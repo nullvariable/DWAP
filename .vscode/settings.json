@@ -1,0 +1,23 @@
+{
+    "Lua.workspace.library": [
+        "C:/Users/nullv/projects/fivem/cfxlua-vscode/library",
+        "c:\\Users\\nullv\\.vscode\\extensions\\overextended.cfxlua-vscode-1.7.27\\plugin\\library\\runtime",
+        "c:\\Users\\nullv\\.vscode\\extensions\\overextended.cfxlua-vscode-1.7.27\\plugin\\library\\natives\\CFX-NATIVE",
+        "c:\\Users\\nullv\\.vscode\\extensions\\overextended.cfxlua-vscode-1.7.27\\plugin\\library\\natives\\GTAV",
+        "${addons}/umbrella-unstable/module/library"
+    ],
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.path": [
+        "?.lua",
+        "?/init.lua",
+        "server/?.lua"
+    ],
+    "Lua.completion.requireSeparator": "/",
+    "Lua.workspace.preloadFileSize": 800,
+    "Lua.runtime.builtin": {
+        "debug": "disable",
+        "io": "disable",
+        "package": "disable"
+    },
+    "Lua.workspace.checkThirdParty": false
+}

@@ -1,0 +1,269 @@
+VERSION = 1,
+
+
+option DWAP.Safehouse
+{
+	type = enum,
+	numValues = 17,
+	default = 1,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_Safehouse,
+	valueTranslation = DWAP_Loot_Safehouse_value,
+}
+
+option DWAP.SpawnInBase
+{
+	type = boolean,
+	default = false,
+
+	page = DWAPGeneral,
+	translation = DWAP_SpawnInBase,
+}
+
+option DWAP.SpawnWithMapAndKeys
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_Keys,
+}
+
+option DWAP.EnableWaterSystem
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_EWC,
+}
+
+option DWAP.EnableGenSystem
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_EGS,
+}
+
+option DWAP.GeneratorFuel
+{
+	type = integer,
+	default = 1000,
+	min = 0,
+	max = 10000,
+
+	page = DWAPGeneral,
+	translation = DWAP_Fuel,
+}
+
+option DWAP.GeneratorPerHour
+{
+	type = double,
+	default = 0.5,
+	min = 0.0,
+	max = 10,
+
+	page = DWAPGeneral,
+	translation = DWAP_PerHour,
+}
+
+option DWAP.GeneratorFuelTank
+{
+	type = integer,
+	default = 2000,
+	min = 0,
+	max = 10000,
+
+	page = DWAPGeneral,
+	translation = DWAP_Tank,
+}
+
+option DWAP.GeneratorCondition
+{
+	type = integer,
+	default = 75,
+	min = 0,
+	max = 100,
+
+	page = DWAPGeneral,
+	translation = DWAP_Condition,
+}
+
+option DWAP.WaterLevel
+{
+	type = integer,
+	default = 2000,
+	min = 0,
+	max = 10000,
+
+	page = DWAPGeneral,
+	translation = DWAP_WaterLevel,
+}
+option DWAP.WaterTankCapacity
+{
+	type = integer,
+	default = 4000,
+	min = 0,
+	max = 10000,
+
+	page = DWAPGeneral,
+	translation = DWAP_MRBWaterTankCapacity,
+}
+
+option DWAP.Loot
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot,
+}
+
+option DWAP.Loot_EnableMaps
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_EnableMaps,
+}
+
+option DWAP.Loot_EnableBooks
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_EnableBooks,
+}
+
+option DWAP.SeedLibrary
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_SeedLibrary,
+}
+
+option DWAP.Loot_FoodLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_FoodLevel,
+	valueTranslation = DWAP_Loot_FoodLevel_value,
+}
+
+option DWAP.Loot_MediaLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_MediaLevel,
+	valueTranslation = DWAP_Loot_MediaLevel_value,
+}
+
+option DWAP.Loot_GunLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_GunLevel,
+	valueTranslation = DWAP_Loot_GunLevel_value,
+}
+
+option DWAP.Loot_MedLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_MedLevel,
+	valueTranslation = DWAP_Loot_MedLevel_value,
+}
+
+option DWAP.Loot_FarmLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_FarmLevel,
+	valueTranslation = DWAP_Loot_FarmLevel_value,
+}
+
+option DWAP.Loot_FishLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_FishLevel,
+	valueTranslation = DWAP_Loot_FishLevel_value,
+}
+
+option DWAP.Loot_TailorLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_TailorLevel,
+	valueTranslation = DWAP_Loot_TailorLevel_value,
+}
+
+option DWAP.Loot_LockersLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_LockersLevel,
+	valueTranslation = DWAP_Loot_LockersLevel_value,
+}
+
+option DWAP.Loot_ToolsLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_ToolsLevel,
+	valueTranslation = DWAP_Loot_ToolsLevel_value,
+}
+
+option DWAP.Loot_BuildMatsLevel
+{
+	type = enum,
+	numValues = 4,
+	default = 3,
+
+	page = DWAPGeneral,
+	translation = DWAP_Loot_BuildMatsLevel,
+	valueTranslation = DWAP_Loot_BuildMatsLevel_value,
+}
+
+option DWAP.EnableAllLocations
+{
+	type = boolean,
+	default = FALSE,
+
+	page = DWAPGeneral,
+	translation = DWAP_EnableAll,
+}

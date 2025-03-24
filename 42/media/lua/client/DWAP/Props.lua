@@ -1,0 +1,226 @@
+DWAP_Props = DWAP_Props or {}
+local DWAPUtils = require("DWAPUtils")
+local hashCoords = DWAPUtils.hashCoords
+
+--- @class objectSpawn
+--- @field x number
+--- @field y number
+--- @field z number
+--- @field sprite? string
+--- @field enabled? string Optional Sandbox variable to enable this spawn
+--- @field clearExisting? boolean
+--- @field isContainer? boolean
+--- @field isDoor? boolean
+--- @field doorN? boolean
+--- @field isFloor? boolean
+--- @field isFireplace? boolean
+
+--- @param spawn objectSpawn
+--- @return number
+local function hashObjectSpawn(spawn)
+    local h = 5381
+    local str = spawn.sprite or ""
+    for i = 1, #str do
+       h = h*32 + h + str:byte(i)
+    end
+    return hashCoords(spawn.x, spawn.y, spawn.z) + h
+end
+
+local function canDestroy(object)
+    local props = object:getProperties()
+	if not props then return false end
+	if props:Is(IsoFlagType.vegitation) then return false end
+    if props:Is(IsoFlagType.solidfloor) then return false end
+    if props:Is(IsoFlagType.transparentFloor) then return false end
+    -- if props:Is(IsoFlagType.attachedFloor) then return false end
+    if props:Is(IsoFlagType.diamondFloor) then return false end
+    if props:Is(IsoFlagType.floorE) then return false end
+    if props:Is(IsoFlagType.floorS) then return false end
+    if props:Is(IsoFlagType.DoorWallN) then return false end
+    if props:Is(IsoFlagType.DoorWallW) then return false end
+    if props:Is(IsoFlagType.WallN) then return false end
+    if props:Is(IsoFlagType.WallNTrans) then return false end
+    if props:Is(IsoFlagType.WallNW) then return false end
+    if props:Is(IsoFlagType.WallOverlay) then return false end
+    if props:Is(IsoFlagType.WallSE) then return false end
+    if props:Is(IsoFlagType.WallW) then return false end
+    if props:Is(IsoFlagType.WallWTrans) then return false end
+    local spriteName = object:getSprite():getName()
+    if spriteName then
+        if spriteName == "advertising_01_14" then return false end
+        if spriteName == "lighting_outdoor_01_16" then return false end
+        if spriteName == "lighting_outdoor_01_17" then return false end
+        if luautils.stringStarts(spriteName, 'blends_natural_02') then return false end
+        if luautils.stringStarts(spriteName, 'blends_grassoverlays') then return false end
+        if luautils.stringStarts(spriteName, 'd_') then return false end
+        if luautils.stringStarts(spriteName, 'e_') then return false end
+        if luautils.stringStarts(spriteName, 'f_') then return false end
+        if luautils.stringStarts(spriteName, 'vegetation_') and not luautils.stringStarts(spriteName, 'vegetation_indoor') then return false end
+
+        if luautils.stringStarts(spriteName, 'street_curbs') then return false end
+    end
+    return true
+end
+
+--- Get an object from a square by sprite name
+--- @param objects PZArrayList<IsoObject>
+--- @param sprite string
+--- @return IsoObject|nil object, number size object and the number of objects on the square
+local function getSpriteObject(objects, sprite)
+    local size = objects:size() - 1
+    if size < 0 then return nil, size end
+    for i = 0, size do
+        local object = objects:get(i)
+        if object and object:getSpriteName() == sprite then
+            return object, size
+        end
+    end
+    return nil, size
+end
+
+--- clear all objects from a square except for the one with the given sprite
+--- @param objects PZArrayList<IsoObject>
+--- @param square IsoGridSquare
+--- @param sprite string
+local function clearObjectsExcluding(objects, square, sprite)
+    local size = objects:size() -1
+    for j = size, 0, -1 do
+        local sqObject = objects:get(j)
+        if sqObject and canDestroy(sqObject) and sqObject:getTextureName() ~= sprite then
+            DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
+            square:transmitRemoveItemFromSquare(sqObject)
+            square:RemoveTileObject(sqObject)
+            sledgeDestroy(sqObject)
+        else
+            DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
+        end
+    end
+end
+
+function DWAP_Props.runHookOnExist(prop, params, attempts)
+    if attempts > 30 then
+        DWAPUtils.dprint(params)
+        error("runHookOnExist: Too many attempts")
+        return
+    end
+    if prop and prop:isExistInTheWorld() then
+        DWAPSquareLoaded:RunHook('PropSpawned', params.x, params.y, params.z, params)
+        local hash = hashObjectSpawn(params)
+        ModData.getOrCreate("DWAP_Props").spawned[hash] = true
+    elseif prop then
+        -- if attempts is a multiple of 10, defer for an in game minute
+        local delay = attempts % 10 == 0
+        if delay then
+            DWAPUtils.DeferMinute(function()
+                DWAP_Props.runHookOnExist(prop, params, attempts + 1)
+            end)
+        else
+            DWAPUtils.Defer(function()
+                DWAP_Props.runHookOnExist(prop, params, attempts + 1)
+            end)
+        end
+    end
+end
+
+--- Spawn an object on a square if it doesn't already exist
+--- @param params objectSpawn
+function DWAP_Props.maybeSpawnObject(params)
+    DWAPUtils.dprint("DWAP_Props.maybeSpawnObject " .. params.x .. " " .. params.y)
+    assert(params.x, "maybeSpawnObject: x is required")
+    assert(params.y, "maybeSpawnObject: y is required")
+    assert(params.z, "maybeSpawnObject: z is required")
+    local square = getSquare(params.x, params.y, params.z)
+    if not square then
+        DWAPUtils.dprint(("DWAP_Props: No square found for maybeSpawnObject %s %s %s"):format(params.x, params.y, params.z))
+        return
+    end
+    local existingObjects = square:getObjects()
+    if params.clearExisting then
+        clearObjectsExcluding(existingObjects, square, params.sprite)
+    end
+    if params.sprite and not getSpriteObject(existingObjects, params.sprite) then
+        local prop
+        if params.isContainer then
+            DWAPUtils.dprint(("DWAP_Props: Adding container %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
+            local obj = ISWoodenContainer:new(params.sprite, nil)
+            prop = IsoThumpable.new(getCell(), square, params.sprite, false, obj)
+            buildUtil.setInfo(prop, obj)
+            prop:setIsContainer(true)
+            prop:getContainer():setType("crate")
+            prop:getContainer():setCapacity(50)
+            square:AddSpecialObject(prop)
+            -- DWAPUtils.Defer(function()
+                -- local sq = getSquare(params.x, params.y, params.z)
+                -- if sq then
+                --     local cont = sq:getContainerItem("crate")
+                --     DWAPUtils.dprint(("DWAP_Props: Filling container %s"):format(params.sprite))
+                --     triggerEvent("onFillContainer", "all", cont:getType(), cont)
+                -- end
+                DWAPUtils.dprint(("DWAP_Props: Filling container %s %s %s"):format(params.sprite, params.x, params.y))
+                -- triggerEvent("OnFillContainer", "Generic", prop:getType(), prop:getContainer())
+                local cont = prop:getContainer()
+                ItemPickerJava.fillContainer(cont, getPlayer())
+            -- end)
+        elseif params.isFireplace then
+            prop = IsoFireplace.new(getCell(), square, getSprite(params.sprite))
+        elseif params.isDoor then
+            DWAPUtils.dprint(("DWAP_Props: Adding door %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
+            prop = IsoDoor.new(getCell(), square, getSprite(params.sprite), params.doorN)
+            square:AddSpecialObject(prop)
+        elseif params.isFloor then
+            local gb = instanceItem("Base.Gravelbag")
+            local obj = ISNaturalFloor:new(params.sprite, nil, gb, getPlayer())
+            prop = IsoThumpable.new(getCell(), square, params.sprite, false, obj)
+            BuildRecipeCode.floor.OnCreate(prop)
+        else
+            -- local prop = IsoObject.new(square, params.sprite)
+            prop = IsoObject.getNew(square, params.sprite, params.sprite, false)
+        end
+        -- square:AddTileObject(prop)
+        square:transmitAddObjectToSquare(prop, -1)
+        DWAPUtils.dprint(("DWAP_Props: Added %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
+        -- DWAPUtils.Defer(function()
+        --     DWAPUtils.dprint(DWAPSquareLoaded.HookedEvents.PropSpawned)
+            -- DWAPSquareLoaded:RunHook('PropSpawned', params.x, params.y, params.z, params)
+            DWAP_Props.runHookOnExist(prop, params, 0)
+        -- end)
+    end
+end
+
+
+Events.OnInitGlobalModData.Add(function()
+-- Events.OnLoad.Add(function()
+    local modData = ModData.getOrCreate("DWAP_Props")
+    if not modData or not modData.init then
+        modData.init = true
+        modData.spawned = {}
+    end
+    local configs = DWAPUtils.loadConfigs()
+    DWAPUtils.dprint("DWAP_Props.OnInitGlobalModData "..#configs)
+    for i = 1, #configs do
+        local config = configs[i]
+        if config and config.objectSpawns then
+            for j = 1, #config.objectSpawns do
+                --- @type objectSpawn
+                local os = config.objectSpawns[j]
+                if not os.enabled or (os.enabled and SandboxVars.DWAP[os.enabled]) then
+                    local spawnedKey = hashObjectSpawn(os)
+                    if not modData.spawned[spawnedKey] then
+                        DWAPUtils.dprint(("Adding object spawn %s %s %s"):format(os.sprite or "none", os.x, os.y))
+                        DWAPSquareLoaded:AddEvent(
+                            DWAP_Props.maybeSpawnObject,
+                            os.x,
+                            os.y,
+                            os.z,
+                            true,
+                            os
+                        )
+                    end
+                end
+            end
+        end
+    end
+    table.wipe(configs)
+    -- DWAPUtils.dprint("Objects to spawn:")
+    -- DWAPUtils.dprint(objectsToSpawn)
+end)
