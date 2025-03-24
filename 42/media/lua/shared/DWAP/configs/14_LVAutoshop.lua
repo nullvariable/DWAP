@@ -59,7 +59,6 @@ local LowryCourt = {
         { sprite = "fixtures_railings_01_36", x = 13138, y = 3030, z = 0, clearExisting = true, },
         { sprite = "fixtures_railings_01_36", x = 13138, y = 3029, z = 0, clearExisting = true, },
         { sprite = "fixtures_railings_01_36", x = 13138, y = 3028, z = 0, clearExisting = true, },
-        { x = 13138, y = 3030, z = 0, clearExisting = true, },
         { x = 13137, y = 3027, z = 0, clearExisting = true, },
         { x = 13138, y = 3027, z = 0, clearExisting = true, },
 

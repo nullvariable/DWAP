@@ -82,7 +82,7 @@ fullConfig[15] = { -- ekron lake house
 fullConfig[16] = { -- ELVille Farm House
     locations = {
         {x=14579, y=3035, z=0, stairDir="W", choices={"lot_basement_house_09_east"}, access="ba_house_large_01_N_02"},
-        {x=14575, y=3031, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
+        {x=14575, y=3031, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
     },
 }
 

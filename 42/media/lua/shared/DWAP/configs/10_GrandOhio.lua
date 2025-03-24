@@ -69,8 +69,8 @@ local GrandOhioConfig = {
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-14, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-15, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y-15, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y-15, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- kitchen sink
         { sprite = "fixtures_sinks_01_17", x = generatorStartCoords.x+20, y = generatorStartCoords.y-6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- utility sink
@@ -78,13 +78,13 @@ local GrandOhioConfig = {
         -- gym fountain
         { sprite = "fixtures_sinks_01_24", x = generatorStartCoords.x+15, y = generatorStartCoords.y+20, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_4", x = generatorStartCoords.x+13, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_4", x = generatorStartCoords.x+14, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- wash room sinks
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+24, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+25, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+26, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+28, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+29, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+30, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- wash room toilets
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+26, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -295,7 +295,7 @@ local GrandOhioConfig = {
             type = 'container',
             coords = {x=generatorStartCoords.x+26,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
-            special = 'skillbooks2',
+            special = 'skillbooks1',
         },
         {
             type = 'container',
@@ -551,7 +551,7 @@ local GrandOhioConfig = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-15,z=-4+0.5},
+            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-9,z=-4+0.5},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,

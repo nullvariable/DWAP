@@ -1,18 +1,18 @@
-local generatorStartCoords = { x = 751, y = 9812, z = -5, }
-local wtc = { x = generatorStartCoords.x+8, y = generatorStartCoords.y+4, generatorStartCoords.z, }
+local genCoords = { x = 751, y = 9812, z = -5, }
+local wtc = { x = genCoords.x+8, y = genCoords.y+4, z = genCoords.z, }
 local EkronCC = {
     spawn = { x = 764, y = 9821, z = -5, },
     doorKeys = {
         name = "Ekron Community College",
         doors = {
             { sprite = "fixtures_doors_01_56", x = 733, y = 9818, z = -1, }, -- storage room door
-            { sprite = "fixtures_doors_01_54", x = generatorStartCoords.x+3, y = generatorStartCoords.y+9, generatorStartCoords.z, },
+            { sprite = "fixtures_doors_01_54", x = genCoords.x+3, y = genCoords.y+9, z = genCoords.z, },
         },
     },
     map = { name = "DWAPStashMap12", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = generatorStartCoords.x, y = generatorStartCoords.y, generatorStartCoords.z, },
+            controls = { sprite = "industry_02_67", x = genCoords.x, y = genCoords.y, z = genCoords.z, },
             chunks = {
                 {90, 1227},
                 {91, 1227},
@@ -56,41 +56,44 @@ local EkronCC = {
     },
     waterFixtures = {
         -- wash room sinks
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y-12, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y-13, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y-14, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y-15, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y-12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y-13, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y-14, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y-15, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- wash room toilets
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-11, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-12, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-13, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-14, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-15, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-11, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-13, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-14, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-15, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y-15, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y-15, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_6", x = genCoords.x+13, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_6", x = genCoords.x+14, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- kitchen sink
-        { sprite = "fixtures_sinks_01_17", x = generatorStartCoords.x+20, y = generatorStartCoords.y-6, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_17", x = genCoords.x+20, y = genCoords.y-6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- utility sink
-        { sprite = "fixtures_sinks_01_34", x = generatorStartCoords.x+23, y = generatorStartCoords.y+23, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_34", x = genCoords.x+23, y = genCoords.y+23, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- gym fountain
-        { sprite = "fixtures_sinks_01_24", x = generatorStartCoords.x+15, y = generatorStartCoords.y+20, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_24", x = genCoords.x+15, y = genCoords.y+20, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y+27, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y+27, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_4", x = genCoords.x+13, y = genCoords.y+27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_4", x = genCoords.x+14, y = genCoords.y+27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- wash room sinks
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+24, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+25, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+26, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_6", x = generatorStartCoords.x+9, y = generatorStartCoords.y+27, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y+27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y+28, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y+29, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_6", x = genCoords.x+9, y = genCoords.y+30, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- wash room toilets
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+27, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+26, generatorStartCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y+27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y+26, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     objectSpawns = {
-        { sprite = "fixtures_railings_01_36", x = 725, y = 9819, z = -1, clearExisting = true, },
-        { sprite = "fixtures_railings_01_36", x = 725, y = 9820, z = -1, clearExisting = true, },
-        { sprite = "fixtures_railings_01_36", x = 725, y = 9821, z = -1, clearExisting = true, },
+        { sprite = "fixtures_railings_01_36", x = 726, y = 9820, z = -1, clearExisting = false, },
+        { sprite = "fixtures_railings_01_36", x = 726, y = 9821, z = -1, clearExisting = false, },
+        { sprite = "fixtures_railings_01_36", x = 726, y = 9822, z = -1, clearExisting = false, },
+        { x = 725, y = 9819, z = -1, clearExisting = true, },
+        { x = 725, y = 9820, z = -1, clearExisting = true, },
+        { x = 725, y = 9821, z = -1, clearExisting = true, },
         { x = 725, y = 9822, z = -1, clearExisting = true, },
 
         -- { sprite = "constructedobjects_01_45", x = 12994, y = 1908, z = 2, clearExisting = false, isContainer = true, },
@@ -100,7 +103,7 @@ local EkronCC = {
         {
             -- filingcabinet next to spawn in operations room
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+11,z=-4},
+            coords = {x=genCoords.x+12,y=genCoords.y+11,z=genCoords.z},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
                 { name = 'Base.Notebook', chance = 1, count = {1,1} },
@@ -112,14 +115,14 @@ local EkronCC = {
         {
             -- 2nd filingcabinet next to spawn in operations room
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+12,y=genCoords.y+12,z=genCoords.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- kitchen
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y-6,z=-4},
+            coords = {x=genCoords.x+20,y=genCoords.y-6,z=genCoords.z},
             dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -127,7 +130,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-6,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -135,7 +138,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-6,z=-4},
+            coords = {x=genCoords.x+16,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -143,7 +146,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-4,z=-4},
+            coords = {x=genCoords.x+16,y=genCoords.y-4,z=genCoords.z},
             dist = {"GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -151,7 +154,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+15,y=generatorStartCoords.y-6,z=-4},
+            coords = {x=genCoords.x+15,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -159,7 +162,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+17,y=generatorStartCoords.y-4,z=-4},
+            coords = {x=genCoords.x+17,y=genCoords.y-4,z=genCoords.z},
             dist = {"FoodCache1.FoodBox",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -167,7 +170,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y-4,z=-4},
+            coords = {x=genCoords.x+18,y=genCoords.y-4,z=genCoords.z},
             dist = {"FoodCache1.FoodBox",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -175,7 +178,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-4,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y-4,z=genCoords.z},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -184,7 +187,7 @@ local EkronCC = {
         -- Armory
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y-2,z=-4},
+            coords = {x=genCoords.x+27,y=genCoords.y-2,z=genCoords.z},
             dist = {"GunCache1.GunBox",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -192,7 +195,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y-2,z=-4},
+            coords = {x=genCoords.x+28,y=genCoords.y-2,z=genCoords.z},
             dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -200,7 +203,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y-2,z=-4},
+            coords = {x=genCoords.x+29,y=genCoords.y-2,z=genCoords.z},
             dist = {"GunCache1.GunBox",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -208,7 +211,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y-2,z=-4},
+            coords = {x=genCoords.x+30,y=genCoords.y-2,z=genCoords.z},
             dist = {"FirearmWeapons_Late"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -216,7 +219,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+1,z=-4},
+            coords = {x=genCoords.x+27,y=genCoords.y+1,z=genCoords.z},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -224,7 +227,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+1,z=-4},
+            coords = {x=genCoords.x+28,y=genCoords.y+1,z=genCoords.z},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -232,7 +235,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+1,z=-4},
+            coords = {x=genCoords.x+29,y=genCoords.y+1,z=genCoords.z},
             dist = {"ArmyStorageGuns",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -240,7 +243,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+1,z=-4},
+            coords = {x=genCoords.x+30,y=genCoords.y+1,z=genCoords.z},
             dist = {"PoliceStorageGuns"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -249,7 +252,7 @@ local EkronCC = {
         -- medical
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+9,z=-4+0.5},
+            coords = {x=genCoords.x+22,y=genCoords.y+9,z=genCoords.z+0.5},
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -257,7 +260,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+10,z=-4},
+            coords = {x=genCoords.x+22,y=genCoords.y+10,z=genCoords.z},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -265,7 +268,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+10,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+10,z=genCoords.z},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -274,7 +277,7 @@ local EkronCC = {
         -- book shelves
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+33,y=genCoords.y+16,z=genCoords.z},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -282,7 +285,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+33,y=genCoords.y+15,z=genCoords.z},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -291,25 +294,25 @@ local EkronCC = {
         -- media storage
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+26,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+26,y=genCoords.y+17,z=genCoords.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = 'skillbooks1',
+        },
+        {
+            type = 'container',
+            coords = {x=genCoords.x+27,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks2',
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+17,z=-4},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = 'skillbooks2',
-        },
-        {
-            type = 'container',
-            coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+28,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillmags',
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+29,y=genCoords.y+17,z=genCoords.z},
             items = {
                 { name = 'TvWideScreen', chance = 1, count = {1,1} },
                 { name = 'Base.Remote', chance = 1, count = {1,3} },
@@ -322,7 +325,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+30,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -330,7 +333,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+31,y=genCoords.y+17,z=genCoords.z},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -338,7 +341,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+20,z=-4},
+            coords = {x=genCoords.x+28,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -346,7 +349,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+20,z=-4},
+            coords = {x=genCoords.x+29,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -354,7 +357,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+20,z=-4},
+            coords = {x=genCoords.x+30,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -362,7 +365,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+20,z=-4},
+            coords = {x=genCoords.x+31,y=genCoords.y+20,z=genCoords.z},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -371,7 +374,7 @@ local EkronCC = {
         -- cleaning
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+22,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -379,7 +382,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -388,13 +391,13 @@ local EkronCC = {
         -- seed/farm library
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -402,7 +405,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+21,y=genCoords.y+15,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -410,7 +413,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+21,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -418,7 +421,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -426,7 +429,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y+16,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -435,7 +438,7 @@ local EkronCC = {
         -- fishing
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -443,7 +446,7 @@ local EkronCC = {
         },
         { -- hunting
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+22,y=genCoords.y+12,z=genCoords.z},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -451,7 +454,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+21,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -459,7 +462,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+20,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -467,7 +470,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -475,7 +478,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+18,y=genCoords.y+12,z=genCoords.z},
             dist = {"DishCabinetLiquor"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -484,7 +487,7 @@ local EkronCC = {
         -- tailoring
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+21,z=-4},
+            coords = {x=genCoords.x+22,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -492,7 +495,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+21,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -500,7 +503,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+22,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+22,z=genCoords.z},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -508,7 +511,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+21,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y+21,z=genCoords.z},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -516,7 +519,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+22,z=-4},
+            coords = {x=genCoords.x+19,y=genCoords.y+22,z=genCoords.z},
             items = {
                 { name = 'Base.Mov_WaterDispenser', chance = 1, count = {1,2} },
                 { name = 'Base.WaterDispenserBottle', chance = 1, count = {1,2} },
@@ -524,7 +527,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+23,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+23,z=genCoords.z},
             dist = {"GymLaundry", "GymLockers"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -532,7 +535,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+24,z=-4},
+            coords = {x=genCoords.x+23,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -541,7 +544,7 @@ local EkronCC = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+27,z=-4+0.5},
+            coords = {x=genCoords.x+12,y=genCoords.y+27,z=genCoords.z+0.5},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -549,7 +552,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-15,z=-4+0.5},
+            coords = {x=genCoords.x+12,y=genCoords.y-9,z=genCoords.z+0.5},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -563,7 +566,7 @@ local EkronCC = {
         -- womens
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-7,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y-7,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -571,7 +574,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-6,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y-6,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -579,7 +582,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-5,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y-5,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -587,7 +590,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-4,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y-4,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -595,7 +598,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-3,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y-3,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -604,7 +607,7 @@ local EkronCC = {
         -- mens
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+21,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+21,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -612,7 +615,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+22,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+22,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -620,7 +623,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+23,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+23,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -628,7 +631,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+24,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -636,7 +639,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+25,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+25,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -645,7 +648,7 @@ local EkronCC = {
         -- entry storage 1
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+11,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+11,z=genCoords.z},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -653,7 +656,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+12,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+12,z=genCoords.z},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -661,7 +664,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+13,z=genCoords.z},
             dist = { "GunStoreKnives", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -669,7 +672,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+14,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+14,z=genCoords.z},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -677,7 +680,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+15,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -685,7 +688,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+3,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -694,7 +697,7 @@ local EkronCC = {
         -- tools
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+14,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+14,z=genCoords.z},
             dist = {"CarSupplyTools", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -702,7 +705,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+15,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+15,z=genCoords.z},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -710,7 +713,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+16,z=genCoords.z},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -718,7 +721,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+17,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -726,7 +729,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+18,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+18,z=genCoords.z},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -734,7 +737,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x+6,y=genCoords.y+19,z=genCoords.z},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -743,7 +746,7 @@ local EkronCC = {
         -- random junk
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+12,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -751,7 +754,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+13,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -759,7 +762,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+14,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+14,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -767,7 +770,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+15,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+15,z=genCoords.z},
             dist = {"CrateCannedFood", "RandomFiller" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -776,7 +779,7 @@ local EkronCC = {
         -- mats
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+16,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -784,7 +787,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+17,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+17,z=genCoords.z},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -792,7 +795,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+19,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+19,z=genCoords.z},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -800,7 +803,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+18,z=-4},
+            coords = {x= genCoords.x+9,y=genCoords.y+18,z=genCoords.z},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -809,7 +812,7 @@ local EkronCC = {
         -- entry storage 2
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+13,z=genCoords.z},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -817,7 +820,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x-2,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -825,7 +828,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x-1,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -833,7 +836,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -841,7 +844,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x+1,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -849,7 +852,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+13,z=-4},
+            coords = {x=genCoords.x+2,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -857,35 +860,35 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
             },
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x-1,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
             },
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x-2,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
             },
         },
         { -- duplicate to to top off the cartons
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -893,7 +896,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x+2,y=genCoords.y+19,z=genCoords.z},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -901,7 +904,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x+1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CafeteriaSnacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -909,7 +912,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x,y=genCoords.y+19,z=genCoords.z},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -917,7 +920,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x-1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -925,7 +928,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x-2,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -933,7 +936,7 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+19,z=-4},
+            coords = {x=genCoords.x-3,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,

@@ -18,7 +18,7 @@ local PSDelilah = {
         { sprite = "fixtures_bathroom_01_7", x = 2034, y = 5693, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_28", x = 2033, y = 5693, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_4", x = 2036, y = 5683, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_12", x = 2035, y = 5683, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_12", x = 2035, y = 5683, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_4", x = 2034, y = 5683, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_12", x = 2033, y = 5683, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
