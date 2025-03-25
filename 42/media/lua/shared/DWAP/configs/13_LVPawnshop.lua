@@ -407,10 +407,10 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12313,y=1325,z=0},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            sandboxEnable = 'SeedLibrary',
+            items = {
+                { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
+            },
         },
         {
             type = 'container',
