@@ -2,6 +2,8 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     lot_basement_jamieton_bunker_01 = { width=4, height=14, stairx=2, stairy=9, stairDir="N" },
     lot_basement_storefront_09 = { width=15, height=9, stairx=13, stairy=4, stairDir="N" },
     lot_basement_coldwar_bunker_01 = { width=61, height=52, stairx=0, stairy=24, stairDir="N" },
+    lot_basement_gas_15_brandenburg = { width=10, height=10, stairx=0, stairy=1, stairDir="N" },
+    lot_basement_gunclub_01 = { width=21, height=7, stairx=19, stairy=1, stairDir="N" },
 }
 
 local fullConfig = table.newarray()
@@ -83,6 +85,39 @@ fullConfig[16] = { -- ELVille Farm House
     locations = {
         {x=14579, y=3035, z=0, stairDir="W", choices={"lot_basement_house_09_east"}, access="ba_house_large_01_N_02"},
         {x=14575, y=3031, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
+    },
+}
+fullConfig[17] = { -- Animal rehab
+    locations = {
+        {x=3110, y=12048, z=0, stairDir="W", choices={"lot_basement_house_06_B_east"}, access="ba_house_medium_07"},
+        {x=3106, y=12039, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
+    },
+}
+fullConfig[18] = { -- McCoy
+    locations = {
+    },
+}
+fullConfig[19] = { -- CentralLVilleMansion
+    locations = {
+        {x=13431, y=1908, z=0, stairDir="N", choices={"lot_basement_gas_15_brandenburg"}, },
+        {x=13434, y=1913, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
+    },
+}
+fullConfig[20] = { -- CentralLVilleMansion
+    locations = {
+        {x=2940, y=12517, z=0, stairDir="W", choices={"lot_basement_house_08"}, },
+        {x=2940, y=12561, z=0, stairDir="N", choices={"lot_basement_house_05"}, }, --access="ba_exterior_north_eastside_03_C"
+
+        -- {x=8400, y=6590, z=0, stairDir="N", choices={"lot_basement_house_03"}, access="ba_exterior_north_eastside_02"},
+        -- {x=8400, y=6590-20, z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_exterior_north_eastside_02_C"},
+        -- {x=8400, y=6590-(20*2), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_exterior_north_eastside_03_C"},
+        -- {x=8400, y=6590-(20*3), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_exterior_north_eastside_04"},
+        -- {x=8400, y=6590-(20*4), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_100_E"},
+        -- {x=8400, y=6590-(20*5), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_11"},
+        -- {x=8400, y=6590-(20*6), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_13"},
+        -- {x=8400, y=6590-(20*7), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_22_redbrick"},
+        -- {x=8400, y=6590-(20*8), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_93_farmhouse"},
+        -- {x=8400, y=6590-(20*9), z=0, stairDir="N", choices={"lot_basement_house_05"}, access="ba_house_medium_96_farmhouse"},
     },
 }
 

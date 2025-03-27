@@ -1,5 +1,6 @@
 DWAP_Props = DWAP_Props or {}
 local DWAPUtils = require("DWAPUtils")
+local IsoObjectUtils = require("Starlit/IsoObjectUtils")
 local hashCoords = DWAPUtils.hashCoords
 
 --- @class objectSpawn
@@ -14,6 +15,9 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field doorN? boolean
 --- @field isFloor? boolean
 --- @field isFireplace? boolean
+--- @field tunnelZ? number
+--- @field replaceWall? boolean
+--- @field isLightSwitch? boolean
 
 --- @param spawn objectSpawn
 --- @return number
@@ -97,6 +101,35 @@ local function clearObjectsExcluding(objects, square, sprite)
     end
 end
 
+local function isWall(object)
+    local props = object:getProperties()
+    if props:Is(IsoFlagType.DoorWallN) then return true end
+    if props:Is(IsoFlagType.DoorWallW) then return true end
+    if props:Is(IsoFlagType.WallN) then return true end
+    if props:Is(IsoFlagType.WallNTrans) then return true end
+    if props:Is(IsoFlagType.WallNW) then return true end
+    if props:Is(IsoFlagType.WallOverlay) then return true end
+    if props:Is(IsoFlagType.WallSE) then return true end
+    if props:Is(IsoFlagType.WallW) then return true end
+    if props:Is(IsoFlagType.WallWTrans) then return true end
+    return false
+end
+
+local function clearWalls(objects, square, sprite)
+    local size = objects:size() -1
+    for j = size, 0, -1 do
+        local sqObject = objects:get(j)
+        if sqObject and isWall(sqObject) and sqObject:getTextureName() ~= sprite then
+            DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
+            square:transmitRemoveItemFromSquare(sqObject)
+            square:RemoveTileObject(sqObject)
+            sledgeDestroy(sqObject)
+        else
+            DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
+        end
+    end
+end
+
 function DWAP_Props.runHookOnExist(prop, params, attempts)
     if attempts > 30 then
         DWAPUtils.dprint(params)
@@ -130,6 +163,9 @@ function DWAP_Props.maybeSpawnObject(params)
     assert(params.y, "maybeSpawnObject: y is required")
     assert(params.z, "maybeSpawnObject: z is required")
     local square = getSquare(params.x, params.y, params.z)
+    if params.tunnelZ then
+        square = IsoObjectUtils.getOrCreateSquare(params.x, params.y, params.tunnelZ)
+    end
     if not square then
         DWAPUtils.dprint(("DWAP_Props: No square found for maybeSpawnObject %s %s %s"):format(params.x, params.y, params.z))
         return
@@ -137,6 +173,9 @@ function DWAP_Props.maybeSpawnObject(params)
     local existingObjects = square:getObjects()
     if params.clearExisting then
         clearObjectsExcluding(existingObjects, square, params.sprite)
+    end
+    if params.replaceWall then
+        clearWalls(existingObjects, square, params.sprite)
     end
     if params.sprite and not getSpriteObject(existingObjects, params.sprite) then
         local prop
@@ -172,6 +211,9 @@ function DWAP_Props.maybeSpawnObject(params)
             local obj = ISNaturalFloor:new(params.sprite, nil, gb, getPlayer())
             prop = IsoThumpable.new(getCell(), square, params.sprite, false, obj)
             BuildRecipeCode.floor.OnCreate(prop)
+        elseif params.isLightSwitch then
+            prop = IsoLightSwitch.new(getCell(), square, getSprite(params.sprite), square:getRoomID())
+            prop:addLightSourceFromSprite()
         else
             -- local prop = IsoObject.new(square, params.sprite)
             prop = IsoObject.getNew(square, params.sprite, params.sprite, false)

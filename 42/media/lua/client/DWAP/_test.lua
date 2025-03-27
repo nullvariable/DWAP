@@ -896,6 +896,7 @@ local ignoreFlags ={
     IsoFlagType.windowW,
     IsoFlagType.diamondFloor,
 }
+--[[
 local Serialise = require("Starlit/serialise/Serialise")
 function serializeItems(container)
     if not container then
@@ -911,6 +912,7 @@ function serializeItems(container)
     end
     return serializedItems
 end
+]]--
 
 function serializeContainer(container)
     local saveContainer = {
@@ -1077,4 +1079,94 @@ function resetModData()
     local md = ModData.getOrCreate("DWAP_Testing")
     md.objects = nil
     DWAPUtils.dprint("ModData reset")
+end
+
+--- Get an object from a square by sprite name
+--- @param square IsoGridSquare
+--- @param sprite string
+--- @return IsoObject|nil object, number size object and the number of objects on the square
+local function getSpriteObject(square, sprite)
+    local tankObjects = square:getObjects()
+    local size = tankObjects:size() - 1
+    for i = 0, size do
+        local object = tankObjects:get(i)
+        if object and object:getSpriteName() == sprite then
+            return object, size
+        end
+    end
+    return nil, -1
+end
+
+function watertest()
+    -- local fixtureSquare = getSquare(10092, 8252, 0)
+    -- local fixtureSquare = getSquare(10093, 8252, 0)
+    -- local fixtureSquare = getSquare(10093, 8260, 0)
+    local fixtureSquare = getSquare(10093, 8261, 0)
+    if not fixtureSquare then
+        DWAPUtils.dprint("Fixture square not found")
+        return
+    end
+    -- local fixtureObj = getSpriteObject(fixtureSquare, "fixtures_sinks_01_33")
+    -- local fixtureObj = getSpriteObject(fixtureSquare, "fixtures_sinks_01_17")
+    -- local fixtureObj = getSpriteObject(fixtureSquare, "fixtures_sinks_01_13")
+    local fixtureObj = getSpriteObject(fixtureSquare, "appliances_laundry_01_5")
+    if not fixtureObj then
+        DWAPUtils.dprint("DWAP_WaterSystem: InitWellFixture: Fixture object not found")
+        return
+    end
+
+    -- local moveSquare = IsoObjectUtils.getOrCreateSquare(10109, 8262, 0 - 1)
+    -- local moveSquare = IsoObjectUtils.getOrCreateSquare(10116, 8251, 0 - 1)
+    local moveSquare = IsoObjectUtils.getOrCreateSquare(10093, 8261, 1)
+
+    if not moveSquare then
+        DWAPUtils.dprint("Move square not found")
+        return
+    end
+    
+    local thumpable = IsoThumpable.new(fixtureObj:getCell(), moveSquare, "crafted_01_11", false)
+    --- @type FluidContainer annoyingly umbrella doesn't have this class yet
+    local fluidContainer = ComponentType.FluidContainer:CreateComponent();
+    fluidContainer:setCapacity(10000)
+    fluidContainer:addFluid(FluidType.Water, 10000)
+    fluidContainer:setContainerName("Well")
+    GameEntityFactory.AddComponent(thumpable, true, fluidContainer);
+    moveSquare:AddTileObject(thumpable)
+    moveSquare:AddSpecialObject(thumpable)
+    moveSquare:transmitAddObjectToSquare(thumpable, -1)
+    fixtureObj:getModData().canBeWaterPiped = false
+    fixtureObj:setUsesExternalWaterSource(true)
+    fixtureObj:transmitModData()
+    fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
+    fixtureObj:doFindExternalWaterSource()
+    fixtureObj:transmitModData()
+    fixtureSquare:transmitModdata()
+    fixtureSquare:setSquareChanged()
+
+    local sprite = thumpable:getSprite()
+    local sf = Reflection.getField(sprite, "solidfloor")
+    DWAPUtils.dprint("solidfloor: "..tostring(sf))
+
+    -- fixtureObj:setSquare(moveSquare)
+    -- fixtureObj:getModData().canBeWaterPiped = false
+    -- fixtureObj:setUsesExternalWaterSource(true)
+    -- fixtureObj:transmitModData()
+    -- fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
+    -- fixtureObj:doFindExternalWaterSource()
+    -- fixtureObj:setSquare(fixtureSquare)
+    -- fixtureObj:transmitModData()
+    -- fixtureSquare:transmitModdata()
+    -- fixtureSquare:setSquareChanged()
+
+end
+
+function roomtest()
+    local player = getPlayer()
+    local pSquare = player:getCurrentSquare()
+    local chunk = pSquare:getChunk()
+
+    -- this.addSpawnedRoom(RoomID.makeID(this.wx / 8, this.wy / 8, int20));
+    local wx = Reflection.getField(chunk, "wx")
+    local wy = Reflection.getField(chunk, "wy")
+    chunk:addSpawnedRoom(wx + wy + -1)
 end

@@ -19,6 +19,10 @@ Sandbox_EN = {
 	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Lville Autoshop",
 	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Ekron Lake House",
 	Sandbox_DWAP_Loot_Safehouse_value_option17 = "ELVilleFarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "Animal Rehab",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Central LVille Mansion",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "ScrapYard",
 
 	Sandbox_DWAP_EnableAll = "Enable all safehouses",
 	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, loot, spawn and map will still only be for the selected option",

@@ -28,6 +28,10 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [14] = "DWAP/configs/14_LVAutoshop",
     [15] = "DWAP/configs/15_EkronLakeHouse",
     [16] = "DWAP/configs/16_ELVilleFarm",
+    [17] = "DWAP/configs/17_AnimalRehab",
+    [18] = "DWAP/configs/18_McCoyEstate",
+    [19] = "DWAP/configs/19_CentralLVilleMansion",
+    [20] = "DWAP/configs/20_ScrapYard",
 }
 
 local configCache = {}

@@ -126,3 +126,35 @@ LootMaps.Init.DWAPStashMap16 = function(mapUI)
     MapUtils.initDefaultStyleV1(mapUI)
     mapAPI:setBoundsInSquares(14400, 2960, 14687, 3215)
 end
+
+-- Animal rehab Safehouse
+LootMaps.Init.DWAPStashMap17 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(3056, 12016, 3319, 12271)
+end
+
+-- McCoy Estate Safehouse
+LootMaps.Init.DWAPStashMap18 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(9960, 8048, 10311, 8383)
+end
+
+-- CentralLVilleMansion
+LootMaps.Init.DWAPStashMap19 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(13360, 1800, 13519, 1975)
+end
+
+-- CentralLVilleMansion
+LootMaps.Init.DWAPStashMap20 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(2872, 12440, 3031, 12615)
+end

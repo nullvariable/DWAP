@@ -217,16 +217,6 @@ end
 function DWAP_WaterSystem:initializeTank(index, tankObj, square)
     local tank = self.tanks[index]
     local sprite = tank.sprite
-    -- local square = getSquare(tank.x, tank.y, tank.z)
-    -- if not square then return end
-    -- local tankObj, objCount = getSpriteObject(square, sprite)
-    -- if not tankObj then
-    --     DWAPUtils.dprint("initializeTank: Tank object not found")
-    --     DWAPUtils.dprint(tank)
-    --     DWAPUtils.dprint({ tankObj = tankObj, objCount = objCount })
-    --     error("initializeTank: Tank object not found")
-    --     return
-    -- end
     if tankObj:getFluidContainer() then
         self.tanks[index].initialized = true
         DWAPUtils.dprint("DWAP_WaterSystem: initializeTank: Fluid container already exists")
@@ -258,19 +248,6 @@ function DWAP_WaterSystem:TankSeen(index)
     if not square then return end
     local tankObj = getTankObject(square)
 
-    -- if not tankObj and tank.isProp and not tank.initialized then
-    --     DWAPUtils.dprint("DWAP_WaterSystem: TankSeen: Tank object not found")
-    --     -- DWAPSquareLoaded:AddHookEvent(
-    --     --     "PropSpawned",
-    --     --     tankSeen,
-    --     --     tank.x,
-    --     --     tank.y,
-    --     --     tank.z,
-    --     --     true,
-    --     --     { index = index }
-    --     -- )
-    --     return
-    -- end
     if not tankObj then
         tankObj = getSpriteObject(square, tank.sprite)
     end
@@ -297,14 +274,6 @@ tankSeen = function(params)
     DWAP_WaterSystem:TankSeen(params.index)
 end
 
--- function DWAP_WaterSystem:reinitializeTankFixtures(coords)
---     DWAPUtils.dprint(("DWAP_WaterSystem: reinitializeTankFixtures: %s %s %s"):format(coords.x, coords.y, coords.z))
---     local square = getSquare(coords.x, coords.y, coords.z)
---     if not square then return end
---     if not self.hadWorldWaterLastTick then
---         self:initializeFixtures(coords)
---     end
--- end
 
 --- Our water shutoff event
 function DWAP_WaterSystem:onWaterShutoff()
@@ -326,7 +295,6 @@ end
 local waterIntervalTick
 --- Watch for the world water to be shut off
 function DWAP_WaterSystem:WaterIntervalTick()
-    -- DWAPUtils.dprint("DWAP_WaterSystem: WaterIntervalTick "..tostring(DWAPUtils.WorldWaterStillAvailable()))
     if DWAPUtils.WorldWaterStillAvailable() then
         self.hadWorldWaterLastTick = true
     elseif hadWorldWaterLastTick then
@@ -334,7 +302,6 @@ function DWAP_WaterSystem:WaterIntervalTick()
         self.hadWorldWaterLastTick = false
         self:onWaterShutoff()
         Events.EveryTenMinutes.Remove(waterIntervalTick)
-        -- self:SaveModData()
     end
 end
 waterIntervalTick = function()
@@ -460,3 +427,6 @@ end)
 --         end
 --     end
 -- end)
+
+
+-- isWaterInfinite

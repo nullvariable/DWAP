@@ -1,12 +1,5 @@
 local EchoCreek = {
     spawn = { x = 3573, y = 10896, z = 1 },
-    purgeToxinsCoords = {
-        {x = 3567, y = 10899, z = -1,},
-    },
-    -- generators = {
-    --     { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, ghost = false, },
-    --     { sprite = "walls_commercial_03_17", x = 3581, y = 10904, z = 0, ghost = true, },
-    -- },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, ghost = false, },

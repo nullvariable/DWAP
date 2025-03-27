@@ -140,6 +140,38 @@ local configs = {
         buildingX = 14579,
         buildingY = 3039,
     },
+    [17] = {
+        name = "Animal Rehab Map",
+        stamps = {
+            {"Asterisk", nil, 3108, 12053, 0, 0, 0},
+        },
+        buildingX = 3108,
+        buildingY = 12053,
+    },
+    [18] = {
+        name = "McCoy Estate Map",
+        stamps = {
+            {"Asterisk", nil, 10081, 8259, 0, 0, 0},
+        },
+        buildingX = 10081,
+        buildingY = 8259,
+    },
+    [19] = {
+        name = "Central Louisville Mansion Map",
+        stamps = {
+            {"Asterisk", nil, 13441, 1895, 0, 0, 0},
+        },
+        buildingX = 13441,
+        buildingY = 1895,
+    },
+    [20] = {
+        name = "ScrapYard Map",
+        stamps = {
+            {"Asterisk", nil, 2937, 12523, 0, 0, 0},
+        },
+        buildingX = 2937,
+        buildingY = 12523,
+    },
 }
 
 
