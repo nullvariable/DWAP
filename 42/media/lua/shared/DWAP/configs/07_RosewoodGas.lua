@@ -1,13 +1,6 @@
 local wtc = {x =8177, y = 11259, z = -1}
 local RosewoodGas = {
     spawn = { x = 8179, y = 11269, z = 1 },
-    purgeToxinsCoords = {
-        {x = 8181, y = 11259, z = -1,},
-    },
-    -- generators = {
-    --     { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, ghost = false, },
-    --     { sprite = "lighting_outdoor_01_2", x = 8152, y = 11269, z = 0, ghost = true, },
-    -- },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, ghost = false, },

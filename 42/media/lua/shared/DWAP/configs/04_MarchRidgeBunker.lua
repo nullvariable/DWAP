@@ -1,9 +1,6 @@
 local wtc = { x = 9955, y = 12620, z = -4, }
 local MarchRidgeConfig = {
     spawn = { x = 9960, y = 12624, z = -4, },
-    purgeToxinsCoords = {
-        {x = 9947, y = 12616, z = -4,},
-    },
     doorKeys = {
         name = "Bunker",
         doors = {
