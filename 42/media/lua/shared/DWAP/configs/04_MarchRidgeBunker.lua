@@ -57,6 +57,14 @@ local MarchRidgeConfig = {
         { sprite = "fixtures_bathroom_01_5", x = 9952, y = 12605, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = 9952, y = 12606, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = 9952, y = 12607, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12607, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12605, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12603, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12607, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12605, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12603, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+
         -- laundry room washers
         { sprite = "appliances_laundry_01_6", x = 9960, y = 12607, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "appliances_laundry_01_6", x = 9961, y = 12607, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -80,6 +88,31 @@ local MarchRidgeConfig = {
         -- {x = 9952, y = 12645, z = -4, sprite = "fixtures_bathroom_01_9",}, -- These are the urinals and PZ doesn't use them currently. Unsure if mods like Lifestyle do
         -- {x = 9952, y = 12646, z = -4, sprite = "fixtures_bathroom_01_9",},
         -- {x = 9952, y = 12647, z = -4, sprite = "fixtures_bathroom_01_9",},
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12647, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12645, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = 9948, y = 12643, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12647, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12645, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = 9951, y = 12643, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+
+        -- decon showers
+        { sprite = "fixtures_bathroom_01_22", x = 9944, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9945, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9946, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9947, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9948, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9949, y = 12628, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9946, y = 12626, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9947, y = 12626, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9946, y = 12624, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = 9947, y = 12624, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9944, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9945, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9946, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9947, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9948, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = 9949, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     loot = {
         {
