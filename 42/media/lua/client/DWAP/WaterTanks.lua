@@ -349,6 +349,24 @@ function DWAP_WaterSystem:SaveModData()
     -- })
 end
 
+--- Add a fixture to the list of fixtures
+--- @param fixture WaterFixture
+--- @param isManual boolean
+function DWAP_WaterSystem:addFixture(fixture, isManual)
+    local hash = self.hashCoords(fixture.source.x, fixture.source.y, fixture.source.z)
+    if not self.fixtures[hash] then
+        self.fixtures[hash] = table.newarray()
+    end
+    self.fixtures[hash][#self.fixtures[hash] + 1] = fixture
+    if isManual then
+        local md = ModData.getOrCreate("DWAP_WaterData")
+        if not md.manualFixtures then
+            md.manualFixtures = {}
+        end
+        md.manualFixtures[#md.manualFixtures+1] = fixture
+    end
+end
+
 --- Initialize the water tanks, OnInitGlobalModData event
 --- @param isNewGame boolean
 function DWAP_WaterSystem:TanksInitData(isNewGame)
@@ -376,11 +394,7 @@ function DWAP_WaterSystem:TanksInitData(isNewGame)
                 if config and config.waterFixtures then
                     for j = 1, #config.waterFixtures do
                         local fixture = config.waterFixtures[j]
-                        local hash = self.hashCoords(fixture.source.x, fixture.source.y, fixture.source.z)
-                        if not self.fixtures[hash] then
-                            self.fixtures[hash] = table.newarray()
-                        end
-                        self.fixtures[hash][#self.fixtures[hash] + 1] = fixture
+                        self:addFixture(fixture, false)
                     end
                 end
             end
@@ -392,6 +406,13 @@ function DWAP_WaterSystem:TanksInitData(isNewGame)
         --     self.tanks = modData.tanks
         --     self.fixtures = modData.fixtures
         -- end
+
+        if md.manualFixtures then
+            for i = 1, #md.manualFixtures do
+                local fixture = md.manualFixtures[i]
+                self:addFixture(fixture, false)
+            end
+        end
     end
     DWAP_WaterSystem:Startup()
 end
