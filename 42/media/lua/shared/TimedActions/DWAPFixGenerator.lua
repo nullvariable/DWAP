@@ -3,6 +3,7 @@
 --***********************************************************
 
 require "TimedActions/ISBaseTimedAction"
+local DWAPUtils = require("DWAPUtils")
 
 DWAPFixGenerator = ISBaseTimedAction:derive("DWAPFixGenerator");
 
@@ -37,7 +38,10 @@ function DWAPFixGenerator:stop()
 end
 
 function DWAPFixGenerator:continueFixing()
-    if DWAP_Gen.getGenerator(self.genIndex).condition < 100 then
+    local generator = DWAP_Gen:GetGenerator(self.genIndex)
+    DWAPUtils.dprint(generator.condition)
+    DWAPUtils.dprint(generator.condition < 100)
+    if generator and generator.condition < 100 then
         local scrapItem = self.character:getInventory():getFirstTypeRecurse("ElectronicsScrap")
         if scrapItem then
             local previousAction = self
