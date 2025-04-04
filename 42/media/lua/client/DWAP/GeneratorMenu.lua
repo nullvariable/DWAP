@@ -4,6 +4,18 @@ local DWAPUtils = require("DWAPUtils")
 
 local generatorControls = {}
 
+--- is IndustrialRevolution or FunctionalAppliances mod active?
+--- @return boolean
+local function isGreenSiloActive()
+    if SandboxVars.IndustrialRevolution and SandboxVars.IndustrialRevolution.EnableSiloGenerators then
+        return true
+    end
+if SandboxVars.FunctionalAppliances and SandboxVars.FunctionalAppliances.FAEnableSiloGenerators then
+        return true
+    end
+    return false
+end
+
 --- Check if the item is a petrol container and has space for petrol
 --- @param item InventoryItem
 local function predicatePetrolNotFull(item)
@@ -40,18 +52,6 @@ local stringCache = {
     removeFA = {}
 }
 Events.OnInitGlobalModData.Add(function()
-    -- local configs = DWAPUtils.loadConfigs()
-    -- for i = 1, #configs do
-    --     local config = configs[i]
-    --     if config.generators then
-    --         for j = 1, #config.generators do
-    --             local generatorControls = config.generators[j].controls
-    --             table.insert(generatorCoords, generatorControls)
-    --         end
-    --     end
-    -- end
-    -- table.wipe(configs)
-
     if SandboxVars.FunctionalAppliances then
         stringCache.removeFA = {
             ["UI_FunctionalAppliances_turngeneratoron"] = getText("UI_FunctionalAppliances_turngeneratoron"),
@@ -68,6 +68,23 @@ Events.OnInitGlobalModData.Add(function()
             ["UI_FunctionalAppliances_takegeneratormagazine"] = getText("UI_FunctionalAppliances_takegeneratormagazine"),
         }
     end
+    if SandboxVars.IndustrialRevolution then
+        stringCache.removeFA = {
+            ["UI_IndustrialRevolution_turngeneratoron"] = getText("UI_IndustrialRevolution_turngeneratoron"),
+            ["UI_IndustrialRevolution_turngeneratoroff"] = getText("UI_IndustrialRevolution_turngeneratoroff"),
+            ["UI_IndustrialRevolution_status"] = getText("UI_IndustrialRevolution_status"),
+            ["UI_IndustrialRevolution_autostartactivated"] = getText("UI_IndustrialRevolution_autostartactivated"),
+            ["UI_IndustrialRevolution_autostartdeactivated"] = getText("UI_IndustrialRevolution_autostartdeactivated"),
+            ["UI_IndustrialRevolution_deactivateautostart"] = getText("UI_IndustrialRevolution_deactivateautostart"),
+            ["UI_IndustrialRevolution_activateautostart"] = getText("UI_IndustrialRevolution_activateautostart"),
+            ["UI_IndustrialRevolution_addfuel"] = getText("UI_IndustrialRevolution_addfuel"),
+            ["UI_IndustrialRevolution_addfuel".. ":"] = getText("UI_IndustrialRevolution_addfuel").. ":",
+            ["UI_IndustrialRevolution_addallfuel"] = getText("UI_IndustrialRevolution_addallfuel"),
+            ["UI_IndustrialRevolution_takefuel"] = getText("UI_IndustrialRevolution_takefuel"),
+            ["UI_IndustrialRevolution_fixgenerator"] = getText("UI_IndustrialRevolution_fixgenerator"),
+            ["UI_IndustrialRevolution_takegeneratormagazine"] = getText("UI_IndustrialRevolution_takegeneratormagazine"),
+        }
+    end
 end)
 
 Events.OnLoad.Add(function()
@@ -76,6 +93,22 @@ end)
 
 function TestLoad()
     generatorControls = DWAP_Gen:GetControlPoints()
+end
+
+--- Check if the object is a generator control
+--- @param objectCoords table
+--- @return number|boolean
+local function getControl(objectCoords)
+    --- @type number|boolean
+    local control = false
+    for i = 1, #generatorControls do
+        local _control = generatorControls[i]
+        if _control and _control.x == objectCoords.x and _control.y == objectCoords.y and _control.z == objectCoords.z then
+            control = i
+            break
+        end
+    end
+    return control
 end
 
 --- Context menu for the bunker generator
@@ -90,26 +123,20 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
 
     local object = worldobjects[1]
     local objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
-    local control
-    for i = 1, #generatorControls do
-        local _control = generatorControls[i]
-        if _control.x == objectCoords.x and _control.y == objectCoords.y and _control.z == objectCoords.z then
-            control = i
-            break
-        end
-    end
-
+    
+    local control = getControl(objectCoords)
     if control then
-        context:removeOptionByName(stringCache["ContextMenu_GeneratorInfo"])
-        context:removeOptionByName(stringCache["ContextMenu_Turn_Off"])
-        context:removeOptionByName(stringCache["ContextMenu_Turn_On"])
-        context:removeOptionByName(stringCache["ContextMenu_GeneratorPlug"])
-        context:removeOptionByName(stringCache["ContextMenu_GeneratorUnplug"])
-        context:removeOptionByName(stringCache["ContextMenu_GeneratorAddFuel"])
-        context:removeOptionByName(stringCache["ContextMenu_GeneratorFix"])
-        if SandboxVars.FunctionalAppliances and SandboxVars.FunctionalAppliances.FAEnableSiloGenerators then
+        -- context:removeOptionByName(stringCache["ContextMenu_GeneratorInfo"])
+        -- context:removeOptionByName(stringCache["ContextMenu_Turn_Off"])
+        -- context:removeOptionByName(stringCache["ContextMenu_Turn_On"])
+        -- context:removeOptionByName(stringCache["ContextMenu_GeneratorPlug"])
+        -- context:removeOptionByName(stringCache["ContextMenu_GeneratorUnplug"])
+        -- context:removeOptionByName(stringCache["ContextMenu_GeneratorAddFuel"])
+        -- context:removeOptionByName(stringCache["ContextMenu_GeneratorFix"])
+        if isGreenSiloActive() then
             -- Try to prevent conflicts with the silo generator mod
             -- https://steamcommunity.com/sharedfiles/filedetails/?id=3042138819
+            -- https://steamcommunity.com/sharedfiles/filedetails/?id=3400131934
             for _, v in pairs(stringCache.removeFA) do
                 context:removeOptionByName(v)
             end
@@ -210,6 +237,7 @@ end
 Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
 
 --- Hide the generator menu items
+--- @deprecated we don't create generator items any more so this should be unneeded
 --- @param _ any
 --- @param context ISContextMenu
 --- @param worldobjects table
@@ -221,13 +249,15 @@ DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
 
     local object = worldobjects[1]
     local objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
-    if DWAPUtils.areCoordsInList(objectCoords, generatorCoords) then
+
+    local control = getControl(objectCoords)
+    if control then
         DWAPUtils.dprint("Generator context menu")
-        local square = object:getSquare()
-        for i = 0, square:getObjects():size() - 1 do
-            object = square:getObjects():get(i)
-            objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
-            if object:getObjectName() == "IsoGenerator" then
+        -- local square = object:getSquare()
+        -- for i = 0, square:getObjects():size() - 1 do
+        --     object = square:getObjects():get(i)
+        --     objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
+        --     if object:getObjectName() == "IsoGenerator" then
                 context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
                 context:removeOptionByName(getText("ContextMenu_Turn_Off"))
                 context:removeOptionByName(getText("ContextMenu_Turn_On"))
@@ -235,8 +265,8 @@ DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
                 context:removeOptionByName(getText("ContextMenu_GeneratorUnplug"))
                 context:removeOptionByName(getText("ContextMenu_GeneratorAddFuel"))
                 context:removeOptionByName(getText("ContextMenu_GeneratorFix"))
-            end
-        end
+        --     end
+        -- end
     end
 end
 -- Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
