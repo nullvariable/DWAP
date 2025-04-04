@@ -18,6 +18,7 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field tunnelZ? number
 --- @field replaceWall? boolean
 --- @field isLightSwitch? boolean
+--- @field room? table coords for the room to attach a square to
 
 --- @param spawn objectSpawn
 --- @return number
@@ -165,6 +166,19 @@ function DWAP_Props.maybeSpawnObject(params)
     local square = getSquare(params.x, params.y, params.z)
     if params.tunnelZ then
         square = IsoObjectUtils.getOrCreateSquare(params.x, params.y, params.tunnelZ)
+        if params.room then
+            local sourceSquare = getSquare(params.room.x, params.room.y, params.room.z)
+            if sourceSquare then
+                local room = sourceSquare:getRoom()
+                local roomDef = room:getRoomDef()
+                local roomId = roomDef:getID()
+                if room then
+                    square:setRoom(room)
+                    square:setRoomID(roomId)
+                    room:addSquare(square)
+                end
+            end
+        end
     end
     if not square then
         DWAPUtils.dprint(("DWAP_Props: No square found for maybeSpawnObject %s %s %s"):format(params.x, params.y, params.z))
