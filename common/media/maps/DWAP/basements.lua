@@ -100,7 +100,7 @@ fullConfig[18] = { -- McCoy
 fullConfig[19] = { -- CentralLVilleMansion
     locations = {
         {x=13431, y=1908, z=0, stairDir="N", choices={"lot_basement_gas_15_brandenburg"}, },
-        {x=13434, y=1913, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
+        {x=13434, y=1913, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, }, -- access="ba_interior_north_01"
     },
 }
 fullConfig[20] = { -- CentralLVilleMansion
