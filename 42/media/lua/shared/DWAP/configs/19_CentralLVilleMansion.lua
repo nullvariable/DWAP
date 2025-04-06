@@ -103,6 +103,9 @@ local CentralLVilleMansion = {
         { sprite = "floors_exterior_street_01_0", x = 13438, y = 1910, z = -1, clearExisting = false, },
         { sprite = "floors_exterior_street_01_0", x = 13438, y = 1909, z = -1, clearExisting = false, },
         { sprite = "floors_exterior_street_01_0", x = 13438, y = 1908, z = -1, clearExisting = false, },
+        { sprite = "fixtures_railings_01_36", x = 13434, y = 1913, z = -1, clearExisting = false, },
+        { sprite = "fixtures_railings_01_36", x = 13434, y = 1914, z = -1, clearExisting = false, },
+        { sprite = "fixtures_railings_01_36", x = 13434, y = 1915, z = -1, clearExisting = false, },
         { x = 13434, y = 1914, z = -1, clearExisting = true, },
         { x = 13434, y = 1915, z = -1, clearExisting = true, },
 

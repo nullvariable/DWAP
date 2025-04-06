@@ -260,7 +260,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10088,y=8260,z=1},
-            dist = {"StoreKitchenButcher", "StoreKitchenBaking", "StoreKitchenPotatoes", "StoreKitchenPots", "StoreKitchenSauce", },
+            dist = {"StoreKitchenButcher", "CrateFlour", "CrateOilVegetable", "StoreKitchenSauce", },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -875,7 +875,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10117,y=8239,z=0},
-            dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
+            dist = {"CrateBlacksmithing", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

@@ -294,6 +294,22 @@ local RiverSafeHouse = {
         -- kitchen
         {
             type = 'container',
+            coords = {x=6956,y=5570,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6956,y=5563,z=0},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=6954,y=5562,z=0},
             dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
             distIncludeJunk = true,

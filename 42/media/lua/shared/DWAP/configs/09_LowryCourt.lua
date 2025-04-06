@@ -20,6 +20,9 @@ local LowryCourt = {
         { sprite = "fixtures_sinks_01_29", x = 12978, y = 1918, z = 2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_2", x = 12978, y = 1919, z = 2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_55", x = 12978, y = 1920, z = 2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+
+        { sprite = "fixtures_bathroom_01_6", x = 12983, y = 1915, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_16", x = 12981, y = 1911, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
         name = "Lowry Court",
@@ -204,7 +207,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12995,y=1911,z=2.5},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -212,7 +215,15 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12991,y=1911,z=2},
-            dist = {"GigamartTools", "JanitorTools" },
+            dist = {"GigamartTools", "JanitorTools", "WeldingWorkshopTools", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12992,y=1911,z=2},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

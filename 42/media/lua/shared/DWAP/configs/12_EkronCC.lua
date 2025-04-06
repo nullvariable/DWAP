@@ -66,6 +66,13 @@ local EkronCC = {
         { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-13, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-14, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y-15, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y-11, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y-7, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y-11, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y-7, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
         { sprite = "appliances_laundry_01_6", x = genCoords.x+13, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "appliances_laundry_01_6", x = genCoords.x+14, y = genCoords.y-9, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -86,6 +93,31 @@ local EkronCC = {
         -- wash room toilets
         { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y+27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = genCoords.x+5, y = genCoords.y+26, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y+31, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y-29, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = genCoords.x+1, y = genCoords.y-27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y+31, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y-29, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = genCoords.x+4, y = genCoords.y-27, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+
+        -- decon showers
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x-3, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x-2, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x-1, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x+1, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x+2, y = genCoords.y+12, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x-1, y = genCoords.y+10, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x, y = genCoords.y+10, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x-1, y = genCoords.y+8, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = genCoords.x, y = genCoords.y+8, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x-3, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x-2, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x-1, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x+1, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = genCoords.x+2, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     objectSpawns = {
         { sprite = "fixtures_railings_01_36", x = 726, y = 9820, z = -1, clearExisting = false, },

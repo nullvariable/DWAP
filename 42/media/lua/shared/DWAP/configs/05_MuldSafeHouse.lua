@@ -6,6 +6,7 @@ local MuldSafeHouse = {
         { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, },
     },
     waterFixtures = {
+        { sprite = "appliances_laundry_01_4", x = 10661, y = 9560, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "appliances_laundry_01_0", x = 10662, y = 9560, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_3", x = 10663, y = 9573, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_16", x = 10657, y = 9566, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -275,7 +276,7 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = {x=10661,y=9566,z=0},
-            dist = {"CampingStoreTools", "ArmyHangarTools", },
+            dist = {"CampingStoreTools", "ArmyHangarTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -289,6 +290,22 @@ local MuldSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         -- kitchen
+        {
+            type = 'container',
+            coords = {x=10663,y=9568,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10659,y=9568,z=0},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
         {
             type = 'container',
             coords = {x=10657,y=9567,z=0},

@@ -19,45 +19,6 @@ local allSeeds = {}
 local allMaps = {}
 local excludeItems = {
     "Key",
-    "BookAiming",
-    "BookButchering",
-    "BookBlacksmith",
-    "BookCarving",
-    "BookCarpentry",
-    "BookCooking",
-    "BookElectricty",
-    "BookFarming",
-    "BookFirstAid",
-    "BookFishing",
-    "BookForaging",
-    "BookFlintKnapping",
-    "BookGlassmaking",
-    "BookHusbandry",
-    "BookLongBlade",
-    "BookMaintenance",
-    "BookMasonry",
-    "BookMechanic",
-    "BookMetalWelding",
-    "BookPottery",
-    "BookReloading",
-    "BookTailoring",
-    "BookTrapping",
-    "BookTracking",
-    "Money",
-    "HerbalistMag",
-    "Magazine1",
-    "Magazine2",
-    "Mag1",
-    "Mag2",
-    "Mag3",
-    "Mag4",
-    "Mag5",
-    "Mag6",
-    "Mag7",
-    "Mag8",
-    "Mag9",
-    "Mag10",
-    "Mag11",
     "IDCard",
     "CreditCard",
     "FishingTackle", -- seems to be in some distrbutions but doesn't exist currently
@@ -241,6 +202,7 @@ local function populateItems()
                         local tag = tags:get(j)
                         if tag == "Magazine" then
                             table.insert(allSkillMags, module .. "." .. name)
+                            excludeItems[#excludeItems+1] = name
                             skip = true
                             break
                         end
@@ -248,11 +210,24 @@ local function populateItems()
                 end
                 if not skip then
                     table.insert(allSkillBooks, module .. "." .. name)
+                    excludeItems[#excludeItems+1] = name
                 end
-            elseif name:find("Seed") and not name:find("Empty") and not name:find("Paste") then
-                table.insert(allSeeds, module .. "." .. name)
-            elseif name ~= "Map" and name:find("Map") and category == "Cartography" then
+            elseif name:find("Seed") then
+                local tags = item:getTags()
+                if tags then
+                    local ts = tags:size()
+                    for j = 0, ts do
+                        local tag = tags:get(j)
+                        if tag == "isSeed" then
+                            table.insert(allSeeds, module .. "." .. name)
+                            excludeItems[#excludeItems+1] = name
+                            break
+                        end
+                    end
+                end
+            elseif category == "Cartography" and name ~= "Map" then
                 table.insert(allMaps, module .. "." .. name)
+                excludeItems[#excludeItems+1] = name
             end
         end
     end
@@ -405,20 +380,39 @@ local function fillContainer(container, config, index, coordsKey)
                 end
             end
         elseif config.randUntilFull then
+            DWAPUtils.dprint("randUntilFull")
             local items = getDistItems(config.dist, config.distIncludeJunk)
+            local alreadySpawnedContainers = {}
             if not items then return end
             local item = items[random:random(1, #items)]
             local hasRoom = checkHasRoom(container, level)
             local tries = 0
             while hasRoom and tries < 100 do
-                item = items[random:random(1, #items)]
+                if not items or #items < 2 and alreadySpawnedContainers and #alreadySpawnedContainers > 0 then
+                    for i = 0, #alreadySpawnedContainers do
+                        items[#items+1] = alreadySpawnedContainers[i]
+                    end
+                    alreadySpawnedContainers = {}
+                    DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
+                end
+                local randindex = random:random(1, #items)
+                item = items[randindex]
                 hasRoom = checkHasRoom(container, level)
                 if hasRoom and item then
                     addItem(container, item)
+                    if type(item) == "string" then
+                        local ii = instanceItem(item)
+                        if ii and ii:getCategory() == "Container" then
+                            items[randindex] = nil
+                            alreadySpawnedContainers[#alreadySpawnedContainers+1] = item
+                            DWAPUtils.dprint("Added container: " .. item)
+                        end
+                    end
                 end
                 tries = tries + 1
             end
         else
+            DWAPUtils.dprint("final loot else")
             local items = config.items
             if not items then
                 items = getDistItems(config.dist, config.distIncludeJunk)

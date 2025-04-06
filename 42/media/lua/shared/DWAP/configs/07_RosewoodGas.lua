@@ -154,6 +154,14 @@ local RosewoodGas = {
         -- upstairs apt
         {
             type = 'container',
+            coords = {x=8178,y=11267,z=1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=8175,y=11269,z=1},
             dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
             distIncludeJunk = true,
@@ -276,7 +284,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8181,y=11266,z=-1},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -284,7 +292,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8181,y=11262,z=-1},
-            dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
+            dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

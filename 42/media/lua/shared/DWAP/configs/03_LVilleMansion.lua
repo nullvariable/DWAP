@@ -304,6 +304,14 @@ local LVilleMansion = {
         -- kitchen
         {
             type = 'container',
+            coords = {x=12028,y=2590,z=0},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=12027,y=2587,z=0},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,

@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 10144, y = 6614, z = -2}
 local WWestPointSafeHouse = {
     spawn = { x = 10162, y = 6622, z = 1 },
     waterTanks = {
-        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 10149, y = 6620, z = -1} },
     },
     waterFixtures = {
         { sprite = "appliances_laundry_01_3", x = 10157, y = 6622, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -30,15 +30,10 @@ local WWestPointSafeHouse = {
         doors = {
             { sprite = "fixtures_doors_02_5", x = 10157, y = 6633, z = 0, },
             { sprite = "fixtures_doors_02_5", x = 10157, y = 6632, z = 0, },
+            { sprite = "fixtures_doors_fences_01_21", x = 10156, y = 6608, z = 0, },
         },
     },
     map = { name = "DWAPStashMap8", },
-    purgeToxinsCoords = {
-        {x = 10149, y = 6620, z = -1,},
-    },
-    -- generators = {
-    --     { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, ghost = false, },
-    -- },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, ghost = false, },
@@ -68,6 +63,16 @@ local WWestPointSafeHouse = {
         { x = 10146, y = 6623, z = -1, clearExisting = true, },
         { x = 10146, y = 6624, z = -1, clearExisting = true, },
         { x = 10146, y = 6625, z = -1, clearExisting = true, },
+
+        { sprite = "industry_02_224", x = 10157, y = 6619, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_224", x = 10157, y = 6618, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_224", x = 10157, y = 6617, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_224", x = 10157, y = 6616, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_250", x = 10157, y = 6615, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_52", x = 10161, y = 6585, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_224", x = 10161, y = 6586, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_224", x = 10161, y = 6587, z = 0, enabled = "EnableWaterSystem", },
+        { sprite = "industry_02_252", x = 10161, y = 6588, z = 0, enabled = "EnableWaterSystem", },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -198,6 +203,22 @@ local WWestPointSafeHouse = {
         -- first basement
         {
             type = 'container',
+            coords = {x=10158,y=6622,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10156,y=6622,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=10152,y=6626,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -215,7 +236,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10156,y=6619,z=-1},
-            dist = {"CrateTools", "GarageTools", "BarnTools" },
+            dist = {"CrateTools", "GarageTools", "BarnTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -223,7 +244,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10157,y=6619,z=-1},
-            dist = {"GigamartTools", "JanitorTools" },
+            dist = {"GigamartTools", "JanitorTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -319,6 +340,14 @@ local WWestPointSafeHouse = {
             coords = {x=10163,y=6628,z=0},
             dist = {"GroceryBagGourmet",},
             distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10163,y=6627,z=0},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },

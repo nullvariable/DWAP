@@ -28,7 +28,7 @@ local LVPawnshop = {
         { sprite = "fixtures_bathroom_01_0", x = 12323, y = 1327, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_2", x = 12324, y = 1327, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
 
-        { sprite = "fixtures_sinks_01_8", x = 12321, y = 1330, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_10", x = 12321, y = 1330, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_25", x = 12321, y = 1327, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_0", x = 12320, y = 1327, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_2", x = 12319, y = 1327, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -251,6 +251,14 @@ local LVPawnshop = {
         },
         {
             type = 'container',
+            coords = {x=12339,y=1329,z=-1},
+            dist = {"MetalShopTools", "MetalWorkerTools" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
             coords = {x=12339,y=1327,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -283,6 +291,14 @@ local LVPawnshop = {
         },
         {
             type = 'container',
+            coords = {x=12337,y=1322,z=-1},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=12335,y=1322,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -308,7 +324,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12334,y=1324,z=-1},
-            dist = {"StoreKitchenBaking",},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -470,7 +486,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12322,y=1330,z=0},
-            dist = {"WeldingWorkshopMetal"},
+            dist = {"WeldingWorkshopMetal", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",

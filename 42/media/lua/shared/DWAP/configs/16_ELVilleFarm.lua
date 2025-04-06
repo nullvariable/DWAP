@@ -31,7 +31,7 @@ local ELVilleFarm = {
         name = "E Lville Farm",
         doors = {
             { sprite = "fixtures_doors_02_5", x = 14579, y = 3043, z = 0, },
-            { sprite = "fixtures_doors_02_5", x = 14576, y = 3068, z = 0, },
+            { sprite = "fixtures_doors_01_28", x = 14576, y = 3068, z = 0, },
         },
     },
     map = { name = "DWAPStashMap16", },
@@ -202,6 +202,14 @@ local ELVilleFarm = {
         -- basement proper
         {
             type = 'container',
+            coords = {x=14585,y=3029,z=-1},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=14584,y=3034,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -298,6 +306,14 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         -- kitchen
+        {
+            type = 'container',
+            coords = {x=14589,y=3036,z=0},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
         {
             type = 'container',
             coords = {x=14584,y=3035,z=0},
@@ -539,7 +555,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14563,y=3040,z=0},
-            dist = {"CrateTools", "GarageTools", "BarnTools" },
+            dist = {"CrateTools", "GarageTools", "BarnTools", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -563,7 +579,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14552,y=3040,z=0},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming", "MetalShopTools", "MetalWorkerTools"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",

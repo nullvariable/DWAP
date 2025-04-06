@@ -1,4 +1,3 @@
-
 local DWAPUtils = require("DWAPUtils")
 local random = newrandom()
 
@@ -27,21 +26,23 @@ function DWAPTest2()
 end
 
 
-local lastBuilding = nil
-Events.OnTick.Add(function()
-    local ply = getPlayer()
-    local square = ply:getCurrentSquare()
-    if not square then return end
-    local building = square:getBuilding()
-    local bn = building and building or nil
-    if bn ~= lastBuilding then
-        DWAPUtils.dprint("Building changed "..tostring(bn))
-        if building then
-            DWAPUtils.lightsOn(square)
+if getDebug() then
+    local lastBuilding = nil
+    Events.OnTick.Add(function()
+        local ply = getPlayer()
+        local square = ply:getCurrentSquare()
+        if not square then return end
+        local building = square:getBuilding()
+        local bn = building and building or nil
+        if bn ~= lastBuilding then
+            DWAPUtils.dprint("Building changed "..tostring(bn))
+            if building then
+                DWAPUtils.lightsOn(square)
+            end
+            lastBuilding = bn
         end
-        lastBuilding = bn
-    end
-end)
+    end)
+end
 
 require "ISUI/ISCollapsableWindow"
 
@@ -1160,13 +1161,65 @@ function watertest()
 
 end
 
-function roomtest()
-    local player = getPlayer()
-    local pSquare = player:getCurrentSquare()
-    local chunk = pSquare:getChunk()
+function dwap_rt()
+    local x = 2946
+    local y = 12536
+    local z = -1
+    local metaGrid = getWorld():getMetaGrid()
+    local cell = getCell()
+    local square = getSquare(x, y, z)
+    local building = square:getBuilding()
+    if not building then
+        DWAPUtils.dprint("No building found")
+        return
+    end
+    local buildingDef = building:getDef()
+    if not buildingDef then
+        DWAPUtils.dprint("No building def found")
+        return
+    end
+    local buildingDefX = buildingDef and buildingDef:getX() or 0
+    local buildingDefY = buildingDef and buildingDef:getY() or 0
+    if type(buildingDefX) ~= "number" then
+        DWAPUtils.dprint("buildingDefX is not a number: " .. tostring(buildingDefX))
+        buildingDefX = 0
+    end
+    if type(buildingDefY) ~= "number" then
+        DWAPUtils.dprint("buildingDefY is not a number: " .. tostring(buildingDefY))
+        buildingDefY = 0
+    end
 
-    -- this.addSpawnedRoom(RoomID.makeID(this.wx / 8, this.wy / 8, int20));
-    local wx = Reflection.getField(chunk, "wx")
-    local wy = Reflection.getField(chunk, "wy")
-    chunk:addSpawnedRoom(wx + wy + -1)
+    DWAPUtils.dprint("CellSizeInSquares "..tostring(cell.CellSizeInSquares))
+    buildingDefX = buildingDefX / cell.CellSizeInSquares
+    DWAPUtils.dprint("buildingDefX "..tostring(buildingDefX))
+    buildingDefY = buildingDefY / cell.CellSizeInSquares
+    local metacell = metaGrid and metaGrid:getCellData(buildingDefX, buildingDefY)
+    if not metacell then
+        DWAPUtils.dprint("No metacell found")
+        return
+    end
+    local rooms = buildingDef:getRooms()
+    metacell:addRooms(rooms, buildingDefX * cell.CellSizeInSquares, buildingDefY * cell.CellSizeInSquares)
+    metaGrid:addRoomsToAdjacentCells(buildingDef, rooms)
+end
+
+function bag_test()
+    local ii = instanceItem("Bag_BigHikingBag")
+    DWAPUtils.dprint("InstanceItem")
+    DWAPUtils.dprint(Reflection.getClassName(ii))
+    DWAPUtils.dprint(ii:getType())
+    DWAPUtils.dprint(ii:getCategory())
+
+    local ii2 = instanceItem("Bag_Satchel_Fishing")
+    DWAPUtils.dprint("InstanceItem2")
+    DWAPUtils.dprint(Reflection.getClassName(ii2))
+    DWAPUtils.dprint(ii2:getType())
+    DWAPUtils.dprint(ii2:getCategory())
+
+
+    -- for i = 1, #fieldNames do
+    --     local fieldName = fieldNames[i]
+    --     local fieldValue = Reflection.getField(instanceItem, fieldName)
+    --     DWAPUtils.dprint(("Field %s: %s"):format(fieldName, tostring(fieldValue)))
+    -- end
 end

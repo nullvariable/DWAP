@@ -68,6 +68,13 @@ local GrandOhioConfig = {
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-13, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-14, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y-15, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y-11, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y-7, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y-11, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y-7, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry room washers
         { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+13, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "appliances_laundry_01_6", x = generatorStartCoords.x+14, y = generatorStartCoords.y-9, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -88,6 +95,31 @@ local GrandOhioConfig = {
         -- wash room toilets
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_5", x = generatorStartCoords.x+5, y = generatorStartCoords.y+26, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        -- washroom showers
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y+31, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y-29, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_31", x = generatorStartCoords.x+1, y = generatorStartCoords.y-27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y+31, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y-29, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_23", x = generatorStartCoords.x+4, y = generatorStartCoords.y-27, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+
+        -- decon showers
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x-3, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x-2, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x-1, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x+1, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x+2, y = generatorStartCoords.y+12, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x-1, y = generatorStartCoords.y+10, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x, y = generatorStartCoords.y+10, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x-1, y = generatorStartCoords.y+8, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_22", x = generatorStartCoords.x, y = generatorStartCoords.y+8, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x-3, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x-2, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x-1, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x+1, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x+2, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     objectSpawns = {
         { x = 13610, y = 1269, z = 0, clearExisting = true, },

@@ -348,7 +348,7 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x=13139,y=3027,z=0},
-            dist = {"WeldingWorkshopMetal"},
+            dist = {"WeldingWorkshopMetal", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",

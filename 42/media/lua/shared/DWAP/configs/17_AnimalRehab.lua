@@ -12,7 +12,7 @@ local AnimalRehab = {
 
         -- 2nd floor
         { sprite = "fixtures_bathroom_01_32", x = 3107, y = 12048, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_34", x = 3108, y = 12048, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_0", x = 3108, y = 12048, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_1", x = 3107, y = 12050, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_1", x = 3107, y = 12051, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
 
@@ -227,7 +227,7 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3117,y=12047,z=-1},
-            dist = {"ArmyStorageElectronics", "RandomFiller" },
+            dist = {"ArmyStorageElectronics", "RandomFiller", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -272,6 +272,14 @@ local AnimalRehab = {
         },
         -- first floor
         -- kitchen
+        {
+            type = 'container',
+            coords = {x=3113,y=12055,z=0},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
         {
             type = 'container',
             coords = {x=3115,y=12051,z=0},
