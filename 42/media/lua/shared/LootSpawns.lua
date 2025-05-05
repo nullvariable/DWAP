@@ -473,21 +473,34 @@ end
 --- @return table{string}
 local function removeExcludeItems(items)
     if not items then return {} end
+    local quickExclude = {}
+    for i = 1, #excludeItems do
+        quickExclude[excludeItems[i]] = true
+    end
     local newItems = {}
     for i = 1, #items do
         local item = items[i]
-        if convertItems[item] then
-            item = convertItems[item]
-        end
-        local exclude = false
-        for j = 1, #excludeItems do
-            if item == excludeItems[j] or string.match(item, excludeItems[j]) then
-                exclude = true
-                break
+        if item and type(item) == "string" then
+            DWAPUtils.dprint("removeExcludeItems")
+            DWAPUtils.dprint(item)
+            DWAPUtils.dprint("type "..type(item))
+            if convertItems[item] then
+                item = convertItems[item]
             end
-        end
-        if not exclude then
-            table.insert(newItems, item)
+            local exclude = false
+            if quickExclude[item] then
+                exclude = true
+            else
+                for j = 1, #excludeItems do
+                    if item == excludeItems[j] or (type(item) == "string" and item:match(excludeItems[j])) then
+                        exclude = true
+                        break
+                    end
+                end
+            end
+            if not exclude then
+                table.insert(newItems, item)
+            end
         end
     end
     return newItems
@@ -598,7 +611,8 @@ end
 
 local function populateItems()
     local items = getAllItems()
-    for i = 0, items:size()-1 do
+    local is = items:size()-1
+    for i = 0, is do
         local item = items:get(i)
         if item and not item:getObsolete() and not item:isHidden() then
             --- @type string
@@ -636,6 +650,8 @@ local function populateItems()
             end
         end
     end
+    DWAPUtils.dprint("excludeItems: " .. #excludeItems)
+    DWAPUtils.dprint(excludeItems)
 end
 
 local previousMediaSpawns = {}
@@ -879,23 +895,30 @@ end
 
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
-    local enableAll = SandboxVars.DWAP.EnableAllLocations
     local safehouseIndex = DWAPUtils.selectedSafehouse or SandboxVars.DWAP.Safehouse - 1
+    local nonPrimaryLootLevel = SandboxVars.DWAP.Loot
+    populateItems()
     for i = 1, #configs do
         local config = configs[i]
-        if config and config.loot and (enableAll or i == safehouseIndex) then
-            for j = 1, #config.loot do
-                if i ~= safehouseIndex and enableAll and SandboxVars.DWAP.Loot == 3 and type(config.loot[j].level) == "string" then
-                    config.loot[j].level = 3
-                end
-                setLootConfigValue(config.loot[j])
-                if config.loot[j].dist then
-                    getDistItems(config.loot[j].dist, config.loot[j].distIncludeJunk)
+        if config and config.loot then
+            if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex) or nonPrimaryLootLevel == 4 then
+                config.loot = {}
+            else
+                local rewwriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex
+                for j = 1, #config.loot do
+                    if rewwriteLevel and type(config.loot[j].level) == "string" then
+                        -- overwrite to low
+                        config.loot[j].level = 3
+                    end
+                    setLootConfigValue(config.loot[j])
+                    -- try to precache the items
+                    if config.loot[j].dist then
+                        getDistItems(config.loot[j].dist, config.loot[j].distIncludeJunk)
+                    end
                 end
             end
         end
     end
-    populateItems()
 end
 
 --- Handle Custom Loot Spawns
