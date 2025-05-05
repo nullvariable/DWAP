@@ -900,7 +900,8 @@ local EkronCC = {
             type = 'container',
             coords = {x=genCoords.x-1,y=genCoords.y+16,z=genCoords.z},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -908,9 +909,8 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x-2,y=genCoords.y+16,z=genCoords.z},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },

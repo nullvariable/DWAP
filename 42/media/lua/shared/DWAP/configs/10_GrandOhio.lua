@@ -900,7 +900,8 @@ local GrandOhioConfig = {
             type = 'container',
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+16,z=-4},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -908,9 +909,10 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+16,z=-4},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',

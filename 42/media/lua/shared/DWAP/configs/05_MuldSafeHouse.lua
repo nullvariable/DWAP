@@ -21,7 +21,7 @@ local MuldSafeHouse = {
         { sprite = "fixtures_sinks_01_17", x = 10662, y = 9564, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_23", x = 10663, y = 9573, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_6", x = 10663, y = 9574, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_35", x = 10661, y = 9574, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_33", x = 10661, y = 9574, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
         name = "Muldraugh Safe House",
@@ -72,7 +72,8 @@ local MuldSafeHouse = {
             type = 'container',
             coords = {x=10658,y=9561,z=0},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -80,9 +81,8 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = {x=10658,y=9562,z=0},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },

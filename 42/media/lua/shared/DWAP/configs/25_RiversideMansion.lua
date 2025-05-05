@@ -222,7 +222,8 @@ local RiversideMansion = {
             type = 'container',
             coords = {x=6671,y=5510,z=0},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -231,7 +232,8 @@ local RiversideMansion = {
             type = 'container',
             coords = {x=6671,y=5511,z=0},
             items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,4} },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.Plank', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -707,7 +709,8 @@ local RiversideMansion = {
             type = 'container',
             coords = {x=6671,y=5510,z=-1},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -715,9 +718,8 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6671,y=5509,z=-1},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,4} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },

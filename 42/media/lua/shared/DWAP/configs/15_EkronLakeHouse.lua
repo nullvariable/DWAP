@@ -231,7 +231,8 @@ local EkronLakeHouse = {
             type = 'container',
             coords = {x=1902,y=9952,z=-1},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -239,9 +240,8 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1902,y=9953,z=-1},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
@@ -256,6 +256,7 @@ local EkronLakeHouse = {
                 { name = 'Base.CDplayer', chance = 1, count = {3,3} },
                 { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
             },
+            randUntilFull = true,
         },
         {
             type = 'container',

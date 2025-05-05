@@ -786,7 +786,8 @@ local McCoyEstate = {
             type = 'container',
             coords = {x=10095,y=8258,z=0},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",

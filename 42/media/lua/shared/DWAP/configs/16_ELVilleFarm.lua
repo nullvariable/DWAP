@@ -542,7 +542,8 @@ local ELVilleFarm = {
             type = 'container',
             coords = {x=14557,y=3040,z=0},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -550,9 +551,8 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14558,y=3040,z=0},
-            items = {
-                { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
-            },
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },

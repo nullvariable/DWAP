@@ -290,13 +290,14 @@ local DoeValleyBunker = {
             type = 'container',
             coords = {x = 5575, y = 9367, z = 0},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,2} },
-                { name = 'Base.ScrewsCarton', chance = 1, count = {1,2} },
+                { name = 'Base.NailsBox', chance = 1, count = {1,2} },
+                { name = 'Base.ScrewsBox', chance = 1, count = {1,2} },
                 { name = 'TvWideScreen', chance = 1, count = {1,1} },
                 { name = 'Base.Headphones', chance = 1, count = {3,3} },
                 { name = 'Base.CDplayer', chance = 1, count = {3,3} },
                 { name = 'Base.VHS_Retail', chance = 0.5, count = {30,30} },
             },
+            randUntilFull = true,
         },
         {
             type = 'container',

@@ -408,7 +408,8 @@ local PSDelilah = {
             type = 'container',
             coords = {x=2044,y=5709,z=0},
             items = {
-                { name = 'Base.NailsCarton', },
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
