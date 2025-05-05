@@ -132,40 +132,36 @@ Future plans:
 
 | 20. Rural Scrapyard | 2937, 12523 |
 | ------------- | ---------- |
-| ![Rural Scrapyard](readme/20_RSY.jpg) | [Rural Scrapyard](readme/20_map.png) |
-| This modest two story home hides a well kept secret tunnel to the scrapyard next door. Connecting two basements, the tunnel carries water from the spring to both homes, as well as power from the generator found in the scrapyard. Well stocked, both basements offer heaps of supplies for the long term, and nearby fields promise years of harvests to come. The nearby workshop and garage are also powered by the generator. | [Rural Scrapyard](readme/20_basement.png) |
+| ![Rural Scrapyard](readme/20_RSY.jpg) | ![Rural Scrapyard](readme/20_map.png) |
+| This modest two story home hides a well kept secret tunnel to the scrapyard next door. Connecting two basements, the tunnel carries water from the spring to both homes, as well as power from the generator found in the scrapyard. Well stocked, both basements offer heaps of supplies for the long term, and nearby fields promise years of harvests to come. The nearby workshop and garage are also powered by the generator. | ![Rural Scrapyard](readme/20_basement.png) |
 | ***Pros***: sweet custom basement connecting two homes, large scrapyard for materials or skills | ***Cons***: miles away from everything but still strong zombie presence |
 
 | 21. Ekron Factory | 565, 9374 |
 | ------------- | ---------- |
-| ![Ekron Factory](readme/21_EF.jpg) | [Ekron Factory](readme/21_map.png) |
-| Grittier than most places, this former factory bunkhouse may look rundown on the outside, but inside there are four floors of space. A small bomb shelter hides many essentials while the upper floors offer ample room to spread out. | [Ekron Factory](readme/21_basement.png) |
+| ![Ekron Factory](readme/21_EF.jpg) | ![Ekron Factory](readme/21_map.png) |
+| Grittier than most places, this former factory bunkhouse may look rundown on the outside, but inside there are four floors of space. A small bomb shelter hides many essentials while the upper floors offer ample room to spread out. | ![Ekron Factory](readme/21_basement.png) |
 | ***Pros***: Edge of Ekron so easy access to the city, but low local zombie counts | ***Cons***: The comforts of home are a bit limited |
 
 | 22. Cortman Medical | 10881, 10022 |
 | ------------- | ---------- |
-| ![Cortman Medical](readme/22_CM.jpg) | [Cortman Medical](readme/22_map.png) |
-| What was this building being used for? What were they doing down in the basement? Either way it seems they were quite well stocked for something. | [Cortman Medical](readme/22_basement.png) |
+| ![Cortman Medical](readme/22_CM.jpg) | ![Cortman Medical](readme/22_map.png) |
+| What was this building being used for? What were they doing down in the basement? Either way it seems they were quite well stocked for something. | ![Cortman Medical](readme/22_basement.png) |
 | ***Pros***: A custom basement connects the clinic with the doctor's home offering tons of space and loot | ***Cons***: Lots of zombies, basement is creepy |
 
 | 23. Rusty Rifle | 10748, 10543 |
 | ------------- | ---------- |
-| ![Rusty Rifle](readme/23_RR.jpg) | [Rusty Rifle](readme/23_map.png) |
-| It wasn't just underground gambling happening here, seems things go a little deeper than you might guess. | [Rusty Rifle](readme/23_basement.png) |
+| ![Rusty Rifle](readme/23_RR.jpg) | ![Rusty Rifle](readme/23_map.png) |
+| It wasn't just underground gambling happening here, seems things go a little deeper than you might guess. | ![Rusty Rifle](readme/23_basement.png) |
 | ***Pros***: A custom basement connects the bar with the bar's storage building, plenty of storage/loot | ***Cons***: Lots of zombies |
 
 | 24. March Ridge Secret Complex | 9850, 13111 |
 | ------------- | ---------- |
-| ![March Ridge Secret Complex](readme/24_MRS.png) | [March Ridge Secret Complex](readme/24_map.png) |
-| A normal military base house block above, but with each home connected to a secret complex underneath, one wonders what they were monitoring and why it had to be so well hidden. | [March Ridge Secret Complex](readme/24_basement.jpg) |
+| ![March Ridge Secret Complex](readme/24_MRS.png) | ![March Ridge Secret Complex](readme/24_map.png) |
+| A normal military base house block above, but with each home connected to a secret complex underneath, one wonders what they were monitoring and why it had to be so well hidden. | ![March Ridge Secret Complex](readme/24_basement.jpg) |
 | ***Pros***: Fully custom, this compact basement is hidden 4 floors below, but features easy access to all the apartments above | ***Cons***: Lots of zombies |
 
 | 25. Riverside Mansion | 9850, 13111 |
 | ------------- | ---------- |
-| ![Riverside Mansion](readme/25_RM.jpg) | [Riverside Mansion](readme/25_map.png) |
-| What do you do when you have lots of money, and lots of paranoia? Build a giant home underneath your own home as a fallout shelter for the end times of course. This normal looking suburban mansion features an expansive basement with all the amenities you could want for years to come. | [Riverside Mansion](readme/25_basement.jpg) |
+| ![Riverside Mansion](readme/25_RM.jpg) | ![Riverside Mansion](readme/25_map.png) |
+| What do you do when you have lots of money, and lots of paranoia? Build a giant home underneath your own home as a fallout shelter for the end times of course. This normal looking suburban mansion features an expansive basement with all the amenities you could want for years to come. | ![Riverside Mansion](readme/25_basement.jpg) |
 | ***Pros***: Massive fully custom basement with plenty of rooms and storage/loot | ***Cons***: Far away from many areas, still busy with zombies |
-
-Workshop ID: 3440887907
-Mod ID: DWAP
-Map Folder: DWAP
