@@ -536,15 +536,34 @@ local function findDistItems(key, withJunk)
     end
 end
 
+--- Get the cache key for a set of distribution lists
+--- @param distLists table{string}
+--- @param includeJunk boolean
+--- @return string
+local function getDistItemsCacheKey(distLists, includeJunk)
+    local key = ""
+    for i = 1, #distLists do
+        local dlist = distLists[i]
+        if i > 1 then key = key .. "," end
+        key = key .. dlist
+    end
+    if includeJunk then
+        key = key .. "true"
+    else
+        key = key .. "false"
+    end
+    return key
+end
+
 local getDistItemsCache = {}
 local function getDistItems(distLists, includeJunk)
-    local key = table.concat(distLists, ",") .. includeJunk
-    if getDistItemsCache[key] then
-        return getDistItemsCache[key]
-    end
     if not distLists then return {} end
     if "string" == type(distLists) then
         distLists = { distLists }
+    end
+    local key = getDistItemsCacheKey(distLists, includeJunk)
+    if getDistItemsCache[key] then
+        return getDistItemsCache[key]
     end
     local items = {}
     for i = 1, #distLists do
@@ -589,36 +608,16 @@ local function populateItems()
             --- @type string
             local category = item:getDisplayCategory()
             if category == "SkillBook" and not (name:find("Set")) and not item:getLuaCreate() then
-                local tags = item:getTags()
-                local skip = false
-                if tags and tags:size() > 0 then
-                    for j = 0, tags:size()-1 do
-                        local tag = tags:get(j)
-                        if tag == "Magazine" then
-                            table.insert(allSkillMags, module .. "." .. name)
-                            excludeItems[#excludeItems+1] = name
-                            skip = true
-                            break
-                        end
-                    end
-                end
-                if not skip then
+                if item:hasTag("Magazine") then
+                    table.insert(allSkillMags, module .. "." .. name)
+                    excludeItems[#excludeItems+1] = name
+                else
                     table.insert(allSkillBooks, module .. "." .. name)
                     excludeItems[#excludeItems+1] = name
                 end
-            elseif name:find("Seed") then
-                local tags = item:getTags()
-                if tags then
-                    local ts = tags:size()
-                    for j = 0, ts do
-                        local tag = tags:get(j)
-                        if tag == "isSeed" then
-                            table.insert(allSeeds, module .. "." .. name)
-                            excludeItems[#excludeItems+1] = name
-                            break
-                        end
-                    end
-                end
+            elseif item:hasTag("isSeed") then
+                table.insert(allSeeds, module .. "." .. name)
+                excludeItems[#excludeItems+1] = name
             elseif category == "Cartography" and name ~= "Map" then
                 table.insert(allMaps, module .. "." .. name)
                 excludeItems[#excludeItems+1] = name
@@ -696,6 +695,10 @@ end
 
 local function addItem(container, item, count, frozen)
     local _count = count or 1
+    if not item or not container then
+        DWAPUtils.dprint("WARN addItem: item or container is nil")
+        return
+    end
     if item == "VHS_Retail" or item == "Base.VHS_Retail" then
         item = nameMediaItem(item, "MagazineCrossword")
         container:AddItem(item)
@@ -703,7 +706,7 @@ local function addItem(container, item, count, frozen)
         item = nameMediaItem(item, "MagazineWordsearch")
         container:AddItem(item)
         -- string contains "Empty"
-    elseif string.match(item, "Empty") then
+    elseif item:match("Empty") then
         item = handleEmptyItem(item)
         container:AddItem(item)
     else
