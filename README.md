@@ -65,6 +65,7 @@ Uncle Dave was quite a collector and you might find a complete seed library (mod
 | ------------- | ---------- |
 | ![Rural West Point Mansion](readme/08_RWPM.jpg) | ![Rural West Point Mansion](readme/08_map.png) |
 | Located off the beaten path, this posh home is perfect for those seeking to get away from it all. A decent drive from West Point, this home backs up to the river. Not only is there good fishing on the river, if you make friends with the neighbor there's also a private fishing pond in the community. The two level basement includes generator, water tank, and fallout shelter. The whole home features plenty of storage and supplies. | ![Rural West Point Mansion](readme/08_basement.png) |
+| Supports the Taylosville map mod | [Taylorsville](https://steamcommunity.com/sharedfiles/filedetails/?id=3134394569) |
 | ***Pros***: super isolated, large 2 level basement | ***Cons***: super isolated, quite a trek to town |
 
 | 9. Lowry Court Apartments | 12993, 1914 |
