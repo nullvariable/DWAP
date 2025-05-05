@@ -73,6 +73,15 @@ local WWestPointSafeHouse = {
         { sprite = "industry_02_224", x = 10161, y = 6586, z = 0, enabled = "EnableWaterSystem", },
         { sprite = "industry_02_224", x = 10161, y = 6587, z = 0, enabled = "EnableWaterSystem", },
         { sprite = "industry_02_252", x = 10161, y = 6588, z = 0, enabled = "EnableWaterSystem", },
+
+        { sprite = "trashcontainers_01_24", x = 10150, y = 6626, z = 0, enabled = "Loot", },
+
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_5", x = 10157, y = 6633, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_02_9", x = 10160, y = 6632, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_02_9", x = 10162, y = 6632, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_04_25", x = 10161, y = 6620, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_04_73", x = 10153, y = 6620, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_04_72", x = 10149, y = 6623, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -210,7 +219,25 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10156,y=6622,z=-1},
-            dist = {"FreezerRich", },
+            dist = {"FridgeFarmStorage", "FridgeGeneric", "SushiKitchenFridge"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10156,y=6623,z=-1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10156,y=6624,z=-1},
+            dist = {"SpiffosKitchenFridge", "SpiffosKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
             frozen = true,
@@ -262,6 +289,23 @@ local WWestPointSafeHouse = {
         -- first floor
         {
             type = 'container',
+            coords = {x=10150,y=6626,z=0},
+            dist = {"MusicStoreCDs"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10151,y=6620,z=0},
+            items = {
+                { name = 'Base.Firewood', chance = 1, count = {10,10} },
+            },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        {
+            type = 'container',
             coords = {x=10155,y=6620,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -282,11 +326,11 @@ local WWestPointSafeHouse = {
             items = {
                 { name = 'Base.Remote', chance = 1, count = {1,1} },
                 { name = 'Base.VideoGame', chance = 1, count = {1,1} },
-                { name = 'Base.Headphones', chance = 1, count = {1,1} },
-                { name = 'Base.CDplayer', chance = 1, count = {1,1} },
                 { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
                 { name = 'Base.VHS_Retail', chance = 1, count = {30,30} },
             },
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
