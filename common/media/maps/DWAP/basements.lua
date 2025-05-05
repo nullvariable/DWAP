@@ -189,6 +189,8 @@ end
 local api = Basements.getAPIv1()
 api:addBasementDefinitions('Muldraugh, KY', basements)
 api:addSpawnLocations('Muldraugh, KY', locations)
+api:addBasementDefinitions('Taylorsville', basements)
+api:addSpawnLocations('Taylorsville', locations)
 print("DWAP basements.lua loaded")
 
 -- Notes on Muldraugh safe house
