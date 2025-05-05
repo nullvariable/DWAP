@@ -172,9 +172,52 @@ local configs = {
         buildingX = 2937,
         buildingY = 12523,
     },
+    [201] = { -- fix the second building from getting stories?
+        name = "ScrapYard Map2",
+        buildingX = 2939,
+        buildingY = 12566,
+    },
+    [21] = {
+        name = "Ekron Factory Map",
+        stamps = {
+            {"Asterisk", nil, 565, 9374, 0, 0, 0},
+        },
+        buildingX = 565,
+        buildingY = 9374,
+    },
+    [22] = {
+        name = "Cortman Medical Map",
+        stamps = {
+            {"Asterisk", nil, 10877, 10022, 0, 0, 0},
+        },
+        buildingX = 10877,
+        buildingY = 10022,
+    },
+    [23] = {
+        name = "Rusty Rifle Map",
+        stamps = {
+            {"Asterisk", nil, 10758, 10549, 0, 0, 0},
+        },
+        buildingX = 10758,
+        buildingY = 10549,
+    },
+    [24] = {
+        name = "March Ridge Clandestine Complex Map",
+        stamps = {
+            {"Asterisk", nil, 9850, 13111, 0, 0, 0},
+        },
+        buildingX = 9850,
+        buildingY = 13111,
+    },
+    [25] = {
+        name = "Riverside Mansion Map",
+        stamps = {
+            {"Asterisk", nil, 6674, 5514, 0, 0, 0},
+        },
+        buildingX = 6674,
+        buildingY = 5514,
+    },
 }
-
-
 for i = 1, #configs do
     local config = configs[i]
     local DWAPStashMap = StashUtil.newStash("DWAPStashMap" .. i, "Map", "Base.RosewoodMap", "Stash_AnnotedMap");

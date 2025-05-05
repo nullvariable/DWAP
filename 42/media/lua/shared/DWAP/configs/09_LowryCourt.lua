@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 12981, y = 1907, z = -1}
 local LowryCourt = {
     spawn = { x = 12993, y = 1914, z = 2 },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 12989, y = 1912, z = 0} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_8", x = 12989, y = 1912, z = 2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -62,6 +62,14 @@ local LowryCourt = {
         },
     },
     objectSpawns = {
+        { sprite = "camping_01_16", x = 12989, y = 1897, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
+        { sprite = "constructedobjects_01_45", x = 12982, y = 1919, z = 0, clearExisting = false, isContainer = true, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_57", x = 12989, y = 1923, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_57", x = 12994, y = 1924, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_57", x = 12998, y = 1924, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_57", x = 13002, y = 1924, z = 2, },
+
         { x = 12983, y = 1916, z = 0, clearExisting = true, },
         { x = 12983, y = 1917, z = 0, clearExisting = true, },
         { x = 12983, y = 1918, z = 0, clearExisting = true, },
@@ -70,6 +78,16 @@ local LowryCourt = {
         { sprite = "appliances_cooking_01_16", x = 12989, y = 1915, z = 2, isFireplace = true, },
     },
     loot = {
+        { -- cabinet next to bunk beds (9365)
+            type = 'container',
+            coords = {x = 12982, y = 1919, z = 0},
+            items = {
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
+            },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
         { -- cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
@@ -88,7 +106,7 @@ local LowryCourt = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -171,10 +189,7 @@ local LowryCourt = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -226,6 +241,7 @@ local LowryCourt = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_ToolsLevel",
         },
 
@@ -308,7 +324,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12989,y=1912,z=2},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -406,23 +422,19 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=13002,y=1919,z=2},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=13000,y=1920,z=2},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=13000,y=1923,z=2},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -430,7 +442,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12996,y=1912,z=2},
-            dist = {"CrateLeather", "SewingStoreFabric", "SewingStoreTools"},
+            dist = {"CrateLeather", "SewingStoreFabric", "SewingStoreTools", "BathroomCounter",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_TailorLevel",

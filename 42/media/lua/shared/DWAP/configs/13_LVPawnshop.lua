@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 12332, y = 1317, z = -2}
 local LVPawnshop = {
     spawn = { x = 12324, y = 1325, z = 0 },
     waterTanks = {
-        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 12320, y = 1326, z = 2}},
     },
     waterFixtures = {
         -- pawnshop proper
@@ -73,6 +73,8 @@ local LVPawnshop = {
         },
     },
     objectSpawns = {
+        { sprite = "industry_02_52", x = 12335, y = 1329, z = -1, clearExisting = false, enabled = "EnableWaterSystem", },
+
         { sprite = "industry_02_64", x = 12317, y = 1326, z = 2, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 12317, y = 1325, z = 2, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_65", x = 12318, y = 1326, z = 2, enabled = "EnableGenSystem", clearExisting = true, },
@@ -89,6 +91,16 @@ local LVPawnshop = {
         { sprite = "fixtures_railings_01_36", x = 12335, y = 1327, z = -1, clearExisting = false, },
         { sprite = "fixtures_railings_01_36", x = 12335, y = 1326, z = -1, clearExisting = false, },
         { x = 12334, y = 1325, z = -1, clearExisting = true, },
+
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12311, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12312, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12314, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12315, y = 1337, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_01_49", x = 12318, y = 1336, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12321, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12322, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12324, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_41", x = 12325, y = 1337, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -109,7 +121,7 @@ local LVPawnshop = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -184,18 +196,13 @@ local LVPawnshop = {
         { -- (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -295,6 +302,7 @@ local LVPawnshop = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -316,7 +324,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12334,y=1323,z=-1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -330,6 +338,22 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         -- Pawnshop
+        {
+            type = 'container',
+            coords = {x=12321,y=1327,z=0},
+            dist = {"SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12319,y=1327,z=0},
+            dist = {"SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
         { -- closet
             type = 'container',
             coords = {x=12330,y=1329,z=0.5},
@@ -342,26 +366,20 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12328,y=1329,z=0},
-            dist = {"SafehouseArmor", "SafehouseLighting"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=12329,y=1329,z=0},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- pawnshop proper
         {
             type = 'container',
             coords = {x=12333,y=1332,z=0},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -375,7 +393,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12332,y=1332,z=0},
-            dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
+            dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -383,7 +401,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12331,y=1332,z=0},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -391,7 +409,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12330,y=1332,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -427,6 +445,8 @@ local LVPawnshop = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -463,7 +483,7 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12315,y=1325,z=0},
-            dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
+            dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -473,8 +493,10 @@ local LVPawnshop = {
             type = 'container',
             coords = {x=12322,y=1327,z=0},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -482,6 +504,8 @@ local LVPawnshop = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -548,6 +572,38 @@ local LVPawnshop = {
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FishLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12328,y=1331,z=1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12322,y=1331,z=1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12322,y=1336,z=1},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=12324,y=1329,z=1},
+            dist = {"CrateFlour", "CrateOilVegetable"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
     },
 }

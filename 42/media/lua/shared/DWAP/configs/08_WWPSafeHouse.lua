@@ -93,7 +93,7 @@ local WWestPointSafeHouse = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -176,10 +176,7 @@ local WWestPointSafeHouse = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -207,6 +204,7 @@ local WWestPointSafeHouse = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -215,6 +213,7 @@ local WWestPointSafeHouse = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -248,6 +247,16 @@ local WWestPointSafeHouse = {
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10159,y=6622,z=-1},
+            items = {
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
+            },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
 
         -- first floor
@@ -314,7 +323,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10162,y=6631,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -349,6 +358,7 @@ local WWestPointSafeHouse = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- laundry room
@@ -380,7 +390,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10163,y=6626,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -388,17 +398,13 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10160,y=6629,z=1},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=10160,y=6630,z=1},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -412,7 +418,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10154,y=6625,z=1},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"ArmyStorageAmmunition", "SafehouseTraps",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -428,7 +434,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10151,y=6626,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",

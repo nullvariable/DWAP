@@ -23,10 +23,11 @@ local PSDelilah = {
         { sprite = "fixtures_sinks_01_12", x = 2033, y = 5683, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
-        name = "P.S. Delilah",
+        name = "P.S. Delilah Key",
         doors = {
             { sprite = "fixtures_doors_02_5", x = 2048, y = 5693, z = 0, },
             { sprite = "fixtures_doors_02_5", x = 2043, y = 5707, z = 0, },
+            { sprite = "fixtures_doors_01_33", x = 2041, y = 5692, z = 2, },
         },
     },
     map = { name = "DWAPStashMap11", },
@@ -50,6 +51,7 @@ local PSDelilah = {
     objectSpawns = {
         -- command area
         { sprite = "location_military_generic_01_0", x = 2036, y = 5684, z = 2, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = 2040, y = 5684, z = 2, enabled = "Loot", clearExisting = false, isContainer = true, },
         { sprite = "appliances_cooking_01_17", x = 2037, y = 5684, z = 2, isFireplace = true, },
         { sprite = "location_hospitality_sunstarmotel_02_13", x = 2035, y = 5688, z = 2, enabled = "Loot", clearExisting = false, isContainer = true, },
         { sprite = "location_hospitality_sunstarmotel_02_13", x = 2035, y = 5686, z = 2, enabled = "Loot", clearExisting = true, isContainer = true, },
@@ -58,8 +60,25 @@ local PSDelilah = {
         { sprite = "constructedobjects_01_45", x = 2036, y = 5686, z = -1, enabled = "Loot", clearExisting = true, isContainer = true, },
         { sprite = "constructedobjects_01_45", x = 2035, y = 5686, z = -1, enabled = "Loot", clearExisting = true, isContainer = true, },
         { sprite = "constructedobjects_01_45", x = 2034, y = 5686, z = -1, enabled = "Loot", clearExisting = true, isContainer = true, },
+
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 2040, y = 5693, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 2036, y = 5693, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 2040, y = 5684, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 2036, y = 5684, z = 2, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_01_41", x = 2043, y = 5711, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2043, y = 5694, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2045, y = 5694, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2050, y = 5694, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2052, y = 5694, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2053, y = 5694, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_exterior_house_03_19", x = 2055, y = 5694, z = 0, },
     },
     loot = {
+        {
+            type = 'container',
+            coords = {x = 2040, y = 5684, z = 2},
+            special = "essentials",
+        },
         {
             type = 'container',
             coords = {x=2035,y=5684,z=2},
@@ -85,7 +104,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2061,y=5685,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -147,7 +166,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2042,y=5684,z=-0.5},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -170,10 +189,35 @@ local PSDelilah = {
         },
         {
             type = 'container',
-            coords = {x=2034,y=5686,z=-1},
-            dist = {"GunCache1.GunBox",},
+            coords = {x=2037,y=5685,z=-1},
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=2038,y=5685,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=2039,y=5685,z=-1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=2034,y=5686,z=-1},
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- metal wall shelves
@@ -299,7 +343,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x = 2035, y = 5688, z = 2},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -339,9 +383,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2044,y=5692,z=1},
-            dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
 
@@ -366,8 +408,10 @@ local PSDelilah = {
             type = 'container',
             coords = {x=2044,y=5709,z=0},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -380,7 +424,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2044,y=5707,z=0},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",

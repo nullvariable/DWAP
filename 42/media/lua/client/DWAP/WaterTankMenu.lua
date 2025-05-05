@@ -5,6 +5,7 @@ local DWAPUtils = require("DWAPUtils")
 local customNameObjects = {
     ["Shower"] = true,
     ["Washing Machine"] = true,
+    ["Combo Washer Dryer"] = true,
     ["Sink"] = true,
     ["Toilet"] = true,
     ["Bath"] = true,

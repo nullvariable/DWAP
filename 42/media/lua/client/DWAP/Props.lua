@@ -7,6 +7,7 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field x number
 --- @field y number
 --- @field z number
+--- @field renderYOffset? number
 --- @field sprite? string
 --- @field enabled? string Optional Sandbox variable to enable this spawn
 --- @field clearExisting? boolean
@@ -15,10 +16,14 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field doorN? boolean
 --- @field isFloor? boolean
 --- @field isFireplace? boolean
+--- @field isStove? boolean
 --- @field tunnelZ? number
 --- @field replaceWall? boolean
 --- @field isLightSwitch? boolean
 --- @field room? table coords for the room to attach a square to
+--- @field barricade? string barricade type
+--- @field target? string barricade object to target
+--- @field IsoType? string IsoType
 
 --- @param spawn objectSpawn
 --- @return number
@@ -191,7 +196,7 @@ function DWAP_Props.maybeSpawnObject(params)
     if params.replaceWall then
         clearWalls(existingObjects, square, params.sprite)
     end
-    if params.sprite and not getSpriteObject(existingObjects, params.sprite) then
+    if params.sprite and (not getSpriteObject(existingObjects, params.sprite) or params.renderYOffset) then
         local prop
         if params.isContainer then
             DWAPUtils.dprint(("DWAP_Props: Adding container %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
@@ -201,6 +206,15 @@ function DWAP_Props.maybeSpawnObject(params)
             prop:setIsContainer(true)
             prop:getContainer():setType("crate")
             prop:getContainer():setCapacity(50)
+            if params.renderYOffset then
+                DWAPUtils.dprint(("DWAP_Props: Setting renderYOffset %s"):format(params.renderYOffset))
+                local sharedSprite = getSprite(params.sprite)
+                if square and sharedSprite and sharedSprite:getProperties():Is("IsStackable") then
+                    local props = ISMoveableSpriteProps.new(sharedSprite)
+                    prop:setRenderYOffset(props:getTotalTableHeight(square))
+                end
+                prop:setRenderYOffset(params.renderYOffset)
+            end
             square:AddSpecialObject(prop)
             -- DWAPUtils.Defer(function()
                 -- local sq = getSquare(params.x, params.y, params.z)
@@ -214,8 +228,15 @@ function DWAP_Props.maybeSpawnObject(params)
                 local cont = prop:getContainer()
                 ItemPickerJava.fillContainer(cont, getPlayer())
             -- end)
+        -- @TODO currently this doesn't have a container and so java crashes the whole game.
+        -- elseif params.IsoType == "IsoCombinationWasherDryer" then
+        --     prop = IsoCombinationWasherDryer.new(getCell(), square, getSprite(params.sprite))
+
+        --     prop:setMovedThumpable(true)
         elseif params.isFireplace then
             prop = IsoFireplace.new(getCell(), square, getSprite(params.sprite))
+        elseif params.isStove then
+            prop = IsoStove.new(getCell(), square, getSprite(params.sprite))
         elseif params.isDoor then
             DWAPUtils.dprint(("DWAP_Props: Adding door %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
             prop = IsoDoor.new(getCell(), square, getSprite(params.sprite), params.doorN)
@@ -232,6 +253,9 @@ function DWAP_Props.maybeSpawnObject(params)
             -- local prop = IsoObject.new(square, params.sprite)
             prop = IsoObject.getNew(square, params.sprite, params.sprite, false)
         end
+        -- if params.renderYOffset then
+        --     prop:setRenderYOffset(params.renderYOffset)
+        -- end
         -- square:AddTileObject(prop)
         square:transmitAddObjectToSquare(prop, -1)
         DWAPUtils.dprint(("DWAP_Props: Added %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
@@ -240,6 +264,57 @@ function DWAP_Props.maybeSpawnObject(params)
             -- DWAPSquareLoaded:RunHook('PropSpawned', params.x, params.y, params.z, params)
             DWAP_Props.runHookOnExist(prop, params, 0)
         -- end)
+    end
+    if params.barricade and params.target then
+        for i = 0, existingObjects:size() - 1 do
+            local obj = existingObjects:get(i)
+            if obj and obj:getSpriteName() == params.target then
+                local data = obj:getModData()
+                if not data.barricade then
+                    data.barricade = true
+                else
+                    return
+                end
+                local barricade = IsoBarricade.AddBarricadeToObject(obj, true)
+                if not barricade then
+                    return
+                end
+                if params.barricade == "metalbar" then
+                    barricade:addMetalBar(nil, nil)
+                end
+                if params.barricade == "metal" then
+                    barricade:addMetal(nil, nil)
+                end
+                if params.barricade == "wood" then
+                    barricade:addPlank(nil, nil)
+                    barricade:addPlank(nil, nil)
+                    barricade:addPlank(nil, nil)
+                    barricade:addPlank(nil, nil)
+                end
+                if params.barricade == "woodhalf" then
+                    barricade:addPlank(nil, nil)
+                    barricade:addPlank(nil, nil)
+                end
+                local barricade2 = IsoBarricade.AddBarricadeToObject(obj, false)
+                if params.barricade == "metalbar" then
+                    barricade2:addMetalBar(nil, nil)
+                end
+                if params.barricade == "metal" then
+                    barricade2:addMetal(nil, nil)
+                end
+                if params.barricade == "wood" then
+                    barricade2:addPlank(nil, nil)
+                    barricade2:addPlank(nil, nil)
+                    barricade2:addPlank(nil, nil)
+                    barricade2:addPlank(nil, nil)
+                end
+                if params.barricade == "woodhalf" then
+                    barricade2:addPlank(nil, nil)
+                    barricade2:addPlank(nil, nil)
+                end
+                break
+            end
+        end
     end
 end
 

@@ -21,11 +21,394 @@ local excludeItems = {
     "Key",
     "IDCard",
     "CreditCard",
+    "TakeoutBox_Chinese",
+    "Paperbag_Jays",
+    "IcePick",
     "FishingTackle", -- seems to be in some distrbutions but doesn't exist currently
 }
 local convertItems = {
-    ["PetrolCanEmpty"] = "JerryCanEmpty",
+    -- ["PetrolCanEmpty"] = "JerryCanEmpty",
 }
+
+local essentials = {
+    "Gloves_LeatherGlovesBlack",
+    "Bag_ALICE_BeltSus_Camo",
+    "SleepingBag_Camo_Packed",
+    "MagnesiumFirestarter",
+    "TentGreen_Packed",
+    "WaterPurificationTablets",
+    "AlcoholBandage",
+    "Pills",
+    "PillsSleepingTablets",
+    "PillsAntiDep",
+    "PillsBeta",
+    "PillsVitamins",
+    "EntrenchingTool",
+    "Eraser",
+    "Pencil",
+    "Pen",
+    "Scissors",
+    "FlashLight_AngleHead_Army",
+    "ClayTool",
+    "Saw",
+    "MetalworkingPliers",
+    "Tongs",
+    "WeldingMask",
+    "BlowTorch",
+    "Crowbar",
+    "Handiknife",
+    "Hammer",
+    "MasonsChisel",
+    "MasonsTrowel",
+    "MetalworkingChisel",
+    "MetalworkingPunch",
+    "PickAxe",
+    "PipeWrench",
+    "Screwdriver",
+    "Sledgehammer",
+    "WoodAxe",
+    "Wrench",
+    "RubberHose",
+    "CanteenMilitary",
+    "Bag_ALICEpack_Army",
+    "PonchoGreen",
+    "Shoes_ArmyBoots",
+    "Trousers_Padded_HuntingCamo",
+    "Vest_Hunting_Camo",
+    "Jacket_HuntingCamo",
+    "Battery",
+    "Notebook",
+    "WristWatch_Left_DigitalBlack",
+}
+
+local gunLockers = {
+    {
+        "AssaultRifle2",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "x4Scope",
+        "x8Scope",
+        "Laser",
+        "AmmoStraps",
+        "RecoilPad",
+        "RedDot",
+        "308Box",
+    },
+    {
+        "Pistol3",
+        "GunLight",
+        "Laser",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "Bullets44Box",
+    },
+    {
+        "ShotgunSawnoff",
+        "AmmoStraps",
+        "ChokeTubeFull",
+        "AmmoStrap_Shells",
+        "RecoilPad",
+        "ShotgunShellsCarton",
+        "ShotgunShellsBox",
+    },
+}
+local gunLockersRain42 = {
+    {
+        "ColtCommando",
+        "RFNGP_GunCase_ColtCommando",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "x4ACOGScope",
+        "x8ACOGScope",
+        "SOCOMRedDot",
+        "223556Suppressor",
+        "GunLight",
+        "Foregrip1",
+        "556Box",
+    },
+    {
+        "Pistol3",
+        "GunLight",
+        "TritiumSights",
+        "Laser",
+        "RedDot",
+        "DIYSuppressor",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "44Clip",
+        "Bullets44Box",
+    },
+    {
+        "HKM23",
+        "RFNGP_GunCase_HKM23",
+        "GunLight",
+        "SOCOMRedDot",
+        "45Suppressor",
+        "Compensator",
+        "USPClip",
+        "USPClip",
+        "USPClip",
+        "USPClip",
+        "USPClip",
+        "Bullets45Box",
+    },
+    {
+        "ShotgunSawnoff",
+        "Sling",
+        "GunLight",
+        "Shellholder",
+        "ShotgunShellsCarton",
+        "ShotgunShellsBox",
+    },
+    {
+        "AA12",
+        "RFNGP_GunCase_AA12",
+        "AA12Magazine",
+        "AA12Magazine",
+        "AA12Magazine",
+        "TritiumSights",
+        "ChokeTubeFull",
+        "Sling",
+        "Shellholder",
+        "12gSuppressor",
+        "GunLight",
+        "RecoilPad",
+        "Foregrip1",
+        "ShotgunShellsCarton",
+        "ShotgunShellsBox",
+    },
+    {
+        "MP5SD",
+        "9mm30Magazine",
+        "9mm30Magazine",
+        "9mm30Magazine",
+        "9mm30Magazine",
+        "9mm30Magazine",
+        "x4ACOGScope",
+        "SOCOMRedDot",
+        "GunLight",
+        "Foregrip1",
+        "Sling",
+        "Bullets9mmBox",
+    },
+    {
+        "G3",
+        "RFNGP_GunCase_G3",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "M14Clip",
+        "308762Suppressor",
+        "x4ACOGScope",
+        "x8ACOGScope",
+        "SOCOMRedDot",
+        "GunLight",
+        "Foregrip1",
+        "Sling",
+        "762Box",
+    },
+    {
+        "M249",
+        "RFNGP_GunCase_M249",
+        "M249Clip",
+        "M249Clip",
+        "M249Clip",
+        "x4ACOGScope",
+        "x8ACOGScope",
+        "GunLight",
+        "Foregrip1",
+        "Sling",
+        "556Box",
+    },
+}
+local gunLockersVanillaExpansion = {
+    {
+        "cj_sg552_commando",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "suppressor_us_5_56",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Box",
+    },
+    {
+        "cj_glock_17",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "suppressor_us_9mm",
+        "MagGlock17",
+        "MagGlock17",
+        "MagGlock17",
+        "MagGlock17",
+        "MagGlock17",
+        "Bullets9mmBox",
+    },
+    {
+        "cj_intratec_9",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "MagTEC",
+        "MagTEC",
+        "MagTEC",
+        "MagTEC",
+        "MagTEC",
+        "Bullets9mmBox",
+    },
+    {
+        "cj_walther_pp",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "MagWalther_PP",
+        "MagWalther_PP",
+        "MagWalther_PP",
+        "MagWalther_PP",
+        "MagWalther_PP",
+        "CJ22LRBox",
+    },
+    {
+        "cj_ak74_m",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "2x_scope_ru",
+        "1x_scope_ru_2",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "4x_scope_ru_2",
+        "4x_scope_ru_3",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "suppressor_ru_5_45",
+        "MagAK74M",
+        "MagAK74M",
+        "MagAK74M",
+        "MagAK74M",
+        "MagAK74M",
+        "CJ545Box",
+    },
+    {
+        "cj_aa_12",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "MagAA12",
+        "MagAA12",
+        "MagAA12",
+        "ShotgunShellsCarton",
+        "ShotgunShellsBox",
+    },
+    {
+        "cj_m1897_sawn",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "ShotgunShellsCarton",
+        "ShotgunShellsBox",
+    },
+    {
+        "cj_mp5sd2",
+        "CJWD40",
+        "GUNOIL2",
+        "CJGCK",
+        "1x_scope_ru",
+        "3x_scope_us",
+        "1x_scope_us_2",
+        "1x_scope_us_3",
+        "1x_scope_us",
+        "4x_scope_us",
+        "25x_scope_us",
+        "4x_scope_us_2",
+        "8x_scope_us",
+        "MagMP5SD2",
+        "MagMP5SD2",
+        "MagMP5SD2",
+        "MagMP5SD2",
+        "MagMP5SD2",
+        "Bullets9mmBox",
+    },
+}
+
+Events.OnLoad.Add(function()
+    local testItem = getItem("RFNGP_GunCase_M249")
+    local testItem2 = getItem("OpenCJGCK")
+    if testItem or testItem2 then
+        gunLockers = {}
+        if testItem then
+            for i = 1, #gunLockersRain42 do
+                gunLockers[#gunLockers+1] = gunLockersRain42[i]
+            end
+        end
+        if testItem2 then
+            for i = 1, #gunLockersVanillaExpansion do
+                gunLockers[#gunLockers+1] = gunLockersVanillaExpansion[i]
+            end
+        end
+    end
+end)
 
 --- Turn a set of coords into a hash
 --- @return number
@@ -35,6 +418,11 @@ local hashCoords = DWAPUtils.hashCoords
 --- @param config table
 local function setLootConfigValue(config)
     if not config then return end
+    if not config.coords then
+        DWAPUtils.dprint("Loot config missing coords")
+        DWAPUtils.dprint(config)
+        return
+    end
     local x = config.coords.x
     local y = config.coords.y
     local z = config.coords.z
@@ -148,7 +536,12 @@ local function findDistItems(key, withJunk)
     end
 end
 
+local getDistItemsCache = {}
 local function getDistItems(distLists, includeJunk)
+    local key = table.concat(distLists, ",") .. includeJunk
+    if getDistItemsCache[key] then
+        return getDistItemsCache[key]
+    end
     if not distLists then return {} end
     if "string" == type(distLists) then
         distLists = { distLists }
@@ -180,6 +573,7 @@ local function getDistItems(distLists, includeJunk)
             end
         end
     end
+    getDistItemsCache[key] = items
     return items
 end
 
@@ -300,7 +694,7 @@ local function handleEmptyItem(item)
     return item
 end
 
-local function addItem(container, item, count)
+local function addItem(container, item, count, frozen)
     local _count = count or 1
     if item == "VHS_Retail" or item == "Base.VHS_Retail" then
         item = nameMediaItem(item, "MagazineCrossword")
@@ -313,7 +707,18 @@ local function addItem(container, item, count)
         item = handleEmptyItem(item)
         container:AddItem(item)
     else
-        container:AddItems(item, _count)
+        if frozen then
+            for i = 1, _count do
+                local result = container:AddItem(item)
+                if instanceof(result, "Food") then
+                    DWAPUtils.dprint("Freezing item: " .. item)
+                    result:setFrozen(true)
+                    result:setFreezingTime(100)
+                end
+            end
+        else
+            container:AddItems(item, _count)
+        end
     end
 end
 
@@ -323,6 +728,10 @@ end
 --- @param coordsKey number
 local function fillContainer(container, config, index, coordsKey)
     if not container or not config then return end
+    local containerType = container:getType()
+    if not config.stove and (containerType == "microwave" or container:isStove()) then
+        return
+    end
     container:emptyIt()
     -- local level = SandboxVars.DWAP[spawnConfig.level] or 4
     local level = 4
@@ -378,10 +787,39 @@ local function fillContainer(container, config, index, coordsKey)
                         allSeeds[i] = nil
                     end
                 end
+            elseif config.special == "essentials" then
+                for i = 1, #essentials do
+                    local item = essentials[i]
+                    if item then
+                        addItem(container, item)
+                    end
+                end
+            elseif config.special == "gunlocker" and level < 4 then -- specifically loads a single gun and clips/ammo for a locker
+                local gunLocker = random:random(1, #gunLockers)
+                for i = 1, #gunLockers[gunLocker] do
+                    local item = gunLockers[gunLocker][i]
+                    if item then
+                        addItem(container, item)
+                    end
+                end
+                local hasRoom = checkHasRoom(container, level)
+                local tries = 0
+                while hasRoom and tries < 100 do
+                    local item = gunLockers[gunLocker][#gunLockers[gunLocker]]
+                    addItem(container, item)
+                    hasRoom = checkHasRoom(container, level)
+                end
             end
         elseif config.randUntilFull then
             DWAPUtils.dprint("randUntilFull")
-            local items = getDistItems(config.dist, config.distIncludeJunk)
+            local items = {}
+            if config.items then
+                for i = 1, #config.items do
+                    items[#items+1] = config.items[i].name
+                end
+            elseif config.dist then
+                items = getDistItems(config.dist, config.distIncludeJunk)
+            end
             local alreadySpawnedContainers = {}
             if not items then return end
             local item = items[random:random(1, #items)]
@@ -399,7 +837,7 @@ local function fillContainer(container, config, index, coordsKey)
                 item = items[randindex]
                 hasRoom = checkHasRoom(container, level)
                 if hasRoom and item then
-                    addItem(container, item)
+                    addItem(container, item, 1, config.frozen)
                     if type(item) == "string" then
                         local ii = instanceItem(item)
                         if ii and ii:getCategory() == "Container" then
@@ -424,10 +862,10 @@ local function fillContainer(container, config, index, coordsKey)
                     if item.chance then
                         if item.chance == 1 or item.chance >= (random:random(1, 100) / 100) then
                             local count = random:random(item.count[1], item.count[2])
-                            addItem(container, item.name, count)
+                            addItem(container, item.name, count, config.frozen)
                         end
                     else
-                        addItem(container, item)
+                        addItem(container, item.name, 1, config.frozen)
                     end
                 end
             end
@@ -438,11 +876,19 @@ end
 
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
+    local enableAll = SandboxVars.DWAP.EnableAllLocations
+    local safehouseIndex = DWAPUtils.selectedSafehouse or SandboxVars.DWAP.Safehouse - 1
     for i = 1, #configs do
         local config = configs[i]
-        if config and config.loot then
+        if config and config.loot and (enableAll or i == safehouseIndex) then
             for j = 1, #config.loot do
+                if i ~= safehouseIndex and enableAll and SandboxVars.DWAP.Loot == 3 and type(config.loot[j].level) == "string" then
+                    config.loot[j].level = 3
+                end
                 setLootConfigValue(config.loot[j])
+                if config.loot[j].dist then
+                    getDistItems(config.loot[j].dist, config.loot[j].distIncludeJunk)
+                end
             end
         end
     end
@@ -455,7 +901,7 @@ end
 --- @param container ItemContainer
 local function onFillContainer(roomType, containerType, container)
     if isMultiplayer() and isClient() then return end
-    if not SandboxVars.DWAP.Loot then return end
+    if not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3 then return end
     if not container or roomType == "Container" then return end
     local square = container:getSourceGrid()
     if square then
@@ -487,7 +933,7 @@ end)
 -- local allMaps = {}
 
 Events.OnInitGlobalModData.Add(function()
-    if not SandboxVars.DWAP.Loot then return end
+    if not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3 then return end
     allCDs = recordedMedia:getAllMediaForType(0)
     allVHS = recordedMedia:getAllMediaForCategory("Retail-VHS")
     --- @cast allCDs ArrayList
@@ -523,7 +969,7 @@ Events.OnInitGlobalModData.Add(function()
 end)
 
 Events.OnSave.Add(function()
-    if not SandboxVars.DWAP.Loot then return end
+    if not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3 then return end
     local modData = ModData.getOrCreate("DWAP_Loot")
     if modData and modData.init then
         modData.lootConfig = lootConfig

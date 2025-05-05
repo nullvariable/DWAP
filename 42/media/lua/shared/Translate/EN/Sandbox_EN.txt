@@ -23,6 +23,11 @@ Sandbox_EN = {
 	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
 	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Central LVille Mansion",
 	Sandbox_DWAP_Loot_Safehouse_value_option21 = "ScrapYard",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "Ekron Factory",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "Rusty Rifle",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "March Ridge Secret",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Riverside Mansion",
 
 	Sandbox_DWAP_EnableAll = "Enable all safehouses",
 	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, loot, spawn and map will still only be for the selected option",
@@ -32,6 +37,9 @@ Sandbox_EN = {
 
 	Sandbox_DWAP_Keys = "Start with Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Get a map of the safehouse and keys for it",
+
+	Sandbox_DWAP_Barricade = "Safehouse is barricaded",
+	Sandbox_DWAP_Barricade_tooltip = "Most doors and windows will start with barricades",
 
 	Sandbox_DWAP_EWC = "Enable Water System",
 	Sandbox_DWAP_EWC_tooltip = "Use the mod's water system, with water tanks and all fixtures plumbed to the tanks",
@@ -59,6 +67,10 @@ Sandbox_EN = {
 
 	Sandbox_DWAP_Loot = "Safehouse Supplies",
 	Sandbox_DWAP_Loot_tooltip = "Should the safehouse have special loot spawns",
+	Sandbox_DWAP_Loot_value_option1 = "Only Primary",
+	Sandbox_DWAP_Loot_value_option2 = "All ",
+	Sandbox_DWAP_Loot_value_option3 = "Primary Normal, Others Low",
+	Sandbox_DWAP_Loot_value_option4 = "None",
 
 	Sandbox_DWAP_Loot_EnableMaps = "Loot -> Maps",
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Stash of All Maps",

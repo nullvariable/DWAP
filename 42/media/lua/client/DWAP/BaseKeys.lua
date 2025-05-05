@@ -13,6 +13,21 @@ DWAPKeysCL.updateBuildingKeyId = function(params)
         DWAPUtils.dprint("Square not found")
         return
     end
+    if params.sprite and params.sprite:find('garage') then
+        DWAPUtils.dprint("Garage door found, attempting to set key ID")
+        local objects = square:getObjects()
+        for i = 0, objects:size() - 1 do
+            local obj = objects:get(i)
+            if obj:getSpriteName() == params.sprite then
+                local garageDoorObjects = buildUtil.getGarageDoorObjects(obj)
+                DWAPUtils.dprint(("Found garage door object %s"):format(obj:getSpriteName()))
+                for j=1,#garageDoorObjects do
+                    local object = garageDoorObjects[j]
+                    object:setKeyId(keyId)
+                end
+            end
+        end
+    end
     local building = square:getBuilding()
     if building then
         local def = building:getDef()
@@ -70,7 +85,8 @@ Events.OnNewGame.Add(function()
                             true,
                             {
                                 coords = {x = door.x, y = door.y, z = door.z},
-                                keyId = keyId
+                                keyId = keyId,
+                                sprite = door.sprite,
                             }
                         )
                     end
@@ -112,7 +128,8 @@ Events.OnLoad.Add(function()
                         true,
                         {
                             coords = {x = door.x, y = door.y, z = door.z},
-                            keyId = keyId
+                            keyId = keyId,
+                            sprite = door.sprite,
                         }
                     )
                 end

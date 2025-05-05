@@ -4,7 +4,7 @@ VERSION = 1,
 option DWAP.Safehouse
 {
 	type = enum,
-	numValues = 21,
+	numValues = 26,
 	default = 1,
 
 	page = DWAPGeneral,
@@ -28,6 +28,15 @@ option DWAP.SpawnWithMapAndKeys
 
 	page = DWAPGeneral,
 	translation = DWAP_Keys,
+}
+
+option DWAP.Barricade
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_Barricade,
 }
 
 option DWAP.EnableWaterSystem
@@ -115,11 +124,13 @@ option DWAP.WaterTankCapacity
 
 option DWAP.Loot
 {
-	type = boolean,
-	default = TRUE,
+	type = enum,
+	numValues = 4,
+	default = 1,
 
 	page = DWAPGeneral,
 	translation = DWAP_Loot,
+	valueTranslation = DWAP_Loot_value,
 }
 
 option DWAP.Loot_EnableMaps

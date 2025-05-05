@@ -23,6 +23,7 @@ local GrandOhioConfig = {
                 {1703, 159},
                 {1704, 158},
                 {1704, 159},
+                {1704, 155},
                 {1704, 156},
                 {1704, 157},
                 {1704, 160},
@@ -54,7 +55,7 @@ local GrandOhioConfig = {
         }
     },
     waterTanks = {
-        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = generatorStartCoords.x, y = generatorStartCoords.y, z = -4}},
     },
     waterFixtures = {
         -- wash room sinks
@@ -122,6 +123,8 @@ local GrandOhioConfig = {
         { sprite = "fixtures_bathroom_01_30", x = generatorStartCoords.x+2, y = generatorStartCoords.y+6, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     objectSpawns = {
+        { sprite = "industry_02_52", x = 13639, y = 1261, z = -4, clearExisting = false, enabled = "EnableWaterSystem", },
+
         { x = 13610, y = 1269, z = 0, clearExisting = true, },
         { x = 13610, y = 1270, z = 0, clearExisting = true, },
         { x = 13610, y = 1271, z = 0, clearExisting = true, },
@@ -219,9 +222,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y-2,z=-4},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -235,17 +236,13 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y-2,z=-4},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y-2,z=-4},
-            dist = {"FirearmWeapons_Late"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -267,7 +264,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+1,z=-4},
-            dist = {"ArmyStorageGuns",},
+            dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -275,7 +272,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+1,z=-4},
-            dist = {"PoliceStorageGuns"},
+            dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -457,6 +454,8 @@ local GrandOhioConfig = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -465,6 +464,8 @@ local GrandOhioConfig = {
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         -- fishing
         {
@@ -551,10 +552,10 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+22,z=-4},
-            items = {
-                { name = 'Base.Mov_WaterDispenser', chance = 1, count = {1,2} },
-                { name = 'Base.WaterDispenserBottle', chance = 1, count = {1,2} },
-            },
+            dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         {
             type = 'container',
@@ -614,7 +615,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-5,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -622,7 +623,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-4,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -655,7 +656,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+23,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -663,7 +664,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+24,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -745,10 +746,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+16,z=-4},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            special = "essentials",
         },
         {
             type = 'container',
@@ -893,15 +891,19 @@ local GrandOhioConfig = {
             type = 'container',
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+16,z=-4},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+16,z=-4},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -911,13 +913,6 @@ local GrandOhioConfig = {
             },
         },
         {
-            type = 'container',
-            coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
-            items = {
-                { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
-            },
-        },
-        { -- duplicate to to top off the cartons
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
             dist = {"StoreCounterTobacco"},
@@ -936,7 +931,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+19,z=-4},
-            dist = {"CafeteriaSnacks"},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",

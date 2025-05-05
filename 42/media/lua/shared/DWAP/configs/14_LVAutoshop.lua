@@ -1,9 +1,10 @@
+-- @TODO custom basement connecting to apt just to the south. The one I always like to put a rope down from.
 local wtc = {x = 13144, y = 3019, z = 0} -- waterTankCoords
 local bunkerTopLeft = {x = 13135, y = 3019, z = -1}
 local LVAutoshop = {
     spawn = { x = 13139, y = 3025, z = 0 },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 13141, y = 3032, z = 0} },
     },
     waterFixtures = {
         { sprite = "fixtures_bathroom_01_4", x = 13137, y = 3018, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -39,19 +40,21 @@ local LVAutoshop = {
         },
     },
     objectSpawns = {
+        { sprite = "camping_01_16", x = 13144, y = 3036, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_72", x = 13143, y = 3019, z = 0, enabled = "EnableWaterSystem", clearExisting = true, }, -- tank left
         { sprite = "industry_02_73", x = 13144, y = 3019, z = 0, enabled = "EnableWaterSystem", clearExisting = true, }, --tank right
         { sprite = "industry_02_74", x = 13143, y = 3018, z = 0, enabled = "EnableWaterSystem", clearExisting = true, }, -- tank back left
         { sprite = "industry_02_75", x = 13144, y = 3018, z = 0, enabled = "EnableWaterSystem", clearExisting = true, }, -- tank back right
 
         { sprite = "industry_02_64", x = 13138, y = 3032, z = 0, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 13138, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        { sprite = "industry_02_68", x = 13138, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
         { sprite = "industry_02_65", x = 13139, y = 3032, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 13139, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        { sprite = "industry_02_69", x = 13139, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
         { sprite = "industry_02_66", x = 13140, y = 3032, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 13140, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        { sprite = "industry_02_70", x = 13140, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
         { sprite = "industry_02_67", x = 13141, y = 3032, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 13141, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        { sprite = "industry_02_71", x = 13141, y = 3031, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
 
         { x = 13137, y = 3030, z = 0, clearExisting = true, },
         { x = 13137, y = 3029, z = 0, clearExisting = true, },
@@ -65,6 +68,24 @@ local LVAutoshop = {
         { sprite = "constructedobjects_01_45", x = 13138, y = 3030, z = 0, clearExisting = false, isContainer = true, },
         { sprite = "appliances_cooking_01_16", x = 13143, y = 3021, z = 0, isFireplace = true, },
         { sprite = "constructedobjects_01_45", x = 13142, y = 3014, z = 0, clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = 13139, y = 3024, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = 13139, y = 3024, z = 0, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = 13140, y = 3024, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = 13140, y = 3024, z = 0, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_41", x = 13138, y = 3012, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_41", x = 13139, y = 3012, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_41", x = 13140, y = 3012, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 13141, y = 3012, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="fixtures_doors_02_40", x = 13143, y = 3012, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_44", x = 13143, y = 3013, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 13143, y = 3014, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_40", x = 13143, y = 3015, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 13143, y = 3016, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="industry_trucks_01_56", x = 13143, y = 3029, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_02_56", x = 13137, y = 3019, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_02_56", x = 13137, y = 3022, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_02_56", x = 13137, y = 3025, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -85,7 +106,7 @@ local LVAutoshop = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -103,7 +124,7 @@ local LVAutoshop = {
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
@@ -144,7 +165,7 @@ local LVAutoshop = {
         { -- next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -168,10 +189,7 @@ local LVAutoshop = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -213,8 +231,10 @@ local LVAutoshop = {
             type = 'container',
             coords = {x=13143,y=3025,z=0},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -222,23 +242,22 @@ local LVAutoshop = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         -- offices
         {
             type = 'container',
             coords = {x=13141,y=3026,z=0},
-            items = {
-                { name = 'Base.Pencil', chance = 1, count = {2,5} },
-                { name = 'Base.Notebook', chance = 1, count = {1,1} },
-                { name = 'Base.Notebook', chance = 1, count = {1,1} },
-                { name = 'Base.WristWatch_Left_DigitalBlack', chance = 1, count = {1,1} },
-                { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
-            },
+            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
             coords = {x=13142,y=3026,z=0},
-            dist = {"BookstoreMilitaryHistory"},
+            dist = {"CrateToiletPaper"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = 1,
@@ -255,14 +274,6 @@ local LVAutoshop = {
                 { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
                 { name = 'Base.Mov_Cot', chance = 1, count = {1,2} },
             },
-        },
-        { -- dupe
-            type = 'container',
-            coords = {x=13137,y=3026,z=0},
-            dist = {"MovieRentalShelves"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
@@ -308,7 +319,7 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x=13138,y=3013,z=0},
-            dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles","CrateTortillaChips"},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -316,7 +327,7 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x = 13142, y = 3014, z = 0},
-            dist = {"CrateLumber"},
+            dist = {"ToolFactoryHandles", "ToolFactoryIngots"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -325,23 +336,16 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x=13140,y=3030,z=0},
-            dist = {"GasStoreEmergency"},
+            dist = {"GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = 2,
+            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',
             coords = {x=13139,y=3030,z=0},
-            items = {
-                { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
-            },
-        },
-        { -- dupe
-            type = 'container',
-            coords = {x=13139,y=3030,z=0},
-            dist = {"StoreCounterTobacco"},
-            distIncludeJunk = true,
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
@@ -351,15 +355,15 @@ local LVAutoshop = {
             dist = {"WeldingWorkshopMetal", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',
             coords = {x=13140,y=3027,z=0},
-            dist = {"CrateLumber", "CrateSheetMetal"},
+            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',
@@ -372,10 +376,10 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x=13142,y=3027,z=0},
-            dist = {"ToolFactoryHandles", "ToolFactoryIngots"},
+            dist = {"CrateBlacksmithing", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',
@@ -385,7 +389,20 @@ local LVAutoshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-
+        {
+            type = 'container',
+            coords = {x = 13139, y = 3024, z = 0},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        {
+            type = 'container',
+            coords = {x = 13140, y = 3024, z = 0},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
     },
 }
 

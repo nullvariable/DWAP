@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 6949, y = 5555, z = -2}
 local RiverSafeHouse = {
     spawn = { x = 6953, y = 5565, z = 1 },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 6962, y = 5564, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_16", x = 6948, y = 5570, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -21,7 +21,7 @@ local RiverSafeHouse = {
         { sprite = "fixtures_sinks_01_16", x = 6949, y = 5559, z = -2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_6", x = 6951, y = 5563, z = -2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
 
-        { sprite = "appliances_laundry_01_1", x = 6951, y = 5570, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_1", x = 6951, y = 5570, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z}, },
     },
     doorKeys = {
         name = "Riverside Safe House",
@@ -31,12 +31,6 @@ local RiverSafeHouse = {
         },
     },
     map = { name = "DWAPStashMap6", },
-    purgeToxinsCoords = {
-        {x = 6962, y = 5564, z = -1,},
-    },
-    -- generators = {
-    --     { sprite = "industry_02_67", x = 6962, y = 5564, z = -1, ghost = false, },
-    -- },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 6962, y = 5564, z = -1, ghost = false, },
@@ -53,7 +47,9 @@ local RiverSafeHouse = {
         },
     },
     objectSpawns = {
-        { sprite = "appliances_laundry_01_1", x = 6951, y = 5570, z = -1, clearExisting = true,}, -- washer dryer combo
+        { sprite = "camping_01_16", x = 6953, y = 5580, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
+        -- { sprite = "appliances_laundry_01_1", x = 6951, y = 5570, z = -1, clearExisting = true, IsoType="IsoCombinationWasherDryer",}, -- washer dryer combo
 
         { sprite = "industry_02_64", x = 6959, y = 5564, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 6959, y = 5563, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
@@ -95,7 +91,7 @@ local RiverSafeHouse = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -154,7 +150,7 @@ local RiverSafeHouse = {
         { -- next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -178,9 +174,7 @@ local RiverSafeHouse = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- metal wall shelves
@@ -262,10 +256,7 @@ local RiverSafeHouse = {
         {
             type = 'container',
             coords = {x=6948,y=5565,z=0},
-            dist = {"LaundryCleaning", "JanitorCleaning"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            special = "essentials",
         },
         {
             type = 'container',
@@ -298,6 +289,7 @@ local RiverSafeHouse = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -306,12 +298,13 @@ local RiverSafeHouse = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=6954,y=5562,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -352,9 +345,7 @@ local RiverSafeHouse = {
         {
             type = 'container',
             coords = {x=6958,y=5562,z=0},
-            dist = {"ArmyStorageAmmunition","ArmyStorageGuns","FirearmWeapons_Late",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- living area
@@ -394,7 +385,7 @@ local RiverSafeHouse = {
         {
             type = 'container',
             coords = {x=6948,y=5568,z=0},
-            dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "MedicalStorageDrugs"},
+            dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -423,6 +414,16 @@ local RiverSafeHouse = {
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=7005,y=5590,z=0},
+            items = {
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
+            },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
     },
 }

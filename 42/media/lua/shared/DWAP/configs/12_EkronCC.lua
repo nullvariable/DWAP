@@ -52,7 +52,7 @@ local EkronCC = {
         }
     },
     waterTanks = {
-        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = genCoords.x, y = genCoords.y, z = genCoords.z}},
     },
     waterFixtures = {
         -- wash room sinks
@@ -120,6 +120,8 @@ local EkronCC = {
         { sprite = "fixtures_bathroom_01_30", x = genCoords.x+2, y = genCoords.y+6, z = genCoords.z, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     objectSpawns = {
+        { sprite = "industry_02_52", x = 754, y = 9811, z = -5, clearExisting = false, enabled = "EnableWaterSystem", },
+
         { sprite = "fixtures_railings_01_36", x = 726, y = 9820, z = -1, clearExisting = false, },
         { sprite = "fixtures_railings_01_36", x = 726, y = 9821, z = -1, clearExisting = false, },
         { sprite = "fixtures_railings_01_36", x = 726, y = 9822, z = -1, clearExisting = false, },
@@ -220,9 +222,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+27,y=genCoords.y-2,z=genCoords.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -236,17 +236,13 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y-2,z=genCoords.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y-2,z=genCoords.z},
-            dist = {"FirearmWeapons_Late"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -268,7 +264,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y+1,z=genCoords.z},
-            dist = {"ArmyStorageGuns",},
+            dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -276,7 +272,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y+1,z=genCoords.z},
-            dist = {"PoliceStorageGuns"},
+            dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -458,6 +454,8 @@ local EkronCC = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -466,6 +464,8 @@ local EkronCC = {
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         -- fishing
         {
@@ -552,10 +552,10 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+22,z=genCoords.z},
-            items = {
-                { name = 'Base.Mov_WaterDispenser', chance = 1, count = {1,2} },
-                { name = 'Base.WaterDispenserBottle', chance = 1, count = {1,2} },
-            },
+            dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         {
             type = 'container',
@@ -615,7 +615,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-5,z=genCoords.z},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -623,7 +623,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-4,z=genCoords.z},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -656,7 +656,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+23,z=genCoords.z},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -664,7 +664,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+24,z=genCoords.z},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -746,10 +746,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+16,z=genCoords.z},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            special = "essentials",
         },
         {
             type = 'container',
@@ -894,8 +891,10 @@ local EkronCC = {
             type = 'container',
             coords = {x=genCoords.x,y=genCoords.y+16,z=genCoords.z},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -903,6 +902,8 @@ local EkronCC = {
             items = {
                 { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -910,15 +911,10 @@ local EkronCC = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
-            type = 'container',
-            coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
-            items = {
-                { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
-            },
-        },
-        { -- duplicate to to top off the cartons
             type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
             dist = {"StoreCounterTobacco"},
@@ -937,7 +933,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+1,y=genCoords.y+19,z=genCoords.z},
-            dist = {"CafeteriaSnacks"},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",

@@ -17,7 +17,7 @@ local EchoCreek = {
         },
     },
     waterTanks = {
-        { sprite = "industry_02_75", x = 3563, y = 10904, z = -1, },
+        { sprite = "industry_02_75", x = 3563, y = 10904, z = -1, sourceType="generator", source = {x = 3565, y = 10898, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_22", x = 3577, y = 10893, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
@@ -43,6 +43,8 @@ local EchoCreek = {
     },
     map = {name = "DWAPStashMap2",},
     objectSpawns = {
+        { sprite = "camping_01_64", x = 3565, y = 10888, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_64", x = 3562, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 3562, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_65", x = 3563, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
@@ -51,8 +53,24 @@ local EchoCreek = {
         { sprite = "industry_02_70", x = 3564, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_71", x = 3565, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+
+        { sprite = "carpentry_01_16", x = 3572, y = 10891, z = -1, enabled = "Loot", clearExisting = true, },
+
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3575, y = 10906, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3574, y = 10906, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_02_50", x = 3568, y = 10906, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_02_49", x = 3567, y = 10906, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_02_48", x = 3566, y = 10906, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="fixtures_doors_01_49", x = 3563, y = 10906, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_24", x = 3566, y = 10898, z = 1, },
     },
     loot = {
+        { -- house next to couch
+            type = 'container',
+            coords = {x=3572, y=10891,z=-1},
+            sandboxEnable = 'Loot',
+            special = "essentials",
+        },
         { -- house next to couch
             type = 'container',
             coords = {x=3566, y=10901,z=1},
@@ -121,7 +139,7 @@ local EchoCreek = {
         { -- twin bedroom
             type = 'container',
             coords = {x=3573,y=10903,z=1},
-            dist = {"GymLaundry", "GymLockers","ArmyStorageOutfit",},
+            dist = {"GymLaundry", "GymLockers","ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -137,7 +155,7 @@ local EchoCreek = {
         { -- master bedroom closet
             type = 'container',
             coords = {x=3576,y=10899,z=1.5},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -145,23 +163,19 @@ local EchoCreek = {
         { -- master bedroom wardrobe
             type = 'container',
             coords = {x=3576,y=10898,z=1},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- master bedroom wardrobe
             type = 'container',
             coords = {x=3576,y=10897,z=1},
-            dist = {"FirearmWeapons_Late"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- master bedroom nightstand
             type = 'container',
             coords = {x=3575,y=10894,z=1},
-            dist = {"DrugLabGuns"},
+            dist = {"DrugLabGuns", "FirearmWeapons_Late"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -182,10 +196,10 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- bathroom
+         { -- bathroom
             type = 'container',
-            coords = {x=3569,y=10899,z=1},
-            dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "MedicalStorageDrugs"},
+            coords = {x=3569,y=10899,z=1.5},
+            dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "BathroomCounter"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -201,8 +215,17 @@ local EchoCreek = {
         -- kitchen
         {
             type = 'container',
+            coords = {x=3569,y=10900,z=1},
+            dist = {"FridgeFarmStorage", "FridgeGeneric"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=3566,y=10898,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -234,7 +257,7 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3568,y=10898,z=1},
-            dist = {"GroceryBagGourmet","StoreKitchenBaking",},
+            dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -480,6 +503,8 @@ local EchoCreek = {
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -488,6 +513,8 @@ local EchoCreek = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         -- crates
         {
@@ -496,6 +523,8 @@ local EchoCreek = {
             items = {
                 { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -503,6 +532,8 @@ local EchoCreek = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -530,11 +561,11 @@ local EchoCreek = {
         },
         { -- metal shelves by sink
             type = 'container',
-            coords = {x=3567,y=10905,z=-1},
-            dist = {"CandyStoreSnacks"},
-            distIncludeJunk = true,
+            coords = {x=3567,y=10905,z=-0.5},
+            dist = {"CrateVHSTapes"},
+            distIncludeJunk = false,
             randUntilFull = true,
-            level = "Loot_FoodLevel",
+            level = "Loot_MediaLevel",
         },
     },
 }

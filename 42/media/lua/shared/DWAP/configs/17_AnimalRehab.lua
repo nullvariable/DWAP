@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 3104, y = 12030, z = -2}
 local AnimalRehab = {
     spawn = { x = 3108, y = 12053, z = 1 },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 3114, y = 12044, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_10", x = 3115, y = 12052, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -45,6 +45,8 @@ local AnimalRehab = {
         },
     },
     objectSpawns = {
+        { sprite = "camping_01_16", x = 3119, y = 12043, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_64", x = 3111, y = 12044, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 3111, y = 12043, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_65", x = 3112, y = 12044, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
@@ -84,7 +86,7 @@ local AnimalRehab = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -143,7 +145,7 @@ local AnimalRehab = {
         { -- next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -159,18 +161,13 @@ local AnimalRehab = {
         { -- (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -211,10 +208,10 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3106,y=12044,z=-1},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
-            distIncludeJunk = false,
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
+            distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_FarmLevel",
+            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',
@@ -223,11 +220,13 @@ local AnimalRehab = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
             coords = {x=3117,y=12047,z=-1},
-            dist = {"ArmyStorageElectronics", "RandomFiller", "MetalShopTools", "MetalWorkerTools" },
+            dist = {"ArmyStorageElectronics", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
@@ -235,17 +234,19 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3117,y=12048,z=-1},
-            dist = {"CrateLumber", "CrateSheetMetal"},
-            distIncludeJunk = true,
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = false,
             randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
             coords = {x=3115,y=12038,z=-1},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -253,6 +254,8 @@ local AnimalRehab = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -278,12 +281,13 @@ local AnimalRehab = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=3115,y=12051,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "FridgeSoda", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -299,7 +303,7 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3115,y=12054,z=0},
-            dist = {"StoreKitchenBaking",},
+            dist = {"KitchenDryFood",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -323,9 +327,7 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3104,y=12052,z=0.5},
-            dist = {"DrugLabGuns"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -376,23 +378,23 @@ local AnimalRehab = {
         {
             type = 'container',
             coords = {x=3107,y=12054,z=0},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=3107,y=12053,z=0},
-            dist = {"CampingLockers", "CampingStoreBackpacks", "GunStoreKnives", "SafehouseTraps", "ArmyStorageAmmunition"},
+            dist = {"GunStoreKnives", "SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
+            coords = {x=3107,y=12053,z=0},
+            dist = {"CampingLockers", "CampingStoreBackpacks",},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
             coords = {x=3111,y=12052,z=0},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",

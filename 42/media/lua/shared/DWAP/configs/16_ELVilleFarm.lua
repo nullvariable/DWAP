@@ -3,7 +3,7 @@ local bunkerTopLeft = {x = 14573, y = 3022, z = -2}
 local ELVilleFarm = {
     spawn = { x = 14584, y = 3036, z = 1 },
     waterTanks = {
-        { sprite = "industry_02_75", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_75", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 14556, y = 3041, z = 0} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_17", x = 14576, y = 3035, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -61,6 +61,8 @@ local ELVilleFarm = {
         },
     },
     objectSpawns = {
+        { sprite = "camping_01_16", x = 14592, y = 3045, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_64", x = 14553, y = 3041, z = 0, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 14553, y = 3040, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_65", x = 14554, y = 3041, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
@@ -72,6 +74,9 @@ local ELVilleFarm = {
 
         { x = 14575, y = 3032, z = -1, clearExisting = true, },
         { x = 14575, y = 3033, z = -1, clearExisting = true, },
+
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_41", x = 14574, y = 3046, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_41", x = 14576, y = 3046, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -92,7 +97,7 @@ local ELVilleFarm = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -175,10 +180,7 @@ local ELVilleFarm = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -206,6 +208,7 @@ local ELVilleFarm = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -252,9 +255,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14573,y=3035,z=0},
-            dist = {"ArmyStorageGuns",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -309,15 +310,16 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14589,y=3036,z=0},
-            dist = {"FreezerRich", },
+            dist = {"FreezerRich", "FridgeSoda",},
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=14584,y=3035,z=0},
-            dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -325,7 +327,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14585,y=3035,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -341,7 +343,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14587,y=3035,z=0},
-            dist = {"StoreKitchenBaking",},
+            dist = {"KitchenDryFood",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -365,9 +367,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14591,y=3039,z=0},
-            dist = {"DrugLabGuns"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -434,7 +434,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14579,y=3041,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -466,7 +466,7 @@ local ELVilleFarm = {
         {
             type = 'container',
             coords = {x=14576,y=3043,z=1},
-            dist = {"ArmyStorageOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -542,8 +542,10 @@ local ELVilleFarm = {
             type = 'container',
             coords = {x=14557,y=3040,z=0},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -551,6 +553,8 @@ local ELVilleFarm = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -574,7 +578,7 @@ local ELVilleFarm = {
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_GunLevel",
+            level = "Loot_LockersLevel",
         },
         {
             type = 'container',
@@ -591,6 +595,26 @@ local ELVilleFarm = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=14576,y=3035,z=-1},
+            items = {
+                { name = 'Base.Firewood', chance = 1, count = {10,10} },
+            },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=14576,y=3034,z=-1},
+            items = {
+                { name = 'Base.Firewood', chance = 1, count = {10,10} },
+            },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
     },
 }

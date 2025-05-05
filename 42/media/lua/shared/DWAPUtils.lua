@@ -1,5 +1,6 @@
 local DWAPUtils = {}
 
+DWAPUtils.currentVersion = 15
 DWAPUtils.selectedSafehouse = 4
 DWAPUtils.safehouseKeyId = nil
 
@@ -32,6 +33,11 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [18] = "DWAP/configs/18_McCoyEstate",
     [19] = "DWAP/configs/19_CentralLVilleMansion",
     [20] = "DWAP/configs/20_ScrapYard",
+    [21] = "DWAP/configs/21_EkronFactory",
+    [22] = "DWAP/configs/22_CortmanMedical",
+    [23] = "DWAP/configs/23_RustyRifle",
+    [24] = "DWAP/configs/24_MRSecret",
+    [25] = "DWAP/configs/25_RiversideMansion",
 }
 
 local configCache = {}
@@ -104,6 +110,39 @@ function DWAPUtils.areCoordsInList(coords, list)
     return false
 end
 
+local function maybeApplyOverrides(config)
+    if config.overrides then
+        local modData = ModData.getOrCreate("DWAP_Utils")
+        if not modData.saveVersion or modData.saveVersion >= DWAPUtils.currentVersion then
+            config.overrides = nil
+            DWAPUtils.dprint("No overrides applied")
+        else
+            -- traverse backwards and load the newest overrides prior to the save version if there's not a matching save version
+            for i = #config.overrides, 1, -1 do
+                local override = config.overrides[i]
+                if override.version == modData.saveVersion then
+                    DWAPUtils.dprint("Applying overrides for version " .. override.version)
+                    for k, v in pairs(override) do
+                        config[k] = v
+                    end
+                    break
+                end
+            end
+        end
+    end
+    config.overrides = nil
+    return config
+end
+Events.OnInitGlobalModData.Add(function(isNewGame)
+    DWAPUtils.dprint("OnInitGlobalModData")
+    DWAPUtils.dprint(isNewGame)
+    local modData = ModData.getOrCreate("DWAP_Utils")
+    if not modData.saveVersion then
+        modData.saveVersion = DWAPUtils.currentVersion
+    end
+end)
+
+
 function DWAPUtils.loadConfigs()
     if #configCache > 0 then
         return configCache
@@ -115,16 +154,16 @@ function DWAPUtils.loadConfigs()
         for i = 1, #configFiles do
             local config = require(configFiles[i])
             if config then
-                if i ~= index then
+                if i ~= index and (not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3) then
                     config.loot = nil
                 end
-                table.insert(configs, config)
+                table.insert(configs, maybeApplyOverrides(config))
             end
         end
     else
         local config = require(configFiles[index])
         if config then
-            table.insert(configs, config)
+            table.insert(configs, maybeApplyOverrides(config))
         end
     end
     configCache = configs

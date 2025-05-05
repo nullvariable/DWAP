@@ -6,12 +6,17 @@ Or grab the 10 years later mod and set out to find more food and fuel.
 
 This mod provides a safehouse with water, power, and supplies. Use the options to set or exclude the various types, start with a map, or start in the safehouse.
 
-Each safehouse is fully plumbed and powered. Keep your generator in good condition and enjoy your creature comforts like working washing machines and flushing toilets (until the tanks run dry at least).
+Each safehouse is fully plumbed and powered. Keep your generator in good condition and enjoy your creature comforts like working washing machines and flushing toilets (until the tanks run dry at least). Every safehouse has a pump, if the generator is running, it will gradually refill the tank over time. Many safehouses have wells or spring water. Recent updates should allow you to move and replumb fixtures within a reaonsable radius of the original base so you can access the base's water tank.
 
-Uncle Dave was quite a collector and you might find a complete seed library (mods that use seed in their item names should be included). He was well known for being quite a reader, so perhaps he'll have left his complete collection of skill books and magazines too (works with Glyde's Trait Magazines and probably other mods that add anything to the skill category).
+Uncle Dave was quite a collector and you might find a complete seed library (mods that use seed in their item names should be included). He was well known for being quite a reader, so perhaps he'll have left his complete collection of skill books and magazines too (works with [Gyde's Trait Magazines](https://steamcommunity.com/sharedfiles/filedetails/?id=3342191739) and probably other mods that add anything to the skill category).
 
-Future plans:
-- more locations (have some ideas, but love to hear your suggestions)
+## About Loot
+* Each location varies a bit, but will include a "essentials" storage with some commonly needed items.
+* You can turn on all the locations and all the loot but this will probably make your game lag the first time you get near a base
+* I had some trouble fitting in the skill books and if you have a bunch of mods you'll find your shelves very full 🤷‍♂️
+* Recently I reworked some of the gun spawning. For most storages the lists work the same, pulling from the game's distribution lists, but I've added a "gun locker" for some spots. Instead of using the normal random distribution, it will build from a list ensuring some standard contents and a variable amount of ammo for the specific gun. At times the random spawn was giving me 10 guns and none of the clips for those guns at all. Lockers are also customized to have specific builds for the base game, but also if you use the [Vanilla Firearms Expansion](https://steamcommunity.com/sharedfiles/filedetails/?id=3434049989) or [Rain's Firearms & Gun Parts](https://steamcommunity.com/sharedfiles/filedetails/?id=3387222454) mods, you will find lockers built specifically for these mods. The guns are still random, but you'll get a full container of parts and ammo for a single gun with this change.
+
+# Warning, spoilers below 😃
 
 ## Locations
 | 1. Doe Valley | 5576, 9365 |
@@ -158,7 +163,8 @@ Future plans:
 | ------------- | ---------- |
 | ![March Ridge Secret Complex](readme/24_MRS.png) | ![March Ridge Secret Complex](readme/24_map.png) |
 | A normal military base house block above, but with each home connected to a secret complex underneath, one wonders what they were monitoring and why it had to be so well hidden. | ![March Ridge Secret Complex](readme/24_basement.jpg) |
-| ***Pros***: Fully custom, this compact basement is hidden 4 floors below, but features easy access to all the apartments above | ***Cons***: Lots of zombies |
+| ***Pros***: Fully custom, this compact basement is hidden 4 floors below, but features easy access to all the apartments above. | ***Cons***: Lots of zombies |
+*Bonus, elevator works with [Gun's Elevator mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3411580812)*
 
 | 25. Riverside Mansion | 9850, 13111 |
 | ------------- | ---------- |

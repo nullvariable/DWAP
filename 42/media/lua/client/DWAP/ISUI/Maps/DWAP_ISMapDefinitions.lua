@@ -158,3 +158,43 @@ LootMaps.Init.DWAPStashMap20 = function(mapUI)
     MapUtils.initDefaultStyleV1(mapUI)
     mapAPI:setBoundsInSquares(2872, 12440, 3031, 12615)
 end
+
+-- EkronFactory
+LootMaps.Init.DWAPStashMap21 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(448, 9312, 735, 9559)
+end
+
+-- Cortman
+LootMaps.Init.DWAPStashMap22 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(10824, 9976, 10951, 10079)
+end
+
+-- Rusty Rifle
+LootMaps.Init.DWAPStashMap23 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(10664, 10512, 10839, 10663)
+end
+
+-- March Ridge Secret complex
+LootMaps.Init.DWAPStashMap24 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(9792, 13032, 9919, 13151)
+end
+
+-- Riverside Mansion
+LootMaps.Init.DWAPStashMap25 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(6584, 5448, 6775, 5567)
+end

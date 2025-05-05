@@ -3,7 +3,7 @@ local wtc = {x = 5575, y = 9364, z = 0}
 local DoeValleyBunker = {
     spawn = { x = 5576, y = 9365, z = -1 },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 5579, y = 9364, z = 0} },
     },
     waterFixtures = {
         { sprite = "fixtures_bathroom_01_6", x = 5577, y = 9371, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -34,6 +34,8 @@ local DoeValleyBunker = {
     },
     map = { name = "DWAPStashMap1", },
     objectSpawns = {
+        { sprite = "camping_01_64", x = 5575, y = 9379, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_72", x = 5574, y = 9364, z = 0, enabled = "EnableWaterSystem", }, -- tank left
         { sprite = "industry_02_73", x = 5575, y = 9364, z = 0, enabled = "EnableWaterSystem", }, --tank right
         { sprite = "industry_02_74", x = 5574, y = 9363, z = 0, enabled = "EnableWaterSystem", }, -- tank back left
@@ -140,7 +142,7 @@ local DoeValleyBunker = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -185,7 +187,7 @@ local DoeValleyBunker = {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -215,18 +217,14 @@ local DoeValleyBunker = {
         { -- (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            sandboxEnable = 'Loot',
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',

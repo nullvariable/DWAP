@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="14" height="24" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="13" Curtains="0" Shutters="11" Stairs="12" RoofCap="8" RoofSlope="9" RoofTop="10" GrimeWall="7">
+ <properties>
+  <property name="BasementAccess" value="0 20 N"/>
+ </properties>
+ <tile_entry category="door_frames">
+  <tile enum="West" tile="fixtures_doors_frames_01_000"/>
+  <tile enum="North" tile="fixtures_doors_frames_01_001"/>
+ </tile_entry>
+ <tile_entry category="doors">
+  <tile enum="West" tile="fixtures_bathroom_01_064"/>
+  <tile enum="North" tile="fixtures_bathroom_01_065"/>
+  <tile enum="WestOpen" tile="fixtures_bathroom_01_066"/>
+  <tile enum="NorthOpen" tile="fixtures_bathroom_01_067"/>
+ </tile_entry>
+ <tile_entry category="exterior_wall_trim">
+  <tile enum="West" tile="location_shop_bargNclothes_01_028"/>
+  <tile enum="North" tile="location_shop_bargNclothes_01_029"/>
+  <tile enum="NorthWest" tile="location_shop_bargNclothes_01_031"/>
+  <tile enum="SouthEast" tile="location_shop_bargNclothes_01_030"/>
+  <tile enum="WestWindow" tile="location_shop_bargNclothes_01_028"/>
+  <tile enum="NorthWindow" tile="location_shop_bargNclothes_01_029"/>
+  <tile enum="WestDoor" tile=""/>
+  <tile enum="NorthDoor" tile=""/>
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="industry_01_000"/>
+  <tile enum="North" tile="industry_01_001"/>
+  <tile enum="NorthWest" tile="industry_01_002"/>
+  <tile enum="SouthEast" tile="industry_01_003"/>
+  <tile enum="WestWindow" tile="industry_01_008"/>
+  <tile enum="NorthWindow" tile="industry_01_009"/>
+  <tile enum="WestDoor" tile="industry_01_010"/>
+  <tile enum="NorthDoor" tile="industry_01_011"/>
+ </tile_entry>
+ <tile_entry category="floors">
+  <tile enum="Floor" tile="floors_exterior_street_01_016"/>
+ </tile_entry>
+ <tile_entry category="grime_floor">
+  <tile enum="West" tile="overlay_grime_floor_01_028"/>
+  <tile enum="North" tile="overlay_grime_floor_01_029"/>
+  <tile enum="East" tile="overlay_grime_floor_01_037"/>
+  <tile enum="South" tile="overlay_grime_floor_01_036"/>
+  <tile enum="SouthWest" tile="overlay_grime_floor_01_039"/>
+  <tile enum="NorthWest" tile="overlay_grime_floor_01_030"/>
+  <tile enum="NorthEast" tile="overlay_grime_floor_01_031"/>
+  <tile enum="SouthEast" tile="overlay_grime_floor_01_038"/>
+ </tile_entry>
+ <tile_entry category="grime_wall">
+  <tile enum="West" tile="overlay_grime_wall_01_000"/>
+  <tile enum="North" tile="overlay_grime_wall_01_001"/>
+  <tile enum="NorthWest" tile="overlay_grime_wall_01_002"/>
+  <tile enum="SouthEast" tile="overlay_grime_wall_01_003"/>
+  <tile enum="WestWindow" tile="overlay_grime_wall_01_008"/>
+  <tile enum="NorthWindow" tile="overlay_grime_wall_01_009"/>
+  <tile enum="WestDoor" tile="overlay_grime_wall_01_010"/>
+  <tile enum="NorthDoor" tile="overlay_grime_wall_01_011"/>
+  <tile enum="WestTrim" tile="overlay_grime_wall_01_032"/>
+  <tile enum="NorthTrim" tile="overlay_grime_wall_01_033"/>
+  <tile enum="NorthWestTrim" tile="overlay_grime_wall_01_034"/>
+  <tile enum="SouthEastTrim" tile="overlay_grime_wall_01_035"/>
+  <tile enum="WestDoubleLeft" tile="overlay_grime_wall_01_036"/>
+  <tile enum="WestDoubleRight" tile="overlay_grime_wall_01_037"/>
+  <tile enum="NorthDoubleLeft" tile="overlay_grime_wall_01_038"/>
+  <tile enum="NorthDoubleRight" tile="overlay_grime_wall_01_039"/>
+ </tile_entry>
+ <tile_entry category="roof_caps">
+  <tile enum="CapRiseE1" tile="walls_exterior_roofs_05_000"/>
+  <tile enum="CapRiseE2" tile="walls_exterior_roofs_05_001"/>
+  <tile enum="CapRiseE3" tile="walls_exterior_roofs_05_002"/>
+  <tile enum="CapFallE1" tile="walls_exterior_roofs_05_008"/>
+  <tile enum="CapFallE2" tile="walls_exterior_roofs_05_009"/>
+  <tile enum="CapFallE3" tile="walls_exterior_roofs_05_010"/>
+  <tile enum="CapRiseS1" tile="walls_exterior_roofs_05_013"/>
+  <tile enum="CapRiseS2" tile="walls_exterior_roofs_05_012"/>
+  <tile enum="CapRiseS3" tile="walls_exterior_roofs_05_011"/>
+  <tile enum="CapFallS1" tile="walls_exterior_roofs_05_005"/>
+  <tile enum="CapFallS2" tile="walls_exterior_roofs_05_004"/>
+  <tile enum="CapFallS3" tile="walls_exterior_roofs_05_003"/>
+  <tile enum="PeakPt5S" tile="walls_exterior_roofs_05_007"/>
+  <tile enum="PeakPt5E" tile="walls_exterior_roofs_05_015"/>
+  <tile enum="PeakOnePt5S" tile="walls_exterior_roofs_05_006"/>
+  <tile enum="PeakOnePt5E" tile="walls_exterior_roofs_05_014"/>
+  <tile enum="PeakTwoPt5S" tile="walls_exterior_roofs_05_017"/>
+  <tile enum="PeakTwoPt5E" tile="walls_exterior_roofs_05_016"/>
+  <tile enum="CapGapS1" tile=""/>
+  <tile enum="CapGapS2" tile=""/>
+  <tile enum="CapGapS3" tile=""/>
+  <tile enum="CapGapE1" tile=""/>
+  <tile enum="CapGapE2" tile=""/>
+  <tile enum="CapGapE3" tile=""/>
+  <tile enum="CapShallowRiseS1" tile="walls_exterior_roofs_05_054"/>
+  <tile enum="CapShallowRiseS2" tile="walls_exterior_roofs_05_055"/>
+  <tile enum="CapShallowFallS1" tile="walls_exterior_roofs_05_051"/>
+  <tile enum="CapShallowFallS2" tile="walls_exterior_roofs_05_050"/>
+  <tile enum="CapShallowRiseE1" tile="walls_exterior_roofs_05_048"/>
+  <tile enum="CapShallowRiseE2" tile="walls_exterior_roofs_05_049"/>
+  <tile enum="CapShallowFallE1" tile="walls_exterior_roofs_05_053"/>
+  <tile enum="CapShallowFallE2" tile="walls_exterior_roofs_05_052"/>
+ </tile_entry>
+ <tile_entry category="roof_slopes">
+  <tile enum="SlopeS1" tile="roofs_01_000"/>
+  <tile enum="SlopeS2" tile="roofs_01_001"/>
+  <tile enum="SlopeS3" tile="roofs_01_002"/>
+  <tile enum="SlopeE1" tile="roofs_01_005"/>
+  <tile enum="SlopeE2" tile="roofs_01_004"/>
+  <tile enum="SlopeE3" tile="roofs_01_003"/>
+  <tile enum="SlopePt5S" tile="roofs_01_015" offset="1,1"/>
+  <tile enum="SlopePt5E" tile="roofs_01_014" offset="1,1"/>
+  <tile enum="SlopeOnePt5S" tile="roofs_01_015"/>
+  <tile enum="SlopeOnePt5E" tile="roofs_01_014"/>
+  <tile enum="SlopeTwoPt5S" tile="roofs_01_071"/>
+  <tile enum="SlopeTwoPt5E" tile="roofs_01_070"/>
+  <tile enum="ShallowSlopeW1" tile="roofs_01_083"/>
+  <tile enum="ShallowSlopeW2" tile="roofs_01_082"/>
+  <tile enum="ShallowSlopeE1" tile="roofs_01_080"/>
+  <tile enum="ShallowSlopeE2" tile="roofs_01_081"/>
+  <tile enum="ShallowSlopeN1" tile="roofs_01_084"/>
+  <tile enum="ShallowSlopeN2" tile="roofs_01_085"/>
+  <tile enum="ShallowSlopeS1" tile="roofs_01_087"/>
+  <tile enum="ShallowSlopeS2" tile="roofs_01_086"/>
+  <tile enum="Inner1" tile="roofs_01_011"/>
+  <tile enum="Inner2" tile="roofs_01_012"/>
+  <tile enum="Inner3" tile="roofs_01_013"/>
+  <tile enum="Outer1" tile="roofs_01_008"/>
+  <tile enum="Outer2" tile="roofs_01_009"/>
+  <tile enum="Outer3" tile="roofs_01_010"/>
+  <tile enum="InnerPt5" tile="roofs_01_067"/>
+  <tile enum="InnerOnePt5" tile="roofs_01_068"/>
+  <tile enum="InnerTwoPt5" tile="roofs_01_069"/>
+  <tile enum="OuterPt5" tile="roofs_01_064"/>
+  <tile enum="OuterOnePt5" tile="roofs_01_065"/>
+  <tile enum="OuterTwoPt5" tile="roofs_01_066"/>
+  <tile enum="CornerSW1" tile="roofs_01_024"/>
+  <tile enum="CornerSW2" tile="roofs_01_025"/>
+  <tile enum="CornerSW3" tile="roofs_01_026"/>
+  <tile enum="CornerNE1" tile="roofs_01_029"/>
+  <tile enum="CornerNE2" tile="roofs_01_028"/>
+  <tile enum="CornerNE3" tile="roofs_01_027"/>
+ </tile_entry>
+ <tile_entry category="roof_tops">
+  <tile enum="West1" tile="floors_exterior_street_01_014" offset="-1,-1"/>
+  <tile enum="West2" tile="floors_exterior_street_01_014" offset="-2,-2"/>
+  <tile enum="West3" tile="floors_exterior_street_01_014"/>
+  <tile enum="North1" tile="floors_exterior_street_01_014" offset="-1,-1"/>
+  <tile enum="North2" tile="floors_exterior_street_01_014" offset="-2,-2"/>
+  <tile enum="North3" tile="floors_exterior_street_01_014"/>
+ </tile_entry>
+ <tile_entry category="shutters">
+  <tile enum="WestBelow" tile="fixtures_windows_detailing_01_016"/>
+  <tile enum="WestAbove" tile="fixtures_windows_detailing_01_017"/>
+  <tile enum="NorthLeft" tile="fixtures_windows_detailing_01_018"/>
+  <tile enum="NorthRight" tile="fixtures_windows_detailing_01_019"/>
+ </tile_entry>
+ <tile_entry category="stairs">
+  <tile enum="West1" tile="fixtures_escalators_01_000"/>
+  <tile enum="West2" tile="fixtures_escalators_01_001"/>
+  <tile enum="West3" tile="fixtures_escalators_01_002"/>
+  <tile enum="North1" tile="fixtures_escalators_01_008"/>
+  <tile enum="North2" tile="fixtures_escalators_01_009"/>
+  <tile enum="North3" tile="fixtures_escalators_01_010"/>
+ </tile_entry>
+ <tile_entry category="windows">
+  <tile enum="West" tile="fixtures_windows_01_000"/>
+  <tile enum="North" tile="fixtures_windows_01_001"/>
+ </tile_entry>
+ <user_tiles>
+  <tile tile="appliances_com_01_001"/>
+  <tile tile="appliances_com_01_073"/>
+  <tile tile="appliances_refrigeration_01_008"/>
+  <tile tile="appliances_refrigeration_01_020"/>
+  <tile tile="appliances_refrigeration_01_021"/>
+  <tile tile="appliances_refrigeration_01_042"/>
+  <tile tile="appliances_refrigeration_01_048"/>
+  <tile tile="carpentry_01_016"/>
+  <tile tile="carpentry_01_017"/>
+  <tile tile="crafted_01_073"/>
+  <tile tile="crafted_01_121"/>
+  <tile tile="crafted_02_000"/>
+  <tile tile="crafted_02_001"/>
+  <tile tile="fixtures_doors_01_032"/>
+  <tile tile="fixtures_doors_01_056"/>
+  <tile tile="fixtures_doors_01_057"/>
+  <tile tile="fixtures_fireplaces_01_005"/>
+  <tile tile="fixtures_fireplaces_01_032"/>
+  <tile tile="fixtures_fireplaces_01_033"/>
+  <tile tile="fixtures_fireplaces_01_034"/>
+  <tile tile="fixtures_railings_01_005"/>
+  <tile tile="fixtures_railings_01_006"/>
+  <tile tile="fixtures_railings_01_007"/>
+  <tile tile="fixtures_sinks_01_017"/>
+  <tile tile="fixtures_sinks_01_025"/>
+  <tile tile="fixtures_sinks_01_035"/>
+  <tile tile="fixtures_stairs_01_056"/>
+  <tile tile="fixtures_stairs_01_057"/>
+  <tile tile="fixtures_stairs_01_058"/>
+  <tile tile="floors_interior_carpet_01_002"/>
+  <tile tile="floors_interior_tilesandwood_01_011"/>
+  <tile tile="floors_rugs_02_005"/>
+  <tile tile="furniture_seating_indoor_03_041"/>
+  <tile tile="furniture_seating_indoor_03_123"/>
+  <tile tile="furniture_shelving_01_024"/>
+  <tile tile="furniture_shelving_01_025"/>
+  <tile tile="furniture_shelving_01_040"/>
+  <tile tile="furniture_shelving_01_042"/>
+  <tile tile="furniture_storage_02_001"/>
+  <tile tile="furniture_storage_02_002"/>
+  <tile tile="furniture_storage_02_013"/>
+  <tile tile="furniture_storage_02_018"/>
+  <tile tile="furniture_storage_02_038"/>
+  <tile tile="furniture_storage_02_039"/>
+  <tile tile="furniture_tables_high_01_004"/>
+  <tile tile="industry_01_006"/>
+  <tile tile="industry_01_007"/>
+  <tile tile="industry_01_012"/>
+  <tile tile="industry_01_056"/>
+  <tile tile="industry_02_001"/>
+  <tile tile="industry_02_003"/>
+  <tile tile="industry_02_004"/>
+  <tile tile="industry_02_005"/>
+  <tile tile="industry_02_052"/>
+  <tile tile="industry_02_072"/>
+  <tile tile="industry_02_073"/>
+  <tile tile="industry_02_074"/>
+  <tile tile="industry_02_075"/>
+  <tile tile="industry_02_076"/>
+  <tile tile="industry_02_177"/>
+  <tile tile="industry_02_193"/>
+  <tile tile="industry_02_194"/>
+  <tile tile="industry_02_195"/>
+  <tile tile="industry_02_217"/>
+  <tile tile="industry_02_218"/>
+  <tile tile="industry_03_025"/>
+  <tile tile="industry_03_080"/>
+  <tile tile="industry_03_089"/>
+  <tile tile="industry_trucks_01_004"/>
+  <tile tile="industry_trucks_01_005"/>
+  <tile tile="industry_trucks_01_006"/>
+  <tile tile="industry_trucks_01_007"/>
+  <tile tile="industry_trucks_01_014"/>
+  <tile tile="industry_trucks_01_015"/>
+  <tile tile="lighting_indoor_01_002"/>
+  <tile tile="lighting_indoor_01_006"/>
+  <tile tile="lighting_indoor_02_009"/>
+  <tile tile="lighting_indoor_02_043"/>
+  <tile tile="lighting_indoor_02_044"/>
+  <tile tile="lighting_indoor_02_045"/>
+  <tile tile="lighting_indoor_03_008"/>
+  <tile tile="lighting_indoor_03_009"/>
+  <tile tile="lighting_indoor_03_011"/>
+  <tile tile="lighting_indoor_03_012"/>
+  <tile tile="lighting_outdoor_01_040"/>
+  <tile tile="lighting_outdoor_01_041"/>
+  <tile tile="location_business_office_generic_01_040"/>
+  <tile tile="location_business_office_generic_01_041"/>
+  <tile tile="location_business_office_generic_02_007"/>
+  <tile tile="location_community_medical_01_010"/>
+  <tile tile="location_community_medical_01_022"/>
+  <tile tile="location_community_medical_01_023"/>
+  <tile tile="location_community_medical_01_024"/>
+  <tile tile="location_community_medical_01_055"/>
+  <tile tile="location_community_medical_01_088"/>
+  <tile tile="location_community_medical_01_136"/>
+  <tile tile="location_community_medical_01_152"/>
+  <tile tile="location_community_medical_01_153"/>
+  <tile tile="location_community_medical_01_157"/>
+  <tile tile="location_entertainment_gallery_02_048"/>
+  <tile tile="location_hospitality_sunstarmotel_02_014"/>
+  <tile tile="location_hospitality_sunstarmotel_02_022"/>
+  <tile tile="location_military_generic_01_001"/>
+  <tile tile="location_military_generic_01_003"/>
+  <tile tile="location_military_generic_01_005"/>
+  <tile tile="location_military_generic_01_022"/>
+  <tile tile="location_military_generic_01_070"/>
+  <tile tile="location_restaurant_bar_01_024"/>
+  <tile tile="location_restaurant_bar_01_044"/>
+  <tile tile="location_restaurant_bar_01_045"/>
+  <tile tile="location_restaurant_bar_01_046"/>
+  <tile tile="location_shop_generic_01_048"/>
+  <tile tile="location_shop_generic_01_049"/>
+  <tile tile="overlay_grime_floor_01_000"/>
+  <tile tile="overlay_grime_floor_01_001"/>
+  <tile tile="overlay_grime_floor_01_002"/>
+  <tile tile="overlay_grime_floor_01_003"/>
+  <tile tile="overlay_grime_floor_01_004"/>
+  <tile tile="overlay_grime_floor_01_005"/>
+  <tile tile="overlay_grime_floor_01_007"/>
+  <tile tile="overlay_grime_floor_01_008"/>
+  <tile tile="overlay_grime_floor_01_009"/>
+  <tile tile="overlay_grime_floor_01_010"/>
+  <tile tile="overlay_grime_floor_01_011"/>
+  <tile tile="overlay_grime_floor_01_020"/>
+  <tile tile="overlay_grime_floor_01_021"/>
+  <tile tile="overlay_grime_floor_01_029"/>
+  <tile tile="overlay_grime_floor_01_044"/>
+  <tile tile="overlay_grime_floor_01_055"/>
+  <tile tile="overlay_grime_floor_01_071"/>
+  <tile tile="overlay_grime_floor_01_074"/>
+  <tile tile="overlay_grime_floor_01_081"/>
+  <tile tile="overlay_grime_floor_01_088"/>
+  <tile tile="overlay_grime_wall_01_000"/>
+  <tile tile="overlay_grime_wall_01_001"/>
+  <tile tile="overlay_grime_wall_01_002"/>
+  <tile tile="overlay_grime_wall_01_003"/>
+  <tile tile="overlay_grime_wall_01_004"/>
+  <tile tile="overlay_grime_wall_01_005"/>
+  <tile tile="overlay_grime_wall_01_006"/>
+  <tile tile="overlay_grime_wall_01_010"/>
+  <tile tile="overlay_grime_wall_01_011"/>
+  <tile tile="overlay_grime_wall_01_012"/>
+  <tile tile="overlay_grime_wall_01_014"/>
+  <tile tile="overlay_grime_wall_01_019"/>
+  <tile tile="overlay_grime_wall_01_020"/>
+  <tile tile="overlay_grime_wall_01_021"/>
+  <tile tile="overlay_grime_wall_01_022"/>
+  <tile tile="overlay_grime_wall_01_030"/>
+  <tile tile="overlay_grime_wall_01_031"/>
+  <tile tile="rooftop_furniture_002"/>
+  <tile tile="rooftop_furniture_017"/>
+  <tile tile="walls_commercial_02_032"/>
+  <tile tile="walls_commercial_02_033"/>
+  <tile tile="walls_commercial_02_034"/>
+  <tile tile="walls_garage_01_051"/>
+  <tile tile="walls_garage_01_053"/>
+  <tile tile="walls_garage_02_016"/>
+  <tile tile="walls_garage_02_017"/>
+  <tile tile="walls_garage_02_018"/>
+  <tile tile="walls_interior_house_01_016"/>
+  <tile tile="walls_interior_house_01_017"/>
+  <tile tile="walls_interior_house_01_018"/>
+ </user_tiles>
+ <used_tiles>4 5 12 6</used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="hall" InternalName="hall" Color="200 200 200" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="6" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall2" InternalName="hall2" Color="128 128 128" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall3" InternalName="hall3" Color="255 0 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall4" InternalName="hall4" Color="0 255 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall5" InternalName="hall5" Color="0 0 255" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall6" InternalName="hall6" Color="0 255 255" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hall7" InternalName="hall7" Color="255 255 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="garage" InternalName="garage" Color="255 200 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <floor>
+  <object type="stairs" x="13" y="0" dir="N" Tile="12"/>
+  <object type="stairs" x="0" y="19" dir="N" Tile="12"/>
+  <object type="wall" length="13" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="24" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="24" dir="W" Tile="0"/>
+  <object type="wall" length="23" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="1" dir="N" Tile="0"/>
+  <object type="wall" length="10" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="22" dir="W" Tile="0"/>
+  <object type="wall" length="19" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="5" dir="N" Tile="0"/>
+  <object type="wall" length="10" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="7" dir="W" Tile="0"/>
+  <object type="wall" length="15" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="7" dir="N" Tile="0"/>
+  <object type="wall" length="15" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="7" dir="N" Tile="0"/>
+  <object type="wall" length="15" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="7" y="7" dir="N" Tile="0"/>
+  <object type="wall" length="10" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="17" dir="W" Tile="0"/>
+  <object type="wall" length="10" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="12" dir="W" Tile="0"/>
+  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="13" y="1" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="13" y="1" dir="W" Tile="0"/>
+  <object type="stairs" x="0" y="19" dir="N" Tile="12"/>
+  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="2" dir="N" Tile="0"/>
+  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="2" dir="N" Tile="0"/>
+  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="2" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="13" y="0" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="13" y="0" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="0" dir="N" Tile="0"/>
+  <object type="wall" length="5" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="5" dir="W" Tile="0"/>
+  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="5" dir="W" Tile="0"/>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+0,0,0,0,0,8,8,8,8,0,0,0,0,1,
+0,0,0,0,0,8,8,8,8,0,0,0,0,1,
+0,0,0,0,0,8,8,8,8,0,0,0,0,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,3,3,3,3,3,2,2,2,2,2,1,1,
+1,1,3,3,3,3,3,2,2,2,2,2,1,1,
+1,1,3,3,3,3,3,2,2,2,2,2,1,1,
+1,1,3,3,3,3,3,2,2,2,2,2,1,1,
+1,1,3,3,3,3,3,2,2,2,2,2,1,1,
+1,1,4,4,4,4,4,5,5,5,5,5,1,1,
+1,1,4,4,4,4,4,5,5,5,5,5,1,1,
+1,1,4,4,4,4,4,5,5,5,5,5,1,1,
+1,1,4,4,4,4,4,5,5,5,5,5,1,1,
+1,1,4,4,4,4,4,5,5,5,5,5,1,1,
+1,1,6,6,6,6,6,7,7,7,7,7,1,1,
+1,1,6,6,6,6,6,7,7,7,7,7,1,1,
+1,1,6,6,6,6,6,7,7,7,7,7,1,1,
+1,1,6,6,6,6,6,7,7,7,7,7,1,1,
+1,1,6,6,6,6,6,7,7,7,7,7,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</rooms>
+  <attributes>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</attributes>
+  <tiles layer="Doors">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,14,0,0,0,0,15,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,117,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,117,116,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,128,128,128,128,0,0,0,0,0,0,
+0,0,0,0,0,128,128,128,128,0,0,0,0,0,0,
+0,0,0,0,0,128,128,128,128,0,0,0,0,114,0,
+129,120,125,120,120,120,120,120,120,120,120,120,120,126,0,
+129,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,118,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,124,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,114,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,116,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,118,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,118,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,118,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,114,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,116,0,0,
+129,0,0,0,0,0,0,0,0,0,0,0,118,0,0,
+129,0,0,0,0,0,0,115,115,123,121,121,118,0,0,
+129,0,0,116,115,115,115,123,124,117,115,115,124,0,0,
+129,0,0,114,0,0,0,122,114,0,0,0,114,0,0,
+129,0,0,114,0,0,0,122,114,0,0,0,116,0,0,
+129,0,0,114,121,0,0,117,116,0,0,0,118,0,0,
+119,0,120,117,115,116,120,120,120,120,120,120,0,0,0,
+119,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,122,121,121,0,0,0,0,0,0,0,
+0,0,0,0,0,122,114,115,0,0,0,0,0,0,0,
+0,0,0,0,0,117,121,121,127,0,0,0,0,115,0,
+130,117,115,116,0,117,115,115,116,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,133,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,131,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,132,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,123,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,122,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,117,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,114,0,0,0,0,0,0,0,123,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,122,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,117,0,0,0,
+0,0,0,123,0,124,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,125,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,46,46,46,46,0,0,0,0,0,0,
+0,0,0,0,0,46,46,46,48,0,0,0,0,0,0,
+0,0,0,0,0,46,46,46,46,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,31,31,31,31,31,0,0,0,
+0,0,0,0,0,0,0,31,31,31,31,31,0,0,0,
+0,0,0,0,0,0,0,31,31,31,31,31,0,0,0,
+0,0,0,0,0,0,0,31,31,31,31,31,0,0,0,
+0,0,0,0,0,0,0,31,31,31,31,31,0,0,0,
+0,0,108,108,108,108,108,30,30,30,30,30,0,0,0,
+0,0,108,108,32,32,32,30,30,30,30,30,0,0,0,
+0,0,108,32,32,32,32,30,30,30,30,30,0,0,0,
+0,0,108,32,32,32,32,30,30,30,30,30,0,0,0,
+0,0,108,32,32,32,32,30,30,30,30,30,0,0,0,
+0,0,123,121,121,121,121,47,47,47,47,47,0,0,0,
+0,0,122,115,0,0,0,47,47,47,47,47,0,0,0,
+0,0,122,0,121,122,114,47,47,47,47,47,0,0,0,
+0,0,122,0,115,122,114,47,47,47,47,47,0,0,0,
+0,0,122,0,0,122,114,47,47,47,47,47,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Furniture">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,
+0,0,0,0,0,57,58,49,54,0,0,0,0,28,0,
+0,0,0,0,0,55,56,0,0,0,0,0,0,27,0,
+0,0,0,0,0,0,83,84,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,113,0,0,0,8,0,0,101,102,102,0,0,0,
+0,0,112,0,36,0,36,93,0,0,0,90,0,0,0,
+0,0,42,0,35,0,35,91,92,0,0,0,0,0,0,
+0,0,36,0,36,0,36,98,0,0,0,0,0,0,0,
+0,0,35,0,35,0,35,97,0,0,0,0,0,0,0,
+0,0,88,33,37,37,37,106,106,106,106,106,25,0,0,
+0,0,87,0,0,0,38,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,103,103,103,0,0,0,0,
+0,0,0,0,34,0,0,0,0,0,0,0,0,0,0,
+0,0,100,0,45,43,44,103,103,103,103,103,60,0,0,
+0,0,0,0,0,0,0,0,66,41,12,13,0,0,0,
+0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,68,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,67,0,0,0,0,0,0,0,
+28,0,0,0,0,0,0,11,0,26,8,8,0,0,0,
+27,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Furniture2">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,9,39,94,24,95,96,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,6,40,0,0,0,
+0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,17,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,78,0,0,104,104,0,0,0,0,0,0,
+0,0,8,7,7,7,3,0,0,0,0,0,0,0,0,
+0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,8,0,5,0,8,0,0,0,0,0,0,0,0,
+29,0,8,0,4,0,8,0,0,0,0,0,0,0,0,
+28,0,8,0,0,0,8,0,0,0,0,0,0,0,0,
+27,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Furniture3">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,80,0,0,0,99,0,77,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,89,0,0,105,0,0,0,0,0,0,0,
+0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,9,0,0,0,9,0,0,0,0,0,0,0,0,
+0,0,9,0,0,0,9,0,0,0,0,0,0,0,0,
+0,0,9,0,0,0,9,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Roof">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,82,0,82,0,0,0,0,
+0,0,0,0,0,0,0,0,81,0,81,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="RoofCap">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+50,53,53,53,53,53,53,53,53,53,53,53,51,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallFurniture3">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,79,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,107,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,107,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallGrime">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,136,0,
+0,0,0,0,0,136,135,135,135,0,0,0,0,134,0,
+0,0,0,0,0,134,0,0,0,0,0,0,0,134,0,
+0,0,0,0,0,134,0,0,0,0,0,0,0,134,0,
+136,135,135,135,135,135,145,0,135,135,135,135,135,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+134,0,136,135,142,135,135,0,0,0,0,0,0,0,0,
+134,0,134,0,0,0,0,0,0,0,0,0,0,0,0,
+134,0,134,0,0,0,0,0,0,0,0,0,141,0,0,
+134,0,134,0,0,0,0,0,0,0,0,0,134,0,0,
+134,0,134,0,0,0,0,0,0,0,0,0,134,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,134,0,0,
+134,0,0,0,0,0,0,143,0,0,0,0,134,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,141,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,134,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,134,0,0,
+134,0,140,135,135,135,135,136,135,135,135,135,134,0,0,
+134,0,144,0,0,0,0,134,0,0,0,0,134,0,0,
+134,0,146,0,0,0,0,134,0,0,0,0,141,0,0,
+134,0,144,0,0,0,0,134,0,0,0,0,134,0,0,
+134,0,138,0,0,0,0,134,0,0,0,0,134,0,0,
+134,0,135,135,142,135,135,135,135,135,135,135,137,0,0,
+134,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallGrime2">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,148,0,147,139,0,0,0,0,0,0,
+0,0,0,0,0,146,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,138,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,144,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,139,150,139,147,0,0,0,0,0,146,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,149,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallOverlay">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,155,154,154,154,154,0,0,0,
+0,0,0,0,0,0,0,153,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,153,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,153,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,153,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallTrim">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,
+0,64,151,0,64,0,0,0,64,0,0,0,64,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,75,65,0,0,
+65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,75,0,0,0,0,75,65,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,152,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,21,0,0,0,0,0,0,0,0,0,75,65,0,0,
+65,22,0,76,0,0,0,0,0,0,0,0,0,0,0,
+0,23,151,64,0,0,0,64,0,0,0,64,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="WallTrim2">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+63,0,61,61,0,61,61,61,0,61,61,61,0,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,
+62,0,61,0,61,61,61,0,61,61,61,0,0,0,0,
+60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Walls">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,71,69,
+0,0,0,0,0,160,159,159,159,69,0,0,0,69,69,
+0,0,0,0,0,158,0,0,0,69,0,0,0,69,69,
+0,0,0,0,0,158,0,0,0,69,0,0,0,69,69,
+71,70,70,70,70,70,156,157,70,70,70,70,70,72,69,
+69,0,0,0,0,0,0,0,0,0,0,0,0,0,69,
+69,0,71,70,74,70,70,163,162,162,162,162,69,0,69,
+69,0,69,0,0,0,0,161,0,0,0,0,69,0,69,
+69,0,69,0,0,0,0,161,0,0,0,0,73,0,69,
+69,0,69,0,0,0,0,161,0,0,0,0,69,0,69,
+69,0,69,0,0,0,0,161,0,0,0,0,69,0,69,
+69,0,111,110,110,110,110,71,70,70,70,70,69,0,69,
+69,0,109,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,109,0,0,0,0,73,0,0,0,0,73,0,69,
+69,0,109,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,109,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,71,70,70,70,70,71,70,70,70,70,69,0,69,
+69,0,69,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,69,0,0,0,0,69,0,0,0,0,73,0,69,
+69,0,69,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,69,0,0,0,0,69,0,0,0,0,69,0,69,
+69,0,70,70,74,70,70,70,70,70,70,70,72,0,69,
+69,0,0,0,0,0,0,0,0,0,0,0,0,0,69,
+70,70,70,70,70,70,70,70,70,70,70,70,70,70,72
+</tiles>
+  <tiles layer="Walls2">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,59,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,85,0,0,85,0,0,0,85,0,0,0,85,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+86,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,86,0,0,
+86,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+86,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,86,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+86,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,86,0,0,
+86,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,85,0,0,0,85,0,0,0,85,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</tiles>
+ </floor>
+</building>

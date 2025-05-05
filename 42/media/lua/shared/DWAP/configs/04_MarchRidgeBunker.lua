@@ -9,6 +9,9 @@ local MarchRidgeConfig = {
         },
     },
     map = { name = "DWAPStashMap4", },
+    objectSpawns = {
+        { sprite = "camping_01_16", x = 9931, y = 12616, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+    },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 9947, y = 12616, z = -4, },
@@ -43,7 +46,7 @@ local MarchRidgeConfig = {
         }
     },
     waterTanks = {
-        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 9947, y = 12616, z = -4} },
     },
     waterFixtures = {
         -- wash room sinks
@@ -133,21 +136,6 @@ local MarchRidgeConfig = {
             coords = {x=9959,y=12628,z=-4},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
-            -- items = {
-            --     { name = 'Base.MuldraughMap', chance = 1, count = {1,1} },
-            --     { name = 'Base.RiversideMap', chance = 1, count = {1,1} },
-            --     { name = 'Base.RosewoodMap', chance = 1, count = {1,1} },
-            --     { name = 'Base.WestpointMap', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap1', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap2', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap3', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap4', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap5', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap6', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap7', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap8', chance = 1, count = {1,1} },
-            --     { name = 'Base.LouisvilleMap9', chance = 1, count = {1,1} },
-            -- },
         },
         -- kitchen
         {
@@ -218,9 +206,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9974,y=12614,z=-4},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -234,17 +220,13 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9976,y=12614,z=-4},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=9977,y=12614,z=-4},
-            dist = {"FirearmWeapons_Late"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -266,7 +248,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9976,y=12617,z=-4},
-            dist = {"ArmyStorageGuns",},
+            dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -274,7 +256,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9977,y=12617,z=-4},
-            dist = {"PoliceStorageGuns"},
+            dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -449,44 +431,6 @@ local MarchRidgeConfig = {
             coords = {x=9970,y=12631,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
-            -- items = {
-            --     { name = 'Base.BasilBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.BellPepperBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.BroccoliBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.CabbageBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.CarrotBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.CauliflowerBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.ChamomileBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.ChivesBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.CilantroBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.CucumberBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.GarlicBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.GreenpeasBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.HabaneroBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.JalapenoBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.KaleBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.LeekBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.LemonGrassBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.LettuceBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.MarigoldBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.MintBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.OnionBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.OreganoBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.ParsleyBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.PotatoBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.PumpkinBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.RedRadishBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.RosemaryBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.SageBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.SpinachBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.StrewberrieBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.SunflowerBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.ThymeBagSeed', chance = 1, count = {5,5} },
-            --     { name = 'Base.TomatoBagSeed2', chance = 1, count = {10,10} },
-            --     { name = 'Base.TurnipBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.WatermelonBagSeed', chance = 1, count = {10,10} },
-            --     { name = 'Base.ZucchiniBagSeed', chance = 1, count = {10,10} },
-            -- },
         },
         {
             type = 'container',
@@ -519,6 +463,8 @@ local MarchRidgeConfig = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -527,6 +473,8 @@ local MarchRidgeConfig = {
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
         },
         -- fishing
         {
@@ -613,10 +561,10 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9966,y=12638,z=-4},
-            items = {
-                { name = 'Base.Mov_WaterDispenser', chance = 1, count = {1,2} },
-                { name = 'Base.WaterDispenserBottle', chance = 1, count = {1,2} },
-            },
+            dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         {
             type = 'container',
@@ -629,7 +577,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9970,y=12640,z=-4},
-            dist = {"ArmyStorageOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_TailorLevel",
@@ -676,7 +624,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9944,y=12611,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -684,7 +632,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9944,y=12612,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -717,7 +665,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9944,y=12639,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -725,7 +673,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9944,y=12640,z=-4},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -774,10 +722,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9950,y=12631,z=-4},
-            dist = {"ArmyStorageAmmunition", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         {
             type = 'container',
@@ -955,15 +900,19 @@ local MarchRidgeConfig = {
             type = 'container',
             coords = {x=9947,y=12632,z=-4},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
             coords = {x=9946,y=12632,z=-4},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -971,15 +920,10 @@ local MarchRidgeConfig = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
-            type = 'container',
-            coords = {x=9944,y=12632,z=-4},
-            items = {
-                { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
-            },
-        },
-        { -- duplicate to to top off the cartons
             type = 'container',
             coords = {x=9944,y=12632,z=-4},
             dist = {"StoreCounterTobacco"},
@@ -998,7 +942,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9948,y=12635,z=-4},
-            dist = {"CafeteriaSnacks"},
+            dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",

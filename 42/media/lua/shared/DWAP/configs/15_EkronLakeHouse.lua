@@ -66,6 +66,9 @@ local EkronLakeHouse = {
         { sprite = "industry_02_226", x = 1919, y = 9965, z = 0, },
         { sprite = "industry_02_226", x = 1918, y = 9965, z = 0, },
         { sprite = "industry_02_255", x = 1917, y = 9965, z = 0, },
+
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 1907, y = 9955, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 1907, y = 9957, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -86,7 +89,7 @@ local EkronLakeHouse = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -169,10 +172,7 @@ local EkronLakeHouse = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox",},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
+            special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
@@ -200,6 +200,7 @@ local EkronLakeHouse = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -230,8 +231,10 @@ local EkronLakeHouse = {
             type = 'container',
             coords = {x=1902,y=9952,z=-1},
             items = {
-                { name = 'Base.NailsCarton', chance = 1, count = {1,4} },
+                { name = 'Base.NailsCarton', },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -239,6 +242,8 @@ local EkronLakeHouse = {
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
             },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -258,6 +263,8 @@ local EkronLakeHouse = {
             items = {
                 { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
             },
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         {
             type = 'container',
@@ -368,6 +375,7 @@ local EkronLakeHouse = {
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
@@ -405,7 +413,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1897,y=9963,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -479,7 +487,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1900,y=9963,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -487,23 +495,19 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1902,y=9953,z=1},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=1903,y=9953,z=1},
-            dist = {"FirearmWeapons_Late", "SafehouseArmor", "SafehouseLighting"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
             coords = {x=1902,y=9949,z=1},
-            dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
+            dist = {"SafehouseArmor","LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -511,7 +515,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1903,y=9949,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
+            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "SafehouseLighting", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",

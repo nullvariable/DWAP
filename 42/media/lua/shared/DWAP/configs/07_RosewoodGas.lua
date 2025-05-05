@@ -23,7 +23,7 @@ local RosewoodGas = {
         },
     },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 8181, y = 11259, z = -1} },
     },
     waterFixtures = {
         -- basement
@@ -45,6 +45,8 @@ local RosewoodGas = {
     },
     map = {name = "DWAPStashMap7",},
     objectSpawns = {
+        { sprite = "camping_01_16", x = 8190, y = 11270, z = 0, enabled = "EnableWaterSystem", }, -- fountain
+
         { sprite = "industry_02_64", x = 8178, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
         { sprite = "industry_02_68", x = 8178, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_65", x = 8179, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
@@ -53,8 +55,18 @@ local RosewoodGas = {
         { sprite = "industry_02_70", x = 8180, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
         { sprite = "industry_02_71", x = 8181, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        
+
         { sprite = "appliances_cooking_01_17", x = 8179, y = 11267, z = 1, isFireplace = true,},
+
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_40", x = 8175, y = 11271, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 8175, y = 11270, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_4", x = 8175, y = 11268, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11264, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11263, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11260, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11259, z = 0, },
+        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_41", x = 8177, y = 11258, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 8178, y = 11258, z = 0, },
     },
     loot = {
         -- ground floor
@@ -67,17 +79,20 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8180,y=11270,z=0},
-            items = {
-                { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
-            },
-        },
-        {
-            type = 'container',
-            coords = {x=8180,y=11270,z=0},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = 1,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8181,y=11270,z=0},
+            items = {
+                { name = 'Base.NailsBox', },
+                { name = 'Base.ScrewsBox', },
+            },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -98,10 +113,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8182,y=11268,z=0},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
+            special = "essentials",
         },
         {
             type = 'container',
@@ -158,12 +170,13 @@ local RosewoodGas = {
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
+            frozen = true,
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=8175,y=11269,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
+            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -203,9 +216,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8181,y=11267,z=1},
-            dist = {"ArmyStorageGuns","DrugLabGuns", "FirearmWeapons_Late"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
@@ -228,7 +239,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8180,y=11267,z=-1},
-            dist = {"CrateLiquor", "DishCabinetVIPLounge", "LaundryCleaning", "JanitorCleaning"},
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "JanitorCleaning", "BathroomCounter", "CrateLinens"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
