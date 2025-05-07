@@ -1,7 +1,7 @@
-name=_Uncle Dave Was a Prepper Local_
+name=_DWAP_DEV_
 poster=poster.png
 icon=poster.png
-id=DWAPL
+id=DWAPDEV
 description=Various bunkers and facilities that a Prepper might have built out. Water sources, generators etc.
 authors=nullvariable
 require=\StarlitLibrary

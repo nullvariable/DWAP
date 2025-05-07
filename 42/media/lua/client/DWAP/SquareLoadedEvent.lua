@@ -65,7 +65,7 @@ function DWAPSquareLoaded:RunHook(name, x, y, z, _params)
                     params[k] = v
                 end
             end
-            DWAPUtils.dprint(params)
+            -- DWAPUtils.dprint(params)
             self:AddEvent(event.cb, x, y, z, event.once, params)
         end
     end
@@ -107,14 +107,14 @@ function DWAPSquareLoaded:AddHookEvent(name, cb, x, y, z, once, params)
             end
         })
     end
-    DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here")
+    -- DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here")
 
     local coordKey = self.hashCoords(x, y, z)
-    DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here2")
-    DWAPUtils.dprint(self.HookedEvents[name][coordKey])
+    -- DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here2")
+    -- DWAPUtils.dprint(self.HookedEvents[name][coordKey])
 
     local callbackKey = #self.HookedEvents[name][coordKey] + 1
-    DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here3")
+    -- DWAPUtils.dprint("DWAPSquareLoaded:AddHookEvent here3")
 
     DWAPUtils.dprint(("DWAPSquareLoaded:AddHookEvent %s (%s %s) %s %s"):format(name, coordKey, callbackKey, x, y))
     local event = {
@@ -126,8 +126,8 @@ function DWAPSquareLoaded:AddHookEvent(name, cb, x, y, z, once, params)
         params = params,
     }
     self.HookedEvents[name][coordKey][callbackKey] = event
-    DWAPUtils.dprint(self.HookedEvents[name])
-    DWAPUtils.dprint(self.HookedEvents[name][coordKey])
+    -- DWAPUtils.dprint(self.HookedEvents[name])
+    -- DWAPUtils.dprint(self.HookedEvents[name][coordKey])
     self.needsSave = true
     return callbackKey
 end
@@ -153,7 +153,7 @@ function DWAPSquareLoaded:AddEvent(cb, x, y, z, _once, params)
         pendingReadyEvents[#pendingReadyEvents + 1] = {cb = cb, x = x, y = y, z = z, once = once, params = params}
         return -1
     end
-    DWAPUtils.dprint(("DWAPSquareLoaded:AddEvent %s %s"):format(x, y))
+    -- DWAPUtils.dprint(("DWAPSquareLoaded:AddEvent %s %s"):format(x, y))
 
     local callbackKey = random:random(1000000)
     while self.Events[callbackKey] do
@@ -224,7 +224,7 @@ end
 function DWAPSquareLoaded:RunCoord(x, y, z)
     local coordKey = self.hashCoords(x, y, z)
     if self.EventsByXYZ[coordKey] then
-        DWAPUtils.dprint(("DWAPSquareLoaded:RunCoord %s %s"):format(coordKey, tostring(#self.EventsByXYZ[coordKey])))
+        -- DWAPUtils.dprint(("DWAPSquareLoaded:RunCoord %s %s"):format(coordKey, tostring(#self.EventsByXYZ[coordKey])))
         for i = 1, #self.EventsByXYZ[coordKey] do
             local callbackKey = self.EventsByXYZ[coordKey][i]
             local event = self.Events[callbackKey]
@@ -270,7 +270,7 @@ function DWAPSquareLoaded:Init()
         end
     end
     DWAPUtils.dprint("DWAPSquareLoaded:Init")
-    DWAPUtils.dprint(self.HookedEvents)
+    -- DWAPUtils.dprint(self.HookedEvents)
 end
 
 

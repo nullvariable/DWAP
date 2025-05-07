@@ -1223,3 +1223,74 @@ function bag_test()
     --     DWAPUtils.dprint(("Field %s: %s"):format(fieldName, tostring(fieldValue)))
     -- end
 end
+
+function RecipeTest()
+    local recipes = CraftRecipeManager.getRecipesForTag("Farming")
+    DWAPUtils.dprint("Recipes "..recipes:size())
+    for i = 0, recipes:size()-1 do
+        local recipe = recipes:get(i)
+        DWAPUtils.dprint("Recipe "..i.." "..recipe:getName())
+        if recipe and recipe:getName() == "OpenPacketOfSeeds" then
+            DWAPUtils.dprint(tostring(recipe:canUseItem("OnionBagSeed")))
+            DWAPUtils.dprint(tostring(recipe:canUseItem("CabbageBagSeed2_Empty")))
+            -- DWAPUtils.dprint("Recipe found")
+            -- -- reflection
+            -- DWAPUtils.dprint(Reflection.getClassName(recipe))
+            -- local inputs = recipe:getInputs()
+            -- DWAPUtils.dprint("Inputs "..inputs:size())
+            -- for j = 0, inputs:size()-1 do
+            --     local input = inputs:get(j)
+            --     DWAPUtils.dprint("Input "..j.." "..Reflection.getClassName(input))
+            --     local getPossibleInputItemsList = input:getPossibleInputItems()()
+            --     DWAPUtils.dprint("PossibleInputItems "..getPossibleInputItemsList:size())
+            --     for k = 0, getPossibleInputItemsList:size()-1 do
+            --         local item = getPossibleInputItemsList:get(k)
+            --         DWAPUtils.dprint("Item "..k.." "..Reflection.getClassName(item))
+            --     end
+            -- end
+            -- -- local fields = Reflection.getClassFieldNames(Reflection.getClassName(recipe))
+            -- -- DWAPUtils.dprint(fields)
+            -- -- for j = 1, #fields do
+            -- --     local fieldName = fields[j]
+            -- --     local fieldValue = Reflection.getField(recipe, fieldName)
+            -- --     DWAPUtils.dprint(("Field %s: %s"):format(fieldName, tostring(fieldValue)))
+            -- -- end
+            break
+        end
+    end
+end
+
+
+-- Events.OnPostMapLoad.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnPostMapLoad")
+-- end)
+
+-- Events.OnPreMapLoad.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnPreMapLoad")
+-- end)
+
+-- Events.OnGameTimeLoaded.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnGameTimeLoaded")
+-- end)
+
+-- Events.OnLoad.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnLoad")
+-- end)
+
+-- Events.OnInitWorld.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnInitWorld")
+-- end)
+
+-- Events.OnInitGlobalModData.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnInitGlobalModData")
+-- end)
+
+-- Events.OnInitRecordedMedia.Add(function()
+--     DWAPUtils.dprint("DWAPEvents OnInitRecordedMedia")
+-- end)
+
+function vhs_test()
+    local item = DWAP_LootSpawning.nameMediaItem("VHS_Retail")
+    local player = getPlayer()
+    player:getInventory():AddItem(item)
+end
