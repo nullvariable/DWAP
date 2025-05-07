@@ -204,7 +204,7 @@ LootMaps.Init.DWAPStashMap26 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(6584, 5448, 6775, 5567)
+    mapAPI:setBoundsInSquares(11536, 6576, 11711, 6799)
 end
 
 -- The Drake

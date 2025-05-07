@@ -47,7 +47,7 @@ local WestPointHome = {
             { sprite = "walls_garage_01_3", x = 11592, y = 6723, z = 0, },
         },
     },
-    map = { name = "DWAPStashMap25", },
+    map = { name = "DWAPStashMap26", },
     objectSpawns = {
         { sprite = "camping_01_16", x = 11595, y = 6714, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
