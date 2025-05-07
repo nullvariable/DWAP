@@ -172,3 +172,15 @@ Uncle Dave was quite a collector and you might find a complete seed library (mod
 | ![Riverside Mansion](readme/25_RM.jpg) | ![Riverside Mansion](readme/25_map.png) |
 | What do you do when you have lots of money, and lots of paranoia? Build a giant home underneath your own home as a fallout shelter for the end times of course. This normal looking suburban mansion features an expansive basement with all the amenities you could want for years to come. | ![Riverside Mansion](readme/25_basement.jpg) |
 | ***Pros***: Massive fully custom basement with plenty of rooms and storage/loot | ***Cons***: Far away from many areas, still busy with zombies |
+
+| 26. West Point Home | 11602, 6731 |
+| ------------- | ---------- |
+| ![West Point Home](readme/26_main.jpg) | ![West Point Home](readme/26_map.png) |
+| This modest single family home comes with a fantastic rec room/man cave. Whether playing pool, pouring drinks or catching the latest blockbuster film, there's plenty for everyone here. In case you get stuck here for a long time, there's also a storage room with all the space you'll need, and an extra exit through the garage. | ![West Point Home](readme/26_basement.jpg) |
+| ***Pros***: Sweet custom basement, plenty of storage/loot, and entertainment options | ***Cons***: No fences, plenty of zombies nearby |
+
+| 27. The Drake | 11908, 6853 |
+| ------------- | ---------- |
+| ![The Drake](readme/27_main.jpg) | ![The Drake](readme/27_map.png) |
+| This West Point bar features 4 upstairs apartments, and is always busy. The downstairs storage areas are quite large and the previous owner made some solid cash renting out individual units. Best of all, hidden away at the back is a fallout shelter that will keep you going for years. | ![The Drake](readme/27_basement.jpg) |
+| ***Pros***: Lots of empty space next to the shelter portion of the basement, 3 levels | ***Cons***: No good farming/fishing options, right in the center of town |
