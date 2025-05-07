@@ -217,6 +217,22 @@ local configs = {
         buildingX = 6674,
         buildingY = 5514,
     },
+    [26] = {
+        name = "West Point Home Map",
+        stamps = {
+            {"Asterisk", nil, 9850, 13111, 0, 0, 0},
+        },
+        buildingX = 9850,
+        buildingY = 13111,
+    },
+    [27] = {
+        name = "The Drake Map",
+        stamps = {
+            {"Asterisk", nil, 11908, 6853, 0, 0, 0},
+        },
+        buildingX = 11908,
+        buildingY = 6853,
+    },
 }
 for i = 1, #configs do
     local config = configs[i]

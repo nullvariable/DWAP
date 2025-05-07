@@ -198,3 +198,19 @@ LootMaps.Init.DWAPStashMap25 = function(mapUI)
     MapUtils.initDefaultStyleV1(mapUI)
     mapAPI:setBoundsInSquares(6584, 5448, 6775, 5567)
 end
+
+-- West Point Home
+LootMaps.Init.DWAPStashMap26 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(6584, 5448, 6775, 5567)
+end
+
+-- The Drake
+LootMaps.Init.DWAPStashMap27 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(11832, 6824, 11975, 6935)
+end

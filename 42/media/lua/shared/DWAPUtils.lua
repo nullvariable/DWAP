@@ -38,6 +38,8 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [23] = "DWAP/configs/23_RustyRifle",
     [24] = "DWAP/configs/24_MRSecret",
     [25] = "DWAP/configs/25_RiversideMansion",
+    [26] = "DWAP/configs/26_WestPointHome",
+    [27] = "DWAP/configs/27_TheDrake",
 }
 
 local configCache = {}
@@ -151,6 +153,7 @@ function DWAPUtils.loadConfigs()
     local index = DWAPUtils.selectedSafehouse
     if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
     if SandboxVars.DWAP.EnableAllLocations then
+        DWAPUtils.dprint("Loading all configs: " .. #configFiles)
         for i = 1, #configFiles do
             local config = require(configFiles[i])
             if config then
@@ -161,9 +164,12 @@ function DWAPUtils.loadConfigs()
             end
         end
     else
+        DWAPUtils.dprint("Loading config: " .. index)
         local config = require(configFiles[index])
         if config then
             table.insert(configs, maybeApplyOverrides(config))
+        else
+            DWAPUtils.dprint("Error loading config: " .. index)
         end
     end
     configCache = configs

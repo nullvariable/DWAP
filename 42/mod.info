@@ -1,6 +1,7 @@
 name=_Uncle Dave Was a Prepper Local_
 poster=poster.png
+icon=poster.png
 id=DWAPL
 description=Various bunkers and facilities that a Prepper might have built out. Water sources, generators etc.
-author=nullvariable
+authors=nullvariable
 require=\StarlitLibrary

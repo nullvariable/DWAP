@@ -12,6 +12,8 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     dwap_23_rusty_rifle = { width=23, height=31, stairx=17, stairy=29, stairDir="W" },
     dwap_24_mrsecret = { width=24, height=43, stairx=1, stairy=38, stairDir="N" },
     dwap_25_riverside_mansion = { width=20, height=24, stairx=13, stairy=11, stairDir="W" },
+    dwap_26_westpointhome = { width=24, height=17, stairx=15, stairy=9, stairDir="N" },
+    dwap_27_thedrake = { width=20, height=4, stairx=7, stairy=-1, stairDir="N" },
 }
 
 local fullConfig = table.newarray()
@@ -161,13 +163,23 @@ fullConfig[25] = { -- RiversideMansion
         {x=6675, y=5510, z=0, stairDir="W", choices={"dwap_25_riverside_mansion"}, access="ba_house_large_01_S_01" },
     },
 }
+fullConfig[26] = { -- WestPoint Home
+    locations = {
+        {x=11607, y=6726, z=0, stairDir="N", choices={"dwap_26_westpointhome"}, },
+    },
+}
+fullConfig[27] = { -- TheDrake
+    locations = {
+        {x=11905-2, y=6840, z=0, stairDir="N", choices={"dwap_27_thedrake"}, },
+    },
+}
 
 local locations = {}
 
 local function getRandomSelected()
     local random = newrandom()
     random:seed(WGParams.instance:getSeedString())
-    return random:random(1, 25) -- IMPORTANT, must match the number of safehouse configs. See also DWAPUtils.lua
+    return random:random(1, #fullConfig) -- IMPORTANT, must match the number of safehouse configs. See also DWAPUtils.lua
 end
 
 if SandboxVars.DWAP.EnableAllLocations then
