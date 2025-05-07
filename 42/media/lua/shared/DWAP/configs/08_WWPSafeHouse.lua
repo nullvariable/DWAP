@@ -454,7 +454,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10153,y=6625,z=1},
-            dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
+            dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -462,7 +462,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10154,y=6625,z=1},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps",},
+            dist = {"CrateLinens", "ArmyStorageAmmunition", "SafehouseTraps",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

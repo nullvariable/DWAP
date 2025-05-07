@@ -71,6 +71,9 @@ local RiverSafeHouse = {
         { sprite = "fixtures_railings_01_37", x = 6951, y = 5567, z = -1, clearExisting = true, },
 
         { sprite = "rooftop_furniture_22", x = 6959, y = 5565, z = 0, clearExisting = true, },
+
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_57", x = 6957, y = 5571, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_56", x = 6959, y = 5567, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)

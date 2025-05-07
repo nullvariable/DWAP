@@ -388,14 +388,10 @@ local CentralLVilleMansion = {
         {
             type = 'container',
             coords = {x = 13437, y = 1914, z = -1},
-            items = {
-                { name = 'TvWideScreen', chance = 1, count = {1,1} },
-                { name = 'Base.Remote', chance = 1, count = {1,3} },
-                { name = 'Base.VideoGame', chance = 1, count = {3,3} },
-                { name = 'Base.Headphones', chance = 1, count = {3,3} },
-                { name = 'Base.CDplayer', chance = 1, count = {3,3} },
-                { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
-            },
+            dist = {"CrateTVWide", "CrateVHSTapes"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',

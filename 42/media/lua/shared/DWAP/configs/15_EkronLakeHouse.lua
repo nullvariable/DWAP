@@ -67,8 +67,10 @@ local EkronLakeHouse = {
         { sprite = "industry_02_226", x = 1918, y = 9965, z = 0, },
         { sprite = "industry_02_255", x = 1917, y = 9965, z = 0, },
 
-        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 1907, y = 9955, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="walls_commercial_01_41", x = 1907, y = 9957, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9952, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9955, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9957, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9960, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -248,15 +250,10 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1898,y=9949,z=-1},
-            items = {
-                { name = 'TvWideScreen', chance = 1, count = {1,1} },
-                { name = 'Base.Remote', chance = 1, count = {1,3} },
-                { name = 'Base.VideoGame', chance = 1, count = {3,3} },
-                { name = 'Base.Headphones', chance = 1, count = {3,3} },
-                { name = 'Base.CDplayer', chance = 1, count = {3,3} },
-                { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
-            },
+            dist = {"CrateTVWide", "CrateVHSTapes"},
+            distIncludeJunk = false,
             randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',

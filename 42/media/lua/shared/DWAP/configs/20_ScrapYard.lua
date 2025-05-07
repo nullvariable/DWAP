@@ -583,6 +583,9 @@ local ScrapYard = {
             type = 'container',
             coords = {x=2935,y=12566,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         {
             type = 'container',

@@ -66,6 +66,9 @@ local AnimalRehab = {
         { x = 3106, y = 12040, z = -1, clearExisting = true, },
 
         { sprite = "constructedobjects_01_45", x = 3106, y = 12049, z = 0, clearExisting = true, isContainer = true, },
+
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_40", x = 3116, y = 12052, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_03_8", x = 3104, y = 12050, z = 0, },
     },
     loot = {
         { -- cabinet next to bunk beds (9365)
@@ -341,6 +344,7 @@ local AnimalRehab = {
                 { name = 'Base.CDplayer', chance = 1, count = {3,3} },
                 { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
             },
+            randUntilFull = true,
         },
         {
             type = 'container',
