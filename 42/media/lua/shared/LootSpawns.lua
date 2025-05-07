@@ -481,9 +481,9 @@ local function removeExcludeItems(items)
     for i = 1, #items do
         local item = items[i]
         if item and type(item) == "string" then
-            DWAPUtils.dprint("removeExcludeItems")
-            DWAPUtils.dprint(item)
-            DWAPUtils.dprint("type "..type(item))
+            -- DWAPUtils.dprint("removeExcludeItems")
+            -- DWAPUtils.dprint(item)
+            -- DWAPUtils.dprint("type "..type(item))
             if convertItems[item] then
                 item = convertItems[item]
             end
@@ -629,7 +629,7 @@ local function populateItems()
                     table.insert(allSkillBooks, module .. "." .. name)
                     excludeItems[#excludeItems+1] = name
                 end
-            elseif item:hasTag("isSeed") then
+            elseif item:hasTag("isSeed") and not item:hasTag("isCutting") then
                 table.insert(allSeeds, module .. "." .. name)
                 excludeItems[#excludeItems+1] = name
             elseif category == "Cartography" and name ~= "Map" then
@@ -650,8 +650,8 @@ local function populateItems()
             end
         end
     end
-    DWAPUtils.dprint("excludeItems: " .. #excludeItems)
-    DWAPUtils.dprint(excludeItems)
+    -- DWAPUtils.dprint("excludeItems: " .. #excludeItems)
+    -- DWAPUtils.dprint(excludeItems)
 end
 
 local previousMediaSpawns = {}
@@ -730,7 +730,7 @@ local function addItem(container, item, count, frozen)
             for i = 1, _count do
                 local result = container:AddItem(item)
                 if instanceof(result, "Food") then
-                    DWAPUtils.dprint("Freezing item: " .. item)
+                    -- DWAPUtils.dprint("Freezing item: " .. item)
                     result:setFrozen(true)
                     result:setFreezingTime(100)
                 end
@@ -830,7 +830,7 @@ local function fillContainer(container, config, index, coordsKey)
                 end
             end
         elseif config.randUntilFull then
-            DWAPUtils.dprint("randUntilFull")
+            -- DWAPUtils.dprint("randUntilFull")
             local items = {}
             if config.items then
                 for i = 1, #config.items do
@@ -850,7 +850,7 @@ local function fillContainer(container, config, index, coordsKey)
                         items[#items+1] = alreadySpawnedContainers[i]
                     end
                     alreadySpawnedContainers = {}
-                    DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
+                    -- DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
                 end
                 local randindex = random:random(1, #items)
                 item = items[randindex]
@@ -862,14 +862,14 @@ local function fillContainer(container, config, index, coordsKey)
                         if ii and ii:getCategory() == "Container" then
                             items[randindex] = nil
                             alreadySpawnedContainers[#alreadySpawnedContainers+1] = item
-                            DWAPUtils.dprint("Added container: " .. item)
+                            -- DWAPUtils.dprint("Added container: " .. item)
                         end
                     end
                 end
                 tries = tries + 1
             end
         else
-            DWAPUtils.dprint("final loot else")
+            -- DWAPUtils.dprint("final loot else")
             local items = config.items
             if not items then
                 items = getDistItems(config.dist, config.distIncludeJunk)
@@ -896,28 +896,38 @@ end
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
     local safehouseIndex = DWAPUtils.selectedSafehouse or SandboxVars.DWAP.Safehouse - 1
+    if #configs == 1 then
+        safehouseIndex = 1
+    end
     local nonPrimaryLootLevel = SandboxVars.DWAP.Loot
     populateItems()
     for i = 1, #configs do
         local config = configs[i]
+        local count = 0
         if config and config.loot then
             if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex) or nonPrimaryLootLevel == 4 then
                 config.loot = {}
             else
-                local rewwriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex
+                local rewriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex
                 for j = 1, #config.loot do
-                    if rewwriteLevel and type(config.loot[j].level) == "string" then
+                    if rewriteLevel and type(config.loot[j].level) == "string" then
                         -- overwrite to low
                         config.loot[j].level = 3
                     end
-                    setLootConfigValue(config.loot[j])
-                    -- try to precache the items
-                    if config.loot[j].dist then
-                        getDistItems(config.loot[j].dist, config.loot[j].distIncludeJunk)
+                    if config.loot[j].special ~= "gunlocker" and i ~= safehouseIndex then
+                        config.loot[j] = nil
+                    else
+                        setLootConfigValue(config.loot[j])
+                        -- try to precache the items
+                        if config.loot[j].dist then
+                            getDistItems(config.loot[j].dist, config.loot[j].distIncludeJunk)
+                        end
+                        count = count + 1
                     end
                 end
             end
         end
+        DWAPUtils.dprint("Done. Loot config count: " .. count)
     end
 end
 
@@ -935,9 +945,8 @@ local function onFillContainer(roomType, containerType, container)
         if containerType == "overhead" or container:getContainerPosition() == "High" then z = z + 0.5 end
         local loot, index, coordsKey = getLootForCoords(square:getX(), square:getY(), z)
         if loot and index and coordsKey then
-            DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
-            DWAPUtils.dprint({index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey})
-            -- DWAPUtils.dprint(("onFillContainer: %s %s %s %s"):format(roomType, containerType, square:getX(), square:getY()))
+            -- DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
+            -- DWAPUtils.dprint({index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey})
             DWAPUtils.DeferThrottled(function()
                 fillContainer(container, loot, index, coordsKey)
                 ItemPickerJava.updateOverlaySprite(container:getParent())
