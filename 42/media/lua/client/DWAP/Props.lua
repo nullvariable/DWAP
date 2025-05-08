@@ -233,6 +233,11 @@ function DWAP_Props.maybeSpawnObject(params)
         --     prop = IsoCombinationWasherDryer.new(getCell(), square, getSprite(params.sprite))
 
         --     prop:setMovedThumpable(true)
+        elseif params.IsoType == "IsoRadio" then
+            prop = IsoRadio.new(getCell(), square, getSprite(params.sprite))
+            prop:getDeviceData():setIsTurnedOn(true);
+            prop:setMovedThumpable(true)
+            square:AddTileObject(prop)
         elseif params.isFireplace then
             prop = IsoFireplace.new(getCell(), square, getSprite(params.sprite))
         elseif params.isStove then
