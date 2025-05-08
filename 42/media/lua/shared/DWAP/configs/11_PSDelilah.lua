@@ -112,7 +112,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2061,y=5686,z=0},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -182,7 +182,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2035,y=5686,z=-1},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -319,7 +319,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2044,y=5690,z=1},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -327,7 +327,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x = 2035, y = 5685, z = 2},
-            dist = {"VehicleDistributions.SurvivalistTruckBed", "LaundryCleaning", "JanitorCleaning", "CrateLeather", "ArmySurplusCots",},
+            dist = {"SurvivalGear", "LaundryCleaning", "JanitorCleaning", "CrateLeather", "ArmySurplusCots",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_LockersLevel",

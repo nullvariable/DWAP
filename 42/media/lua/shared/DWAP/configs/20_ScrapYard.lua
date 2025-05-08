@@ -511,7 +511,7 @@ local ScrapYard = {
         {
             type = 'container',
             coords = {x=2936,y=12559,z=0},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",

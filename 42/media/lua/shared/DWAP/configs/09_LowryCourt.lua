@@ -76,9 +76,24 @@ local LowryCourt = {
 
         { sprite = "constructedobjects_01_45", x = 12994, y = 1908, z = 2, clearExisting = false, isContainer = true, },
         { sprite = "appliances_cooking_01_16", x = 12989, y = 1915, z = 2, isFireplace = true, },
+
+        -- shelf replacements
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+
+        { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
+        { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        {
             type = 'container',
             coords = {x = 12982, y = 1919, z = 0},
             items = {
@@ -115,7 +130,7 @@ local LowryCourt = {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -124,10 +139,10 @@ local LowryCourt = {
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
             randUntilFull = true,
-            level = "Loot_MediaLevel",
+            level = "Loot_MedLevel",
         },
         { -- upper
             type = 'container',
@@ -151,7 +166,7 @@ local LowryCourt = {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -165,49 +180,66 @@ local LowryCourt = {
         { -- next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
+        },
+        { -- (73)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks2",
+        },
+        { -- (9374)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
+        },
+        { -- far end next to stairs (9375)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot',
+            special = "essentials",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- (73)
+
+        -- extra spawns
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
-            dist = {"MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
-            distIncludeJunk = false,
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_MedLevel",
+            level = "Loot_ToolsLevel",
         },
-        { -- (9374)
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
-            distIncludeJunk = false,
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_GunLevel",
-        },
-        { -- far end next to stairs (9375)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            special = "essentials",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
+            level = "Loot_LockersLevel",
         },
 
         -- 2nd floor
@@ -337,64 +369,6 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10163,y=6629,z=0},
-        --     dist = {"FoodCache1.FoodBox",},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_FoodLevel",
-        -- },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10163,y=6628,z=0},
-        --     dist = {"GroceryBagGourmet",},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_FoodLevel",
-        -- },
-        -- -- laundry room
-        -- {
-        --     type = 'container',
-        --     coords = {x=10157,y=6621,z=0},
-        --     dist = {"LaundryCleaning", "JanitorCleaning"},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_FoodLevel",
-        -- },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10157,y=6620,z=0},
-        --     dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
-        --     distIncludeJunk = true,
-        --     randUntilFull = true,
-        --     level = 1,
-        -- },
-        -- -- 2nd floor
-        -- {
-        --     type = 'container',
-        --     coords = {x=10163,y=6627,z=1},
-        --     dist = {"SafehouseArmor", "SafehouseLighting"},
-        --     distIncludeJunk = true,
-        --     randUntilFull = true,
-        --     level = "Loot_LockersLevel",
-        -- },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10163,y=6626,z=1},
-        --     dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
-        --     distIncludeJunk = true,
-        --     randUntilFull = true,
-        --     level = "Loot_LockersLevel",
-        -- },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10160,y=6629,z=1},
-        --     dist = {"GunCache1.GunBox",},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_GunLevel",
-        -- },
         {
             type = 'container',
             coords = {x=13002,y=1911,z=2},

@@ -181,7 +181,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+16,y=genCoords.y-4,z=genCoords.z},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -197,7 +197,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+17,y=genCoords.y-4,z=genCoords.z},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -205,7 +205,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+18,y=genCoords.y-4,z=genCoords.z},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -228,7 +228,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+28,y=genCoords.y-2,z=genCoords.z},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

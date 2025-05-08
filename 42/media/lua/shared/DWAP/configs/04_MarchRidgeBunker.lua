@@ -181,7 +181,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9964,y=12612,z=-4},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -189,7 +189,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9965,y=12612,z=-4},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -212,7 +212,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9975,y=12614,z=-4},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

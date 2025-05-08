@@ -181,7 +181,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-4,z=-4},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -197,7 +197,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+17,y=generatorStartCoords.y-4,z=-4},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -205,7 +205,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y-4,z=-4},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -228,7 +228,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y-2,z=-4},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

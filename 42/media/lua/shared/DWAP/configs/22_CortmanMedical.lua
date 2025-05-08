@@ -450,7 +450,7 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10872,y=10018,z=0},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -458,7 +458,7 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10872,y=10018,z=0.5},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",

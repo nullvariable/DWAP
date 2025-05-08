@@ -155,7 +155,7 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = {x=10658,y=9565,z=0},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -399,7 +399,7 @@ local v14oldLoot = {
     { -- (9374)
         type = 'container',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+11,z=v14bunkerTopLeft.z},
-        dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+        dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
         distIncludeJunk = false,
         randUntilFull = true,
         level = "Loot_GunLevel",
@@ -407,7 +407,7 @@ local v14oldLoot = {
     { -- far end next to stairs (9375)
         type = 'container',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+12,z=v14bunkerTopLeft.z},
-        dist = {"GunCache1.GunBox",},
+        dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
         distIncludeJunk = false,
         randUntilFull = true,
         level = "Loot_GunLevel",

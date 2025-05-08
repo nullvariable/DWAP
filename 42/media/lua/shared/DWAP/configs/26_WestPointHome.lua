@@ -288,6 +288,14 @@ local WestPointHome = {
         },
         {
             type = 'container',
+            coords = {x=11611,y=6727,z=-1},
+            dist = {"TheatreSnacks", "CrateSodaBottles", "CrateSodaCans"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
             coords = {x=11608,y=6726,z=-1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -334,7 +342,7 @@ local WestPointHome = {
         {
             type = 'container',
             coords = {x=11603,y=6718,z=-0.5},
-            dist = {"BathroomCounter", "GasStoreToiletries"},
+            dist = {"CrateToiletPaper", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -400,9 +408,12 @@ local WestPointHome = {
             type = 'container',
             coords = {x=11601,y=6726,z=-1},
             dist = {"CrateLongStick"},
-            distIncludeJunk = false,
+            items = {
+                { name = 'Base.LongStick', chance = 1, count = {10,10} },
+                { name = 'Base.Firewood', chance = 1, count = {10,10} },
+            },
             randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            level = "Loot_FarmLevel",
         },
         {
             type = 'container',
@@ -456,7 +467,7 @@ local WestPointHome = {
         {
             type = 'container',
             coords = {x=11606,y=6729,z=-1},
-            dist = {"CafeKitchenCoffee"},
+            dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -464,7 +475,7 @@ local WestPointHome = {
         {
             type = 'container',
             coords = {x=11605,y=6729,z=-1},
-            dist = {"GigamartBreakfast"},
+            dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",

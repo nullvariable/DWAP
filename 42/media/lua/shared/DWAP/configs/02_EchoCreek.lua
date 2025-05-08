@@ -249,7 +249,7 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3568,y=10897,z=1},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",

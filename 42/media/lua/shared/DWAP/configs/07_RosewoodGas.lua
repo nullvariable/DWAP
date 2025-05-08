@@ -200,7 +200,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8176,y=11267,z=1},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -208,7 +208,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8180,y=11267,z=1},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

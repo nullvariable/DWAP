@@ -187,7 +187,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x=12028,y=2587,z=0},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -195,7 +195,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x=12029,y=2587,z=0},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -316,7 +316,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x=12026,y=2595,z=1.5},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT", "ArmyStorageAmmunition", },
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -332,7 +332,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x=12029,y=2591,z=1.5},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT", "ArmyStorageAmmunition", },
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -567,7 +567,7 @@ local v14oldLoot = {
     { -- (9374)
         type = 'container',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+11,z=v14bunkerTopLeft.z},
-        dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+        dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
         distIncludeJunk = false,
         randUntilFull = true,
         level = "Loot_GunLevel",
@@ -739,7 +739,7 @@ local v15loot = {
     {
         type = 'container',
         coords = {x=12034,y=2590,z=-1},
-        dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+        dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
         distIncludeJunk = false,
         randUntilFull = true,
         level = "Loot_GunLevel",

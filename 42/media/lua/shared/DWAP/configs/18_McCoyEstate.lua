@@ -275,7 +275,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10085,y=8260,z=1},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -307,7 +307,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10084,y=8262,z=1.5},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -587,7 +587,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10092,y=8256,z=0},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -595,7 +595,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10093,y=8256,z=0},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -749,7 +749,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10099,y=8264,z=0},
-            dist = {"GunCache1.GunBox", "GunCache1.Bag_DuffelBagTINT"},
+            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

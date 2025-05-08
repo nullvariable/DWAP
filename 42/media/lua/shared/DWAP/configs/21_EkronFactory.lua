@@ -73,6 +73,21 @@ local EkronFactory = {
         { sprite = "lighting_outdoor_01_49", x = 566, y = 9378, z = 0, isLightSwitch = true, },
         { sprite = "lighting_outdoor_01_49", x = 581, y = 9378, z = -1, isLightSwitch = true, },
 
+        -- shelf replacements
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+
+        { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
+        { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
+
         { barricade = "metalbar", target="walls_commercial_01_84", x = 577, y = 9378, z = 0, },
         { barricade = "metal", target="walls_commercial_01_84", x = 577, y = 9380, z = 0, },
     },
@@ -83,6 +98,7 @@ local EkronFactory = {
             sandboxEnable = 'Loot',
             special = "essentials",
         },
+        
         { -- cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
@@ -110,7 +126,7 @@ local EkronFactory = {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -119,10 +135,10 @@ local EkronFactory = {
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
             randUntilFull = true,
-            level = "Loot_MediaLevel",
+            level = "Loot_MedLevel",
         },
         { -- upper
             type = 'container',
@@ -146,7 +162,7 @@ local EkronFactory = {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -160,48 +176,84 @@ local EkronFactory = {
         { -- next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
+        },
+        { -- (73)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks2",
+        },
+        { -- (9374)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
+        },
+        { -- far end next to stairs (9375)
+            type = 'container',
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
+            sandboxEnable = 'Loot',
+            special = "essentials",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- (73)
+
+        -- extra spawns
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
-            dist = {"MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
-            distIncludeJunk = false,
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_MedLevel",
+            level = "Loot_ToolsLevel",
         },
-        { -- (9374)
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
         },
-        { -- far end next to stairs (9375)
+
+        -- extra spawns
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
         },
-        { -- metal wall shelves
+        {
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z+0.5},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
         },
 
         -- 2nd floor
@@ -403,7 +455,7 @@ local EkronFactory = {
         {
             type = 'container',
             coords = {x=564,y=9379,z=1},
-            dist = {"GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -411,7 +463,7 @@ local EkronFactory = {
         {
             type = 'container',
             coords = {x=564,y=9378,z=1},
-            dist = {"FoodCache1.FoodBox",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
