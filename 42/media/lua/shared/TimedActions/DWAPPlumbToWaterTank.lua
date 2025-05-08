@@ -51,7 +51,7 @@ function DWAPPlumbToWaterTank:complete()
         DWAP_WaterSystem:addFixture(newFixture, true)
         DWAP_WaterSystem:InitializeFixture(newFixture)
     else
-        noise('sq is null or index is invalid')
+        print('sq is null or index is invalid')
     end
 
     return true;
