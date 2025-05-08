@@ -32,7 +32,7 @@ Sandbox_EN = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "The Drake",
 
 	Sandbox_DWAP_EnableAll = "Enable all safehouses",
-	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, loot, spawn and map will still only be for the selected option",
+	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, keys, map, and spawn will still only be for the selected option",
 
 	Sandbox_DWAP_SpawnInBase = "Spawn In Safehouse",
 	Sandbox_DWAP_SpawnInBase_tooltip = "Start inside the safehouse with the keys",
