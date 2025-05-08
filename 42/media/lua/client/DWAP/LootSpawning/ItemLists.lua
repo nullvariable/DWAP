@@ -22,12 +22,13 @@ local excludeStrings = {
     "CreditCard",
     "HamRadio",
     "FishingTackle",
+    "Paperbag",
 }
 local excludeItems = {
     ["TakeoutBox_Chinese"] = true,
-    ["Paperbag_Jays"] = true,
     ["IcePick"] = true,
     ["IDcard_Blank"] = true,
+    ["BLTAnnotations"] = true,
 }
 local convertItems = {
     -- ["PetrolCanEmpty"] = "JerryCanEmpty",
