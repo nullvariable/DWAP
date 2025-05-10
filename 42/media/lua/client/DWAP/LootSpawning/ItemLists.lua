@@ -438,14 +438,27 @@ local function getDistCacheKey(distLists, distIncludeJunk)
     return key
 end
 
+--- split a string by dot
+--- @param str string
+--- @return table
+local function splitDot(str)
+    local t = {}
+    for w in str:gmatch("([^%.]+)") do
+        table.insert(t, w)
+    end
+    return t
+end
+
 --- Get all of the items from the distribution lists, then filter them and save it to the cache variable
 --- @param distLists table[string]: The distribution list to get the items from
 --- @param distIncludeJunk boolean: Whether to include junk items in the list
-local function getCachedDistItemList(distLists, distIncludeJunk)
-    local cacheKey = getDistCacheKey(distLists, distIncludeJunk)
+local function getCachedDistItemList(_distLists, distIncludeJunk)
+    local cacheKey = getDistCacheKey(_distLists, distIncludeJunk)
     if cachedDistItemLists[cacheKey] then
         return cachedDistItemLists[cacheKey]
     end
+
+    local distLists = _distLists
 
     local tempNoDupes = {}
     local items = {}
@@ -463,6 +476,27 @@ local function getCachedDistItemList(distLists, distIncludeJunk)
             else
                 distListItems = ProceduralDistributions.list[distList].items
             end
+        else
+            local distTable = Distributions[1]
+            distListItems = {}
+            if distList:find(".") then
+                local distListParts = splitDot(distList)
+                for j = 1, #distListParts do
+                    local distListPart = distListParts[j]
+                    if distTable[distListPart] then
+                        distTable = distTable[distListPart]
+                    else
+                        break
+                    end
+                end
+            else
+                distTable = Distributions[distList]
+            end
+            if distTable and distTable.items then
+                distListItems = distTable.items
+            end
+        end
+        if distListItems and #distListItems > 0 then
             for j = 1, #distListItems do
                 local item = distListItems[j]
                 if convertItems[item] then
@@ -553,22 +587,29 @@ function DWAP_LootSpawning.populateItems()
                 DWAPUtils.dprint("Seed packet recipe can use item: " .. name .. " = " .. tostring(canUse))
             end
             if not excludeItems[name] then
+                local module = item:getModuleName()
                 local category = item:getDisplayCategory()
                 -- is this a skill book?
                 local skillBookType = isSkillLiterature(category, name, item)
                 if skillBookType == 1 then
-                    allSkillBooks[#allSkillBooks + 1] = name
+                    allSkillBooks[#allSkillBooks + 1] = module .. "." .. name
                     excludeItems[name] = true
                 elseif skillBookType == 2 then
-                    allSkillMags[#allSkillMags + 1] = name
+                    allSkillMags[#allSkillMags + 1] = module .. "." .. name
                     excludeItems[name] = true
-                -- is this a seed/seed packet?
                 elseif isSeed(category, name, item) or seedPacketRecipe:canUseItem(name) then
-                    allSeeds[#allSeeds + 1] = name
-                    excludeItems[name] = true
-                -- is this a map?
+                    -- is this a seed/seed packet?
+                    local ii = instanceItem(module .. "." .. name)
+                    if ii and (instanceof(ii, "Food") and not ii:isFresh()) then
+                        allSeeds[#allSeeds + 1] = module .. "." .. name
+                        excludeItems[name] = true
+                    elseif ii and not instanceof(ii, "Food") then
+                        allSeeds[#allSeeds + 1] = module .. "." .. name
+                        excludeItems[name] = true
+                    end
                 elseif isMap(category, name) then
-                    allMaps[#allMaps + 1] = name
+                    -- is this a map?
+                    allMaps[#allMaps + 1] = module .. "." .. name
                     excludeItems[name] = true
                 else
                     for j = 1, #excludeStrings do

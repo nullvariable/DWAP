@@ -51,17 +51,6 @@ local function removeLootEntry(index, coordsKey)
     lootByCoords[coordsKey] = nil
 end
 
---- split a string by dot
---- @param str string
---- @return table
-local function splitDot(str)
-    local t = {}
-    for w in str:gmatch("([^%.]+)") do
-        table.insert(t, w)
-    end
-    return t
-end
-
 --- check if there's room in a container, based on the desired level and the container's max capacity
 --- @param container ItemContainer
 --- @param desiredLevel number
@@ -124,8 +113,7 @@ local function addItem(container, item, count, frozen)
             for i = 1, _count do
                 --- @type Food|InventoryItem
                 local result = container:AddItem(item)
-                if instanceof(result, "Food") then
-                    result:setFrozen(true)
+                if instanceof(result, "Food") and not result:isSpice() and result:canBeFrozen() then
                     result:setFreezingTime(100)
                 end
             end
@@ -199,7 +187,7 @@ local function fillContainer(container, config, index, coordsKey)
             for i = 1, #allSeeds do
                 local item = allSeeds[i]
                 if item then
-                    local count = random:random(5, 10)
+                    local count = random:random(3, 10)
                     addItem(container, item, count)
                     allSeeds[i] = nil
                 end
