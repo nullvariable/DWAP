@@ -85,7 +85,7 @@ local LVilleMansion = {
         { sprite = "fixtures_railings_01_4", x = 12025, y = 2598, z = 0, }, -- basement railing
 
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_02_40", x = 12030, y = 2588, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_02_40", x = 12030, y = 2590, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_exterior_house_02_40", x = 12030, y = 2590, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_interior_house_03_9", x = 12024, y = 2586, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_interior_house_03_40", x = 12018, y = 2589, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_interior_house_04_72", x = 12018, y = 2597, z = 0, },
