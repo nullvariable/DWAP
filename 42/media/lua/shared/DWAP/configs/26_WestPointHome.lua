@@ -321,7 +321,7 @@ local WestPointHome = {
         -- shelter room
         {
             type = 'container',
-            coords = {x=11607,y=6724,z=-1},
+            coords = {x=11605,y=6722,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
