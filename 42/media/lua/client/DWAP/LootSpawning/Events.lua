@@ -58,7 +58,7 @@ end
 local function checkHasRoom(container, desiredLevel)
     if not container then return false end
     if desiredLevel == 4 then return false end
-    if desiredLevel == 1 or not desiredLevel then return container:hasRoomFor(nil, 1) end
+    if desiredLevel == 1 or not desiredLevel then return container:hasRoomFor(getPlayer(), 1) end
     local weight = container:getContentsWeight()
     local maxWeight = container:getMaxWeight()
     -- 2 = 60%, 3 = 30%
@@ -184,22 +184,23 @@ local function fillContainer(container, config, index, coordsKey)
             end
         elseif config.special == "SeedLibrary" then
             local allSeeds = DWAP_LootSpawning.getAllSeeds()
-            for i = 1, #allSeeds do
-                local item = allSeeds[i]
-                if item then
-                    local count = random:random(3, 10)
-                    addItem(container, item, count)
-                    allSeeds[i] = nil
+            if allSeeds and #allSeeds > 0 then
+                for i = 1, #allSeeds do
+                    local item = allSeeds[i]
+                    if item then
+                        local count = random:random(2, 4)
+                        addItem(container, item, count)
+                    end
                 end
-            end
-            level = SandboxVars.DWAP.Loot_FarmLevel or 4
-            local hasRoom = checkHasRoom(container, level)
-            local tries = 0
-            while hasRoom and tries < 100 do
-                local item = allSeeds[random:random(1, #allSeeds)]
-                addItem(container, item)
-                hasRoom = checkHasRoom(container, level)
-                tries = tries + 1
+                level = SandboxVars.DWAP.Loot_FarmLevel or 4
+                local hasRoom = checkHasRoom(container, level)
+                local tries = 0
+                while hasRoom and tries < 100 do
+                    local item = allSeeds[random:random(1, #allSeeds)]
+                    addItem(container, item)
+                    hasRoom = checkHasRoom(container, level)
+                    tries = tries + 1
+                end
             end
         elseif config.special == "essentials" then
             local essentials = DWAP_LootSpawning.getEssentials()
