@@ -107,6 +107,16 @@ Events.OnNewGame.Add(function()
         end
         table.wipe(configs)
     end
+    local stashList = StashSystem.getAllStashes()
+    for i=0,stashList:size()-1 do
+        local stash = stashList:get(i)
+        local name = stash:getName()
+        if name and name:find("DWAPStashMap") then
+            local mapItem = instanceItem(stash:getItem())
+            StashSystem.doStashItem(stash, mapItem)
+            DWAPUtils.dprint(("Removed stash %s"):format(name))
+        end
+    end
 end)
 
 Events.OnLoad.Add(function()
