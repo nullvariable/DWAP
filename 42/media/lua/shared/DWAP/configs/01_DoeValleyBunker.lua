@@ -9,9 +9,6 @@ local DoeValleyBunker = {
         { sprite = "fixtures_bathroom_01_6", x = 5577, y = 9371, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_16", x = 5575, y = 9367, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
-    -- generators = {
-    --     { sprite = "industry_02_67", x = 5579, y = 9364, z = 0, ghost = false, isProp = true, },
-    -- },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = 5579, y = 9364, z = 0, ghost = false, isProp = true, },
@@ -78,12 +75,7 @@ local DoeValleyBunker = {
         { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = -1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
 
         -- extra loot crates
-        -- { sprite = "constructedobjects_01_45", x = 5573, y = 9365, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        -- { sprite = "constructedobjects_01_45", x = 5573, y = 9366, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        -- { sprite = "constructedobjects_01_45", x = 5573, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        -- { sprite = "constructedobjects_01_45", x = 5574, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
         { sprite = "constructedobjects_01_45", x = 5575, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        -- { sprite = "constructedobjects_01_45", x = 5576, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
         { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = -1, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
         { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = -1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
         { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = -1, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
@@ -112,16 +104,14 @@ local DoeValleyBunker = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -195,16 +185,16 @@ local DoeValleyBunker = {
         { -- metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         { -- metal wall shelves
             type = 'container',
@@ -234,14 +224,6 @@ local DoeValleyBunker = {
         },
 
         -- exterior crates
-        --[[
-        { sprite = "constructedobjects_01_45", x = 5573, y = 9365, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 5573, y = 9366, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 5573, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 5574, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 5575, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 5576, y = 9367, z = 0, enabled = "Loot", clearExisting = false, isContainer = true, },
-        ]]
         {
             type = 'container',
             coords = {x = 5573, y = 9365, z = 0},
@@ -261,7 +243,7 @@ local DoeValleyBunker = {
         {
             type = 'container',
             coords = {x = 5573, y = 9367, z = 0},
-            dist = {"CarSupplyTools","CampingLockers"},
+            dist = {"CarSupplyTools", "GasStorageMechanics", "CampingLockers"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -310,58 +292,7 @@ for i = 0, 7 do
             z = 0,
             isFloor = true,
         })
-        -- table.insert(DoeValleyBunker.objectSpawns, {
-        --     sprite = "roofs_03_23",
-        --     x = sandX + i,
-        --     y = sandY + j,
-        --     z = 1,
-        --     isFloor = true,
-        -- })
     end
 end
-        -- { sprite = "blends_street_01_55", x = 5580, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5579, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5578, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5577, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5576, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5575, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5574, y = 9367, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5573, y = 9367, z = 0, isFloor = true, },
-
-        -- { sprite = "blends_street_01_55", x = 5580, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5579, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5578, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5577, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5576, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5575, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5574, y = 9366, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5573, y = 9366, z = 0, isFloor = true, },
-
-        -- { sprite = "blends_street_01_55", x = 5580, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5579, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5578, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5577, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5576, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5575, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5574, y = 9365, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5573, y = 9365, z = 0, isFloor = true, },
-
-        -- { sprite = "blends_street_01_55", x = 5580, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5579, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5578, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5577, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5576, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5575, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5574, y = 9364, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5573, y = 9364, z = 0, isFloor = true, },
-
-        -- { sprite = "blends_street_01_55", x = 5580, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5579, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5578, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5577, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5576, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5575, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5574, y = 9363, z = 0, isFloor = true, },
-        -- { sprite = "blends_street_01_55", x = 5573, y = 9363, z = 0, isFloor = true, },
 
 return DoeValleyBunker
