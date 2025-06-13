@@ -4,7 +4,7 @@ VERSION = 1,
 option DWAP.Safehouse
 {
 	type = enum,
-	numValues = 28,
+	numValues = 36,
 	default = 1,
 
 	page = DWAPGeneral,

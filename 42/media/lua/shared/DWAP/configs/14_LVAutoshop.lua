@@ -121,16 +121,14 @@ local LVAutoshop = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -204,16 +202,16 @@ local LVAutoshop = {
         { -- metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         { -- metal wall shelves
             type = 'container',
@@ -246,7 +244,7 @@ local LVAutoshop = {
         {
             type = 'container',
             coords = {x=13150,y=3018,z=0.5},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -437,5 +435,18 @@ local LVAutoshop = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    -- table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_46", x = 13610, y = 1269, z = -4, removeWall = "west" })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "industry_trucks_01_15", x = 13136, y = 3032, z = -1, removeWall = "north", })
+    table.insert(LVAutoshop.objectSpawns, { --[[sprite = "walls_garage_01_47",]] x = 13136, y = 3033, z = -1, removeWall = "north", })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "fixtures_doors_01_53", x = 13136, y = 3032, z = -1, isDoor = true, doorN = true, })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "floors_exterior_street_01_16", x = 13136, y = 3032, z = -1, isFloor = true, })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "industry_trucks_01_4", x = 13136, y = 3032, z = -1, })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "industry_02_194", x = 13136, y = 3032, z = -1, })
+    table.insert(LVAutoshop.objectSpawns, { sprite = "industry_trucks_01_4", x = 13137, y = 3032, z = -1, })
+
+    table.insert(LVAutoshop.objectSpawns, { sprite = "walls_interior_house_02_48", x = 13143, y = 3051, z = 0, removeFloor = true, clearExisting = true, })
+end
 
 return LVAutoshop

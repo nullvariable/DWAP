@@ -1,9 +1,9 @@
-local wtc1 = {x = 10877, y = 10022, z = 2,}
+local wtc1 = {x = 10888, y = 10028, z = -1,}
 local CortmanMedical = {
     spawn = { x = 10881, y = 10022, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 10890, y = 10016, z = 0, },
+            controls = { sprite = "industry_02_67", x = 10885, y = 10028, z = -1, },
             chunks = {
                 {1361, 1252},
                 {1357, 1254},
@@ -18,11 +18,14 @@ local CortmanMedical = {
                 {1356, 1254},
                 {1357, 1255},
                 {1358, 1253},
+                {1358, 1252},
+                {1361, 1253},
+                {1362, 1252},
             },
         },
     },
     waterTanks = {
-        { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = 10890, y = 10016, z = 0} },
+        { sprite = "industry_02_73", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = 10885, y = 10028, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_8", x = 10872, y = 10018, z = 0, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
@@ -47,17 +50,17 @@ local CortmanMedical = {
     },
     map = { name = "DWAPStashMap22", },
     objectSpawns = {
-        { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
+        -- { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
         { sprite = "camping_01_64", x = 10863, y = 10022, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
-        { sprite = "industry_02_64", x = 10887, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, }, -- generator
-        { sprite = "industry_02_68", x = 10887, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_65", x = 10888, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_69", x = 10888, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_66", x = 10889, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_70", x = 10889, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_67", x = 10890, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_71", x = 10890, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_64", x = 10887, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, }, -- generator
+        -- { sprite = "industry_02_68", x = 10887, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_65", x = 10888, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_69", x = 10888, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_66", x = 10889, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_70", x = 10889, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_67", x = 10890, y = 10016, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_71", x = 10890, y = 10015, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
 
         { sprite = "carpentry_01_16", x = 10857, y = 10044, z = -1, enabled = "Loot", isContainer = true, },
         { sprite = "carpentry_01_16", x = 10857, y = 10044, z = -1, renderYOffset = 32, enabled = "Loot", isContainer = true, },
@@ -340,7 +343,7 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10872,y=10027,z=0},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -450,7 +453,7 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10872,y=10018,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -458,17 +461,13 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10872,y=10018,z=0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=10872,y=10017,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -684,7 +683,7 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x = 10861, y = 10041, z = -1},
-            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
+            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics","BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -699,5 +698,11 @@ local CortmanMedical = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(CortmanMedical.objectSpawns, { x = 10909, y = 10020, z = 0, removeFloor = true, })
+else
+    table.insert(CortmanMedical.objectSpawns, { sprite = "walls_interior_house_02_50", x = 10890, y = 10020, z = -1, clearExisting = true, replaceWall = true, })
+end
 
 return CortmanMedical

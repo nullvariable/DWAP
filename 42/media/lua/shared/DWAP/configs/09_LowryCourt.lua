@@ -121,16 +121,14 @@ local LowryCourt = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -204,16 +202,16 @@ local LowryCourt = {
         { -- metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         { -- metal wall shelves
             type = 'container',
@@ -236,7 +234,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -308,7 +306,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12989,y=1919,z=2},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -324,7 +322,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12989,y=1922,z=2},
-            dist = { "GunStoreKnives", "CampingStoreBackpacks" },
+            dist = { "GunStoreKnives",  "PawnShopKnives","CampingStoreBackpacks" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -356,9 +354,7 @@ local LowryCourt = {
         {
             type = 'container',
             coords = {x=12989,y=1912,z=2},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -447,5 +443,32 @@ local LowryCourt = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(LowryCourt.objectSpawns, { sprite = "industry_trucks_01_15", x = 12982, y = 1920, z = -1, removeWall = "north" })
+    table.insert(LowryCourt.objectSpawns, { sprite = "fixtures_doors_frames_01_5", x = 12982, y = 1920, z = -1, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "fixtures_doors_01_53", x = 12982, y = 1920, z = -1, isDoor = true, doorN = true, })
+    table.insert(LowryCourt.objectSpawns, { x = 12939, y = 1933, z = 0, removeFloor = true, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })
+    table.insert(LowryCourt.generators[1].chunks, { 1622, 241 })
+    table.insert(LowryCourt.generators[1].chunks, { 1621, 241 })
+    table.insert(LowryCourt.generators[1].chunks, { 1620, 241 })
+    table.insert(LowryCourt.generators[1].chunks, { 1619, 241 })
+
+    -- ladder to 3rd floor
+    table.insert(LowryCourt.objectSpawns, { sprite = "location_sewer_01_33", x = 12989, y = 1918, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_49", x = 12989, y = 1918, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_50", x = 12989, y = 1917, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_48", x = 12990, y = 1917, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_51", x = 12990, y = 1918, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "location_sewer_01_33", x = 12989, y = 1918, z = 1, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "industry_trucks_01_6", x = 12989, y = 1918, z = 1, removeWall = "west", removeFloor = true, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_03_16", x = 12990, y = 1918, z = 1, })
+    table.insert(LowryCourt.objectSpawns, { x = 12989, y = 1918, z = 2, removeFloor = true, clearExisting = true, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_03_16", x = 12990, y = 1918, z = 2, clearExisting = true, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "furniture_shelving_01_41", x = 12990, y = 1918, z = 2, })
+    table.insert(LowryCourt.objectSpawns, { x = 12989, y = 1917, z = 2, clearExisting = true, })
+    table.insert(LowryCourt.objectSpawns, { sprite = "furniture_shelving_01_41", x = 12990, y = 1917, z = 2, clearExisting = true, })
+end
 
 return LowryCourt

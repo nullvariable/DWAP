@@ -131,9 +131,7 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = {x=10657,y=9567,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -324,14 +322,11 @@ local v14oldLoot = {
     { -- lower (66)
         type = 'container',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+3,z=v14bunkerTopLeft.z},
-        dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-        distIncludeJunk = true,
-        randUntilFull = true,
+        special = "kitchentools",
         level = "Loot_FoodLevel",
     },
     { -- upper
         type = 'container',
-        sprite = 'location_trailer_02_23',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+4,z=v14bunkerTopLeft.z+0.5},
         dist = {"GroceryBagGourmet",},
         distIncludeJunk = false,

@@ -1,9 +1,10 @@
 local wtc = {x = 1898, y = 9964, z = -1} -- waterTankCoords
-local bunkerTopLeft = {x = 1895, y = 9946, z = -2}
+-- local bunkerTopLeft = {x = 1895, y = 9946, z = -2}
+local bunkerTopLeft = {x = 1917, y = 9934, z = -1}
 local EkronLakeHouse = {
     spawn = { x = 1902, y = 9951, z = 1 },
     waterTanks = {
-        { sprite = "industry_02_75", x = wtc.x, y = wtc.y, z = wtc.z,sourceType="generator", source = {x = 1900, y = 9959, z = -1} },
+        { sprite = "industry_02_75", x = wtc.x, y = wtc.y, z = wtc.z,sourceType="generator", source = {x = 1911, y = 9944, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_4", x = 1883, y = 9973, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
@@ -28,12 +29,13 @@ local EkronLakeHouse = {
             { sprite = "fixtures_doors_01_56", x = 1921, y = 9910, z = 0, },
             { sprite = "fixtures_doors_01_28", x = 1946, y = 9942, z = 0, },
             { sprite = "fixtures_doors_01_56", x = 1851, y = 9953, z = 0, },
+            { sprite = "fixtures_doors_01_56", x = 1907, y = 9946, z = 0, },
         },
     },
     map = { name = "DWAPStashMap15", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 1900, y = 9959, z = -1, isProp=true, },
+            controls = { sprite = "industry_02_67", x = 1911, y = 9944, z = -1, },
             chunks = {
                 {237, 1243},
                 {237, 1244},
@@ -41,46 +43,60 @@ local EkronLakeHouse = {
                 {238, 1243},
                 {238, 1244},
                 {238, 1245},
+                {238, 1242},
+                {239, 1242},
+                {239, 1243},
+                {239, 1241},
+                {240, 1243},
+                {240, 1240},
+                {240, 1241},
+                {240, 1242},
+                {240, 1238},
+                {240, 1239},
             },
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_64", x = 1897, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 1897, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_65", x = 1898, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 1898, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_66", x = 1899, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 1899, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_67", x = 1900, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 1900, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        { sprite = "walls_exterior_house_02_19", x = 1906, y = 9949, z = -1, clearExisting = true, removeWall = "north", },
+        { sprite = "floors_exterior_street_01_16", x = 1906, y = 9948, z = -1, isFloor = true, },
+        { sprite = "walls_exterior_house_02_16", x = 1906, y = 9948, z = -1, },
+        { sprite = "walls_exterior_house_02_16", x = 1907, y = 9948, z = -1, },
+        -- { sprite = "industry_02_64", x = 1897, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
+        -- { sprite = "industry_02_68", x = 1897, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_65", x = 1898, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_69", x = 1898, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_66", x = 1899, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_70", x = 1899, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_67", x = 1900, y = 9959, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_71", x = 1900, y = 9958, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
 
-        { sprite = "fixtures_railings_01_36", x = 1898, y = 9957, z = -1, clearExisting = true, },
-        { sprite = "fixtures_railings_01_36", x = 1898, y = 9956, z = -1, clearExisting = true, },
-        { sprite = "fixtures_railings_01_36", x = 1898, y = 9955, z = -1, clearExisting = true, },
-        { x = 1897, y = 9957, z = -1, clearExisting = true, },
-        { x = 1897, y = 9956, z = -1, clearExisting = true, },
-        { x = 1897, y = 9955, z = -1, clearExisting = true, },
-        { x = 1897, y = 9954, z = -1, clearExisting = true, },
+        -- { sprite = "fixtures_railings_01_36", x = 1898, y = 9957, z = -1, clearExisting = true, },
+        -- { sprite = "fixtures_railings_01_36", x = 1898, y = 9956, z = -1, clearExisting = true, },
+        -- { sprite = "fixtures_railings_01_36", x = 1898, y = 9955, z = -1, clearExisting = true, },
+        -- { x = 1897, y = 9957, z = -1, clearExisting = true, },
+        -- { x = 1897, y = 9956, z = -1, clearExisting = true, },
+        -- { x = 1897, y = 9955, z = -1, clearExisting = true, },
+        -- { x = 1897, y = 9954, z = -1, clearExisting = true, },
 
-        { sprite = "industry_02_53", x = 1920, y = 9965, z = 0, },
-        { sprite = "industry_02_226", x = 1919, y = 9965, z = 0, },
-        { sprite = "industry_02_226", x = 1918, y = 9965, z = 0, },
-        { sprite = "industry_02_255", x = 1917, y = 9965, z = 0, },
+        -- { sprite = "industry_02_53", x = 1920, y = 9965, z = 0, },
+        -- { sprite = "industry_02_226", x = 1919, y = 9965, z = 0, },
+        -- { sprite = "industry_02_226", x = 1918, y = 9965, z = 0, },
+        -- { sprite = "industry_02_255", x = 1917, y = 9965, z = 0, },
 
         -- shelf replacements
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
 
-        { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
-        { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
+        -- { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
+        -- { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
 
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9952, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_40", x = 1907, y = 9955, z = 0, },
@@ -106,16 +122,14 @@ local EkronLakeHouse = {
         { -- lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -189,16 +203,16 @@ local EkronLakeHouse = {
         { -- metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
+        },
+        { -- metal wall shelves
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
         },
         { -- metal wall shelves
             type = 'container',
@@ -221,7 +235,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
@@ -435,7 +449,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1897,y=9963,z=0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -443,9 +457,7 @@ local EkronLakeHouse = {
         {
             type = 'container',
             coords = {x=1897,y=9963,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -560,5 +572,11 @@ local EkronLakeHouse = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(EkronLakeHouse.objectSpawns, { sprite = "industry_trucks_01_7", x = 1921, y = 9947, z = -1, removeWall = "west", })
+
+    table.insert(EkronLakeHouse.objectSpawns, { sprite = "industry_railroad_05_8", x = 1921, y = 9911, z = 0, removeFloor = true, })
+end
 
 return EkronLakeHouse

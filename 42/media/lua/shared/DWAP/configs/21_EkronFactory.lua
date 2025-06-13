@@ -1,5 +1,5 @@
 local wtc1 = {x = 594, y = 9371, z = 0,}
-local bunkerTopLeft = {x = 581, y = 9373, z = -2}
+local bunkerTopLeft = {x = 591, y = 9366, z = -1}
 local EkronFactory = {
     spawn = { x = 565, y = 9374, z = 1 },
     generators = {
@@ -15,6 +15,10 @@ local EkronFactory = {
                 {72, 1172},
                 {74, 1171},
                 {74, 1172},
+                {73, 1172},
+                {73, 1170},
+                {73, 1171},
+                {74, 1170},
             },
         },
     },
@@ -36,35 +40,21 @@ local EkronFactory = {
     },
     map = { name = "DWAPStashMap21", },
     objectSpawns = {
+        { sprite = "floors_exterior_street_01_16", x = 586, y = 9379, z = -1, isFloor = true, removeWall = "west", },
+        { sprite = "industry_trucks_01_5", x = 586, y = 9379, z = -1, },
+        { sprite = "industry_trucks_01_5", x = 586, y = 9380, z = -1, },
+
         { x = 583, y = 9382, z = -1, clearExisting = true, },
         { sprite = "lighting_outdoor_01_33", x = 579, y = 9375, z = -1, isLightSwitch = true, },
-        { sprite = "lighting_outdoor_01_33", x = 583, y = 9381, z = -1, isLightSwitch = true, },
         { sprite = "lighting_outdoor_01_32", x = 578, y = 9378, z = -1, isLightSwitch = true, },
         { sprite = "lighting_outdoor_01_32", x = 573, y = 9378, z = -1, isLightSwitch = true, },
         { sprite = "appliances_cooking_01_16", x = 564, y = 9374, z = 1, isFireplace = true,},
-
-        { sprite = "constructedobjects_01_45", x = 576, y = 9371, z = 1, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 576, y = 9371, z = 1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 576, y = 9371, z = 1, renderYOffset = 64, enabled = "Loot", clearExisting = false, isContainer = true, },
-
-        { sprite = "constructedobjects_01_45", x = 575, y = 9371, z = 1, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 575, y = 9371, z = 1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 575, y = 9371, z = 1, renderYOffset = 64, enabled = "Loot", clearExisting = false, isContainer = true, },
-
-        { x = 574, y = 9372, z = 1, enabled = "Loot", clearExisting = true, },
-        { sprite = "constructedobjects_01_45", x = 574, y = 9371, z = 1, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 574, y = 9371, z = 1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 574, y = 9371, z = 1, renderYOffset = 64, enabled = "Loot", clearExisting = false, isContainer = true, },
-
-        { sprite = "constructedobjects_01_45", x = 573, y = 9371, z = 1, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 573, y = 9371, z = 1, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "constructedobjects_01_45", x = 573, y = 9371, z = 1, renderYOffset = 64, enabled = "Loot", clearExisting = false, isContainer = true, },
 
         -- hallway kitchen
         { sprite = "fixtures_counters_01_35", x = 564, y = 9378, z = 1, clearExisting = false, },
         { sprite = "fixtures_sinks_01_8", x = 564, y = 9378, z = 1, clearExisting = false, },
         { sprite = "fixtures_counters_01_35", x = 564, y = 9379, z = 1, clearExisting = false, },
-        { sprite = "appliances_cooking_01_29", x = 564, y = 9379, z = 1, clearExisting = false, isStove = true, },
+        -- { sprite = "appliances_cooking_01_29", x = 564, y = 9379, z = 1, clearExisting = false, isStove = true, },
         { sprite = "fixtures_counters_01_35", x = 564, y = 9380, z = 1, clearExisting = false, },
 
         { sprite = "carpentry_01_16", x = 576, y = 9380, z = 1, enabled = "Loot", isContainer = true, },
@@ -74,38 +64,40 @@ local EkronFactory = {
         { sprite = "lighting_outdoor_01_49", x = 581, y = 9378, z = -1, isLightSwitch = true, },
 
         -- shelf replacements
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
 
-        { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
-        { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
+        -- { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
+        -- { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
 
         { barricade = "metalbar", target="walls_commercial_01_84", x = 577, y = 9378, z = 0, },
         { barricade = "metal", target="walls_commercial_01_84", x = 577, y = 9380, z = 0, },
     },
     loot = {
-        { -- upper hallway
+        {
             type = 'container',
             coords = {x = 576, y = 9380, z = 1},
-            sandboxEnable = 'Loot',
-            special = "essentials",
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
-        
-        { -- cabinet next to bunk beds (9365)
+        -- basement
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
@@ -114,33 +106,29 @@ local EkronFactory = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        {
             type = 'container',
-            sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        {
             type = 'container',
-            sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
@@ -149,16 +137,15 @@ local EkronFactory = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        {
             type = 'container',
-            sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            dist = {"SewingStoreTools"},
-            distIncludeJunk = true,
+            dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
+            distIncludeJunk = false,
             randUntilFull = true,
-            level = "Loot_TailorLevel",
+            level = "Loot_BuildMatsLevel",
         },
-        { -- metal shelves (70)
+        {
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
@@ -167,51 +154,51 @@ local EkronFactory = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot',
             special = "essentials",
         },
-        { -- metal wall shelves
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        {
+            type = 'container',
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -219,8 +206,6 @@ local EkronFactory = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-
-        -- extra spawns
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
@@ -237,8 +222,6 @@ local EkronFactory = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-
-        -- extra spawns
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
@@ -250,16 +233,14 @@ local EkronFactory = {
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-
-        -- 2nd floor
         {
             type = 'container',
-            coords = {x=576,y=9371,z=1},
+            coords = {x=597,y=9375,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood", "ArmyBunkerKitchen"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -267,27 +248,92 @@ local EkronFactory = {
         },
         {
             type = 'container',
-            coords = {x=575,y=9371,z=1},
+            coords = {x=596,y=9375,z=-1},
             dist = {"FirearmWeapons_Late", "DrugLabGuns","ArmyStorageGuns","PoliceStorageGuns", "PoliceStorageAmmunition",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+    {
             type = 'container',
-            coords = {x=574,y=9371,z=1},
-            dist = {"GunStoreKnives","SafehouseTraps", "ArmyStorageAmmunition","CampingStoreBackpacks", "ArmySurplusMisc"},
+            coords = {x=595,y=9375,z=-1},
+            dist = {"GunStoreKnives","SafehouseTraps", "ArmyStorageAmmunition", "ArmySurplusMisc"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
-            coords = {x=573,y=9371,z=1},
+            coords = {x=594,y=9375,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools", "GigamartTools", "JanitorTools", "LoggingFactoryTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=593,y=9375,z=-1},
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools", "GigamartTools", "JanitorTools", "LoggingFactoryTools", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=597,y=9377,z=-1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=597,y=9378,z=-1},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=595,y=9377,z=-1},
+            dist = {"ArtStorePottery","CrateMasonry" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=595,y=9378,z=-1},
+            dist = {"KitchenDryFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=593,y=9377,z=-1},
+            dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_MedLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=593,y=9378,z=-1},
+            dist = {"SewingStoreTools", "CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_TailorLevel",
+        },
+
+        -- 2nd floor
+        {
+            type = 'container',
+            coords = {x=575,y=9371,z=1},
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "CrateVHSTapes", "LivingRoomShelfClassy",},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
@@ -413,7 +459,7 @@ local EkronFactory = {
         {
             type = 'container',
             coords = {x=566,y=9371,z=0},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -447,15 +493,13 @@ local EkronFactory = {
         {
             type = 'container',
             coords = {x=564,y=9380,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=564,y=9379,z=1},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -498,5 +542,10 @@ local EkronFactory = {
         },
     },
 }
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9379, z = -1, removeWall = "north", })
+    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9376, z = 0, removeFloor = true, })
+    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9375, z = 0, clearExisting = true, })
+end
 
 return EkronFactory

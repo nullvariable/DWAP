@@ -2,7 +2,8 @@ local wtc = {x = 10094, y = 8259, z = 3} -- waterTankCoords (well)
 local McCoyEstate = {
     spawn = { x = 10081, y = 8259, z = 1 },
     waterTanks = {
-        { sprite = "crafted_01_11", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 10113, y = 8240, z = 0}},
+        -- { sprite = "crafted_01_11", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 10113, y = 8240, z = 0}},
+        { sprite = "crafted_01_11", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 10120, y = 8239, z = -1}},
     },
     waterFixtures = {
         -- fishing 
@@ -12,7 +13,6 @@ local McCoyEstate = {
         -- butchering
         { sprite = "fixtures_sinks_01_33", x = 10092, y = 8252, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_17", x = 10093, y = 8252, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-
 
         { sprite = "fixtures_bathroom_01_37", x = 10094, y = 8258, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         -- laundry
@@ -49,7 +49,8 @@ local McCoyEstate = {
     map = { name = "DWAPStashMap18", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 10113, y = 8240, z = 0, isProp=true, },
+            -- controls = { sprite = "industry_02_67", x = 10113, y = 8240, z = 0, isProp=true, },
+            controls = { sprite = "industry_02_67", x = 10120, y = 8239, z = -1, },
             chunks = {
                 {1263, 1029},
                 {1263, 1030},
@@ -76,14 +77,14 @@ local McCoyEstate = {
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_64", x = 10110, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 10110, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_65", x = 10111, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 10111, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_66", x = 10112, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 10112, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_67", x = 10113, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 10113, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_64", x = 10110, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
+        -- { sprite = "industry_02_68", x = 10110, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_65", x = 10111, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_69", x = 10111, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_66", x = 10112, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_70", x = 10112, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_67", x = 10113, y = 8240, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_71", x = 10113, y = 8239, z = 0, enabled = "EnableGenSystem", clearExisting = true, },
 
         { sprite = "crafted_01_11", x = 10094, y = 8259, z = 3, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
 
@@ -291,9 +292,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10084,y=8261,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -494,7 +493,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10084,y=8263,z=2},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -685,7 +684,7 @@ local McCoyEstate = {
         {
             type = 'container',
             coords = {x=10081,y=8257,z=0.5},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

@@ -1,9 +1,9 @@
-local wtc = {x =8177, y = 11259, z = -1}
+local wtc = {x = 8177, y = 11259, z = -1}
 local RosewoodGas = {
     spawn = { x = 8179, y = 11269, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, ghost = false, },
+            controls = { sprite = "industry_02_67", x = 8172, y = 11255, z = -1, },
             chunks = {
                 {1021, 1408},
                 {1021, 1409},
@@ -19,11 +19,18 @@ local RosewoodGas = {
                 {1018, 1408},
                 {1017, 1407},
                 {1017, 1408},
+                {1020, 1406},
+                {1020, 1407},
+                {1021, 1406},
+                {1021, 1407},
+                {1021, 1404},
+                {1021, 1405},
             },
         },
     },
     waterTanks = {
-        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 8181, y = 11259, z = -1} },
+        { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 8172, y = 11255, z = -1} },
+        { sprite = "industry_02_73", x = 8168, y = 11255, z = -1, },
     },
     waterFixtures = {
         -- basement
@@ -41,20 +48,29 @@ local RosewoodGas = {
         name = "Rosewood Gas Station Key",
         doors = {
             { sprite = "fixtures_doors_02_4", x = 8175, y = 11268, z = 0, },
+            { sprite = "fixtures_doors_01_56", x = 8174, y = 11260, z = -1, },
         },
     },
     map = {name = "DWAPStashMap7",},
     objectSpawns = {
         { sprite = "camping_01_16", x = 8190, y = 11270, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
-        { sprite = "industry_02_64", x = 8178, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 8178, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_65", x = 8179, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 8179, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_66", x = 8180, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 8180, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 8181, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_64", x = 8178, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
+        -- { sprite = "industry_02_68", x = 8178, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_65", x = 8179, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_69", x = 8179, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_66", x = 8180, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_70", x = 8180, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_67", x = 8181, y = 11259, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_71", x = 8181, y = 11258, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+
+        { sprite = "walls_commercial_03_35", x = 8176, y = 11260, z = -1, removeWall = "west", clearExisting = true, },
+        -- { sprite = "walls_exterior_wooden_01_38", x = 8175, y = 11261, z = -1 },
+        -- { sprite = "fixtures_doors_frames_01_8", x = 8175, y = 11261, z = -1 },
+        -- { sprite = "fixtures_doors_01_28", x = 8175, y = 11261, z = -1, isDoor = true, doorN = false, },
+        { sprite = "walls_commercial_03_49", x = 8175, y = 11260, z = -1,  },
+        { sprite = "floors_exterior_street_01_16", x = 8175, y = 11260, z = -1, isFloor = true, },
+        { sprite = "walls_commercial_03_49", x = 8175, y = 11261, z = -1 },
 
         { sprite = "appliances_cooking_01_17", x = 8179, y = 11267, z = 1, isFireplace = true,},
 
@@ -176,9 +192,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8175,y=11269,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -192,7 +206,7 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8175,y=11267,z=1},
-            dist = {"GroceryBagGourmet",},
+            dist = {"GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -235,6 +249,42 @@ local RosewoodGas = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
+        -- addon basement
+        {
+            type = 'container',
+            coords = {x=8166,y=11259,z=-1},
+            dist = {"ArtStorePottery","CrateMasonry" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8166,y=11258,z=-1},
+            dist = {"CrateCannedFood","LiquorStoreBeer","CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8166,y=11257,z=-1},
+            dist = {"FreezerRich", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8166,y=11256,z=-1},
+            dist = {"FreezerIceCream", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        
         -- basement
         {
             type = 'container',
@@ -312,14 +362,10 @@ local RosewoodGas = {
         {
             type = 'container',
             coords = {x=8181,y=11258,z=0},
-            items = {
-                { name = 'Base.Remote', chance = 1, count = {1,1} },
-                { name = 'Base.VideoGame', chance = 1, count = {1,1} },
-                { name = 'Base.Headphones', chance = 1, count = {1,1} },
-                { name = 'Base.CDplayer', chance = 1, count = {1,1} },
-                { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
-                { name = 'Base.VHS_Retail', chance = 0.5, count = {30,30} },
-            },
+            dist = {"CrateVHSTapes"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
@@ -364,5 +410,18 @@ local RosewoodGas = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(RosewoodGas.objectSpawns, { x = 8174, y = 11255, z = -1, removeWall = "north" })
+    table.insert(RosewoodGas.objectSpawns, { x = 8174, y = 11215, z = 0, removeFloor = true, })
+    table.insert(RosewoodGas.objectSpawns, { sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
+    table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
+    table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
+    table.insert(RosewoodGas.generators[1].chunks, { 1021, 1401 })
+    table.insert(RosewoodGas.generators[1].chunks, { 1021, 1402 })
+    table.insert(RosewoodGas.generators[1].chunks, { 1021, 1403 })
+    table.insert(RosewoodGas.generators[1].chunks, { 1022, 1401 })
+    table.insert(RosewoodGas.generators[1].chunks, { 1022, 1402 })
+end
 
 return RosewoodGas

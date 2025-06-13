@@ -1,0 +1,8 @@
+Stash_EN = {
+    Stash_DWAP_09_text1 = "top floor, supplies in basement",
+    Stash_DWAP_10_text1 = "fallout shelter stairs behind security office",
+    Stash_DWAP_12_text1 = "fallout shelter in basement",
+    Stash_DWAP_31_text1 = "Careful of cave ins",
+    Stash_DWAP_31_text2 = "Make your way to the library in the basement",
+    Stash_DWAP_32_text1 = "Take the elevator",
+}

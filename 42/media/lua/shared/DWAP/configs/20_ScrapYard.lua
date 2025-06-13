@@ -77,20 +77,6 @@ local ScrapYard = {
 
         { sprite = "carpentry_01_16", x = 2947, y = 12522, z = -1, isContainer = true, },
 
-        -- exterior entrance
-        { sprite = "walls_exterior_house_01_51", x = 2941, y = 12565, z = 0, },
-        { sprite = "walls_exterior_house_01_49", x = 2940, y = 12565, z = 0, },
-        { sprite = "roofs_02_22", x = 2940, y = 12564, z = 1, },
-        { sprite = "walls_exterior_house_01_48", x = 2941, y = 12564, z = 0, },
-        { sprite = "roofs_02_22", x = 2940, y = 12563, z = 1, },
-        { sprite = "walls_exterior_house_01_48", x = 2941, y = 12563, z = 0, },
-        { sprite = "roofs_02_22", x = 2940, y = 12562, z = 1, },
-        { sprite = "walls_exterior_house_01_48", x = 2941, y = 12562, z = 0, },
-        { sprite = "roofs_02_22", x = 2940, y = 12561, z = 1, },
-        { sprite = "walls_exterior_house_01_48", x = 2941, y = 12561, z = 0, },
-        { sprite = "walls_exterior_wooden_01_39", x = 2940, y = 12561, z = 0, },
-        { sprite = "fixtures_doors_01_29", x = 2940, y = 12561, z = 0, isDoor = true, doorN = true, },
-        { sprite = "floors_exterior_natural_01_10", x = 2940, y = 12561, z = 0, },
 
         { sprite = "fixtures_doors_01_29", x = 2946, y = 12527, z = -1, isDoor = true, doorN = true, },
         { sprite = "walls_exterior_wooden_01_39", x = 2946, y = 12527, z = -1, replaceWall = true, },
@@ -250,9 +236,7 @@ local ScrapYard = {
         {
             type = 'container',
             coords = {x=2934,y=12517,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -378,7 +362,7 @@ local ScrapYard = {
         {
             type = 'container',
             coords = {x=2945,y=12526,z=-1},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -478,7 +462,7 @@ local ScrapYard = {
         },
         {
             type = 'container',
-            coords = {x=2939,y=12561,z=0},
+            coords = {x=2945,y=12561,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
@@ -495,9 +479,7 @@ local ScrapYard = {
         {
             type = 'container',
             coords = {x=2934,y=12559,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -664,7 +646,7 @@ local ScrapYard = {
         {
             type = 'container',
             coords = {x=2943,y=12573,z=-1},
-            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
+            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -804,6 +786,35 @@ local ScrapYard = {
 table.insert(ScrapYard.objectSpawns, { sprite = "industry_02_250", x = 2941, y = 12504, z = 0, })
 for i = 12505, 12516 do
     table.insert(ScrapYard.objectSpawns, { sprite = "industry_02_224", x = 2941, y = i, z = 0, })
+end
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(ScrapYard.objectSpawns, { x = 2940, y = 12561, z = -1, removeWall = "west" })
+    table.insert(ScrapYard.objectSpawns, { x = 2939, y = 12561, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_23", delete = true, x = 2941, y = 12564, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_22", delete = true, x = 2941, y = 12563, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_21", delete = true, x = 2941, y = 12562, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_stairs_01_11", delete = true, x = 2940, y = 12564, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_stairs_01_12", delete = true, x = 2940, y = 12563, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_stairs_01_13", delete = true, x = 2940, y = 12562, z = -1 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "blends_natural_01_22", isFloor = true, x = 2940, y = 12564, z = 0 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "blends_natural_01_22", isFloor = true, x = 2940, y = 12563, z = 0 })
+    table.insert(ScrapYard.objectSpawns, { sprite = "blends_natural_01_22", isFloor = true, x = 2940, y = 12562, z = 0 })
+else
+    -- exterior entrance
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_51", x = 2941, y = 12565, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_49", x = 2940, y = 12565, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "roofs_02_22", x = 2940, y = 12564, z = 1, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_48", x = 2941, y = 12564, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "roofs_02_22", x = 2940, y = 12563, z = 1, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_48", x = 2941, y = 12563, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "roofs_02_22", x = 2940, y = 12562, z = 1, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_48", x = 2941, y = 12562, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "roofs_02_22", x = 2940, y = 12561, z = 1, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_house_01_48", x = 2941, y = 12561, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "walls_exterior_wooden_01_39", x = 2940, y = 12561, z = 0, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_doors_01_29", x = 2940, y = 12561, z = 0, isDoor = true, doorN = true, })
+    table.insert(ScrapYard.objectSpawns, { sprite = "floors_exterior_natural_01_10", x = 2940, y = 12561, z = 0, })
 end
 
 return ScrapYard

@@ -6,7 +6,6 @@ local configs = {
         name = "Doe Valley Bunker Map",
         stamps = {
             {"Asterisk", nil, 5577, 9376, 0, 0, 0},
-            -- {nil, "<3 Uncle Dave", 3580, 10887, 0, 0, 0},
         },
         buildingX = 5577,
         buildingY = 9372,
@@ -15,7 +14,6 @@ local configs = {
         name = "Echo Creek Safehouse Map",
         stamps = {
             {"Asterisk", nil, 3575, 10901, 0, 0, 0},
-            -- {nil, "Meet here", 3580, 10887, 0, 0, 0},
         },
         buildingX = 3567,
         buildingY = 10899,
@@ -24,7 +22,6 @@ local configs = {
         name = "Louisville Safehouse Map",
         stamps = {
             {"Asterisk", nil, 12037, 2592, 0, 0, 0},
-            -- {nil, "Meet here", 12045, 2577, 0, 0, 0},
         },
         buildingX = 12027,
         buildingY = 2587,
@@ -33,14 +30,12 @@ local configs = {
         name = "March Ridge Bunker Map",
         stamps = {
             {"Asterisk", nil, 9947, 12616, 0, 0, 0},
-            -- {nil, "Meet Here", 9876, 12642, 0, 0, 0},
         },
     },
     [5] = {
         name = "Muldraugh Safehouse Map",
         stamps = {
             {"Asterisk", nil, 10660, 9567, 0, 0, 0},
-            -- {nil, "Meet here", 8136, 11239, 0, 0, 0},
         },
         buildingX = 10669,
         buildingY = 9562,
@@ -49,7 +44,6 @@ local configs = {
         name = "Riverside Safehouse Map",
         stamps = {
             {"Asterisk", nil, 6953, 5565, 0, 0, 0},
-            -- {nil, "Meet here", 8136, 11239, 0, 0, 0},
         },
         buildingX = 6962,
         buildingY = 5564,
@@ -57,8 +51,7 @@ local configs = {
     [7] = {
         name = "Rosewood Safehouse Map",
         stamps = {
-            {"Asterisk", nil, 8184, 11269.5, 1, 0, 0},
-            -- {nil, "Meet here", 8136, 11239, 0, 0, 0},
+            {"Asterisk", nil, 8184, 11269, 0, 0, 0},
         },
         buildingX = 8181,
         buildingY = 11259,
@@ -67,7 +60,6 @@ local configs = {
         name = "West Point Safehouse Map",
         stamps = {
             {"Asterisk", nil, 10162, 6622, 0, 0, 0},
-            -- {nil, "Meet here", 12045, 2577, 0, 0, 0},
         },
         buildingX = 10162,
         buildingY = 6622,
@@ -76,16 +68,16 @@ local configs = {
         name = "Lowry Court Map",
         stamps = {
             {"Asterisk", nil, 12983, 1914, 0, 0, 0},
-            {nil, "top floor", 12955, 1882, 0, 0, 0},
+            {nil, "Stash_DWAP_09_text1", 12955, 1882, 0, 0, 0},
         },
         buildingX = 12993,
         buildingY = 1914,
     },
     [10] = {
-        name = "West Point Safehouse Map",
+        name = "Grand Ohio Map",
         stamps = {
             {"Asterisk", nil, 13612, 1269, 0, 0, 0},
-            {nil, "behind security office", 13549, 1291, 0, 0, 0},
+            {nil, "Stash_DWAP_10_text1", 13549, 1291, 0, 0, 0},
         },
         buildingX = 13649,
         buildingY = 1272,
@@ -103,7 +95,7 @@ local configs = {
         name = "Ekron Community College Map",
         stamps = {
             {"Asterisk", nil, 725, 9820, 0, 0, 0},
-            {nil, "fallout shelter in basement", 748, 9870, 0, 0, 0},
+            {nil, "Stash_DWAP_12_text1", 748, 9870, 0, 0, 0},
         },
         buildingX = 725,
         buildingY = 9820,
@@ -180,7 +172,7 @@ local configs = {
     [21] = {
         name = "Ekron Factory Map",
         stamps = {
-            {"Asterisk", nil, 565, 9374, 0, 0, 0},
+            {"Asterisk", nil, 565, 9374, 255, 255, 255},
         },
         buildingX = 565,
         buildingY = 9374,
@@ -233,7 +225,103 @@ local configs = {
         buildingX = 11908,
         buildingY = 6853,
     },
+    [28] = {
+        name = "Ekron Pig Farm Map",
+        stamps = {
+            {"Asterisk", nil, 104, 8955, 0, 0, 0},
+        },
+        buildingX = 104,
+        buildingY = 8955,
+    },
+    [29] = {
+        name = "LV Complex Map",
+        stamps = {
+            {"Asterisk", nil, 14151, 2629, 0, 0, 0},
+        },
+        buildingX = 14146,
+        buildingY = 2660,
+    },
+    [30] = {
+        name = "Brandenburg Townhome Map",
+        stamps = {
+            {"Asterisk", nil, 2609, 14458, 0, 0, 0},
+        },
+        buildingX = 2609,
+        buildingY = 14458,
+    },
+    [31] = {
+        name = "Tell No One",
+        stamps = {
+            {"Asterisk", nil, 7673, 12270, 0, 0, 0},
+            {"Asterisk", nil, 7678, 11887, 0, 0, 0},
+            {"ArrowNorth", nil, 7680, 12215, 0, 0, 0},
+            {"ArrowSouth", nil, 7680, 12229, 0, 0, 0},
+            {nil, "Stash_DWAP_31_text1", 7544, 12294, 0, 0, 0},
+            {nil, "Stash_DWAP_31_text2", 7567, 11936, 0, 0, 0},
+        },
+        buildingX = 7673,
+        buildingY = 12270,
+    },
+    [32] = {
+        name = "Quill Manor Map",
+        stamps = {
+            {"Asterisk", nil, 1221, 7384, 0, 0, 0},
+            {nil, "Stash_DWAP_32_text1", 1214, 7400, 0, 0, 0},
+        },
+        buildingX = 1221,
+        buildingY = 7384,
+    },
+    [33] = {
+        name = "Dark Wallow Lake Map",
+        stamps = {
+            {"Asterisk", nil, 8718, 15311, 0, 0, 0},
+        },
+        buildingX = 8718,
+        buildingY = 15311,
+    },
+    [34] = {
+        name = "Eastern Hunting Cabin Map",
+        stamps = {
+            {"Asterisk", nil, 12722, 8749, 0, 0, 0},
+        },
+        buildingX = 12722,
+        buildingY = 8749,
+    },
+    [35] = {
+        name = "Drug Lab Map",
+        stamps = {
+            {"Asterisk", nil, 11613, 9293, 0, 0, 0},
+        },
+        buildingX = 11613,
+        buildingY = 9293,
+    },
 }
+if getActivatedMods():contains("\\Ladders") then
+    print("Found Ladders mod, adding ladder stamps to safehouses")
+    table.insert(configs[2].stamps, {"Ladder", nil, 3612, 10902, 0, 0, 0})
+    table.insert(configs[4].stamps, {"Ladder", nil, 9883, 12619, 0, 0, 0})
+    table.insert(configs[6].stamps, {"Ladder", nil, 7009, 5591, 0, 0, 0})
+    table.insert(configs[7].stamps, {"Ladder", nil, 8174, 11215, 0, 0, 0})
+    table.insert(configs[8].stamps, {"Ladder", nil, 10143, 6679, 0, 0, 0})
+    table.insert(configs[9].stamps, {"Ladder", nil, 12939, 1933, 0, 0, 0})
+    table.insert(configs[10].stamps, {"Ladder", nil, 13482, 1300, 0, 0, 0})
+    table.insert(configs[12].stamps, {"Ladder", nil, 754, 9780, 0, 0, 0})
+    table.insert(configs[13].stamps, {"Ladder", nil, 12321, 1313, 0, 0, 0})
+    table.insert(configs[14].stamps, {"Ladder", nil, 13143, 3051, 0, 0, 0})
+    table.insert(configs[15].stamps, {"Ladder", nil, 1921, 9911, 0, 0, 0})
+    table.insert(configs[17].stamps, {"Ladder", nil, 3127, 12078, 0, 0, 0})
+    table.insert(configs[19].stamps, {"Ladder", nil, 13452, 1874, 0, 0, 0})
+    table.insert(configs[20].stamps, {"Ladder", nil, 2939, 12561, 0, 0, 0})
+    table.insert(configs[21].stamps, {"Ladder", nil, 598, 9376, 0, 0, 0})
+    table.insert(configs[22].stamps, {"Ladder", nil, 10909, 10020, 0, 0, 0})
+    table.insert(configs[23].stamps, {"Ladder", nil, 10752, 10547, 0, 0, 0})
+    table.insert(configs[27].stamps, {"Ladder", nil, 11889, 6880, 0, 0, 0})
+    table.insert(configs[28].stamps, {"Ladder", nil, 117, 8925, 0, 0, 0})
+    table.insert(configs[30].stamps, {"Ladder", nil, 2559, 14454, 0, 0, 0})
+    table.insert(configs[31].stamps, {"Ladder", nil, 7679, 12205, 0, 0, 0})
+    table.insert(configs[33].stamps, {"Ladder", nil, 8716, 15314, 0, 0, 0})
+end
+
 for i = 1, #configs do
     local config = configs[i]
     local DWAPStashMap = StashUtil.newStash("DWAPStashMap" .. i, "Map", "Base.RosewoodMap", "Stash_AnnotedMap");

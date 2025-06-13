@@ -91,7 +91,7 @@ LootMaps.Init.DWAPStashMap12 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(680, 9784, 919, 9927)
+    mapAPI:setBoundsInSquares(696, 9744, 919, 9911)
 
 end
 
@@ -213,4 +213,68 @@ LootMaps.Init.DWAPStashMap27 = function(mapUI)
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
     mapAPI:setBoundsInSquares(11832, 6824, 11975, 6935)
+end
+
+-- Ekron Pig Farm
+LootMaps.Init.DWAPStashMap28 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(48, 8848, 463, 9135)
+end
+
+-- LVille Complex
+LootMaps.Init.DWAPStashMap29 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(14080, 2568, 14271, 2735)
+end
+
+-- BrandenburgTH
+LootMaps.Init.DWAPStashMap30 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(2496, 14296, 2695, 14503)
+end
+
+-- Prison Break
+LootMaps.Init.DWAPStashMap31 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(7352, 11752, 7951, 12327)
+end
+
+-- Quill Manor
+LootMaps.Init.DWAPStashMap32 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(1176, 7224, 1519, 7487)
+end
+
+-- Dark Wallow Lake House
+LootMaps.Init.DWAPStashMap33 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(8584, 15200, 8871, 15447)
+end
+
+-- Dark Wallow Lake House
+LootMaps.Init.DWAPStashMap34 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(12368, 8688, 12879, 8967)
+end
+
+-- E Muldraugh Drug Shack
+LootMaps.Init.DWAPStashMap35 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(11480, 9224, 11783, 9407)
 end

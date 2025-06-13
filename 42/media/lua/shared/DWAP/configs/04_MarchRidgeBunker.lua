@@ -42,6 +42,7 @@ local MarchRidgeConfig = {
                 {1245, 1580},
                 {1244, 1581},
                 {1243, 1581},
+                {1239, 1577},
             },
         }
     },
@@ -141,9 +142,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9967,y=12610,z=-4},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -701,7 +700,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9950,y=12629,z=-4},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -731,7 +730,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9953,y=12630,z=-4},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -976,5 +975,18 @@ local MarchRidgeConfig = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(MarchRidgeConfig.objectSpawns, { x = 9883, y = 12619, z = 0, removeFloor = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { x = 9883, y = 12619, z = 0, clearExisting = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { x = 9921, y = 12623, z = -4, removeWall = "west", })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "walls_garage_01_37", x = 9920, y = 12623, z = -4 })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "floors_exterior_street_01_0", x = 9920, y = 12623, z = -4, isFloor = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "walls_garage_01_37", x = 9920, y = 12624, z = -4 })
+    table.insert(MarchRidgeConfig.objectSpawns, { x = 9919, y = 12623, z = -4, removeWall = "west", })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "walls_garage_01_37", x = 9919, y = 12623, z = -4 })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "floors_exterior_street_01_0", x = 9919, y = 12623, z = -4, isFloor = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { sprite = "walls_garage_01_37", x = 9919, y = 12624, z = -4 })
+end
 
 return MarchRidgeConfig

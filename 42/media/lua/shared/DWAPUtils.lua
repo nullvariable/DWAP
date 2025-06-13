@@ -1,6 +1,6 @@
 local DWAPUtils = {}
 
-DWAPUtils.currentVersion = 15
+DWAPUtils.currentVersion = 16
 DWAPUtils.selectedSafehouse = 4
 DWAPUtils.safehouseKeyId = nil
 
@@ -40,6 +40,14 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [25] = "DWAP/configs/25_RiversideMansion",
     [26] = "DWAP/configs/26_WestPointHome",
     [27] = "DWAP/configs/27_TheDrake",
+    [28] = "DWAP/configs/28_EkronPigFarm",
+    [29] = "DWAP/configs/29_LVilleComplex",
+    [30] = "DWAP/configs/30_BrandenburgTH",
+    [31] = "DWAP/configs/31_PrisonBreak",
+    [32] = "DWAP/configs/32_QuillManor",
+    [33] = "DWAP/configs/33_DarkWallow",
+    [34] = "DWAP/configs/34_HuntingCabin",
+    [35] = "DWAP/configs/35_DrugShack",
 }
 
 local configCache = {}

@@ -207,15 +207,13 @@ local WestPointHome = {
         {
             type = 'container',
             coords = {x=11607,y=6721,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=11606,y=6721,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -369,7 +367,7 @@ local WestPointHome = {
         {
             type = 'container',
             coords = {x=11603,y=6723,z=-1},
-            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
+            dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "PawnShopKnives",},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",

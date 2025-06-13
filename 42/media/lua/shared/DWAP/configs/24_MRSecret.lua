@@ -258,9 +258,7 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9846,y=13108,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -415,7 +413,7 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9833,y=13124,z=-1},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -569,7 +567,7 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9840,y=13120,z=-4},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -635,7 +633,7 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9849,y=13124,z=-3.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -718,7 +716,7 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9845,y=13118,z=-4},
-            dist = { "ArmyHangarTools", "CarSupplyTools", "GarageTools", },
+            dist = { "ArmyHangarTools", "GasStorageMechanics", "GarageTools", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

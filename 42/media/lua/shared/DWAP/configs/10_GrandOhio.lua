@@ -157,9 +157,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y-6,z=-4},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -181,7 +179,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-4,z=-4},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -692,7 +690,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+13,z=-4},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -725,7 +723,7 @@ local GrandOhioConfig = {
         {
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+14,z=-4},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -968,4 +966,24 @@ local GrandOhioConfig = {
     },
 }
 
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_46", x = 13610, y = 1269, z = -4, removeWall = "west" })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "fixtures_doors_01_64", x = 13610, y = 1269, z = -4, isDoor = true, doorN = false, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "floors_exterior_street_01_16", x = 13609, y = 1269, z = -4, isFloor = true, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13609, y = 1269, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "overlay_grime_wall_01_1", x = 13609, y = 1269, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13609, y = 1270, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "floors_exterior_street_01_16", x = 13546, y = 1278, z = -4, isFloor = true, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13546, y = 1278, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "overlay_grime_wall_01_1", x = 13546, y = 1278, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13546, y = 1279, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { x = 13482, y = 1300, z = 0, removeFloor = true, })
+    -- this ladder was fighting with me and wouldn't let me go down it while working fine going up, so I changed it to north facing
+    -- table.insert(GrandOhioConfig.objectSpawns, { x = 13545, y = 1278, z = -1, removeFloor = true, })
+    -- table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })
+    -- table.insert(GrandOhioConfig.generators[1].chunks, { 1622, 241 })
+    -- table.insert(GrandOhioConfig.generators[1].chunks, { 1621, 241 })
+    -- table.insert(GrandOhioConfig.generators[1].chunks, { 1620, 241 })
+    -- table.insert(GrandOhioConfig.generators[1].chunks, { 1619, 241 })
+end
 return GrandOhioConfig

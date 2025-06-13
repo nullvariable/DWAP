@@ -105,7 +105,7 @@ local RiversideMansion = {
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_MedLevel",
+            level = "Loot_LockersLevel",
         },
         -- NE bedroom
         {
@@ -145,7 +145,7 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6671,y=5514,z=1},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -299,9 +299,7 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6675,y=5504,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -315,7 +313,7 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6678,y=5504,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -365,7 +363,7 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6673,y=5512,z=-1},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -439,7 +437,7 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6676,y=5515,z=-1},
-            dist = { "CarSupplyTools", },
+            dist = { "CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -463,7 +461,6 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6676,y=5518,z=-1},
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
@@ -481,7 +478,6 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6676,y=5520,z=-1},
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },

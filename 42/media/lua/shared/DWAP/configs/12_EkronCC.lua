@@ -157,9 +157,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+20,y=genCoords.y-6,z=genCoords.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -181,7 +179,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+16,y=genCoords.y-4,z=genCoords.z},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -692,7 +690,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+13,z=genCoords.z},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -725,7 +723,7 @@ local EkronCC = {
         {
             type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+14,z=genCoords.z},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -967,5 +965,15 @@ local EkronCC = {
         },
     },
 }
+if getActivatedMods():contains("\\Ladders") then
+    -- table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_46", x = 13610, y = 1269, z = -4, removeWall = "west" })
+    table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_47", x = 754, y = 9796, z = -5, removeWall = "north", clearExisting = true, })
+    table.insert(EkronCC.objectSpawns, { sprite = "fixtures_doors_01_53", x = 754, y = 9796, z = -5, isDoor = true, doorN = true, })
+    table.insert(EkronCC.objectSpawns, { sprite = "floors_exterior_natural_01_10", x = 754, y = 9795, z = -5, isFloor = true, })
+    table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_32", x = 754, y = 9795, z = -5, })
+    table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_32", x = 755, y = 9795, z = -5, })
 
+    table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_02_16", x = 755, y = 9780, z = 0, })
+    table.insert(EkronCC.objectSpawns, { x = 754, y = 9780, z = 0, removeFloor = true, })
+end
 return EkronCC

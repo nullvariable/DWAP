@@ -104,15 +104,13 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=2061,y=5685,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=2061,y=5686,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -295,7 +293,7 @@ local PSDelilah = {
         {
             type = 'container',
             coords = {x=10154,y=6630,z=0.5},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",

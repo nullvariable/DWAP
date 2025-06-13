@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="19" height="3" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="12" Curtains="0" Shutters="10" Stairs="11" RoofCap="7" RoofSlope="8" RoofTop="9" GrimeWall="6">
+<building version="4" width="19" height="3" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="12" Curtains="0" Shutters="10" Stairs="11" RoofCap="7" RoofSlope="8" RoofTop="9" GrimeWall="6">
  <properties>
   <property name="BasementAccess" value="7 -1 N"/>
  </properties>
@@ -13,16 +13,6 @@
   <tile enum="WestOpen" tile="fixtures_bathroom_01_066"/>
   <tile enum="NorthOpen" tile="fixtures_bathroom_01_067"/>
  </tile_entry>
- <tile_entry category="exterior_wall_trim">
-  <tile enum="West" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="North" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="NorthWest" tile="location_shop_bargNclothes_01_031"/>
-  <tile enum="SouthEast" tile="location_shop_bargNclothes_01_030"/>
-  <tile enum="WestWindow" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="NorthWindow" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="WestDoor" tile=""/>
-  <tile enum="NorthDoor" tile=""/>
- </tile_entry>
  <tile_entry category="exterior_walls">
   <tile enum="West" tile="industry_01_000"/>
   <tile enum="North" tile="industry_01_001"/>
@@ -32,6 +22,16 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="industry_trucks_01_048"/>
+  <tile enum="North" tile="industry_trucks_01_049"/>
+  <tile enum="NorthWest" tile="industry_trucks_01_050"/>
+  <tile enum="SouthEast" tile="industry_trucks_01_051"/>
+  <tile enum="WestWindow" tile="industry_trucks_01_056"/>
+  <tile enum="NorthWindow" tile="industry_trucks_01_057"/>
+  <tile enum="WestDoor" tile="industry_trucks_01_058"/>
+  <tile enum="NorthDoor" tile="industry_trucks_01_059"/>
  </tile_entry>
  <tile_entry category="floors">
   <tile enum="Floor" tile="floors_exterior_natural_01_008"/>
@@ -218,7 +218,7 @@
   <tile tile="walls_exterior_house_02_019"/>
   <tile tile="walls_exterior_house_02_027"/>
  </user_tiles>
- <used_tiles>4 5</used_tiles>
+ <used_tiles>3 5 4</used_tiles>
  <used_furniture></used_furniture>
  <room Name="Room 1" InternalName="room1" Color="200 200 200" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <floor>

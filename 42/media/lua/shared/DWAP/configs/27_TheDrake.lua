@@ -197,7 +197,7 @@ local TheDrake = {
         {
             type = 'container',
             coords = {x=11909,y=6841,z=-1},
-            dist = {"ArmyStorageAmmunition", "GunStoreKnives", "DerelictHouseCrime" },
+            dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -574,9 +574,7 @@ local TheDrake = {
         {
             type = 'container',
             coords = {x=11908,y=6851,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -606,6 +604,13 @@ local TheDrake = {
         },
     },
 }
+
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(TheDrake.objectSpawns, { x = 11889, y = 6880, z = 0, removeFloor = true, })
+    table.insert(TheDrake.objectSpawns, { sprite = "location_business_office_generic_01_35", x = 11889, y = 6879, z = 0, })
+end
+
 -- CrateBeer CrateWine
 -- CrateBooks
 -- CrateElectronics

@@ -1,9 +1,9 @@
-local wtc1 = {x = 10766, y = 10554, z = 2,}
+local wtc1 = {x = 10772, y = 10551, z = -1,}
 local RustyRifle = {
     spawn = { x = 10748, y = 10543, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 10755, y = 10530, z = 0, },
+            controls = { sprite = "industry_02_67", x = 10770, y = 10551, z = -1, },
             chunks = {
                 {1343, 1317},
                 {1343, 1318},
@@ -18,17 +18,20 @@ local RustyRifle = {
                 {1347, 1320},
                 {1347, 1321},
                 {1347, 1322},
-                {1345, 1319},
                 {1345, 1320},
                 {1345, 1321},
                 {1345, 1322},
                 {1346, 1322},
                 {1344, 1316},
+                {1346, 1319},
+                {1347, 1318},
+                {1347, 1319},
+                {1346, 1320},
             },
         },
     },
     waterTanks = {
-        { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = 10755, y = 10530, z = 0} },
+        { sprite = "industry_02_72", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = 10770, y = 10551, z = -1} },
     },
     waterFixtures = {
         -- owner's suite
@@ -48,6 +51,7 @@ local RustyRifle = {
         -- shelter
         { sprite = "fixtures_bathroom_01_3", x = 10764, y = 10557, z = -1, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
         { sprite = "fixtures_sinks_01_16", x = 10760, y = 10556, z = -1, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
+        { sprite = "fixtures_sinks_01_17", x = 10764, y = 10562, z = -1, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
     },
     doorKeys = {
         name = "Rusty Rifle",
@@ -61,7 +65,7 @@ local RustyRifle = {
     },
     map = { name = "DWAPStashMap23", },
     objectSpawns = {
-        { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
+        -- { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
         { sprite = "camping_01_64", x = 10776, y = 10563, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
         { sprite = "fixtures_railings_01_29", x = 10777, y = 10577, z = 0, clearExisting = true, }, -- basement railing
@@ -73,30 +77,29 @@ local RustyRifle = {
         -- between basements door
         { sprite = "location_sewer_01_19", x = 10765, y = 10548, z = -1, replaceWall = true, },
         { sprite = "fixtures_doors_01_9", x = 10765, y = 10548, z = -1, isDoor = true, doorN = true, },
-        { sprite = "location_sewer_01_0", x = 10765, y = 10548, z = -1, replaceWall = false, },
         { sprite = "location_sewer_01_0", x = 10766, y = 10548, z = -1, replaceWall = true, },
 
-        { sprite = "industry_02_64", x = 10752, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, }, -- generator
-        { sprite = "industry_02_68", x = 10752, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_65", x = 10753, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_69", x = 10753, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_66", x = 10754, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_70", x = 10754, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_67", x = 10755, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
-        { sprite = "industry_02_71", x = 10755, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_64", x = 10752, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, }, -- generator
+        -- { sprite = "industry_02_68", x = 10752, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_65", x = 10753, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_69", x = 10753, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_66", x = 10754, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_70", x = 10754, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_67", x = 10755, y = 10530, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
+        -- { sprite = "industry_02_71", x = 10755, y = 10529, z = 0, enabled = "EnableGenSystem", clearExisting = false, },
 
-        { sprite = "blends_street_01_55", x = 10752, y = 10529, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10752, y = 10530, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10752, y = 10531, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10753, y = 10529, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10753, y = 10530, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10753, y = 10531, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10754, y = 10529, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10754, y = 10530, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10754, y = 10531, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10755, y = 10529, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10755, y = 10530, z = 0, isFloor = true, },
-        { sprite = "blends_street_01_55", x = 10755, y = 10531, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10752, y = 10529, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10752, y = 10530, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10752, y = 10531, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10753, y = 10529, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10753, y = 10530, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10753, y = 10531, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10754, y = 10529, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10754, y = 10530, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10754, y = 10531, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10755, y = 10529, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10755, y = 10530, z = 0, isFloor = true, },
+        -- { sprite = "blends_street_01_55", x = 10755, y = 10531, z = 0, isFloor = true, },
 
         -- basement bookshelves
         { sprite = "furniture_shelving_01_40", x = 10764, y = 10542, z = -1, isContainer = true, clearExisting = false, },
@@ -194,15 +197,13 @@ local RustyRifle = {
         {
             type = 'container',
             coords = {x=10753,y=10546,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
             coords = {x=10755,y=10546,z=1.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -413,7 +414,7 @@ local RustyRifle = {
         {
             type = 'container',
             coords = {x=10751,y=10542,z=0},
-            dist = { "GunStoreKnives", },
+            dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",
@@ -629,7 +630,7 @@ local RustyRifle = {
         {
             type = 'container',
             coords = {x=10781,y=10568,z=0},
-            dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
+            dist = {"CampingStoreTools", "ArmyHangarTools", "GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -727,5 +728,12 @@ local RustyRifle = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(RustyRifle.objectSpawns, { x = 10752, y = 10547, z = 0, removeFloor = true, })
+else
+    table.insert(RustyRifle.objectSpawns, { sprite = "location_sewer_01_0", x = 10765, y = 10548, z = -1, replaceWall = false, })
+end
+
 
 return RustyRifle

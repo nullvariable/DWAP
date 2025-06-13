@@ -1,5 +1,4 @@
 local wtc = {x = 10158, y = 6620, z = -1} -- waterTankCoords
-local bunkerTopLeft = {x = 10144, y = 6614, z = -2}
 local WWestPointSafeHouse = {
     spawn = { x = 10162, y = 6622, z = 1 },
     waterTanks = {
@@ -22,8 +21,10 @@ local WWestPointSafeHouse = {
         { sprite = "fixtures_bathroom_01_55", x = 10163, y = 6630, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
 
         -- basement fixtures
-        { sprite = "fixtures_sinks_01_16", x = 10144, y = 6618, z = -2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_6", x = 10146, y = 6622, z = -2, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_35", x = 10156, y = 6621, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_33", x = 10146, y = 6631, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_16", x = 10146, y = 6635, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_6", x = 10148, y = 6631, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
         name = "W West Point Safe House",
@@ -36,10 +37,11 @@ local WWestPointSafeHouse = {
     map = { name = "DWAPStashMap8", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, ghost = false, },
+            controls = { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, },
             chunks = {
                 {1268, 827},
                 {1268, 828},
+                {1268, 829},
                 {1269, 827},
                 {1269, 828},
                 {1269, 829},
@@ -49,47 +51,47 @@ local WWestPointSafeHouse = {
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_64", x = 10146, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 10146, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_65", x = 10147, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 10147, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_66", x = 10148, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 10148, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 10149, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_64", x = 10146, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
+        -- { sprite = "industry_02_68", x = 10146, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_65", x = 10147, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_69", x = 10147, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_66", x = 10148, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_70", x = 10148, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_67", x = 10149, y = 6620, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_71", x = 10149, y = 6619, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
 
-        { x = 10146, y = 6621, z = -1, clearExisting = true, },
-        { x = 10146, y = 6622, z = -1, clearExisting = true, },
-        { x = 10146, y = 6623, z = -1, clearExisting = true, },
-        { x = 10146, y = 6624, z = -1, clearExisting = true, },
-        { x = 10146, y = 6625, z = -1, clearExisting = true, },
+        -- { x = 10146, y = 6621, z = -1, clearExisting = true, },
+        -- { x = 10146, y = 6622, z = -1, clearExisting = true, },
+        -- { x = 10146, y = 6623, z = -1, clearExisting = true, },
+        -- { x = 10146, y = 6624, z = -1, clearExisting = true, },
+        -- { x = 10146, y = 6625, z = -1, clearExisting = true, },
 
-        { sprite = "industry_02_224", x = 10157, y = 6619, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_224", x = 10157, y = 6618, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_224", x = 10157, y = 6617, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_224", x = 10157, y = 6616, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_250", x = 10157, y = 6615, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_52", x = 10161, y = 6585, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_224", x = 10161, y = 6586, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_224", x = 10161, y = 6587, z = 0, enabled = "EnableWaterSystem", },
-        { sprite = "industry_02_252", x = 10161, y = 6588, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10157, y = 6619, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10157, y = 6618, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10157, y = 6617, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10157, y = 6616, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_250", x = 10157, y = 6615, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_52", x = 10161, y = 6585, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10161, y = 6586, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_224", x = 10161, y = 6587, z = 0, enabled = "EnableWaterSystem", },
+        -- { sprite = "industry_02_252", x = 10161, y = 6588, z = 0, enabled = "EnableWaterSystem", },
 
         { sprite = "trashcontainers_01_24", x = 10150, y = 6626, z = 0, enabled = "Loot", },
 
         -- shelf replacements
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
-        { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+7, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+6, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+5, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 0, enabled = "Loot", clearExisting = true, isContainer = true, },
+        -- { sprite = "location_military_generic_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+1, z = bunkerTopLeft.z, renderYOffset = 32, enabled = "Loot", clearExisting = false, isContainer = true, },
 
-        { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
-        { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
+        -- { sprite = "furniture_tables_high_01_16", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z, clearExisting = true },
+        -- { sprite = "appliances_com_01_0", x = bunkerTopLeft.x+2, y = bunkerTopLeft.y+2, z = bunkerTopLeft.z,  IsoType = "IsoRadio" }, -- renderYOffset = 34,
 
         { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_5", x = 10157, y = 6633, z = 0, },
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_02_9", x = 10160, y = 6632, z = 0, },
@@ -99,16 +101,16 @@ local WWestPointSafeHouse = {
         { barricade = "woodhalf", enabled = "Barricade", target="walls_interior_house_04_72", x = 10149, y = 6623, z = 0, },
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        { -- cabinet next to bunk beds
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
+            coords = {x=10146,y=6637,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
+            coords = {x=10146,y=6636,z=-1+0.5},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -116,17 +118,15 @@ local WWestPointSafeHouse = {
         },
         { -- lower (66)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            coords = {x=10146,y=6636,z=-1},
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            coords = {x=10146,y=6635,z=-1+0.5},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -134,8 +134,8 @@ local WWestPointSafeHouse = {
         { -- lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
-            dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
+            coords = {x=10146,y=6635,z=-1},
+            dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MedLevel",
@@ -143,7 +143,7 @@ local WWestPointSafeHouse = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
+            coords = {x=10146,y=6634,z=-1+0.5},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -152,78 +152,23 @@ local WWestPointSafeHouse = {
         { -- lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            dist = {"SewingStoreTools"},
+            coords = {x=10146,y=6634,z=-1},
+            dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_TailorLevel",
+            level = "Loot_FoodLevel",
         },
-        { -- metal shelves (70)
+        { --crates by shower
             type = 'container',
-            sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
-            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
-        },
-        { -- metal shelves (71)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
-            sandboxEnable = 'SeedLibrary',
-            special = 'SeedLibrary',
-        },
-        { -- next to inner door (9372)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
-        },
-        { -- (73)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- (9374)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- far end next to stairs (9375)
-            type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot',
-            special = "essentials",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
-            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        { -- metal wall shelves
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
+            coords = {x=10146,y=6633,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-
-        -- extra spawns
-        {
+        { --crates by shower
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            coords = {x=10146,y=6632,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -231,14 +176,81 @@ local WWestPointSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            coords = {x=10148,y=6632,z=-1},
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
+        {
+            type = 'container',
+            coords = {x=10148,y=6633,z=-1},
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10148,y=6634,z=-1},
+            dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        { -- mil locker
+            type = 'container',
+            coords = {x=10148,y=6638,z=-1},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        { -- mil locker
+            type = 'container',
+            coords = {x=10148,y=6639,z=-1},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        -- "bunker" entryway
+        {
+            type = 'container',
+            coords = {x=10148,y=6627,z=-1},
+            sandboxEnable = 'Loot',
+            special = "essentials",
+        },
+        {
+            type = 'container',
+            coords = {x=10148,y=6628,z=-1},
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
+        },
+        {
+            type = 'container',
+            coords = {x=10148,y=6629,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
+        },
+        {
+            type = 'container',
+            coords = {x=10148,y=6630,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks2",
+        },
+        {
+            type = 'container',
+            coords = {x=10146,y=6629,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
+        },
+        {
+            type = 'container',
+            coords = {x=10146,y=6630,z=-1},
+            dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_TailorLevel",
+        },
 
-        -- first basement
+        -- main basement
         {
             type = 'container',
             coords = {x=10158,y=6622,z=-1},
@@ -274,6 +286,22 @@ local WWestPointSafeHouse = {
             randUntilFull = true,
             frozen = true,
             level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10150,y=6626,z=-1},
+            dist = {"ArtStorePottery","CrateMasonry" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=10151,y=6626,z=-1},
+            dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
         },
         {
             type = 'container',
@@ -367,7 +395,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10154,y=6630,z=0.5},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -399,9 +427,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10162,y=6631,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -423,7 +449,7 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10163,y=6628,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
+            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -542,12 +568,30 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10150,y=6625,z=1.5},
-            dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
-            distIncludeJunk = true,
+            dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
+            distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
     },
 }
+--[[
+1267 828
+1267 829
+1267 830
+1267 831
+1268 828
+--]]
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "industry_trucks_01_14", x = 10146, y = 6628, z = -1, removeWall = "west" })
+    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "fixtures_doors_frames_01_4", x = 10146, y = 6628, z = -1, })
+    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "fixtures_doors_01_56", x = 10146, y = 6628, z = -1, isDoor = true, doorN = false, })
+    table.insert(WWestPointSafeHouse.objectSpawns, { x = 10143, y = 6679, z = 0, removeFloor = true, })
+    table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 828 })
+    table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 829 })
+    table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 830 })
+    table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 831 })
+    table.insert(WWestPointSafeHouse.generators[1].chunks, { 1268, 828 })
+end
 
 return WWestPointSafeHouse
