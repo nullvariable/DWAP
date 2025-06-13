@@ -24,16 +24,28 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field barricade? string barricade type
 --- @field target? string barricade object to target
 --- @field IsoType? string IsoType
+--- @field removeFloor? boolean remove the floor
+--- @field removeWall? "north"|"west" remove the wall
+--- @field delete? boolean if true, the object will be deleted instead of spawned
 
+local MODULUS_32_BIT = 4294967296
 --- @param spawn objectSpawn
 --- @return number
-local function hashObjectSpawn(spawn)
+local hashObjectSpawn = function(spawn)
+    spawn = spawn or {}
     local h = 5381
     local str = spawn.sprite or ""
     for i = 1, #str do
-       h = h*32 + h + str:byte(i)
+       h = h * 33 + str:byte(i)
+       h = h % MODULUS_32_BIT
     end
-    return hashCoords(spawn.x, spawn.y, spawn.z) + h
+
+    local coordHash = hashCoords(spawn.x, spawn.y, spawn.z)
+
+    h = h + coordHash
+    h = h % MODULUS_32_BIT
+
+    return h
 end
 
 local function canDestroy(object)
@@ -94,6 +106,7 @@ end
 --- @param sprite string
 local function clearObjectsExcluding(objects, square, sprite)
     local size = objects:size() -1
+    DWAPUtils.dprint(("clearObjectsExcluding size: %s"):format(size))
     for j = size, 0, -1 do
         local sqObject = objects:get(j)
         if sqObject and canDestroy(sqObject) and sqObject:getTextureName() ~= sprite then
@@ -193,10 +206,38 @@ function DWAP_Props.maybeSpawnObject(params)
     if params.clearExisting then
         clearObjectsExcluding(existingObjects, square, params.sprite)
     end
+    if params.removeFloor then
+        DWAPUtils.dprint(("DWAP_Props: Removing floor %s %s %s"):format(params.x, params.y, params.z))
+        IsoObjectUtils.removeFloor(square)
+    end
+    if params.removeWall then
+        DWAPUtils.dprint(("DWAP_Props: Removing wall %s %s %s"):format(params.x, params.y, params.z))
+        IsoObjectUtils.removeWall(square, params.removeWall)
+    end
     if params.replaceWall then
         clearWalls(existingObjects, square, params.sprite)
     end
-    if params.sprite and (not getSpriteObject(existingObjects, params.sprite) or params.renderYOffset) then
+    local object, size = getSpriteObject(existingObjects, params.sprite)
+    if object then
+        DWAPUtils.dprint(("DWAP_Props: Found existing object %s %s %s"):format(tostring(params.sprite), params.x, params.y))
+        if params.delete then
+            for i = size, 0, -1 do
+                local sqObject = existingObjects:get(i)
+                if sqObject and sqObject:getSpriteName() == params.sprite then
+                    DWAPUtils.dprint(("DWAP_Props: Deleting object %s %s %s"):format(params.sprite, params.x, params.y))
+                    square:transmitRemoveItemFromSquare(sqObject)
+                    square:RemoveTileObject(sqObject)
+                    sledgeDestroy(sqObject)
+                end
+            end
+            DWAPUtils.dprint(("DWAP_Props: Deleted object %s %s %s"):format(params.sprite, params.x, params.y))
+            return
+        end
+    elseif params.delete then
+        DWAPUtils.dprint(("DWAP_Props: Not deleting object %s %s %s, because it doesn't exist"):format(tostring(params.sprite), params.x, params.y))
+        return
+    end
+    if params.sprite and (not object or params.renderYOffset) then
         local prop
         if params.isContainer then
             DWAPUtils.dprint(("DWAP_Props: Adding container %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
@@ -269,6 +310,8 @@ function DWAP_Props.maybeSpawnObject(params)
             -- DWAPSquareLoaded:RunHook('PropSpawned', params.x, params.y, params.z, params)
             DWAP_Props.runHookOnExist(prop, params, 0)
         -- end)
+    else
+        DWAPUtils.dprint(("DWAP_Props: Not adding %s to %s %s, clearExisting: %s, barricade: %s"):format(tostring(params.sprite), tostring(params.x), tostring(params.y), tostring(params.clearExisting), tostring(params.barricade)))
     end
     if params.barricade and params.target then
         for i = 0, existingObjects:size() - 1 do
@@ -331,6 +374,18 @@ Events.OnInitGlobalModData.Add(function()
         modData.init = true
         modData.spawned = {}
     end
+    local DWAP_UtilsmodData = ModData.getOrCreate("DWAP_Utils")
+        if DWAP_UtilsmodData.saveVersion and DWAP_UtilsmodData.saveVersion < 16 then
+            hashObjectSpawn = function(spawn)
+            local h = 5381
+            local str = spawn.sprite or ""
+            for i = 1, #str do
+            h = h*32 + h + str:byte(i)
+            end
+            return hashCoords(spawn.x, spawn.y, spawn.z) + h
+        end
+    end
+
     local configs = DWAPUtils.loadConfigs()
     DWAPUtils.dprint("DWAP_Props.OnInitGlobalModData "..#configs)
     for i = 1, #configs do
