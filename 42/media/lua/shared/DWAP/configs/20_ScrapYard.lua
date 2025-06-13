@@ -791,6 +791,9 @@ end
 if getActivatedMods():contains("\\Ladders") then
     table.insert(ScrapYard.objectSpawns, { x = 2940, y = 12561, z = -1, removeWall = "west" })
     table.insert(ScrapYard.objectSpawns, { x = 2939, y = 12561, z = 0, removeFloor = true, clearExisting = true, })
+    --------- TEMP FIX UNTIL LADDERS MOD IS FIXED. It breaks for west facing ladders if they have a wall on the north
+    table.insert(ScrapYard.objectSpawns, { x = 2939, y = 12561, z = 0, removeWall = "north" })
+    ---------
     table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_23", delete = true, x = 2941, y = 12564, z = -1 })
     table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_22", delete = true, x = 2941, y = 12563, z = -1 })
     table.insert(ScrapYard.objectSpawns, { sprite = "fixtures_railings_01_21", delete = true, x = 2941, y = 12562, z = -1 })
