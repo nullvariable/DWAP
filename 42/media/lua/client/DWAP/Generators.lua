@@ -11,6 +11,7 @@ DWAP_Gen = {
     cell = nil,
     chunksByHash = {}, -- controlIndex
     generators = {},
+    AutoPowerDone = false,
     emitters = {},
     ready = false,
     pendingChunks = table.newarray(),
@@ -40,19 +41,35 @@ local function calculateChunkBounds(wx, wy)
     return startX, startY, endX, endY
 end
 
+local function getCenterFromWXWY(wx, wy)
+    local startX, startY, endX, endY = calculateChunkBounds(wx, wy)
+    return math.floor((startX + endX) / 2), math.floor((startY + endY) / 2)
+end
+
+local function centerKey(wx, wy)
+    local x, y = getCenterFromWXWY(wx, wy)
+    return ("%s-%s"):format(x, y), x, y
+end
+
 local function getChunkCenterXY(chunk)
     local wx = Reflection.getField(chunk, "wx")
     local wy = Reflection.getField(chunk, "wy")
-    local startX, startY, endX, endY = calculateChunkBounds(wx, wy)
-    return math.floor((startX + endX) / 2), math.floor((startY + endY) / 2), wx, wy
+    local x, y = getCenterFromWXWY(wx, wy)
+    return x, y, wx, wy
+    -- local startX, startY, endX, endY = calculateChunkBounds(wx, wy)
+    -- return math.floor((startX + endX) / 2), math.floor((startY + endY) / 2), wx, wy
 end
 
 local function powerChunk(chunk)
     local bottom = chunk:getMinLevel()
     local top = chunk:getMaxLevel()
     local x, y, wx, wy = getChunkCenterXY(chunk)
-    DWAPUtils.dprint(("Adding generator pos %s %s %s-%s %s %s"):format(x, y, bottom, top, wx, wy))
-    for i = bottom, top do
+    -- DWAPUtils.dprint(("Adding generator pos %s %s %s-%s %s %s"):format(x, y, bottom, top, wx, wy))
+    local interval = SandboxVars.GeneratorVerticalPowerRange or 1
+    if interval < 1 then
+        interval = 1
+    end
+    for i = bottom, top, interval do
         chunk:addGeneratorPos(x, y, i)
     end
 end
@@ -108,6 +125,9 @@ end
 
 function DWAP_Gen:chunkLoaded(chunk)
     local hash, wx, wy = getChunkHash(chunk)
+    local _centerKey, cx, cy = centerKey(wx, wy)
+    self.activeChunks[_centerKey] = {x = cx, y = cy, wx = wx, wy = wy, hash = hash}
+    self.activeChunksByHash[hash] = true
     if self.chunksByHash[hash] then
         DWAPUtils.dprint("DWAP_Gen: Chunk with hash loaded")
         local gen = self.generators[self.chunksByHash[hash]]
@@ -137,17 +157,31 @@ Events.LoadChunk.Add(function(chunk)
     DWAP_Gen:chunkLoaded(chunk)
 end)
 
+-- local refreshRange = 6
 local refreshNearbyChunks
 function DWAP_Gen:RefreshNearbyChunks()
-    local pSquare = getPlayer():getCurrentSquare()
-    local pchunk = pSquare:getChunk()
-    if pchunk then
-        local _, wx, wy = getChunkHash(pchunk)
-        for i = wx -2, wx + 2 do
-            for j = wy - 2, wy + 2 do
-                local chunk = DWAP_Gen.cell:getChunk(i, j)
-                if chunk then
-                    DWAP_Gen:chunkLoaded(chunk)
+    -- local pSquare = getPlayer():getCurrentSquare()
+    -- local pchunk = pSquare:getChunk()
+    -- if pchunk then
+    --     local _, wx, wy = getChunkHash(pchunk)
+    --     for i = wx -refreshRange, wx + refreshRange do
+    --         for j = wy - refreshRange, wy + refreshRange do
+    --             local chunk = DWAP_Gen.cell:getChunk(i, j)
+    --             if chunk then
+    --                 DWAP_Gen:chunkLoaded(chunk)
+    --             end
+    --         end
+    --     end
+    -- end
+    if self.activeChunks then
+        for _, chunk in pairs(self.activeChunks) do
+            local gen = self.generators[self.chunksByHash[chunk.hash]]
+            if gen and gen.running then
+                local wx, wy = chunk.wx, chunk.wy
+                local cchunk = DWAP_Gen.cell:getChunk(wx, wy)
+                if cchunk then
+                    -- powerChunkFromXY
+                    powerChunk(cchunk)
                 end
             end
         end
@@ -158,6 +192,23 @@ refreshNearbyChunks = function()
 end
 
 Events.OnExitVehicle.Add(refreshNearbyChunks)
+
+local unloadSquare
+function DWAP_Gen:unloadSquare(square)
+    if not square then
+        return
+    end
+    local x, y = square:getX(), square:getY()
+    local key = ("%s-%s"):format(x, y)
+    if self.activeChunks[key] then
+        self.activeChunksByHash[self.activeChunks[key].hash] = nil
+        self.activeChunks[key] = nil
+    end
+end
+unloadSquare = function(square)
+    return DWAP_Gen:unloadSquare(square)
+end
+
 
 
 function DWAP_Gen:GetGenerator(index)
@@ -235,6 +286,19 @@ end
 function DWAP_Gen:hourlyTick()
     local fuelUsed = SandboxVars.DWAP.GeneratorPerHour or 0.5
     if not self.generators then return end
+    if not self.AutoPowerDone and not DWAPUtils.WorldPowerStillAvailable() then
+        for i = 1, #self.generators do
+            local gen = self.generators[i]
+            if not gen.running then
+                gen.running = true
+                self:TurnOnGen(i)
+            end
+        end
+        self.AutoPowerDone = true
+        DWAP_GenData.AutoPowerDone = true
+        DWAP_Gen:SaveModData()
+        DWAPUtils.dprint("DWAP_Gen: Auto power enabled")
+    end
     for i = 1, #self.generators do
         local gen = self.generators[i]
         if gen.running then
@@ -253,11 +317,13 @@ function DWAP_Gen:hourlyTick()
             end
         end
     end
-    self:RefreshNearbyChunks()
-    self:SaveModData()
 end
 Events.EveryHours.Add(function()
     DWAP_Gen:hourlyTick()
+    DWAP_Gen:SaveModData()
+end)
+Events.EveryOneMinute.Add(function()
+    DWAP_Gen:RefreshNearbyChunks()
 end)
 
 function DWAP_Gen:SaveModData()
@@ -343,19 +409,31 @@ end
 
 function DWAP_Gen:initModData(isNewGame)
     if SandboxVars.DWAP.EnableGenSystem then
+        self.activeChunks = {}
+        self.activeChunksByHash = {}
         DWAP_GenData = ModData.getOrCreate("DWAP_GenData")
-        DWAPUtils.dprint("DWAP_Gen.initModData")
-        DWAPUtils.dprint({
-            DWAP_GenData = DWAP_GenData,
-            isNewGame = isNewGame,
-            power = DWAPUtils.WorldPowerStillAvailable(),
-        })
+        -- DWAPUtils.dprint("DWAP_Gen.initModData")
+        -- DWAPUtils.dprint({
+        --     DWAP_GenData = DWAP_GenData,
+        --     isNewGame = isNewGame,
+        --     power = DWAPUtils.WorldPowerStillAvailable(),
+        -- })
         if not DWAP_GenData or not DWAP_GenData.init or isNewGame then
+            local wpStillAvail = DWAPUtils.WorldPowerStillAvailable()
             local configs = DWAPUtils.loadConfigs()
             DWAP_GenData.init = true
+            DWAP_GenData.AutoPowerDone = false
+            if not SandboxVars.DWAP.AutoPowerGenSystem then
+                DWAP_GenData.AutoPowerDone = true
+            end
             DWAP_GenData.generators = table.newarray()
 
-            local running = not DWAPUtils.WorldPowerStillAvailable()
+            local running = false
+            if not wpStillAvail and SandboxVars.DWAP.AutoPowerGenSystem then
+                running = true
+                DWAP_GenData.AutoPowerDone = true
+                self.AutoPowerDone = true
+            end
             for i = 1, #configs do
                 local config = configs[i]
                 if config then
@@ -396,6 +474,7 @@ function DWAP_Gen:initModData(isNewGame)
             DWAPUtils.dprint(DWAP_GenData.generators)
             self:SaveModData()
         else
+            self.AutoPowerDone = DWAP_GenData.AutoPowerDone
             self.generators = DWAP_GenData.generators
             -- chunksByHash
             for i = 1, #self.generators do
@@ -427,3 +506,26 @@ Events.OnLoad.Add(function()
     DWAP_Gen.ready = true
     DWAP_Gen:loadpending()
 end)
+Events.ReuseGridsquare.Add(unloadSquare)
+
+-- -- fridge/freezer logic
+-- Events.LoadGridsquare.Add(function(square)
+--     if not square then return end
+--     local chunk = square:getChunk()
+--     if not chunk then return end
+--     local hash = getChunkHash(chunk)
+--     if DWAP_Gen.activeChunksByHash[hash] then
+--         local objects = square:getObjects()
+--         local size = objects:size() - 1
+--         for i = 0, size do
+--             local obj = objects:get(i)
+--             if not instanceof(obj, 'IsoWorldInventoryObject') then
+--                 for containerIndex = 0,obj:getContainerCount()-1 do
+--                     local container = obj:getContainerByIndex(containerIndex)
+--                     local type = container:getType()
+--                     if type == "fridge" or type == "freezer" then
+                        
+--             end
+--         end
+--     end
+-- end)

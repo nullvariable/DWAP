@@ -56,6 +56,14 @@ option DWAP.EnableGenSystem
 	page = DWAPGeneral,
 	translation = DWAP_EGS,
 }
+option DWAP.AutoPowerGenSystem
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_APGS,
+}
 
 option DWAP.GeneratorFuel
 {
