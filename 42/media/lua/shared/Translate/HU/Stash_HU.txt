@@ -1,0 +1,8 @@
+Stash_HU = {
+    Stash_DWAP_09_text1 = "Legfelső emelet, kellékek az alagsorban",
+    Stash_DWAP_10_text1 = "Fallout menedék lépcsők a biztonsági iroda mögött",
+    Stash_DWAP_12_text1 = "Fallout menedékhely az alagsorban",
+    Stash_DWAP_31_text1 = "Vigyázzon a barlang -insre",
+    Stash_DWAP_31_text2 = "Tegyen utat az alagsori könyvtárba",
+    Stash_DWAP_32_text1 = "Vedd el a lift",
+}

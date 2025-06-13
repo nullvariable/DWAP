@@ -1,0 +1,160 @@
+Sandbox_UA = {
+	Sandbox_DWAPGeneral = "Дядько Дейв був підготовкою",
+
+	Sandbox_DWAP_Loot_Safehouse = "Сейф",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "Випадковий",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "Долина Лін",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "Echo Creek",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W Louisville",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "Березневий хребет бункер",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Малдрау",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "Ріковироба",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "Розуд",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W West Point",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "Lowry Court Livel",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "Гранд Огайо",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "Ekron Comm Coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "Ломбард Лвілл",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Livel Autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Екрон -Лейк Будинок",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "Реабілітація тварин",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Центральний особняк Лвілла",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "Скрапінг",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "Фабрика Екрона",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "Іржава гвинтівка",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "Березневий хребет секрет",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Ріверсайдський особняк",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "Вест -Пойнт додому",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Дрейк",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Екрон Свиняча ферма",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Лвілл 3 домашній комплекс",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Бранденбургський таунхаус",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Тюремна перерва",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Садиба",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Темне озеро Валлоу",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Східна мисливська каюта",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Мулдрау Лабораторія наркотиків",
+
+	Sandbox_DWAP_EnableAll = "Увімкнути всі безпечні будинки",
+	Sandbox_DWAP_EnableAll_tooltip = "Не рекомендується, ключі, карта та нерест все ще будуть лише для вибраного варіанту",
+
+	Sandbox_DWAP_SpawnInBase = "Нерест у Safehouse",
+	Sandbox_DWAP_SpawnInBase_tooltip = "Почніть всередині сейфу з клавішами",
+
+	Sandbox_DWAP_Keys = "Почніть з карти та клавіш",
+	Sandbox_DWAP_Keys_tooltip = "Отримайте карту безпечного будинку та ключі для нього",
+
+	Sandbox_DWAP_Barricade = "Safhouse забарикадований",
+	Sandbox_DWAP_Barricade_tooltip = "Більшість дверей та вікон почнуться з барикад",
+
+	Sandbox_DWAP_EWC = "Увімкнути водну систему",
+	Sandbox_DWAP_EWC_tooltip = "Використовуйте водну систему мод, з резервуарами з водою та всіма світильниками, що піднялися до резервуарів",
+	
+	Sandbox_DWAP_EGS = "Увімкнути систему генератора",
+	Sandbox_DWAP_EGS_tooltip = "Використовуйте генератори MOD, які забезпечують живлення для всього сейфу",
+	Sandbox_DWAP_EWC_tooltip = "Використовуйте водну систему мод, з резервуарами з водою та всіма світильниками, що піднялися до резервуарів",
+	
+	Sandbox_DWAP_APGS = "Система автоматичного запуску генератора",
+	Sandbox_DWAP_APGS_tooltip = "Генератори виявлять втрати потужності та автоматично запускаються",
+	
+	Sandbox_DWAP_Fuel = "Генератор палива",
+	Sandbox_DWAP_Fuel_tooltip = "Скільки палива повинен починати генератор (и)",
+
+	Sandbox_DWAP_Tank = "Генератор",
+	Sandbox_DWAP_Tank_tooltip = "Скільки палива повинен бути здатний зберігати",
+
+	Sandbox_DWAP_PerHour = "Швидкість палива генератора",
+	Sandbox_DWAP_PerHour_tooltip = "Скільки палива слід використовувати кожну в ігрову годину",
+
+	Sandbox_DWAP_Condition = "Стан генератора",
+	Sandbox_DWAP_Condition_tooltip = "Подібно до генераторів ваніл, від 0 до 100",
+
+	Sandbox_DWAP_WaterLevel = "Рівень води",
+	Sandbox_DWAP_WaterLevel_tooltip = "Скільки вода має почати резервуари",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "Резервуар",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Яка максимальна ємність для резервуарів для води",
+
+	Sandbox_DWAP_Loot = "Бейнхаус приладдя",
+	Sandbox_DWAP_Loot_tooltip = "Якщо в сейфі має спеціальні стравні нерести",
+	Sandbox_DWAP_Loot_value_option1 = "Тільки первинний",
+	Sandbox_DWAP_Loot_value_option2 = "Все",
+	Sandbox_DWAP_Loot_value_option3 = "Первинний нормальний, інші низькі",
+	Sandbox_DWAP_Loot_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_EnableMaps = "Граб -> карти",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Приходження всіх карт",
+
+	Sandbox_DWAP_Loot_EnableBooks = "Грабеж -> Книги навичок",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Приход усіх книг про навички",
+
+	Sandbox_DWAP_Loot_MediaLevel = "Грабеж -> медіа",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Книги, компакт -диски тощо",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_FoodLevel = "Граб -> їжа",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_GunLevel = "Грабеж -> гармати",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_MedLevel = "Грабеж -> медичні засоби",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_SeedLibrary = "Насіннєва бібліотека",
+	Sandbox_DWAP_SeedLibrary_tooltip = "Деякі з кожного насіння в грі",
+
+	Sandbox_DWAP_Loot_FarmLevel = "Лут -> Сільські запаси",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_FishLevel = "Заблоковка -> Рибальські запаси",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_TailorLevel = "Грабеж -> Пошиті приладдя",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_LockersLevel = "Грабеж -> одяг",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "Грабеж -> Інструменти",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Ні",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "Грабеж -> будівельні килимки",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Залежно від Safehouse, менші матимуть значно менше",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Високий",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Середній",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Низький",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "Ні",
+
+}

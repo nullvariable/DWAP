@@ -1,0 +1,8 @@
+Stash_IT = {
+    Stash_DWAP_09_text1 = "Top Floor, Forniture nel seminterrato",
+    Stash_DWAP_10_text1 = "scale di rifugio fallout dietro l'ufficio di sicurezza",
+    Stash_DWAP_12_text1 = "Riparo fallout nel seminterrato",
+    Stash_DWAP_31_text1 = "Attento delle caverne",
+    Stash_DWAP_31_text2 = "Fatti strada verso la biblioteca nel seminterrato",
+    Stash_DWAP_32_text1 = "Prendi l'ascensore",
+}

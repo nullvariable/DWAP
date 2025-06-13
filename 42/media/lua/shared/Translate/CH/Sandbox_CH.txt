@@ -1,0 +1,160 @@
+Sandbox_CH = {
+	Sandbox_DWAPGeneral = "戴夫叔叔是一個預先",
+
+	Sandbox_DWAP_Loot_Safehouse = "安全屋",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "隨機的",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "多伊谷",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "迴聲溪",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W路易斯維爾",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "三月嶺掩體",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "河邊",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "玫瑰木",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W西點",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "洛瑞法院萊維爾",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "俄亥俄州大",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "Ekron Comm Coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "Lville Pawnshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Lville Autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "埃克倫湖之家",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "動物康復",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "中央lville豪宅",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "廢料",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "埃克倫工廠",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "科爾特曼醫療",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "生鏽的步槍",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "三月嶺的秘密",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "河濱豪宅",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "西點之家",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "德雷克",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "勃蘭登堡聯排別墅",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "越獄",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "奎爾莊園",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "黑暗的沃洛湖",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "東部狩獵小屋",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh毒品實驗室",
+
+	Sandbox_DWAP_EnableAll = "啟用所有安全屋",
+	Sandbox_DWAP_EnableAll_tooltip = "不推薦，鍵，地圖和產卵仍然只適用於選定的選項",
+
+	Sandbox_DWAP_SpawnInBase = "在安全屋中產卵",
+	Sandbox_DWAP_SpawnInBase_tooltip = "用鑰匙開始在安全屋內",
+
+	Sandbox_DWAP_Keys = "從地圖和鑰匙開始",
+	Sandbox_DWAP_Keys_tooltip = "獲取安全屋和鑰匙的地圖",
+
+	Sandbox_DWAP_Barricade = "安全屋被封鎖",
+	Sandbox_DWAP_Barricade_tooltip = "大多數門和窗戶將從路障開始",
+
+	Sandbox_DWAP_EWC = "啟用水系統",
+	Sandbox_DWAP_EWC_tooltip = "使用Mod的水系統，以及水箱和所有固定裝置",
+	
+	Sandbox_DWAP_EGS = "啟用發電機系統",
+	Sandbox_DWAP_EGS_tooltip = "使用MOD的發電機，該發電機為整個安全屋提供了電源",
+	Sandbox_DWAP_EWC_tooltip = "使用Mod的水系統，以及水箱和所有固定裝置",
+	
+	Sandbox_DWAP_APGS = "發電機自動啟動系統",
+	Sandbox_DWAP_APGS_tooltip = "發電機將檢測功率損耗並自動啟動",
+	
+	Sandbox_DWAP_Fuel = "發電機燃料",
+	Sandbox_DWAP_Fuel_tooltip = "發電機應該從多少燃料開始",
+
+	Sandbox_DWAP_Tank = "發電機箱",
+	Sandbox_DWAP_Tank_tooltip = "發電機應能夠存儲多少燃料",
+
+	Sandbox_DWAP_PerHour = "發電機燃料速率",
+	Sandbox_DWAP_PerHour_tooltip = "在遊戲時間中應使用多少燃料",
+
+	Sandbox_DWAP_Condition = "發電機條件",
+	Sandbox_DWAP_Condition_tooltip = "類似於香草發電機，0至100",
+
+	Sandbox_DWAP_WaterLevel = "水位",
+	Sandbox_DWAP_WaterLevel_tooltip = "水箱應該從多少水開始",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "水箱",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "水箱的最大容量是多少",
+
+	Sandbox_DWAP_Loot = "安全室用品",
+	Sandbox_DWAP_Loot_tooltip = "安全屋應該有特殊的戰利品產卵",
+	Sandbox_DWAP_Loot_value_option1 = "只有主要",
+	Sandbox_DWAP_Loot_value_option2 = "全部",
+	Sandbox_DWAP_Loot_value_option3 = "主要正常，其他人低",
+	Sandbox_DWAP_Loot_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_EnableMaps = "戰利品 - >地圖",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "所有地圖的藏匿處",
+
+	Sandbox_DWAP_Loot_EnableBooks = "戰利品 - >技能書籍",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "所有技能書籍的藏匿處",
+
+	Sandbox_DWAP_Loot_MediaLevel = "戰利品 - >媒體",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "書籍，CD等",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_FoodLevel = "戰利品 - >食物",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_GunLevel = "戰利品 - >槍支",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_MedLevel = "戰利品 - >醫療用品",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_SeedLibrary = "種子庫",
+	Sandbox_DWAP_SeedLibrary_tooltip = "遊戲中的每一個種子",
+
+	Sandbox_DWAP_Loot_FarmLevel = "戰利品 - >農業用品",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_FishLevel = "戰利品 - >釣魚用品",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_TailorLevel = "戰利品 - >剪裁用品",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_LockersLevel = "戰利品 - >服裝",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "戰利品 - >工具",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "沒有任何",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "戰利品 - >建築墊子",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "較小的人會有所不同",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "高的",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "中等的",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "低的",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "沒有任何",
+
+}

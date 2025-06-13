@@ -1,0 +1,8 @@
+Stash_PTBR = {
+    Stash_DWAP_09_text1 = "Piso superior, suprimentos no porão",
+    Stash_DWAP_10_text1 = "escadas de abrigo de Fallout atrás do escritório de segurança",
+    Stash_DWAP_12_text1 = "Abrigo de Fallout no porão",
+    Stash_DWAP_31_text1 = "Cuidadoso de cavernas",
+    Stash_DWAP_31_text2 = "Vá para a biblioteca no porão",
+    Stash_DWAP_32_text1 = "Pegue o elevador",
+}

@@ -1,0 +1,8 @@
+Stash_FI = {
+    Stash_DWAP_09_text1 = "Yläkerros, tarvikkeet kellarissa",
+    Stash_DWAP_10_text1 = "Fallout Shelter portaat turvallisuustoimiston takana",
+    Stash_DWAP_12_text1 = "Fallout -suoja kellarissa",
+    Stash_DWAP_31_text1 = "Varo Cave IN: stä",
+    Stash_DWAP_31_text2 = "Matka kellarissa olevaan kirjastoon",
+    Stash_DWAP_32_text1 = "Ottaa hissi",
+}

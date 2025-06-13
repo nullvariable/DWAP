@@ -1,0 +1,8 @@
+Stash_CH = {
+    Stash_DWAP_09_text1 = "頂層，地下室供應",
+    Stash_DWAP_10_text1 = "安全辦公室後面的避難所樓梯",
+    Stash_DWAP_12_text1 = "地下室的輻射庇護所",
+    Stash_DWAP_31_text1 = "小心洞穴",
+    Stash_DWAP_31_text2 = "前往地下室的圖書館",
+    Stash_DWAP_32_text1 = "乘電梯",
+}

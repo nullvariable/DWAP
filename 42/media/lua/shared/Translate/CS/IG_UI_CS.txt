@@ -1,0 +1,3 @@
+IGUI_CS = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Vypadat z vìzení?",
+}

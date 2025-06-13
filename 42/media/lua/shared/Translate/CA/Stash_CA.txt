@@ -1,0 +1,8 @@
+Stash_CA = {
+    Stash_DWAP_09_text1 = "Planta superior, subministraments al soterrani",
+    Stash_DWAP_10_text1 = "Fallout Shelter Scales darrere de l'Oficina de Seguretat",
+    Stash_DWAP_12_text1 = "refugi de caiguda al soterrani",
+    Stash_DWAP_31_text1 = "Cuida amb la cova instant",
+    Stash_DWAP_31_text2 = "Feu el vostre camí cap a la biblioteca al soterrani",
+    Stash_DWAP_32_text1 = "Agafeu l?ascensor",
+}

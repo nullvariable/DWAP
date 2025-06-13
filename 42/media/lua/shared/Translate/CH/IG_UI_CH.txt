@@ -1,0 +1,3 @@
+IGUI_CH = {
+    IGUI_DWAP_31_OptionalSpawnQ = "闖入監獄？",
+}

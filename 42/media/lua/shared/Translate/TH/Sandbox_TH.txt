@@ -1,0 +1,160 @@
+Sandbox_TH = {
+	Sandbox_DWAPGeneral = "ลุงเดฟเป็น prepper",
+
+	Sandbox_DWAP_Loot_Safehouse = "เสื้อกล้าม",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "แบบสุ่ม",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "Doe Valley",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "ก้องลำธาร",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W Louisville",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "MARCH RIDGE BUNKER",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "ริมแม่น้ำ",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "ชิงชัน",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W West Point",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "Lowry Court Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "แกรนด์โอไฮโอ",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "ekron comm coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "Lville Pawnshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "lville autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Ekron Lake House",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "การบำบัดสัตว์",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "อสังหาริมทรัพย์ของแท้",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "คฤหาสน์ Lville Central",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "หุบเขา",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "โรงงาน Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "ปืนไรเฟิลสนิม",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "March Ridge Secret",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "คฤหาสน์ริมแม่น้ำ",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "บ้านเวสต์พอยต์",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "ฟาร์มหมู Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "ทาวน์โฮมบรันเดนบูร์ก",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "การพักคุก",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "คฤหาสน์ขนนก",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "ทะเลสาบ Dark Wallow",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "กระท่อมล่าสัตว์ตะวันออก",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "ห้องปฏิบัติการยาเสพติด Muldraugh",
+
+	Sandbox_DWAP_EnableAll = "เปิดใช้งาน Safehouses ทั้งหมด",
+	Sandbox_DWAP_EnableAll_tooltip = "ไม่แนะนำคีย์แผนที่และการวางไข่จะยังคงเป็นตัวเลือกที่เลือกเท่านั้น",
+
+	Sandbox_DWAP_SpawnInBase = "วางไข่ใน Safehouse",
+	Sandbox_DWAP_SpawnInBase_tooltip = "เริ่มต้นภายใน Safehouse ด้วยกุญแจ",
+
+	Sandbox_DWAP_Keys = "เริ่มต้นด้วย Map & Keys",
+	Sandbox_DWAP_Keys_tooltip = "รับแผนที่ของ Safehouse และ Keys สำหรับมัน",
+
+	Sandbox_DWAP_Barricade = "Safehouse เป็นสิ่งกีดขวาง",
+	Sandbox_DWAP_Barricade_tooltip = "ประตูและหน้าต่างส่วนใหญ่จะเริ่มต้นด้วยเครื่องกีดขวาง",
+
+	Sandbox_DWAP_EWC = "เปิดใช้งานระบบน้ำ",
+	Sandbox_DWAP_EWC_tooltip = "ใช้ระบบน้ำของ mod กับถังเก็บน้ำและอุปกรณ์ติดตั้งทั้งหมดที่ติดอยู่กับถัง",
+	
+	Sandbox_DWAP_EGS = "เปิดใช้งานระบบเครื่องกำเนิดไฟฟ้า",
+	Sandbox_DWAP_EGS_tooltip = "ใช้เครื่องกำเนิดไฟฟ้าของ mod ซึ่งให้พลังงานแก่ทั้งเซฟเฮาส์",
+	Sandbox_DWAP_EWC_tooltip = "ใช้ระบบน้ำของ mod กับถังเก็บน้ำและอุปกรณ์ติดตั้งทั้งหมดที่ติดอยู่กับถัง",
+	
+	Sandbox_DWAP_APGS = "ระบบเริ่มต้นอัตโนมัติ",
+	Sandbox_DWAP_APGS_tooltip = "เครื่องกำเนิดไฟฟ้าจะตรวจจับการสูญเสียพลังงานและเริ่มโดยอัตโนมัติ",
+	
+	Sandbox_DWAP_Fuel = "เชื้อเพลิงเครื่องกำเนิดไฟฟ้า",
+	Sandbox_DWAP_Fuel_tooltip = "เครื่องกำเนิดไฟฟ้าควรเริ่มต้นด้วยเชื้อเพลิงเท่าใด",
+
+	Sandbox_DWAP_Tank = "ถังเครื่องกำเนิดไฟฟ้า",
+	Sandbox_DWAP_Tank_tooltip = "เครื่องกำเนิดไฟฟ้าควรมีเชื้อเพลิงเท่าใดในการจัดเก็บ",
+
+	Sandbox_DWAP_PerHour = "อัตราเชื้อเพลิงเครื่องกำเนิดไฟฟ้า",
+	Sandbox_DWAP_PerHour_tooltip = "ควรใช้เชื้อเพลิงเท่าใดในแต่ละชั่วโมงเกม",
+
+	Sandbox_DWAP_Condition = "สภาพเครื่องกำเนิดไฟฟ้า",
+	Sandbox_DWAP_Condition_tooltip = "คล้ายกับเครื่องกำเนิดวานิลลา 0 ถึง 100",
+
+	Sandbox_DWAP_WaterLevel = "ระดับน้ำ",
+	Sandbox_DWAP_WaterLevel_tooltip = "ถังน้ำควรเริ่มต้นด้วยน้ำเท่าใด",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "ถังเก็บน้ำ",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "ความจุสูงสุดสำหรับถังเก็บน้ำคืออะไร",
+
+	Sandbox_DWAP_Loot = "เสบียง Safehouse",
+	Sandbox_DWAP_Loot_tooltip = "หาก Safehouse มีการวางไข่เป็นพิเศษ",
+	Sandbox_DWAP_Loot_value_option1 = "เฉพาะหลัก",
+	Sandbox_DWAP_Loot_value_option2 = "ทั้งหมด",
+	Sandbox_DWAP_Loot_value_option3 = "ปฐมภูมิปกติอื่น ๆ ต่ำ",
+	Sandbox_DWAP_Loot_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_EnableMaps = "Loot -> แผนที่",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "ซ่อนแผนที่ทั้งหมด",
+
+	Sandbox_DWAP_Loot_EnableBooks = "Loot -> หนังสือทักษะ",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "เก็บหนังสือทักษะทั้งหมด",
+
+	Sandbox_DWAP_Loot_MediaLevel = "Loot -> สื่อ",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "หนังสือซีดี ฯลฯ",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_FoodLevel = "Loot -> อาหาร",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_GunLevel = "Loot -> ปืน",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_MedLevel = "Loot -> เวชภัณฑ์",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_SeedLibrary = "ห้องสมุดเมล็ดพันธุ์",
+	Sandbox_DWAP_SeedLibrary_tooltip = "บางส่วนของเมล็ดพันธุ์ในเกม",
+
+	Sandbox_DWAP_Loot_FarmLevel = "Loot -> อุปกรณ์การทำฟาร์ม",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_FishLevel = "Loot -> อุปกรณ์ตกปลา",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_TailorLevel = "Loot -> อุปกรณ์ตัดเย็บ",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_LockersLevel = "Loot -> เสื้อผ้า",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "loot -> เครื่องมือ",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "ไม่มี",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "Loot -> สร้างเสื่อ",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "แตกต่างกันไปตาม safehouse คนที่เล็กกว่าจะมีความหมายน้อยกว่า",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "สูง",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "ปานกลาง",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "ต่ำ",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "ไม่มี",
+
+}

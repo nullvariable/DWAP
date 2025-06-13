@@ -1,0 +1,8 @@
+Stash_PL = {
+    Stash_DWAP_09_text1 = "Najwyższe piętro, zapasy w piwnicy",
+    Stash_DWAP_10_text1 = "Schronienie Fallout Schronot za biurem bezpieczeństwa",
+    Stash_DWAP_12_text1 = "Schronisko Fallout w piwnicy",
+    Stash_DWAP_31_text1 = "Ostrożnie jaskini ins",
+    Stash_DWAP_31_text2 = "Udaj się do biblioteki w piwnicy",
+    Stash_DWAP_32_text1 = "Weź windę",
+}

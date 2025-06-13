@@ -1,0 +1,3 @@
+IGUI_PH = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Break out mula sa bilangguan?",
+}

@@ -1,0 +1,3 @@
+IGUI_CA = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Voleu sortir de la presó?",
+}

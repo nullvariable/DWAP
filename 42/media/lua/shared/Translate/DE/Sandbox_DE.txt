@@ -1,0 +1,160 @@
+Sandbox_DE = {
+	Sandbox_DWAPGeneral = "Onkel Dave war ein Prepper",
+
+	Sandbox_DWAP_Loot_Safehouse = "Safouse",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "Zufällig",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "Doe Valley",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "Echo Creek",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W Louisville",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "March Ridge Bunker",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Muldrugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "Flussufer",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "Rosenholz",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W West Point",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "Lowry Court Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "Grand Ohio",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "Ekron Comm Coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "Lville Pawnshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Lville Autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Ekron Lake House",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "Tierreha",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Central Lville Mansion",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "Schrottplatz",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "Ekron Fabrik",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "Rusty Gewehr",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "March Ridge Secret",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Riverside Mansion",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "West Point Home",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Die Drake",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 Hauskomplex",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Gefängnisausbruch",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dunkler Waldensee",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Ostjagdkabine",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldrudh Drug Lab",
+
+	Sandbox_DWAP_EnableAll = "Aktivieren Sie alle Safe -Häuser",
+	Sandbox_DWAP_EnableAll_tooltip = "Nicht empfohlen, Schlüssel, Karte und Spawn sind immer noch nur für die ausgewählte Option,",
+
+	Sandbox_DWAP_SpawnInBase = "Laichen im Safuehouse",
+	Sandbox_DWAP_SpawnInBase_tooltip = "Beginnen Sie mit den Schlüssel im Safouse",
+
+	Sandbox_DWAP_Keys = "Beginnen Sie mit Map & Keys",
+	Sandbox_DWAP_Keys_tooltip = "Holen Sie sich eine Karte des Safehouse und der Schlüssel dafür",
+
+	Sandbox_DWAP_Barricade = "Safehouse ist verbarrikadiert",
+	Sandbox_DWAP_Barricade_tooltip = "Die meisten Türen und Fenster beginnen mit Barrikaden",
+
+	Sandbox_DWAP_EWC = "Wassersystem aktivieren",
+	Sandbox_DWAP_EWC_tooltip = "Verwenden Sie das Wassersystem des Mods mit Wassertanks und allen Vorrichtungen, die in die Panzer gesetzt sind",
+	
+	Sandbox_DWAP_EGS = "Generatorsystem aktivieren",
+	Sandbox_DWAP_EGS_tooltip = "Verwenden Sie die Generatoren des Mod, die dem gesamten Safehouse Strom verleihen",
+	Sandbox_DWAP_EWC_tooltip = "Verwenden Sie das Wassersystem des Mods mit Wassertanks und allen Vorrichtungen, die in die Panzer gesetzt sind",
+	
+	Sandbox_DWAP_APGS = "Generator Auto Startsystem",
+	Sandbox_DWAP_APGS_tooltip = "Generatoren erkennen Stromverlust und beginnen automatisch",
+	
+	Sandbox_DWAP_Fuel = "Generator Kraftstoff",
+	Sandbox_DWAP_Fuel_tooltip = "Wie viel Kraftstoff sollte der Generator (en) mit beginnen",
+
+	Sandbox_DWAP_Tank = "Generatortank",
+	Sandbox_DWAP_Tank_tooltip = "Wie viel Kraftstoff sollte der Generator in der Lage sein, speichern zu können?",
+
+	Sandbox_DWAP_PerHour = "Kraftstoffrate Generator",
+	Sandbox_DWAP_PerHour_tooltip = "Wie viel Kraftstoff sollte jeweils in der Spielstunde eingesetzt werden",
+
+	Sandbox_DWAP_Condition = "Generatorzustand",
+	Sandbox_DWAP_Condition_tooltip = "Ähnlich wie Vanillegeneratoren 0 bis 100",
+
+	Sandbox_DWAP_WaterLevel = "Wasserstand",
+	Sandbox_DWAP_WaterLevel_tooltip = "Wie viel Wasser sollten die Tanks beginnen",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "Wassertank",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Was ist die maximale Kapazität für die Wassertanks?",
+
+	Sandbox_DWAP_Loot = "Safehouse -Lieferungen",
+	Sandbox_DWAP_Loot_tooltip = "Sollte das Safehouse spezielle Beutespawns haben",
+	Sandbox_DWAP_Loot_value_option1 = "Nur primär",
+	Sandbox_DWAP_Loot_value_option2 = "Alle",
+	Sandbox_DWAP_Loot_value_option3 = "Primär normal, andere niedrig",
+	Sandbox_DWAP_Loot_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_EnableMaps = "LOOT -> Karten",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Versteck aller Karten",
+
+	Sandbox_DWAP_Loot_EnableBooks = "Beute -> Skillbücher",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Vorrat aller Skillbücher",
+
+	Sandbox_DWAP_Loot_MediaLevel = "LOOT -> Medien",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Bücher, CDs usw.",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_FoodLevel = "Beute -> Lebensmittel",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_GunLevel = "LOOT -> Waffen",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_MedLevel = "Beute -> medizinische Versorgung",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_SeedLibrary = "Saatgutbibliothek",
+	Sandbox_DWAP_SeedLibrary_tooltip = "Einige von jedem Samen im Spiel",
+
+	Sandbox_DWAP_Loot_FarmLevel = "Beute -> landwirtschaftliche Lieferungen",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_FishLevel = "Beute -> Fischereimittel",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_TailorLevel = "Beute -> Anpassungsversorgungen",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_LockersLevel = "Beute -> Kleidung",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "LOOT -> Tools",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Keiner",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "Beute -> Matten erstellen",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Variiert je nach Safouse, kleinere haben deutlich weniger",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Hoch",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Medium",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Niedrig",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "Keiner",
+
+}

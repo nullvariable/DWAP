@@ -1,0 +1,8 @@
+Stash_TR = {
+    Stash_DWAP_09_text1 = "üst kat, bodrum katındaki malzemeler",
+    Stash_DWAP_10_text1 = "Güvenlik ofisinin arkasında serpin sığınağı merdivenleri",
+    Stash_DWAP_12_text1 = "bodrum katında serpin sığınağı",
+    Stash_DWAP_31_text1 = "Mağara Ins'e dikkat edin",
+    Stash_DWAP_31_text2 = "Bodrumdaki kütüphaneye gidin",
+    Stash_DWAP_32_text1 = "Asansörü al",
+}

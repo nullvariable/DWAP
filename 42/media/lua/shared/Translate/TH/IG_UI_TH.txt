@@ -1,0 +1,3 @@
+IGUI_TH = {
+    IGUI_DWAP_31_OptionalSpawnQ = "เลิกคุก?",
+}

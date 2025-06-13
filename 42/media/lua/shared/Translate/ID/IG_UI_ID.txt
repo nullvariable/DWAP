@@ -1,0 +1,3 @@
+IGUI_ID = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Keluar dari penjara?",
+}

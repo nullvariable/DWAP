@@ -1,0 +1,8 @@
+Stash_TH = {
+    Stash_DWAP_09_text1 = "ชั้นบนสุดเสบียงในห้องใต้ดิน",
+    Stash_DWAP_10_text1 = "Fallout Shelter Stairs ด้านหลังสำนักงานรักษาความปลอดภัย",
+    Stash_DWAP_12_text1 = "Fallout Shelter ในห้องใต้ดิน",
+    Stash_DWAP_31_text1 = "ระวังถ้ำ Ins",
+    Stash_DWAP_31_text2 = "เดินไปที่ห้องสมุดในห้องใต้ดิน",
+    Stash_DWAP_32_text1 = "ใช้ลิฟต์",
+}

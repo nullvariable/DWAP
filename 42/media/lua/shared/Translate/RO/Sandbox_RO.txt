@@ -1,0 +1,160 @@
+Sandbox_RO = {
+	Sandbox_DWAPGeneral = "Unchiul Dave era un prepper",
+
+	Sandbox_DWAP_Loot_Safehouse = "SAFEHOUSE",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "Aleatoriu",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "Valea Doe",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "Echo Creek",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W Louisville",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "March Ridge Bunker",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "Riverside",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "Lemn de trandafir",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W West Point",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "Lowry Court Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "Grand Ohio",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "Ekron Comm Coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "LVILLE PUWNSHOP",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Lville autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Ekron Lake House",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "Reabilitarea animalelor",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Conacul central Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "Scrapyard",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "Fabrica Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "Pușcă ruginită",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "March Ridge Secret",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Riverside Mansion",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "West Point Home",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ferma de porci Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Evadare din puşcărie",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Lacul întunecat Wallow",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Cabina de vânătoare de est",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+
+	Sandbox_DWAP_EnableAll = "Activați toate salarii",
+	Sandbox_DWAP_EnableAll_tooltip = "Nu este recomandat, tastele, harta și Spawn vor fi în continuare doar pentru opțiunea selectată",
+
+	Sandbox_DWAP_SpawnInBase = "Spawn in Safehouse",
+	Sandbox_DWAP_SpawnInBase_tooltip = "Începeți în interiorul sigurehouse -ului cu tastele",
+
+	Sandbox_DWAP_Keys = "Începeți cu hartă și taste",
+	Sandbox_DWAP_Keys_tooltip = "Obțineți o hartă a casei de siguranță și a cheilor pentru aceasta",
+
+	Sandbox_DWAP_Barricade = "SafeHouse este baricadat",
+	Sandbox_DWAP_Barricade_tooltip = "Majoritatea ușilor și ferestrelor vor începe cu baricade",
+
+	Sandbox_DWAP_EWC = "Activați sistemul de apă",
+	Sandbox_DWAP_EWC_tooltip = "Folosiți sistemul de apă al modului, cu rezervoare de apă și toate corpurile plumbate la rezervoare",
+	
+	Sandbox_DWAP_EGS = "Activați sistemul generatorului",
+	Sandbox_DWAP_EGS_tooltip = "Utilizați generatoarele MOD, care asigură putere întregii sigurele de siguranță",
+	Sandbox_DWAP_EWC_tooltip = "Folosiți sistemul de apă al modului, cu rezervoare de apă și toate corpurile plumbate la rezervoare",
+	
+	Sandbox_DWAP_APGS = "Sistem de pornire automată a generatorului",
+	Sandbox_DWAP_APGS_tooltip = "Generatoarele vor detecta pierderea de energie și vor începe automat",
+	
+	Sandbox_DWAP_Fuel = "Combustibil generator",
+	Sandbox_DWAP_Fuel_tooltip = "Cât de mult combustibil ar trebui să înceapă generatorul",
+
+	Sandbox_DWAP_Tank = "Rezervor de generator",
+	Sandbox_DWAP_Tank_tooltip = "Cât de mult combustibil ar trebui să fie capabil generatorul",
+
+	Sandbox_DWAP_PerHour = "Rata de combustibil a generatorului",
+	Sandbox_DWAP_PerHour_tooltip = "Cât de mult combustibil trebuie utilizat fiecare în ora jocului",
+
+	Sandbox_DWAP_Condition = "Starea generatorului",
+	Sandbox_DWAP_Condition_tooltip = "Similar cu generatoarele de vanilie, 0 până la 100",
+
+	Sandbox_DWAP_WaterLevel = "Nivelul apei",
+	Sandbox_DWAP_WaterLevel_tooltip = "Câtă apă ar trebui să înceapă rezervoarele",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "Rezervor de apă",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Care este capacitatea maximă pentru rezervoarele de apă",
+
+	Sandbox_DWAP_Loot = "Consumabile de siguranță",
+	Sandbox_DWAP_Loot_tooltip = "În cazul în care sigure -sirened are saramuri speciale de pradă",
+	Sandbox_DWAP_Loot_value_option1 = "Numai primar",
+	Sandbox_DWAP_Loot_value_option2 = "Toate",
+	Sandbox_DWAP_Loot_value_option3 = "Normal primar, altele scăzute",
+	Sandbox_DWAP_Loot_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_EnableMaps = "Hărți loot ->",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Stash de toate hărțile",
+
+	Sandbox_DWAP_Loot_EnableBooks = "Loot -> cărți de îndemânare",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Stash de toate cărțile de îndemânare",
+
+	Sandbox_DWAP_Loot_MediaLevel = "Loot -> media",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Cărți, CD -uri etc.",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_FoodLevel = "Loot -> alimente",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_GunLevel = "Loot -> arme",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_MedLevel = "Loot -> consumabile medicale",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_SeedLibrary = "Biblioteca de semințe",
+	Sandbox_DWAP_SeedLibrary_tooltip = "O parte din fiecare sămânță din joc",
+
+	Sandbox_DWAP_Loot_FarmLevel = "Loot -> consumabile de agricultură",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_FishLevel = "Loot -> Suport pentru pescuit",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_TailorLevel = "Loot -> Suport de croitorie",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_LockersLevel = "LOT -> Îmbrăcăminte",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "Instrumente de loot ->",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Nici unul",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "Loot -> Covorașe de construcție",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Variază în funcție de saifhouse, cele mai mici vor avea în mod semnificativ mai puțin",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Ridicat",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Mediu",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Scăzut",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "Nici unul",
+
+}

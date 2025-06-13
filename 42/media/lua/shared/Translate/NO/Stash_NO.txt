@@ -1,0 +1,8 @@
+Stash_NO = {
+    Stash_DWAP_09_text1 = "Toppetasjen, forsyninger i kjelleren",
+    Stash_DWAP_10_text1 = "Fallout Shelter trapper bak sikkerhetskontoret",
+    Stash_DWAP_12_text1 = "Fallout Shelter i kjelleren",
+    Stash_DWAP_31_text1 = "Forsiktig med huleinnlegg",
+    Stash_DWAP_31_text2 = "Ta veien til biblioteket i kjelleren",
+    Stash_DWAP_32_text1 = "Ta heisen",
+}

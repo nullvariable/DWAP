@@ -1,0 +1,3 @@
+IGUI_FI = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Erota vankilasta?",
+}

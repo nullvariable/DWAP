@@ -1,0 +1,160 @@
+Sandbox_CA = {
+	Sandbox_DWAPGeneral = "L?oncle Dave era un preparador",
+
+	Sandbox_DWAP_Loot_Safehouse = "Safateria",
+	Sandbox_DWAP_Loot_Safehouse_value_option1 = "Fortuït",
+	Sandbox_DWAP_Loot_Safehouse_value_option2 = "Doe Valley",
+	Sandbox_DWAP_Loot_Safehouse_value_option3 = "Echo Creek",
+	Sandbox_DWAP_Loot_Safehouse_value_option4 = "W Louisville",
+	Sandbox_DWAP_Loot_Safehouse_value_option5 = "March Ridge Bunker",
+	Sandbox_DWAP_Loot_Safehouse_value_option6 = "Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option7 = "Ribera",
+	Sandbox_DWAP_Loot_Safehouse_value_option8 = "Bosc de palissandre",
+	Sandbox_DWAP_Loot_Safehouse_value_option9 = "W West Point",
+	Sandbox_DWAP_Loot_Safehouse_value_option10 = "Lowry Court Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option11 = "Gran Ohio",
+	Sandbox_DWAP_Loot_Safehouse_value_option12 = "P.S.Delilah",
+	Sandbox_DWAP_Loot_Safehouse_value_option13 = "Ekron Comm Coll",
+	Sandbox_DWAP_Loot_Safehouse_value_option14 = "Pawnshop de Lville",
+	Sandbox_DWAP_Loot_Safehouse_value_option15 = "Lville Autoshop",
+	Sandbox_DWAP_Loot_Safehouse_value_option16 = "Casa del llac Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option17 = "Elvillefarm",
+	Sandbox_DWAP_Loot_Safehouse_value_option18 = "Rehabilitació animal",
+	Sandbox_DWAP_Loot_Safehouse_value_option19 = "McCoy Estate",
+	Sandbox_DWAP_Loot_Safehouse_value_option20 = "Central Lville Mansion",
+	Sandbox_DWAP_Loot_Safehouse_value_option21 = "Ferralla",
+	Sandbox_DWAP_Loot_Safehouse_value_option22 = "Fàbrica Ekron",
+	Sandbox_DWAP_Loot_Safehouse_value_option23 = "Cortman Medical",
+	Sandbox_DWAP_Loot_Safehouse_value_option24 = "Rifle Rusty",
+	Sandbox_DWAP_Loot_Safehouse_value_option25 = "March Ridge Secret",
+	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Mansió Riverside",
+	Sandbox_DWAP_Loot_Safehouse_value_option27 = "West Point Home",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "El Drake",
+	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
+	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Complex de casa Lville 3",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "BRANDENBURG TOWNHOME",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Descans a la presó",
+	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
+	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Llac Wallow Dark",
+	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Cabina de caça oriental",
+	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+
+	Sandbox_DWAP_EnableAll = "Habiliteu tots els safehouses",
+	Sandbox_DWAP_EnableAll_tooltip = "No es recomana, les claus, el mapa i la crea només seran per a l'opció seleccionada",
+
+	Sandbox_DWAP_SpawnInBase = "Generar a la caixa forta",
+	Sandbox_DWAP_SpawnInBase_tooltip = "Comenceu dins de la caixa forta amb les tecles",
+
+	Sandbox_DWAP_Keys = "Comenceu amb Map & Keys",
+	Sandbox_DWAP_Keys_tooltip = "Obteniu un mapa de la caixa forta i les tecles",
+
+	Sandbox_DWAP_Barricade = "Safehouse està barricada",
+	Sandbox_DWAP_Barricade_tooltip = "La majoria de portes i finestres començaran amb barricades",
+
+	Sandbox_DWAP_EWC = "Habiliteu el sistema d'aigua",
+	Sandbox_DWAP_EWC_tooltip = "Utilitzeu el sistema d?aigua del MOD, amb dipòsits d?aigua i tots els accessoris plomats als dipòsits",
+	
+	Sandbox_DWAP_EGS = "Activa el sistema de generadors",
+	Sandbox_DWAP_EGS_tooltip = "Utilitzeu els generadors del mod, que proporcionen energia a tota la caixa forta",
+	Sandbox_DWAP_EWC_tooltip = "Utilitzeu el sistema d?aigua del MOD, amb dipòsits d?aigua i tots els accessoris plomats als dipòsits",
+	
+	Sandbox_DWAP_APGS = "Sistema d'inici automàtic del generador",
+	Sandbox_DWAP_APGS_tooltip = "Els generadors detectaran la pèrdua d?energia i s?iniciaran automàticament",
+	
+	Sandbox_DWAP_Fuel = "Combustible generador",
+	Sandbox_DWAP_Fuel_tooltip = "Quant de combustible ha de començar els generadors (s)",
+
+	Sandbox_DWAP_Tank = "Tanc generador",
+	Sandbox_DWAP_Tank_tooltip = "Quant de combustible ha de ser capaç d?emmagatzemar el generador",
+
+	Sandbox_DWAP_PerHour = "Taxa de combustible generador",
+	Sandbox_DWAP_PerHour_tooltip = "Quant de combustible s?ha d?utilitzar cadascun en hora de joc",
+
+	Sandbox_DWAP_Condition = "Condició del generador",
+	Sandbox_DWAP_Condition_tooltip = "Semblant als generadors de vainilla, de 0 a 100",
+
+	Sandbox_DWAP_WaterLevel = "Nivell de l'aigua",
+	Sandbox_DWAP_WaterLevel_tooltip = "Amb quina aigua han de començar els tancs",
+
+	Sandbox_DWAP_MRBWaterTankCapacity = "Dipòsit d'aigua",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Quina és la capacitat màxima dels dipòsits d?aigua",
+
+	Sandbox_DWAP_Loot = "Subministraments de Safehouse",
+	Sandbox_DWAP_Loot_tooltip = "En cas que el Safehouse tingui envasos especials",
+	Sandbox_DWAP_Loot_value_option1 = "Només primària",
+	Sandbox_DWAP_Loot_value_option2 = "Totes",
+	Sandbox_DWAP_Loot_value_option3 = "Normal primari, altres baixos",
+	Sandbox_DWAP_Loot_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_EnableMaps = "Loot -> mapes",
+	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Stash de tots els mapes",
+
+	Sandbox_DWAP_Loot_EnableBooks = "Loot -> Llibres d?habilitats",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Stash de tots els llibres d?habilitats",
+
+	Sandbox_DWAP_Loot_MediaLevel = "Botí -> suports",
+	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Llibres, CD, etc.",
+	Sandbox_DWAP_Loot_MediaLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_MediaLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_MediaLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_MediaLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_FoodLevel = "Loot -> menjar",
+	Sandbox_DWAP_Loot_FoodLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_FoodLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_FoodLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_FoodLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_GunLevel = "Loot -> canons",
+	Sandbox_DWAP_Loot_GunLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_GunLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_MedLevel = "Loot -> Subministraments mèdics",
+	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_MedLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_SeedLibrary = "Biblioteca de llavors",
+	Sandbox_DWAP_SeedLibrary_tooltip = "Algunes de totes les llavors del joc",
+
+	Sandbox_DWAP_Loot_FarmLevel = "Loot -> Subministraments d'agricultura",
+	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_FishLevel = "Loot -> Subministraments de pesca",
+	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_FishLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_TailorLevel = "Loot -> Subministraments de adaptació",
+	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_TailorLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_LockersLevel = "Loot -> roba",
+	Sandbox_DWAP_Loot_LockersLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_LockersLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_LockersLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_LockersLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_ToolsLevel = "Loot -> eines",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Res",
+
+	Sandbox_DWAP_Loot_BuildMatsLevel = "Loot -> Mates de construcció",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Varia segons la caixa forta, els més petits tindran de forma significativa",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Alt",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Mitjà",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Baix",
+	Sandbox_DWAP_Loot_BuildMatsLevel_value_option4 = "Res",
+
+}

@@ -1,0 +1,8 @@
+Stash_DE = {
+    Stash_DWAP_09_text1 = "oberste Etage, Vorräte im Keller",
+    Stash_DWAP_10_text1 = "Fallout Shelter -Treppe hinter dem Sicherheitsbüro",
+    Stash_DWAP_12_text1 = "Fallout Shelter im Keller",
+    Stash_DWAP_31_text1 = "Achten Sie vor Höhlen -Ins",
+    Stash_DWAP_31_text2 = "Machen Sie sich auf den Weg zur Bibliothek im Keller",
+    Stash_DWAP_32_text1 = "Nehmen Sie den Aufzug",
+}

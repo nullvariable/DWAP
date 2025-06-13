@@ -1,0 +1,3 @@
+IGUI_HU = {
+    IGUI_DWAP_31_OptionalSpawnQ = "Kitör a börtönből?",
+}

@@ -1,0 +1,8 @@
+Stash_ID = {
+    Stash_DWAP_09_text1 = "lantai atas, persediaan di ruang bawah tanah",
+    Stash_DWAP_10_text1 = "Tangga penampungan Fallout di belakang kantor keamanan",
+    Stash_DWAP_12_text1 = "tempat berlindung di ruang bawah tanah",
+    Stash_DWAP_31_text1 = "Hati -hati dengan gua",
+    Stash_DWAP_31_text2 = "Membuat jalan Anda ke perpustakaan di ruang bawah tanah",
+    Stash_DWAP_32_text1 = "Ambil lift",
+}
