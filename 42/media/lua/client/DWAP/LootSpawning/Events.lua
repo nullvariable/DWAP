@@ -21,7 +21,7 @@ local function setLootConfigValue(config)
     local y = config.coords.y
     local z = config.coords.z
     local coordsKey = hashCoords(x, y, z)
-    local index = #lootConfig+1
+    local index = #lootConfig + 1
     lootConfig[index] = config
     lootByCoords[coordsKey] = index
 end
@@ -90,8 +90,8 @@ end
 --- @param frozen? boolean
 --- @return InventoryItem|nil item
 local function addItem(container, item, count, frozen)
-    DWAPUtils.dprint("addItem")
-    DWAPUtils.dprint({item = item, count = count, frozen = frozen})
+    -- DWAPUtils.dprint("addItem")
+    -- DWAPUtils.dprint({item = item, count = count, frozen = frozen})
     local _count = count or 1
     if not item or not container then
         DWAPUtils.dprint("WARN addItem: item or container is nil")
@@ -140,6 +140,10 @@ local function fillContainer(container, config, index, coordsKey)
         level = SandboxVars.DWAP[config.level] or 4
     elseif type(config.level) == "number" then
         level = config.level
+    elseif config.special == 'kitchentools' then
+        level = SandboxVars.DWAP.Loot_FoodLevel or 3
+    elseif config.special == 'gunlocker' then
+        level = SandboxVars.DWAP.Loot_GunLevel or 3
     end
     if config.sandboxEnable ~= nil and not SandboxVars.DWAP[config.sandboxEnable] then
         removeLootEntry(index, coordsKey)
@@ -210,6 +214,26 @@ local function fillContainer(container, config, index, coordsKey)
                     addItem(container, item)
                 end
             end
+        elseif config.special == "kitchentools" and level < 4 then
+            local kitchenTools = DWAP_LootSpawning.getKitchenTools()
+            local kitchenToolsWithSpices =  DWAP_LootSpawning.getKitchenToolsSpices()
+            for i = 1, #kitchenTools do
+                kitchenToolsWithSpices[#kitchenToolsWithSpices+1] = kitchenTools[i]
+            end
+            for i = 1, #kitchenTools do
+                local item = kitchenTools[i]
+                if item then
+                    addItem(container, item)
+                end
+            end
+            local hasRoom = checkHasRoom(container, level)
+            local tries = 0
+            while hasRoom and tries < 100 do
+                local item =  kitchenToolsWithSpices[random:random(1, #kitchenToolsWithSpices)]
+                addItem(container, item)
+                hasRoom = checkHasRoom(container, level)
+                tries = tries + 1
+            end
         elseif config.special == "gunlocker" and level < 4 then -- specifically loads a single gun and clips/ammo for a locker
             local gunLockers = DWAP_LootSpawning.getGunLockers()
             local gunLocker = random:random(1, #gunLockers)
@@ -240,16 +264,16 @@ local function fillContainer(container, config, index, coordsKey)
                     for j = 1, count do
                         if config.items[i].chance then
                             if config.items[i].chance == 1 or config.items[i].chance >= (random:random(1, 100) / 100) then
-                                items[#items+1] = config.items[i].name
+                                items[#items + 1] = config.items[i].name
                                 addItem(container, config.items[i].name, 1, config.frozen)
                             end
                         else
-                            items[#items+1] = config.items[i].name
+                            items[#items + 1] = config.items[i].name
                             addItem(container, config.items[i].name, 1, config.frozen)
                         end
                     end
                 else
-                    items[#items+1] = config.items[i].name
+                    items[#items + 1] = config.items[i].name
                     addItem(container, config.items[i].name, 1, config.frozen)
                 end
             end
@@ -263,7 +287,7 @@ local function fillContainer(container, config, index, coordsKey)
         while hasRoom and tries < 100 do
             if not items or #items < 2 and alreadySpawnedContainers and #alreadySpawnedContainers > 0 then
                 for i = 0, #alreadySpawnedContainers do
-                    items[#items+1] = alreadySpawnedContainers[i]
+                    items[#items + 1] = alreadySpawnedContainers[i]
                 end
                 alreadySpawnedContainers = {}
                 -- DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
@@ -277,7 +301,7 @@ local function fillContainer(container, config, index, coordsKey)
                     local ii = instanceItem(item)
                     if ii and ii:getCategory() == "Container" then
                         items[randindex] = nil
-                        alreadySpawnedContainers[#alreadySpawnedContainers+1] = item
+                        alreadySpawnedContainers[#alreadySpawnedContainers + 1] = item
                         -- DWAPUtils.dprint("Added container: " .. item)
                     end
                 end
@@ -287,12 +311,12 @@ local function fillContainer(container, config, index, coordsKey)
     else
         -- DWAPUtils.dprint("final loot else")
         local items = config.items or {}
-        local dist = config.dist or {"RandomFiller"}
+        local dist = config.dist or { "RandomFiller" }
         if config.dist or #items < 1 then
             local _items = DWAP_LootSpawning.getItemsWithDistLists(dist, config.distIncludeJunk)
             if _items then
                 for i = 1, #_items do
-                    items[#items+1] = { name = _items[i] }
+                    items[#items + 1] = { name = _items[i] }
                 end
             end
         end
@@ -366,7 +390,7 @@ local function onFillContainer(roomType, containerType, container)
         local loot, index, coordsKey = getLootForCoords(square:getX(), square:getY(), z)
         if loot and index and coordsKey then
             DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
-            DWAPUtils.dprint({index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey})
+            DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })
             DWAPUtils.DeferThrottled(function()
                 fillContainer(container, loot, index, coordsKey)
                 ItemPickerJava.updateOverlaySprite(container:getParent())

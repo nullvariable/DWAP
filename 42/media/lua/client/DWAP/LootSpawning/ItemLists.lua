@@ -29,6 +29,7 @@ local excludeItems = {
     ["IcePick"] = true,
     ["IDcard_Blank"] = true,
     ["BLTAnnotations"] = true,
+    ["HeavyChain"] = true,
 }
 local convertItems = {
     -- ["PetrolCanEmpty"] = "JerryCanEmpty",
@@ -82,6 +83,79 @@ local essentials = {
     "Battery",
     "Notebook",
     "WristWatch_Left_DigitalBlack",
+}
+local kitchenTools = {
+    "BakingPan",
+    "Kettle",
+    "RoastingPan",
+    "KitchenTongs",
+    "GridlePan",
+    "GlassTumbler",
+    "GlassWine",
+    "Vinegar_Jug",
+    "TinOpener",
+    "MugWhite",
+    "MugWhite",
+    "Plate",
+    "Plate",
+    "Saucepan",
+    "Pan",
+    "KitchenKnife",
+    "MeatCleaver",
+    "Mop",
+    "Broom",
+    "Bleach",
+    "Sponge",
+    "CleaningLiquid2",
+    "MortarPestle",
+    "Kettle_Copper",
+    "Corkscrew",
+    "CheeseCloth",
+    "Pot",
+    "MuffinTray",
+    "BakingTray",
+    "Bowl",
+    "Bowl",
+    "Bowl",
+    "Bowl",
+    "P38",
+    "Spork",
+    "Spork",
+}
+local kitchenToolsSpices = {
+    "Salt",
+    "Pepper",
+    "Lard",
+    "Ketchup",
+    "Hotsauce",
+    "Honey",
+    "JamFruit",
+    "JamMarmalade",
+    "MapleSyrup",
+    "Margarine",
+    "Marinara",
+    "Mustard",
+    "OilOlive",
+    "OilVegetable",
+    "PeanutButter",
+    "RiceVinegar",
+    "Soysauce",
+    "TomatoPaste",
+    "Vinegar2",
+    "BasilDried",
+    "ChamomileDried",
+    "ChivesDried",
+    "CilantroDried",
+    "Cinnamon",
+    "MarigoldDried",
+    "MintHerbDried",
+    "OreganoDried",
+    "ParsleyDried",
+    "RosemaryDried",
+    "SageDried",
+    "ThymeDried",
+    "Capers",
+    "Olives",
 }
 
 local gunLockers = {
@@ -594,27 +668,33 @@ function DWAP_LootSpawning.populateItems()
                 if skillBookType == 1 then
                     allSkillBooks[#allSkillBooks + 1] = module .. "." .. name
                     excludeItems[name] = true
+                    excludeItems[module .. "." .. name] = true
                 elseif skillBookType == 2 then
                     allSkillMags[#allSkillMags + 1] = module .. "." .. name
                     excludeItems[name] = true
+                    excludeItems[module .. "." .. name] = true
                 elseif isSeed(category, name, item) or seedPacketRecipe:canUseItem(name) then
                     -- is this a seed/seed packet?
                     local ii = instanceItem(module .. "." .. name)
                     if ii and (instanceof(ii, "Food") and not ii:isFresh()) then
                         allSeeds[#allSeeds + 1] = module .. "." .. name
                         excludeItems[name] = true
+                        excludeItems[module .. "." .. name] = true
                     elseif ii and not instanceof(ii, "Food") then
                         allSeeds[#allSeeds + 1] = module .. "." .. name
                         excludeItems[name] = true
+                        excludeItems[module .. "." .. name] = true
                     end
                 elseif isMap(category, name) then
                     -- is this a map?
                     allMaps[#allMaps + 1] = module .. "." .. name
                     excludeItems[name] = true
+                    excludeItems[module .. "." .. name] = true
                 else
                     for j = 1, #excludeStrings do
                         if name:find(excludeStrings[j]) then
                             excludeItems[name] = true
+                            excludeItems[module .. "." .. name] = true
                             break
                         end
                     end
@@ -661,6 +741,17 @@ end
 --- @return table: The list of essential items
 function DWAP_LootSpawning.getEssentials()
     return essentials
+end
+
+--- get the items for the special kitchenTools list
+--- @return table: The list of  kitchen tools
+function DWAP_LootSpawning.getKitchenTools()
+    return  kitchenTools
+end
+--- get the items for the special kitchenToolsSpices list
+--- @return table: The list of kitchen tools spices
+function DWAP_LootSpawning.getKitchenToolsSpices()
+    return kitchenToolsSpices
 end
 --- get the items for the special "gunLockers" list
 --- @return table: The list of gun locker items
