@@ -12,6 +12,10 @@ local hadWorldWaterLastTick = true
 --- @param sprite string
 --- @return IsoObject|nil object, number size object and the number of objects on the square
 local function getSpriteObject(square, sprite)
+    if not square then
+        DWAPUtils.dprint("getSpriteObject: Square not found")
+        return nil, -1
+    end
     local tankObjects = square:getObjects()
     local size = tankObjects:size() - 1
     for i = 0, size do
@@ -268,6 +272,16 @@ function DWAP_WaterSystem:TankSeen(index)
                 fixture
             )
         end
+    elseif self.hadWorldWaterLastTick then
+        DWAPSquareLoaded:AddHookEvent(
+                "OnWaterShutoff",
+                tankSeen,
+                tank.x,
+                tank.y,
+                tank.z,
+                true,
+                { index = index }
+            )
     end
 end
 tankSeen = function(params)
