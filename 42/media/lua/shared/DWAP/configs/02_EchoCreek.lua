@@ -2,7 +2,7 @@ local EchoCreek = {
     spawn = { x = 3573, y = 10896, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, ghost = false, },
+            controls = { sprite = "industry_02_67", x = 3586, y = 10898, z = -1, },
             chunks = {
                 {445, 1362},
                 {445, 1363},
@@ -13,11 +13,15 @@ local EchoCreek = {
                 {447, 1362},
                 {447, 1363},
                 {446, 1364}, -- gas pumps outside
+                {448, 1362},
+                {449, 1362},
+                {450, 1362},
+                {451, 1362},
             },
         },
     },
     waterTanks = {
-        { sprite = "industry_02_75", x = 3563, y = 10904, z = -1, sourceType="generator", source = {x = 3565, y = 10898, z = -1} },
+        { sprite = "industry_02_75", x = 3563, y = 10904, z = -1, sourceType="generator", source = {x = 3586, y = 10898, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_22", x = 3577, y = 10893, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
@@ -45,14 +49,21 @@ local EchoCreek = {
     objectSpawns = {
         { sprite = "camping_01_64", x = 3565, y = 10888, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
-        { sprite = "industry_02_64", x = 3562, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        { sprite = "industry_02_68", x = 3562, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_65", x = 3563, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_69", x = 3563, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_66", x = 3564, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_70", x = 3564, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        { sprite = "industry_02_71", x = 3565, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_64", x = 3562, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
+        -- { sprite = "industry_02_68", x = 3562, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_65", x = 3563, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_69", x = 3563, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_66", x = 3564, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_70", x = 3564, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+        -- { sprite = "industry_02_71", x = 3565, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
+
+        { x = 3576, y = 10902, z = -1, clearExisting = true, },
+        { x = 3577, y = 10902, z = -1, removeWall = "west", },
+        { x = 3578, y = 10902, z = -1, removeWall = "west", },
+        { sprite = "floors_exterior_street_01_0", x = 3577, y = 10902, z = -1, isFloor = true, },
+        { sprite = "location_sewer_01_1", x = 3577, y = 10902, z = -1, },
+        { sprite = "location_sewer_01_1", x = 3577, y = 10903, z = -1, },
 
         { sprite = "carpentry_01_16", x = 3572, y = 10891, z = -1, enabled = "Loot", clearExisting = true, },
 
@@ -225,9 +236,7 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3566,y=10898,z=1},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = true,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -303,7 +312,7 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3585,y=10892,z=0},
-            dist = {"CarSupplyTools", "GasStoreEmergency"},
+            dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -569,5 +578,12 @@ local EchoCreek = {
         },
     },
 }
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(EchoCreek.objectSpawns, { x = 3588, y = 10902, z = -1, removeWall = "west" })
+    table.insert(EchoCreek.objectSpawns, { x = 3612, y = 10901, z = 0, clearExisting = true, })
+    table.insert(EchoCreek.objectSpawns, { sprite = "walls_exterior_wooden_01_64", x = 3612, y = 10902, z = 0, removeFloor = true, })
+    table.insert(EchoCreek.objectSpawns, { sprite = "walls_exterior_wooden_01_65", x = 3612, y = 10903, z = 0, })
+end
 
 return EchoCreek
