@@ -1,0 +1,8 @@
+Stash_FR = {
+    Stash_DWAP_09_text1 = "étage supérieur, fournitures au sous-sol",
+    Stash_DWAP_10_text1 = "escaliers des abris de retombées derrière le bureau de sécurité",
+    Stash_DWAP_12_text1 = "refuge des retombées au sous-sol",
+    Stash_DWAP_31_text1 = "Attention aux cavernes",
+    Stash_DWAP_31_text2 = "Se diriger vers la bibliothèque au sous-sol",
+    Stash_DWAP_32_text1 = "Prendre l'ascenseur",
+}
