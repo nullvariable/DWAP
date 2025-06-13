@@ -49,15 +49,6 @@ local EchoCreek = {
     objectSpawns = {
         { sprite = "camping_01_64", x = 3565, y = 10888, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
-        -- { sprite = "industry_02_64", x = 3562, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, }, -- generator
-        -- { sprite = "industry_02_68", x = 3562, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_65", x = 3563, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_69", x = 3563, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_66", x = 3564, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_70", x = 3564, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_67", x = 3565, y = 10898, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-        -- { sprite = "industry_02_71", x = 3565, y = 10897, z = -1, enabled = "EnableGenSystem", clearExisting = true, },
-
         { x = 3576, y = 10902, z = -1, clearExisting = true, },
         { x = 3577, y = 10902, z = -1, removeWall = "west", },
         { x = 3578, y = 10902, z = -1, removeWall = "west", },

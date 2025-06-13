@@ -172,6 +172,7 @@ local LVilleMansion = {
             type = 'container',
             coords = {x=12028,y=2590,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -179,9 +180,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x=12027,y=2587,z=0},
-            dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -428,7 +427,7 @@ local LVilleMansion = {
         {
             type = 'container',
             coords = {x = 12047, y = 2580, z = 0},
-            dist = {"CarSupplyTools", },
+            dist = {"CarSupplyTools","GasStorageMechanics", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
@@ -492,9 +491,7 @@ local v14oldLoot = {
     { -- lower (66)
         type = 'container',
         coords = {x=v14bunkerTopLeft.x,y=v14bunkerTopLeft.y+3,z=v14bunkerTopLeft.z},
-        dist = {"StoreKitchenGlasses", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
-        distIncludeJunk = true,
-        randUntilFull = true,
+        special = "kitchentools",
         level = "Loot_FoodLevel",
     },
     { -- upper
@@ -747,7 +744,7 @@ local v15loot = {
     {
         type = 'container',
         coords = {x=12035,y=2590,z=-1},
-        dist = { "GunStoreKnives", },
+        dist = { "GunStoreKnives", "PawnShopKnives",  },
         distIncludeJunk = true,
         randUntilFull = true,
         level = "Loot_GunLevel",
