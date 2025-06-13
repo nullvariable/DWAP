@@ -9,13 +9,19 @@ local customNameObjects = {
     ["Sink"] = true,
     ["Toilet"] = true,
     ["Bath"] = true,
-    -- ["Rain Collector Barrel"] = true,
 }
+    -- ["Rain Collector Barrel"] = true,
 local plumbableDistance = 35
 
 local waterTanks = {}
 
 Events.OnLoad.Add(function()
+    if getActivatedMods():contains("\\FunctionalAppliances2") then
+        customNameObjects["Tabletop Soda"] = true
+        customNameObjects["Soda Machine"] = true
+        -- customNameObjects["SlurpBurp"] = true
+    end
+
     local configs = DWAPUtils.loadConfigs()
     for i = 1, #configs do
         local config = configs[i]
@@ -71,7 +77,7 @@ end
 --- @param object IsoObject
 --- @return boolean
 local function isWTPlumbable(object)
-    DWAPUtils.dprint("isWTPlumbable")
+    -- DWAPUtils.dprint("isWTPlumbable")
     local sprite = object:getSprite()
     -- local attachedsprite = object:getAttachedAnimSprite()
     -- if attachedsprite then
@@ -89,13 +95,20 @@ local function isWTPlumbable(object)
     -- if thisSprite then
     local thisSprite = sprite
     if thisSprite then
-        DWAPUtils.dprint("isWTPlumbable: " .. tostring(object:getSpriteName()))
+        -- DWAPUtils.dprint("isWTPlumbable: " .. tostring(object:getSpriteName()))
         local properties = thisSprite:getProperties()
         if properties and properties:Is("CustomName") then
             local name = tostring(properties:Val("CustomName"))
-            DWAPUtils.dprint("isWTPlumbable: " .. name)
-            DWAPUtils.dprint(tostring(customNameObjects[name]))
-            return customNameObjects[name] == true
+            local groupName = properties:Is("GroupName") and tostring(properties:Val("GroupName")) or ""
+            -- DWAPUtils.dprint("isWTPlumbable: " .. name)
+            -- DWAPUtils.dprint(tostring(customNameObjects[name]))
+            return customNameObjects[name] == true or customNameObjects[groupName] == true
+        elseif properties and properties:Is("GroupName") then
+            local groupName = tostring(properties:Val("GroupName"))
+            DWAPUtils.dprint("isWTPlumbable: " .. groupName)
+            if customNameObjects[groupName] then
+                return true
+            end
         end
     end
     return false
@@ -123,7 +136,7 @@ end
 ---@param test boolean
 DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
     DWAPUtils.dprint("worldObjectContextMenuWater")
-    if test == true then return true end
+    -- if test == true then return true end
     if not SandboxVars.DWAP.EnableWaterSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
 
