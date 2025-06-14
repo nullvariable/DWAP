@@ -125,10 +125,10 @@ local QuillManor = {
         { sprite = "walls_interior_bathroom_01_10", x = 1225, y = 7365, z = 0, },
         { sprite = "fixtures_doors_frames_01_8", x = 1225, y = 7365, z = 0, },
 
-        { barricade = "metal", enabled = "Barricade", target="location_restaurant_bar_01_47", x = 1230, y = 7364, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="location_restaurant_bar_01_47", x = 1239, y = 7364, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="walls_interior_house_05_22", x = 1242, y = 7366, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="walls_interior_house_05_22", x = 1242, y = 7370, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_02_54", x = 1230, y = 7364, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="walls_commercial_02_54", x = 1239, y = 7364, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_72", x = 1242, y = 7366, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_72", x = 1242, y = 7370, z = 0, },
     },
     loot = {
         -- only basement for now.
