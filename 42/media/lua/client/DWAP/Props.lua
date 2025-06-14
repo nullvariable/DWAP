@@ -323,7 +323,13 @@ function DWAP_Props.maybeSpawnObject(params)
                 else
                     return
                 end
-                local barricade = IsoBarricade.AddBarricadeToObject(obj, true)
+                local barricade
+                local success, err = pcall(function()
+                    barricade = IsoBarricade.AddBarricadeToObject(obj, true)
+                end)
+                if not success then
+                    DWAPUtils.dprint(("DWAP_Props: Failed to add barricade to object %s: %s (%s %s)"):format(params.sprite, err, tostring(params.x), tostring(params.y)))
+                end
                 if not barricade then
                     return
                 end
