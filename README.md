@@ -65,7 +65,7 @@ Custom firearms load outs for gun lockers. Attachments, clips, and ammo for:
 
 | 3. West Louisville Mansion | 12021, 2588 |
 | ------------- | ---------- |
-| ![West Louisville Mansion](readme/03_WLM.jpg) | ![West Louisville Mansion](readme/02_map.png) |
+| ![West Louisville Mansion](readme/03_WLM.jpg) | ![West Louisville Mansion](readme/03_map.png) |
 | This comfortable home features a standalone three car garage. The home and garage are fully powered. Due to the proximity to the river, this home features a pumping system that allows for the water storage to be refilled from the river when the generator is powered. Enjoy some down time in the garage loft with a game of pool, or relax catching some fish. Not far from all the great things that Louisville proper has to offer. | ![West Louisville Mansion](readme/03_basement.png) |
 | Optional mods supported | * Ladders!? |
 | ***Pros***: Fully custom basement map, tons of storage | ***Cons***: Tons of zombies |
