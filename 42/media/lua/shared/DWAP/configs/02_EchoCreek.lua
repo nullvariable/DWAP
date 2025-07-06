@@ -1,3 +1,4 @@
+local wtc = {x = 3563, y = 10904, z = -1}
 local EchoCreek = {
     spawn = { x = 3573, y = 10896, z = 1 },
     generators = {
@@ -13,29 +14,32 @@ local EchoCreek = {
                 {447, 1362},
                 {447, 1363},
                 {446, 1364}, -- gas pumps outside
+                {448, 1361},
                 {448, 1362},
                 {449, 1362},
                 {450, 1362},
                 {451, 1362},
+                {450, 1363},
+                {451, 1363},
             },
         },
     },
     waterTanks = {
-        { sprite = "industry_02_75", x = 3563, y = 10904, z = -1, sourceType="generator", source = {x = 3586, y = 10898, z = -1} },
+        { sprite = "industry_02_75", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 3586, y = 10898, z = -1} },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_22", x = 3577, y = 10893, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_bathroom_01_4", x = 3578, y = 10893, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_32", x = 3566, y = 10899, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_17", x = 3569, y = 10897, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_bathroom_01_4", x = 3562, y = 10897, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_12", x = 3563, y = 10897, z = 0, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "appliances_laundry_01_5", x = 3562, y = 10900, z = 1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_9", x = 3567, y = 10897, z = 1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_bathroom_01_25", x = 3569, y = 10897, z = 1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_bathroom_01_2", x = 3571, y = 10897, z = 1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_3", x = 3571, y = 10899, z = 1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
-        { sprite = "fixtures_sinks_01_32", x = 3567, y = 10904, z = -1, sourceType="tank", source = {x = 3563, y = 10904, z = -1} },
+        { sprite = "fixtures_sinks_01_22", x = 3577, y = 10893, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_4", x = 3578, y = 10893, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_32", x = 3566, y = 10899, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_17", x = 3569, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_4", x = 3562, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_12", x = 3563, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_5", x = 3562, y = 10900, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_9", x = 3567, y = 10897, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_25", x = 3569, y = 10897, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_2", x = 3571, y = 10897, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_3", x = 3571, y = 10899, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_32", x = 3567, y = 10904, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
         name = "Echo Creek Station",
@@ -49,14 +53,14 @@ local EchoCreek = {
     objectSpawns = {
         { sprite = "camping_01_64", x = 3565, y = 10888, z = 0, enabled = "EnableWaterSystem", }, -- fountain
 
-        { x = 3576, y = 10902, z = -1, clearExisting = true, },
-        { x = 3577, y = 10902, z = -1, removeWall = "west", },
-        { x = 3578, y = 10902, z = -1, removeWall = "west", },
-        { sprite = "floors_exterior_street_01_0", x = 3577, y = 10902, z = -1, isFloor = true, },
-        { sprite = "location_sewer_01_1", x = 3577, y = 10902, z = -1, },
-        { sprite = "location_sewer_01_1", x = 3577, y = 10903, z = -1, },
+        -- { x = 3576, y = 10902, z = -1, clearExisting = true, },
+        -- { x = 3577, y = 10902, z = -1, removeWall = "west", },
+        -- { x = 3578, y = 10902, z = -1, removeWall = "west", },
+        -- { sprite = "floors_exterior_street_01_16", x = 3577, y = 10902, z = -1, isFloor = true, },
+        -- { sprite = "location_sewer_01_1", x = 3577, y = 10902, z = -1, },
+        -- { sprite = "location_sewer_01_1", x = 3577, y = 10903, z = -1, },
 
-        { sprite = "carpentry_01_16", x = 3572, y = 10891, z = -1, enabled = "Loot", clearExisting = true, },
+        -- { sprite = "carpentry_01_16", x = 3572, y = 10891, z = -1, enabled = "Loot", clearExisting = true, },
 
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3575, y = 10906, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3574, y = 10906, z = 0, },
@@ -67,44 +71,72 @@ local EchoCreek = {
         { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_24", x = 3566, y = 10898, z = 1, },
     },
     loot = {
-        { -- house next to couch
+        -- addon basement room
+        {
             type = 'container',
-            coords = {x=3572, y=10891,z=-1},
+            coords = {x=3581, y=10897,z=-1},
             sandboxEnable = 'Loot',
             special = "essentials",
         },
+        {
+            type = 'container',
+            coords = {x=3584, y=10901,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
+        },
+        {
+            type = 'container',
+            coords = {x=3585, y=10901,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks2",
+        },
+        {
+            type = 'container',
+            coords = {x=3586, y=10901,z=-1},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
+        },
+        {
+            type = 'container',
+            coords = {x=3587, y=10901,z=-1},
+            dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=3587, y=10901,z=-1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=3587, y=10897,z=-1},
+            dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+
+
         { -- house next to couch
             type = 'container',
             coords = {x=3566, y=10901,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- bookcase1
-            type = 'container',
-            coords = {x=3562, y=10902,z=1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- bookcase2
-            type = 'container',
-            coords = {x=3562, y=10901,z=1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- end table
-            type = 'container',
-            coords = {x=3563, y=10901,z=1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
-        },
         { -- tv stand
             type = 'container',
             coords = {x=3564,y=10905,z=1},
             items = {
-                { name = 'Base.Headphones', chance = 1, count = {3,3} },
-                { name = 'Base.CDplayer', chance = 1, count = {3,3} },
                 { name = 'Base.VHS_Retail', chance = 1, count = {30,30} },
             },
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         { -- bunkbed bedroom
             type = 'container',
@@ -401,7 +433,7 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3574,y=10895,z=0},
-            dist = {"CampingStoreBackpacks"},
+            dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_GunLevel",

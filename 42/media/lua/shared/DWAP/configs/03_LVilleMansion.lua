@@ -142,6 +142,8 @@ local LVilleMansion = {
                 { name = 'Base.Bullhorn', chance = 0.5, count = {1,1} },
                 { name = 'Base.VHS_Retail', chance = 0.5, count = {30,30} },
             },
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',

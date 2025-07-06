@@ -175,6 +175,8 @@ local MuldSafeHouse = {
                 { name = 'Base.VideoGame', chance = 1, count = {1,1} },
                 { name = 'Base.VHS_Retail', chance = 1, count = {30,30} },
             },
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
         },
         {
             type = 'container',
