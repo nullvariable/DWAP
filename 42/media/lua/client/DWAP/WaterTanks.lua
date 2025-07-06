@@ -115,7 +115,7 @@ function DWAP_WaterSystem:InitializeFixture(fixture)
         fixtureObj:getModData().canBeWaterPiped = false
         fixtureObj:setUsesExternalWaterSource(true)
         fixtureObj:transmitModData()
-        fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
+        -- fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
 
         -- DWAPUtils.Defer(function()
         fixtureObj:doFindExternalWaterSource()

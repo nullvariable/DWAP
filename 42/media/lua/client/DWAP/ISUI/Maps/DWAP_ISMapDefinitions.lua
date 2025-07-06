@@ -278,3 +278,11 @@ LootMaps.Init.DWAPStashMap35 = function(mapUI)
     MapUtils.initDefaultStyleV1(mapUI)
     mapAPI:setBoundsInSquares(11480, 9224, 11783, 9407)
 end
+
+-- Gun Club
+LootMaps.Init.DWAPStashMap36 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+mapAPI:setBoundsInSquares(1784, 14080, 1975, 14295)
+end

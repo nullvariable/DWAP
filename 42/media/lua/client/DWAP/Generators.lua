@@ -4,7 +4,7 @@ Reflection = require("Starlit/utils/Reflection")
 
 local DWAP_GenData
 
-local SOUNDVOLUME = 4
+local SOUNDVOLUME = 3
 
 DWAP_Gen = {
     ---@type IsoCell

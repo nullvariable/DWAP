@@ -295,6 +295,14 @@ local configs = {
         buildingX = 11613,
         buildingY = 9293,
     },
+    [36] = {
+        name = "Gun Club Map",
+        stamps = {
+            {"Asterisk", nil, 1858, 14166, 0, 0, 0},
+        },
+        buildingX = 1858,
+        buildingY = 14166,
+    },
 }
 if getActivatedMods():contains("\\Ladders") then
     print("Found Ladders mod, adding ladder stamps to safehouses")
@@ -320,6 +328,7 @@ if getActivatedMods():contains("\\Ladders") then
     table.insert(configs[30].stamps, {"Ladder", nil, 2559, 14454, 0, 0, 0})
     table.insert(configs[31].stamps, {"Ladder", nil, 7679, 12205, 0, 0, 0})
     table.insert(configs[33].stamps, {"Ladder", nil, 8716, 15314, 0, 0, 0})
+    table.insert(configs[36].stamps, {"Ladder", nil, 1831, 14111, 0, 0, 0})
 end
 
 for i = 1, #configs do

@@ -26,8 +26,26 @@ function DWAPTest2()
 end
 
 
-if getDebug() then
-    local lastBuilding = nil
+-- if getDebug() then
+--     local lastBuilding = nil
+--     Events.OnTick.Add(function()
+--         local ply = getPlayer()
+--         local square = ply:getCurrentSquare()
+--         if not square then return end
+--         local building = square:getBuilding()
+--         local bn = building and building or nil
+--         if bn ~= lastBuilding then
+--             DWAPUtils.dprint("Building changed "..tostring(bn))
+--             if building then
+--                 DWAPUtils.lightsOn(square)
+--             end
+--             lastBuilding = bn
+--         end
+--     end)
+-- end
+
+local lastBuilding = nil
+function DoAutoLights()
     Events.OnTick.Add(function()
         local ply = getPlayer()
         local square = ply:getCurrentSquare()
@@ -563,6 +581,10 @@ function FindChunksForRoom()
         uchunk.chunk:addGeneratorPos(x, y, playerZ)
     end
     DWAPUtils.lightsOn(pSquare)
+end
+
+function printSandboxVert()
+    DWAPUtils.dprint(("SandboxVars.GeneratorVerticalPowerRange %s"):format(SandboxVars.GeneratorVerticalPowerRange))
 end
 
 function GetChunkXYFromPlayer()
@@ -1294,3 +1316,40 @@ function vhs_test()
     local player = getPlayer()
     player:getInventory():AddItem(item)
 end
+
+
+function fix_19_gen()
+    local DWAP_GenData = ModData.getOrCreate("DWAP_GenData")
+    DWAP_GenData.init = false
+    DWAPUtils.dprint("DWAP_GenData init set to false")
+end
+
+-- function confirmOptionalSpawn(_, button, optionalSpawn)
+--     DWAPUtils.dprint(optionalSpawn)
+--     if button.internal == "YES" then
+--         DWAPUtils.dprint("Optional spawn confirmed")
+--     else
+--         DWAPUtils.dprint("Optional spawn cancelled")
+--     end
+-- end
+-- function test_dialog()
+--     DWAPUtils.dprint("Testing dialog")
+--     local configs = DWAPUtils.loadConfigs()
+--     local configIndex = 1
+--     if SandboxVars.DWAP.EnableAllLocations then
+--         configIndex = DWAPUtils.getSafehouseIndex()
+--     end
+--     local config = configs[configIndex]
+--     table.wipe(configs)
+--     DWAPUtils.dprint(config.optionalSpawn and config.optionalSpawn.question or "No optional spawn question")
+--     if config.optionalSpawn then
+--     	local width = 380;
+--     	local x = getCore():getScreenWidth() / 2 - (width / 2)
+--     	local height = 120;
+--     	local y = getCore():getScreenHeight() / 2 - (height / 2)
+--         local dialog = ISModalDialog:new(x,y, width, height, getText(config.optionalSpawn.question), true, nil, confirmOptionalSpawn, nil, config.optionalSpawn);
+-- 	    dialog:initialise()
+-- 	    dialog:addToUIManager()
+-- 	    dialog:bringToTop()
+--     end
+-- end

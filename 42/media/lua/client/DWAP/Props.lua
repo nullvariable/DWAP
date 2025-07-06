@@ -291,7 +291,7 @@ function DWAP_Props.maybeSpawnObject(params)
             local gb = instanceItem("Base.Gravelbag")
             local obj = ISNaturalFloor:new(params.sprite, nil, gb, getPlayer())
             prop = IsoThumpable.new(getCell(), square, params.sprite, false, obj)
-            BuildRecipeCode.floor.OnCreate(prop)
+            BuildRecipeCode.floor.OnCreate({thumpable = prop})
         elseif params.isLightSwitch then
             prop = IsoLightSwitch.new(getCell(), square, getSprite(params.sprite), square:getRoomID())
             prop:addLightSourceFromSprite()

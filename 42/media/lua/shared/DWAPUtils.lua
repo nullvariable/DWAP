@@ -42,12 +42,13 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [27] = "DWAP/configs/27_TheDrake",
     [28] = "DWAP/configs/28_EkronPigFarm",
     [29] = "DWAP/configs/29_LVilleComplex",
-    [30] = "DWAP/configs/30_BrandenburgTH",
+    [30] = "DWAP/configs/30_IrvingtonTH",
     [31] = "DWAP/configs/31_PrisonBreak",
     [32] = "DWAP/configs/32_QuillManor",
     [33] = "DWAP/configs/33_DarkWallow",
     [34] = "DWAP/configs/34_HuntingCabin",
     [35] = "DWAP/configs/35_DrugShack",
+    [36] = "DWAP/configs/36_GunClub",
 }
 
 local configCache = {}

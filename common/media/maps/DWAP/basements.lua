@@ -5,7 +5,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     lot_basement_gas_15_brandenburg = { width=10, height=10, stairx=0, stairy=1, stairDir="N" },
     lot_basement_gunclub_01 = { width=21, height=7, stairx=19, stairy=1, stairDir="N" },
     lot_basement_house_wadsworth_main = { width=13, height=16, stairx=7, stairy=6, stairDir="N" },
-    dwap_02_echo_creek_tunnel = { width=36, height=7, stairx=34, stairy=6, stairDir="N" },
+    dwap_02_echo_creek_tunnel = { width=37, height=7, stairx=35, stairy=6, stairDir="N" },
     dwap_03_lville_mansion = { width=15, height=25, stairx=0, stairy=20, stairDir="N" },
     dwap_04_march_ridge_tunnel = { width=37, height=6, stairx=0, stairy=1, stairDir="N" },
     dwap_05_muldsafehouse = { width=8, height=15, stairx=0, stairy=1, stairDir="N" },
@@ -45,6 +45,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     dwap_33_darkwallow = { width=9, height=23, stairx=0, stairy=14, stairDir="N" },
     dwap_34_huntingcabin = { width=9, height=17, stairx=1, stairy=15, stairDir="W" },
     dwap_35_drugshack = { width=41, height=21, stairx=1, stairy=3, stairDir="W" },
+    dwap_36_gunclub = { width=43, height=54, stairx=38, stairy=49, stairDir="N" },
 }
 
 local fullConfig = table.newarray()
@@ -53,13 +54,11 @@ fullConfig[1] = { -- DoeValleyBunker
 }
 fullConfig[2] = { -- EchoCreek
     locations = {
-        -- {x=12024, y=2598, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
         {x=3612, y=10903, stairDir="N", choices={"dwap_02_echo_creek_tunnel"}},
     },
 }
 fullConfig[3] = { -- LVilleMansion
     locations = {
-        -- {x=12024, y=2598, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
         {x=12024, y=2598, stairDir="N", choices={"dwap_03_lville_mansion"}},
     },
 }
@@ -70,20 +69,12 @@ locations = {
 }
 fullConfig[5] = { -- MuldSafeHouse
     locations = {
-        -- {x=10663, y=9565, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}}, -- my first spot, fits into the front hall, but needs extra walls spawned and cuts off garage access.
-
-        -- 2nd iteration
-        -- {x=10657, y=9562, stairDir="N", choices={"lot_basement_house_09"}, access="ba_exterior_north_westside_29"},
-        -- {x=10658, y=9562, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
-
         {x=10657, y=9562, stairDir="N", choices={"dwap_05_muldsafehouse"}, access="ba_exterior_north_westside_29"},
     },
 }
 fullConfig[6] = { -- Riverside
     locations = {
         {x=6950, y=5564, stairDir="N", choices={"dwap_06_riverside_farm"}, access="ba_house_medium_18_farmhouse"},
-        -- {x=6950, y=5564, stairDir="N", choices={"lot_basement_house_09"}, access="ba_house_medium_18_farmhouse"},
-        -- {x=6951, y=5564, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
     },
 }
 fullConfig[7] = { -- RosewoodGas
@@ -94,8 +85,6 @@ locations = {
 fullConfig[8] = { -- WWPSafeHouse
     locations = {
         {x=10159, y=6623, stairDir="N", choices={"dwap_08_WWPSafeHouse"}, access="ba_house_large_01_S_08"},
-        -- {x=10159, y=6623, stairDir="N", choices={"lot_basement_storefront_09"}, access="ba_house_large_01_S_08"},
-        -- {x=10146, y=6623, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
     },
 }
 fullConfig[9] = { -- Lowry Court
@@ -132,14 +121,11 @@ end
 fullConfig[13] = { -- pawnshop
 locations = {
     {x=12333, y=1326, z=0, stairDir="N", choices={"dwap_13_lvillepawn"}, access="ba_house_large_01_S_08"},
-    -- {x=12333, y=1326, z=0, stairDir="N", choices={"lot_basement_house_42_B_south"}, access="ba_house_large_01_S_08"},
-    -- {x=12334, y=1326, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
 },
 }
 fullConfig[14] = { -- autoshop
 locations = {
     {x=13137, y=3028, z=0, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
-    -- {x=10146, y=6623, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
     },
 }
 if getActivatedMods():contains("\\Ladders") then
@@ -147,23 +133,17 @@ if getActivatedMods():contains("\\Ladders") then
 end
 fullConfig[15] = { -- ekron lake house
     locations = {
-        -- {x=1897, y=9955, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
         {x=1906, y=9945, stairDir="N", choices={"dwap_15_ekron_farm"}},
-        -- {x=10146, y=6623, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
     },
 }
 fullConfig[16] = { -- ELVille Farm House
     locations = {
         {x=14579, y=3035, z=0, stairDir="W", choices={"dwap_16_elvillefarm"},},
-        -- {x=14579, y=3035, z=0, stairDir="W", choices={"lot_basement_house_09_east"}, access="ba_house_large_01_N_02"},
-        -- {x=14575, y=3031, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}},
     },
 }
 fullConfig[17] = { -- Animal rehab
     locations = {
         {x=3110, y=12048, z=0, stairDir="W", choices={"dwap_17_animal_rehab"}, access="ba_house_medium_07"},
-        -- {x=3110, y=12048, z=0, stairDir="W", choices={"lot_basement_house_06_B_east"}, access="ba_house_medium_07"},
-        -- {x=3106, y=12039, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01"},
     },
 }
 fullConfig[18] = { -- McCoy
@@ -174,20 +154,16 @@ fullConfig[18] = { -- McCoy
 fullConfig[19] = { -- CentralLVilleMansion
     locations = {
         {x=13432, y=1905, z=0, stairDir="W", choices={"dwap_19_lville_mansion"}, access = "ba_interior_west_07", },
-        -- {x=13431, y=1908, z=0, stairDir="N", choices={"lot_basement_gas_15_brandenburg"}, },
-        -- {x=13434, y=1913, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, }, -- access="ba_interior_north_01"
     },
 }
 fullConfig[20] = { -- scrapeyard
     locations = {
         {x=2940, y=12517, z=0, stairDir="W", choices={"lot_basement_house_08"}, },
-        -- {x=2940, y=12561, z=0, stairDir="N", choices={"lot_basement_house_05"}, }, --access="ba_exterior_north_eastside_03_C"
         {x=2940, y=12562, z=0, stairDir="N", choices={"dwap_20_tunnel"}, }, --access="ba_exterior_north_eastside_03_C"
     },
 }
 fullConfig[21] = { -- Ekron Factory
     locations = {
-        -- {x=583, y=9382, z=-1, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_interior_north_01" },
         {x=586, y=9379, z=0, stairDir="W", choices={"dwap_21_ekron_factory"} },
     },
 }
@@ -271,6 +247,11 @@ fullConfig[35] = { -- East Muldraugh Drug Shack
         {x=11586, y=9287, z=0, stairDir="W", choices={"dwap_35_drugshack"}, access="ba_house_small_173"},
     },
 }
+fullConfig[36] = { -- Irvington Gun Club
+    locations = {
+        {x=1866, y=14160, z=0, stairDir="N", choices={"dwap_36_gunclub"},},
+    },
+}
 
 local locations = {}
 
@@ -300,46 +281,9 @@ local api = Basements.getAPIv1()
 api:addBasementDefinitions('Muldraugh, KY', basements)
 api:addSpawnLocations('Muldraugh, KY', locations)
 
-if instanceItem("TaylorsvilleMap") then
+
+if getActivatedMods():contains("\\Taylorsville") then
     api:addBasementDefinitions('Taylorsville', basements)
     api:addSpawnLocations('Taylorsville', locations)
 end
 print("DWAP basements.lua loaded")
-
--- Notes on Muldraugh safe house
--- { name = "", type = "Basement", x = 10657, y = 9560, z = 0, width = 7, height = 14,
---     properties = {
---       StairDirection = "N",
---       StairX = 0,
---       StairY = 2,
---       Access = "ba_exterior_north_westside_29"
---     }
---   },
--- the above is the objects.lua definition for the basement here, but we want to force our chosen basement to spawn every time
-
--- { name = "", type = "Basement", x = 6948, y = 5562, z = 0, width = 11, height = 11,
--- properties = {
---   StairDirection = "N",
---   StairX = 2,
---   StairY = 2,
---   Access = "ba_house_medium_18_farmhouse"
--- }
--- },
--- the above is the objects.lua definition for the basement here, but we want to force our chosen basement to spawn every time
-
--- { name = "", type = "Basement", x = 10149, y = 6620, z = 0, width = 15, height = 13,
--- properties = {
---   StairDirection = "N",
---   StairX = 10,
---   StairY = 3,
---   Access = "ba_house_large_01_S_08"
--- }
--- },
--- the above is the objects.lua definition for the basement here, but we want to force our chosen basement to spawn every time
--- lot_basement_house_32
--- lot_basement_house_36_south
--- lot_basement_house_37_empty_south
--- lot_basement_house_39_south
-
--- lot_basement_house_42_B_south has water tank already
--- lot_basement_house_65 has wt

@@ -129,6 +129,39 @@ local function getMoveableDisplayName(obj)
     return nil
 end
 
+--- Refresh water fixtures that have lost their connection to tanks
+--- @param clickCoords table coordinates where the user clicked
+local function refreshLostFixtures(clickCoords)
+    local tank = getWaterTank(clickCoords)
+    if not tank then return end
+    
+    local tankHash = DWAP_WaterSystem.hashCoords(tank.x, tank.y, tank.z)
+    local fixtures = DWAP_WaterSystem.fixtures[tankHash]
+    if not fixtures then return end
+    
+    DWAPUtils.dprint("Checking " .. #fixtures .. " fixtures for lost connections near tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
+    
+    for i = 1, #fixtures do
+        local fixture = fixtures[i]
+        local fixtureSquare = getSquare(fixture.x, fixture.y, fixture.z)
+        if fixtureSquare then
+            local objects = fixtureSquare:getObjects()
+            local osize = objects:size() - 1
+            for j = 0, osize do
+                local obj = objects:get(j)
+                if obj and obj:getSpriteName() == fixture.sprite then
+                    -- Check if this fixture has lost its connection
+                    if not obj:getUsesExternalWaterSource() or not obj:hasExternalWaterSource() then
+                        DWAPUtils.dprint("Refreshing lost fixture connection: " .. fixture.sprite .. " at " .. fixture.x .. ", " .. fixture.y .. ", " .. fixture.z)
+                        DWAP_WaterSystem:InitializeFixture(fixture)
+                    end
+                    break
+                end
+            end
+        end
+    end
+end
+
 --- Context menu for water system so players can move sinks etc
 ---@param player number
 ---@param context ISContextMenu
@@ -139,6 +172,13 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
     -- if test == true then return true end
     if not SandboxVars.DWAP.EnableWaterSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
+    
+    -- Check if we're near a water tank and refresh any lost fixture connections
+    -- Use the first object's coordinates as the click location
+    if worldobjects[1] then
+        local clickCoords = {x = worldobjects[1]:getX(), y = worldobjects[1]:getY(), z = worldobjects[1]:getZ()}
+        refreshLostFixtures(clickCoords)
+    end
 
     local object
     for i = 1, #worldobjects do

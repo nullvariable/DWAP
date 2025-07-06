@@ -382,7 +382,11 @@ end
 local function onFillContainer(roomType, containerType, container)
     if isMultiplayer() and isClient() then return end
     if not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3 then return end
-    if not container or roomType == "Container" then return end
+    if not container or roomType == "Container" or roomType == "Zombie Bag" then return end
+    if not instanceof(container, "ItemContainer") then
+        DWAPUtils.dprint("onFillContainer: Not an ItemContainer")
+        return
+    end
     local square = container:getSourceGrid()
     if square then
         local z = square:getZ()
