@@ -252,10 +252,10 @@ Custom firearms load outs for gun lockers. Attachments, clips, and ammo for:
 | Optional mods supported | * Functional Appliances 2 * Gun's Elevator mod |
 | ***Pros***: Massive space with lots of supplies, close to Louisville locations | ***Cons***: Three generators to maintain, tunnels are quite long to move things around |
 
-| 30. Brandenburg Townhouse | 2609, 14458 |
+| 30. Irvington Townhouse | 2609, 14458 |
 | ------------- | ---------- |
-| ![Brandenburg Townhouse](readme/30_main.jpg) | ![Brandenburg Townhouse](readme/30_map.png) |
-| This mid-range townhouse at the end of the row of units seems mediocre, but it turns out that it's hiding a full fallout shelter. Being nearly central to Brandenburg you'll find this location has plenty to offer. | ![Brandenburg Townhouse](readme/30_basement.png) |
+| ![Irvington Townhouse](readme/30_main.jpg) | ![Irvington Townhouse](readme/30_map.png) |
+| This mid-range townhouse at the end of the row of units seems mediocre, but it turns out that it's hiding a full fallout shelter. Being nearly central to Irvington you'll find this location has plenty to offer. | ![Irvington Townhouse](readme/30_basement.png) |
 | Optional mods supported | * Ladders!? |
 | ***Pros***: Lots of nearby townhouses also with basements | ***Cons***: Can be a lot of zombies in the area |
 

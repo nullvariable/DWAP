@@ -1,6 +1,6 @@
 local bunkerTopLeft = {x = 2607, y = 14436, z = -1}
 local wtc = {x = 2609, y = 14446, z = -1}
-local BrandenburgTH = {
+local IrvingtonTH = {
     spawn = { x = 2609, y = 14458, z = 1 },
     waterTanks = {
         { sprite = "industry_02_72", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 2614, y = 14446, z = -1} },
@@ -32,7 +32,7 @@ local BrandenburgTH = {
         },
     },
     doorKeys = {
-        name = "Brandenburg Townhome",
+        name = "Irvington Townhome",
         doors = {
             { sprite = "fixtures_doors_01_45", x = 2611, y = 14456, z = 0, },
             { sprite = "fixtures_doors_01_53", x = 2608, y = 14449, z = -1, },
@@ -207,8 +207,8 @@ local BrandenburgTH = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(BrandenburgTH.objectSpawns, { x = 2559, y = 14454, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(IrvingtonTH.objectSpawns, { x = 2559, y = 14454, z = 0, removeFloor = true, clearExisting = true, })
 else
-    table.insert(BrandenburgTH.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
+    table.insert(IrvingtonTH.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
 end
-return BrandenburgTH
+return IrvingtonTH
