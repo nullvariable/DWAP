@@ -36,22 +36,10 @@ local convertItems = {
 }
 local essentials = {
     "Gloves_LeatherGlovesBlack",
-    "Bag_ALICE_BeltSus_Camo",
+    "Essential_Bag_ALICE_BeltSus_Camo",
     "SleepingBag_Camo_Packed",
-    "MagnesiumFirestarter",
     "TentGreen_Packed",
-    "WaterPurificationTablets",
-    "AlcoholBandage",
-    "Pills",
-    "PillsSleepingTablets",
-    "PillsAntiDep",
-    "PillsBeta",
-    "PillsVitamins",
     "EntrenchingTool",
-    "Eraser",
-    "Pencil",
-    "Pen",
-    "Scissors",
     "FlashLight_AngleHead_Army",
     "ClayTool",
     "Saw",
@@ -60,7 +48,6 @@ local essentials = {
     "WeldingMask",
     "BlowTorch",
     "Crowbar",
-    "Handiknife",
     "Hammer",
     "MasonsChisel",
     "MasonsTrowel",
@@ -72,17 +59,32 @@ local essentials = {
     "Sledgehammer",
     "WoodAxe",
     "Wrench",
-    "RubberHose",
     "CanteenMilitary",
     "Bag_ALICEpack_Army",
-    "PonchoGreen",
     "Shoes_ArmyBoots",
     "Trousers_Padded_HuntingCamo",
     "Vest_Hunting_Camo",
     "Jacket_HuntingCamo",
+    "WristWatch_Left_DigitalBlack",
+}
+local essentialsAlice = {
+    "MagnesiumFirestarter",
+    "WaterPurificationTablets",
+    "AlcoholBandage",
+    "Pills",
+    "PillsSleepingTablets",
+    "PillsAntiDep",
+    "PillsBeta",
+    "PillsVitamins",
+    "Eraser",
+    "Pencil",
+    "Pen",
+    "Scissors",
+    "Handiknife",
+    "RubberHose",
+    "PonchoGreen",
     "Battery",
     "Notebook",
-    "WristWatch_Left_DigitalBlack",
 }
 local kitchenTools = {
     "BakingPan",
@@ -156,6 +158,14 @@ local kitchenToolsSpices = {
     "ThymeDried",
     "Capers",
     "Olives",
+}
+
+-- limit to 1 of an item
+local throttleSpawn = {
+    ["CDplayer"] = true,
+    ["Earbuds"] = true,
+    ["Headphones"] = true,
+    ["TvWideScreen"] = true,
 }
 
 local gunLockers = {
@@ -738,9 +748,9 @@ function DWAP_LootSpawning.populateItems()
 end
 
 --- get the items for the special "essentials" list
---- @return table: The list of essential items
+--- @return table, table: The list of essentials and essentialsAlice
 function DWAP_LootSpawning.getEssentials()
-    return essentials
+    return essentials, essentialsAlice
 end
 
 --- get the items for the special kitchenTools list
@@ -753,6 +763,17 @@ end
 function DWAP_LootSpawning.getKitchenToolsSpices()
     return kitchenToolsSpices
 end
+
+--- Check if an item is in the throttleSpawn list
+--- @param item string: The item to check
+--- @return boolean : True if the item is in the throttleSpawn list, false otherwise
+function DWAP_LootSpawning.isThrottleSpawnItem(item)
+    if not item or type(item) ~= "string" then
+        return false
+    end
+    return throttleSpawn[item]
+end
+
 --- get the items for the special "gunLockers" list
 --- @return table: The list of gun locker items
 function DWAP_LootSpawning.getGunLockers()

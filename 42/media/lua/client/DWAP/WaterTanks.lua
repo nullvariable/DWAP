@@ -164,7 +164,7 @@ end
 
 -- @TODO if it becomes a thing, we could add a moddata for when the square is not found to store up water that would be added if the player was in range and then add it
 -- the next time we see the tank...
-function DWAP_WaterSystem:generatorRefill()
+function DWAP_WaterSystem:generatorRefill(maxAmount)
     for i = 1, #self.tanks do
         local tank = self.tanks[i]
         if tank.sourceType == "generator" then
@@ -172,8 +172,8 @@ function DWAP_WaterSystem:generatorRefill()
             if generatorSquare and generatorSquare:haveElectricity() then
                 local tankSquare = getSquare(tank.x, tank.y, tank.z)
                 if tankSquare then
-                    DWAPUtils.dprint("index "..i)
-                    DWAPUtils.dprint(tank)
+                    DWAPUtils.dprint("index "..i .. " x: "..tank.x.." y: "..tank.y.." sprite: "..tank.sprite)
+                    -- DWAPUtils.dprint(tank)
                     local objects = tankSquare:getObjects()
                     local osize = objects:size() - 1
                     for j = 0, osize do
@@ -187,16 +187,12 @@ function DWAP_WaterSystem:generatorRefill()
                                     DWAPUtils.dprint("DWAP_WaterSystem: generatorRefill: Refilling tank")
                                     local free = fluidContainer:getFreeCapacity()
                                     if free > 0 then
-                                        -- fluidContainer:addFluid(FluidType.Water, generatorWaterPerTenMinutes)
-                                        -- DWAPUtils.dprint(("DWAP_WaterSystem: generatorRefill: Refilled tank at %s %s %s with %d water"):format(tank.x,
-                                        --     tank.y, tank.z, generatorWaterPerTenMinutes))
-                                        -- tankObj:syncItemFields()
                                         local fluid = Fluid.Get(FluidType.Water)
                                         local currentAmount = fluidContainer:getSpecificFluidAmount(fluid)
-                                        local newAmount = currentAmount + generatorWaterPerTenMinutes
+                                        local newAmount = currentAmount + maxAmount
                                         fluidContainer:adjustSpecificFluidAmount(fluid, newAmount)
                                         DWAPUtils.dprint(("DWAP_WaterSystem: generatorRefill: Refilled tank at %s %s %s with %d water"):format(tank.x,
-                                            tank.y, tank.z, generatorWaterPerTenMinutes))
+                                            tank.y, tank.z, maxAmount))
                                     else
                                         DWAPUtils.dprint("DWAP_WaterSystem: generatorRefill: Tank is full "..tostring(free))
                                     end
@@ -221,24 +217,36 @@ end
 function DWAP_WaterSystem:initializeTank(index, tankObj, square)
     local tank = self.tanks[index]
     local sprite = tank.sprite
-    if tankObj:getFluidContainer() then
-        self.tanks[index].initialized = true
-        DWAPUtils.dprint("DWAP_WaterSystem: initializeTank: Fluid container already exists")
+    
+    -- Double check to prevent duplicate initialization
+    if tank.initialized or tankObj:getFluidContainer() then
+        tank.initialized = true
+        DWAPUtils.dprint("DWAP_WaterSystem: initializeTank: Tank already initialized or fluid container already exists")
         return
     end
-    local thumpable = IsoThumpable.new(tankObj:getCell(), square, sprite, false)
-    thumpable:getModData().waterSource = true
+    
+    DWAPUtils.dprint("DWAP_WaterSystem: initializeTank: Creating new tank with fluid container")
+    
+    -- Remove the old object first
     square:transmitRemoveItemFromSquare(tankObj)
     square:RemoveTileObject(tankObj)
+    
+    -- Create new thumpable tank
+    local thumpable = IsoThumpable.new(tankObj:getCell(), square, sprite, false)
+    thumpable:getModData().waterSource = true
 
     --- @type FluidContainer annoyingly umbrella doesn't have this class yet
     local fluidContainer = ComponentType.FluidContainer:CreateComponent();
     fluidContainer:setCapacity(SandboxVars.DWAP.WaterTankCapacity or 4000)
     fluidContainer:addFluid(FluidType.Water, SandboxVars.DWAP.WaterLevel or 2000)
     GameEntityFactory.AddComponent(thumpable, true, fluidContainer);
+    
+    -- Add the new object
     square:AddTileObject(thumpable)
     square:AddSpecialObject(thumpable)
     square:transmitAddObjectToSquare(thumpable, thumpable:getObjectIndex())
+    
+    -- Mark as initialized
     self.tanks[index].initialized = true
     -- self:SaveModData()
     DWAPUtils.dprint(("DWAP_WaterSystem: initializeTank: Initialized tank at %s %s %s"):format(tank.x, tank.y, tank.z))
@@ -248,15 +256,29 @@ local tankSeen
 function DWAP_WaterSystem:TankSeen(index)
     DWAPUtils.dprint(("DWAP_WaterSystem: TankSeen: %d"):format(index))
     local tank = self.tanks[index]
+    
+    -- Prevent duplicate initialization
+    if tank.initialized then
+        DWAPUtils.dprint("DWAP_WaterSystem: TankSeen: Tank already initialized")
+        return
+    end
+    
     local square = getSquare(tank.x, tank.y, tank.z)
     if not square then return end
+    
+    -- Check if we already have a tank object with fluid container
     local tankObj = getTankObject(square)
+    if tankObj and tankObj:getFluidContainer() then
+        tank.initialized = true
+        DWAPUtils.dprint("DWAP_WaterSystem: TankSeen: Tank object with fluid container already exists")
+        return
+    end
 
     if not tankObj then
         tankObj = getSpriteObject(square, tank.sprite)
     end
 
-    if tankObj and (not tank.initialized or not tankObj:getFluidContainer()) then
+    if tankObj then
         self:initializeTank(index, tankObj, square)
     end
     local hash = self.hashCoords(tank.x, tank.y, tank.z)
@@ -300,8 +322,11 @@ function DWAP_WaterSystem:onWaterShutoff()
         end
     end
     if anyGeneratorSupplied then
-        Events.EveryTenMinutes.Add(function()
-            DWAP_WaterSystem:generatorRefill()
+        -- Events.EveryTenMinutes.Add(function()
+        --     DWAP_WaterSystem:generatorRefill()
+        -- end)
+        Events.EveryHours.Add(function()
+            DWAP_WaterSystem:generatorRefill(generatorWaterPerTenMinutes * 6)
         end)
     end
 end

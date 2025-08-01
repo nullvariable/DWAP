@@ -1,6 +1,6 @@
 local DWAPUtils = {}
 
-DWAPUtils.currentVersion = 16
+DWAPUtils.currentVersion = 17
 DWAPUtils.selectedSafehouse = 4
 DWAPUtils.safehouseKeyId = nil
 
@@ -11,6 +11,7 @@ local getPlayer = getPlayer
 local table = table
 
 print(("DWAPUtils.lua loaded: debug = %s"):format(tostring(getDebug())))
+local debugEnabled = getDebug()
 
 local configFiles = { -- should match order in Sandbox_EN and other translations, which should also be alphabetical
     [1] = "DWAP/configs/01_DoeValleyBunker",
@@ -49,6 +50,50 @@ local configFiles = { -- should match order in Sandbox_EN and other translations
     [34] = "DWAP/configs/34_HuntingCabin",
     [35] = "DWAP/configs/35_DrugShack",
     [36] = "DWAP/configs/36_GunClub",
+    [37] = "DWAP/configs/37_GasCorner_17",
+}
+local configFiles_17 = {
+    [1] = "DWAP/configs/01_DoeValleyBunker_17",
+    [2] = "DWAP/configs/02_EchoCreek_17",
+    [3] = "DWAP/configs/03_LVilleMansion_17",
+    [4] = "DWAP/configs/04_MarchRidgeBunker_17",
+    [5] = "DWAP/configs/05_MuldSafeHouse_17",
+    [6] = "DWAP/configs/06_RiverSafeHouse_17",
+    [7] = "DWAP/configs/07_RosewoodGas_17",
+    [8] = "DWAP/configs/08_WWPSafeHouse_17",
+    [9] = "DWAP/configs/09_LowryCourt_17",
+    [10] = "DWAP/configs/10_GrandOhio_17",
+    [11] = "DWAP/configs/11_PSDelilah_17",
+    [12] = "DWAP/configs/12_EkronCC_17",
+    [13] = "DWAP/configs/13_LVPawnshop_17",
+    [14] = "DWAP/configs/14_LVAutoshop_17",
+    [15] = "DWAP/configs/15_EkronLakeHouse_17",
+    [16] = "DWAP/configs/16_ELVilleFarm_17",
+    [17] = "DWAP/configs/17_AnimalRehab_17",
+    [18] = "DWAP/configs/18_McCoyEstate_17",
+    [19] = "DWAP/configs/19_CentralLVilleMansion_17",
+    [20] = "DWAP/configs/20_ScrapYard_17",
+    [21] = "DWAP/configs/21_EkronFactory_17",
+    [22] = "DWAP/configs/22_CortmanMedical_17",
+    [23] = "DWAP/configs/23_RustyRifle_17",
+    [24] = "DWAP/configs/24_MRSecret_17",
+    [25] = "DWAP/configs/25_RiversideMansion_17",
+    [26] = "DWAP/configs/26_WestPointHome_17",
+    [27] = "DWAP/configs/27_TheDrake_17",
+    [28] = "DWAP/configs/28_EkronPigFarm_17",
+    [29] = "DWAP/configs/29_LVilleComplex_17",
+    [30] = "DWAP/configs/30_IrvingtonTH_17",
+    [31] = "DWAP/configs/31_PrisonBreak_17",
+    [32] = "DWAP/configs/32_QuillManor_17",
+    [33] = "DWAP/configs/33_DarkWallow_17",
+    [34] = "DWAP/configs/34_HuntingCabin_17",
+    [35] = "DWAP/configs/35_DrugShack_17",
+    [36] = "DWAP/configs/36_GunClub_17",
+    [37] = "DWAP/configs/37_GasCorner_17",
+    [38] = "DWAP/configs/38_ForLease_17",
+    [39] = "DWAP/configs/39_LeafHill_17",
+    [40] = "DWAP/configs/40_WestMaple_17",
+    [41] = "DWAP/configs/41_Parsonage_17",
 }
 
 local configCache = {}
@@ -86,7 +131,7 @@ Events.OnInitGlobalModData.Add(function()
 end)
 
 function DWAPUtils.dprint(var)
-    if not getDebug() then return end
+    if not debugEnabled then return end
     if type(var) == "string" then
         log(DebugType.Lua, var)
         return
@@ -154,17 +199,27 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 end)
 
 
-function DWAPUtils.loadConfigs()
-    if #configCache > 0 then
+function DWAPUtils.loadConfigs(noCache)
+    if noCache == nil then
+        noCache = false
+    end
+    if #configCache > 0 and not noCache then
         return configCache
     end
     local configs = table.newarray()
+    local configFilesToUse = configFiles
+    if DWAPUtils.getSaveVersion() == 17 then
+        DWAPUtils.dprint("Using config files for version 17")
+        configFilesToUse = configFiles_17
+    end
     local index = DWAPUtils.selectedSafehouse
     if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
     if SandboxVars.DWAP.EnableAllLocations then
-        DWAPUtils.dprint("Loading all configs: " .. #configFiles)
-        for i = 1, #configFiles do
-            local config = require(configFiles[i])
+        if debugEnabled then
+            DWAPUtils.dprint("Loading all configs: " .. #configFilesToUse)
+        end
+        for i = 1, #configFilesToUse do
+            local config = require(configFilesToUse[i])
             if config then
                 if i ~= index and (not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3) then
                     config.loot = nil
@@ -174,15 +229,33 @@ function DWAPUtils.loadConfigs()
         end
     else
         DWAPUtils.dprint("Loading config: " .. index)
-        local config = require(configFiles[index])
+        local config = require(configFilesToUse[index])
         if config then
             table.insert(configs, maybeApplyOverrides(config))
         else
             DWAPUtils.dprint("Error loading config: " .. index)
         end
     end
-    configCache = configs
+    if not noCache then
+        configCache = configs
+    end
     return configCache
+end
+
+function DWAPUtils.getStartingLocations()
+    local spawns = {}
+    local configFilesToUse = configFiles
+    if DWAPUtils.getSaveVersion() == 17 then
+        DWAPUtils.dprint("Using config files for version 17")
+        configFilesToUse = configFiles_17
+    end
+    for i = 1, #configFilesToUse do
+        local config = require(configFilesToUse[i])
+        if config and config.spawn then
+            spawns[#spawns + 1] = config.spawn
+        end
+    end
+    return spawns
 end
 
 --- Test if the water is still available in the world
@@ -205,7 +278,7 @@ end
 --- before we run the function
 -----------------------------------------------------
 
-local functionsPerThrottle = 5
+local functionsPerThrottle = 10 -- Increased from 5 to process more functions per tick
 local tickHooked = false
 local functions = table.newarray()
 local functionsThrottled = table.newarray()
@@ -228,7 +301,7 @@ local function runDeferredFunctions(_functions, maxPerTick)
             local success, err = pcall(functionsToRun[i])
             if not success then
                 log(DebugType.Lua, "Error running deferred function: " .. tostring(err))
-            else
+            elseif debugEnabled then
                 DWAPUtils.dprint("Ran deferred function " .. tostring(i))
             end
         end
@@ -357,6 +430,59 @@ function DWAPUtils.lightsOn(square, building, attempts)
     return true
 end
 
+--- Toggle the lights on in the current room only
+--- @param square IsoGridSquare|nil
+--- @param attempts number|nil
+--- @return boolean
+function DWAPUtils.lightsOnCurrentRoom(square, attempts)
+    DWAPUtils.dprint("lightsOnCurrentRoom")
+    local player = getPlayer()
+    square = square or player:getCurrentSquare()
+    if not square then
+        if not attempts or attempts < 5 then
+            DWAPUtils.Defer(function()
+                DWAPUtils.lightsOnCurrentRoom(nil, (attempts or 0) + 1)
+            end)
+            return false
+        end
+        return false
+    end
+
+    local room = square:getRoom()
+    if not room then
+        DWAPUtils.dprint("No room found for current square")
+        return false
+    end
+
+    local switches = 0
+    local lightSwitches = room:getLightSwitches()
+    for j = 1, lightSwitches:size() do
+        local lightSwitch = lightSwitches:get(j - 1)
+        lightSwitch:setActive(true, false, true)
+        switches = switches + 1
+    end
+    
+    DWAPUtils.dprint(("Turned on %d lights in current room"):format(switches))
+    return true
+end
+
+--- Get the save version from ModData
+--- @return number
+function DWAPUtils.getSaveVersion()
+    local utilsModData = ModData.getOrCreate("DWAP_Utils")
+    
+    if not utilsModData.saveVersion then
+        return DWAPUtils.currentVersion
+    end
+    return utilsModData.saveVersion
+end
+
+--- Hash coordinates to a unique number
+--- This is a simple hash function that combines x, y, z coordinates into a single number
+--- @param x number
+--- @param y number
+--- @param z number
+--- @return number
 function DWAPUtils.hashCoords(x, y, z)
     return x * 24593 + y * 49157 + z * 193
 end

@@ -5,7 +5,7 @@ local configs = {
     [1] = {
         name = "Doe Valley Bunker Map",
         stamps = {
-            {"Asterisk", nil, 5577, 9376, 0, 0, 0},
+            {"Asterisk", nil, 5577, 9376, 255, 0, 0},
         },
         buildingX = 5577,
         buildingY = 9372,
@@ -302,6 +302,47 @@ local configs = {
         },
         buildingX = 1858,
         buildingY = 14166,
+    },
+    [37] = {
+        name = "Gas Corner Map",
+        stamps = {
+            {"Asterisk", nil, 1664, 5746, 0, 0, 0},
+        },
+        buildingX = 1664,
+        buildingY = 5746,
+    },
+    [38] = {
+        name = "For Lease Map",
+        stamps = {
+            {"Asterisk", nil, 12538, 5211, 0, 0, 0},
+        },
+        buildingX = 12538,
+        buildingY = 5211,
+    },
+    [39] = {
+        name = "Leaf Hill Map",
+        stamps = {
+            {"Asterisk", nil, 12395, 3404, 0, 0, 0},
+        },
+        buildingX = 12395,
+        buildingY = 3404,
+    },
+    [40] = {
+        name = "West Maple Golf Course Map",
+        stamps = {
+            {"Asterisk", nil, 6117, 6638, 0, 0, 0},
+        },
+        buildingX = 6117,
+        buildingY = 6638,
+    },
+    [41] = {
+        name = "Rosewood Parsonage Map",
+        stamps = {
+            {"Asterisk", nil, 8157, 11543, 0, 0, 0},
+            -- {nil, "Stash_DWAP_41_text1", 8074, 11560, 255, 255, 255},
+        },
+        buildingX = 8157,
+        buildingY = 11543,
     },
 }
 if getActivatedMods():contains("\\Ladders") then

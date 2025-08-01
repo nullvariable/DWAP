@@ -5,3 +5,7 @@ id=DWAPDEV
 description=Various bunkers and facilities that a Prepper might have built out. Water sources, generators etc.
 authors=nullvariable
 require=\StarlitLibrary
+pack=dwap_tiles_01
+pack=dwap_tiles_01.floor
+tiledef=dwap_tiles_01 1337
+entityscript=DWAP/dwap_entities

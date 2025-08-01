@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="6" height="50" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="18" Curtains="0" Shutters="16" Stairs="17" RoofCap="13" RoofSlope="14" RoofTop="15" GrimeWall="9">
+<building version="4" width="6" height="50" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="18" Curtains="0" Shutters="16" Stairs="17" RoofCap="13" RoofSlope="14" RoofTop="15" GrimeWall="9">
  <properties>
   <property name="BasementAccess" value="0 45 N"/>
  </properties>
@@ -13,16 +13,6 @@
   <tile enum="WestOpen" tile="fixtures_bathroom_01_066"/>
   <tile enum="NorthOpen" tile="fixtures_bathroom_01_067"/>
  </tile_entry>
- <tile_entry category="exterior_wall_trim">
-  <tile enum="West" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="North" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="NorthWest" tile="location_shop_bargNclothes_01_031"/>
-  <tile enum="SouthEast" tile="location_shop_bargNclothes_01_030"/>
-  <tile enum="WestWindow" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="NorthWindow" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="WestDoor" tile=""/>
-  <tile enum="NorthDoor" tile=""/>
- </tile_entry>
  <tile_entry category="exterior_walls">
   <tile enum="West" tile="industry_01_000"/>
   <tile enum="North" tile="industry_01_001"/>
@@ -32,6 +22,16 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="location_sewer_01_000"/>
+  <tile enum="North" tile="location_sewer_01_001"/>
+  <tile enum="NorthWest" tile="location_sewer_01_002"/>
+  <tile enum="SouthEast" tile="location_sewer_01_003"/>
+  <tile enum="WestWindow" tile=""/>
+  <tile enum="NorthWindow" tile=""/>
+  <tile enum="WestDoor" tile=""/>
+  <tile enum="NorthDoor" tile=""/>
  </tile_entry>
  <tile_entry category="floors">
   <tile enum="Floor" tile="floors_exterior_natural_01_010"/>
@@ -263,18 +263,20 @@
   <tile tile="walls_exterior_house_01_007"/>
   <tile tile="walls_exterior_house_01_015"/>
  </user_tiles>
- <used_tiles>4 11 6 8 10 12 5 7 9 17</used_tiles>
+ <used_tiles>3 11 6 8 10 12 5 7 9 17 4</used_tiles>
  <used_furniture></used_furniture>
  <room Name="storage" InternalName="storage" Color="200 200 200" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="8" GrimeWall="10" Ceiling="0"/>
  <room Name="tunnel" InternalName="tunnel" Color="128 128 128" InteriorWall="11" InteriorWallTrim="0" Floor="5" GrimeFloor="7" GrimeWall="9" Ceiling="0"/>
  <floor>
   <object type="stairs" x="0" y="44" dir="N" Tile="17"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="4" y="44" dir="W" Tile="0"/>
-  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="0" dir="W" Tile="0"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="50" dir="W" Tile="0"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="49" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="0" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="0" dir="N" Tile="0"/>
+  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="1" dir="W" Tile="0"/>
   <rooms>
-0,2,2,2,2,0,
+0,2,0,0,0,0,
 0,2,2,2,2,0,
 0,2,2,2,2,0,
 0,2,2,2,2,0,
@@ -431,7 +433,7 @@
 0,0,0,0,0,0,0
 </tiles>
   <tiles layer="FloorOverlay">
-0,0,0,33,34,0,0,
+0,0,0,0,0,0,0,
 0,0,0,33,34,0,0,
 0,0,0,33,34,0,0,
 0,0,0,33,34,0,0,
@@ -590,7 +592,7 @@
 0,0,0,0,0,0,0
 </tiles>
   <tiles layer="Roof">
-0,0,29,0,0,0,0,
+0,0,0,0,0,0,0,
 0,0,29,0,0,0,0,
 0,0,29,0,0,0,0,
 0,0,29,0,0,0,0,
@@ -643,7 +645,7 @@
 0,0,0,0,0,0,0
 </tiles>
   <tiles layer="WallFurniture">
-0,31,0,0,0,0,0,
+0,0,0,0,0,0,0,
 0,31,0,0,0,0,0,
 0,31,0,0,0,0,0,
 0,31,0,0,0,0,0,

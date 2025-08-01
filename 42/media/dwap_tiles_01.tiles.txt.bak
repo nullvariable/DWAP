@@ -1,0 +1,118 @@
+version = 1
+tileset
+{
+    file = dwap_tiles_01
+    size = 8,8
+    id = 1
+    // dwap_tiles_01_0
+    tile
+    {
+        xy = 0,0
+        BlocksPlacement = 
+        ContainerCapacity = 100
+        CustomName = DWAP_PowerBank
+        ScrapUseSkill = 
+        ScrapUseTool = 
+        container = BatteryBank
+    }
+    // dwap_tiles_01_1
+    tile
+    {
+        xy = 1,0
+        CustomName = Ghost_Generator
+        Facing = E
+        ForceSingleItem = 
+        GroupName = ghost_generator
+        ScrapUseSkill = 
+        ScrapUseTool = 
+        invisible = 
+        trans = 
+    }
+    // dwap_tiles_01_2
+    tile
+    {
+        xy = 2,0
+        BlocksPlacement = 
+        FootstepMaterial = Metal
+        MaterialType = Metal
+        RenderLayer = Floor
+        TileOverlay = 
+        exterior = 
+        solidfloor = 
+        transparentFloor = 
+    }
+    // dwap_tiles_01_3
+    tile
+    {
+        xy = 3,0
+        BlocksPlacement = 
+        FootstepMaterial = Metal
+        MaterialType = Metal
+        RenderLayer = Floor
+        TileOverlay = 
+        exterior = 
+        solidfloor = 
+        transparentFloor = 
+    }
+    // dwap_tiles_01_8
+    tile
+    {
+        xy = 0,1
+        AmbientSound = RadiatorAmbiance
+        BlocksPlacement = 
+        IsWaterCollector = 
+        Material = MetalPlates
+        Material2 = Plumbing
+        ScrapUseSkill = 
+        ScrapUseTool = 
+        solid = 
+    }
+    // dwap_tiles_01_9
+    tile
+    {
+        xy = 1,1
+        AmbientSound = RadiatorAmbiance
+        BlocksPlacement = 
+        Material = MetalPlates
+        Material2 = Plumbing
+        ScrapUseSkill = 
+        ScrapUseTool = 
+        solid = 
+    }
+    // dwap_tiles_01_12
+    tile
+    {
+        xy = 4,1
+        DoorSound = MetalDoor
+        IsClosedState = 
+        MaterialType = Metal
+        doorW = 
+    }
+    // dwap_tiles_01_13
+    tile
+    {
+        xy = 5,1
+        DoorSound = MetalDoor
+        InteriorSide = 
+        MaterialType = Metal
+        doorW = 
+    }
+    // dwap_tiles_01_14
+    tile
+    {
+        xy = 6,1
+        DoorSound = MetalDoor
+        IsClosedState = 
+        MaterialType = Metal
+        doorN = 
+    }
+    // dwap_tiles_01_15
+    tile
+    {
+        xy = 7,1
+        DoorSound = MetalDoor
+        InteriorSide = 
+        MaterialType = Metal
+        doorN = 
+    }
+}

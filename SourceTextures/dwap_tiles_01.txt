@@ -1,0 +1,16 @@
+version = 0
+settings
+{
+    packFileName = ../42/media/texturepacks/dwap_tiles_01.pack
+    outputImageSize = 1024,1024
+    scale50 = false
+    inputImageDirectory
+    {
+        path = dwap_tiles
+        imagesAreTilesheets = true
+    }
+    tileDef
+    {
+        path = ../42/media/dwap_tiles_01.tiles
+    }
+}

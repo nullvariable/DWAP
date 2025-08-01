@@ -31,6 +31,7 @@ local EchoCreek = {
         { sprite = "fixtures_sinks_01_22", x = 3577, y = 10893, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_4", x = 3578, y = 10893, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_32", x = 3566, y = 10899, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_18", x = 3570, y = 10903, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_17", x = 3569, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_bathroom_01_4", x = 3562, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
         { sprite = "fixtures_sinks_01_12", x = 3563, y = 10897, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },

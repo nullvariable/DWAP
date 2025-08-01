@@ -1317,39 +1317,12 @@ function vhs_test()
     player:getInventory():AddItem(item)
 end
 
-
 function fix_19_gen()
     local DWAP_GenData = ModData.getOrCreate("DWAP_GenData")
     DWAP_GenData.init = false
     DWAPUtils.dprint("DWAP_GenData init set to false")
 end
 
--- function confirmOptionalSpawn(_, button, optionalSpawn)
---     DWAPUtils.dprint(optionalSpawn)
---     if button.internal == "YES" then
---         DWAPUtils.dprint("Optional spawn confirmed")
---     else
---         DWAPUtils.dprint("Optional spawn cancelled")
---     end
--- end
--- function test_dialog()
---     DWAPUtils.dprint("Testing dialog")
---     local configs = DWAPUtils.loadConfigs()
---     local configIndex = 1
---     if SandboxVars.DWAP.EnableAllLocations then
---         configIndex = DWAPUtils.getSafehouseIndex()
---     end
---     local config = configs[configIndex]
---     table.wipe(configs)
---     DWAPUtils.dprint(config.optionalSpawn and config.optionalSpawn.question or "No optional spawn question")
---     if config.optionalSpawn then
---     	local width = 380;
---     	local x = getCore():getScreenWidth() / 2 - (width / 2)
---     	local height = 120;
---     	local y = getCore():getScreenHeight() / 2 - (height / 2)
---         local dialog = ISModalDialog:new(x,y, width, height, getText(config.optionalSpawn.question), true, nil, confirmOptionalSpawn, nil, config.optionalSpawn);
--- 	    dialog:initialise()
--- 	    dialog:addToUIManager()
--- 	    dialog:bringToTop()
---     end
--- end
+function showbexiting()
+    DWAPUtils.dprint(Core.bExiting)
+end

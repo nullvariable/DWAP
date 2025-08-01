@@ -1,16 +1,18 @@
 DWAP = DWAP or {}
 
+local generatorVersion = 17
 local DWAPUtils = require("DWAPUtils")
+local GeneratorWindow = require("DWAP/UI/GeneratorWindow")
 
 local generatorControls = {}
 
 --- is IndustrialRevolution or FunctionalAppliances mod active?
 --- @return boolean
 local function isGreenSiloActive()
-    if SandboxVars.IndustrialRevolution and SandboxVars.IndustrialRevolution.EnableSiloGenerators then
+    if getActivatedMods():contains("\\IndustrialRevolution") and SandboxVars.IndustrialRevolution.EnableSiloGenerators then
         return true
     end
-if SandboxVars.FunctionalAppliances and SandboxVars.FunctionalAppliances.FAEnableSiloGenerators then
+    if getActivatedMods():contains("\\FunctionalAppliances") and SandboxVars.FunctionalAppliances.FAEnableSiloGenerators then
         return true
     end
     return false
@@ -87,13 +89,17 @@ Events.OnInitGlobalModData.Add(function()
     end
 end)
 
+local DWAP_GenObject
 Events.OnLoad.Add(function()
-    generatorControls = DWAP_Gen:GetControlPoints()
+    generatorVersion = DWAPUtils.getSaveVersion()
+    if generatorVersion < 17 then
+        generatorControls = DWAP_Gen:GetControlPoints()
+        DWAP_GenObject = DWAP_Gen
+    end
+    generatorControls = DWAP_Gen2:GetControlPoints()
+    DWAP_GenObject = DWAP_Gen2
 end)
 
-function TestLoad()
-    generatorControls = DWAP_Gen:GetControlPoints()
-end
 
 --- Check if the object is a generator control
 --- @param objectCoords table
@@ -117,7 +123,7 @@ end
 ---@param worldobjects table
 ---@param test boolean
 DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
-    if test == true then return true end
+    -- if test == true then return true end
     if not SandboxVars.DWAP.EnableGenSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
 
@@ -143,24 +149,29 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
         end
 
         DWAPUtils.dprint("Generator context menu")
-        local generator = DWAP_Gen:GetGenerator(control)
+        local generator = DWAP_GenObject:GetGenerator(control)
         if not generator then return end
-
-        context:addOptionOnTop(("Fuel: %0.0f / %0.0f"):format(generator.fuel, generator.capacity))
-        context:addOptionOnTop(("Condition: %0.0f"):format(generator.condition))
 
         local player = getPlayer()
         local skilled = player:getPerkLevel(Perks.Electricity) >= 3 or player:isRecipeActuallyKnown("Generator")
         local playerInventory = player:getInventory()
+        if generatorVersion < 17 then
+            context:addOptionOnTop(("Fuel: %0.0fL / %0.0fL"):format(generator.fuel, generator.capacity))
+            context:addOptionOnTop(("Condition: %0.0f%%"):format(generator.condition))
+        else
+            context:addOptionOnTop("Status", nil, function()
+                GeneratorWindow.OnOpenPanel(player:getPlayerNum(), control)
+            end)
+        end
 
         if generator.running then
             context:addOption(getText("ContextMenu_Turn_Off"), nil, function()
-                DWAP_Gen:TurnOffGen(control)
+                DWAP_GenObject:TurnOffGen(control)
             end)
         else
             if generator.condition > 0 then
                 context:addOption(getText("ContextMenu_Turn_On"), nil, function()
-                    DWAP_Gen:TurnOnGen(control)
+                    DWAP_GenObject:TurnOnGen(control)
                 end)
             end
             if generator.condition < 100 then
@@ -236,38 +247,62 @@ end
 -- Events.OnPreFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
 Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
 
---- Hide the generator menu items
---- @deprecated we don't create generator items any more so this should be unneeded
+
+--- Get the generator at the specified square
+--- @param x number
+--- @param y number
+--- @param z number
+--- @return IsoGenerator|nil
+local function getSquareGenerator(x, y, z)
+    local square = DWAP_Gen2.cell:getGridSquare(x, y, z)
+    if not square then return nil end
+    local objects = square:getSpecialObjects()
+    local size = objects:size() - 1
+    for i = size, 0, -1 do
+        local object = objects:get(i)
+        if instanceof(object, "IsoGenerator")
+            and object:getModData().generatorFullType == "Moveables.crafted_01_11" then
+            return object
+        end
+    end
+end
+
+--- Hide the generator menu items for fake generators
 --- @param _ any
 --- @param context ISContextMenu
 --- @param worldobjects table
 --- @param test boolean
 DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
-    if test == true then return true end
     if not SandboxVars.DWAP.EnableGenSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
 
     local object = worldobjects[1]
-    local objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
+    local square = object:getSquare()
+    if not square then
+        DWAPUtils.dprint("No square found for object, skipping generator menu items")
+        return
+    end
+    
+    local gen = getSquareGenerator(square:getX(), square:getY(), square:getZ())
 
-    local control = getControl(objectCoords)
-    if control then
-        DWAPUtils.dprint("Generator context menu")
-        -- local square = object:getSquare()
-        -- for i = 0, square:getObjects():size() - 1 do
-        --     object = square:getObjects():get(i)
-        --     objectCoords = { x = object:getX(), y = object:getY(), z = object:getZ() }
-        --     if object:getObjectName() == "IsoGenerator" then
-                context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
-                context:removeOptionByName(getText("ContextMenu_Turn_Off"))
-                context:removeOptionByName(getText("ContextMenu_Turn_On"))
-                context:removeOptionByName(getText("ContextMenu_GeneratorPlug"))
-                context:removeOptionByName(getText("ContextMenu_GeneratorUnplug"))
-                context:removeOptionByName(getText("ContextMenu_GeneratorAddFuel"))
-                context:removeOptionByName(getText("ContextMenu_GeneratorFix"))
-        --     end
-        -- end
+    if gen then
+        DWAPUtils.dprint("Generator found, hiding menu items")
+        -- Remove vanilla generator menu options
+        context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
+        context:removeOptionByName(getText("ContextMenu_Turn_Off"))
+        context:removeOptionByName(getText("ContextMenu_Turn_On"))
+        context:removeOptionByName(getText("ContextMenu_GeneratorPlug"))
+        context:removeOptionByName(getText("ContextMenu_GeneratorUnplug"))
+        context:removeOptionByName(getText("ContextMenu_GeneratorAddFuel"))
+        context:removeOptionByName(getText("ContextMenu_GeneratorFix"))
+        
+        -- Also remove any conflicting mod options if present
+        if isGreenSiloActive() then
+            for _, v in pairs(stringCache.removeFA) do
+                context:removeOptionByName(v)
+            end
+        end
     end
 end
 -- Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
--- Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
+Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)

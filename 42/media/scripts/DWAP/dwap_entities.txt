@@ -1,0 +1,48 @@
+module DWAP
+{
+    
+    entity DWAPWaterTankWest
+    {
+        
+        component FluidContainer
+        {
+            ContainerName   = Collector,
+            capacity        = 10000,
+            RainFactor	    = 0.0,
+            InitialPercentMin      = 0.0,
+            InitialPercentMax      = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = dwap_tiles_01_8,
+                }
+            }
+        }
+    }
+    entity DWAPWaterTankEast
+    {
+        
+        component FluidContainer
+        {
+            ContainerName   = Collector,
+            capacity        = 10000,
+            RainFactor	    = 0.0,
+            InitialPercentMin      = 0.0,
+            InitialPercentMax      = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = dwap_tiles_01_9,
+                }
+            }
+        }
+    }
+}

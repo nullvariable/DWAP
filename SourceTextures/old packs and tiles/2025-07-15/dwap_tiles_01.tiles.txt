@@ -1,0 +1,16 @@
+version = 1
+tileset
+{
+    file = dwap_tiles_01
+    size = 8,8
+    id = 1
+    // dwap_tiles_01_0
+    tile
+    {
+        xy = 0,0
+        ContainerCapacity = 100
+        Material = Mechanical
+        Material2 = MetalScrap
+        container = BatteryBank
+    }
+}

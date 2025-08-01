@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="19" height="23" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="12" Curtains="0" Shutters="10" Stairs="11" RoofCap="7" RoofSlope="8" RoofTop="9" GrimeWall="6">
+<building version="4" width="19" height="23" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="12" Curtains="0" Shutters="10" Stairs="11" RoofCap="7" RoofSlope="8" RoofTop="9" GrimeWall="6">
  <properties>
   <property name="BasementAccess" value="13 11 W"/>
  </properties>
@@ -13,16 +13,6 @@
   <tile enum="WestOpen" tile="fixtures_bathroom_01_066"/>
   <tile enum="NorthOpen" tile="fixtures_bathroom_01_067"/>
  </tile_entry>
- <tile_entry category="exterior_wall_trim">
-  <tile enum="West" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="North" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="NorthWest" tile="location_shop_bargNclothes_01_031"/>
-  <tile enum="SouthEast" tile="location_shop_bargNclothes_01_030"/>
-  <tile enum="WestWindow" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="NorthWindow" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="WestDoor" tile=""/>
-  <tile enum="NorthDoor" tile=""/>
- </tile_entry>
  <tile_entry category="exterior_walls">
   <tile enum="West" tile="industry_01_000"/>
   <tile enum="North" tile="industry_01_001"/>
@@ -32,6 +22,16 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="walls_exterior_house_02_000"/>
+  <tile enum="North" tile="walls_exterior_house_02_001"/>
+  <tile enum="NorthWest" tile="walls_exterior_house_02_002"/>
+  <tile enum="SouthEast" tile="walls_exterior_house_02_003"/>
+  <tile enum="WestWindow" tile="walls_exterior_house_02_008"/>
+  <tile enum="NorthWindow" tile="walls_exterior_house_02_009"/>
+  <tile enum="WestDoor" tile="walls_exterior_house_02_010"/>
+  <tile enum="NorthDoor" tile="walls_exterior_house_02_011"/>
  </tile_entry>
  <tile_entry category="floors">
   <tile enum="Floor" tile="floors_exterior_natural_01_010"/>
@@ -343,7 +343,7 @@
   <tile tile="walls_logs_097"/>
   <tile tile="walls_logs_099"/>
  </user_tiles>
- <used_tiles>4 5 11</used_tiles>
+ <used_tiles>3 5 11 4</used_tiles>
  <used_furniture></used_furniture>
  <room Name="infirmary" InternalName="infirmary" Color="85 255 127" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="hall" InternalName="hall" Color="200 200 200" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
@@ -357,15 +357,8 @@
  <room Name="workshop" InternalName="workshop" Color="0 0 255" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="bathroom" InternalName="bathroom" Color="255 200 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <floor>
-  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="11" dir="N" Tile="0"/>
-  <object type="wall" length="5" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="11" dir="W" Tile="0"/>
-  <object type="wall" length="5" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="12" dir="W" Tile="0"/>
   <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="15" y="0" dir="N" Tile="0"/>
   <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="15" y="12" dir="N" Tile="0"/>
-  <object type="wall" length="23" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="19" y="0" dir="N" Tile="0"/>
-  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="15" y="0" dir="W" Tile="0"/>
-  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="15" y="23" dir="W" Tile="0"/>
-  <object type="wall" length="15" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="23" dir="W" Tile="0"/>
   <object type="wall" length="23" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="0" dir="N" Tile="0"/>
   <object type="wall" length="15" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="0" dir="W" Tile="0"/>
   <object type="wall" length="5" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="0" dir="N" Tile="0"/>
@@ -390,7 +383,7 @@
 6,6,6,6,6,10,10,10,10,10,3,3,3,3,3,2,2,2,2,
 6,6,6,6,6,10,10,10,10,10,3,3,3,11,11,2,2,2,2,
 6,6,6,6,6,10,10,10,10,10,3,3,3,11,11,2,2,2,2,
-6,6,6,6,6,10,10,10,10,10,3,3,2,2,2,2,2,2,2,
+6,6,6,6,6,10,10,10,10,10,3,3,0,2,2,2,2,2,2,
 8,8,8,8,8,9,9,9,9,9,9,7,7,7,7,2,2,2,2,
 8,8,8,8,8,9,9,9,9,9,9,7,7,7,7,2,2,2,2,
 8,8,8,8,8,9,9,9,9,9,9,7,7,7,7,2,2,2,2,
