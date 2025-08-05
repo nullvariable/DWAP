@@ -344,6 +344,15 @@ local configs = {
         buildingX = 8157,
         buildingY = 11543,
     },
+    [42] = {
+        name = "Louisville Townhouse Map",
+        stamps = {
+            {"Asterisk", nil, 12832, 1619, 0, 0, 0},
+            -- {nil, "Stash_DWAP_42_text1", 12688, 1496, 255, 255, 255},
+        },
+        buildingX = 12832,
+        buildingY = 1619,
+    },
 }
 if getActivatedMods():contains("\\Ladders") then
     print("Found Ladders mod, adding ladder stamps to safehouses")

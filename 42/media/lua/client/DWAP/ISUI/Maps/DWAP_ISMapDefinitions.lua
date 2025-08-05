@@ -324,5 +324,13 @@ LootMaps.Init.DWAPStashMap41 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-mapAPI:setBoundsInSquares(8072, 11520, 8199, 11591)
+    mapAPI:setBoundsInSquares(8072, 11520, 8199, 11591)
+end
+
+-- Louisville Townhouse
+LootMaps.Init.DWAPStashMap42 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(12688, 1496, 13031, 1711)
 end

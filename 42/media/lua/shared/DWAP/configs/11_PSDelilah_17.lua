@@ -117,7 +117,7 @@ local PSDelilah = {
                 },
             },
             fakeGenerators = {
-                { x = 2046, y = 5693, z = -1, createTile = true },
+                { x = 2046, y = 5693, z = -1, createTile = false },
             },
         },
     },

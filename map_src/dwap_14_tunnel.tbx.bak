@@ -196,6 +196,8 @@
  </tile_entry>
  <user_tiles>
   <tile tile="appliances_cooking_01_017"/>
+  <tile tile="dwap_tiles_01_000"/>
+  <tile tile="dwap_tiles_01_009"/>
   <tile tile="furniture_shelving_01_024"/>
   <tile tile="furniture_shelving_01_025"/>
   <tile tile="industry_01_022"/>
@@ -204,17 +206,15 @@
   <tile tile="industry_01_042"/>
   <tile tile="industry_02_053"/>
   <tile tile="industry_02_064"/>
-  <tile tile="industry_02_065"/>
   <tile tile="industry_02_066"/>
   <tile tile="industry_02_067"/>
-  <tile tile="industry_02_068"/>
   <tile tile="industry_02_069"/>
   <tile tile="industry_02_070"/>
   <tile tile="industry_02_071"/>
   <tile tile="industry_02_072"/>
-  <tile tile="industry_02_073"/>
   <tile tile="industry_02_074"/>
   <tile tile="industry_02_075"/>
+  <tile tile="industry_02_174"/>
   <tile tile="industry_02_177"/>
   <tile tile="industry_02_188"/>
   <tile tile="industry_02_193"/>
@@ -283,17 +283,17 @@
 </attributes>
   <tiles layer="Furniture">
 0,0,0,1,0,0,0,
-7,0,0,0,0,0,0,
-6,0,3,0,3,0,0,
-5,0,2,0,2,0,0,
-0,0,3,0,3,0,0,
-0,0,2,0,2,0,0,
+9,0,0,0,0,0,0,
+8,0,5,0,5,0,0,
+7,0,4,0,4,0,0,
+0,0,5,0,5,0,0,
+0,0,4,0,4,0,0,
+0,14,15,16,20,0,0,
+0,11,12,13,2,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,
-0,0,0,0,4,0,0,
-0,8,0,0,4,0,0,
+0,0,18,19,6,0,0,
+0,10,17,3,6,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
@@ -388,12 +388,12 @@
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
-0,13,14,15,16,0,0,
-0,9,10,11,12,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
-0,0,19,20,0,0,0,
-0,0,17,18,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,

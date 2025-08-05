@@ -1,15 +1,15 @@
 local bunkerTopLeft = {x = 5575, y = 9363, z = -1}
-local wtc = {x = 5579, y = 9371, z = -1}
-local pb1 = { x = 5583, y = 9371, z = -1 }
+local wtc = {x = 5579, y = 9372, z = -1}
+local pb1 = { x = 5583, y = 9372, z = -1 }
 local DoeValleyBunker = {
     spawn = { x = 5576, y = 9365, z = -1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 5583, y = 9371, z = -1} },
     },
     waterFixtures = {
-        { sprite = "fixtures_bathroom_01_6", x = 5577, y = 9371, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_16", x = 5575, y = 9367, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "appliances_laundry_01_1", x = 5578, y = 9372, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_6", x = 5577, y = 9371, z = -1, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_16", x = 5575, y = 9367, z = -1, sourceType="tank", source = 1 },
+        { sprite = "appliances_laundry_01_1", x = 5578, y = 9373, z = -1, sourceType="tank", source = 1 },
     },
     generators = {
         {
@@ -60,7 +60,7 @@ local DoeValleyBunker = {
                 }
             },
             fakeGenerators = {
-                { x = 5579, y = 9369, z = -1, },
+                { x = 5579, y = 9370, z = -1, },
             },
             chunks = {
                 {696, 1170},
@@ -220,13 +220,13 @@ local DoeValleyBunker = {
         -- addon room
         {
             type = 'container',
-            coords = {x = 5578, y = 9372, z = -1},
+            coords = {x = 5578, y = 9373, z = -1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- [20]
             type = 'container',
-            coords = {x = 5581, y = 9375, z = -1},
+            coords = {x = 5581, y = 9376, z = -1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -234,7 +234,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5582, y = 9375, z = -1},
+            coords = {x = 5582, y = 9376, z = -1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -242,7 +242,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5583, y = 9375, z = -1},
+            coords = {x = 5583, y = 9376, z = -1},
             dist = {"CarSupplyTools", "GasStorageMechanics", "CampingLockers"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -250,7 +250,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5584, y = 9375, z = -1},
+            coords = {x = 5584, y = 9376, z = -1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -258,7 +258,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5584, y = 9374, z = -1},
+            coords = {x = 5584, y = 9375, z = -1},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -266,7 +266,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5584, y = 9373, z = -1},
+            coords = {x = 5584, y = 9374, z = -1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -274,7 +274,7 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x = 5584, y = 9370, z = -1},
+            coords = {x = 5584, y = 9371, z = -1},
             items = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.Sheet', },

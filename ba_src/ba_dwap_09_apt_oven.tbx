@@ -150,6 +150,7 @@
  </tile_entry>
  <user_tiles>
   <tile tile="appliances_cooking_01_016"/>
+  <tile tile="dwap_tiles_01_001"/>
   <tile tile="floors_interior_tilesandwood_01_031"/>
   <tile tile="overlay_grime_wall_01_004"/>
   <tile tile="walls_interior_detailing_01_004"/>
@@ -188,7 +189,7 @@
 </attributes>
   <tiles layer="Floor">
 0,0,0,
-0,2,0,
+0,3,0,
 0,0,0
 </tiles>
   <tiles layer="Furniture">
@@ -198,17 +199,32 @@
 </tiles>
   <tiles layer="WallGrime">
 0,0,0,
-0,3,0,
+0,4,0,
 0,0,0
 </tiles>
   <tiles layer="WallTrim">
 0,0,0,
-0,4,0,
+0,5,0,
 0,0,0
 </tiles>
   <tiles layer="Walls">
 0,0,0,
-0,5,0,
+0,6,0,
+0,0,0
+</tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0
+</rooms>
+  <attributes>
+0,0,
+0,0
+</attributes>
+  <tiles layer="Floor">
+0,0,0,
+0,2,0,
 0,0,0
 </tiles>
  </floor>

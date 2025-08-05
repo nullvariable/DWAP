@@ -91,9 +91,8 @@ local CentralLVilleMansion = {
                 },
             },
             fakeGenerators = {
-                -- { x = 13437, y = 1906, z = -1, createTile = true },
-                -- { x = 13443, y = 1882, z = -4, createTile = true },
-                { x = 13439, y = 1888, z = -1, createTile = true },
+                { x = 13439, y = 1888+6, z = -1, },
+                { x = 13438, y = 1874, z = -4, },
             },
         },
     },

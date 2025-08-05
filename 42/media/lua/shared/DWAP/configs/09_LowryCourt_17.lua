@@ -106,8 +106,10 @@ local LowryCourt = {
             },
             fakeGenerators = {
                 -- { x = 12983, y = 1920, z = -1, createTile = true },
-                { x = 12984, y = 1916, z = -1, createTile = true },
-                { x = 12992, y = 1924, z = 3, createTile = false },
+                -- { x = 12984, y = 1916, z = -1, createTile = true },
+                { x = 12985, y = 1916, z = -1, createTile = false },
+                -- { x = 12992, y = 1924, z = 3, createTile = false },
+                { x = 12989, y = 1915, z = 3, createTile = false },
             },
         },
     },
@@ -482,26 +484,10 @@ local LowryCourt = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "industry_trucks_01_15", x = 12982, y = 1920, z = -1, removeWall = "north" })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "fixtures_doors_frames_01_5", x = 12982, y = 1920, z = -1, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "fixtures_doors_01_53", x = 12982, y = 1920, z = -1, isDoor = true, doorN = true, })
     table.insert(LowryCourt.objectSpawns, { x = 12939, y = 1933, z = 0, removeFloor = true, })
     table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })
 
-    -- ladder to 3rd floor
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "location_sewer_01_33", x = 12989, y = 1918, z = 0, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_49", x = 12989, y = 1918, z = 0, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_50", x = 12989, y = 1917, z = 0, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_48", x = 12990, y = 1917, z = 0, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_02_51", x = 12990, y = 1918, z = 0, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "location_sewer_01_33", x = 12989, y = 1918, z = 1, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "industry_trucks_01_6", x = 12989, y = 1918, z = 1, removeWall = "west", removeFloor = true, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_03_16", x = 12990, y = 1918, z = 1, })
-    -- -- table.insert(LowryCourt.objectSpawns, { x = 12989, y = 1918, z = 2, removeFloor = true, clearExisting = true, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_03_16", x = 12990, y = 1918, z = 2, clearExisting = true, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "furniture_shelving_01_41", x = 12990, y = 1918, z = 2, })
-    -- table.insert(LowryCourt.objectSpawns, { x = 12989, y = 1917, z = 2, clearExisting = true, })
-    -- table.insert(LowryCourt.objectSpawns, { sprite = "furniture_shelving_01_41", x = 12990, y = 1917, z = 2, clearExisting = true, })
+    table.insert(LowryCourt.generators[1].fakeGenerators, { x = 12951, y=1931, z = -4, createTile = false })
 end
 
 return LowryCourt

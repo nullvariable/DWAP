@@ -124,7 +124,7 @@ local EkronLakeHouse = {
                 },
             },
             fakeGenerators = {
-                { x = 1907, y = 9949, z = -1, createTile = true },
+                { x = 1908, y = 9948, z = -1, createTile = false },
             },
         },
     },

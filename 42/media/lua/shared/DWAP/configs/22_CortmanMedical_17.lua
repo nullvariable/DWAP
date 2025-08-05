@@ -101,7 +101,7 @@ local CortmanMedical = {
                 },
             },
             fakeGenerators = {
-                { x = 10873, y = 10027, z = -1, createTile = true },
+                { x = 10873, y = 10028, z = -1, createTile = true },
             },
         },
     },

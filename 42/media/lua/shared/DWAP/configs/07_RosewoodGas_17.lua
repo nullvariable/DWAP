@@ -101,9 +101,32 @@ local RosewoodGas = {
                 },
             },
             fakeGenerators = {
-                { x = 8183, y = 11265, z = -1, createTile = false },
+                { x = 8173, y = 11261, z = -1, createTile = false },
+                -- { x = 8183, y = 11265, z = -1, createTile = false },
                 -- { x = 8152, y = 11263, z = 1, createTile = false },
                 { x = 8152, y = 11263, z = -1, createTile = false },
+            },
+            chunks = {
+                {1021, 1408},
+                {1021, 1409},
+                {1022, 1407},
+                {1022, 1408},
+                {1022, 1409},
+                {1023, 1408},
+                {1023, 1409},
+                -- gas pumps
+                {1019, 1407},
+                {1019, 1408},
+                {1018, 1407},
+                {1018, 1408},
+                {1017, 1407},
+                {1017, 1408},
+                {1020, 1406},
+                {1020, 1407},
+                {1021, 1406},
+                {1021, 1407},
+                {1021, 1404},
+                {1021, 1405},
             },
         },
     },
@@ -484,7 +507,8 @@ if getActivatedMods():contains("\\Ladders") then
     table.insert(RosewoodGas.objectSpawns, { sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
     table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
     table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
-    table.insert(RosewoodGas.generators[1].fakeGenerators, { x = 8174, y = 11214, z = -1, createTile = true })
+
+    table.insert(RosewoodGas.generators[1].fakeGenerators, { x = 8173, y = 11234, z = -1, createTile = false })
 end
 
 return RosewoodGas

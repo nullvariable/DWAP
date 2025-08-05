@@ -424,6 +424,7 @@
  <floor>
   <object type="stairs" x="2" y="2" dir="W" Tile="16"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="3" y="3" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="3" y="2" dir="N" Tile="0"/>
   <rooms>
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

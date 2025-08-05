@@ -120,7 +120,6 @@ local RiverSafeHouse = {
             },
             fakeGenerators = {
                 { x = 6957, y = 5568, z = -1, createTile = false },
-                { x = 7008, y = 5591, z = -1, createTile = false },
             },
         },
     },
@@ -719,6 +718,9 @@ local RiverSafeHouse = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
+    table.insert(RiverSafeHouse.generators[1].fakeGenerators, { x = 6989, y = 5570, z = -1, createTile = false })
+    table.insert(RiverSafeHouse.generators[1].fakeGenerators, { x = 7008, y = 5591, z = -1, createTile = false })
+
     table.insert(RiverSafeHouse.objectSpawns, { x = 6957, y = 5569, z = -1, removeWall = "west" })
     table.insert(RiverSafeHouse.objectSpawns, { sprite = "walls_exterior_wooden_01_34", x = 6957, y = 5569, z = -1 })
     table.insert(RiverSafeHouse.objectSpawns, { sprite = "fixtures_doors_01_12", x = 6957, y = 5569, z = -1, isDoor = true, doorN = false, })

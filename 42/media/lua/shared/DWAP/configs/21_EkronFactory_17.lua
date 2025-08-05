@@ -92,8 +92,8 @@ local EkronFactory = {
                 },
             },
             fakeGenerators = {
-                { x = 586, y = 9377, z = -1, createTile = true },
-                { x = 569, y = 9381, z = -1, createTile = true },
+                { x = 587, y = 9377, z = -1, },
+                { x = 568, y = 9381, z = -1, },
             },
         },
     },

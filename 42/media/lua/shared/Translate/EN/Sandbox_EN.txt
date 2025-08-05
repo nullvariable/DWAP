@@ -43,6 +43,8 @@ Sandbox_EN = {
 	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint Shop For Lease"
 	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Leaf Heights"
 	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Rosewood Parsonage"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville Townhouse"
 
 	Sandbox_DWAP_EnableAll = "Enable all safehouses",
 	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, keys, map, and spawn will still only be for the selected option",

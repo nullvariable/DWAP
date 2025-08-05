@@ -333,24 +333,13 @@
  <room Name="kitchen" InternalName="kitchen" Color="255 200 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <floor>
   <object type="stairs" x="23" y="12" dir="N" Tile="11"/>
-  <object type="wall" length="24" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="12" dir="W" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="24" y="12" dir="N" Tile="0"/>
-  <object type="wall" length="24" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="24" dir="W" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="12" dir="N" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="12" dir="N" Tile="0"/>
-  <object type="wall" length="8" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="16" dir="W" Tile="0"/>
-  <object type="wall" length="8" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="22" y="16" dir="N" Tile="0"/>
-  <object type="wall" length="14" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="21" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="21" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="8" y="21" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="21" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="21" dir="N" Tile="0"/>
   <object type="stairs" x="11" y="0" dir="W" Tile="11"/>
-  <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="1" dir="W" Tile="0"/>
-  <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="22" y="1" dir="N" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="23" y="0" dir="N" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="0" dir="W" Tile="0"/>
-  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="0" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="17" dir="N" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="21" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="21" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="21" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="3" y="21" dir="W" Tile="0"/>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="22" y="17" dir="N" Tile="0"/>
   <rooms>
 0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,

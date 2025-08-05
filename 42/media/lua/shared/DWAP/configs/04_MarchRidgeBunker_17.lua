@@ -18,8 +18,8 @@ local MarchRidgeConfig = {
             fakeGenerators = {
                 { x = 9920, y = 12624, z = -4, createTile = false },
                 { x = 9943, y = 12627, z = -4, createTile = false },
-                { x = 9948, y = 12651, z = -4, createTile = false },
-                { x = 9977, y = 12637, z = -4, createTile = false },
+                { x = 9948, y = 12652, z = -4, createTile = false },
+                { x = 9974, y = 12638, z = -4, createTile = false },
                 { x = 9962, y = 12607, z = -4, createTile = false },
                 { x = 9929, y = 12627, z = -1, createTile = false },
             },

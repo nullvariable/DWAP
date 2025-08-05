@@ -354,9 +354,11 @@ local function noIntegration()
             DWAPUtils.dprint("DWAP_ISA: LoadDWAPPowerbank no square")
             return
         end
-        square:removeIsoObject(isoObject)
-        square:RemoveTileObject(isoObject)
-        square:transmitRemoveItemFromSquare(isoObject)
+        if isoObject then
+            square:removeIsoObject(isoObject)
+            square:RemoveTileObject(isoObject)
+            square:transmitRemoveItemFromSquare(isoObject)
+        end
 
         local newObject = IsoObject.getNew(square, "industry_02_175", "industry_02_175", false)
         square:transmitAddObjectToSquare(newObject)

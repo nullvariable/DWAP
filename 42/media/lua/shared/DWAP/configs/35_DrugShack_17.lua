@@ -107,8 +107,8 @@ local DrugShack = {
                 },
             },
             fakeGenerators = {
-                { x = 11587, y = 9298, z = -1, createTile = true },
-                { x = 11615, y = 9286, z = -1, createTile = true },
+                { x = 11610, y = 9294, z = -2, createTile = true },
+                { x = 11595, y = 9294, z = -2, createTile = true },
             },
         },
     },

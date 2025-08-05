@@ -1,4 +1,4 @@
-local generatorStartCoords = { x = 13636, y = 1262, z = 4, }
+local generatorStartCoords = { x = 13636, y = 1262, z = -4, }
 local wtc = { x = generatorStartCoords.x+8, y = generatorStartCoords.y+4, z = -4, }
 local GrandOhioConfig = {
     spawn = { x = 13649, y = 1272, z = -4, },
@@ -14,11 +14,11 @@ local GrandOhioConfig = {
         {
             controls = { sprite = "industry_02_67", x = generatorStartCoords.x, y = generatorStartCoords.y, z = -4, },
             fakeGenerators = {
-                { x = generatorStartCoords.x-23, y = generatorStartCoords.y+11, z = -4, createTile = true },
-                { x = generatorStartCoords.x-4, y = generatorStartCoords.y+11, z = -4, createTile = true },
-                { x = generatorStartCoords.x+1, y = generatorStartCoords.y+35, z = -4, createTile = true },
-                { x = generatorStartCoords.x+30, y = generatorStartCoords.y+21, z = -4, createTile = true },
-                { x = generatorStartCoords.x+15, y = generatorStartCoords.y-12, z = -4, createTile = true },
+                { x = generatorStartCoords.x-22, y = generatorStartCoords.y+12, z = -4, createTile = false },
+                { x = generatorStartCoords.x-5, y = generatorStartCoords.y+12, z = -4, createTile = false },
+                { x = generatorStartCoords.x+1, y = generatorStartCoords.y+36, z = -4, createTile = false },
+                { x = generatorStartCoords.x+30, y = generatorStartCoords.y+22, z = -4, createTile = false },
+                { x = generatorStartCoords.x+15, y = generatorStartCoords.y-12, z = -4, createTile = false },
                 -- { x = generatorStartCoords.x-18, y = generatorStartCoords.y+11, z = -1, createTile = true }, -- this ends up powering a huge amount of the mall which is probably not what we want
             },
         }

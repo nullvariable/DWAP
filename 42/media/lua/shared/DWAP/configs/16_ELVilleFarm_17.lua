@@ -109,7 +109,8 @@ local ELVilleFarm = {
                 },
             },
             fakeGenerators = {
-                { x = 14571, y = 3040, z = -1, createTile = true },
+                { x = 14578, y = 3037, z = -1, },
+                { x = 14561, y = 3040, z = -1, },
             },
         },
     },

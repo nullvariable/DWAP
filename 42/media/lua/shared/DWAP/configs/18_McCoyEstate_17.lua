@@ -139,10 +139,9 @@ local McCoyEstate = {
                 },
             },
             fakeGenerators = {
-                { x = 10095, y = 8282, z = -1, createTile = true },
-                { x = 10087, y = 8268, z = 2, createTile = false },
-                -- { x = 10085, y = 8259, z = -1, createTile = true },
-                { x = 10112, y = 8241, z = -1, createTile = true },
+                { x = 10095, y = 8282, z = -1, },
+                { x = 10087, y = 8268, z = -1, },
+                { x = 10112, y = 8241, z = -1, },
             },
         },
     },

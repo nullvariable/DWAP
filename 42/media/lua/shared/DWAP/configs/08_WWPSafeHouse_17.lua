@@ -125,7 +125,17 @@ local WWestPointSafeHouse = {
                 },
             },
             fakeGenerators = {
-                { x = 10153, y = 6627, z = -1, createTile = true },
+                { x = 10153, y = 6627, z = -1, createTile = false },
+            },
+            chunks = {
+                {1268, 827},
+                {1268, 828},
+                {1268, 829},
+                {1269, 827},
+                {1269, 828},
+                {1269, 829},
+                {1270, 827},
+                {1270, 828},
             },
         },
     },

@@ -2,7 +2,7 @@ local wtc = {x = 13141, y = 3042, z = -1} -- waterTankCoords
 local pb1 = { x = 13142, y = 3038, z = -1 }
 local bunkerTopLeft = {x = 13135, y = 3019, z = -1}
 local LVAutoshop = {
-    spawn = { x = 13139, y = 3025, z = 0 },
+    spawn = { x = 13140, y = 3028, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 13141, y = 3032, z = 0} },
     },
@@ -114,7 +114,7 @@ local LVAutoshop = {
                 },
             },
             fakeGenerators = {
-                { x = 13138, y = 3030, z = -1, createTile = true },
+                { x = 13139, y = 3030, z = -1, createTile = true },
             },
         },
     },

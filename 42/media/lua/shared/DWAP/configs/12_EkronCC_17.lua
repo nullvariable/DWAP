@@ -14,11 +14,11 @@ local EkronCC = {
         {
             controls = { sprite = "industry_02_67", x = genCoords.x, y = genCoords.y, z = genCoords.z, },
             fakeGenerators = {
-                { x = genCoords.x-23, y = genCoords.y+11, z = -5, createTile = true },
-                { x = genCoords.x-4, y = genCoords.y+11, z = -5, createTile = true },
-                { x = genCoords.x+1, y = genCoords.y+35, z = -5, createTile = true },
-                { x = genCoords.x+30, y = genCoords.y+21, z = -5, createTile = true },
-                { x = genCoords.x+15, y = genCoords.y-12, z = -5, createTile = true },
+                { x = genCoords.x-22, y = genCoords.y+12, z = -5, createTile = false },
+                { x = genCoords.x-5, y = genCoords.y+12, z = -5, createTile = false },
+                { x = genCoords.x+1, y = genCoords.y+36, z = -5, createTile = false },
+                { x = genCoords.x+30, y = genCoords.y+22, z = -5, createTile = false },
+                { x = genCoords.x+15, y = genCoords.y-12, z = -5, createTile = false },
             },
         }
     },

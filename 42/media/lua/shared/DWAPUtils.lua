@@ -94,6 +94,7 @@ local configFiles_17 = {
     [39] = "DWAP/configs/39_LeafHill_17",
     [40] = "DWAP/configs/40_WestMaple_17",
     [41] = "DWAP/configs/41_Parsonage_17",
+    [42] = "DWAP/configs/42_LvilleTownhouse_17",
 }
 
 local configCache = {}
@@ -242,6 +243,7 @@ function DWAPUtils.loadConfigs(noCache)
     return configCache
 end
 
+local useGen = false
 function DWAPUtils.getStartingLocations()
     local spawns = {}
     local configFilesToUse = configFiles
@@ -251,7 +253,13 @@ function DWAPUtils.getStartingLocations()
     end
     for i = 1, #configFilesToUse do
         local config = require(configFilesToUse[i])
-        if config and config.spawn then
+        if useGen and config and config.generators and config.generators[1].controls then
+            spawns[#spawns+1] = {
+                x = config.generators[1].controls.x,
+                y = config.generators[1].controls.y,
+                z = config.generators[1].controls.z,
+            }
+        elseif config and config.spawn then
             spawns[#spawns + 1] = config.spawn
         end
     end
@@ -485,6 +493,20 @@ end
 --- @return number
 function DWAPUtils.hashCoords(x, y, z)
     return x * 24593 + y * 49157 + z * 193
+end
+
+function DWAPUtils.tableSize(tbl)
+    if type(tbl) ~= "table" then
+        return 0
+    end
+    if #tbl > 0 then
+        return #tbl
+    end
+    local count = 0
+    for _ in pairs(tbl) do
+        count = count + 1
+    end
+    return count
 end
 
 return DWAPUtils

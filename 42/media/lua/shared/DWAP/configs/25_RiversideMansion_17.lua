@@ -131,8 +131,7 @@ local RiversideMansion = {
                 },
             },
             fakeGenerators = {
-                -- { x = 6674, y = 5510, z = -1, createTile = true },
-                { x = 6681, y = 5510, z = -1, createTile = true },
+                { x = 6674, y = 5510, z = -2, },
             },
         },
     },

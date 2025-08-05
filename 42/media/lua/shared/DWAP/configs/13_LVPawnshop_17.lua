@@ -140,7 +140,7 @@ local LVPawnshop = {
                 },
             },
             fakeGenerators = {
-                { x = 12326, y = 1337, z = -1, createTile = true },
+                { x = 12326, y = 1337, z = -1, createTile = false },
             },
         },
     },

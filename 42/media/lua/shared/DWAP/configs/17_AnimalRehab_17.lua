@@ -121,7 +121,7 @@ local AnimalRehab = {
                 },
             },
             fakeGenerators = {
-                { x = 3117, y = 12061, z = -1, createTile = true },
+                { x = 3117, y = 12061, z = -1 },
             },
         },
     },

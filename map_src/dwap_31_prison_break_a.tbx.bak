@@ -272,11 +272,9 @@
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="4" y="44" dir="W" Tile="0"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="5" y="50" dir="W" Tile="0"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="49" dir="N" Tile="0"/>
-  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="0" dir="W" Tile="0"/>
-  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="0" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="2" y="1" dir="W" Tile="0"/>
+  <object type="wall" length="4" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="1" dir="W" Tile="0"/>
   <rooms>
-0,2,0,0,0,0,
+0,0,0,0,0,0,
 0,2,2,2,2,0,
 0,2,2,2,2,0,
 0,2,2,2,2,0,
