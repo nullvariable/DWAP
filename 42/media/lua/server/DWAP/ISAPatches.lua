@@ -355,7 +355,6 @@ local function noIntegration()
             return
         end
         if isoObject then
-            square:removeIsoObject(isoObject)
             square:RemoveTileObject(isoObject)
             square:transmitRemoveItemFromSquare(isoObject)
         end

@@ -3,7 +3,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     lot_basement_coldwar_bunker_01 = { width=61, height=52, stairx=0, stairy=24, stairDir="N" },
     lot_basement_house_wadsworth_main = { width=13, height=16, stairx=7, stairy=6, stairDir="N" },
     dummy = { width=1, height=1, stairx=0, stairy=0, stairDir='N' },
-    dwap_01_doe_valley = { width=8, height=7, stairx=-1, stairy=2, stairDir="N" },
+    dwap_01_doe_valley = { width=8, height=8, stairx=0, stairy=6, stairDir="N" },
     dwap_02_echo_creek_tunnel = { width=37, height=7, stairx=35, stairy=6, stairDir="N" },
     dwap_03_lville_mansion = { width=15, height=25, stairx=0, stairy=20, stairDir="N" },
     dwap_04_march_ridge_tunnel = { width=38, height=6, stairx=0, stairy=1, stairDir="N" },
@@ -16,7 +16,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     dwap_10_tunnel_b = { width=65, height=24, stairx=0, stairy=19, stairDir="N" },
     dwap_12_cc_tunnel = { width=2, height=16, stairx=0, stairy=12, stairDir="N" },
     dwap_13_lvillepawn = { width=25, height=25, stairx=23, stairy=13, stairDir="N" },
-    dwap_14_tunnel = { width=7, height=23, stairx=0, stairy=0, stairDir="N" },
+    dwap_14_tunnel = { width=7, height=24, stairx=0, stairy=1, stairDir="N" },
     dwap_15_ekron_farm = { width=17, height=38, stairx=0, stairy=34, stairDir="N" },
     dwap_16_elvillefarm = { width=31, height=26, stairx=24, stairy=13, stairDir="W" },
     dwap_17_animal_rehab = { width=20, height=32, stairx=1, stairy=0, stairDir="W" },
@@ -55,7 +55,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
 
 local basement_access = {
     ba_dwap_generator = { width=1, height=1, stairx=0, stairy=0, stairDir="N" },
-    ba_dwap_01 = { width=1, height=4, stairx=3, stairy=-9, stairDir="N" },
+    ba_dwap_01 = { width=1, height=4, stairx=5, stairy=-5, stairDir="N" },
     ba_dwap_jamieton_bunker_01 = { width=3, height=8, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_02_water = { width=3, height=3, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_03 = { width=15, height=22, stairx=0, stairy=19, stairDir="N" },
@@ -101,18 +101,19 @@ local basement_access = {
     ba_dwap_33 = { width=3, height=6, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_35 = { width=35, height=12, stairx=1, stairy=0, stairDir="W" },
     ba_dwap_36 = { width=2, height=7, stairx=0, stairy=2, stairDir="N" },
-    ba_dwap_37 = { width=2, height=5, stairx=1, stairy=1, stairDir="N" },
+    ba_dwap_37 = { width=4, height=6, stairx=1, stairy=1, stairDir="N" },
     ba_dwap_38_for_lease = { width=6, height=4, stairx=3, stairy=0, stairDir="W" },
     ba_dwap_39_leaf_hill = { width=1, height=8, stairx=1, stairy=0, stairDir="W" },
     ba_dwap_40 = { width=4, height=4, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_41 = { width=10, height=10, stairx=7, stairy=0, stairDir="W" },
+    ba_dwap_42 = { width=20, height=20, stairx=0, stairy=3, stairDir="N" },
 }
 
 
 local fullConfig = table.newarray()
 fullConfig[1] = { -- DoeValleyBunker
     locations = {
-        {x=5577, y = 9363+9, stairDir="N", choices={"dwap_01_doe_valley"}, access="ba_dwap_01"},
+        {x=5578, y = 9375+1, stairDir="N", choices={"dwap_01_doe_valley"}, access="ba_dwap_01"},
         {x=5575, y = 9363, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_jamieton_bunker_01"},
     },
 }
@@ -157,8 +158,8 @@ end
 ]]
 table.insert(fullConfig[4].locations, {x=9920, y = 12624, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9943, y = 12627, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
-table.insert(fullConfig[4].locations, {x=9948, y = 12651, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
-table.insert(fullConfig[4].locations, {x=9977, y = 12637, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
+table.insert(fullConfig[4].locations, {x=9948, y = 12652, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
+table.insert(fullConfig[4].locations, {x=9974, y = 12638, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9962, y = 12607, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9929, y = 12627, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 
@@ -177,7 +178,7 @@ fullConfig[6] = { -- Riverside
 
 fullConfig[7] = { -- RosewoodGas
 locations = {
-        {x=8183, y = 11265, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        -- {x=8183, y = 11265, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
         {x=8152, y = 11263, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
 
         {x=8174, y=11216, stairDir="N", choices={"dwap_07_rosewood_tunnel"}, access="ba_dwap_07_water"},
@@ -196,17 +197,27 @@ fullConfig[9] = { -- Lowry Court
         {x=12983, y=1916, z=0, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_dwap_09"},
         {x = 12981, y = 1907, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_jamieton_bunker_01"},
         {x=12992, y=1901, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_09_water"},
-        {x=12989, y=1915, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_09_apt_oven"}
+        {x=12989, y=1915, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_09_apt_oven"},
+
+        {x=12985, y = 1916, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 if getActivatedMods():contains("\\Ladders") then
     table.insert(fullConfig[9].locations, {x=12982, y=1921, z=0, stairDir="N", choices={"dwap_09_lowry_tunnel"},})
     table.insert(fullConfig[9].locations, {x=12989, y=1917, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_09_lowry_apt_ladder",})
+    table.insert(fullConfig[9].locations, {x=12951, y=1931, z=-5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 end
 
+local GOMgeneratorStartCoords = { x = 13636, y = 1262, z = -4, }
 fullConfig[10] = { -- Grand Ohio Mall
     locations = {
         {x=13610, y=1270, stairDir="N", choices={"lot_basement_coldwar_bunker_01"}, access="ba_interior_north_01"},
+
+        {x=GOMgeneratorStartCoords.x-22, y=GOMgeneratorStartCoords.y+12, z=GOMgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=GOMgeneratorStartCoords.x-5, y=GOMgeneratorStartCoords.y+12, z=GOMgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=GOMgeneratorStartCoords.x+1, y=GOMgeneratorStartCoords.y+36, z=GOMgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=GOMgeneratorStartCoords.x+30, y=GOMgeneratorStartCoords.y+22, z=GOMgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=GOMgeneratorStartCoords.x+15, y=GOMgeneratorStartCoords.y-12, z=GOMgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 if getActivatedMods():contains("\\Ladders") then
@@ -220,9 +231,17 @@ fullConfig[11] = { -- PSDelilah
         {x=2031, y=5686, z=-1, stairDir="N", choices={"dummy"}, access="ba_dwap_11_deckb"},
     },
 }
+
+local ECCgeneratorStartCoords = { x = 751, y = 9812, z = -5, }
 fullConfig[12] = { -- Ekron Community College
     locations = {
         {x=725, y=9820, z=-1, stairDir="N", choices={"lot_basement_coldwar_bunker_01"}, access="ba_dwap_12"},
+
+        {x=ECCgeneratorStartCoords.x-22, y=ECCgeneratorStartCoords.y+12, z=ECCgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=ECCgeneratorStartCoords.x-5, y=ECCgeneratorStartCoords.y+12, z=ECCgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=ECCgeneratorStartCoords.x+1, y=ECCgeneratorStartCoords.y+36, z=ECCgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=ECCgeneratorStartCoords.x+30, y=ECCgeneratorStartCoords.y+22, z=ECCgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=ECCgeneratorStartCoords.x+15, y=ECCgeneratorStartCoords.y-12, z=ECCgeneratorStartCoords.z-1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 if getActivatedMods():contains("\\Ladders") then
@@ -262,6 +281,9 @@ fullConfig[17] = { -- Animal rehab
 fullConfig[18] = { -- McCoy
     locations = {
         {x=10109, y=8238, z=0, stairDir="W", choices={"dwap_18_mccoy_mansion"}, access="ba_exterior_west_northside_14"},
+
+        {x=10095, y = 8282, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=10087, y = 8268, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 fullConfig[19] = { -- CentralLVilleMansion
@@ -353,6 +375,10 @@ fullConfig[32] = { -- Quill Manor
     locations = {
         {x=1227, y=7364, z=0, stairDir="N", choices={"dwap_32_quill_manor"}, access="ba_dwap_32" },
         {x=1203, y=7374, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_32_water" },
+
+        {x=1215, y = 7393, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=1242, y = 7393, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        {x=1215, y = 7363, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 fullConfig[33] = { -- Dark Wallow Lake House
@@ -402,6 +428,13 @@ fullConfig[40] = { -- West Maple Golf Course
 fullConfig[41] = { -- Rosewood Parsonage
     locations = {
         {x=8156, y=11538, z=0, stairDir="W", choices={"dwap_41_parsonage"}, access="ba_dwap_41"},
+    },
+}
+fullConfig[42] = { -- Louisville Converted townhouse
+    locations = {
+        {x=12830, y=1613, z=0, stairDir="N", choices={"lot_basement_jamieton_bunker_01"}, access="ba_dwap_42"},
+        {x = 12828, y = 1604, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_jamieton_bunker_01"},
+        {x=12835, y = 1615, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
     },
 }
 
