@@ -1,6 +1,12 @@
 DWAP = DWAP or {}
 
 local DWAPUtils = require("DWAPUtils")
+DWAPWaterSystem = DWAPWaterSystem or require("DWAPWaterSystem_client")
+
+-- Simple hash function for coordinates (moved from old DWAP_WaterSystem)
+local function hashCoords(x, y, z)
+    return DWAPUtils.hashCoords(x, y, z)
+end
 
 local customNameObjects = {
     ["Shower"] = true,
@@ -10,7 +16,7 @@ local customNameObjects = {
     ["Toilet"] = true,
     ["Bath"] = true,
 }
-    -- ["Rain Collector Barrel"] = true,
+-- ["Rain Collector Barrel"] = true,
 local plumbableDistance = 35
 
 local waterTanks = {}
@@ -28,7 +34,7 @@ Events.OnLoad.Add(function()
         if config and config.waterTanks then
             for j = 1, #config.waterTanks do
                 local tank = config.waterTanks[j]
-                waterTanks[#waterTanks+1] = tank
+                waterTanks[#waterTanks + 1] = tank
                 DWAPUtils.dprint("Water tank loaded: " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
             end
         end
@@ -42,8 +48,8 @@ end)
 local function getWaterTank(coords)
     for i = 1, #waterTanks do
         local dist = IsoUtils.DistanceTo(coords.x, coords.y, waterTanks[i].x, waterTanks[i].y)
-        DWAPUtils.dprint("Distance to water tank: " .. dist)
         if dist < plumbableDistance then
+            DWAPUtils.dprint("Distance to water tank: " .. dist)
             return waterTanks[i]
         end
     end
@@ -58,13 +64,13 @@ local function doPlumbing(_, player, itemToPipe)
     local playerObj = getSpecificPlayer(player)
     if not playerObj then return end
     local wrench = playerObj:getInventory():getFirstTypeEvalRecurse("PipeWrench", predicateNotBroken) or
-    playerObj:getInventory():getFirstTagEvalRecurse("PipeWrench", predicateNotBroken);
+        playerObj:getInventory():getFirstTagEvalRecurse("PipeWrench", predicateNotBroken);
     if not wrench then
         DWAPUtils.dprint("No wrench found")
         return
     end
 
-    local waterTank = getWaterTank({x = itemToPipe:getX(), y = itemToPipe:getY(), z = itemToPipe:getZ()})
+    local waterTank = getWaterTank({ x = itemToPipe:getX(), y = itemToPipe:getY(), z = itemToPipe:getZ() })
     if not waterTank then
         DWAPUtils.dprint("No water tank found")
         return
@@ -134,28 +140,36 @@ end
 local function refreshLostFixtures(clickCoords)
     local tank = getWaterTank(clickCoords)
     if not tank then return end
-    
-    local tankHash = DWAP_WaterSystem.hashCoords(tank.x, tank.y, tank.z)
-    local fixtures = DWAP_WaterSystem.fixtures[tankHash]
-    if not fixtures then return end
-    
-    DWAPUtils.dprint("Checking " .. #fixtures .. " fixtures for lost connections near tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
-    
-    for i = 1, #fixtures do
-        local fixture = fixtures[i]
-        local fixtureSquare = getSquare(fixture.x, fixture.y, fixture.z)
-        if fixtureSquare then
-            local objects = fixtureSquare:getObjects()
-            local osize = objects:size() - 1
-            for j = 0, osize do
-                local obj = objects:get(j)
-                if obj and obj:getSpriteName() == fixture.sprite then
-                    -- Check if this fixture has lost its connection
-                    if not obj:getUsesExternalWaterSource() or not obj:hasExternalWaterSource() then
-                        DWAPUtils.dprint("Refreshing lost fixture connection: " .. fixture.sprite .. " at " .. fixture.x .. ", " .. fixture.y .. ", " .. fixture.z)
-                        DWAP_WaterSystem:InitializeFixture(fixture)
+
+    if DWAPUtils.getSaveVersion() >= 17 then
+        return
+    else
+        DWAPUtils.dprint("DWAPWaterSystem: Refreshing fixtures for tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
+        -- Old system: Use the old DWAP_WaterSystem client-side logic
+        local tankHash = hashCoords(tank.x, tank.y, tank.z)
+        local fixtures = DWAP_WaterSystem.fixtures[tankHash]
+        if not fixtures then return end
+
+        DWAPUtils.dprint("Checking " ..
+        #fixtures .. " fixtures for lost connections near tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
+
+        for i = 1, #fixtures do
+            local fixture = fixtures[i]
+            local fixtureSquare = getSquare(fixture.x, fixture.y, fixture.z)
+            if fixtureSquare then
+                local objects = fixtureSquare:getObjects()
+                local osize = objects:size() - 1
+                for j = 0, osize do
+                    local obj = objects:get(j)
+                    if obj and obj:getSpriteName() == fixture.sprite then
+                        -- Check if this fixture has lost its connection
+                        if not obj:getUsesExternalWaterSource() or not obj:hasExternalWaterSource() then
+                            DWAPUtils.dprint("Refreshing lost fixture connection: " ..
+                            fixture.sprite .. " at " .. fixture.x .. ", " .. fixture.y .. ", " .. fixture.z)
+                            DWAP_WaterSystem:InitializeFixture(fixture)
+                        end
+                        break
                     end
-                    break
                 end
             end
         end
@@ -172,11 +186,10 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
     -- if test == true then return true end
     if not SandboxVars.DWAP.EnableWaterSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
-    
-    -- Check if we're near a water tank and refresh any lost fixture connections
-    -- Use the first object's coordinates as the click location
+
+    -- Debug water object information at click location (runs on every click)
     if worldobjects[1] then
-        local clickCoords = {x = worldobjects[1]:getX(), y = worldobjects[1]:getY(), z = worldobjects[1]:getZ()}
+        local clickCoords = { x = worldobjects[1]:getX(), y = worldobjects[1]:getY(), z = worldobjects[1]:getZ() }
         refreshLostFixtures(clickCoords)
     end
 
@@ -184,7 +197,7 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
     for i = 1, #worldobjects do
         local obj = worldobjects[i]
         if obj and isWTPlumbable(obj) then
-            local coords = {x = obj:getX(), y = obj:getY(), z = obj:getZ()}
+            local coords = { x = obj:getX(), y = obj:getY(), z = obj:getZ() }
             local tank = getWaterTank(coords)
             if not tank then
                 DWAPUtils.dprint("No water tank found")
@@ -200,7 +213,8 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
     if not object then return end
     DWAPUtils.dprint("Found plumbable object: " .. tostring(object:getSpriteName()))
     local name = getMoveableDisplayName(object) or "";
-    local option = context:addGetUpOption(getText("ContextMenu_PlumbItem", name), worldobjects, doPlumbing, player, object);
+    local option = context:addGetUpOption(getText("ContextMenu_PlumbItem", name), worldobjects, doPlumbing, player,
+        object);
     local playerObj = getSpecificPlayer(player)
     local playerInv = playerObj:getInventory()
     if not playerInv:containsTypeEvalRecurse("PipeWrench", predicateNotBroken) and not playerInv:containsTagEvalRecurse("PipeWrench", predicateNotBroken) then

@@ -35,23 +35,32 @@ end
 
 function DWAPPlumbToWaterTank:complete()
     if self.itemToPipe then
-        self.itemToPipe:getModData().canBeWaterPiped = false
-        self.itemToPipe:setUsesExternalWaterSource(true)
-        self.itemToPipe:transmitModData()
-        self.itemToPipe:sendObjectChange('usesExternalWaterSource', { value = true })
-        buildUtil.setHaveConstruction(self.itemToPipe:getSquare(), true);
-        local newFixture = {
-            sprite = self.itemToPipe:getSpriteName(),
-            x = self.itemToPipe:getX(),
-            y = self.itemToPipe:getY(),
-            z = self.itemToPipe:getZ(),
-            sourceType = "tank",
-            source = {x = self.waterTank.x, y = self.waterTank.y, z = self.waterTank.z},
-        }
-        DWAP_WaterSystem:addFixture(newFixture, true)
-        DWAP_WaterSystem:InitializeFixture(newFixture)
+        local DWAPUtils = require("DWAPUtils")
+        if DWAPUtils.getSaveVersion() < 17 then
+            self.itemToPipe:getModData().canBeWaterPiped = false
+            self.itemToPipe:setUsesExternalWaterSource(true)
+            self.itemToPipe:transmitModData()
+            self.itemToPipe:sendObjectChange('usesExternalWaterSource', { value = true })
+            buildUtil.setHaveConstruction(self.itemToPipe:getSquare(), true);
+        else
+            DWAPUtils.dprint("Plumbing new fixture to water tank: " .. tostring(self.itemToPipe:getSpriteName()))
+            local DWAPWaterSystem = require("DWAPWaterSystem_client")
+            if DWAPWaterSystem and DWAPWaterSystem.instance then
+                DWAPWaterSystem.instance:sendCommand(self.character, "plumbNewFixture", {
+                    fixtureX = self.itemToPipe:getX(),
+                    fixtureY = self.itemToPipe:getY(),
+                    fixtureZ = self.itemToPipe:getZ(),
+                    tankX = self.waterTank.x,
+                    tankY = self.waterTank.y,
+                    tankZ = self.waterTank.z,
+                    itemToPipe = self.itemToPipe:getSpriteName(),
+                })
+            else
+                print("DWAPWaterSystem not found or not initialized")
+            end
+        end
     else
-        print('sq is null or index is invalid')
+        print('itemToPipe is null')
     end
 
     return true;

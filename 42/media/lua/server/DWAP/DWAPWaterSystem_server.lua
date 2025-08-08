@@ -132,73 +132,45 @@ end
 
 function DWAPWaterSystem:OnClientCommand(command, playerObj, args)
     self:noise("Received client command: " .. tostring(command))
-
-    if command == "connectToTank" then
-        self:handleConnectToTank(playerObj, args)
-    elseif command == "disconnectFromTank" then
-        self:handleDisconnectFromTank(playerObj, args)
+    if command == "plumbNewFixture" then
+        self:handlePlumbNewFixture(playerObj, args)
     end
 end
 
-function DWAPWaterSystem:handleConnectToTank(playerObj, args)
+function DWAPWaterSystem:handlePlumbNewFixture(playerObj, args)
     local fixtureX, fixtureY, fixtureZ = args.fixtureX, args.fixtureY, args.fixtureZ
     local tankX, tankY, tankZ = args.tankX, args.tankY, args.tankZ
 
-    self:noise("Connecting fixture at " .. fixtureX .. "," .. fixtureY .. "," .. fixtureZ ..
-        " to tank at " .. tankX .. "," .. tankY .. "," .. tankZ)
+    self:noise("Plumbing new fixture at " .. fixtureX .. "," .. fixtureY .. "," .. fixtureZ .. 
+              " to tank at " .. tankX .. "," .. tankY .. "," .. tankZ)
 
-    -- Get the fixture lua object
-    local fixtureObj = self:getLuaObjectAt(fixtureX, fixtureY, fixtureZ)
-    if not fixtureObj or not fixtureObj:isFixture() then
-        self:noise("Invalid fixture object")
+    local square = getCell():getGridSquare(fixtureX, fixtureY, fixtureZ)
+    if not square then
+        self:noise("No square found at fixture location")
         return
     end
 
-    -- Get the tank lua object to verify it exists
-    local tankObj = self:getLuaObjectAt(tankX, tankY, tankZ)
-    if not tankObj or not tankObj:isTank() then
-        self:noise("Invalid tank object")
+    local isoObject = nil
+    for i=1,square:getObjects():size() do
+        local obj = square:getObjects():get(i-1)
+        -- Look for objects that can be plumbed (sinks, toilets, etc.)
+        if obj and obj:getSpriteName() == args.itemToPipe then
+            isoObject = obj
+            break
+        end
+    end
+
+    if not isoObject then
+        self:noise("No plumbable iso object found at fixture location")
         return
     end
-
-    -- Update the fixture's connection
-    fixtureObj.connection = { x = tankX, y = tankY, z = tankZ }
-    fixtureObj:saveData(true)
-
-    -- Use DWAPUtils to handle the actual plumbing connection
-    local fixtureIso = fixtureObj:getIsoObject()
-    if fixtureIso then
-        DWAPUtils.connectWaterTank(fixtureIso, { x = tankX, y = tankY, z = tankZ })
-    end
-
-    -- Notify client of successful connection
-    self:sendCommand("updateWaterObject", { x = fixtureX, y = fixtureY, z = fixtureZ })
-end
-
-function DWAPWaterSystem:handleDisconnectFromTank(playerObj, args)
-    local fixtureX, fixtureY, fixtureZ = args.fixtureX, args.fixtureY, args.fixtureZ
-
-    self:noise("Disconnecting fixture at " .. fixtureX .. "," .. fixtureY .. "," .. fixtureZ)
-
-    local fixtureObj = self:getLuaObjectAt(fixtureX, fixtureY, fixtureZ)
-    if not fixtureObj or not fixtureObj:isFixture() then
-        self:noise("Invalid fixture object")
-        return
-    end
-
-    -- Clear the connection
-    fixtureObj.connection = { x = nil, y = nil, z = nil }
-    fixtureObj:saveData(true)
-
-    -- Use DWAPUtils to handle the disconnection
-    local fixtureIso = fixtureObj:getIsoObject()
-    if fixtureIso then
-        fixtureIso:setUsesExternalWaterSource(false)
-        fixtureIso:transmitModData()
-    end
-
-    -- Notify client of successful disconnection
-    self:sendCommand("updateWaterObject", { x = fixtureX, y = fixtureY, z = fixtureZ })
+    local objectData = {
+        type = "fixture",
+        sprite = args.itemToPipe,
+        x = fixtureX, y = fixtureY, z = fixtureZ,
+        source = { x = tankX, y = tankY, z = tankZ }
+    }
+    DWAPWaterObject.onNewFixtureObject(isoObject, objectData, self)
 end
 
 SGlobalObjectSystem.RegisterSystemClass(DWAPWaterSystem)
