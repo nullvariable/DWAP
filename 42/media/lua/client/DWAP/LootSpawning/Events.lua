@@ -426,8 +426,8 @@ local function onFillContainer(roomType, containerType, container)
         if containerType == "overhead" or container:getContainerPosition() == "High" then z = z + 0.5 end
         local loot, index, coordsKey = getLootForCoords(square:getX(), square:getY(), z)
         if loot and index and coordsKey then
-            DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
-            DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })
+            -- DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
+            -- DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })
             DWAPUtils.DeferThrottled(function()
                 fillContainer(container, loot, index, coordsKey)
                 ItemPickerJava.updateOverlaySprite(container:getParent())

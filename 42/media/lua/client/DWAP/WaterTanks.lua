@@ -409,6 +409,11 @@ end
 --- Initialize the water tanks, OnInitGlobalModData event
 --- @param isNewGame boolean
 function DWAP_WaterSystem:TanksInitData(isNewGame)
+    if DWAPUtils.getSaveVersion() >= 17 then
+        DWAPUtils.dprint("DWAP_WaterSystem: TanksInitData: Save version is 17 or higher, skipping initialization")
+        return
+    end
+
     DWAPUtils.dprint("DWAP_WaterSystem: InitWaterTanks (new game: " .. tostring(isNewGame) .. ")")
 
     if SandboxVars.DWAP.EnableWaterSystem then
@@ -461,6 +466,9 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 end)
 
 Events.OnLoad.Add(function()
+    if DWAPUtils.getSaveVersion() >= 17 then
+        return
+    end
     if SandboxVars.DWAP.EnableWaterSystem then
         hadWorldWaterLastTick = DWAPUtils.WorldWaterStillAvailable()
         DWAP_WaterSystem.hadWorldWaterLastTick = hadWorldWaterLastTick

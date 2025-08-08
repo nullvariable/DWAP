@@ -1,4 +1,5 @@
 local DWAPUtils = {}
+local IsoObjectUtils = require("Starlit/IsoObjectUtils")
 
 DWAPUtils.currentVersion = 17
 DWAPUtils.selectedSafehouse = 4
@@ -507,6 +508,28 @@ function DWAPUtils.tableSize(tbl)
         count = count + 1
     end
     return count
+end
+
+--- Connect a water tank to a specific coordinates. Note that this should be the actual coords for the tank, we'll do -1 in the code
+--- @param isoObject IsoObject
+--- @param coords table{ x = number, y = number, z = number }
+function DWAPUtils.connectWaterTank(isoObject, coords)
+    local originalSquare = isoObject:getSquare()
+    local moveSquare = IsoObjectUtils.getOrCreateSquare(coords.x, coords.y, coords.z - 1)
+    if moveSquare then
+        isoObject:setSquare(moveSquare)
+        DWAPUtils.dprint('square updated to ' .. coords.x .. "," .. coords.y .. "," .. (coords.z - 1))
+        isoObject:getModData().canBeWaterPiped = false
+        isoObject:setUsesExternalWaterSource(true)
+        -- isoObject:transmitModData()
+        isoObject:doFindExternalWaterSource()
+        DWAPUtils.dprint(tostring(isoObject:hasExternalWaterSource()))
+        isoObject:setSquare(originalSquare)
+        DWAPUtils.dprint('square updated back')
+        originalSquare:setSquareChanged()
+        isoObject:transmitModData()
+        DWAPUtils.dprint(originalSquare:getX() .. "," .. originalSquare:getY() .. "," .. originalSquare:getZ() .. " connected to tank")
+    end
 end
 
 return DWAPUtils

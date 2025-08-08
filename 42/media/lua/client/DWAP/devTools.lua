@@ -6,11 +6,7 @@ local Reflection = require("Starlit/utils/Reflection")
 
 -- Helper function to get table size
 local function getTableSize(tbl)
-    local count = 0
-    for _ in pairs(tbl) do
-        count = count + 1
-    end
-    return count
+    return DWAPUtils.tableSize(tbl)
 end
 
 -- Helper function to get chunk center coordinates

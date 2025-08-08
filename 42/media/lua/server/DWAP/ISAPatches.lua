@@ -354,13 +354,19 @@ local function noIntegration()
             DWAPUtils.dprint("DWAP_ISA: LoadDWAPPowerbank no square")
             return
         end
+        local index = -1
         if isoObject then
+            isoObject:getObjectIndex()
             square:RemoveTileObject(isoObject)
             square:transmitRemoveItemFromSquare(isoObject)
         end
 
         local newObject = IsoObject.getNew(square, "industry_02_175", "industry_02_175", false)
-        square:transmitAddObjectToSquare(newObject)
+        if newObject == nil then
+            DWAPUtils.dprint("DWAP_ISA: Failed to create new IsoObject for powerbank replacement")
+            return
+        end
+        square:transmitAddObjectToSquare(newObject, index)
 
     end
     MapObjects.OnLoadWithSprite("dwap_tiles_01_0", LoadDWAPPowerbank, 6)
