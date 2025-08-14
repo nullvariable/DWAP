@@ -3,6 +3,11 @@ require "TimedActions/ISBaseTimedAction"
 local DWAPUtils = require("DWAPUtils")
 
 DWAPSiphonFuel = ISBaseTimedAction:derive("DWAPSiphonFuel");
+if isClient() then
+    require "DWAP/DWAPPowerSystem_client"
+else
+    require "DWAP/DWAPPowerSystem_server"
+end
 
 function DWAPSiphonFuel:isValid()
     return self.character:isPrimaryHandItem(self.petrol) or self.character:isSecondaryHandItem(self.petrol)
@@ -44,7 +49,11 @@ end
 function DWAPSiphonFuel:complete()
 	self.fluidCont:addFluid(Fluid.Petrol, self.itemTarget - self.itemStart)
     DWAPUtils.dprint("DWAPSiphonFuel:complete " ..tostring(self.itemTarget).." "..tostring(self.tankStart).." "..tostring(self.tankTarget))
-    DWAP_Gen:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
+    if self.version == 1 then
+        DWAP_Gen:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
+    else
+        DWAPPowerSystem.instance:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
+    end
 
     self.petrol:syncItemFields()
 
@@ -74,6 +83,8 @@ function DWAPSiphonFuel:new(character, generator, petrolCan, generatorData, genI
     o.generatorData = generatorData;
     o.genIndex = genIndex;
     o.maxTime = o:getDuration();
+
+    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
     -- print(o.maxTime)
     -- print("DWAPSiphonFuel:new end")
     return o;

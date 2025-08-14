@@ -41,7 +41,7 @@ debugScenarios.DebugScenarioTSave = nil
 
 DebugScenarioAllMaps = false
 
-local target = 3
+local target = 41
 
 
 local DWAPUtils = require "DWAPUtils"
@@ -59,8 +59,7 @@ print(("Loaded %d DWAP spawns"):format(#spawns))
 debugScenarios.DebugScenarioDWAP = {
     name = "DWAP Scenario " .. target,
     -- world = "Muldraugh, KY",
-    -- forceLaunch = true, -- use this to force the launch of THIS scenario right after main menu was loaded, save more clicks! Don't do multiple scenarii with this options
-    -- startLoc = { x = 3108, y = 12053, z = 1 },
+    -- startLoc = { x = 12835, y = 1611, z = 0 },
     startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
     setSandbox = function()
         SandboxVars.VehicleEasyUse = true;
@@ -69,7 +68,8 @@ debugScenarios.DebugScenarioDWAP = {
         SandboxVars.ElecShutModifier = -1;
         SandboxVars.WaterShut = 1;
         SandboxVars.ElecShut = 1;
-        SandboxVars.DayLength = 26;
+        -- SandboxVars.DayLength = 26;
+        SandboxVars.DayLength = 1;
         -- SandboxVars.TimeSinceApo = 3;
         SandboxVars.StartTime = 2;
         SandboxVars.AnimalRanchChance = 1;
@@ -79,6 +79,8 @@ debugScenarios.DebugScenarioDWAP = {
         end
         SandboxVars.GunsElevator.elevatorSpeed = 10;
         SandboxVars.DWAP = {
+            EnableLadders = true,
+            EnableAllLocations = true,
             Safehouse = target +1,
             SpawnInBase = true,
             SpawnWithMapAndKeys = true,
@@ -93,7 +95,8 @@ debugScenarios.DebugScenarioDWAP = {
             GeneratorCondition = 75,
             WaterLevel = 2000,
             WaterTankCapacity = 4000,
-            Loot = 2,
+            -- Loot = 2,
+            Loot = 1,
             Loot_EnableMaps = true,
             Loot_EnableBooks = true,
             SeedLibrary = true,
@@ -107,7 +110,6 @@ debugScenarios.DebugScenarioDWAP = {
             Loot_LockersLevel = 1,
             Loot_ToolsLevel = 1,
             Loot_BuildMatsLevel = 1,
-            EnableAllLocations = true,
         }
     end,
     onStart = function()

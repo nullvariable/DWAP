@@ -115,13 +115,9 @@ function DWAPWaterObject.onNewFixtureObject(isoObject, data, waterSystem)
         }
 
         -- If water is already shut off, connect immediately
-        if waterSystem.waterIsShutoff then
+        if not DWAPUtils.WorldWaterStillAvailable() then
             DWAPUtils.Defer(function()
-                DWAPUtils.connectWaterTank(isoObject, {
-                    x = data.source.x,
-                    y = data.source.y,
-                    z = data.source.z
-                })
+                DWAPUtils.connectWaterTank(isoObject, modData.connection)
             end)
         end
     else

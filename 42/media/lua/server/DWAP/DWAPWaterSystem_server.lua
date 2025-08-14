@@ -26,6 +26,7 @@ function DWAPWaterSystem:new()
 end
 
 function DWAPWaterSystem:initSystem()
+	SGlobalObjectSystem.initSystem(self)
     self:noise("Initializing system")
     if DWAPUtils.getSaveVersion() < 17 or not SandboxVars.DWAP.EnableWaterSystem then
         self.active = false
@@ -34,16 +35,26 @@ function DWAPWaterSystem:initSystem()
     else
         self.active = true
     end
-
+    self.system:setModDataKeys({'waterShutOffHappened'})
+    self.system:setObjectModDataKeys({
+        objectType = "objectType",
+        connection = "connection"
+    })
     -- Initialize water shutoff detection
-    self.hadWorldWaterLastTick = DWAPUtils.WorldWaterStillAvailable()
-    if self.hadWorldWaterLastTick then
-        self:noise("InitSystem: watching for water shutoff")
-        Events.EveryHours.Add(self.waterIntervalTick)
-    else
-        self:noise("InitSystem: No water detected, triggering shutoff")
-        self:onWaterShutoff()
+    if not self.waterShutOffHappened then
+        self.hadWorldWaterLastTick = DWAPUtils.WorldWaterStillAvailable()
+        if self.hadWorldWaterLastTick then
+            self:noise("[InitSystem] watching for water shutoff")
+            -- Wrap handler to preserve self
+            self._waterTickHandler = function() self:waterIntervalTick() end
+            Events.EveryHours.Add(self._waterTickHandler)
+        end
     end
+    -- Start generator refill if any tanks are generator-powered
+    local waterSystem = self
+    Events.EveryHours.Add(function()
+        waterSystem:refillTanksFromSource(6) -- 6 water per hour (1 per 10 minutes * 6)
+    end)
 end
 
 function DWAPWaterSystem:waterIntervalTick()
@@ -53,7 +64,11 @@ function DWAPWaterSystem:waterIntervalTick()
         self:noise("Water shutoff detected")
         self.hadWorldWaterLastTick = false
         self:onWaterShutoff()
-        Events.EveryHours.Remove(self.waterIntervalTick)
+        -- Remove wrapped handler
+        if self._waterTickHandler then
+            Events.EveryHours.Remove(self._waterTickHandler)
+            self._waterTickHandler = nil
+        end
     end
 end
 
@@ -68,16 +83,20 @@ end
 --- Refill all generator-powered tanks
 --- @param maxAmount number Maximum amount to add per tank
 function DWAPWaterSystem:refillTanksFromSource(maxAmount)
+    if not self.waterShutOffHappened then return end
     for i = 1, self:getLuaObjectCount() do
         local tankObj = self:getLuaObjectByIndex(i)
         if tankObj and tankObj:isTank() then
             local isoObject = tankObj:getIsoObject()
             if isoObject then
-                local modData = isoObject:getModData()
-                -- If tank has a generator source, check if generator has power and refill
-                if modData.waterSource then
-                    -- Add logic here to check generator power and refill tank
-                    -- This would need to be implemented based on your generator system
+                local fluidComponent = isoObject:getComponent("Fluid")
+                if fluidComponent then
+                    local currentAmount = fluidComponent:getAmount()
+                    local newAmount = math.min(currentAmount + maxAmount, fluidComponent:getCapacity())
+                    fluidComponent:setAmount(newAmount)
+                    self:noise(string.format("Refilled tank at %d,%d,%d to %d/%d",
+                        isoObject:getX(), isoObject:getY(), isoObject:getZ(),
+                        newAmount, fluidComponent:getCapacity()))
                 end
             end
         end
@@ -86,29 +105,32 @@ end
 
 --- Handle water shutoff event
 function DWAPWaterSystem:onWaterShutoff()
-    self:noise("Water shutoff detected")
-
-    self.waterIsShutoff = true
+    self:noise("Water shutoff started")
+    if self.waterShutOffHappened then
+        self:noise("Water shutoff already happened, skipping")
+        return
+    end
+    self.waterShutOffHappened = true
     -- Connect all fixtures to their tanks based on their stored connection data
     self:noise("Found " .. self:getLuaObjectCount() .. " Lua objects")
     for i = 1, self:getLuaObjectCount() do
+        -- Use Lua object wrapper, not raw GlobalObject
         local luaObj = self:getLuaObjectByIndex(i)
-        if luaObj and luaObj:isFixture() then
+        if not luaObj then
+            self:noise(string.format("[onWaterShutoff] nil luaObj at index %d", i))
+        elseif luaObj:isFixture() then
             local isoObject = luaObj:getIsoObject()
-            if isoObject and luaObj.connection and luaObj.connection.x then
-                DWAPUtils.connectWaterTank(isoObject, {
-                    x = luaObj.connection.x,
-                    y = luaObj.connection.y,
-                    z = luaObj.connection.z
-                })
+            -- Prefer luaObj.connection; fallback to modData if needed
+            local conn = luaObj.connection
+            if (not conn or not conn.x) and isoObject then
+                local md = isoObject:getModData()
+                conn = md and md.connection or conn
+            end
+            if isoObject and conn and conn.x then
+                DWAPUtils.connectWaterTank(isoObject, { x = conn.x, y = conn.y, z = conn.z })
             end
         end
     end
-
-    -- Start generator refill if any tanks are generator-powered
-    Events.EveryHours.Add(function()
-        self:refillTanksFromSource(6) -- 6 water per hour (1 per 10 minutes * 6)
-    end)
 end
 
 function DWAPWaterSystem:newLuaObject(globalObject)
@@ -116,10 +138,10 @@ function DWAPWaterSystem:newLuaObject(globalObject)
     return DWAPWaterObject:new(self, globalObject)
 end
 
-function DWAPWaterSystem:OnObjectAboutToBeRemoved(isoObject)
-    self:noise("DWAPWaterSystem:OnObjectAboutToBeRemoved")
-    return
-end
+-- function DWAPWaterSystem:OnObjectAboutToBeRemoved(isoObject)
+--     self:noise("DWAPWaterSystem:OnObjectAboutToBeRemoved")
+--     return
+-- end
 
 function DWAPWaterSystem:OnObjectAdded(isoObject)
     self:noise("DWAPWaterSystem:OnObjectAdded")
@@ -174,3 +196,4 @@ function DWAPWaterSystem:handlePlumbNewFixture(playerObj, args)
 end
 
 SGlobalObjectSystem.RegisterSystemClass(DWAPWaterSystem)
+return DWAPWaterSystem

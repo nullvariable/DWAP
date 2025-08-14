@@ -3,6 +3,7 @@ require "ISUI/ISScrollingListBox"
 local DWAPUtils = require("DWAPUtils")
 
 local GeneratorWindow = ISCollapsableWindow:derive("GeneratorWindow")
+local DWAPPowerSystem = require("DWAPPowerSystem_client")
 
 -- Load all translation strings once for performance
 local function loadTranslations()
@@ -36,8 +37,11 @@ function GeneratorWindow:new(x, y, width, height)
     o.title = strings.title
     o:setResizable(false)
     o.generatorIndex = nil
+    o.openCoords = nil
     o.refreshTimer = 0
-    o.refreshInterval = 60 -- Refresh every 60 ticks (1 second)
+    o.sRefreshTimer = 0
+    o.refreshInterval = 10
+    o.sRefreshInterval = 2 * 60 -- how often to poll the server
 
     GeneratorWindow.instance = o
     return o
@@ -205,29 +209,37 @@ function GeneratorWindow:update()
         self.refreshTimer = 0
         self:updateGeneratorData()
     end
+    self.sRefreshTimer = self.sRefreshTimer + 1
+    if self.sRefreshTimer >= self.sRefreshInterval then
+        self.sRefreshTimer = 0
+        if self.generatorIndex then
+            DWAPPowerSystem.instance:sendCommand(self.playerObj, "refreshGenData", {generatorIndex = self.generatorIndex})
+        end
+    end
 end
 
 function GeneratorWindow:isPlayerTooFar()
-    if not self.generatorIndex or not self.playerObj or not DWAP_Gen2 then
+    if not self.generatorIndex or not self.playerObj then
         return false
     end
 
-    local generator = DWAP_Gen2:GetGenerator(self.generatorIndex)
-    if not generator then
-        return true -- Close if generator no longer exists
-    end
 -- IsoUtils.DistanceToSquared(player:getX(),player:getY(),obj:getX()+0.5,obj:getY()+0.5) <=
     local distance = IsoUtils.DistanceToSquared(self.playerObj:getX(), self.playerObj:getY(),
-        generator.controls.x + 0.5, generator.controls.y + 0.5)
-    return distance > 5
+        self.openCoords.x + 0.5, self.openCoords.y + 0.5)
+    return distance > 6
 end
 
 function GeneratorWindow:updateGeneratorData()
-    if not self.generatorIndex or not DWAP_Gen2 then
+    if not self.generatorIndex then
         return
     end
 
-    local data = DWAP_Gen2:GetCombinedGeneratorData(self.generatorIndex)
+    -- local data = DWAP_Gen2:GetCombinedGeneratorData(self.generatorIndex)
+    if not DWAPPowerSystem.instance then
+        DWAPUtils.dprint("GeneratorWindow: No power system instance")
+        return
+    end
+    local data = DWAPPowerSystem.instance:getGeneratorInfo(self.generatorIndex)
     if not data then
         DWAPUtils.dprint("GeneratorWindow: No data for generator " .. self.generatorIndex)
         return
@@ -238,7 +250,7 @@ function GeneratorWindow:updateGeneratorData()
         local statusText = strings.statusRunning
 
         -- Check if running on solar/battery power only
-        if data.solarEnabled and data.canDisableGenerator and data.netPowerNeeded and data.netPowerNeeded <= 0 then
+        if data.solarEnabled then
             statusText = strings.statusUsingBattery
         end
         self.statusLabel:setColor(0, 1, 0)
@@ -294,7 +306,7 @@ function GeneratorWindow:updateGeneratorData()
     end
 
     -- Update ISA Integration Status
-    if data.solarEnabled then
+    if data.hasSolar then
         local isaStatus = getText("IGUI_DWAP_GeneratorWindow_ISAActive")
         if data.connectedPanels and data.connectedPanels > 0 then
             isaStatus = getText("IGUI_DWAP_GeneratorWindow_ISAPanels", data.connectedPanels)
@@ -340,7 +352,7 @@ function GeneratorWindow:updateGeneratorData()
         end
     else
         -- ISA integration not available
-        if DWAP_Gen2 and DWAP_Gen2.canUseSolar then
+        if getActivatedMods():contains("\\ISA") then
             self.isaStatusLabel:setName(strings.isaNotAvailable)
             self.isaStatusLabel:setColor(1, 1, 0) -- Yellow for not available
         else
@@ -369,23 +381,21 @@ function GeneratorWindow:updateGeneratorData()
 end
 
 function GeneratorWindow:onToggleGenerator()
-    if not self.generatorIndex or not DWAP_Gen2 then
+    if not self.generatorIndex then
         return
     end
 
-    local generator = DWAP_Gen2:GetGenerator(self.generatorIndex)
-    if not generator then
-        return
-    end
+    local generator = DWAPPowerSystem.instance:getGeneratorInfo(self.generatorIndex)
 
     if generator.running then
-        DWAP_Gen2:TurnOffGen(self.generatorIndex)
+        DWAPPowerSystem.instance:sendCommand(self.playerObj, "TurnOffGen", {generatorIndex = self.generatorIndex})
     else
-        DWAP_Gen2:TurnOnGen(self.generatorIndex)
+        DWAPPowerSystem.instance:sendCommand(self.playerObj, "TurnOnGen", {generatorIndex = self.generatorIndex})
     end
-
-    -- Immediate refresh after toggle
     self:updateGeneratorData()
+    DWAPUtils.Defer(function()
+        self:updateGeneratorData()
+    end)
 end
 
 function GeneratorWindow:onRefreshData()
@@ -406,6 +416,8 @@ function GeneratorWindow.OnOpenPanel(player, generatorIndex)
     instance.player = player
     instance.playerObj = getSpecificPlayer(player)
     instance.generatorIndex = generatorIndex
+    instance.openCoords = { x = instance.playerObj:getX(), y = instance.playerObj:getY(), z = instance.playerObj:getZ() }
+    DWAPUtils.dprint("GeneratorWindow opened for " .. tostring(generatorIndex))
 
     instance:addToUIManager()
     instance:updateGeneratorData()

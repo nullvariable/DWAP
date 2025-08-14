@@ -269,14 +269,14 @@ local function updatePowerbank()
     end
 end
 
-local function onLoad()
-    if DWAP_Gen2.canUseSolar then
-        -- get the update frequency from the ISA sandbox settings
-        if everyTen then
-            Events.EveryTenMinutes.Add(updatePowerbank)
-        else
-            Events.EveryHours.Add(updatePowerbank)
-        end
-    end
-end
-Events.OnLoad.Add(onLoad)
+-- local function onLoad()
+--     if DWAP_Gen2.canUseSolar then
+--         -- get the update frequency from the ISA sandbox settings
+--         if everyTen then
+--             Events.EveryTenMinutes.Add(updatePowerbank)
+--         else
+--             Events.EveryHours.Add(updatePowerbank)
+--         end
+--     end
+-- end
+-- Events.OnLoad.Add(onLoad)

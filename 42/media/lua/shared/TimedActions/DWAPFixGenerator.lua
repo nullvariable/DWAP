@@ -6,6 +6,11 @@ require "TimedActions/ISBaseTimedAction"
 local DWAPUtils = require("DWAPUtils")
 
 DWAPFixGenerator = ISBaseTimedAction:derive("DWAPFixGenerator");
+if isClient() then
+    require "DWAP/DWAPPowerSystem_client"
+else
+    require "DWAP/DWAPPowerSystem_server"
+end
 
 function DWAPFixGenerator:isValid()
     return self.generator:getObjectIndex() ~= -1 and
@@ -38,7 +43,12 @@ function DWAPFixGenerator:stop()
 end
 
 function DWAPFixGenerator:continueFixing()
-    local generator = DWAP_Gen:GetGenerator(self.genIndex)
+    local generator
+    if self.version == 1 then
+        generator = DWAP_Gen:GetGenerator(self.genIndex)
+    else
+        generator = DWAPPowerSystem.instance.generators[self.genIndex]
+    end
     DWAPUtils.dprint(generator.condition)
     DWAPUtils.dprint(generator.condition < 100)
     if generator and generator.condition < 100 then
@@ -59,9 +69,9 @@ end
 function DWAPFixGenerator:perform()
     self.character:stopOrTriggerSound(self.sound)
 
-    if isClient() then
+    -- if isClient() then
         self:continueFixing()
-    end
+    -- end
 
     -- needed to remove from queue / start next.
     ISBaseTimedAction.perform(self);
@@ -75,13 +85,19 @@ function DWAPFixGenerator:complete()
     self.character:getInventory():Remove(scrapItem);
     sendRemoveItemFromContainer(self.character:getInventory(), scrapItem);
 
-    DWAP_Gen:RepairGen(self.genIndex, 4 +
-    (1 * (self.character:getPerkLevel(Perks.Electricity)) / 2))
+    if self.version == 1 then
+        DWAP_Gen:RepairGen(self.genIndex, 4 +
+        (1 * (self.character:getPerkLevel(Perks.Electricity)) / 2))
+    else
+        DWAPPowerSystem.instance:RepairGen(self.genIndex, 4 +
+        (1 * (self.character:getPerkLevel(Perks.Electricity)) / 2))
+    end
+
     addXp(self.character, Perks.Electricity, 5)
 
-    if not isClient() and not isServer() then
-        self:continueFixing()
-    end
+    -- if not isClient() and isServer() then
+    --     self:continueFixing()
+    -- end
 
     return true
 end
@@ -104,5 +120,8 @@ function DWAPFixGenerator:new(character, generatorObj, generatorData, genIndex)
     o.genIndex = genIndex;
     o.maxTime = o:getDuration()
     o.caloriesModifier = 4;
+
+    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
+
     return o;
 end

@@ -396,7 +396,7 @@ end
 
 local function controlsSeenWrapper(params)
     DWAPUtils.dprint("DWAP_Gen: controlsSeenWrapper")
-    DWAPUtils.dprint(params)
+    -- DWAPUtils.dprint(params)
     DWAP_Gen:ensureSound(params.controlIndex)
 end
 

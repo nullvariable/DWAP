@@ -33,7 +33,7 @@ Sandbox_EN = {
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "LVille 3 house complex",
 	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington Townhome",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Prison Break",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dark Wallow Lake",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Eastern Hunting Cabin",
@@ -86,6 +86,9 @@ Sandbox_EN = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Water Tank",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "What's the max capacity for the water tanks",
+
+	Sandbox_DWAP_EnableLadders = "Enable Escape Ladders (req Ladders?! mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Requires Ladders?! mod to work",
 
 	Sandbox_DWAP_Loot = "Safehouse Supplies",
 	Sandbox_DWAP_Loot_tooltip = "Should the safehouse have special loot spawns",

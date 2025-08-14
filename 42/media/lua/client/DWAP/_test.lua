@@ -1326,3 +1326,54 @@ end
 function showbexiting()
     DWAPUtils.dprint(Core.bExiting)
 end
+
+function TestClientConn()
+    local conf = { sprite = "fixtures_sinks_01_9", x = 12835, y = 1610, z = 0, sourceType="tank", source = {x = 12835, y = 1614, z = 1} }
+    local square = getCell():getGridSquare(conf.x, conf.y, conf.z)
+    if not square then
+        DWAPUtils.dprint("TestClientConn: No square found at " .. conf.x .. "," .. conf.y .. "," .. conf.z)
+        return
+    end
+    local count = square:getObjects():size()
+    local targetObj = nil
+    for i = 1, count do
+        local obj = square:getObjects():get(i - 1)
+        if obj and obj:getSprite() and obj:getSprite():getName() == conf.sprite then
+            targetObj = obj
+            break
+        end
+    end
+
+    if not targetObj then
+        DWAPUtils.dprint("TestClientConn: No object found with sprite " .. conf.sprite)
+        return
+    end
+    DWAPUtils.connectWaterTank(targetObj, {
+        x = conf.source.x,
+        y = conf.source.y,
+        z = conf.source.z,
+    })
+end
+
+function TestFindWaterSourceOnSquare()
+    local square = getCell():getGridSquare(12835, 1614, 1)
+    if not square then
+        DWAPUtils.dprint("TestFindWaterSourceOnSquare: No square found at 12835,1614,1")
+        return
+    end
+    local objects = square:getObjects()
+    local count = objects:size()
+    for i = 0, count - 1 do
+        local obj = objects:get(i)
+        if obj and obj:getSprite() then
+            DWAPUtils.dprint(("TestFindWaterSourceOnSquare: Object %s found on square %s,%s,%s"):format(obj:getSprite():getName(), square:getX(), square:getY(), square:getZ()))
+        end
+    end
+    local foundObject = IsoObject.FindWaterSourceOnSquare(square)
+    if not foundObject then
+        DWAPUtils.dprint("TestFindWaterSourceOnSquare: No water source found on square")
+        return
+    end
+    DWAPUtils.dprint("TestFindWaterSourceOnSquare: Found water source on square")
+    DWAPUtils.dprint(("TestFindWaterSourceOnSquare: Water source %s found"):format(foundObject:getSprite():getName()))
+end

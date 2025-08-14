@@ -3,6 +3,7 @@ DWAP = DWAP or {}
 local generatorVersion = 17
 local DWAPUtils = require("DWAPUtils")
 local GeneratorWindow = require("DWAP/UI/GeneratorWindow")
+local DWAPPowerSystem = require("DWAPPowerSystem_client")
 
 local generatorControls = {}
 
@@ -53,51 +54,12 @@ local stringCache = {
 
     removeFA = {}
 }
-Events.OnInitGlobalModData.Add(function()
-    if SandboxVars.FunctionalAppliances then
-        stringCache.removeFA = {
-            ["UI_FunctionalAppliances_turngeneratoron"] = getText("UI_FunctionalAppliances_turngeneratoron"),
-            ["UI_FunctionalAppliances_turngeneratoroff"] = getText("UI_FunctionalAppliances_turngeneratoroff"),
-            ["UI_FunctionalAppliances_status"] = getText("UI_FunctionalAppliances_status"),
-            ["UI_FunctionalAppliances_autostartactivated"] = getText("UI_FunctionalAppliances_autostartactivated"),
-            ["UI_FunctionalAppliances_autostartdeactivated"] = getText("UI_FunctionalAppliances_autostartdeactivated"),
-            ["UI_FunctionalAppliances_deactivateautostart"] = getText("UI_FunctionalAppliances_deactivateautostart"),
-            ["UI_FunctionalAppliances_activateautostart"] = getText("UI_FunctionalAppliances_activateautostart"),
-            ["UI_FunctionalAppliances_addfuel"] = getText("UI_FunctionalAppliances_addfuel"),
-            ["UI_FunctionalAppliances_addallfuel"] = getText("UI_FunctionalAppliances_addallfuel"),
-            ["UI_FunctionalAppliances_takefuel"] = getText("UI_FunctionalAppliances_takefuel"),
-            ["UI_FunctionalAppliances_fixgenerator"] = getText("UI_FunctionalAppliances_fixgenerator"),
-            ["UI_FunctionalAppliances_takegeneratormagazine"] = getText("UI_FunctionalAppliances_takegeneratormagazine"),
-        }
-    end
-    if SandboxVars.IndustrialRevolution then
-        stringCache.removeFA = {
-            ["UI_IndustrialRevolution_turngeneratoron"] = getText("UI_IndustrialRevolution_turngeneratoron"),
-            ["UI_IndustrialRevolution_turngeneratoroff"] = getText("UI_IndustrialRevolution_turngeneratoroff"),
-            ["UI_IndustrialRevolution_status"] = getText("UI_IndustrialRevolution_status"),
-            ["UI_IndustrialRevolution_autostartactivated"] = getText("UI_IndustrialRevolution_autostartactivated"),
-            ["UI_IndustrialRevolution_autostartdeactivated"] = getText("UI_IndustrialRevolution_autostartdeactivated"),
-            ["UI_IndustrialRevolution_deactivateautostart"] = getText("UI_IndustrialRevolution_deactivateautostart"),
-            ["UI_IndustrialRevolution_activateautostart"] = getText("UI_IndustrialRevolution_activateautostart"),
-            ["UI_IndustrialRevolution_addfuel"] = getText("UI_IndustrialRevolution_addfuel"),
-            ["UI_IndustrialRevolution_addfuel".. ":"] = getText("UI_IndustrialRevolution_addfuel").. ":",
-            ["UI_IndustrialRevolution_addallfuel"] = getText("UI_IndustrialRevolution_addallfuel"),
-            ["UI_IndustrialRevolution_takefuel"] = getText("UI_IndustrialRevolution_takefuel"),
-            ["UI_IndustrialRevolution_fixgenerator"] = getText("UI_IndustrialRevolution_fixgenerator"),
-            ["UI_IndustrialRevolution_takegeneratormagazine"] = getText("UI_IndustrialRevolution_takegeneratormagazine"),
-        }
-    end
-end)
 
 local DWAP_GenObject
 Events.OnLoad.Add(function()
     generatorVersion = DWAPUtils.getSaveVersion()
-    if generatorVersion < 17 then
-        generatorControls = DWAP_Gen:GetControlPoints()
-        DWAP_GenObject = DWAP_Gen
-    end
-    generatorControls = DWAP_Gen2:GetControlPoints()
-    DWAP_GenObject = DWAP_Gen2
+    generatorControls = DWAP_Gen:GetControlPoints()
+    DWAP_GenObject = DWAP_Gen
 end)
 
 
@@ -155,14 +117,8 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
         local player = getPlayer()
         local skilled = player:getPerkLevel(Perks.Electricity) >= 3 or player:isRecipeActuallyKnown("Generator")
         local playerInventory = player:getInventory()
-        if generatorVersion < 17 then
-            context:addOptionOnTop(("Fuel: %0.0fL / %0.0fL"):format(generator.fuel, generator.capacity))
-            context:addOptionOnTop(("Condition: %0.0f%%"):format(generator.condition))
-        else
-            context:addOptionOnTop("Status", nil, function()
-                GeneratorWindow.OnOpenPanel(player:getPlayerNum(), control)
-            end)
-        end
+        context:addOptionOnTop(("Fuel: %0.0fL / %0.0fL"):format(generator.fuel, generator.capacity))
+        context:addOptionOnTop(("Condition: %0.0f%%"):format(generator.condition))
 
         if generator.running then
             context:addOption(getText("ContextMenu_Turn_Off"), nil, function()
@@ -210,7 +166,7 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
                 for i = 0, possibleGasContainers:size() - 1 do
                     ---@type InventoryItem
                     local item = possibleGasContainers:get(i)
-                    DWAPUtils.dprint(item:getID())
+                    -- DWAPUtils.dprint(item:getID())
                     subContext:addOption(("Siphon Gas into %s"):format(item:getName()), nil, function()
                         DWAPUtils.dprint(("Siphoning gas to %s"):format(item:getName()))
                         walkToGen(objectCoords)
@@ -222,7 +178,7 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
             end
         end
         local gasContainers = playerInventory:getAllEvalRecurse(predicatePetrol)
-        DWAPUtils.dprint(type(gasContainers))
+        -- DWAPUtils.dprint(type(gasContainers))
         if gasContainers and gasContainers:size() > 0 then
             DWAPUtils.dprint("Gas containers found")
             ---@type ISContextMenu
@@ -244,9 +200,115 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
         end
     end
 end
--- Events.OnPreFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
-Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
 
+local titleText = getText("IGUI_DWAP_GeneratorWindow_Title")
+DWAP.worldObjectContextMenu_17 = function(_, context, worldObjects, test)
+    for i = 1, #worldObjects do
+        local object = worldObjects[i]
+        if object and object:getModData().DWAPObjectType == "controlPanel" then
+            if isGreenSiloActive() then
+                -- Try to prevent conflicts with the silo generator mod
+                -- https://steamcommunity.com/sharedfiles/filedetails/?id=3042138819
+                -- https://steamcommunity.com/sharedfiles/filedetails/?id=3400131934
+                for _, v in pairs(stringCache.removeFA) do
+                    context:removeOptionByName(v)
+                end
+            end
+            local genIndex = object:getModData().DWAPGeneratorIndex
+            if not genIndex or type(genIndex) ~= "number" then
+                DWAPUtils.dprint("No generator config found for index: " .. tostring(genIndex))
+                return
+            end
+            local generator = DWAPPowerSystem.instance:getGeneratorInfo(genIndex)
+            if not generator then
+                return
+            end
+
+            local player = getPlayer()
+            local skilled = player:getPerkLevel(Perks.Electricity) >= 3 or player:isRecipeActuallyKnown("Generator")
+            local playerInventory = player:getInventory()
+
+            context:addOptionOnTop(titleText, nil, function()
+                GeneratorWindow.OnOpenPanel(player:getPlayerNum(), genIndex)
+            end)
+            if not generator.running then
+                if generator.condition < 100 then
+                    local opt = context:addOption(getText("ContextMenu_GeneratorFix"), nil, function()
+                        walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
+                        local scrapItem = playerInventory:getFirstTypeRecurse("ElectronicsScrap");
+                        if scrapItem then
+                            ISInventoryPaneContextMenu.transferIfNeeded(player, scrapItem);
+                            ISTimedActionQueue.add(DWAPFixGenerator:new(player, object, generator, genIndex));
+                        end
+                    end)
+                    if not skilled then
+                        opt.notAvailable = true
+                        local tooltip = ISWorldObjectContextMenu.addToolTip();
+                        tooltip.description = getText("ContextMenu_GeneratorPlugTT");
+                        opt.toolTip = tooltip;
+                    end
+                    if not playerInventory:containsTypeRecurse("ElectronicsScrap") then
+                        local tooltip = ISWorldObjectContextMenu.addToolTip();
+                        opt.notAvailable = true;
+                        tooltip.description = getText("ContextMenu_GeneratorFixTT");
+                        opt.toolTip = tooltip;
+                    end
+                    if player:tooDarkToRead() then
+                        opt.notAvailable = true
+                        local tooltip = ISInventoryPaneContextMenu.addToolTip();
+                        tooltip.description = getText("ContextMenu_TooDarkToSee");
+                        opt.toolTip = tooltip;
+                        return
+                    end
+                    return
+                end
+            end
+            local hose = playerInventory:getFirstTagRecurse("SiphonGas")
+            if hose then
+                local possibleGasContainers = playerInventory:getAllEvalRecurse(predicatePetrolNotFull)
+                if possibleGasContainers:size() > 0 then
+                    ---@type ISContextMenu
+                    local subContext = ISContextMenu:getNew(context)
+                    local menuOption = context:addOption("Siphon Fuel")
+                    context:addSubMenu(menuOption, subContext)
+                    for j = 0, possibleGasContainers:size() - 1 do
+                        ---@type InventoryItem
+                        local item = possibleGasContainers:get(j)
+                        -- DWAPUtils.dprint(item:getID())
+                        subContext:addOption(("Siphon Gas into %s"):format(item:getName()), nil, function()
+                            DWAPUtils.dprint(("Siphoning gas to %s"):format(item:getName()))
+                            walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
+                            ISInventoryPaneContextMenu.equipWeapon(item, false, false, player:getPlayerNum())
+                            ISInventoryPaneContextMenu.equipWeapon(hose, true, false, player:getPlayerNum())
+                            ISTimedActionQueue.add(DWAPSiphonFuel:new(player, object, item, generator, genIndex))
+                        end)
+                    end
+                end
+            end
+            local gasContainers = playerInventory:getAllEvalRecurse(predicatePetrol)
+            if gasContainers and gasContainers:size() > 0 then
+                DWAPUtils.dprint("Gas containers found")
+                ---@type ISContextMenu
+                local subContext = ISContextMenu:getNew(context)
+                local menuOption = context:addOption("Fuel Generator")
+                context:addSubMenu(menuOption, subContext)
+                for j = 0, gasContainers:size() - 1 do
+                    ---@type InventoryItem
+                    local item = gasContainers:get(j)
+                    DWAPUtils.dprint(("adding item %s"):format(item:getName()))
+                    subContext:addOption(("Add From %s"):format(item:getName()), nil, function()
+                        DWAPUtils.dprint(("Emptying %s"):format(item:getName()))
+                        walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
+                        -- DWAPUtils.dprint(type(MRPAddFuel))
+                        ISTimedActionQueue.add(ISEquipWeaponAction:new(player, item, 50, true, false))
+                        ISTimedActionQueue.add(DWAPAddFuel:new(player, object, item, generator, genIndex))
+                    end)
+                end
+            end
+            return
+        end
+    end
+end
 
 --- Get the generator at the specified square
 --- @param x number
@@ -273,7 +335,7 @@ end
 --- @param worldobjects table
 --- @param test boolean
 DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
-    if not SandboxVars.DWAP.EnableGenSystem then return end
+    if test == true or not SandboxVars.DWAP.EnableGenSystem then return end
     if not worldobjects or #worldobjects <= 0 then return end
 
     local object = worldobjects[1]
@@ -304,5 +366,72 @@ DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
         end
     end
 end
--- Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
-Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
+
+DWAP.hideGeneratorMenuItems_17 = function(_, context, worldObjects, test)
+    if test == true or not SandboxVars.DWAP.EnableGenSystem then return end
+    for i = 1, #worldObjects do
+        local object = worldObjects[i]
+        if object and object:getModData().DWAPObjectType == "generator" then
+            context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
+            context:removeOptionByName(getText("ContextMenu_Turn_Off"))
+            context:removeOptionByName(getText("ContextMenu_Turn_On"))
+            context:removeOptionByName(getText("ContextMenu_GeneratorPlug"))
+            context:removeOptionByName(getText("ContextMenu_GeneratorUnplug"))
+            context:removeOptionByName(getText("ContextMenu_GeneratorAddFuel"))
+            context:removeOptionByName(getText("ContextMenu_GeneratorFix"))
+            -- Also remove any conflicting mod options if present
+            if isGreenSiloActive() then
+                for _, v in pairs(stringCache.removeFA) do
+                    context:removeOptionByName(v)
+                end
+            end
+            return
+        end
+    end
+end
+
+Events.OnInitGlobalModData.Add(function()
+    if SandboxVars.FunctionalAppliances then
+        stringCache.removeFA = {
+            ["UI_FunctionalAppliances_turngeneratoron"] = getText("UI_FunctionalAppliances_turngeneratoron"),
+            ["UI_FunctionalAppliances_turngeneratoroff"] = getText("UI_FunctionalAppliances_turngeneratoroff"),
+            ["UI_FunctionalAppliances_status"] = getText("UI_FunctionalAppliances_status"),
+            ["UI_FunctionalAppliances_autostartactivated"] = getText("UI_FunctionalAppliances_autostartactivated"),
+            ["UI_FunctionalAppliances_autostartdeactivated"] = getText("UI_FunctionalAppliances_autostartdeactivated"),
+            ["UI_FunctionalAppliances_deactivateautostart"] = getText("UI_FunctionalAppliances_deactivateautostart"),
+            ["UI_FunctionalAppliances_activateautostart"] = getText("UI_FunctionalAppliances_activateautostart"),
+            ["UI_FunctionalAppliances_addfuel"] = getText("UI_FunctionalAppliances_addfuel"),
+            ["UI_FunctionalAppliances_addallfuel"] = getText("UI_FunctionalAppliances_addallfuel"),
+            ["UI_FunctionalAppliances_takefuel"] = getText("UI_FunctionalAppliances_takefuel"),
+            ["UI_FunctionalAppliances_fixgenerator"] = getText("UI_FunctionalAppliances_fixgenerator"),
+            ["UI_FunctionalAppliances_takegeneratormagazine"] = getText("UI_FunctionalAppliances_takegeneratormagazine"),
+        }
+    end
+    if SandboxVars.IndustrialRevolution then
+        stringCache.removeFA = {
+            ["UI_IndustrialRevolution_turngeneratoron"] = getText("UI_IndustrialRevolution_turngeneratoron"),
+            ["UI_IndustrialRevolution_turngeneratoroff"] = getText("UI_IndustrialRevolution_turngeneratoroff"),
+            ["UI_IndustrialRevolution_status"] = getText("UI_IndustrialRevolution_status"),
+            ["UI_IndustrialRevolution_autostartactivated"] = getText("UI_IndustrialRevolution_autostartactivated"),
+            ["UI_IndustrialRevolution_autostartdeactivated"] = getText("UI_IndustrialRevolution_autostartdeactivated"),
+            ["UI_IndustrialRevolution_deactivateautostart"] = getText("UI_IndustrialRevolution_deactivateautostart"),
+            ["UI_IndustrialRevolution_activateautostart"] = getText("UI_IndustrialRevolution_activateautostart"),
+            ["UI_IndustrialRevolution_addfuel"] = getText("UI_IndustrialRevolution_addfuel"),
+            ["UI_IndustrialRevolution_addfuel".. ":"] = getText("UI_IndustrialRevolution_addfuel").. ":",
+            ["UI_IndustrialRevolution_addallfuel"] = getText("UI_IndustrialRevolution_addallfuel"),
+            ["UI_IndustrialRevolution_takefuel"] = getText("UI_IndustrialRevolution_takefuel"),
+            ["UI_IndustrialRevolution_fixgenerator"] = getText("UI_IndustrialRevolution_fixgenerator"),
+            ["UI_IndustrialRevolution_takegeneratormagazine"] = getText("UI_IndustrialRevolution_takegeneratormagazine"),
+        }
+    end
+
+    if SandboxVars.DWAP.EnableGenSystem then
+        if DWAPUtils.getSaveVersion() < 17 then
+            Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
+            Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
+        else
+            Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu_17)
+            Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems_17)
+        end
+    end
+end)

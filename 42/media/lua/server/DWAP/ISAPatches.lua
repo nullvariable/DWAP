@@ -193,23 +193,23 @@ local function patchUpdatePowerbanks()
             originalUpdatePowerbanks = PBSystem.updatePowerbanks
 
             -- Mirror ISA's logic for determining which event to use
-            local useEveryTenMinutes = SandboxVars.ISA.ChargeFreq == 1
-            -- Force to 10 minutes for now since ISA logic is commented out
-            useEveryTenMinutes = true
+            -- local useEveryTenMinutes = SandboxVars.ISA.ChargeFreq == 1
+            -- -- Force to 10 minutes for now since ISA logic is commented out
+            -- useEveryTenMinutes = true
 
-            if useEveryTenMinutes then
-                DWAPUtils.dprint("DWAP_ISA: Using EveryTenMinutes event (ChargeFreq = 1)")
-                if Events.EveryTenMinutes then
-                    Events.EveryTenMinutes.Remove(originalUpdatePowerbanks)
-                    Events.EveryTenMinutes.Add(wrappedUpdatePowerbanks)
-                end
-            else
-                DWAPUtils.dprint("DWAP_ISA: Using EveryHours event (ChargeFreq != 1)")
-                if Events.EveryHours then
-                    Events.EveryHours.Remove(originalUpdatePowerbanks)
-                    Events.EveryHours.Add(wrappedUpdatePowerbanks)
-                end
-            end
+            -- if useEveryTenMinutes then
+            --     DWAPUtils.dprint("DWAP_ISA: Using EveryTenMinutes event (ChargeFreq = 1)")
+            --     if Events.EveryTenMinutes then
+            --         Events.EveryTenMinutes.Remove(originalUpdatePowerbanks)
+            --         Events.EveryTenMinutes.Add(wrappedUpdatePowerbanks)
+            --     end
+            -- else
+            --     DWAPUtils.dprint("DWAP_ISA: Using EveryHours event (ChargeFreq != 1)")
+            --     if Events.EveryHours then
+            --         Events.EveryHours.Remove(originalUpdatePowerbanks)
+            --         Events.EveryHours.Add(wrappedUpdatePowerbanks)
+            --     end
+            -- end
 
             patchApplied = true
             DWAPUtils.dprint("DWAP_ISA: Successfully patched updatePowerbanks")

@@ -244,7 +244,7 @@ LootMaps.Init.DWAPStashMap31 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(7352, 11752, 7951, 12327)
+    mapAPI:setBoundsInSquares(7064, 8144, 7447, 8463)
 end
 
 -- Quill Manor

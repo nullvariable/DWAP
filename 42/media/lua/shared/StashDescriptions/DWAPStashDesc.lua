@@ -250,17 +250,12 @@ local configs = {
         buildingY = 14458,
     },
     [31] = {
-        name = "Tell No One",
+        name = "Fallas Lake Diner Map",
         stamps = {
-            {"Asterisk", nil, 7673, 12270, 0, 0, 0},
-            {"Asterisk", nil, 7678, 11887, 0, 0, 0},
-            {"ArrowNorth", nil, 7680, 12215, 0, 0, 0},
-            {"ArrowSouth", nil, 7680, 12229, 0, 0, 0},
-            {nil, "Stash_DWAP_31_text1", 7544, 12294, 0, 0, 0},
-            {nil, "Stash_DWAP_31_text2", 7567, 11936, 0, 0, 0},
+            {"Asterisk", nil, 7231, 8210, 0, 0, 0},
         },
-        buildingX = 7673,
-        buildingY = 12270,
+        buildingX = 7231,
+        buildingY = 8210,
     },
     [32] = {
         name = "Quill Manor Map",

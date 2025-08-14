@@ -35,11 +35,11 @@ Events.OnLoad.Add(function()
             for j = 1, #config.waterTanks do
                 local tank = config.waterTanks[j]
                 waterTanks[#waterTanks + 1] = tank
-                DWAPUtils.dprint("Water tank loaded: " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
+                -- DWAPUtils.dprint("Water tank loaded: " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
             end
         end
     end
-    DWAPUtils.dprint("Water tanks loaded: " .. #waterTanks)
+    DWAPUtils.dprint("WaterTankMenu tanks loaded: " .. #waterTanks)
 end)
 
 --- Get a water tank if within range

@@ -31,7 +31,13 @@ end
 
 local function onLoadWithSprite(isoObject)
     print("debug onLoadWithSprite")
-    DWAPWaterSystem.instance:loadIsoObject(isoObject)
+    if not DWAPWaterSystem.instance then
+        print("DWAPWaterSystem instance not found, cannot load water object")
+        return
+    end
+    pcall(function()
+        DWAPWaterSystem.instance:loadIsoObject(isoObject)
+    end)
 end
 
 Events.OnInitGlobalModData.Add(function()
