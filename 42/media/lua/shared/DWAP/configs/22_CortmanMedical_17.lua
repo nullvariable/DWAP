@@ -11,52 +11,42 @@ local CortmanMedical = {
                     {
                         type = "panel",
                         isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
-                        x = 10885,
-                        y = 10024,
-                        z = 0,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
+                        sprite = "solarmod_tileset_01_10",
                         x = 10886,
-                        y = 10024,
+                        y = 10021,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
+                        sprite = "solarmod_tileset_01_10",
                         x = 10887,
-                        y = 10024,
+                        y = 10021,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
+                        sprite = "solarmod_tileset_01_10",
                         x = 10888,
-                        y = 10024,
+                        y = 10021,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
+                        sprite = "solarmod_tileset_01_10",
                         x = 10889,
-                        y = 10024,
+                        y = 10021,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +56,7 @@ local CortmanMedical = {
                         y = 10023,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +66,7 @@ local CortmanMedical = {
                         y = 10023,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +76,7 @@ local CortmanMedical = {
                         y = 10023,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +86,7 @@ local CortmanMedical = {
                         y = 10023,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -794,7 +784,7 @@ local CortmanMedical = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(CortmanMedical.objectSpawns, { x = 10909, y = 10020, z = 0, clearExisting = true, removeFloor = true, })
+    table.insert(CortmanMedical.objectSpawns, { enabled = "EnableLadders", x = 10909, y = 10020, z = 0, clearExisting = true, removeFloor = true, })
 else
     table.insert(CortmanMedical.objectSpawns, { sprite = "walls_interior_house_02_50", x = 10890, y = 10020, z = -1, clearExisting = true, replaceWall = true, })
 end

@@ -38,10 +38,40 @@ local DarkWallow = {
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_9",
                         x = 8722,
+                        y = 15306,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 8722,
+                        y = 15307,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 8722,
+                        y = 15308,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 8722,
                         y = 15309,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -51,7 +81,7 @@ local DarkWallow = {
                         y = 15310,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -61,27 +91,37 @@ local DarkWallow = {
                         y = 15311,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15312,
+                        x = 8724,
+                        y = 15306,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15313,
+                        x = 8724,
+                        y = 15307,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 8724,
+                        y = 15308,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -91,7 +131,7 @@ local DarkWallow = {
                         y = 15309,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -101,7 +141,7 @@ local DarkWallow = {
                         y = 15310,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -111,27 +151,7 @@ local DarkWallow = {
                         y = 15311,
                         z = 0,
                         pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15312,
-                        z = 0,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15313,
-                        z = 0,
-                        pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -696,10 +716,10 @@ local DarkWallow = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(DarkWallow.objectSpawns, { x = 8712, y = 15311, z = -1, removeWall = "west" })
-    table.insert(DarkWallow.objectSpawns, { sprite = "walls_exterior_wooden_01_26", x = 8716, y = 15314, z = 0, removeFloor = true, clearExisting = true, })
-    table.insert(DarkWallow.objectSpawns, { sprite = "location_sewer_01_33", x = 8716, y = 15314, z = 0, })
-    table.insert(DarkWallow.objectSpawns, { x = 8716, y = 15314, z = 1, removeFloor = true, clearExisting = true, })
+    table.insert(DarkWallow.objectSpawns, { enabled = "EnableLadders", x = 8712, y = 15311, z = -1, removeWall = "west" })
+    table.insert(DarkWallow.objectSpawns, { enabled = "EnableLadders", sprite = "walls_exterior_wooden_01_26", x = 8716, y = 15314, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(DarkWallow.objectSpawns, { enabled = "EnableLadders", sprite = "location_sewer_01_33", x = 8716, y = 15314, z = 0, })
+    table.insert(DarkWallow.objectSpawns, { enabled = "EnableLadders", x = 8716, y = 15314, z = 1, removeFloor = true, clearExisting = true, })
 else
     -- table.insert(DarkWallow.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
 end

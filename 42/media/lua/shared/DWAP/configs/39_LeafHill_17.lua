@@ -16,7 +16,7 @@ local LeafHill = {
                         y = 3406,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local LeafHill = {
                         y = 3407,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local LeafHill = {
                         y = 3408,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local LeafHill = {
                         y = 3409,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local LeafHill = {
                         y = 3410,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local LeafHill = {
                         y = 3411,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local LeafHill = {
                         y = 3412,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local LeafHill = {
                         y = 3413,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

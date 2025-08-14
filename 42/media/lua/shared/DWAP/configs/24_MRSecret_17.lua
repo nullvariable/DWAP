@@ -16,7 +16,7 @@ local MRSecret = {
                         y = 13122,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local MRSecret = {
                         y = 13121,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local MRSecret = {
                         y = 13120,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local MRSecret = {
                         y = 13119,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local MRSecret = {
                         y = 13118,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local MRSecret = {
                         y = 13117,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local MRSecret = {
                         y = 13110,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local MRSecret = {
                         y = 13109,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local MRSecret = {
                         y = 13108,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -106,7 +106,7 @@ local MRSecret = {
                         y = 13107,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -116,7 +116,7 @@ local MRSecret = {
                         y = 13106,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -126,7 +126,7 @@ local MRSecret = {
                         y = 13105,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -136,7 +136,7 @@ local MRSecret = {
                         y = 13098,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -146,7 +146,7 @@ local MRSecret = {
                         y = 13097,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -156,7 +156,7 @@ local MRSecret = {
                         y = 13096,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -166,7 +166,7 @@ local MRSecret = {
                         y = 13095,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -176,7 +176,7 @@ local MRSecret = {
                         y = 13094,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -186,7 +186,7 @@ local MRSecret = {
                         y = 13093,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

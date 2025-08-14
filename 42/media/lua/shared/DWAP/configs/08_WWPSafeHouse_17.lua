@@ -50,7 +50,7 @@ local WWestPointSafeHouse = {
                         y = 6626,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -60,7 +60,7 @@ local WWestPointSafeHouse = {
                         y = 6627,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -70,7 +70,7 @@ local WWestPointSafeHouse = {
                         y = 6628,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -80,7 +80,7 @@ local WWestPointSafeHouse = {
                         y = 6629,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -90,7 +90,7 @@ local WWestPointSafeHouse = {
                         y = 6626,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -100,7 +100,7 @@ local WWestPointSafeHouse = {
                         y = 6627,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -110,7 +110,7 @@ local WWestPointSafeHouse = {
                         y = 6628,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -120,7 +120,7 @@ local WWestPointSafeHouse = {
                         y = 6629,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -627,10 +627,10 @@ local WWestPointSafeHouse = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "industry_trucks_01_14", x = 10146, y = 6628, z = -1, removeWall = "west" })
-    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "fixtures_doors_frames_01_4", x = 10146, y = 6628, z = -1, })
-    table.insert(WWestPointSafeHouse.objectSpawns, { sprite = "fixtures_doors_01_56", x = 10146, y = 6628, z = -1, isDoor = true, doorN = false, })
-    table.insert(WWestPointSafeHouse.objectSpawns, { x = 10143, y = 6679, z = 0, removeFloor = true, })
+    table.insert(WWestPointSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "industry_trucks_01_14", x = 10146, y = 6628, z = -1, removeWall = "west" })
+    table.insert(WWestPointSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "fixtures_doors_frames_01_4", x = 10146, y = 6628, z = -1, })
+    table.insert(WWestPointSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "fixtures_doors_01_56", x = 10146, y = 6628, z = -1, isDoor = true, doorN = false, })
+    table.insert(WWestPointSafeHouse.objectSpawns, { enabled = "EnableLadders", x = 10143, y = 6679, z = 0, removeFloor = true, })
     -- table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 828 })
     -- table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 829 })
     -- table.insert(WWestPointSafeHouse.generators[1].chunks, { 1267, 830 })

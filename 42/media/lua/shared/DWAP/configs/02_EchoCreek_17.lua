@@ -39,7 +39,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -49,7 +49,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -59,7 +59,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -69,7 +69,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -79,7 +79,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -89,7 +89,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -99,7 +99,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -109,7 +109,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -119,7 +119,7 @@ local EchoCreek = {
                         y = 10903,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 }
             },
@@ -706,10 +706,10 @@ local EchoCreek = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(EchoCreek.objectSpawns, { x = 3588, y = 10902, z = -1, removeWall = "west" })
-    table.insert(EchoCreek.objectSpawns, { x = 3612, y = 10901, z = 0, clearExisting = true, })
-    table.insert(EchoCreek.objectSpawns, { sprite = "walls_exterior_wooden_01_64", x = 3612, y = 10902, z = 0, removeFloor = true, })
-    table.insert(EchoCreek.objectSpawns, { sprite = "walls_exterior_wooden_01_65", x = 3612, y = 10903, z = 0, })
+    table.insert(EchoCreek.objectSpawns, { enabled = "EnableLadders", x = 3588, y = 10902, z = -1, removeWall = "west" })
+    table.insert(EchoCreek.objectSpawns, { enabled = "EnableLadders", x = 3612, y = 10901, z = 0, clearExisting = true, })
+    table.insert(EchoCreek.objectSpawns, { enabled = "EnableLadders", sprite = "walls_exterior_wooden_01_64", x = 3612, y = 10902, z = 0, removeFloor = true, })
+    table.insert(EchoCreek.objectSpawns, { enabled = "EnableLadders", sprite = "walls_exterior_wooden_01_65", x = 3612, y = 10903, z = 0, })
 end
 
 return EchoCreek

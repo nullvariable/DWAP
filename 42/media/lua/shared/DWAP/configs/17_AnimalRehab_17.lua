@@ -46,7 +46,7 @@ local AnimalRehab = {
                         y = 12060,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local AnimalRehab = {
                         y = 12060,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local AnimalRehab = {
                         y = 12060,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local AnimalRehab = {
                         y = 12060,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local AnimalRehab = {
                         y = 12058,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local AnimalRehab = {
                         y = 12058,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -106,7 +106,7 @@ local AnimalRehab = {
                         y = 12058,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -116,7 +116,7 @@ local AnimalRehab = {
                         y = 12058,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -672,9 +672,9 @@ local AnimalRehab = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(AnimalRehab.objectSpawns, { x = 3113, y = 12063, z = -1, removeWall = "north", })
+    table.insert(AnimalRehab.objectSpawns, { enabled = "EnableLadders", x = 3113, y = 12063, z = -1, removeWall = "north", })
 
-    table.insert(AnimalRehab.objectSpawns, { x = 3127, y = 12078, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(AnimalRehab.objectSpawns, { enabled = "EnableLadders", x = 3127, y = 12078, z = 0, removeFloor = true, clearExisting = true, })
 end
 
 return AnimalRehab

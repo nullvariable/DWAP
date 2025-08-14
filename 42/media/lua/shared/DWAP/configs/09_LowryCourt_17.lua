@@ -50,7 +50,7 @@ local LowryCourt = {
                         y = 1905,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -60,7 +60,7 @@ local LowryCourt = {
                         y = 1904,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -70,7 +70,17 @@ local LowryCourt = {
                         y = 1903,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 12984,
+                        y = 1902,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -80,7 +90,7 @@ local LowryCourt = {
                         y = 1905,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -90,7 +100,7 @@ local LowryCourt = {
                         y = 1904,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -100,7 +110,17 @@ local LowryCourt = {
                         y = 1903,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 12986,
+                        y = 1902,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
                     },
                 },
             },
@@ -484,8 +504,8 @@ local LowryCourt = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(LowryCourt.objectSpawns, { x = 12939, y = 1933, z = 0, removeFloor = true, })
-    table.insert(LowryCourt.objectSpawns, { sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })
+    table.insert(LowryCourt.objectSpawns, { enabled = "EnableLadders", x = 12939, y = 1933, z = 0, removeFloor = true, })
+    table.insert(LowryCourt.objectSpawns, { enabled = "EnableLadders", sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })
 
     table.insert(LowryCourt.generators[1].fakeGenerators, { x = 12951, y=1931, z = -4, createTile = false })
 end

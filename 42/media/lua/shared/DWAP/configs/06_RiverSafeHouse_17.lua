@@ -44,7 +44,7 @@ local RiverSafeHouse = {
                         y = 5570,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -54,7 +54,7 @@ local RiverSafeHouse = {
                         y = 5569,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -64,7 +64,7 @@ local RiverSafeHouse = {
                         y = 5568,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -74,7 +74,17 @@ local RiverSafeHouse = {
                         y = 5567,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 6958,
+                        y = 5566,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -84,7 +94,7 @@ local RiverSafeHouse = {
                         y = 5565,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -94,7 +104,7 @@ local RiverSafeHouse = {
                         y = 5564,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -104,7 +114,7 @@ local RiverSafeHouse = {
                         y = 5563,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -114,7 +124,7 @@ local RiverSafeHouse = {
                         y = 5562,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -721,11 +731,11 @@ if getActivatedMods():contains("\\Ladders") then
     table.insert(RiverSafeHouse.generators[1].fakeGenerators, { x = 6989, y = 5570, z = -1, createTile = false })
     table.insert(RiverSafeHouse.generators[1].fakeGenerators, { x = 7008, y = 5591, z = -1, createTile = false })
 
-    table.insert(RiverSafeHouse.objectSpawns, { x = 6957, y = 5569, z = -1, removeWall = "west" })
-    table.insert(RiverSafeHouse.objectSpawns, { sprite = "walls_exterior_wooden_01_34", x = 6957, y = 5569, z = -1 })
-    table.insert(RiverSafeHouse.objectSpawns, { sprite = "fixtures_doors_01_12", x = 6957, y = 5569, z = -1, isDoor = true, doorN = false, })
-    table.insert(RiverSafeHouse.objectSpawns, { sprite = "location_shop_bargNclothes_01_24", x = 7009, y = 5591, z = 0, removeFloor = true, })
-    table.insert(RiverSafeHouse.objectSpawns, { sprite = "location_shop_bargNclothes_01_25", x = 7009, y = 5592, z = 0, })
+    table.insert(RiverSafeHouse.objectSpawns, { enabled = "EnableLadders", x = 6957, y = 5569, z = -1, removeWall = "west" })
+    table.insert(RiverSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "walls_exterior_wooden_01_34", x = 6957, y = 5569, z = -1 })
+    table.insert(RiverSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "fixtures_doors_01_12", x = 6957, y = 5569, z = -1, isDoor = true, doorN = false, })
+    table.insert(RiverSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "location_shop_bargNclothes_01_24", x = 7009, y = 5591, z = 0, removeFloor = true, })
+    table.insert(RiverSafeHouse.objectSpawns, { enabled = "EnableLadders", sprite = "location_shop_bargNclothes_01_25", x = 7009, y = 5592, z = 0, })
 end
 
 return RiverSafeHouse

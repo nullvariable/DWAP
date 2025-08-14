@@ -33,7 +33,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -43,7 +43,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -53,7 +53,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -63,7 +63,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -73,7 +73,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -83,7 +83,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -93,7 +93,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -103,7 +103,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -113,7 +113,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -123,7 +123,7 @@ local HuntingCabin = {
                         y = 8752,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

@@ -25,7 +25,7 @@ local DoeValleyBunker = {
                         y = 9374,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -35,7 +35,7 @@ local DoeValleyBunker = {
                         y = 9373,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -45,7 +45,7 @@ local DoeValleyBunker = {
                         y = 9372,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -55,7 +55,7 @@ local DoeValleyBunker = {
                         y = 9371,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 }
             },

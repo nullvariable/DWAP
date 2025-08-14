@@ -54,7 +54,7 @@ local ELVilleFarm = {
                         y = 3040,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -64,7 +64,7 @@ local ELVilleFarm = {
                         y = 3041,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -74,7 +74,7 @@ local ELVilleFarm = {
                         y = 3042,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -84,7 +84,7 @@ local ELVilleFarm = {
                         y = 3043,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -94,7 +94,7 @@ local ELVilleFarm = {
                         y = 3044,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -104,7 +104,7 @@ local ELVilleFarm = {
                         y = 3045,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

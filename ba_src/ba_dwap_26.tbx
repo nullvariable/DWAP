@@ -187,8 +187,8 @@
   <tile tile="walls_garage_01_032"/>
   <tile tile="walls_garage_01_033"/>
   <tile tile="walls_garage_01_034"/>
-  <tile tile="walls_interior_house_01_032"/>
-  <tile tile="walls_interior_house_01_043"/>
+  <tile tile="walls_interior_house_01_004"/>
+  <tile tile="walls_interior_house_01_015"/>
  </user_tiles>
  <used_tiles>3 5 11 4</used_tiles>
  <used_furniture></used_furniture>

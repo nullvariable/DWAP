@@ -891,12 +891,12 @@ local LVPawnshop = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(LVPawnshop.objectSpawns, { sprite = "industry_trucks_01_49", x = 12322, y = 1313, z = -1, clearExisting = true, replaceWall= true, })
-    table.insert(LVPawnshop.objectSpawns, { x = 12323, y = 1313, z = -1, clearExisting = true, })
-    table.insert(LVPawnshop.objectSpawns, { x = 12324, y = 1313, z = -1, clearExisting = true, })
-    table.insert(LVPawnshop.objectSpawns, { removeFloor = true, x = 12321, y = 1313, z = 0, })
-    table.insert(LVPawnshop.objectSpawns, { sprite = "floors_interior_tilesandwood_01_31", x = 12323, y = 1313, z = 0, })
-    table.insert(LVPawnshop.objectSpawns, { sprite = "floors_interior_tilesandwood_01_31", x = 12324, y = 1313, z = 0, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", sprite = "industry_trucks_01_49", x = 12322, y = 1313, z = -1, clearExisting = true, replaceWall= true, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", x = 12323, y = 1313, z = -1, clearExisting = true, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", x = 12324, y = 1313, z = -1, clearExisting = true, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", removeFloor = true, x = 12321, y = 1313, z = 0, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", sprite = "floors_interior_tilesandwood_01_31", x = 12323, y = 1313, z = 0, })
+    table.insert(LVPawnshop.objectSpawns, { enabled = "EnableLadders", sprite = "floors_interior_tilesandwood_01_31", x = 12324, y = 1313, z = 0, })
 end
 
 return LVPawnshop

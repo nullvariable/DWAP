@@ -16,7 +16,7 @@ local TheDrake = {
                         y = 6860,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local TheDrake = {
                         y = 6859,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local TheDrake = {
                         y = 6858,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local TheDrake = {
                         y = 6857,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local TheDrake = {
                         y = 6856,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local TheDrake = {
                         y = 6855,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local TheDrake = {
                         y = 6854,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local TheDrake = {
                         y = 6853,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local TheDrake = {
                         y = 6852,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -106,7 +106,7 @@ local TheDrake = {
                         y = 6851,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -675,8 +675,8 @@ local TheDrake = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(TheDrake.objectSpawns, { x = 11889, y = 6880, z = 0, removeFloor = true, })
-    table.insert(TheDrake.objectSpawns, { sprite = "location_business_office_generic_01_35", x = 11889, y = 6879, z = 0, })
+    table.insert(TheDrake.objectSpawns, { enabled = "EnableLadders", x = 11889, y = 6880, z = 0, removeFloor = true, })
+    table.insert(TheDrake.objectSpawns, { enabled = "EnableLadders", sprite = "location_business_office_generic_01_35", x = 11889, y = 6879, z = 0, })
 end
 
 return TheDrake

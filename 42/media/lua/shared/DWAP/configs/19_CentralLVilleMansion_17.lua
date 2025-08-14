@@ -16,7 +16,7 @@ local CentralLVilleMansion = {
                         y = 1898,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local CentralLVilleMansion = {
                         y = 1897,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local CentralLVilleMansion = {
                         y = 1896,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local CentralLVilleMansion = {
                         y = 1895,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local CentralLVilleMansion = {
                         y = 1894,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local CentralLVilleMansion = {
                         y = 1893,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local CentralLVilleMansion = {
                         y = 1892,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local CentralLVilleMansion = {
                         y = 1891,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -1561,10 +1561,10 @@ local CentralLVilleMansion = {
 
 if getActivatedMods():contains("\\Ladders") then
 
-    table.insert(CentralLVilleMansion.objectSpawns, { sprite = "walls_interior_house_03_43", x = 13451, y = 1874, z = 0, clearExisting = true, })
-    table.insert(CentralLVilleMansion.objectSpawns, { sprite = "fixtures_doors_01_5", x = 13451, y = 1874, z = 0, isDoor = true, doorN = true, })
-    table.insert(CentralLVilleMansion.objectSpawns, { sprite = "walls_interior_house_03_33", x = 13452, y = 1874, z = 0, removeFloor = true, clearExisting = true, })
-    table.insert(CentralLVilleMansion.objectSpawns, { sprite = "walls_interior_house_03_32", x = 13453, y = 1874, z = 0, })
+    table.insert(CentralLVilleMansion.objectSpawns, { enabled = "EnableLadders", sprite = "walls_interior_house_03_43", x = 13451, y = 1874, z = 0, clearExisting = true, })
+    table.insert(CentralLVilleMansion.objectSpawns, { enabled = "EnableLadders", sprite = "fixtures_doors_01_5", x = 13451, y = 1874, z = 0, isDoor = true, doorN = true, })
+    table.insert(CentralLVilleMansion.objectSpawns, { enabled = "EnableLadders", sprite = "walls_interior_house_03_33", x = 13452, y = 1874, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(CentralLVilleMansion.objectSpawns, { enabled = "EnableLadders", sprite = "walls_interior_house_03_32", x = 13453, y = 1874, z = 0, })
 else
     table.insert(CentralLVilleMansion.objectSpawns, { sprite = "industry_trucks_01_50", x = 13452, y = 1874, z = -2, removeWall = "north", })
 end

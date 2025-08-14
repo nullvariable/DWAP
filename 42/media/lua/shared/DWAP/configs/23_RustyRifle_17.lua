@@ -16,7 +16,7 @@ local RustyRifle = {
                         y = 10554,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local RustyRifle = {
                         y = 10553,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local RustyRifle = {
                         y = 10552,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local RustyRifle = {
                         y = 10551,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local RustyRifle = {
                         y = 10550,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local RustyRifle = {
                         y = 10549,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local RustyRifle = {
                         y = 10548,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local RustyRifle = {
                         y = 10547,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local RustyRifle = {
                         y = 10546,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -106,7 +106,7 @@ local RustyRifle = {
                         y = 10545,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -811,7 +811,7 @@ local RustyRifle = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(RustyRifle.objectSpawns, { x = 10752, y = 10547, z = 0, removeFloor = true, })
+    table.insert(RustyRifle.objectSpawns, { enabled = "EnableLadders", x = 10752, y = 10547, z = 0, removeFloor = true, })
 else
     table.insert(RustyRifle.objectSpawns, { sprite = "location_sewer_01_0", x = 10765, y = 10548, z = -1, replaceWall = false, })
 end

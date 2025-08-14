@@ -16,7 +16,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local RosewoodGas = {
                         y = 11272,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -502,9 +502,9 @@ local RosewoodGas = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(RosewoodGas.objectSpawns, { x = 8174, y = 11255, z = -1, removeWall = "north" })
-    table.insert(RosewoodGas.objectSpawns, { x = 8174, y = 11215, z = 0, removeFloor = true, })
-    table.insert(RosewoodGas.objectSpawns, { sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
+    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11255, z = -1, removeWall = "north" })
+    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11215, z = 0, removeFloor = true, })
+    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
     table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
     table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
 

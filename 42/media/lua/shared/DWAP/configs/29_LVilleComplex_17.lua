@@ -22,7 +22,7 @@ local LVilleComplex = {
                         y = 2637,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -32,7 +32,7 @@ local LVilleComplex = {
                         y = 2638,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -42,7 +42,7 @@ local LVilleComplex = {
                         y = 2639,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -52,7 +52,7 @@ local LVilleComplex = {
                         y = 2640,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -62,7 +62,7 @@ local LVilleComplex = {
                         y = 2641,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -72,7 +72,7 @@ local LVilleComplex = {
                         y = 2642,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -82,7 +82,7 @@ local LVilleComplex = {
                         y = 2637,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -92,7 +92,7 @@ local LVilleComplex = {
                         y = 2638,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -102,7 +102,7 @@ local LVilleComplex = {
                         y = 2639,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -112,7 +112,7 @@ local LVilleComplex = {
                         y = 2640,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -122,17 +122,17 @@ local LVilleComplex = {
                         y = 2641,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_9",
-                        x = 14145,
+                        x = 14147,
                         y = 2642,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

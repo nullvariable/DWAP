@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="5" height="5" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="11" Curtains="0" Shutters="9" Stairs="10" RoofCap="6" RoofSlope="7" RoofTop="8" GrimeWall="5">
+<building version="4" width="3" height="3" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="11" Curtains="0" Shutters="9" Stairs="10" RoofCap="6" RoofSlope="7" RoofTop="8" GrimeWall="5">
  <tile_entry category="door_frames">
   <tile enum="West" tile="fixtures_doors_frames_01_000"/>
   <tile enum="North" tile="fixtures_doors_frames_01_001"/>
@@ -149,77 +149,45 @@
   <tile enum="North" tile="fixtures_windows_01_001"/>
  </tile_entry>
  <user_tiles>
-  <tile tile="floors_exterior_natural_01_010"/>
-  <tile tile="industry_02_004"/>
-  <tile tile="industry_02_194"/>
-  <tile tile="industry_railroad_01_000"/>
-  <tile tile="industry_railroad_01_002"/>
-  <tile tile="walls_exterior_house_01_004"/>
+  <tile tile="roofs_03_023"/>
+  <tile tile="solarmod_tileset_01_010"/>
  </user_tiles>
  <used_tiles>4</used_tiles>
  <used_furniture></used_furniture>
  <floor>
   <rooms>
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0
+0,0,0,
+0,0,0,
+0,0,0
 </rooms>
   <attributes>
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0
+0,0,0,
+0,0,0,
+0,0,0
+</attributes>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0
+</rooms>
+  <attributes>
+0,0,0,
+0,0,0,
+0,0,0
 </attributes>
   <tiles layer="Floor">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-1,1,1,1,0,0,
-1,1,1,1,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
-</tiles>
-  <tiles layer="FloorOverlay">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-0,0,4,5,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
+1,1,1,1,
+1,1,1,1,
+0,0,0,0,
+1,1,1,1
 </tiles>
   <tiles layer="Furniture">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-1,0,0,0,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
-</tiles>
-  <tiles layer="Roof">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-0,2,0,0,0,0,
-0,2,0,0,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
-</tiles>
-  <tiles layer="WallFurniture">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-3,0,4,5,0,0,
-3,0,0,0,0,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
-</tiles>
-  <tiles layer="Walls">
-0,0,0,0,0,0,
-0,0,0,0,0,0,
-6,0,0,0,6,0,
-6,0,0,0,6,0,
-0,0,0,0,0,0,
-0,0,0,0,0,0
+0,0,0,0,
+2,2,2,2,
+0,0,0,0,
+2,2,2,2
 </tiles>
  </floor>
 </building>

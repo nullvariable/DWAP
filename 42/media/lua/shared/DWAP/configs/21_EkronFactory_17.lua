@@ -17,7 +17,7 @@ local EkronFactory = {
                         y = 9377,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -27,7 +27,7 @@ local EkronFactory = {
                         y = 9377,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -37,7 +37,7 @@ local EkronFactory = {
                         y = 9377,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -47,7 +47,7 @@ local EkronFactory = {
                         y = 9377,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -57,7 +57,7 @@ local EkronFactory = {
                         y = 9379,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -67,7 +67,7 @@ local EkronFactory = {
                         y = 9379,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -77,7 +77,7 @@ local EkronFactory = {
                         y = 9379,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -87,7 +87,7 @@ local EkronFactory = {
                         y = 9379,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -598,9 +598,9 @@ local EkronFactory = {
     },
 }
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9379, z = -1, removeWall = "north", })
-    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9376, z = 0, removeFloor = true, })
-    table.insert(EkronFactory.objectSpawns, { x = 598, y = 9375, z = 0, clearExisting = true, })
+    table.insert(EkronFactory.objectSpawns, { enabled = "EnableLadders", x = 598, y = 9379, z = -1, removeWall = "north", })
+    table.insert(EkronFactory.objectSpawns, { enabled = "EnableLadders", x = 598, y = 9376, z = 0, removeFloor = true, })
+    table.insert(EkronFactory.objectSpawns, { enabled = "EnableLadders", x = 598, y = 9375, z = 0, clearExisting = true, })
 end
 
 return EkronFactory

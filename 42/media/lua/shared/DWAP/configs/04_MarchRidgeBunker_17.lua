@@ -948,9 +948,9 @@ local MarchRidgeConfig = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(MarchRidgeConfig.objectSpawns, { x = 9883, y = 12619, z = 0, removeFloor = true, })
-    table.insert(MarchRidgeConfig.objectSpawns, { x = 9883, y = 12619, z = 0, clearExisting = true, })
-    table.insert(MarchRidgeConfig.objectSpawns, { x = 9921, y = 12623, z = -4, removeWall = "west", })
+    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9883, y = 12619, z = 0, removeFloor = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9883, y = 12619, z = 0, clearExisting = true, })
+    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9921, y = 12623, z = -4, removeWall = "west", })
 end
 
 return MarchRidgeConfig

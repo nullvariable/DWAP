@@ -928,17 +928,17 @@ local GrandOhioConfig = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_46", x = 13610, y = 1269, z = -4, removeWall = "west" })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "fixtures_doors_01_64", x = 13610, y = 1269, z = -4, isDoor = true, doorN = false, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "floors_exterior_street_01_16", x = 13609, y = 1269, z = -4, isFloor = true, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13609, y = 1269, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "overlay_grime_wall_01_1", x = 13609, y = 1269, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13609, y = 1270, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "floors_exterior_street_01_16", x = 13546, y = 1278, z = -4, isFloor = true, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13546, y = 1278, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "overlay_grime_wall_01_1", x = 13546, y = 1278, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_garage_01_33", x = 13546, y = 1279, z = -4, })
-    table.insert(GrandOhioConfig.objectSpawns, { x = 13482, y = 1300, z = 0, removeFloor = true, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_01_46", x = 13610, y = 1269, z = -4, removeWall = "west" })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "fixtures_doors_01_64", x = 13610, y = 1269, z = -4, isDoor = true, doorN = false, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "floors_exterior_street_01_16", x = 13609, y = 1269, z = -4, isFloor = true, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_01_33", x = 13609, y = 1269, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "overlay_grime_wall_01_1", x = 13609, y = 1269, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_01_33", x = 13609, y = 1270, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "floors_exterior_street_01_16", x = 13546, y = 1278, z = -4, isFloor = true, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_01_33", x = 13546, y = 1278, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "overlay_grime_wall_01_1", x = 13546, y = 1278, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_01_33", x = 13546, y = 1279, z = -4, })
+    table.insert(GrandOhioConfig.objectSpawns, { enabled = "EnableLadders", x = 13482, y = 1300, z = 0, removeFloor = true, })
     -- this ladder was fighting with me and wouldn't let me go down it while working fine going up, so I changed it to north facing
     -- table.insert(GrandOhioConfig.objectSpawns, { x = 13545, y = 1278, z = -1, removeFloor = true, })
     -- table.insert(GrandOhioConfig.objectSpawns, { sprite = "walls_interior_house_04_16", x = 12940, y = 1933, z = 0, })

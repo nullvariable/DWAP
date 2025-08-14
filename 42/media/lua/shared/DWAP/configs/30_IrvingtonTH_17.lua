@@ -29,7 +29,7 @@ local IrvingtonTH = {
                         y = 14441,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -39,7 +39,7 @@ local IrvingtonTH = {
                         y = 14442,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -49,7 +49,7 @@ local IrvingtonTH = {
                         y = 14443,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -59,7 +59,7 @@ local IrvingtonTH = {
                         y = 14444,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -69,7 +69,17 @@ local IrvingtonTH = {
                         y = 14445,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 2606,
+                        y = 14446,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -79,7 +89,7 @@ local IrvingtonTH = {
                         y = 14441,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -89,7 +99,7 @@ local IrvingtonTH = {
                         y = 14442,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -99,7 +109,7 @@ local IrvingtonTH = {
                         y = 14443,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -109,7 +119,7 @@ local IrvingtonTH = {
                         y = 14444,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -119,7 +129,17 @@ local IrvingtonTH = {
                         y = 14445,
                         z = 0,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_9",
+                        x = 2608,
+                        y = 14446,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
                     },
                 },
             },
@@ -305,7 +325,7 @@ local IrvingtonTH = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(IrvingtonTH.objectSpawns, { x = 2559, y = 14454, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(IrvingtonTH.objectSpawns, { enabled = "EnableLadders", x = 2559, y = 14454, z = 0, removeFloor = true, clearExisting = true, })
 else
     table.insert(IrvingtonTH.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
 end

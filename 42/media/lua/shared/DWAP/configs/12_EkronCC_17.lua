@@ -944,7 +944,7 @@ if getActivatedMods():contains("\\Ladders") then
     -- table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_32", x = 754, y = 9795, z = -5, })
     -- table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_01_32", x = 755, y = 9795, z = -5, })
 
-    table.insert(EkronCC.objectSpawns, { sprite = "walls_garage_02_16", x = 755, y = 9780, z = 0, })
-    table.insert(EkronCC.objectSpawns, { x = 754, y = 9780, z = 0, removeFloor = true, })
+    table.insert(EkronCC.objectSpawns, { enabled = "EnableLadders", sprite = "walls_garage_02_16", x = 755, y = 9780, z = 0, })
+    table.insert(EkronCC.objectSpawns, { enabled = "EnableLadders", x = 754, y = 9780, z = 0, removeFloor = true, })
 end
 return EkronCC

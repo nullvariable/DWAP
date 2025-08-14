@@ -5,6 +5,91 @@ local WestMaple = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
+            solar = {
+                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
+                panels = {
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6125,
+                        y = 6635,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6125,
+                        y = 6636,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6125,
+                        y = 6637,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6125,
+                        y = 6638,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6126,
+                        y = 6635,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6126,
+                        y = 6636,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6126,
+                        y = 6637,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_6",
+                        x = 6126,
+                        y = 6638,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                },
+            },
             fakeGenerators = {
                 { x = 6127, y = 6635, z = -1, createTile = true },
             },
@@ -657,7 +742,7 @@ local WestMaple = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(WestMaple.objectSpawns, { sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(WestMaple.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
 end
 
 return WestMaple

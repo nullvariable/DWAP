@@ -16,7 +16,7 @@ local GasCorner = {
                         y = 5744,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -26,7 +26,7 @@ local GasCorner = {
                         y = 5745,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -36,7 +36,7 @@ local GasCorner = {
                         y = 5746,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -46,7 +46,7 @@ local GasCorner = {
                         y = 5747,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -56,7 +56,7 @@ local GasCorner = {
                         y = 5748,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -66,7 +66,7 @@ local GasCorner = {
                         y = 5749,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -76,7 +76,7 @@ local GasCorner = {
                         y = 5750,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -86,7 +86,7 @@ local GasCorner = {
                         y = 5751,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -96,7 +96,7 @@ local GasCorner = {
                         y = 5752,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },
@@ -756,7 +756,7 @@ local GasCorner = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(GasCorner.objectSpawns, { sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(GasCorner.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
 end
 
 return GasCorner

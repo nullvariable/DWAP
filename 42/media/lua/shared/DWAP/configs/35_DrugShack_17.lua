@@ -32,7 +32,7 @@ local DrugShack = {
                         y = 9293,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -42,7 +42,7 @@ local DrugShack = {
                         y = 9293,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -52,7 +52,7 @@ local DrugShack = {
                         y = 9293,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -62,7 +62,7 @@ local DrugShack = {
                         y = 9293,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -72,7 +72,7 @@ local DrugShack = {
                         y = 9295,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -82,7 +82,7 @@ local DrugShack = {
                         y = 9295,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -92,7 +92,7 @@ local DrugShack = {
                         y = 9295,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -102,7 +102,7 @@ local DrugShack = {
                         y = 9295,
                         z = 1,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 },
             },

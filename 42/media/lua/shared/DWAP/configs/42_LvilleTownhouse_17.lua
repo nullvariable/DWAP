@@ -28,7 +28,7 @@ local LouisvilleTownhouse = {
                         y = 1613,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -38,7 +38,7 @@ local LouisvilleTownhouse = {
                         y = 1613,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -48,7 +48,7 @@ local LouisvilleTownhouse = {
                         y = 1613,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -58,7 +58,7 @@ local LouisvilleTownhouse = {
                         y = 1613,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -68,7 +68,7 @@ local LouisvilleTownhouse = {
                         y = 1613,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -78,7 +78,7 @@ local LouisvilleTownhouse = {
                         y = 1615,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -88,7 +88,7 @@ local LouisvilleTownhouse = {
                         y = 1615,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -98,7 +98,7 @@ local LouisvilleTownhouse = {
                         y = 1615,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -108,7 +108,7 @@ local LouisvilleTownhouse = {
                         y = 1615,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                     {
                         type = "panel",
@@ -118,7 +118,7 @@ local LouisvilleTownhouse = {
                         y = 1615,
                         z = 2,
                         pb = 1,
-                        spawn = true,
+                        spawn = false,
                     },
                 }
             },
