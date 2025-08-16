@@ -2,6 +2,12 @@
 require "TimedActions/ISBaseTimedAction"
 
 DWAPAddFuel = ISBaseTimedAction:derive("DWAPAddFuel");
+local DWAPUtils = require("DWAPUtils")
+if isClient() then
+    require "DWAP/DWAPPowerSystem_client"
+else
+    require "DWAP/DWAPPowerSystem_server"
+end
 
 function DWAPAddFuel:isValid()
     if self.generatorData.fuel >= self.generatorData.capacity then
@@ -52,7 +58,11 @@ function DWAPAddFuel:complete()
     end
 
     self.petrol:syncItemFields()
-    DWAP_Gen:AddFuel(self.genIndex, endFuel)
+    if self.version == 1 then
+        DWAP_Gen:AddFuel(self.genIndex, endFuel)
+    else
+        DWAPPowerSystem.instance:AddFuel(self.genIndex, endFuel)
+    end
 
     return true;
 end
@@ -73,7 +83,7 @@ function DWAPAddFuel:new(character, generator, petrolCan, generatorData, genInde
     o.generatorData = generatorData;
     o.genIndex = genIndex;
     o.maxTime = o:getDuration();
-    -- print(o.maxTime)
-    -- print("DWAPAddFuel:new end")
+
+    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
     return o;
 end

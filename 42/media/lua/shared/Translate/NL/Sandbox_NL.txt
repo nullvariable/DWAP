@@ -29,15 +29,22 @@ Sandbox_NL = {
 	Sandbox_DWAP_Loot_Safehouse_value_option25 = "Maart Ridge Secret",
 	Sandbox_DWAP_Loot_Safehouse_value_option26 = "Riverside Mansion",
 	Sandbox_DWAP_Loot_Safehouse_value_option27 = "West Point Home",
-	Sandbox_DWAP_Loot_Safehouse_value_option28 = "De Drake",
+	Sandbox_DWAP_Loot_Safehouse_value_option28 = "De drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 Huiscomplex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg stadshuis",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Gevangenis",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington stadshuis",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Kwammanor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dark Wallow Lake",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Eastern Hunting Cabin",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Brandenburg gashoek",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint Shop voor lease"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Bladhoogtes"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Palsonage van rozenhout"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville herenhuis"
 
 	Sandbox_DWAP_EnableAll = "Schakel alle safehouses in",
 	Sandbox_DWAP_EnableAll_tooltip = "Niet aanbevolen, sleutels, kaart en spawn zijn nog steeds alleen voor de geselecteerde optie",
@@ -56,7 +63,8 @@ Sandbox_NL = {
 	
 	Sandbox_DWAP_EGS = "Schakel het generatorsysteem in",
 	Sandbox_DWAP_EGS_tooltip = "Gebruik de generatoren van de mod, die de hele safehouse stroom leveren",
-	Sandbox_DWAP_EWC_tooltip = "Gebruik het watersysteem van de mod, met watertanks en alle armaturen die in de tanks zijn gekomen",
+	Sandbox_DWAP_EGSS = "Solar inschakelen",
+	Sandbox_DWAP_EGSS_tooltip = "Vereist meeslepende zonnepanelen om te werken",
 	
 	Sandbox_DWAP_APGS = "Generator Auto Start System",
 	Sandbox_DWAP_APGS_tooltip = "Generatoren detecteren stroomverlies en beginnen automatisch",
@@ -74,10 +82,13 @@ Sandbox_NL = {
 	Sandbox_DWAP_Condition_tooltip = "Vergelijkbaar met vanille -generatoren, 0 tot 100",
 
 	Sandbox_DWAP_WaterLevel = "Waterspiegel",
-	Sandbox_DWAP_WaterLevel_tooltip = "Met hoeveel water de tanks moeten beginnen",
+	Sandbox_DWAP_WaterLevel_tooltip = "Met hoeveel water zou de tanks moeten beginnen",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Waterreservoir",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Wat is de maximale capaciteit voor de watertanks",
+
+	Sandbox_DWAP_EnableLadders = "Escape ladders inschakelen (Req Ladders?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Vereist ladders?! Mod om te werken",
 
 	Sandbox_DWAP_Loot = "Safehouse -benodigdheden",
 	Sandbox_DWAP_Loot_tooltip = "Mocht de safehouse speciale buitspawns hebben",
@@ -120,7 +131,7 @@ Sandbox_NL = {
 	Sandbox_DWAP_SeedLibrary = "Zaadbibliotheek",
 	Sandbox_DWAP_SeedLibrary_tooltip = "Een deel van elk zaadje in het spel",
 
-	Sandbox_DWAP_Loot_FarmLevel = "Buit -> landbouwvoorraden",
+	Sandbox_DWAP_Loot_FarmLevel = "Buit -> landbouwbenodigdheden",
 	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Hoog",
 	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Medium",
 	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Laag",

@@ -5,4 +5,5 @@ Stash_TR = {
     Stash_DWAP_31_text1 = "Mağara Ins'e dikkat edin",
     Stash_DWAP_31_text2 = "Bodrumdaki kütüphaneye gidin",
     Stash_DWAP_32_text1 = "Asansörü al",
+    Stash_DWAP_41_text1 = "soldaki son kript",
 }

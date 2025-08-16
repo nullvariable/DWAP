@@ -32,12 +32,19 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Komplex domu Lville 3",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg Townhome",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Vìzení",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dark Wallow Lake",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Východní lovecká kabina",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Brandenburg Gas Corner",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint Shop for Lease"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Výšky listù"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Rosewood Parsonage"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville Townhouse"
 
 	Sandbox_DWAP_EnableAll = "Povolit všechny bezpeèí",
 	Sandbox_DWAP_EnableAll_tooltip = "Nedoporuèuje se, klíèe, mapa a spøení budou stále pouze pro vybranou možnost",
@@ -56,7 +63,8 @@ Sandbox_CS = {
 	
 	Sandbox_DWAP_EGS = "Povolit generátorový systém",
 	Sandbox_DWAP_EGS_tooltip = "Použijte generátory mod, které poskytují napájení celého bezpeèí",
-	Sandbox_DWAP_EWC_tooltip = "Použijte vodní systém mod, s nádržemi na vodu a všechna pøíslušenství, které se dotkne do nádrží",
+	Sandbox_DWAP_EGSS = "Povolit solární energie",
+	Sandbox_DWAP_EGSS_tooltip = "Vyžaduje, aby fungovala pohlcující solární pole",
 	
 	Sandbox_DWAP_APGS = "Systém automatického startu generátoru",
 	Sandbox_DWAP_APGS_tooltip = "Generátory detekují ztrátu energie a zaènou automaticky",
@@ -79,6 +87,9 @@ Sandbox_CS = {
 	Sandbox_DWAP_MRBWaterTankCapacity = "Nádrž na vodu",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Jaká je maximální kapacita pro nádrže na vodu",
 
+	Sandbox_DWAP_EnableLadders = "Povolit únikové žebøíky (žebøíky REQ?! MOD)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Vyžaduje žebøíky?! Mod do práce",
+
 	Sandbox_DWAP_Loot = "Safehouse dodávky",
 	Sandbox_DWAP_Loot_tooltip = "Mìl by mít Safehouse speciální koøist",
 	Sandbox_DWAP_Loot_value_option1 = "Pouze primární",
@@ -86,11 +97,11 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_value_option3 = "Primární normální, ostatní nízké",
 	Sandbox_DWAP_Loot_value_option4 = "Žádný",
 
-	Sandbox_DWAP_Loot_EnableMaps = "Loot -> mapy",
+	Sandbox_DWAP_Loot_EnableMaps = "LOOT -> mapy",
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Skrýš všech map",
 
 	Sandbox_DWAP_Loot_EnableBooks = "Loot -> knihy dovedností",
-	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Skrýš všech knih dovedností",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Skrývání všech knih dovedností",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Loot -> média",
 	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Knihy, CD atd",
@@ -111,7 +122,7 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Nízký",
 	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Žádný",
 
-	Sandbox_DWAP_Loot_MedLevel = "Loot -> Zdravotnické potøeby",
+	Sandbox_DWAP_Loot_MedLevel = "Loot -> zdravotnický materiál",
 	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Vysoký",
 	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Støední",
 	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Nízký",
@@ -151,7 +162,7 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Žádný",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "Loot -> Stavební rohože",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Liší se podle bezpeèí, menší budou mít znaènì ménì",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Liší se podle bezpeèí, menší budou mít výraznì ménì",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Vysoký",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Støední",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Nízký",

@@ -40,10 +40,6 @@ local HuntingCabin = {
     },
     map = { name = "DWAPStashMap34", },
     objectSpawns = {
-        { x = 8709, y = 15310, z = 0, removeWall = "north" },
-        { x = 8709, y = 15309, z = 0, clearExisting = true, },
-        { x = 8709, y = 15308, z = 0, clearExisting = true, },
-        { x = 8709, y = 15307, z = 0, clearExisting = true, },
 
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_wooden_01_32", x = 12713, y = 8750, z = 0, },
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_wooden_01_32", x = 12713, y = 8751, z = 0, },

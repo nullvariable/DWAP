@@ -9,7 +9,8 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field z number
 --- @field renderYOffset? number
 --- @field sprite? string
---- @field enabled? string Optional Sandbox variable to enable this spawn
+--- @field enabled? string|boolean Optional Sandbox variable to enable this spawn
+--- @field disabled? string|boolean Optional Sandbox variable to disable this spawn if true
 --- @field clearExisting? boolean
 --- @field isContainer? boolean
 --- @field isDoor? boolean
@@ -27,6 +28,8 @@ local hashCoords = DWAPUtils.hashCoords
 --- @field removeFloor? boolean remove the floor
 --- @field removeWall? "north"|"west" remove the wall
 --- @field delete? boolean if true, the object will be deleted instead of spawned
+--- @field modData? table<string, any> ModData to set on the spawned object
+--- @field isSpecial? boolean if true, the object will be added as a special object
 
 local MODULUS_32_BIT = 4294967296
 --- @param spawn objectSpawn
@@ -299,10 +302,15 @@ function DWAP_Props.maybeSpawnObject(params)
             -- local prop = IsoObject.new(square, params.sprite)
             prop = IsoObject.getNew(square, params.sprite, params.sprite, false)
         end
+
         -- if params.renderYOffset then
         --     prop:setRenderYOffset(params.renderYOffset)
         -- end
         -- square:AddTileObject(prop)
+        if params.isSpecial then
+            DWAPUtils.dprint(("DWAP_Props: Adding special object %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
+            square:AddSpecialObject(prop)
+        end
         square:transmitAddObjectToSquare(prop, -1)
         DWAPUtils.dprint(("DWAP_Props: Added %s to %s %s %s"):format(params.sprite, params.x, params.y, params.z))
         -- DWAPUtils.Defer(function()
@@ -370,6 +378,13 @@ function DWAP_Props.maybeSpawnObject(params)
             end
         end
     end
+
+    if params.modData then
+        local modData = prop:getModData()
+        for k, v in pairs(params.modData) do
+            modData[k] = v
+        end
+    end
 end
 
 
@@ -400,7 +415,17 @@ Events.OnInitGlobalModData.Add(function()
             for j = 1, #config.objectSpawns do
                 --- @type objectSpawn
                 local os = config.objectSpawns[j]
-                if not os.enabled or (os.enabled and SandboxVars.DWAP[os.enabled]) then
+                local enabled = true
+                if type(os.enabled) == "string" then
+                    enabled = SandboxVars.DWAP[os.enabled]
+                elseif type(os.enabled) == "boolean" then
+                    enabled = os.enabled
+                elseif type(os.disabled) == "string" then
+                    enabled = not SandboxVars.DWAP[os.disabled]
+                elseif type(os.disabled) == "boolean" then
+                    enabled = not os.disabled
+                end
+                if enabled then
                     local spawnedKey = hashObjectSpawn(os)
                     if not modData.spawned[spawnedKey] then
                         DWAPUtils.dprint(("Adding object spawn %s %s %s"):format(os.sprite or "none", os.x, os.y))

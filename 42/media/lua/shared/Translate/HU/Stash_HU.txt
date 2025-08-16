@@ -5,4 +5,5 @@ Stash_HU = {
     Stash_DWAP_31_text1 = "Vigyázzon a barlang -insre",
     Stash_DWAP_31_text2 = "Tegyen utat az alagsori könyvtárba",
     Stash_DWAP_32_text1 = "Vedd el a lift",
+    Stash_DWAP_41_text1 = "Utolsó kript a bal oldalon",
 }

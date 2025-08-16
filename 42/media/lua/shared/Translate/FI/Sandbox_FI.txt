@@ -32,12 +32,19 @@ Sandbox_FI = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburgin kaupunkiasunto",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Vankila",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvingtonin kaupunkiltään",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Kisan kartano",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Tumma wallow -järvi",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Itäinen metsästyshytti",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh huumelaboratorio",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Brandenburgin kaasukulma",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Tarkistuspistekauppa vuokrasopimukseen"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Lehtien korkeus"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple -golfkoti"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Ruusupuun seurakunta"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville -kaupunkitalo"
 
 	Sandbox_DWAP_EnableAll = "Ota kaikki turvalliset",
 	Sandbox_DWAP_EnableAll_tooltip = "Ei suositeltavaa, avaimet, kartta ja kutevat ovat silti vain valittuja vaihtoehtoja",
@@ -45,7 +52,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_SpawnInBase = "Kutikko Safehousessa",
 	Sandbox_DWAP_SpawnInBase_tooltip = "Aloita Safehouse -näppäinten sisällä",
 
-	Sandbox_DWAP_Keys = "Aloita kartalla ja avaimilla",
+	Sandbox_DWAP_Keys = "Aloita kartalla ja näppäimillä",
 	Sandbox_DWAP_Keys_tooltip = "Hanki kartta SafeHousesta ja avaimet sille",
 
 	Sandbox_DWAP_Barricade = "SafeHouse on estetty",
@@ -56,7 +63,8 @@ Sandbox_FI = {
 	
 	Sandbox_DWAP_EGS = "Ota generaattorijärjestelmä käyttöön",
 	Sandbox_DWAP_EGS_tooltip = "Käytä mod -generaattoreita, jotka tarjoavat virtaa koko SafeHouselle",
-	Sandbox_DWAP_EWC_tooltip = "Käytä MOD: n vesijärjestelmää, jossa vesisäiliöt ja kaikki säiliöihin pukeutuneet kalusteet",
+	Sandbox_DWAP_EGSS = "Ota aurinko käyttöön",
+	Sandbox_DWAP_EGSS_tooltip = "Vaatii syventäviä aurinkopaneereita toimimaan",
 	
 	Sandbox_DWAP_APGS = "Generaattorin automaattinen käynnistysjärjestelmä",
 	Sandbox_DWAP_APGS_tooltip = "Generaattorit tunnistavat virranhäviön ja alkavat automaattisesti",
@@ -77,7 +85,10 @@ Sandbox_FI = {
 	Sandbox_DWAP_WaterLevel_tooltip = "Kuinka paljon vettä säiliöiden pitäisi alkaa",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Vesisäiliö",
-	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Mikä on vesisäiliöiden maksimikapasiteetti",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Mikä on vesisäiliöiden enimmäiskapasiteetti",
+
+	Sandbox_DWAP_EnableLadders = "Ota paeta tikkaat (req tikkaat?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Vaatii tikkaita?! modin töitä",
 
 	Sandbox_DWAP_Loot = "SafeHouse -tarvikkeet",
 	Sandbox_DWAP_Loot_tooltip = "Pitäisikö SafeHouse -ryöstökuorut",
@@ -90,7 +101,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Kaikkien karttojen pinta",
 
 	Sandbox_DWAP_Loot_EnableBooks = "Ryöstö -> taitokirjat",
-	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Kaikkien taitokirjojen varasto",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Kaikkien taitojen kirjojen varasto",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Ryöstö -> media",
 	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Kirjat, CD -levyt jne",
@@ -151,7 +162,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Ei yhtään",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "Ryöstö -> rakennusmatot",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Vaihtelee SafeHouse, pienemmillä on merkitsevästi vähemmän",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Vaihtelee SafeHouse -sivustolla, pienemmillä on huomattavasti vähemmän",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Korkea",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Keskipitkä",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Matala",

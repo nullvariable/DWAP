@@ -5,4 +5,5 @@ Stash_TH = {
     Stash_DWAP_31_text1 = "ระวังถ้ำ Ins",
     Stash_DWAP_31_text2 = "เดินไปที่ห้องสมุดในห้องใต้ดิน",
     Stash_DWAP_32_text1 = "ใช้ลิฟต์",
+    Stash_DWAP_41_text1 = "ห้องใต้ดินสุดท้ายทางด้านซ้าย",
 }

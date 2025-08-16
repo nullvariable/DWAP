@@ -153,9 +153,6 @@ function DWAP_Gen:chunkLoaded(chunk)
         end
     end
 end
-Events.LoadChunk.Add(function(chunk)
-    DWAP_Gen:chunkLoaded(chunk)
-end)
 
 -- local refreshRange = 6
 local refreshNearbyChunks
@@ -191,7 +188,6 @@ refreshNearbyChunks = function()
     DWAP_Gen:RefreshNearbyChunks()
 end
 
-Events.OnExitVehicle.Add(refreshNearbyChunks)
 
 local unloadSquare
 function DWAP_Gen:unloadSquare(square)
@@ -319,10 +315,16 @@ function DWAP_Gen:hourlyTick()
     end
 end
 Events.EveryHours.Add(function()
+    if DWAPUtils.getSaveVersion() > 16 then
+        return
+    end
     DWAP_Gen:hourlyTick()
     DWAP_Gen:SaveModData()
 end)
 Events.EveryOneMinute.Add(function()
+    if DWAPUtils.getSaveVersion() > 16 then
+        return
+    end
     DWAP_Gen:RefreshNearbyChunks()
 end)
 
@@ -394,7 +396,7 @@ end
 
 local function controlsSeenWrapper(params)
     DWAPUtils.dprint("DWAP_Gen: controlsSeenWrapper")
-    DWAPUtils.dprint(params)
+    -- DWAPUtils.dprint(params)
     DWAP_Gen:ensureSound(params.controlIndex)
 end
 
@@ -409,6 +411,15 @@ end
 
 function DWAP_Gen:initModData(isNewGame)
     if SandboxVars.DWAP.EnableGenSystem then
+        -- Exit early if save version is greater than 16
+        if DWAPUtils.getSaveVersion() > 16 then
+            return
+        end
+        Events.ReuseGridsquare.Add(unloadSquare)
+        Events.LoadChunk.Add(function(chunk)
+            DWAP_Gen:chunkLoaded(chunk)
+        end)
+        Events.OnExitVehicle.Add(refreshNearbyChunks)
         self.activeChunks = {}
         self.activeChunksByHash = {}
         DWAP_GenData = ModData.getOrCreate("DWAP_GenData")
@@ -503,29 +514,10 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 end)
 
 Events.OnLoad.Add(function()
+    if DWAPUtils.getSaveVersion() > 16 then
+        DWAPUtils.dprint("DWAP_Gen: Save version is greater than 16")
+        return
+    end
     DWAP_Gen.ready = true
     DWAP_Gen:loadpending()
 end)
-Events.ReuseGridsquare.Add(unloadSquare)
-
--- -- fridge/freezer logic
--- Events.LoadGridsquare.Add(function(square)
---     if not square then return end
---     local chunk = square:getChunk()
---     if not chunk then return end
---     local hash = getChunkHash(chunk)
---     if DWAP_Gen.activeChunksByHash[hash] then
---         local objects = square:getObjects()
---         local size = objects:size() - 1
---         for i = 0, size do
---             local obj = objects:get(i)
---             if not instanceof(obj, 'IsoWorldInventoryObject') then
---                 for containerIndex = 0,obj:getContainerCount()-1 do
---                     local container = obj:getContainerByIndex(containerIndex)
---                     local type = container:getType()
---                     if type == "fridge" or type == "freezer" then
-                        
---             end
---         end
---     end
--- end)

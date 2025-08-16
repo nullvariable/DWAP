@@ -1,0 +1,15 @@
+module DWAP
+{
+    imports { Base }
+
+    item GhostGenerator {
+        Weight	=	1,
+        Type	=	Normal,
+        DisplayName	= Ghost Generator,
+        GeneratorSound = Silent,
+        SoundRadius = 0,
+        SoundVolume = 0,
+        ConditionLowerChanceOneIn = 100,
+        WorldObjectSprite = "dwap_tiles_01_1",
+    }
+}

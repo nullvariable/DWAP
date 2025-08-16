@@ -32,31 +32,39 @@ Sandbox_DA = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg byhus",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fængselspause",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington byhus",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dark Wallow Lake",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Eastern Hunting Cabin",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Brandenburg gashjørne",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint Shop for lejekontrakt"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Bladhøjder"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Rosewood Parsonage"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville rækkehus"
 
 	Sandbox_DWAP_EnableAll = "Aktivér alle safehuse",
-	Sandbox_DWAP_EnableAll_tooltip = "Ikke anbefalet, nøgler, kort og spawn vil stadig kun være for den valgte mulighed",
+	Sandbox_DWAP_EnableAll_tooltip = "Ikke anbefalet, nøgler, kort og spawn vil stadig kun være til den valgte mulighed",
 
 	Sandbox_DWAP_SpawnInBase = "Spawn i Safehouse",
 	Sandbox_DWAP_SpawnInBase_tooltip = "Start inde i safehouse med nøglerne",
 
-	Sandbox_DWAP_Keys = "Start med MAP & KEYS",
+	Sandbox_DWAP_Keys = "Start med kort og nøgler",
 	Sandbox_DWAP_Keys_tooltip = "Få et kort over safehouse og nøgler til det",
 
 	Sandbox_DWAP_Barricade = "Safehouse er barrikaderet",
 	Sandbox_DWAP_Barricade_tooltip = "De fleste døre og vinduer starter med barrikader",
 
 	Sandbox_DWAP_EWC = "Aktivér vandsystem",
-	Sandbox_DWAP_EWC_tooltip = "Brug modens vandsystem, med vandtanke og alle inventar, der er vorte til tanke",
+	Sandbox_DWAP_EWC_tooltip = "Brug mods vandsystem, med vandtanke og alle inventar, der er vorte til tanke",
 	
 	Sandbox_DWAP_EGS = "Aktivér generatorsystem",
 	Sandbox_DWAP_EGS_tooltip = "Brug mods generatorer, der giver strøm til hele safehouse",
-	Sandbox_DWAP_EWC_tooltip = "Brug modens vandsystem, med vandtanke og alle inventar, der er vorte til tanke",
+	Sandbox_DWAP_EGSS = "Aktivér solenergi",
+	Sandbox_DWAP_EGSS_tooltip = "Kræver fordybende solarrays for at arbejde",
 	
 	Sandbox_DWAP_APGS = "Generator Auto Start System",
 	Sandbox_DWAP_APGS_tooltip = "Generatorer registrerer strømtab og starter automatisk",
@@ -73,11 +81,14 @@ Sandbox_DA = {
 	Sandbox_DWAP_Condition = "Generatortilstand",
 	Sandbox_DWAP_Condition_tooltip = "Svarende til vaniljegeneratorer, 0 til 100",
 
-	Sandbox_DWAP_WaterLevel = "Vandstand",
+	Sandbox_DWAP_WaterLevel = "Vandstanden",
 	Sandbox_DWAP_WaterLevel_tooltip = "Hvor meget vand tanke skal starte med",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Vandtank",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Hvad er den maksimale kapacitet til vandtanke",
+
+	Sandbox_DWAP_EnableLadders = "Aktivér flugtstiger (Req Ladders?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Kræver stiger?! mod til arbejde",
 
 	Sandbox_DWAP_Loot = "Safehouse forsyninger",
 	Sandbox_DWAP_Loot_tooltip = "Skulle safehouse have specielle tyvegods",
@@ -89,7 +100,7 @@ Sandbox_DA = {
 	Sandbox_DWAP_Loot_EnableMaps = "Loot -> kort",
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Stash af alle kort",
 
-	Sandbox_DWAP_Loot_EnableBooks = "Loot -> færdighedsbøger",
+	Sandbox_DWAP_Loot_EnableBooks = "Loot -> dygtighedsbøger",
 	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Stash af alle dygtighedsbøger",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Loot -> medier",
@@ -151,7 +162,7 @@ Sandbox_DA = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Ingen",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "Loot -> bygningsmåtter",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Varierer efter safehouse, mindre vil have signifikant mindre",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Varierer efter safehouse, mindre vil have betydeligt mindre",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Høj",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Medium",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Lav",

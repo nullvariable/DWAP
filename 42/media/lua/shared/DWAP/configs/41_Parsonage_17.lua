@@ -1,0 +1,402 @@
+local wtc1 = {x = 8160, y = 11537, z = -2,}
+local pb1  = {x = 8159, y = 11537, z = -2,}
+local Parsonage = {
+    spawn = { x = 8157, y = 11543, z = 0 },
+    generators = {
+        {
+            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
+            solar = {
+                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
+                panels = {
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_7",
+                        x = 8149,
+                        y = 11545,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_7",
+                        x = 8150,
+                        y = 11545,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_7",
+                        x = 8151,
+                        y = 11545,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_7",
+                        x = 8152,
+                        y = 11545,
+                        z = 0,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_10",
+                        x = 8149,
+                        y = 11544,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_10",
+                        x = 8150,
+                        y = 11544,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_10",
+                        x = 8151,
+                        y = 11544,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                    {
+                        type = "panel",
+                        isSpecial = true,
+                        sprite = "solarmod_tileset_01_10",
+                        x = 8152,
+                        y = 11544,
+                        z = 1,
+                        pb = 1,
+                        spawn = false,
+                    },
+                },
+            },
+            fakeGenerators = {
+                { x = 8145, y = 11547, z = -1 },
+            },
+        },
+    },
+    waterTanks = {
+        { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = 1 },
+    },
+    waterFixtures = {
+        { sprite = "fixtures_sinks_01_9", x = 8150, y = 11538, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_13", x = 8152, y = 11541, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_32", x = 8152, y = 11539, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_0", x = 8153, y = 11539, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_16", x = 8151, y = 11536, z = -2, sourceType="tank", source = 1 },
+    },
+    doorKeys = {
+        name = "Rosewood Parsonage Key",
+        doors = {
+            { sprite = "fixtures_doors_02_5", x = 8155, y = 11544, z = 0, },
+            { sprite = "fixtures_doors_02_5", x = 8144, y = 11544, z = -1, },
+        },
+    },
+    map = { name = "DWAPStashMap41", },
+    objectSpawns = {
+
+        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8153, y = 11545, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8157, y = 11545, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_1", x = 8150, y = 11538, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_02_24", x = 8159, y = 11540, z = 0, },
+
+    },
+    loot = {
+        -- main house
+        -- kitchen
+        {
+            type = 'container',
+            coords = {x=8149,y=11541,z=0},
+            special = "kitchentools",
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11538,z=0},
+            dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8150,y=11538,z=0},
+            dist = {"CrateFishing","MusicStoreCDs"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FishLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8151,y=11538,z=0},
+            dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood", "CrateLiquor", "StoreCounterTobacco"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- fridge
+            type = 'container',
+            coords = {x=8151,y=11539,z=0},
+            dist = {"FridgeFarmStorage", "FreezerIceCream"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- mini fridge
+            type = 'container',
+            coords = {x=8151,y=11540,z=0},
+            dist = {"FreezerIceCream", "WesternKitchenFreezer", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        -- bathroom
+        {
+            type = 'container',
+            coords = {x=8152,y=11541,z=0.5},
+            dist = {"MedicalCabinet", "GasStoreToiletries"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_MedLevel",
+        },
+        -- living room
+        {
+            type = 'container',
+            coords = {x=8154,y=11539,z=0},
+            dist = {"SafehouseFireplace", "SafehouseLighting", "LivingRoomShelfClassy" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        -- bedrooms
+        {
+            type = 'container',
+            coords = {x=8157,y=11542,z=0},
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
+        },
+        {
+            type = 'container',
+            coords = {x=8158,y=11541,z=0},
+            dist = {"GunStoreKnives","ClothingStorageWinter",},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        -- entrance hall
+        {
+            type = 'container',
+            coords = {x=8152,y=11538,z=0},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+
+        -- below crypts
+        -- crates by stairs
+        {
+            type = 'container',
+            coords = {x=8142,y=11548,z=-2},
+            dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateBootsArmy", "CampingStoreBackpacks"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8143,y=11548,z=-2},
+            dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_MedLevel",
+        },
+        -- chests by cots
+        {
+            type = 'container',
+            coords = {x=8142,y=11543,z=-2},
+            sandboxEnable = 'Loot_EnableMaps',
+            special = "maps",
+        },
+        {
+            type = 'container',
+            coords = {x=8142,y=11540,z=-2},
+            dist = { "SafehouseArmor", "SafehouseArmor_Late", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8142,y=11537,z=-2},
+            dist = { "SafehouseTraps", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8146,y=11540,z=-2},
+            dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8146,y=11537,z=-2},
+            items = {
+                { name = 'Base.NailsBox', },
+                { name = 'Base.Sheet', },
+                { name = 'Base.WoodAxe', },
+                { name = 'Base.Machete', },
+            },
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        -- crates by cots
+        {
+            type = 'container',
+            coords = {x=8145,y=11541,z=-2},
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8146,y=11541,z=-2},
+            dist = {"ToolStoreMetalwork","CrateBlacksmithing", "BurglarTools", "CarpenterTools", "BarnTools" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        -- shelving
+        {
+            type = 'container',
+            coords = {x=8149,y=11536,z=-2},
+            dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_TailorLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11537,z=-2},
+            dist = {"CrateBlacksmithing" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11538,z=-2},
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11539,z=-2},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11540,z=-2},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks2",
+        },
+        {
+            type = 'container',
+            coords = {x=8149,y=11541,z=-2},
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
+        },
+        {
+            type = 'container',
+            coords = {x=8151,y=11540,z=-2},
+            dist = {"SafehouseMedical" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_MedLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8151,y=11541,z=-2},
+            sandboxEnable = 'Loot',
+            special = "essentials",
+        },
+        -- kitchen cabinets
+        {
+            type = 'container',
+            coords = {x=8151,y=11536,z=-2},
+            dist = {"CrateTortillaChips", "KitchenDryFood", "JanitorCleaning"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8151,y=11537,z=-2},
+            dist = {"CrateFlour", "CrateOilVegetable"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- fridge
+            type = 'container',
+            coords = {x=8151,y=11539,z=-2},
+            dist = {"FridgeFarmStorage", "FreezerIceCream"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        -- crates
+        {
+            type = 'container',
+            coords = {x=8158,y=11541,z=-2},
+            dist = {"CrateToiletPaper", "CrateLinens", "BathroomCounter", "GasStoreToiletries",},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=8159,y=11541,z=-2},
+            dist = {"CrateLumber", "CrateSheetMetal", "CrateClayBags", "CrateMasonry"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+    },
+}
+
+if getActivatedMods():contains("\\Ladders") then
+    table.insert(Parsonage.objectSpawns, { enabled = "EnableLadders", x = 8142, y = 11542, z = 0, removeFloor = true, })
+    table.insert(Parsonage.objectSpawns, { enabled = "EnableLadders", x = 8142, y = 11543, z = -1, removeWall = "north", })
+end
+
+return Parsonage

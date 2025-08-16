@@ -32,12 +32,19 @@ Sandbox_CH = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "德雷克",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "勃蘭登堡聯排別墅",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "越獄",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "歐文頓聯排別墅",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "奎爾莊園",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "黑暗的沃洛湖",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "東部狩獵小屋",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh毒品實驗室",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "歐文頓槍支俱樂部",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "勃蘭登堡氣角",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "檢查點商店租賃"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "葉高"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "西楓高爾夫之家"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "玫瑰木牧師"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "路易斯維爾聯排別墅"
 
 	Sandbox_DWAP_EnableAll = "啟用所有安全屋",
 	Sandbox_DWAP_EnableAll_tooltip = "不推薦，鍵，地圖和產卵仍然只適用於選定的選項",
@@ -56,7 +63,8 @@ Sandbox_CH = {
 	
 	Sandbox_DWAP_EGS = "啟用發電機系統",
 	Sandbox_DWAP_EGS_tooltip = "使用MOD的發電機，該發電機為整個安全屋提供了電源",
-	Sandbox_DWAP_EWC_tooltip = "使用Mod的水系統，以及水箱和所有固定裝置",
+	Sandbox_DWAP_EGSS = "啟用太陽能",
+	Sandbox_DWAP_EGSS_tooltip = "需要沉浸式太陽能陣列才能工作",
 	
 	Sandbox_DWAP_APGS = "發電機自動啟動系統",
 	Sandbox_DWAP_APGS_tooltip = "發電機將檢測功率損耗並自動啟動",
@@ -78,6 +86,9 @@ Sandbox_CH = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "水箱",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "水箱的最大容量是多少",
+
+	Sandbox_DWAP_EnableLadders = "啟用逃生梯子（req梯子？！mod）",
+	Sandbox_DWAP_EnableLadders_tooltip = "需要梯子嗎？修改工作",
 
 	Sandbox_DWAP_Loot = "安全室用品",
 	Sandbox_DWAP_Loot_tooltip = "安全屋應該有特殊的戰利品產卵",
@@ -151,7 +162,7 @@ Sandbox_CH = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "沒有任何",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "戰利品 - >建築墊子",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "較小的人會有所不同",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "安全屋的不同，較小的房屋的變化將大大降低",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "高的",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "中等的",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "低的",

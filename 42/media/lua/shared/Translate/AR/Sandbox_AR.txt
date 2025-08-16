@@ -32,12 +32,19 @@ Sandbox_AR = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "El drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Granja de cerdo de Ekron",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Townhome de Brandenburg",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fuga de la prisión",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Diner del lago Fallas",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Lago de revoloteado oscuro",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Cabaña de caza del este",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Laboratorio de drogas de Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Club de armas de Irvington",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Rincón de gas de Brandenburg",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Tienda de puntos de control para arrendamiento"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Alturas de la hoja"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Casa parroquial"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Casa adosada de Louisville"
 
 	Sandbox_DWAP_EnableAll = "Habilitar todas las casas de seguridad",
 	Sandbox_DWAP_EnableAll_tooltip = "No recomendado, las teclas, el mapa y el Spawn aún solo serán para la opción seleccionada",
@@ -56,7 +63,8 @@ Sandbox_AR = {
 	
 	Sandbox_DWAP_EGS = "Habilitar el sistema de generador",
 	Sandbox_DWAP_EGS_tooltip = "Use los generadores del mod, que proporcionan energía a todo el safehouse",
-	Sandbox_DWAP_EWC_tooltip = "Use el sistema de agua del mod, con tanques de agua y todos los accesorios cubiertos a los tanques",
+	Sandbox_DWAP_EGSS = "Habilitar solar",
+	Sandbox_DWAP_EGSS_tooltip = "Requiere matrices solares inmersivas para trabajar",
 	
 	Sandbox_DWAP_APGS = "Sistema de inicio automático del generador",
 	Sandbox_DWAP_APGS_tooltip = "Los generadores detectarán la pérdida de energía y comenzarán automáticamente",
@@ -78,6 +86,9 @@ Sandbox_AR = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Tanque de agua",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "¿Cuál es la capacidad máxima para los tanques de agua?",
+
+	Sandbox_DWAP_EnableLadders = "Habilitar escaleras de escape (¿REQ escaleras?",
+	Sandbox_DWAP_EnableLadders_tooltip = "¿Requiere escaleras? mod para trabajar",
 
 	Sandbox_DWAP_Loot = "Suministros de safehouse",
 	Sandbox_DWAP_Loot_tooltip = "Si el Safehouse tiene desove de botín especiales",

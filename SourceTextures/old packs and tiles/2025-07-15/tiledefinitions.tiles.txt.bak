@@ -1,0 +1,20 @@
+version = 1
+tileset
+{
+    file = ghost_tileset
+    size = 2,2
+    id = 1
+    // ghost_tileset_1
+    tile
+    {
+        xy = 1,0
+        CustomName = Ghost_Generator
+        Facing = E
+        ForceSingleItem = 
+        GroupName = ghost_generator
+        ScrapUseSkill = 
+        ScrapUseTool = 
+        invisible = 
+        trans = 
+    }
+}

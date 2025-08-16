@@ -5,4 +5,5 @@ Stash_PH = {
     Stash_DWAP_31_text1 = "Maingat sa Cave Ins",
     Stash_DWAP_31_text2 = "Gawin ang iyong paraan sa library sa basement",
     Stash_DWAP_32_text1 = "Kunin ang elevator",
+    Stash_DWAP_41_text1 = "Huling crypt sa kaliwa",
 }

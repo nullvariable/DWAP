@@ -5,4 +5,5 @@ Stash_NL = {
     Stash_DWAP_31_text1 = "Voorzichtig met Cave Ins",
     Stash_DWAP_31_text2 = "Ga naar de bibliotheek in de kelder",
     Stash_DWAP_32_text1 = "Neem de lift",
+    Stash_DWAP_41_text1 = "Laatste crypte aan de linkerkant",
 }

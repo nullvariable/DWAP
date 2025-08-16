@@ -32,12 +32,19 @@ Sandbox_DE = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Die Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 Hauskomplex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Brandenburg Townhome",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Gefängnisausbruch",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Dunkler Waldensee",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Ostjagdkabine",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldrudh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Brandenburg Gasecke",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint -Shop für Mietvertrag"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Blatthöhen"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Rosenwood -Pfarrhaus"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville Townhouse"
 
 	Sandbox_DWAP_EnableAll = "Aktivieren Sie alle Safe -Häuser",
 	Sandbox_DWAP_EnableAll_tooltip = "Nicht empfohlen, Schlüssel, Karte und Spawn sind immer noch nur für die ausgewählte Option,",
@@ -56,7 +63,8 @@ Sandbox_DE = {
 	
 	Sandbox_DWAP_EGS = "Generatorsystem aktivieren",
 	Sandbox_DWAP_EGS_tooltip = "Verwenden Sie die Generatoren des Mod, die dem gesamten Safehouse Strom verleihen",
-	Sandbox_DWAP_EWC_tooltip = "Verwenden Sie das Wassersystem des Mods mit Wassertanks und allen Vorrichtungen, die in die Panzer gesetzt sind",
+	Sandbox_DWAP_EGSS = "Solar aktivieren",
+	Sandbox_DWAP_EGSS_tooltip = "Erfordert immersive Solaranordnungen, um zu arbeiten",
 	
 	Sandbox_DWAP_APGS = "Generator Auto Startsystem",
 	Sandbox_DWAP_APGS_tooltip = "Generatoren erkennen Stromverlust und beginnen automatisch",
@@ -78,6 +86,9 @@ Sandbox_DE = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Wassertank",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Was ist die maximale Kapazität für die Wassertanks?",
+
+	Sandbox_DWAP_EnableLadders = "Enable Escape Ladders (REQ Leitern?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Benötigt Leitern ?! Mod zur Arbeit",
 
 	Sandbox_DWAP_Loot = "Safehouse -Lieferungen",
 	Sandbox_DWAP_Loot_tooltip = "Sollte das Safehouse spezielle Beutespawns haben",

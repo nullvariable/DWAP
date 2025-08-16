@@ -5,4 +5,5 @@ Stash_EN = {
     Stash_DWAP_31_text1 = "Careful of cave ins",
     Stash_DWAP_31_text2 = "Make your way to the library in the basement",
     Stash_DWAP_32_text1 = "Take the elevator",
+    Stash_DWAP_41_text1 = "last crypt on the left",
 }

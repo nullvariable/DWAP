@@ -5,4 +5,5 @@ Stash_RU = {
     Stash_DWAP_31_text1 = "Осторожно",
     Stash_DWAP_31_text2 = "Подойдите в библиотеку в подвале",
     Stash_DWAP_32_text1 = "Возьмите лифт",
+    Stash_DWAP_41_text1 = "Последний крипт слева",
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="36" height="5" ExteriorWall="4" ExteriorWallTrim="3" Door="2" DoorFrame="1" Window="18" Curtains="0" Shutters="16" Stairs="17" RoofCap="13" RoofSlope="14" RoofTop="15" GrimeWall="7">
+<building version="4" width="36" height="5" ExteriorWall="3" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="17" Curtains="0" Shutters="15" Stairs="16" RoofCap="12" RoofSlope="13" RoofTop="14" GrimeWall="6">
  <properties>
   <property name="BasementAccess" value="0 1 N"/>
  </properties>
@@ -12,16 +12,6 @@
   <tile enum="North" tile="fixtures_bathroom_01_065"/>
   <tile enum="WestOpen" tile="fixtures_bathroom_01_066"/>
   <tile enum="NorthOpen" tile="fixtures_bathroom_01_067"/>
- </tile_entry>
- <tile_entry category="exterior_wall_trim">
-  <tile enum="West" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="North" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="NorthWest" tile="location_shop_bargNclothes_01_031"/>
-  <tile enum="SouthEast" tile="location_shop_bargNclothes_01_030"/>
-  <tile enum="WestWindow" tile="location_shop_bargNclothes_01_028"/>
-  <tile enum="NorthWindow" tile="location_shop_bargNclothes_01_029"/>
-  <tile enum="WestDoor" tile=""/>
-  <tile enum="NorthDoor" tile=""/>
  </tile_entry>
  <tile_entry category="exterior_walls">
   <tile enum="West" tile="industry_01_000"/>
@@ -230,9 +220,9 @@
   <tile tile="walls_commercial_02_022"/>
   <tile tile="walls_garage_01_046"/>
  </user_tiles>
- <used_tiles>4 10 8 5 11 6 7 12 9</used_tiles>
+ <used_tiles>3 9 7 4 10 5 6 11 8</used_tiles>
  <used_furniture></used_furniture>
- <room Name="hallway" InternalName="hallway" Color="200 200 200" InteriorWall="12" InteriorWallTrim="9" Floor="0" GrimeFloor="6" GrimeWall="7" Ceiling="0"/>
+ <room Name="hallway" InternalName="hallway" Color="200 200 200" InteriorWall="11" InteriorWallTrim="8" Floor="0" GrimeFloor="5" GrimeWall="6" Ceiling="0"/>
  <floor>
   <rooms>
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

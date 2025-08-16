@@ -5,7 +5,7 @@ local configs = {
     [1] = {
         name = "Doe Valley Bunker Map",
         stamps = {
-            {"Asterisk", nil, 5577, 9376, 0, 0, 0},
+            {"Asterisk", nil, 5577, 9376, 255, 0, 0},
         },
         buildingX = 5577,
         buildingY = 9372,
@@ -250,17 +250,12 @@ local configs = {
         buildingY = 14458,
     },
     [31] = {
-        name = "Tell No One",
+        name = "Fallas Lake Diner Map",
         stamps = {
-            {"Asterisk", nil, 7673, 12270, 0, 0, 0},
-            {"Asterisk", nil, 7678, 11887, 0, 0, 0},
-            {"ArrowNorth", nil, 7680, 12215, 0, 0, 0},
-            {"ArrowSouth", nil, 7680, 12229, 0, 0, 0},
-            {nil, "Stash_DWAP_31_text1", 7544, 12294, 0, 0, 0},
-            {nil, "Stash_DWAP_31_text2", 7567, 11936, 0, 0, 0},
+            {"Asterisk", nil, 7231, 8210, 0, 0, 0},
         },
-        buildingX = 7673,
-        buildingY = 12270,
+        buildingX = 7231,
+        buildingY = 8210,
     },
     [32] = {
         name = "Quill Manor Map",
@@ -302,6 +297,56 @@ local configs = {
         },
         buildingX = 1858,
         buildingY = 14166,
+    },
+    [37] = {
+        name = "Gas Corner Map",
+        stamps = {
+            {"Asterisk", nil, 1664, 5746, 0, 0, 0},
+        },
+        buildingX = 1664,
+        buildingY = 5746,
+    },
+    [38] = {
+        name = "For Lease Map",
+        stamps = {
+            {"Asterisk", nil, 12538, 5211, 0, 0, 0},
+        },
+        buildingX = 12538,
+        buildingY = 5211,
+    },
+    [39] = {
+        name = "Leaf Hill Map",
+        stamps = {
+            {"Asterisk", nil, 12395, 3404, 0, 0, 0},
+        },
+        buildingX = 12395,
+        buildingY = 3404,
+    },
+    [40] = {
+        name = "West Maple Golf Course Map",
+        stamps = {
+            {"Asterisk", nil, 6117, 6638, 0, 0, 0},
+        },
+        buildingX = 6117,
+        buildingY = 6638,
+    },
+    [41] = {
+        name = "Rosewood Parsonage Map",
+        stamps = {
+            {"Asterisk", nil, 8157, 11543, 0, 0, 0},
+            -- {nil, "Stash_DWAP_41_text1", 8074, 11560, 255, 255, 255},
+        },
+        buildingX = 8157,
+        buildingY = 11543,
+    },
+    [42] = {
+        name = "Louisville Townhouse Map",
+        stamps = {
+            {"Asterisk", nil, 12832, 1619, 0, 0, 0},
+            -- {nil, "Stash_DWAP_42_text1", 12688, 1496, 255, 255, 255},
+        },
+        buildingX = 12832,
+        buildingY = 1619,
     },
 }
 if getActivatedMods():contains("\\Ladders") then

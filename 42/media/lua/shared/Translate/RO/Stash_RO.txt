@@ -5,4 +5,5 @@ Stash_RO = {
     Stash_DWAP_31_text1 = "Atent la peștera",
     Stash_DWAP_31_text2 = "Faceți -vă drum spre biblioteca din subsol",
     Stash_DWAP_32_text1 = "Luați liftul",
+    Stash_DWAP_41_text1 = "Ultima cripta din stânga",
 }

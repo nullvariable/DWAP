@@ -231,7 +231,7 @@ LootMaps.Init.DWAPStashMap29 = function(mapUI)
     mapAPI:setBoundsInSquares(14080, 2568, 14271, 2735)
 end
 
--- BrandenburgTH
+-- Irvington TH
 LootMaps.Init.DWAPStashMap30 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
@@ -244,7 +244,7 @@ LootMaps.Init.DWAPStashMap31 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(7352, 11752, 7951, 12327)
+    mapAPI:setBoundsInSquares(7064, 8144, 7447, 8463)
 end
 
 -- Quill Manor
@@ -284,5 +284,53 @@ LootMaps.Init.DWAPStashMap36 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-mapAPI:setBoundsInSquares(1784, 14080, 1975, 14295)
+    mapAPI:setBoundsInSquares(1784, 14080, 1975, 14295)
+end
+
+-- Brandenburg Gas Corner
+LootMaps.Init.DWAPStashMap37 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(1632, 5688, 1711, 5791)
+end
+
+-- For Lease
+LootMaps.Init.DWAPStashMap38 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(12448, 5136, 12711, 5375)
+end
+
+-- Leaf Hill
+LootMaps.Init.DWAPStashMap39 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(12288, 3312, 12503, 3463)
+end
+
+-- West Maple Golf Course
+LootMaps.Init.DWAPStashMap40 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(5920, 6480, 6327, 6783)
+end
+
+-- Rosewood Parsonage
+LootMaps.Init.DWAPStashMap41 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(8072, 11520, 8199, 11591)
+end
+
+-- Louisville Townhouse
+LootMaps.Init.DWAPStashMap42 = function(mapUI)
+    local mapAPI = mapUI.javaObject:getAPIv1()
+    MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
+    MapUtils.initDefaultStyleV1(mapUI)
+    mapAPI:setBoundsInSquares(12688, 1496, 13031, 1711)
 end

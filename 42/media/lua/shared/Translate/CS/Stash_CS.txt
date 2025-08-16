@@ -5,4 +5,5 @@ Stash_CS = {
     Stash_DWAP_31_text1 = "Opatrnì v jeskyni",
     Stash_DWAP_31_text2 = "Vydejte se do knihovny v suterénu",
     Stash_DWAP_32_text1 = "Vezmìte výtah",
+    Stash_DWAP_41_text1 = "Poslední krypta vlevo",
 }

@@ -16,7 +16,7 @@ local DWAPUtils = require("DWAPUtils")
 --             if SandboxVars.DWAP.EnableGenSystem then
 --                 DWAPUtils.Defer(function()
 --                     DWAPSquareLoaded:AddEvent(
---                         DWAPUtils.lightsOn,
+--                         DWAPUtils.lightsOnCurrentRoom,
 --                         coords.x, coords.y, coords.z,
 --                         true
 --                     )
@@ -53,7 +53,7 @@ Events.OnInitGlobalModData.Add(function()
             getWorld():setLuaPosZ(coords.z);
             if SandboxVars.DWAP.EnableGenSystem then
                 DWAPSquareLoaded:AddEvent(
-                    DWAPUtils.lightsOn,
+                    DWAPUtils.lightsOnCurrentRoom,
                     coords.x, coords.y, coords.z,
                     true
                 )

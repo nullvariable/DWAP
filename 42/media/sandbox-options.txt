@@ -4,7 +4,7 @@ VERSION = 1,
 option DWAP.Safehouse
 {
 	type = enum,
-	numValues = 37,
+	numValues = 43,
 	default = 1,
 
 	page = DWAPGeneral,
@@ -55,6 +55,14 @@ option DWAP.EnableGenSystem
 
 	page = DWAPGeneral,
 	translation = DWAP_EGS,
+}
+option DWAP.EnableGenSystemSolar
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_EGSS,
 }
 option DWAP.AutoPowerGenSystem
 {
@@ -128,6 +136,15 @@ option DWAP.WaterTankCapacity
 
 	page = DWAPGeneral,
 	translation = DWAP_MRBWaterTankCapacity,
+}
+
+option DWAP.EnableLadders
+{
+	type = boolean,
+	default = TRUE,
+
+	page = DWAPGeneral,
+	translation = DWAP_EnableLadders,
 }
 
 option DWAP.Loot

@@ -65,7 +65,9 @@ local function checkHasRoom(container, desiredLevel)
     if desiredLevel == 2 then
         return weight < (maxWeight * 0.6)
     elseif desiredLevel == 3 then
-        return weight < (maxWeight * 0.3)
+        local getItems = container:getItems()
+
+        return getItems:size() < random:random(3, 6) and weight < (maxWeight * 0.15)
     end
     return false
 end
@@ -115,6 +117,33 @@ local function addItem(container, item, count, frozen)
                 local result = container:AddItem(item)
                 if instanceof(result, "Food") and not result:isSpice() and result:canBeFrozen() then
                     result:setFreezingTime(100)
+                end
+            end
+        elseif item == "Essential_Bag_ALICE_BeltSus_Camo" then
+            DWAPUtils.dprint("Adding Alice Pack to container")
+            local result = container:AddItem("Bag_ALICE_BeltSus_Camo")
+            if not result then
+                DWAPUtils.dprint("Failed to add Alice Pack to container")
+                return
+            end
+            local innerContainer = result:getInventory()
+            local _, alicePackItems = DWAP_LootSpawning.getEssentials()
+            DWAPUtils.dprint("Alice Pack item count: " .. tostring(#alicePackItems))
+            if innerContainer and alicePackItems and #alicePackItems > 0 then
+                for i = 1, #alicePackItems do
+                    local aliceItem = alicePackItems[i]
+                    if aliceItem then
+                        local ii = instanceItem(aliceItem)
+                        if ii then
+                            innerContainer:AddItems(ii, 1)
+                        end
+                    end
+                end
+            else
+                if innerContainer then
+                    DWAPUtils.dprint("Alice Pack container found, no items to add")
+                else
+                    DWAPUtils.dprint("Failed to get Alice Pack inner container")
                 end
             end
         else
@@ -207,7 +236,7 @@ local function fillContainer(container, config, index, coordsKey)
                 end
             end
         elseif config.special == "essentials" then
-            local essentials = DWAP_LootSpawning.getEssentials()
+            local essentials, alicePack = DWAP_LootSpawning.getEssentials()
             for i = 1, #essentials do
                 local item = essentials[i]
                 if item then
@@ -279,17 +308,17 @@ local function fillContainer(container, config, index, coordsKey)
             end
         end
 
-        local alreadySpawnedContainers = {}
+        local throttledSpawnPerContainer = {}
         if not items or #items < 1 then return end
         local item = items[random:random(1, #items)]
         local hasRoom = true -- first item always has room
         local tries = 0
         while hasRoom and tries < 100 do
-            if not items or #items < 2 and alreadySpawnedContainers and #alreadySpawnedContainers > 0 then
-                for i = 0, #alreadySpawnedContainers do
-                    items[#items + 1] = alreadySpawnedContainers[i]
+            if not items or #items < 2 and throttledSpawnPerContainer and #throttledSpawnPerContainer > 0 then
+                for i = 0, #throttledSpawnPerContainer do
+                    items[#items + 1] = throttledSpawnPerContainer[i]
                 end
-                alreadySpawnedContainers = {}
+                throttledSpawnPerContainer = {}
                 -- DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
             end
             local randindex = random:random(1, #items)
@@ -301,8 +330,12 @@ local function fillContainer(container, config, index, coordsKey)
                     local ii = instanceItem(item)
                     if ii and ii:getCategory() == "Container" then
                         items[randindex] = nil
-                        alreadySpawnedContainers[#alreadySpawnedContainers + 1] = item
+                        throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
                         -- DWAPUtils.dprint("Added container: " .. item)
+                    elseif ii and DWAP_LootSpawning.isThrottleSpawnItem(item) then
+                        -- DWAPUtils.dprint("Throttled spawn item: " .. item)
+                        items[randindex] = nil
+                        throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
                     end
                 end
             end
@@ -393,8 +426,8 @@ local function onFillContainer(roomType, containerType, container)
         if containerType == "overhead" or container:getContainerPosition() == "High" then z = z + 0.5 end
         local loot, index, coordsKey = getLootForCoords(square:getX(), square:getY(), z)
         if loot and index and coordsKey then
-            DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
-            DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })
+            -- DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
+            -- DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })
             DWAPUtils.DeferThrottled(function()
                 fillContainer(container, loot, index, coordsKey)
                 ItemPickerJava.updateOverlaySprite(container:getParent())

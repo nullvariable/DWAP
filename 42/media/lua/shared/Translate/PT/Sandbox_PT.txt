@@ -32,12 +32,19 @@ Sandbox_PT = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "O Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Townhome de Brandenburgo",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Pausa da prisão",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Townhome de Irvington",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Falllas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Lago de Sallow Dark",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Cabine de caça oriental",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Irvington Gun Club",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Corner de gás de Brandenburgo",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Loja de pontos de verificação para locação"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Alturas das folhas"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Parsonagem de pau -rosa"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Townhouse de Louisville"
 
 	Sandbox_DWAP_EnableAll = "Habilite todos os preços",
 	Sandbox_DWAP_EnableAll_tooltip = "Não recomendado, as chaves, mapa e spawn ainda serão apenas para a opção selecionada",
@@ -56,7 +63,8 @@ Sandbox_PT = {
 	
 	Sandbox_DWAP_EGS = "Ativar sistema gerador",
 	Sandbox_DWAP_EGS_tooltip = "Use os geradores do mod, que fornecem energia para todo o cofre",
-	Sandbox_DWAP_EWC_tooltip = "Use o sistema de água do MOD, com tanques de água e todos os acessórios que se aliviam nos tanques",
+	Sandbox_DWAP_EGSS = "Ativar solar",
+	Sandbox_DWAP_EGSS_tooltip = "Requer matrizes solares imersivas para funcionar",
 	
 	Sandbox_DWAP_APGS = "Sistema de início automático do gerador",
 	Sandbox_DWAP_APGS_tooltip = "Os geradores detectarão perda de energia e iniciarão automaticamente",
@@ -78,6 +86,9 @@ Sandbox_PT = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Tanque de água",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Qual é a capacidade máxima dos tanques de água",
+
+	Sandbox_DWAP_EnableLadders = "Ativar escadas de fuga (escadas req?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Requer escadas?! mod para trabalhar",
 
 	Sandbox_DWAP_Loot = "Suprimentos de Safehouse",
 	Sandbox_DWAP_Loot_tooltip = "O cofrehhouse tiver saídas de saques especiais",
