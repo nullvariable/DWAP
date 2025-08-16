@@ -2,7 +2,8 @@ Stash_DA = {
     Stash_DWAP_09_text1 = "øverste etage, forsyninger i kælderen",
     Stash_DWAP_10_text1 = "Fallout Shelter trapper bag sikkerhedskontoret",
     Stash_DWAP_12_text1 = "Fallout Shelter i kælderen",
-    Stash_DWAP_31_text1 = "Omhyggelig med huler",
+    Stash_DWAP_31_text1 = "Omhyggelig med hulen",
     Stash_DWAP_31_text2 = "Gå til biblioteket i kælderen",
     Stash_DWAP_32_text1 = "Tag elevatoren",
+    Stash_DWAP_41_text1 = "Sidste krypt til venstre",
 }

@@ -5,4 +5,5 @@ Stash_NO = {
     Stash_DWAP_31_text1 = "Forsiktig med huleinnlegg",
     Stash_DWAP_31_text2 = "Ta veien til biblioteket i kjelleren",
     Stash_DWAP_32_text1 = "Ta heisen",
+    Stash_DWAP_41_text1 = "Siste krypte til venstre",
 }

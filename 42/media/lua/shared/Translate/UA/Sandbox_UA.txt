@@ -32,12 +32,19 @@ Sandbox_UA = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Дрейк",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Екрон Свиняча ферма",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Лвілл 3 домашній комплекс",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Бранденбургський таунхаус",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Тюремна перерва",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Ірвінгтонський таунхаус",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Садиба",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Темне озеро Валлоу",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Східна мисливська каюта",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Мулдрау Лабораторія наркотиків",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Ірвінгтонський пістолет Клуб",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Бранденбургський газовий куточок",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Магазин контрольних пунктів для оренди"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Листова висота"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "Західний кленовий гольф дому"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Портаунс з палісандру"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Таунхаус Луїсвілль"
 
 	Sandbox_DWAP_EnableAll = "Увімкнути всі безпечні будинки",
 	Sandbox_DWAP_EnableAll_tooltip = "Не рекомендується, ключі, карта та нерест все ще будуть лише для вибраного варіанту",
@@ -52,11 +59,12 @@ Sandbox_UA = {
 	Sandbox_DWAP_Barricade_tooltip = "Більшість дверей та вікон почнуться з барикад",
 
 	Sandbox_DWAP_EWC = "Увімкнути водну систему",
-	Sandbox_DWAP_EWC_tooltip = "Використовуйте водну систему мод, з резервуарами з водою та всіма світильниками, що піднялися до резервуарів",
+	Sandbox_DWAP_EWC_tooltip = "Використовуйте водну систему мод, з резервуарами з водою та всіма світильниками, що опускаються до резервуарів",
 	
 	Sandbox_DWAP_EGS = "Увімкнути систему генератора",
 	Sandbox_DWAP_EGS_tooltip = "Використовуйте генератори MOD, які забезпечують живлення для всього сейфу",
-	Sandbox_DWAP_EWC_tooltip = "Використовуйте водну систему мод, з резервуарами з водою та всіма світильниками, що піднялися до резервуарів",
+	Sandbox_DWAP_EGSS = "Увімкнути сонячну енергію",
+	Sandbox_DWAP_EGSS_tooltip = "Вимагає занурених сонячних масивів для роботи",
 	
 	Sandbox_DWAP_APGS = "Система автоматичного запуску генератора",
 	Sandbox_DWAP_APGS_tooltip = "Генератори виявлять втрати потужності та автоматично запускаються",
@@ -79,8 +87,11 @@ Sandbox_UA = {
 	Sandbox_DWAP_MRBWaterTankCapacity = "Резервуар",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Яка максимальна ємність для резервуарів для води",
 
+	Sandbox_DWAP_EnableLadders = "Увімкнути сходи для втечі (сходи Req?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Потрібні сходи?! мод для роботи",
+
 	Sandbox_DWAP_Loot = "Бейнхаус приладдя",
-	Sandbox_DWAP_Loot_tooltip = "Якщо в сейфі має спеціальні стравні нерести",
+	Sandbox_DWAP_Loot_tooltip = "Якщо в сейфі має спеціальні страви породи",
 	Sandbox_DWAP_Loot_value_option1 = "Тільки первинний",
 	Sandbox_DWAP_Loot_value_option2 = "Все",
 	Sandbox_DWAP_Loot_value_option3 = "Первинний нормальний, інші низькі",
@@ -120,19 +131,19 @@ Sandbox_UA = {
 	Sandbox_DWAP_SeedLibrary = "Насіннєва бібліотека",
 	Sandbox_DWAP_SeedLibrary_tooltip = "Деякі з кожного насіння в грі",
 
-	Sandbox_DWAP_Loot_FarmLevel = "Лут -> Сільські запаси",
+	Sandbox_DWAP_Loot_FarmLevel = "Мат -> Сільські запаси",
 	Sandbox_DWAP_Loot_FarmLevel_value_option1 = "Високий",
 	Sandbox_DWAP_Loot_FarmLevel_value_option2 = "Середній",
 	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Низький",
 	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Ні",
 
-	Sandbox_DWAP_Loot_FishLevel = "Заблоковка -> Рибальські запаси",
+	Sandbox_DWAP_Loot_FishLevel = "Грабеж -> риболовля",
 	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Високий",
 	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Середній",
 	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Низький",
 	Sandbox_DWAP_Loot_FishLevel_value_option4 = "Ні",
 
-	Sandbox_DWAP_Loot_TailorLevel = "Грабеж -> Пошиті приладдя",
+	Sandbox_DWAP_Loot_TailorLevel = "Маут -> пошиття",
 	Sandbox_DWAP_Loot_TailorLevel_value_option1 = "Високий",
 	Sandbox_DWAP_Loot_TailorLevel_value_option2 = "Середній",
 	Sandbox_DWAP_Loot_TailorLevel_value_option3 = "Низький",

@@ -5,4 +5,5 @@ Stash_FI = {
     Stash_DWAP_31_text1 = "Varo Cave IN: stä",
     Stash_DWAP_31_text2 = "Matka kellarissa olevaan kirjastoon",
     Stash_DWAP_32_text1 = "Ottaa hissi",
+    Stash_DWAP_41_text1 = "Viimeinen krypta vasemmalla",
 }

@@ -32,12 +32,19 @@ Sandbox_RU = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Дрейк",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Lville 3 House Complex",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Бранденбург Таунхаус",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Побег из тюрьмы",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Ирвингтон Таунхам",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Озеро Фаллас",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Усадьба",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Темное озеро Уол",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Восточная охотничья домика",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Muldraugh Drug Lab",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Ирвингтонский оружейный клуб",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Бранденбургский газовый угол",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Объект -магазин для аренды"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Лист высоты"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "Дом West Maple Golf"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Розовой лес"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Луисвилл Таунхаус"
 
 	Sandbox_DWAP_EnableAll = "Включить все сейф",
 	Sandbox_DWAP_EnableAll_tooltip = "Не рекомендуется, клавиши, карта и спаун все равно будут только для выбранной опции",
@@ -56,7 +63,8 @@ Sandbox_RU = {
 	
 	Sandbox_DWAP_EGS = "Включить генераторную систему",
 	Sandbox_DWAP_EGS_tooltip = "Используйте генераторы MOD, которые обеспечивают питание для всего домика Safe",
-	Sandbox_DWAP_EWC_tooltip = "Используйте систему водоснабжения мода с резервуарами для воды и всем",
+	Sandbox_DWAP_EGSS = "Включить солнечную энергию",
+	Sandbox_DWAP_EGSS_tooltip = "Требуются захватывающие солнечные батареи",
 	
 	Sandbox_DWAP_APGS = "Система автоматического запуска генератора",
 	Sandbox_DWAP_APGS_tooltip = "Генераторы обнаруживают потерю мощности и автоматически начнутся",
@@ -78,6 +86,9 @@ Sandbox_RU = {
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Резервуар для воды",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Какова максимальная емкость для резервуаров для воды",
+
+	Sandbox_DWAP_EnableLadders = "Включить лестницы Escape (req Ladders?! Mod)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Требуется лестницы?! мод для работы",
 
 	Sandbox_DWAP_Loot = "Safehouse Supplies",
 	Sandbox_DWAP_Loot_tooltip = "Если у Safehouse есть специальные породы добычи",
@@ -151,7 +162,7 @@ Sandbox_RU = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Никто",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "LOOT -> строительные коврики",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Варьируется от Safehouse, меньшие будут значительно меньше",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Варьируется от Safehouse, меньшие будут иметь значительно меньше",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Высокий",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Середина",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Низкий",

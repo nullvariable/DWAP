@@ -5,4 +5,5 @@ Stash_JP = {
     Stash_DWAP_31_text1 = "洞窟に注意してください",
     Stash_DWAP_31_text2 = "地下の図書館に向かいます",
     Stash_DWAP_32_text1 = "エレベーターを取ります",
+    Stash_DWAP_41_text1 = "左側の最後の地下室",
 }

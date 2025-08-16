@@ -5,4 +5,5 @@ Stash_AR = {
     Stash_DWAP_31_text1 = "Cuidado de las cuevas",
     Stash_DWAP_31_text2 = "Dirígete a la biblioteca en el sótano",
     Stash_DWAP_32_text1 = "Tomar el ascensor",
+    Stash_DWAP_41_text1 = "Última cripta a la izquierda",
 }

@@ -5,4 +5,5 @@ Stash_FR = {
     Stash_DWAP_31_text1 = "Attention aux cavernes",
     Stash_DWAP_31_text2 = "Se diriger vers la bibliothèque au sous-sol",
     Stash_DWAP_32_text1 = "Prendre l'ascenseur",
+    Stash_DWAP_41_text1 = "Dernière crypte à gauche",
 }

@@ -5,4 +5,5 @@ Stash_PL = {
     Stash_DWAP_31_text1 = "Ostrożnie jaskini ins",
     Stash_DWAP_31_text2 = "Udaj się do biblioteki w piwnicy",
     Stash_DWAP_32_text1 = "Weź windę",
+    Stash_DWAP_41_text1 = "Ostatnia krypty po lewej stronie",
 }
