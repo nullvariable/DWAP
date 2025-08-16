@@ -96,7 +96,7 @@ local Parsonage = {
         },
     },
     waterTanks = {
-        { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = 1666, y = 5746, z = -4} },
+        { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = 1 },
     },
     waterFixtures = {
         { sprite = "fixtures_sinks_01_9", x = 8150, y = 11538, z = 0, sourceType="tank", source = 1 },
@@ -127,9 +127,7 @@ local Parsonage = {
         {
             type = 'container',
             coords = {x=8149,y=11541,z=0},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
+            special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
@@ -196,10 +194,8 @@ local Parsonage = {
         {
             type = 'container',
             coords = {x=8157,y=11542,z=0},
-            dist = {"GunStoreKnives","ArmyStorageOutfit",},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
         },
         {
             type = 'container',
