@@ -4,8 +4,11 @@ local MarchRidgeConfig = {
     doorKeys = {
         name = "Bunker",
         doors = {
-            { sprite = "industry_trucks_01_33", x = 9925, y = 12625, z = 0, },
-            { sprite = "fixtures_doors_01_54", x = 9950, y = 12625, z = -4, },
+            { x = 9925, y = 12625, z = 0, },
+            { x = 9950, y = 12625, z = -4, },
+            { sprite = "walls_garage_02_0", x = 9924, y = 12626, z = -4, },
+            { sprite = "walls_garage_02_0", x = 9934, y = 12626, z = -4, },
+            { sprite = "walls_garage_02_0", x = 9944, y = 12626, z = -4, },
         },
     },
     map = { name = "DWAPStashMap4", },
@@ -16,11 +19,11 @@ local MarchRidgeConfig = {
         {
             controls = { sprite = "industry_02_67", x = 9947, y = 12616, z = -4, },
             fakeGenerators = {
-                { x = 9920, y = 12624, z = -4, createTile = false },
-                { x = 9943, y = 12627, z = -4, createTile = false },
+                { x = 9920, y = 12625, z = -4, createTile = false },
+                { x = 9943, y = 12628, z = -4, createTile = false },
                 { x = 9948, y = 12652, z = -4, createTile = false },
                 { x = 9974, y = 12638, z = -4, createTile = false },
-                { x = 9962, y = 12607, z = -4, createTile = false },
+                { x = 9963, y = 12606, z = -4, createTile = false },
                 { x = 9929, y = 12627, z = -1, createTile = false },
             },
         }
@@ -948,9 +951,9 @@ local MarchRidgeConfig = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9883, y = 12619, z = 0, removeFloor = true, })
-    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9883, y = 12619, z = 0, clearExisting = true, })
-    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9921, y = 12623, z = -4, removeWall = "west", })
+    table.insert(MarchRidgeConfig.doorKeys.doors, { sprite = "industry_trucks_01_33", x = 9881, y = 12618, z = 0, })
+    table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9883, y = 12619, z = 0, removeFloor = true, clearExisting = true, })
+    -- table.insert(MarchRidgeConfig.objectSpawns, { enabled = "EnableLadders", x = 9921, y = 12623, z = -4, removeWall = "west", })
 end
 
 return MarchRidgeConfig

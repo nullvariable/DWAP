@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="37" height="5" ExteriorWall="3" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="17" Curtains="0" Shutters="15" Stairs="16" RoofCap="12" RoofSlope="13" RoofTop="14" GrimeWall="6">
+<building version="4" width="37" height="5" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="18" Curtains="0" Shutters="16" Stairs="17" RoofCap="13" RoofSlope="14" RoofTop="15" GrimeWall="7">
  <properties>
   <property name="BasementAccess" value="0 1 N"/>
  </properties>
@@ -22,6 +22,16 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="industry_trucks_01_048"/>
+  <tile enum="North" tile="industry_trucks_01_049"/>
+  <tile enum="NorthWest" tile="industry_trucks_01_050"/>
+  <tile enum="SouthEast" tile="industry_trucks_01_051"/>
+  <tile enum="WestWindow" tile="industry_trucks_01_056"/>
+  <tile enum="NorthWindow" tile="industry_trucks_01_057"/>
+  <tile enum="WestDoor" tile="industry_trucks_01_058"/>
+  <tile enum="NorthDoor" tile="industry_trucks_01_059"/>
  </tile_entry>
  <tile_entry category="floors">
   <tile enum="Floor" tile="floors_exterior_natural_01_008"/>
@@ -220,10 +230,11 @@
   <tile tile="walls_commercial_02_022"/>
   <tile tile="walls_garage_01_046"/>
  </user_tiles>
- <used_tiles>3 9 7 4 10 5 6 11 8</used_tiles>
+ <used_tiles>3 10 8 5 11 6 7 12 9 4</used_tiles>
  <used_furniture></used_furniture>
- <room Name="hallway" InternalName="hallway" Color="200 200 200" InteriorWall="11" InteriorWallTrim="8" Floor="0" GrimeFloor="5" GrimeWall="6" Ceiling="0"/>
+ <room Name="hallway" InternalName="hallway" Color="200 200 200" InteriorWall="12" InteriorWallTrim="9" Floor="0" GrimeFloor="6" GrimeWall="7" Ceiling="0"/>
  <floor>
+  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="37" y="4" dir="N" Tile="0"/>
   <rooms>
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

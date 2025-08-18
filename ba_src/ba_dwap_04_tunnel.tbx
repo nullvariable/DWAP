@@ -190,11 +190,11 @@
 0,1
 </tiles>
   <tiles layer="WallGrime">
-0,8,
+8,8,
 0,7
 </tiles>
   <tiles layer="WallTrim">
-0,10,
+10,10,
 0,0
 </tiles>
   <tiles layer="WallTrim2">
