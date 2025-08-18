@@ -316,7 +316,7 @@ end
 --- @param z number
 --- @return IsoGenerator|nil
 local function getSquareGenerator(x, y, z)
-    local square = DWAP_Gen2.cell:getGridSquare(x, y, z)
+    local square = getSquare(x, y, z)
     if not square then return nil end
     local objects = square:getSpecialObjects()
     local size = objects:size() - 1

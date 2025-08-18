@@ -1,4 +1,5 @@
 local DWAPUtils = require("DWAPUtils")
+local DWAPPowerSystem = require("DWAPPowerSystem_client")
 
 --- Hide ISA menu items for DWAP powerbanks, keeping only the status option
 --- @param player any
@@ -19,9 +20,9 @@ local function hideDWAPPowerbankMenuItems(player, context, worldobjects, test)
         end
     end
     
-    -- Check if this location matches any DWAP powerbank
-    if DWAP_Gen2 and DWAP_Gen2.generators then
-        for index, generator in pairs(DWAP_Gen2.generators) do
+    -- Check if this location matches any DWAP powerbank using the new power system
+    if DWAPPowerSystem.instance and DWAPPowerSystem.instance.generators then
+        for index, generator in pairs(DWAPPowerSystem.instance.generators) do
             if generator and generator.solar and generator.solar.powerbank then
                 local powerbank = generator.solar.powerbank
                 if x == powerbank.x and y == powerbank.y and z == powerbank.z then

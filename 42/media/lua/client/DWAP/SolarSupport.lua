@@ -139,7 +139,7 @@ end
 function DWAP_ISA:initModData(isNewGame)
     -- Exit early if save version is less than 17
     if DWAPUtils.getSaveVersion() < 17 then
-        DWAPUtils.dprint("DWAP_Gen2: Save version is less than 17, skipping generator initialization for newer version")
+        DWAPUtils.dprint("Save version is less than 17, skipping generator initialization for newer version")
         return
     end
 

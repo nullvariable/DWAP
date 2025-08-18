@@ -56,12 +56,16 @@ if not spawns or #spawns == 0 then
 end
 print(("Loaded %d DWAP spawns"):format(#spawns))
 
+target = #spawns
+
 debugScenarios.DebugScenarioDWAP = {
     name = "DWAP Scenario " .. target,
     -- world = "Muldraugh, KY",
-    -- startLoc = { x = 12835, y = 1611, z = 0 },
+    -- startLoc = { x = 5567, y = 12486, z=-17 },
     startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
     setSandbox = function()
+        SandboxVars.SurvivorHouseChance = 7
+        SandboxVars.HouseAlarmFrequency = 6
         SandboxVars.VehicleEasyUse = true;
         SandboxVars.Zombies = 6; -- none
         SandboxVars.WaterShutModifier = -1;
@@ -78,6 +82,11 @@ debugScenarios.DebugScenarioDWAP = {
             SandboxVars.GunsElevator = {};
         end
         SandboxVars.GunsElevator.elevatorSpeed = 10;
+
+        SandboxVars.DWAPHWFF ={
+            MakePrimary = true,
+            IncludeLoot = true,
+        }
         SandboxVars.DWAP = {
             EnableLadders = true,
             EnableAllLocations = true,
@@ -95,8 +104,8 @@ debugScenarios.DebugScenarioDWAP = {
             GeneratorCondition = 75,
             WaterLevel = 2000,
             WaterTankCapacity = 4000,
-            -- Loot = 2,
-            Loot = 1,
+            Loot = 2, -- all
+            -- Loot = 1, -- primary only
             Loot_EnableMaps = true,
             Loot_EnableBooks = true,
             SeedLibrary = true,
