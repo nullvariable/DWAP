@@ -9,10 +9,8 @@ local hashedObjects = {}
 local tankSprites = {}
 local fixtureSprites = {}
 local PRIORITY = 37
-print("Water.lua loaded")
 
 local function onNewWithSprite(isoObject)
-    print("debug onNewWithSprite")
     local sprite = isoObject:getSprite()
     if not sprite then return end
     local spriteName = sprite:getName()
@@ -30,9 +28,8 @@ local function onNewWithSprite(isoObject)
 end
 
 local function onLoadWithSprite(isoObject)
-    print("debug onLoadWithSprite")
     if not DWAPWaterSystem.instance then
-        print("DWAPWaterSystem instance not found, cannot load water object")
+        DWAPUtils.dprint("DWAPWaterSystem instance not found, cannot load water object")
         return
     end
     pcall(function()
@@ -41,7 +38,6 @@ local function onLoadWithSprite(isoObject)
 end
 
 Events.OnInitGlobalModData.Add(function()
-    print("debug OnInitGlobalModData "..tostring(DWAPUtils.getSaveVersion()))
     if DWAPUtils.getSaveVersion() < 17 or not SandboxVars.DWAP.EnableWaterSystem then
         return
     end
