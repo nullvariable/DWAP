@@ -9,6 +9,10 @@ DWAPKeys.onNewGame = function(playerObj, _)
 
     local configs = DWAPUtils.loadConfigs()
     local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
+    if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
+        configIndex = #configs
+        DWAPUtils.dprint("server/BaseKeys -1 found, using last config")
+    end
     local config = configs[configIndex]
     if config and config.doorKeys then
         if config.doorKeys and SandboxVars.DWAP.SpawnWithMapAndKeys then

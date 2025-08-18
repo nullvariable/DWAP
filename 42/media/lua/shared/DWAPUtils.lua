@@ -1,8 +1,9 @@
 local DWAPUtils = {}
 local IsoObjectUtils = require("Starlit/IsoObjectUtils")
+local TableUtils = require("Starlit/TableUtils")
 
 DWAPUtils.currentVersion = 17
-DWAPUtils.selectedSafehouse = 4
+DWAPUtils.selectedSafehouse = -1
 DWAPUtils.safehouseKeyId = nil
 
 local getSandboxOptions = getSandboxOptions
@@ -100,13 +101,27 @@ local configFiles_17 = {
 
 local configCache = {}
 
+--- Global variable for external configs - new system
+--- Format: {
+---   {
+---     minimumVersion = 17,
+---     file = "DWAP_HogWallowFacility",
+---     overrides = {
+---       selectedSafehouse = true|false
+---       includeLoot = true|false
+---     },
+---   }
+--- }
+DWAP_ExternalConfigs = DWAP_ExternalConfigs or {}
+
+
 --- Get a random selected safehouse
 --- Should always return the same number for the same seed
 --- @return number
 function DWAPUtils.getRandomSelected()
     local random = newrandom()
     random:seed(WGParams.instance:getSeedString())
-    return random:random(1, #configFiles) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
+    return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
 end
 
 function DWAPUtils.getSafehouseKeyId()
@@ -116,6 +131,10 @@ function DWAPUtils.getSafehouseKeyId()
 end
 
 function DWAPUtils.getSafehouseIndex()
+    -- if there are any external configs that set selectedSafehouse to true, return -1, which means we'll select the last config in the list, letting the mods duke it out over loading order
+    if DWAP_ExternalConfigs and #DWAP_ExternalConfigs > 0 then
+        return -1
+    end
     local selected = SandboxVars.DWAP.Safehouse - 1
     if SandboxVars.DWAP.Safehouse > 1 then
         -- enum 1 is random which is the default so we need to subtract 1
@@ -130,6 +149,11 @@ Events.OnInitGlobalModData.Add(function()
     DWAPUtils.selectedSafehouse = DWAPUtils.getSafehouseIndex()
     DWAPUtils.safehouseKeyId = DWAPUtils.getSafehouseKeyId()
     DWAPUtils.dprint(("OnInitGlobalModData Selected safehouse: %d"):format(DWAPUtils.selectedSafehouse))
+
+    local modData = ModData.getOrCreate("DWAP_Utils")
+    if not modData.saveVersion then
+        modData.saveVersion = DWAPUtils.currentVersion
+    end
 end)
 
 function DWAPUtils.dprint(var)
@@ -191,14 +215,6 @@ local function maybeApplyOverrides(config)
     config.overrides = nil
     return config
 end
-Events.OnInitGlobalModData.Add(function(isNewGame)
-    DWAPUtils.dprint("OnInitGlobalModData")
-    DWAPUtils.dprint(isNewGame)
-    local modData = ModData.getOrCreate("DWAP_Utils")
-    if not modData.saveVersion then
-        modData.saveVersion = DWAPUtils.currentVersion
-    end
-end)
 
 
 function DWAPUtils.loadConfigs(noCache)
@@ -210,7 +226,8 @@ function DWAPUtils.loadConfigs(noCache)
     end
     local configs = table.newarray()
     local configFilesToUse = configFiles
-    if DWAPUtils.getSaveVersion() == 17 then
+    local saveVersion = DWAPUtils.getSaveVersion()
+    if saveVersion == 17 then
         DWAPUtils.dprint("Using config files for version 17")
         configFilesToUse = configFiles_17
     end
@@ -226,31 +243,63 @@ function DWAPUtils.loadConfigs(noCache)
                 if i ~= index and (not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3) then
                     config.loot = nil
                 end
-                table.insert(configs, maybeApplyOverrides(config))
+                if saveVersion < 17 then
+                    config = maybeApplyOverrides(config)
+                end
+                table.insert(configs, config)
+                DWAPUtils.dprint("Loaded config: " .. configFilesToUse[i])
             end
         end
     else
-        DWAPUtils.dprint("Loading config: " .. index)
-        local config = require(configFilesToUse[index])
+        local loadIndex = index == -1 and DWAPUtils.getRandomSelected() or index
+        DWAPUtils.dprint("Loading config: " .. loadIndex)
+        local config = require(configFilesToUse[loadIndex])
         if config then
-            table.insert(configs, maybeApplyOverrides(config))
+            if saveVersion < 17 then
+                config = maybeApplyOverrides(config)
+            end
+            table.insert(configs, config)
+            DWAPUtils.dprint("Loaded config: " .. configFilesToUse[loadIndex])
         else
-            DWAPUtils.dprint("Error loading config: " .. index)
+            DWAPUtils.dprint("Error loading config: " .. loadIndex)
         end
     end
-    if not noCache then
-        configCache = configs
+
+    DWAPUtils.dprint("Loading external configs: " .. #DWAP_ExternalConfigs)
+    for i = 1, #DWAP_ExternalConfigs do
+        local extConfig = DWAP_ExternalConfigs[i]
+        if saveVersion >= (extConfig.minimumVersion or 0) then
+            local success, config = pcall(require, extConfig.file)
+            if success and config then
+                if extConfig.overrides and extConfig.overrides.includeLoot == false then
+                    config.loot = nil
+                end
+                table.insert(configs, config)
+                DWAPUtils.dprint("Loaded external config: " .. extConfig.file .. " with loot: " .. tostring(type(config.loot) == "table"))
+            else
+                DWAPUtils.dprint("Error loading external config: " .. extConfig.file)
+            end
+        end
     end
+
+    DWAPUtils.dprint("Loaded " .. #configs .. " configs.")
+    configCache = configs
     return configCache
 end
 
 local useGen = false
 function DWAPUtils.getStartingLocations()
     local spawns = {}
-    local configFilesToUse = configFiles
-    if DWAPUtils.getSaveVersion() == 17 then
-        DWAPUtils.dprint("Using config files for version 17")
-        configFilesToUse = configFiles_17
+    local configFilesToUse = {}
+    local saveVersion = DWAPUtils.getSaveVersion()
+    if saveVersion == 17 then
+        for i = 1, #configFiles_17 do
+            configFilesToUse[#configFilesToUse + 1] = configFiles_17[i]
+        end
+    else
+        for i = 1, #configFiles do
+            configFilesToUse[#configFilesToUse + 1] = configFiles[i]
+        end
     end
     for i = 1, #configFilesToUse do
         local config = require(configFilesToUse[i])
@@ -264,7 +313,49 @@ function DWAPUtils.getStartingLocations()
             spawns[#spawns + 1] = config.spawn
         end
     end
+    for i = 1, #DWAP_ExternalConfigs do
+        local extConfig = DWAP_ExternalConfigs[i]
+        if saveVersion >= (extConfig.minimumVersion or 0) then
+            local success, config = pcall(require, extConfig.file)
+            if success and config then
+                if extConfig.overrides and extConfig.overrides.includeLoot == false then
+                    config.loot = nil
+                end
+                table.insert(configFilesToUse, extConfig.file)
+                useGen = useGen or (config.generators and #config.generators > 0)
+            else
+                DWAPUtils.dprint("Error loading external config: " .. extConfig.file)
+            end
+        end
+    end
     return spawns
+end
+
+--- Register external configuration files to be included in loadConfigs
+--- @param configPaths table List of configuration file paths to add
+--- @param isForVersion17 boolean Whether these configurations are for version 17
+function DWAPUtils.registerExternalConfigs(configPaths, isForVersion17)
+    if not configPaths or type(configPaths) ~= "table" then
+        error("registerExternalConfigs: configPaths is nil or not a table")
+        return
+    end
+
+    local targetTable = isForVersion17 and DWAPUtils.ExternalConfigs_17 or DWAPUtils.ExternalConfigs
+
+    local existingConfigs = TableUtils.toLookup(targetTable)
+    for i = 1, #configPaths do
+        if type(configPaths[i]) == "string" and not existingConfigs[configPaths[i]] then
+            table.insert(targetTable, configPaths[i])
+            DWAPUtils.dprint("Registered external config: " .. configPaths[i])
+        elseif existingConfigs[configPaths[i]] then
+            DWAPUtils.dprint("External config already registered: " .. configPaths[i])
+        else
+            DWAPUtils.dprint("Invalid config path, not a string: " .. tostring(configPaths[i]))
+        end
+    end
+
+    -- Clear the cache to ensure new configs are loaded
+    configCache = {}
 end
 
 --- Test if the water is still available in the world

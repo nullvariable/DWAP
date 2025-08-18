@@ -1,42 +1,18 @@
 local DWAPUtils = require("DWAPUtils")
 
--- Events.OnNewGame.Add(function()
---     local configs = DWAPUtils.loadConfigs()
---     local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
---     local config = configs[configIndex]
---     if SandboxVars.DWAP.SpawnInBase then
---         local coords = {}
---         if config and config.spawn then
---             coords = config.spawn
---         end
---         table.wipe(configs)
---         if coords then
---             local player = getPlayer()
---             player:teleportTo(coords.x, coords.y, coords.z)
---             if SandboxVars.DWAP.EnableGenSystem then
---                 DWAPUtils.Defer(function()
---                     DWAPSquareLoaded:AddEvent(
---                         DWAPUtils.lightsOnCurrentRoom,
---                         coords.x, coords.y, coords.z,
---                         true
---                     )
---                 end)
---             end
---             DWAPUtils.dprint(("Teleported player to %s %s %s"):format(coords.x, coords.y, coords.z))
---         else
---             error("No spawn coords found")
---         end
---     end
-
--- end)
-
--- Events.OnInitWorld.Add(function()
 Events.OnInitGlobalModData.Add(function()
     if SandboxVars.DWAP.SpawnInBase then
         local configs = DWAPUtils.loadConfigs()
         local configIndex = 1
+        local safeHouseIndex = DWAPUtils.getSafehouseIndex()
         if SandboxVars.DWAP.EnableAllLocations then
-            configIndex = DWAPUtils.getSafehouseIndex()
+            configIndex = safeHouseIndex
+        elseif safeHouseIndex == -1 then
+            configIndex = safeHouseIndex
+        end
+        if configIndex == -1 then
+            DWAPUtils.dprint("-1 found, using last config")
+            configIndex = #configs
         end
         local config = configs[configIndex]
         local coords = {}
@@ -149,10 +125,20 @@ Events.OnLoad.Add(function()
     if DWAP_Spawn and not DWAP_Spawn.done then
         local configs = DWAPUtils.loadConfigs()
         local configIndex = 1
+        local safeHouseIndex = DWAPUtils.getSafehouseIndex()
         if SandboxVars.DWAP.EnableAllLocations then
-            configIndex = DWAPUtils.getSafehouseIndex()
+            configIndex = safeHouseIndex
+        elseif safeHouseIndex == -1 then
+            configIndex = safeHouseIndex
+        end
+        if configIndex == -1 then
+            configIndex = #configs
         end
         local config = configs[configIndex]
+        if not config then
+            DWAPUtils.dprint("No config, skipping optional spawn question")
+            return
+        end
         table.wipe(configs)
         DWAPUtils.dprint(config.optionalSpawn and config.optionalSpawn.question or "No optional spawn question")
         if config.optionalSpawn then

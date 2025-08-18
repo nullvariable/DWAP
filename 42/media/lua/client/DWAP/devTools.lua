@@ -1546,7 +1546,12 @@ function VisualizePlumbingStatus(radius, plumbingLookup, tankLookup)
                     for i = 1, #plumbingStatus.fixtures do
                         local fixture = plumbingStatus.fixtures[i]
 
-                        if fixture.isTank then
+                        -- Check for specific sprite names for purple highlighting
+                        local spriteName = fixture.obj and fixture.obj:getSprite() and fixture.obj:getSprite():getName()
+                        if spriteName == "industry_02_73" or spriteName == "industry_02_72" then
+                            -- Purple for industry_02_73 and industry_02_72
+                            addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.5, 0, 0.5, 0.7)
+                        elseif fixture.isTank then
                             -- Water tank logic
                             if fixture.fluid > 0 then
                                 -- Blue for water tank with fluid
@@ -1631,10 +1636,175 @@ function ShowPlumbing(index)
         DWAPUtils.dprint("Plumbing visualization enabled for " ..
             configName .. " (" .. fixtureCount .. " total fixtures, " .. tankCount .. " tanks)")
         DWAPUtils.dprint(
-            "Red = not in config or <100 fluid, Blue = water tank with fluid, Green = fixture in config with >100 fluid")
+            "Purple = industry_02_73/72, Red = not in config or <100 fluid, Blue = water tank with fluid, Green = fixture in config with >100 fluid")
     else
         Events.OnTick.Remove(plumbingTick)
         currentPlumbingLookup = nil
         DWAPUtils.dprint("Plumbing visualization disabled")
     end
+end
+
+-- Find unconnected plumbing fixtures in the same building and floor as the player
+function FindUnconnectedPlumbing()
+    local pSquare = getPlayer():getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
+
+    local building = pSquare:getBuilding()
+    if not building then
+        DWAPUtils.dprint("Player is not inside a building")
+        return
+    end
+
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    DWAPUtils.dprint("=== FINDING UNCONNECTED PLUMBING FIXTURES ===")
+    DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
+
+    -- Plumbing fixture names to look for
+    local plumbingNames = {
+        ["Bath"] = true,
+        ["Shower"] = true,
+        ["Toilet"] = true,
+        ["Combo Washer Dryer"] = true,
+        ["Gallery Toilet"] = true,
+        ["Sink"] = true,
+        ["Soda Machine"] = true,
+        ["Washing Machine"] = true
+    }
+
+    local unconnectedFixtures = {}
+    local connectedFixtures = {}
+    local waterTanks = {}
+    local searchRadius = 50 -- Search in a larger area to cover the building
+
+    -- Search all squares in the radius on the same floor
+    for x = playerX - searchRadius, playerX + searchRadius do
+        for y = playerY - searchRadius, playerY + searchRadius do
+            local square = getSquare(x, y, playerZ)
+            if square then
+                -- Only check squares that are part of the same building
+                local squareBuilding = square:getBuilding()
+                if squareBuilding == building then
+                    local objects = square:getObjects()
+                    if objects then
+                        for j = 0, objects:size() - 1 do
+                            local obj = objects:get(j)
+                            local isPlumbingFixture = false
+                            local customNameStr = "Unknown"
+                            local spriteName = ""
+
+                            if obj then
+                                spriteName = obj:getSpriteName() or ""
+                                
+                                -- Check if object has fluid (tanks)
+                                if obj:hasFluid() then
+                                    local fluidContainer = obj:getFluidContainer()
+                                    if fluidContainer and fluidContainer:getCapacity() > 1000 then
+                                        -- This is likely a water tank
+                                        table.insert(waterTanks, {
+                                            sprite = spriteName,
+                                            x = x,
+                                            y = y,
+                                            z = playerZ,
+                                            capacity = fluidContainer:getCapacity(),
+                                            amount = fluidContainer:getAmount()
+                                        })
+                                    else
+                                        isPlumbingFixture = true
+                                    end
+                                else
+                                    local objectSprite = obj:getSprite()
+                                    if objectSprite then
+                                        local props = objectSprite:getProperties()
+                                        local customName = props and props:Is("CustomName") and props:Val("CustomName")
+                                        if customName and plumbingNames[customName] then
+                                            isPlumbingFixture = true
+                                            customNameStr = customName
+                                        end
+                                        if obj:isFloor() then
+                                            isPlumbingFixture = false
+                                        end
+                                    end
+                                end
+
+                                if isPlumbingFixture then
+                                    -- Check if the fixture is connected to water
+                                    local isConnected = false
+                                    if obj.getUsesExternalWaterSource and obj.hasExternalWaterSource then
+                                        isConnected = obj:getUsesExternalWaterSource() and obj:hasExternalWaterSource()
+                                    elseif obj:hasFluid() and obj.getFluidAmount then
+                                        -- For fluid-based fixtures, check if they have water
+                                        local fluidAmount = obj:getFluidAmount() or 0
+                                        isConnected = fluidAmount > 50 -- Consider connected if has significant water
+                                    end
+
+                                    local fixtureData = {
+                                        sprite = spriteName,
+                                        x = x,
+                                        y = y,
+                                        z = playerZ,
+                                        customName = customNameStr,
+                                        isConnected = isConnected
+                                    }
+
+                                    if isConnected then
+                                        table.insert(connectedFixtures, fixtureData)
+                                    else
+                                        table.insert(unconnectedFixtures, fixtureData)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- Print results in config format
+    DWAPUtils.dprint("=== WATER TANKS FOUND (" .. #waterTanks .. ") ===")
+    if #waterTanks > 0 then
+        print("    waterTanks = {")
+        for i = 1, #waterTanks do
+            local tank = waterTanks[i]
+            print("        { sprite = \"" .. tank.sprite .. "\", x = " .. tank.x .. ", y = " .. tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount)
+        end
+        print("    },")
+    else
+        print("    waterTanks = {},")
+    end
+
+    DWAPUtils.dprint("=== UNCONNECTED FIXTURES FOUND (" .. #unconnectedFixtures .. ") ===")
+    if #unconnectedFixtures > 0 then
+        print("    waterFixtures = {")
+        for i = 1, #unconnectedFixtures do
+            local fixture = unconnectedFixtures[i]
+            print("        { sprite = \"" .. fixture.sprite .. "\", x = " .. fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, ")
+        end
+        print("    },")
+    else
+        DWAPUtils.dprint("No unconnected fixtures found!")
+    end
+
+    if #connectedFixtures > 0 then
+        DWAPUtils.dprint("=== CONNECTED FIXTURES FOUND (" .. #connectedFixtures .. ") ===")
+        for i = 1, #connectedFixtures do
+            local fixture = connectedFixtures[i]
+            DWAPUtils.dprint("  " .. fixture.sprite .. " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ")")
+        end
+    end
+
+    DWAPUtils.dprint("=== SUMMARY ===")
+    DWAPUtils.dprint("Water tanks: " .. #waterTanks)
+    DWAPUtils.dprint("Unconnected fixtures: " .. #unconnectedFixtures)
+    DWAPUtils.dprint("Connected fixtures: " .. #connectedFixtures)
+    DWAPUtils.dprint("Total fixtures: " .. (#unconnectedFixtures + #connectedFixtures))
+
+    return {
+        waterTanks = waterTanks,
+        unconnectedFixtures = unconnectedFixtures,
+        connectedFixtures = connectedFixtures
+    }
 end

@@ -377,6 +377,9 @@ local function loadConfigs()
     if #configs == 1 then
         safehouseIndex = 1
     end
+    if safehouseIndex == -1 then
+        safehouseIndex = #configs
+    end
     local nonPrimaryLootLevel = SandboxVars.DWAP.Loot
     for i = 1, #configs do
         local config = configs[i]

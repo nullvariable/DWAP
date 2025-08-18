@@ -54,8 +54,8 @@ local basement_access = {
     ba_dwap_01 = { width=1, height=4, stairx=5, stairy=-5, stairDir="N" },
     ba_dwap_01_solar = { width=4, height=15, stairx=5, stairy=5, stairDir="N" },
     ba_dwap_jamieton_bunker_01 = { width=3, height=8, stairx=0, stairy=0, stairDir="N" },
-    ba_dwap_02_water = { width=3, height=3, stairx=0, stairy=0, stairDir="N" },
-    ba_dwap_02_water_solar = { width=25, height=18, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_02_water = { width=2, height=2, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_02_water_solar = { width=20, height=16, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_03 = { width=15, height=22, stairx=0, stairy=19, stairDir="N" },
     ba_dwap_03_solar = { width=15, height=22, stairx=0, stairy=19, stairDir="N" },
     ba_dwap_04_tunnel = { width=2, height=2, stairx=0, stairy=5, stairDir="N" },
@@ -162,7 +162,11 @@ fullConfig[2] = { -- EchoCreek
     },
 }
 if doSolar then
-    fullConfig[2].locations[#fullConfig[2].locations].access="ba_dwap_02_water_solar"
+    for i = 1, #fullConfig[2].locations do
+        if fullConfig[2].locations[i].access == "ba_dwap_02_water" then
+            fullConfig[2].locations[i].access = "ba_dwap_02_water_solar"
+        end
+    end
 end
 
 fullConfig[3] = { -- LVilleMansion
@@ -198,11 +202,11 @@ end
                 { x = 9962, y = 12607, z = -4, createTile = true },
                 { x = 9929, y = 12627, z = -1, createTile = true },
 ]]
-table.insert(fullConfig[4].locations, {x=9920, y = 12624, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
-table.insert(fullConfig[4].locations, {x=9943, y = 12627, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
+table.insert(fullConfig[4].locations, {x=9920, y = 12625, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
+table.insert(fullConfig[4].locations, {x=9943, y = 12628, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9948, y = 12652, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9974, y = 12638, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
-table.insert(fullConfig[4].locations, {x=9962, y = 12607, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
+table.insert(fullConfig[4].locations, {x=9963, y = 12606, z = -5, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 table.insert(fullConfig[4].locations, {x=9929, y = 12627, z = -2, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"})
 
 fullConfig[5] = { -- MuldSafeHouse

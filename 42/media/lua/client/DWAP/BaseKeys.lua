@@ -24,6 +24,8 @@ DWAPKeysCL.updateBuildingKeyId = function(params)
                 for j=1,#garageDoorObjects do
                     local object = garageDoorObjects[j]
                     object:setKeyId(keyId)
+                    object:setLocked(false)
+                    object:syncIsoObject(false, 0, nil, nil);
                 end
             end
         end
@@ -68,6 +70,11 @@ Events.OnNewGame.Add(function()
         DWAPUtils.dprint("DWAPKeysCL.OnNewGame")
         local configs = DWAPUtils.loadConfigs()
         local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
+        if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
+            configIndex = #configs
+            DWAPUtils.dprint("client/BaseKeys -1 found, using last config")
+        end
+
         local config = configs[configIndex]
         if config then
             if config.doorKeys then
@@ -123,6 +130,9 @@ Events.OnLoad.Add(function()
     if SandboxVars.DWAP.SpawnWithMapAndKeys then
         local configs = DWAPUtils.loadConfigs()
         local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
+        if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
+            configIndex = #configs
+        end
         local config = configs[configIndex]
         if config then
             if config.doorKeys then
