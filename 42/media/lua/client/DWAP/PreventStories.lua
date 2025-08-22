@@ -49,7 +49,7 @@ Events.OnInitGlobalModData.Add(function()
         local configs = DWAPUtils.loadConfigs()
         for i = 1, #configs do
             local config = configs[i]
-            if config and config.doorKeys then
+            if config and config.doorKeys and not config.allowStories then
                 for j = 1, #config.doorKeys.doors do
                     local door = config.doorKeys.doors[j]
                     local hash = DWAPUtils.hashCoords(door.x, door.y, door.z)

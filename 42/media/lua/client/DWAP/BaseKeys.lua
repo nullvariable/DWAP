@@ -69,11 +69,7 @@ Events.OnNewGame.Add(function()
     if SandboxVars.DWAP.SpawnWithMapAndKeys then
         DWAPUtils.dprint("DWAPKeysCL.OnNewGame")
         local configs = DWAPUtils.loadConfigs()
-        local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
-        if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
-            configIndex = #configs
-            DWAPUtils.dprint("client/BaseKeys -1 found, using last config")
-        end
+        local configIndex = DWAPUtils.getPrimaryConfigIndex()
 
         local config = configs[configIndex]
         if config then
@@ -129,17 +125,14 @@ end)
 Events.OnLoad.Add(function()
     if SandboxVars.DWAP.SpawnWithMapAndKeys then
         local configs = DWAPUtils.loadConfigs()
-        local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
-        if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
-            configIndex = #configs
-        end
+        local configIndex = DWAPUtils.getPrimaryConfigIndex()
         local config = configs[configIndex]
         if config then
             if config.doorKeys then
                 local keyId = DWAPUtils.getSafehouseKeyId()
                 for i = 1, #config.doorKeys.doors do
                     local door = config.doorKeys.doors[i]
-                    DWAPUtils.dprint(("Adding key to door %s %s %s"):format(door.x, door.y, door.z))
+                    DWAPUtils.dprint(("configIndex:%d Adding key to door %s %s %s"):format(configIndex, door.x, door.y, door.z))
                     DWAPSquareLoaded:AddEvent(
                         DWAPKeysCL.updateBuildingKeyId,
                         door.x,

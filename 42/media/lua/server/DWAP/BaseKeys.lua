@@ -8,11 +8,7 @@ DWAPKeys.onNewGame = function(playerObj, _)
     -- local data = ModData.getOrCreate("DWAP_UnsyncedKeys")
 
     local configs = DWAPUtils.loadConfigs()
-    local configIndex = SandboxVars.DWAP.EnableAllLocations and DWAPUtils.selectedSafehouse or 1
-    if configIndex == -1 or DWAPUtils.selectedSafehouse == -1 then
-        configIndex = #configs
-        DWAPUtils.dprint("server/BaseKeys -1 found, using last config")
-    end
+    local configIndex = DWAPUtils.getPrimaryConfigIndex()
     local config = configs[configIndex]
     if config and config.doorKeys then
         if config.doorKeys and SandboxVars.DWAP.SpawnWithMapAndKeys then
@@ -22,12 +18,13 @@ DWAPKeys.onNewGame = function(playerObj, _)
             key:setName(config.doorKeys.name)
             key:setKeyId(keyId)
             playerObj:getInventory():AddItem(key)
-            DWAPUtils.dprint(("Added key %s to player inventory"):format(key:getDisplayName()))
+            DWAPUtils.dprint(("Added key %s (%d) to player inventory"):format(key:getDisplayName(), configIndex))
         end
-        if SandboxVars.DWAP.SpawnInBase then
-            local flashlight = instanceItem("Base.HandTorch")
-            playerObj:getInventory():AddItem(flashlight)
-        end
+        -- @todo for bases that might be super dark to spawn in, add starter items to the config
+        -- if SandboxVars.DWAP.SpawnInBase then
+        --     local flashlight = instanceItem("Base.HandTorch")
+        --     playerObj:getInventory():AddItem(flashlight)
+        -- end
     end
     table.wipe(configs)
 end

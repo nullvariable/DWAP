@@ -12,15 +12,6 @@ option DWAP.Safehouse
 	valueTranslation = DWAP_Loot_Safehouse_value,
 }
 
-option DWAP.SpawnInBase
-{
-	type = boolean,
-	default = false,
-
-	page = DWAPGeneral,
-	translation = DWAP_SpawnInBase,
-}
-
 option DWAP.SpawnWithMapAndKeys
 {
 	type = boolean,

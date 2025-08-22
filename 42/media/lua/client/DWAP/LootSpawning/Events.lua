@@ -373,13 +373,8 @@ end
 
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
-    local safehouseIndex = DWAPUtils.selectedSafehouse or SandboxVars.DWAP.Safehouse - 1
-    if #configs == 1 then
-        safehouseIndex = 1
-    end
-    if safehouseIndex == -1 then
-        safehouseIndex = #configs
-    end
+    local safehouseIndex = DWAPUtils.getPrimaryConfigIndex()
+    DWAPUtils.dprint("Loot Safehouse Index: " .. tostring(safehouseIndex))
     local nonPrimaryLootLevel = SandboxVars.DWAP.Loot
     for i = 1, #configs do
         local config = configs[i]
@@ -407,7 +402,7 @@ local function loadConfigs()
                 end
             end
         end
-        DWAPUtils.dprint("Done. Loot config count: " .. count)
+        DWAPUtils.dprint("Done. Loot config count: " .. count .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
 end
 
@@ -448,10 +443,12 @@ Events.OnPostMapLoad.Add(function()
     DWAP_LootSpawning.populateItems()
     local modData = ModData.getOrCreate("DWAP_Loot")
     if modData and modData.init then
+        DWAPUtils.dprint("ModData for DWAP_Loot already initialized, loading existing loot config")
         lootConfig = modData.lootConfig
         lootByCoords = modData.lootByCoords
         Events.OnFillContainer.Add(onFillContainer)
     else
+        DWAPUtils.dprint("Initializing DWAP_Loot mod data")
         loadConfigs()
         modData.lootConfig = lootConfig
         modData.lootByCoords = lootByCoords

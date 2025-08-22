@@ -714,11 +714,20 @@ function DWAPGoto(index)
         return
     end
     local config = configs[index]
-    if not config or not config.spawn then
-        DWAPUtils.dprint("Config at index " .. index .. " has no spawn data")
+    if not config then
+        DWAPUtils.dprint("Config at index " .. index .. " is nil")
         return
     end
     local spawn = config.spawn
+    if not spawn and config.doorKeys then
+        for i = 1, #config.doorKeys.doors do
+            local doorKey = config.doorKeys.doors[i]
+            if doorKey and doorKey.x then
+                spawn = doorKey
+                break
+            end
+        end
+    end
     if not spawn.x or not spawn.y or not spawn.z then
         DWAPUtils.dprint("Spawn data is incomplete for config at index " .. index)
         return

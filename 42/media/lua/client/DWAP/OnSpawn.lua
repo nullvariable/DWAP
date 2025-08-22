@@ -1,42 +1,46 @@
 local DWAPUtils = require("DWAPUtils")
 
-Events.OnInitGlobalModData.Add(function()
-    if SandboxVars.DWAP.SpawnInBase then
-        local configs = DWAPUtils.loadConfigs()
-        local configIndex = 1
-        local safeHouseIndex = DWAPUtils.getSafehouseIndex()
-        if SandboxVars.DWAP.EnableAllLocations then
-            configIndex = safeHouseIndex
-        elseif safeHouseIndex == -1 then
-            configIndex = safeHouseIndex
-        end
-        if configIndex == -1 then
-            DWAPUtils.dprint("-1 found, using last config")
-            configIndex = #configs
-        end
-        local config = configs[configIndex]
-        local coords = {}
-        if config and config.spawn then
-            coords = config.spawn
-        end
-        table.wipe(configs)
-        if coords then
-            DWAPUtils.dprint(coords)
-            local name = ("#%s | %s %s %s"):format(DWAPUtils.selectedSafehouse, coords.x, coords.y, coords.z)
-            DWAPUtils.dprint("Overriding spawn to ".. name)
-            getWorld():setLuaPosX(coords.x);
-            getWorld():setLuaPosY(coords.y);
-            getWorld():setLuaPosZ(coords.z);
-            if SandboxVars.DWAP.EnableGenSystem then
-                DWAPSquareLoaded:AddEvent(
-                    DWAPUtils.lightsOnCurrentRoom,
-                    coords.x, coords.y, coords.z,
-                    true
-                )
-            end
+function DWAPProfessionInitWorld(isNewGame)
+    if not isNewGame then return end
+    local spawnRegion = MapSpawnSelect.instance.selectedRegion
+    if not spawnRegion then
+        spawnRegion = MapSpawnSelect.instance:useDefaultSpawnRegion()
+    end
+    DWAPUtils.dprint("Selected spawn region: " .. tostring(spawnRegion.name))
+    if not (spawnRegion.name == "DWAP") then
+        DWAPUtils.dprint("Safehouse spawn not selected")
+        return
+    end
+    DWAPUtils.dprint("Safehouse spawn selected")
+    local configs = DWAPUtils.loadConfigs()
+    local safeHouseIndex = DWAPUtils.getBaseSafehouseIndex()
+    local config = configs[safeHouseIndex]
+    local coords = {}
+    if config and config.spawn then
+        coords = config.spawn
+    end
+    table.wipe(configs)
+    if coords then
+        DWAPUtils.dprint(coords)
+        local name = ("#%s | %s %s %s"):format(safeHouseIndex, coords.x, coords.y, coords.z)
+        DWAPUtils.dprint("Overriding spawn to ".. name)
+        getWorld():setLuaPosX(coords.x);
+        getWorld():setLuaPosY(coords.y);
+        getWorld():setLuaPosZ(coords.z);
+        if SandboxVars.DWAP.EnableGenSystem then
+            DWAPSquareLoaded:AddEvent(
+                DWAPUtils.lightsOnCurrentRoom,
+                coords.x, coords.y, coords.z,
+                true
+            )
         end
     end
+end
+Events.OnInitWorld.Add(function()
+    DWAPProfessionInitWorld(true)
 end)
+Events.OnInitGlobalModData.Add(DWAPProfessionInitWorld)
+
 
 local optionalSpawnFunctions = {
     DWAP_31_beforeTeleport = function(config)
@@ -90,70 +94,78 @@ local optionalSpawnFunctions = {
     -- end
 }
 
+local function doOptionalSpawn(optionalSpawn)
+    local x, y, z = optionalSpawn.coords.x, optionalSpawn.coords.y, optionalSpawn.coords.z
+    if optionalSpawn.beforeTeleport and optionalSpawnFunctions[optionalSpawn.beforeTeleport] then
+        local optionalBefore = optionalSpawnFunctions[optionalSpawn.beforeTeleport]
+        DWAPUtils.dprint("Running before teleport function")
+        local success, err = pcall(optionalBefore, optionalSpawn)
+        if not success then
+            DWAPUtils.dprint("Error in beforeTeleport function: " .. tostring(err))
+        end
+    end
+    if isClient() then
+        SendCommandToServer("/teleportto " .. x .. "," .. y .. "," .. z);
+    else
+        getPlayer():teleportTo(x, y, z)
+    end
+    if optionalSpawn.afterTeleport and optionalSpawnFunctions[optionalSpawn.afterTeleport] then
+        local optionalSpawnAfter = optionalSpawnFunctions[optionalSpawn.afterTeleport]
+        DWAPUtils.dprint("Running after teleport function")
+        local success, err = pcall(optionalSpawnAfter, optionalSpawn)
+        if not success then
+            DWAPUtils.dprint("Error in afterTeleport function: " .. tostring(err))
+        end
+    end
+end
+
 local function confirmOptionalSpawn(_, button, optionalSpawn)
     DWAPUtils.dprint(optionalSpawn)
     if button.internal == "YES" then
         DWAPUtils.dprint("Optional spawn confirmed")
-        local x, y, z = optionalSpawn.coords.x, optionalSpawn.coords.y, optionalSpawn.coords.z
-        if optionalSpawn.beforeTeleport and optionalSpawnFunctions[optionalSpawn.beforeTeleport] then
-            local optionalBefore = optionalSpawnFunctions[optionalSpawn.beforeTeleport]
-            DWAPUtils.dprint("Running before teleport function")
-            local success, err = pcall(optionalBefore, optionalSpawn)
-            if not success then
-                DWAPUtils.dprint("Error in beforeTeleport function: " .. tostring(err))
-            end
-        end
-        if isClient() then
-            SendCommandToServer("/teleportto " .. x .. "," .. y .. "," .. z);
-        else
-            getPlayer():teleportTo(x, y, z)
-	    end
-        if optionalSpawn.afterTeleport and optionalSpawnFunctions[optionalSpawn.afterTeleport] then
-            local optionalSpawnAfter = optionalSpawnFunctions[optionalSpawn.afterTeleport]
-            DWAPUtils.dprint("Running after teleport function")
-            local success, err = pcall(optionalSpawnAfter, optionalSpawn)
-            if not success then
-                DWAPUtils.dprint("Error in afterTeleport function: " .. tostring(err))
-            end
-        end
+        doOptionalSpawn(optionalSpawn)
     else
         DWAPUtils.dprint("Optional spawn cancelled")
     end
 end
-Events.OnLoad.Add(function()
-    DWAP_Spawn = ModData.getOrCreate("DWAP_Spawn")
-    if DWAP_Spawn and not DWAP_Spawn.done then
-        local configs = DWAPUtils.loadConfigs()
-        local configIndex = 1
-        local safeHouseIndex = DWAPUtils.getSafehouseIndex()
-        if SandboxVars.DWAP.EnableAllLocations then
-            configIndex = safeHouseIndex
-        elseif safeHouseIndex == -1 then
-            configIndex = safeHouseIndex
-        end
-        if configIndex == -1 then
-            configIndex = #configs
-        end
-        local config = configs[configIndex]
-        if not config then
-            DWAPUtils.dprint("No config, skipping optional spawn question")
-            return
-        end
-        table.wipe(configs)
-        DWAPUtils.dprint(config.optionalSpawn and config.optionalSpawn.question or "No optional spawn question")
-        if config.optionalSpawn then
-            local width = 380
-            local x = getCore():getScreenWidth() / 2 - (width / 2)
-            local height = 120
-            local y = getCore():getScreenHeight() / 2 - (height / 2)
-            local dialog = ISModalDialog:new(x,y, width, height, getText(config.optionalSpawn.question), true, nil, confirmOptionalSpawn, nil, config.optionalSpawn)
-            dialog:initialise()
-            dialog:addToUIManager()
-            dialog:bringToTop()
-            setGameSpeed(0)
-            DWAP_Spawn.done = true
-        else
-            DWAP_Spawn.done = true
-        end
-    end
-end)
+-- Events.OnLoad.Add(function()
+--     DWAP_Spawn = ModData.getOrCreate("DWAP_Spawn")
+--     if DWAP_Spawn and not DWAP_Spawn.done then
+--         local configs = DWAPUtils.loadConfigs()
+--         local configIndex = 1
+--         local safeHouseIndex = DWAPUtils.getSafehouseIndex()
+--         if SandboxVars.DWAP.EnableAllLocations then
+--             configIndex = safeHouseIndex
+--         end
+--         local config = configs[configIndex]
+--         if not config then
+--             DWAPUtils.dprint("No config, skipping optional spawn question")
+--             return
+--         end
+--         table.wipe(configs)
+--         DWAPUtils.dprint(config.optionalSpawn and config.optionalSpawn.question or "No optional spawn question")
+--         if config.optionalSpawn then
+--             if config.optionalSpawn.question then
+--                 local width = 380
+--                 local x = getCore():getScreenWidth() / 2 - (width / 2)
+--                 local height = 120
+--                 local y = getCore():getScreenHeight() / 2 - (height / 2)
+--                 local dialog = ISModalDialog:new(x,y, width, height, getText(config.optionalSpawn.question), true, nil, confirmOptionalSpawn, nil, config.optionalSpawn)
+--                 dialog:initialise()
+--                 dialog:addToUIManager()
+--                 dialog:bringToTop()
+--                 setGameSpeed(0)
+--             elseif config.optionalSpawn.sandbox then
+--                 local sandbox = SandboxVars[config.optionalSpawn.sandbox[1]][config.optionalSpawn.sandbox[2]]
+--                 if sandbox then
+--                     doOptionalSpawn(config.optionalSpawn)
+--                 end
+--             else
+--                 doOptionalSpawn(config.optionalSpawn)
+--             end
+--             DWAP_Spawn.done = true
+--         else
+--             DWAP_Spawn.done = true
+--         end
+--     end
+-- end)

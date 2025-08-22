@@ -15,7 +15,7 @@ local function onNewWithSprite(isoObject)
     if not sprite then return end
     local spriteName = sprite:getName()
     local hashed = hashCoords(isoObject:getX(), isoObject:getY(), isoObject:getZ())
-    DWAPWaterSystem.instance:noise("DWAPWaterSystem onNewWithSprite: " .. tostring(spriteName) .. " at " .. tostring(hashed))
+    -- DWAPWaterSystem.instance:noise("DWAPWaterSystem onNewWithSprite: " .. tostring(spriteName) .. " at " .. tostring(hashed))
 
     if hashedObjects[hashed] then
         local objectData = hashedObjects[hashed]

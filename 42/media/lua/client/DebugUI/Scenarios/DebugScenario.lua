@@ -41,7 +41,7 @@ debugScenarios.DebugScenarioTSave = nil
 
 DebugScenarioAllMaps = false
 
-local target = 41
+local target = 38
 
 
 local DWAPUtils = require "DWAPUtils"
@@ -56,13 +56,13 @@ if not spawns or #spawns == 0 then
 end
 print(("Loaded %d DWAP spawns"):format(#spawns))
 
-target = #spawns
+-- target = #spawns
 
 debugScenarios.DebugScenarioDWAP = {
     name = "DWAP Scenario " .. target,
     -- world = "Muldraugh, KY",
-    -- startLoc = { x = 5567, y = 12486, z=-17 },
-    startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
+    startLoc = { x = 12659, y = 6402, z = 2 },
+    -- startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
     setSandbox = function()
         SandboxVars.SurvivorHouseChance = 7
         SandboxVars.HouseAlarmFrequency = 6
@@ -84,14 +84,18 @@ debugScenarios.DebugScenarioDWAP = {
         SandboxVars.GunsElevator.elevatorSpeed = 10;
 
         SandboxVars.DWAPHWFF ={
+            MakePrimary = false,
+            IncludeLoot = true,
+        }
+        SandboxVars.DWAPBateman ={
             MakePrimary = true,
             IncludeLoot = true,
+            PenthouseSpawn = true,
         }
         SandboxVars.DWAP = {
             EnableLadders = true,
             EnableAllLocations = true,
             Safehouse = target +1,
-            SpawnInBase = true,
             SpawnWithMapAndKeys = true,
             Barricade = true,
             EnableWaterSystem = true,
