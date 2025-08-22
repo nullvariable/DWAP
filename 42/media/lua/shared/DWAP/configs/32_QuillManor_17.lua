@@ -741,15 +741,15 @@ local QuillManor = {
     },
 }
 
-if getActivatedMods():contains("\\Gelevator") then
-    table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1228, y = 7363, z = 0, isFloor = true, })
-    table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1227, y = 7363, z = 0, isFloor = true, })
-    table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1226, y = 7363, z = 0, isFloor = true, })
-else
-    table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1226, y = 7363, z = 0, })
-    table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1227, y = 7363, z = 0, })
-    table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1228, y = 7363, z = 0, })
-    table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_28", x = 1229, y = 7363, z = 0, })
-    table.insert(QuillManor.objectSpawns, { x = 1226, y = 7378, z = -10, removeWall = "north", })
-end
+-- if getActivatedMods():contains("\\Gelevator") then
+--     table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1228, y = 7363, z = 0, isFloor = true, })
+--     table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1227, y = 7363, z = 0, isFloor = true, })
+--     table.insert(QuillManor.objectSpawns, { sprite = "blends_natural_01_23", x = 1226, y = 7363, z = 0, isFloor = true, })
+-- else
+--     table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1226, y = 7363, z = 0, })
+--     table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1227, y = 7363, z = 0, })
+--     table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_29", x = 1228, y = 7363, z = 0, })
+--     table.insert(QuillManor.objectSpawns, { sprite = "fixtures_railings_01_28", x = 1229, y = 7363, z = 0, })
+--     table.insert(QuillManor.objectSpawns, { x = 1226, y = 7378, z = -10, removeWall = "north", })
+-- end
 return QuillManor
