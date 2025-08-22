@@ -154,6 +154,7 @@ local FallasDiner = {
         doors = {
             { sprite = "fixtures_doors_01_45", x = 7236, y = 8199, z = 0, },
             { sprite = "fixtures_doors_01_53", x = 7231, y = 8217, z = 0, },
+            { sprite = "fixtures_doors_01_53", x = 7228, y = 8205, z = 0, },
             { sprite = "fixtures_doors_01_53", x = bunkerTopLeft.x, y = bunkerTopLeft.y, z = bunkerTopLeft.z, },
         },
     },
