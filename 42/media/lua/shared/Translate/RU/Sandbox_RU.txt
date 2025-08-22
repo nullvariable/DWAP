@@ -49,9 +49,6 @@ Sandbox_RU = {
 	Sandbox_DWAP_EnableAll = "Включить все сейф",
 	Sandbox_DWAP_EnableAll_tooltip = "Не рекомендуется, клавиши, карта и спаун все равно будут только для выбранной опции",
 
-	Sandbox_DWAP_SpawnInBase = "Появится в Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Начните внутри Safehouse с ключами",
-
 	Sandbox_DWAP_Keys = "Начните с Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Получите карту Safehouse и ключи для этого",
 

@@ -1,6 +1,6 @@
 Stash_CS = {
     Stash_DWAP_09_text1 = "Nejvyšší patro, zásoby v suterénu",
-    Stash_DWAP_10_text1 = "Fallout Shelter Schodištì za bezpeènostní kanceláø",
+    Stash_DWAP_10_text1 = "Fallout pøístøeší po schodech za bezpeènostní kanceláø",
     Stash_DWAP_12_text1 = "Fallout Shelter v suterénu",
     Stash_DWAP_31_text1 = "Opatrnì v jeskyni",
     Stash_DWAP_31_text2 = "Vydejte se do knihovny v suterénu",

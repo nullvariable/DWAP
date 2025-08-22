@@ -49,9 +49,6 @@ Sandbox_CH = {
 	Sandbox_DWAP_EnableAll = "啟用所有安全屋",
 	Sandbox_DWAP_EnableAll_tooltip = "不推薦，鍵，地圖和產卵仍然只適用於選定的選項",
 
-	Sandbox_DWAP_SpawnInBase = "在安全屋中產卵",
-	Sandbox_DWAP_SpawnInBase_tooltip = "用鑰匙開始在安全屋內",
-
 	Sandbox_DWAP_Keys = "從地圖和鑰匙開始",
 	Sandbox_DWAP_Keys_tooltip = "獲取安全屋和鑰匙的地圖",
 

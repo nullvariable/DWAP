@@ -49,9 +49,6 @@ Sandbox_CS = {
 	Sandbox_DWAP_EnableAll = "Povolit všechny bezpeèí",
 	Sandbox_DWAP_EnableAll_tooltip = "Nedoporuèuje se, klíèe, mapa a spøení budou stále pouze pro vybranou možnost",
 
-	Sandbox_DWAP_SpawnInBase = "Vytvoøte se v bezpeèí",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Zaènìte uvnitø bezpeèí pomocí klíèù",
-
 	Sandbox_DWAP_Keys = "Zaènìte s mapou a klíèi",
 	Sandbox_DWAP_Keys_tooltip = "Získejte mapu bezpeèí a klíèe pro to",
 
@@ -66,7 +63,7 @@ Sandbox_CS = {
 	Sandbox_DWAP_EGSS = "Povolit solární energie",
 	Sandbox_DWAP_EGSS_tooltip = "Vyžaduje, aby fungovala pohlcující solární pole",
 	
-	Sandbox_DWAP_APGS = "Systém automatického startu generátoru",
+	Sandbox_DWAP_APGS = "Automatické spuštìní generátoru",
 	Sandbox_DWAP_APGS_tooltip = "Generátory detekují ztrátu energie a zaènou automaticky",
 	
 	Sandbox_DWAP_Fuel = "Palivo generátor",
@@ -97,11 +94,11 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_value_option3 = "Primární normální, ostatní nízké",
 	Sandbox_DWAP_Loot_value_option4 = "Žádný",
 
-	Sandbox_DWAP_Loot_EnableMaps = "LOOT -> mapy",
+	Sandbox_DWAP_Loot_EnableMaps = "Loot -> mapy",
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Skrýš všech map",
 
 	Sandbox_DWAP_Loot_EnableBooks = "Loot -> knihy dovedností",
-	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Skrývání všech knih dovedností",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Skrýš všech knih dovedností",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Loot -> média",
 	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Knihy, CD atd",
@@ -122,7 +119,7 @@ Sandbox_CS = {
 	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Nízký",
 	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Žádný",
 
-	Sandbox_DWAP_Loot_MedLevel = "Loot -> zdravotnický materiál",
+	Sandbox_DWAP_Loot_MedLevel = "Loot -> Zdravotnické potøeby",
 	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Vysoký",
 	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Støední",
 	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Nízký",

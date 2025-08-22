@@ -5,4 +5,5 @@ Stash_ID = {
     Stash_DWAP_31_text1 = "Hati -hati dengan gua",
     Stash_DWAP_31_text2 = "Membuat jalan Anda ke perpustakaan di ruang bawah tanah",
     Stash_DWAP_32_text1 = "Ambil lift",
+    Stash_DWAP_41_text1 = "Crypt terakhir di sebelah kiri",
 }

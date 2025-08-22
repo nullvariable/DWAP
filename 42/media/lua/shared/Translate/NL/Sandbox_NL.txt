@@ -49,9 +49,6 @@ Sandbox_NL = {
 	Sandbox_DWAP_EnableAll = "Schakel alle safehouses in",
 	Sandbox_DWAP_EnableAll_tooltip = "Niet aanbevolen, sleutels, kaart en spawn zijn nog steeds alleen voor de geselecteerde optie",
 
-	Sandbox_DWAP_SpawnInBase = "Spawn in safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Begin binnen de safehouse met de sleutels",
-
 	Sandbox_DWAP_Keys = "Begin met kaart en toetsen",
 	Sandbox_DWAP_Keys_tooltip = "Koop er een kaart van de safehouse en sleutels voor",
 

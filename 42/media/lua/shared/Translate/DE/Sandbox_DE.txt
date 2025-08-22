@@ -49,9 +49,6 @@ Sandbox_DE = {
 	Sandbox_DWAP_EnableAll = "Aktivieren Sie alle Safe -Häuser",
 	Sandbox_DWAP_EnableAll_tooltip = "Nicht empfohlen, Schlüssel, Karte und Spawn sind immer noch nur für die ausgewählte Option,",
 
-	Sandbox_DWAP_SpawnInBase = "Laichen im Safuehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Beginnen Sie mit den Schlüssel im Safouse",
-
 	Sandbox_DWAP_Keys = "Beginnen Sie mit Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Holen Sie sich eine Karte des Safehouse und der Schlüssel dafür",
 

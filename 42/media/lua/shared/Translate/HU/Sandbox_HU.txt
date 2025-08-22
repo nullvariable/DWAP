@@ -44,22 +44,19 @@ Sandbox_HU = {
 	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Levélmagasság"
 	Sandbox_DWAP_Loot_Safehouse_value_option41 = "Nyugat -juhar golf otthon"
 	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Rózsafa plébánia"
-	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville városháza"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville városi ház"
 
 	Sandbox_DWAP_EnableAll = "Engedélyezze az összes biztonságos házat",
 	Sandbox_DWAP_EnableAll_tooltip = "Nem ajánlott, a kulcsok, a térkép és a spawn továbbra is csak a kiválasztott opcióra vonatkozik",
 
-	Sandbox_DWAP_SpawnInBase = "Ívott a Safehouse -ban",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Kezdje a Safehouse -ban a kulcsokkal",
-
-	Sandbox_DWAP_Keys = "Kezdje a Map & Keys segítségével",
+	Sandbox_DWAP_Keys = "Kezdje a térkép és a kulcsok segítségével",
 	Sandbox_DWAP_Keys_tooltip = "Szerezzen egy térképet a biztonságos házról és a kulcsokról",
 
 	Sandbox_DWAP_Barricade = "A SAFEHOUSE barikádja van",
 	Sandbox_DWAP_Barricade_tooltip = "A legtöbb ajtó és ablak barikádokkal kezdődik",
 
 	Sandbox_DWAP_EWC = "Engedélyezze a vízrendszert",
-	Sandbox_DWAP_EWC_tooltip = "Használja a MOD vízrendszerét, víztartályokkal és a tartályokba beillesztett összes berendezéssel",
+	Sandbox_DWAP_EWC_tooltip = "Használja a MOD vízrendszerét, víztartályokkal és a tartályokba beillesztett összes szerelvényrel",
 	
 	Sandbox_DWAP_EGS = "Engedélyezze a generátor rendszert",
 	Sandbox_DWAP_EGS_tooltip = "Használja a MOD generátorait, amelyek energiát biztosítanak az egész Safehouse -nak",
@@ -91,7 +88,7 @@ Sandbox_HU = {
 	Sandbox_DWAP_EnableLadders_tooltip = "Létrákat igényel?! Mod a munkához",
 
 	Sandbox_DWAP_Loot = "SAFEHOUSE készletek",
-	Sandbox_DWAP_Loot_tooltip = "Ha a Safehouse -nak speciális zsákmánya van",
+	Sandbox_DWAP_Loot_tooltip = "Ha a Safehouse -nak speciális zsákmány szaporodása van",
 	Sandbox_DWAP_Loot_value_option1 = "Csak az elsődleges",
 	Sandbox_DWAP_Loot_value_option2 = "Minden",
 	Sandbox_DWAP_Loot_value_option3 = "Elsődleges normál, mások alacsonyak",
@@ -101,7 +98,7 @@ Sandbox_HU = {
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Az összes térkép székhelye",
 
 	Sandbox_DWAP_Loot_EnableBooks = "Zsákmány -> készségkönyvek",
-	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Minden készségkönyv elhelyezkedése",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Minden készségkönyv botja",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Zsákmány -> média",
 	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Könyvek, CDS stb",
@@ -128,7 +125,7 @@ Sandbox_HU = {
 	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Alacsony",
 	Sandbox_DWAP_Loot_MedLevel_value_option4 = "Egyik sem",
 
-	Sandbox_DWAP_SeedLibrary = "Magkönyvtár",
+	Sandbox_DWAP_SeedLibrary = "Vetőmagkönyvtár",
 	Sandbox_DWAP_SeedLibrary_tooltip = "A játék minden magjának egy része",
 
 	Sandbox_DWAP_Loot_FarmLevel = "Zsákmány -> gazdálkodási kellékek",
@@ -137,7 +134,7 @@ Sandbox_HU = {
 	Sandbox_DWAP_Loot_FarmLevel_value_option3 = "Alacsony",
 	Sandbox_DWAP_Loot_FarmLevel_value_option4 = "Egyik sem",
 
-	Sandbox_DWAP_Loot_FishLevel = "Zsákmány -> Halászati kellékek",
+	Sandbox_DWAP_Loot_FishLevel = "Zsákmány -> Halászati ​​kellékek",
 	Sandbox_DWAP_Loot_FishLevel_value_option1 = "Magas",
 	Sandbox_DWAP_Loot_FishLevel_value_option2 = "Közepes",
 	Sandbox_DWAP_Loot_FishLevel_value_option3 = "Alacsony",

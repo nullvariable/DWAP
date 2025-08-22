@@ -49,9 +49,6 @@ Sandbox_PH = {
 	Sandbox_DWAP_EnableAll = "Paganahin ang lahat ng mga ligtas",
 	Sandbox_DWAP_EnableAll_tooltip = "Hindi inirerekomenda, mga susi, mapa, at spaw ay magiging para lamang sa napiling pagpipilian",
 
-	Sandbox_DWAP_SpawnInBase = "Spawn sa Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Magsimula sa loob ng safehouse kasama ang mga susi",
-
 	Sandbox_DWAP_Keys = "Magsimula sa Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Kumuha ng isang mapa ng safehouse at mga susi para dito",
 

@@ -47,10 +47,7 @@ Sandbox_TR = {
 	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville Townhouse"
 
 	Sandbox_DWAP_EnableAll = "Tüm kasaları etkinleştirin",
-	Sandbox_DWAP_EnableAll_tooltip = "Önerilmez, anahtarlar, harita ve yumurtlama yine de yalnızca seçilen seçenek için olacaktır",
-
-	Sandbox_DWAP_SpawnInBase = "Safehouse'da yumurtlama",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Anahtarlarla güvenli evin içinden başlayın",
+	Sandbox_DWAP_EnableAll_tooltip = "Tavsiye edilmez, anahtarlar, harita ve yumurtlama yine de yalnızca seçilen seçenek için olacaktır",
 
 	Sandbox_DWAP_Keys = "Harita ve Keys ile Başlayın",
 	Sandbox_DWAP_Keys_tooltip = "Bunun için SafeHouse ve Anahtarların bir haritasını alın",
@@ -66,7 +63,7 @@ Sandbox_TR = {
 	Sandbox_DWAP_EGSS = "Güneş Etkinleştir",
 	Sandbox_DWAP_EGSS_tooltip = "Sürükleyici güneş dizilerinin çalışmasını gerektirir",
 	
-	Sandbox_DWAP_APGS = "Jeneratör otomatik başlangıç sistemi",
+	Sandbox_DWAP_APGS = "Jeneratör otomatik başlangıç ​​sistemi",
 	Sandbox_DWAP_APGS_tooltip = "Jeneratörler güç kaybını tespit edecek ve otomatik olarak başlayacak",
 	
 	Sandbox_DWAP_Fuel = "Jeneratör yakıtı",

@@ -49,9 +49,6 @@ Sandbox_CA = {
 	Sandbox_DWAP_EnableAll = "Habiliteu tots els safehouses",
 	Sandbox_DWAP_EnableAll_tooltip = "No es recomana, les claus, el mapa i la crea només seran per a l'opció seleccionada",
 
-	Sandbox_DWAP_SpawnInBase = "Generar a la caixa forta",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Comenceu dins de la caixa forta amb les tecles",
-
 	Sandbox_DWAP_Keys = "Comenceu amb Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Obteniu un mapa de la caixa forta i les tecles",
 
@@ -82,10 +79,10 @@ Sandbox_CA = {
 	Sandbox_DWAP_Condition_tooltip = "Semblant als generadors de vainilla, de 0 a 100",
 
 	Sandbox_DWAP_WaterLevel = "Nivell de l'aigua",
-	Sandbox_DWAP_WaterLevel_tooltip = "Amb quina aigua han de començar els tancs",
+	Sandbox_DWAP_WaterLevel_tooltip = "Amb quina aigua han de començar els dipòsits",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Dipòsit d'aigua",
-	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Quina és la capacitat màxima dels dipòsits d?aigua",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Quina és la capacitat màxima dels dipòsits d'aigua",
 
 	Sandbox_DWAP_EnableLadders = "Activa les escapades (req escales ?! mod)",
 	Sandbox_DWAP_EnableLadders_tooltip = "Requereix escales?! mod per treballar",

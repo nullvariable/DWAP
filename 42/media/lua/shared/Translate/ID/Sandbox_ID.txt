@@ -32,18 +32,22 @@ Sandbox_ID = {
 	Sandbox_DWAP_Loot_Safehouse_value_option28 = "Drake",
 	Sandbox_DWAP_Loot_Safehouse_value_option29 = "Ekron Pig Farm",
 	Sandbox_DWAP_Loot_Safehouse_value_option30 = "Kompleks Lville 3 House",
-	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Townhome Brandenburg",
-	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Istirahat penjara",
+	Sandbox_DWAP_Loot_Safehouse_value_option31 = "Irvington Townhome",
+	Sandbox_DWAP_Loot_Safehouse_value_option32 = "Fallas Lake Diner",
 	Sandbox_DWAP_Loot_Safehouse_value_option33 = "Quill Manor",
 	Sandbox_DWAP_Loot_Safehouse_value_option34 = "Danau Wallow Gelap",
 	Sandbox_DWAP_Loot_Safehouse_value_option35 = "Kabin Perburuan Timur",
 	Sandbox_DWAP_Loot_Safehouse_value_option36 = "Lab Narkoba Muldraugh",
+	Sandbox_DWAP_Loot_Safehouse_value_option37 = "Klub Senjata Irvington",
+	Sandbox_DWAP_Loot_Safehouse_value_option38 = "Pojok Gas Brandenburg",
+	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Toko pos pemeriksaan untuk disewakan"
+	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Ketinggian daun"
+	Sandbox_DWAP_Loot_Safehouse_value_option41 = "Rumah Golf Maple Barat"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Parsonage Rosewood"
+	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Townhouse Louisville"
 
 	Sandbox_DWAP_EnableAll = "Aktifkan semua safehouse",
 	Sandbox_DWAP_EnableAll_tooltip = "Tidak direkomendasikan, kunci, peta, dan spawn hanya akan untuk opsi yang dipilih",
-
-	Sandbox_DWAP_SpawnInBase = "Bertelur di safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Mulailah di dalam safehouse dengan kunci",
 
 	Sandbox_DWAP_Keys = "Mulailah dengan Peta & Kunci",
 	Sandbox_DWAP_Keys_tooltip = "Dapatkan peta safehouse dan kunci untuk itu",
@@ -52,17 +56,18 @@ Sandbox_ID = {
 	Sandbox_DWAP_Barricade_tooltip = "Sebagian besar pintu dan jendela akan mulai dengan barikade",
 
 	Sandbox_DWAP_EWC = "Aktifkan sistem air",
-	Sandbox_DWAP_EWC_tooltip = "Gunakan sistem air MOD, dengan tangki air dan semua perlengkapan di dalam tangki",
+	Sandbox_DWAP_EWC_tooltip = "Gunakan sistem air MOD, dengan tangki air dan semua perlengkapan yang dilemparkan ke dalam tangki",
 	
 	Sandbox_DWAP_EGS = "Aktifkan sistem generator",
 	Sandbox_DWAP_EGS_tooltip = "Gunakan generator mod, yang memberikan daya ke seluruh safehouse",
-	Sandbox_DWAP_EWC_tooltip = "Gunakan sistem air MOD, dengan tangki air dan semua perlengkapan di dalam tangki",
+	Sandbox_DWAP_EGSS = "Aktifkan Solar",
+	Sandbox_DWAP_EGSS_tooltip = "Membutuhkan susunan matahari yang mendalam untuk bekerja",
 	
 	Sandbox_DWAP_APGS = "Sistem Mulai Otomatis Generator",
 	Sandbox_DWAP_APGS_tooltip = "Generator akan mendeteksi kehilangan daya dan mulai secara otomatis",
 	
 	Sandbox_DWAP_Fuel = "Bahan Bakar Generator",
-	Sandbox_DWAP_Fuel_tooltip = "Berapa banyak bahan bakar yang harus dimulai dengan generator",
+	Sandbox_DWAP_Fuel_tooltip = "Berapa banyak bahan bakar yang harus dimulai generator",
 
 	Sandbox_DWAP_Tank = "Tangki Generator",
 	Sandbox_DWAP_Tank_tooltip = "Berapa banyak bahan bakar yang harus disimpan oleh generator",
@@ -79,7 +84,10 @@ Sandbox_ID = {
 	Sandbox_DWAP_MRBWaterTankCapacity = "Tangki air",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Berapa kapasitas maksimal untuk tangki air",
 
-	Sandbox_DWAP_Loot = "Persediaan Safehouse",
+	Sandbox_DWAP_EnableLadders = "Aktifkan tangga Escape (REQ LADDERS?! MOD)",
+	Sandbox_DWAP_EnableLadders_tooltip = "Membutuhkan tangga?! mod untuk bekerja",
+
+	Sandbox_DWAP_Loot = "Persediaan safehouse",
 	Sandbox_DWAP_Loot_tooltip = "Jika safehouse memiliki jarahan khusus bertelur",
 	Sandbox_DWAP_Loot_value_option1 = "Hanya primer",
 	Sandbox_DWAP_Loot_value_option2 = "Semua",

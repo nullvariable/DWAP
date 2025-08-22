@@ -49,9 +49,6 @@ Sandbox_FR = {
 	Sandbox_DWAP_EnableAll = "Activer toutes les maisons de sécurité",
 	Sandbox_DWAP_EnableAll_tooltip = "Non recommandé, les clés, la carte et le frai seront toujours uniquement pour l'option sélectionnée",
 
-	Sandbox_DWAP_SpawnInBase = "Spawn in Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Commencez à l'intérieur du refuge avec les clés",
-
 	Sandbox_DWAP_Keys = "Commencez par la carte et les clés",
 	Sandbox_DWAP_Keys_tooltip = "Obtenez une carte de la maisons de refuge et des clés pour elle",
 

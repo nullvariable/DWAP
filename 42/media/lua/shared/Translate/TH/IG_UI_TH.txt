@@ -4,7 +4,7 @@ IGUI_TH = {
     -- Generator Window
     IGUI_DWAP_GeneratorWindow_Title = "สถานะเครื่องกำเนิดไฟฟ้า",
     IGUI_DWAP_GeneratorWindow_StatusUnknown = "สถานะ: ไม่ทราบ",
-    IGUI_DWAP_GeneratorWindow_StatusRunning = "สถานะ: กำลังทำงาน",
+    IGUI_DWAP_GeneratorWindow_StatusRunning = "สถานะ: กำลังวิ่ง",
     IGUI_DWAP_GeneratorWindow_StatusUsingBattery = "สถานะ: การใช้แบตเตอรี่",
     IGUI_DWAP_GeneratorWindow_StatusOff = "สถานะ: ปิด",
     IGUI_DWAP_GeneratorWindow_FuelLabel = "เชื้อเพลิง: %1 l / %2 l",

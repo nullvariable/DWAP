@@ -49,9 +49,6 @@ Sandbox_EN = {
 	Sandbox_DWAP_EnableAll = "Enable all safehouses",
 	Sandbox_DWAP_EnableAll_tooltip = "Not recommended, keys, map, and spawn will still only be for the selected option",
 
-	Sandbox_DWAP_SpawnInBase = "Spawn In Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Start inside the safehouse with the keys",
-
 	Sandbox_DWAP_Keys = "Start with Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Get a map of the safehouse and keys for it",
 

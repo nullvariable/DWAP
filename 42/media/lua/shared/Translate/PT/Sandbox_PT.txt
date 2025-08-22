@@ -49,9 +49,6 @@ Sandbox_PT = {
 	Sandbox_DWAP_EnableAll = "Habilite todos os preços",
 	Sandbox_DWAP_EnableAll_tooltip = "Não recomendado, as chaves, mapa e spawn ainda serão apenas para a opção selecionada",
 
-	Sandbox_DWAP_SpawnInBase = "Spawn em Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Comece dentro do Safehouse com as chaves",
-
 	Sandbox_DWAP_Keys = "Comece com mapa e chaves",
 	Sandbox_DWAP_Keys_tooltip = "Obtenha um mapa do Safehouse e das chaves",
 

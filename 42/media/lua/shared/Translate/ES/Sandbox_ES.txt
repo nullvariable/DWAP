@@ -49,9 +49,6 @@ Sandbox_ES = {
 	Sandbox_DWAP_EnableAll = "Habilitar todas las casas de seguridad",
 	Sandbox_DWAP_EnableAll_tooltip = "No recomendado, las teclas, el mapa y el Spawn aún solo serán para la opción seleccionada",
 
-	Sandbox_DWAP_SpawnInBase = "Engendrar en Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Comience dentro del Safehouse con las llaves",
-
 	Sandbox_DWAP_Keys = "Comience con Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "Obtenga un mapa de Safehouse y Keys para ello",
 

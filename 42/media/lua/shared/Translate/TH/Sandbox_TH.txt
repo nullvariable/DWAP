@@ -49,9 +49,6 @@ Sandbox_TH = {
 	Sandbox_DWAP_EnableAll = "เปิดใช้งาน Safehouses ทั้งหมด",
 	Sandbox_DWAP_EnableAll_tooltip = "ไม่แนะนำคีย์แผนที่และการวางไข่จะยังคงเป็นตัวเลือกที่เลือกเท่านั้น",
 
-	Sandbox_DWAP_SpawnInBase = "วางไข่ใน Safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "เริ่มต้นภายใน Safehouse ด้วยกุญแจ",
-
 	Sandbox_DWAP_Keys = "เริ่มต้นด้วย Map & Keys",
 	Sandbox_DWAP_Keys_tooltip = "รับแผนที่ของ Safehouse และ Keys สำหรับมัน",
 
@@ -62,7 +59,7 @@ Sandbox_TH = {
 	Sandbox_DWAP_EWC_tooltip = "ใช้ระบบน้ำของ mod กับถังเก็บน้ำและอุปกรณ์ติดตั้งทั้งหมดที่ติดอยู่กับถัง",
 	
 	Sandbox_DWAP_EGS = "เปิดใช้งานระบบเครื่องกำเนิดไฟฟ้า",
-	Sandbox_DWAP_EGS_tooltip = "ใช้เครื่องกำเนิดไฟฟ้าของ mod ซึ่งให้พลังงานแก่ทั้งเซฟเฮาส์",
+	Sandbox_DWAP_EGS_tooltip = "ใช้เครื่องกำเนิดไฟฟ้าของ mod ซึ่งให้พลังงานแก่ทั้ง safehouse",
 	Sandbox_DWAP_EGSS = "เปิดใช้งาน Solar",
 	Sandbox_DWAP_EGSS_tooltip = "ต้องใช้อาร์เรย์พลังงานแสงอาทิตย์ที่ดื่มด่ำในการทำงาน",
 	

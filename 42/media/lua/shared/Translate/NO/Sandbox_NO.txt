@@ -43,14 +43,11 @@ Sandbox_NO = {
 	Sandbox_DWAP_Loot_Safehouse_value_option39 = "Checkpoint Shop for Lease"
 	Sandbox_DWAP_Loot_Safehouse_value_option40 = "Bladhøyder"
 	Sandbox_DWAP_Loot_Safehouse_value_option41 = "West Maple Golf Home"
-	Sandbox_DWAP_Loot_Safehouse_value_option42 = "PLOESWOOD PREASAGE"
+	Sandbox_DWAP_Loot_Safehouse_value_option42 = "Palisander pastor"
 	Sandbox_DWAP_Loot_Safehouse_value_option43 = "Louisville rekkehus"
 
 	Sandbox_DWAP_EnableAll = "Aktiver alle safehouse",
 	Sandbox_DWAP_EnableAll_tooltip = "Ikke anbefalt, nøkler, kart og gyte vil fremdeles bare være for det valgte alternativet",
-
-	Sandbox_DWAP_SpawnInBase = "Gyte i safehouse",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Start inne i safehouse med nøklene",
 
 	Sandbox_DWAP_Keys = "Start med kart og nøkler",
 	Sandbox_DWAP_Keys_tooltip = "Få et kart over safehouse og nøkler for det",
@@ -82,16 +79,16 @@ Sandbox_NO = {
 	Sandbox_DWAP_Condition_tooltip = "I likhet med vaniljegeneratorer, 0 til 100",
 
 	Sandbox_DWAP_WaterLevel = "Vannstand",
-	Sandbox_DWAP_WaterLevel_tooltip = "Hvor mye vann tankene skal begynne med",
+	Sandbox_DWAP_WaterLevel_tooltip = "Hvor mye vann tankene skal starte med",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Vanntank",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Hva er den maksimale kapasiteten for vanntankene",
 
-	Sandbox_DWAP_EnableLadders = "Enable Escape Stadders (Req Ladders?! Mod)",
+	Sandbox_DWAP_EnableLadders = "Aktiver Escape Stiger (Req -stiger?! Mod)",
 	Sandbox_DWAP_EnableLadders_tooltip = "Krever stiger?! mod å jobbe",
 
 	Sandbox_DWAP_Loot = "Safehouse Supplies",
-	Sandbox_DWAP_Loot_tooltip = "Skulle safehouse ha spesielle tyvegater spawns",
+	Sandbox_DWAP_Loot_tooltip = "Skulle safehouse ha spesielle tyvegater gyter",
 	Sandbox_DWAP_Loot_value_option1 = "Bare primær",
 	Sandbox_DWAP_Loot_value_option2 = "Alle",
 	Sandbox_DWAP_Loot_value_option3 = "Primær normal, andre lave",
@@ -122,7 +119,7 @@ Sandbox_NO = {
 	Sandbox_DWAP_Loot_GunLevel_value_option3 = "Lav",
 	Sandbox_DWAP_Loot_GunLevel_value_option4 = "Ingen",
 
-	Sandbox_DWAP_Loot_MedLevel = "Loot -> medisinsk utstyr",
+	Sandbox_DWAP_Loot_MedLevel = "Tyvegods -> medisinsk utstyr",
 	Sandbox_DWAP_Loot_MedLevel_value_option1 = "Høy",
 	Sandbox_DWAP_Loot_MedLevel_value_option2 = "Medium",
 	Sandbox_DWAP_Loot_MedLevel_value_option3 = "Lav",

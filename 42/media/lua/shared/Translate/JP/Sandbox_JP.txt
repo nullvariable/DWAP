@@ -49,9 +49,6 @@ Sandbox_JP = {
 	Sandbox_DWAP_EnableAll = "すべてのセーフハウスを有効にします",
 	Sandbox_DWAP_EnableAll_tooltip = "推奨されない、キー、マップ、スポーンは選択されたオプションのみである",
 
-	Sandbox_DWAP_SpawnInBase = "セーフハウスでスポーン",
-	Sandbox_DWAP_SpawnInBase_tooltip = "キーを使用してセーフハウス内で開始します",
-
 	Sandbox_DWAP_Keys = "マップとキーから始めます",
 	Sandbox_DWAP_Keys_tooltip = "セーフハウスの地図とそのための鍵を入手する",
 
@@ -62,7 +59,7 @@ Sandbox_JP = {
 	Sandbox_DWAP_EWC_tooltip = "水槽とすべての備品がタンクに配管されたすべての備品を使用して、MODの水システムを使用してください",
 	
 	Sandbox_DWAP_EGS = "発電機システムを有効にします",
-	Sandbox_DWAP_EGS_tooltip = "Safehouse全体に電力を供給するMODのジェネレーターを使用してください",
+	Sandbox_DWAP_EGS_tooltip = "Safehouse全体に電力を供給するmodのジェネレーターを使用してください",
 	Sandbox_DWAP_EGSS = "ソーラーを有効にします",
 	Sandbox_DWAP_EGSS_tooltip = "動作するには没入型ソーラーアレイが必要です",
 	
@@ -87,7 +84,7 @@ Sandbox_JP = {
 	Sandbox_DWAP_MRBWaterTankCapacity = "水タンク",
 	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "ウォータータンクの最大容量は何ですか",
 
-	Sandbox_DWAP_EnableLadders = "脱出はラダー（reqはしご？！mod）を有効にします",
+	Sandbox_DWAP_EnableLadders = "脱出はラダー（reqはしご？！mod）を有効にする",
 	Sandbox_DWAP_EnableLadders_tooltip = "はしごが必要ですか？！動作するmod",
 
 	Sandbox_DWAP_Loot = "セーフハウス用品",

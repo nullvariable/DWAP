@@ -49,10 +49,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_EnableAll = "Ota kaikki turvalliset",
 	Sandbox_DWAP_EnableAll_tooltip = "Ei suositeltavaa, avaimet, kartta ja kutevat ovat silti vain valittuja vaihtoehtoja",
 
-	Sandbox_DWAP_SpawnInBase = "Kutikko Safehousessa",
-	Sandbox_DWAP_SpawnInBase_tooltip = "Aloita Safehouse -näppäinten sisällä",
-
-	Sandbox_DWAP_Keys = "Aloita kartalla ja näppäimillä",
+	Sandbox_DWAP_Keys = "Aloita kartalla ja avaimilla",
 	Sandbox_DWAP_Keys_tooltip = "Hanki kartta SafeHousesta ja avaimet sille",
 
 	Sandbox_DWAP_Barricade = "SafeHouse on estetty",
@@ -67,7 +64,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_EGSS_tooltip = "Vaatii syventäviä aurinkopaneereita toimimaan",
 	
 	Sandbox_DWAP_APGS = "Generaattorin automaattinen käynnistysjärjestelmä",
-	Sandbox_DWAP_APGS_tooltip = "Generaattorit tunnistavat virranhäviön ja alkavat automaattisesti",
+	Sandbox_DWAP_APGS_tooltip = "Generaattorit havaitsevat virranhäviön ja alkavat automaattisesti",
 	
 	Sandbox_DWAP_Fuel = "Generaattoripolttoaine",
 	Sandbox_DWAP_Fuel_tooltip = "Kuinka paljon polttoainetta generaattorin (t) pitäisi alkaa",
@@ -85,7 +82,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_WaterLevel_tooltip = "Kuinka paljon vettä säiliöiden pitäisi alkaa",
 
 	Sandbox_DWAP_MRBWaterTankCapacity = "Vesisäiliö",
-	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Mikä on vesisäiliöiden enimmäiskapasiteetti",
+	Sandbox_DWAP_MRBWaterTankCapacity_tooltip = "Mikä on vesisäiliöiden maksimikapasiteetti",
 
 	Sandbox_DWAP_EnableLadders = "Ota paeta tikkaat (req tikkaat?! Mod)",
 	Sandbox_DWAP_EnableLadders_tooltip = "Vaatii tikkaita?! modin töitä",
@@ -101,7 +98,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_Loot_EnableMaps_tooltip = "Kaikkien karttojen pinta",
 
 	Sandbox_DWAP_Loot_EnableBooks = "Ryöstö -> taitokirjat",
-	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Kaikkien taitojen kirjojen varasto",
+	Sandbox_DWAP_Loot_EnableBooks_tooltip = "Kaikkien taitokirjojen varasto",
 
 	Sandbox_DWAP_Loot_MediaLevel = "Ryöstö -> media",
 	Sandbox_DWAP_Loot_MediaLevel_tooltip = "Kirjat, CD -levyt jne",
@@ -162,7 +159,7 @@ Sandbox_FI = {
 	Sandbox_DWAP_Loot_ToolsLevel_value_option4 = "Ei yhtään",
 
 	Sandbox_DWAP_Loot_BuildMatsLevel = "Ryöstö -> rakennusmatot",
-	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Vaihtelee SafeHouse -sivustolla, pienemmillä on huomattavasti vähemmän",
+	Sandbox_DWAP_Loot_BuildMatsLevel_tooltip = "Vaihtelee SafeHouse, pienemmillä on huomattavasti vähemmän",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option1 = "Korkea",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option2 = "Keskipitkä",
 	Sandbox_DWAP_Loot_BuildMatsLevel_value_option3 = "Matala",

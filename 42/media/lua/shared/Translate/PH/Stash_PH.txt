@@ -1,6 +1,6 @@
 Stash_PH = {
     Stash_DWAP_09_text1 = "Nangungunang palapag, mga gamit sa basement",
-    Stash_DWAP_10_text1 = "Mga hagdan ng Fallout Shelter sa Likod ng Security Office",
+    Stash_DWAP_10_text1 = "Ang mga hagdan ng fallout sa likod ng tanggapan ng seguridad",
     Stash_DWAP_12_text1 = "Fallout Shelter sa Basement",
     Stash_DWAP_31_text1 = "Maingat sa Cave Ins",
     Stash_DWAP_31_text2 = "Gawin ang iyong paraan sa library sa basement",
