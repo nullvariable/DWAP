@@ -66,70 +66,83 @@ DWAPKeysCL.updateBuildingKeyId = function(params)
 end
 
 Events.OnNewGame.Add(function()
-    if SandboxVars.DWAP.SpawnWithMapAndKeys then
         DWAPUtils.dprint("DWAPKeysCL.OnNewGame")
         local configs = DWAPUtils.loadConfigs()
         local configIndex = DWAPUtils.getPrimaryConfigIndex()
-
-        local config = configs[configIndex]
-        if config then
-            if config.doorKeys then
-                local keyId = DWAPUtils.getSafehouseKeyId()
-                for i = 1, #config.doorKeys.doors do
-                    local door = config.doorKeys.doors[i]
-                    DWAPUtils.dprint(("Adding key to door %s %s %s"):format(door.x, door.y, door.z))
-                    if door.isProp then
-                        DWAPSquareLoaded:AddHookEvent(
-                            "PropSpawned",
-                            DWAPKeysCL.updateBuildingKeyId,
-                            door.x,
-                            door.y,
-                            door.z,
-                            true,
-                            {
-                                coords = {x = door.x, y = door.y, z = door.z},
-                                keyId = keyId,
-                                sprite = door.sprite,
-                            }
-                        )
+        local keyIdBase = DWAPUtils.getSafehouseKeyId()
+        print('Client BaseKeys. ' .. keyIdBase)
+        for i = 1, #configs do
+            local config = configs[i]
+            if config then
+                if (SandboxVars.DWAP.SpawnWithMapAndKeys and i == configIndex) or (config.doorKeys and config.doorKeys.extra) then
+                    if config.doorKeys then
+                        local keyId = keyIdBase + i
+                        for j = 1, #config.doorKeys.doors do
+                            local door = config.doorKeys.doors[j]
+                            DWAPUtils.dprint(("Adding key %s to door %s %s %s"):format(keyId, door.x, door.y, door.z))
+                            if door.isProp then
+                                DWAPSquareLoaded:AddHookEvent(
+                                    "PropSpawned",
+                                    DWAPKeysCL.updateBuildingKeyId,
+                                    door.x,
+                                    door.y,
+                                    door.z,
+                                    true,
+                                    {
+                                        coords = {x = door.x, y = door.y, z = door.z},
+                                        keyId = keyId,
+                                        sprite = door.sprite,
+                                    }
+                                )
+                            end
+                        end
                     end
-                end
-            end
-            if config.map then
-                local playerObj = getPlayer()
-                if not playerObj then return end
-                local stash = StashSystem.getStash(config.map.name)
-                if stash then
-                    local mapItem = instanceItem(stash:getItem())
-                    StashSystem.doStashItem(stash, mapItem)
-                    mapItem:setCustomName(true)
-                    playerObj:getInventory():AddItem(mapItem)
-                    DWAPUtils.dprint(("Added map %s to player inventory"):format(mapItem:getDisplayName()))
+                    if config.map then
+                        local playerObj = getPlayer()
+                        if not playerObj then return end
+                        local stash = StashSystem.getStash(config.map.name)
+                        if stash then
+                            local mapItem = instanceItem(stash:getItem())
+                            StashSystem.doStashItem(stash, mapItem)
+                            mapItem:setCustomName(true)
+                            playerObj:getInventory():AddItem(mapItem)
+                            DWAPUtils.dprint(("Added map %s to player inventory"):format(mapItem:getDisplayName()))
+
+                            -- readd the original stash so it can be used if the player dies and starts a new character etc.
+                            pcall(function()
+                                local stashBuilding = StashBuilding.new(stash:getName(), stash:getBuildingX(), stash:getBuildingY())
+                                local possibleStashes = StashSystem.getPossibleStashes()
+                                possibleStashes:add(stashBuilding)
+                            end)
+                        else
+                            DWAPUtils.dprint(("No stash found for map %s"):format(config.map))
+                        end
+                    end
                 end
             end
         end
         table.wipe(configs)
-    end
-    local stashList = StashSystem.getAllStashes()
-    for i=0,stashList:size()-1 do
-        local stash = stashList:get(i)
-        local name = stash:getName()
-        if name and name:find("DWAPStashMap") then
-            local mapItem = instanceItem(stash:getItem())
-            StashSystem.doStashItem(stash, mapItem)
-            DWAPUtils.dprint(("Removed stash %s"):format(name))
-        end
-    end
+    -- local stashList = StashSystem.getAllStashes()
+    -- for i=0,stashList:size()-1 do
+    --     local stash = stashList:get(i)
+    --     local name = stash:getName()
+    --     if name and name:find("DWAPStashMap") then
+    --         local mapItem = instanceItem(stash:getItem())
+    --         StashSystem.doStashItem(stash, mapItem)
+    --         DWAPUtils.dprint(("Removed stash %s"):format(name))
+    --     end
+    -- end
 end)
 
 Events.OnLoad.Add(function()
-    if SandboxVars.DWAP.SpawnWithMapAndKeys then
-        local configs = DWAPUtils.loadConfigs()
-        local configIndex = DWAPUtils.getPrimaryConfigIndex()
-        local config = configs[configIndex]
-        if config then
+    local configs = DWAPUtils.loadConfigs()
+    local configIndex = DWAPUtils.getPrimaryConfigIndex()
+    local keyIdBase = DWAPUtils.getSafehouseKeyId()
+    for c = 1, #configs do
+        local config = configs[c]
+        if config and ((configIndex == c and SandboxVars.DWAP.SpawnWithMapAndKeys) or (config.doorKeys and config.doorKeys.extra)) then
             if config.doorKeys then
-                local keyId = DWAPUtils.getSafehouseKeyId()
+                local keyId = keyIdBase + c
                 for i = 1, #config.doorKeys.doors do
                     local door = config.doorKeys.doors[i]
                     DWAPUtils.dprint(("configIndex:%d Adding key to door %s %s %s"):format(configIndex, door.x, door.y, door.z))
@@ -148,8 +161,8 @@ Events.OnLoad.Add(function()
                 end
             end
         end
-        table.wipe(configs)
     end
+    table.wipe(configs)
 end)
 
 -- if mapsToSpawn then

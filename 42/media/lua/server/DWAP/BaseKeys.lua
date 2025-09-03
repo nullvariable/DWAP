@@ -9,22 +9,27 @@ DWAPKeys.onNewGame = function(playerObj, _)
 
     local configs = DWAPUtils.loadConfigs()
     local configIndex = DWAPUtils.getPrimaryConfigIndex()
-    local config = configs[configIndex]
-    if config and config.doorKeys then
-        if config.doorKeys and SandboxVars.DWAP.SpawnWithMapAndKeys then
-            local keyId = DWAPUtils.getSafehouseKeyId()
-            --- @type InventoryItem
-            local key = instanceItem("Base.Key1")
-            key:setName(config.doorKeys.name)
-            key:setKeyId(keyId)
-            playerObj:getInventory():AddItem(key)
-            DWAPUtils.dprint(("Added key %s (%d) to player inventory"):format(key:getDisplayName(), configIndex))
+    local keyIdBase = DWAPUtils.getSafehouseKeyId()
+    for i = 1, #configs do
+        local config = configs[i]
+        if config and config.doorKeys then
+            if i == configIndex or config.doorKeys.extra then
+                if config.doorKeys and (SandboxVars.DWAP.SpawnWithMapAndKeys or config.doorKeys.extra) then
+                    local keyId = keyIdBase + i
+                    --- @type InventoryItem
+                    local key = instanceItem("Base.Key1")
+                        key:setName(config.doorKeys.name)
+                    key:setKeyId(keyId)
+                    playerObj:getInventory():AddItem(key)
+                    DWAPUtils.dprint(("Added key %s (%d) to player inventory"):format(key:getDisplayName(), keyId))
+                end
+                -- @todo for bases that might be super dark to spawn in, add starter items to the config
+                -- if SandboxVars.DWAP.SpawnInBase then
+                --     local flashlight = instanceItem("Base.HandTorch")
+                --     playerObj:getInventory():AddItem(flashlight)
+                -- end
+            end
         end
-        -- @todo for bases that might be super dark to spawn in, add starter items to the config
-        -- if SandboxVars.DWAP.SpawnInBase then
-        --     local flashlight = instanceItem("Base.HandTorch")
-        --     playerObj:getInventory():AddItem(flashlight)
-        -- end
     end
     table.wipe(configs)
 end

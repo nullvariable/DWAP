@@ -308,13 +308,41 @@ function DWAPUtils.loadConfigs(noCache)
         if saveVersion >= (extConfig.minimumVersion or 0) then
             local success, config = pcall(require, extConfig.file)
             if success and config then
-                if (extConfig.overrides and extConfig.overrides.includeLoot == false) then
-                    DWAPUtils.dprint("External config override to exclude loot")
-                    config.loot = nil
-                end
-                if extConfig.overrides and extConfig.overrides.makePrimary then
-                    DWAPUtils.dprint(extConfig.file .. " is set to be primary safehouse")
-                    config.selectedSafehouse = true
+                if extConfig.overrides then
+                    if extConfig.overrides.includeLoot == false then
+                        DWAPUtils.dprint("External config override to exclude loot")
+                        config.loot = nil
+                    end
+                    if extConfig.overrides.makePrimary then
+                        DWAPUtils.dprint(extConfig.file .. " is set to be primary safehouse")
+                        config.selectedSafehouse = true
+                    end
+                    if not extConfig.overrides.makePrimary then
+                        local lootVal = extConfig.overrides.regularLoot
+                        local removeSpecials = extConfig.overrides.essentialLoot and extConfig.overrides.essentialLoot < 3
+                        for j = 1, #config.loot do
+                            if config.loot[j] and config.loot[j].special ~= nil and removeSpecials then
+                                config.loot[j] = nil
+                            elseif config.loot[j] then
+                                if lootVal == 2 then
+                                    config.loot[j] = nil
+                                elseif lootVal == 3 then -- high, or extra high
+                                    config.loot[j].level = 1
+                                elseif lootVal == 4 then
+                                    config.loot[j].level = 2
+                                elseif lootVal == 5 then
+                                    config.loot[j].level = 3
+                                end
+                            end
+                        end
+                    end
+                    if (extConfig.overrides.essentialLoot and extConfig.overrides.essentialLoot > 2) or (extConfig.overrides.regularLoot and extConfig.overrides.regularLoot > 2) then
+                        config.addonLootOverride = true
+                    end
+                    if extConfig.overrides.keyAndMap and extConfig.overrides.keyAndMap > 1 then
+                        DWAPUtils.dprint("External config override to include key and map")
+                        config.doorKeys.extra = true
+                    end
                 end
                 table.insert(configs, config)
                 DWAPUtils.dprint("Loaded external config: " .. extConfig.file .. " with loot: " .. tostring(type(config.loot) == "table"))
