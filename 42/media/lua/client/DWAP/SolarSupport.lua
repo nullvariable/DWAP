@@ -1,5 +1,4 @@
 local DWAPUtils = require("DWAPUtils")
-local ISA = require "ImmersiveSolarArrays/Utilities"
 DWAP_ISA = {
     configCache = {},
 }
@@ -247,36 +246,3 @@ local function onFillContainer(roomType, containerType, container)
 end
 Events.OnFillContainer.Add(onFillContainer)
 
-local everyTen = SandboxVars.ISA.ChargeFreq == 1 and true
-local function updatePowerbank()
-    local generatorsInScanRange = DWAP_Gen2.generatorsInScanRange
-    if generatorsInScanRange then
-        for parent, _ in pairs(generatorsInScanRange) do
-            local generator = DWAP_Gen2.generators[parent]
-            if generator and generator.solar then
-                local data = DWAP_Gen2:GetCombinedGeneratorData(parent)
-                if data and data.solarEnabled then
-                    -- DWAPUtils.dprint("DWAP_ISA: Updating powerbank for generator " .. parent)
-                    -- DWAPUtils.dprint("  Active panels: " .. data.activePanels .. "/" .. data.totalPanels)
-                    -- DWAPUtils.dprint("  Solar output: " .. data.solarOutput)
-                    -- DWAPUtils.dprint("  Battery: " .. (data.batteryPercent or 0) .. "% (" .. (data.batteryState or "unknown") .. ")")
-                    -- DWAPUtils.dprint("  Power needed: " .. data.totalPowerUsing .. ", net after solar/battery: " .. data.netPowerNeeded)
-                end
-            end
-        end
-    else
-        DWAPUtils.dprint("DWAP_ISA: No generators in scan range, skipping powerbank update")
-    end
-end
-
--- local function onLoad()
---     if DWAP_Gen2.canUseSolar then
---         -- get the update frequency from the ISA sandbox settings
---         if everyTen then
---             Events.EveryTenMinutes.Add(updatePowerbank)
---         else
---             Events.EveryHours.Add(updatePowerbank)
---         end
---     end
--- end
--- Events.OnLoad.Add(onLoad)

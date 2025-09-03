@@ -430,8 +430,8 @@ Events.OnInitGlobalModData.Add(function()
             Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
             Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
         else
-            Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu_17)
             Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems_17)
+            Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu_17)
         end
     end
 end)

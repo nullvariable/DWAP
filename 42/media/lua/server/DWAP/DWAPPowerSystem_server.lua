@@ -30,12 +30,16 @@ end
 function DWAPPowerSystem:loadGenerators()
     local configs = DWAPUtils.loadConfigs()
     local generators = {}
-    local running = not DWAPUtils.WorldPowerStillAvailable() and SandboxVars.DWAP.AutoPowerGenSystem
+    local _running = not DWAPUtils.WorldPowerStillAvailable() and SandboxVars.DWAP.AutoPowerGenSystem
     for i = 1, #configs do
         local config = configs[i]
         if config and config.generators then
             for j = 1, #config.generators do
                 local gen = config.generators[j]
+                local running = _running
+                if gen.startsOn then
+                    running = true
+                end
                 if gen then
                     gen.running = running
                     gen.solarEnabled = false
@@ -60,7 +64,7 @@ end
 function DWAPPowerSystem:initSystem()
     SGlobalObjectSystem.initSystem(self)
     DWAPUtils.dprint("System initialized")
-    self.system:setModDataKeys({ 'setupDone', 'generators', 'haveWorldPower' })
+    self.system:setModDataKeys({ 'setupDone', 'generators', 'haveWorldPower', 'ghostHashToIndex', 'controlHashToIndex', })
     self.system:setObjectModDataKeys({ 'DWAPObjectType', 'DWAPGeneratorIndex', 'DWAPEmitter' })
     self.system:setObjectSyncKeys({ 'DWAPObjectType', 'DWAPGeneratorIndex', 'DWAPEmitter' })
     if DWAPUtils.getSaveVersion() < 17 or not SandboxVars.DWAP.EnableGenSystem then
@@ -74,7 +78,7 @@ function DWAPPowerSystem:initSystem()
     if self.canUseSolar then
         self.PbSystem = require "ImmersiveSolarArrays/Powerbank/PowerBankSystem_Server"
     end
-    if not self.setupDone then
+    if not self.setupDone or (self.ghostHashToIndex == nil or self.controlHashToIndex == nil) then
         self:noise("Setting up power system")
         self.haveWorldPower = DWAPUtils.WorldPowerStillAvailable()
         local generators = self:loadGenerators()
@@ -113,6 +117,7 @@ function DWAPPowerSystem:configureGhostGenerator(isoGenerator)
     if genIndex then
         modData.DWAPObjectType = "generator"
         modData.DWAPGeneratorIndex = genIndex
+        isoGenerator:transmitModData()
     end
 end
 
@@ -125,6 +130,7 @@ function DWAPPowerSystem:maybeConfigureControlPanel(isoObject)
     if genIndex then
         modData.DWAPObjectType = "controlPanel"
         modData.DWAPGeneratorIndex = genIndex
+        isoObject:transmitModData()
     end
 end
 

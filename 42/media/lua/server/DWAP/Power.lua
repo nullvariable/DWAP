@@ -20,7 +20,11 @@ end, PRIORITY)
 
 MapObjects.OnLoadWithSprite(ghostGeneratorSpriteName, function(object)
     DWAPPowerSystem.instance:noise("Loading ghost generator at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
-    DWAPPowerSystem.instance:loadIsoObject(object)
+
+    DWAPPowerSystem.instance:configureGhostGenerator(object)
+    local generator = DWAPPowerObject.convertToIsoGenerator(object)
+
+    DWAPPowerSystem.instance:loadIsoObject(generator)
 end, PRIORITY)
 
 MapObjects.OnNewWithSprite(controlSpriteName, function(object)
@@ -30,5 +34,6 @@ end, PRIORITY)
 
 MapObjects.OnLoadWithSprite(controlSpriteName, function(object)
     DWAPPowerSystem.instance:noise("Loading control panel at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+    DWAPPowerSystem.instance:maybeConfigureControlPanel(object)
     DWAPPowerSystem.instance:loadIsoObject(object)
 end, PRIORITY)
