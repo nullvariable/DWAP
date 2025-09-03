@@ -89,14 +89,29 @@ function DWAPWaterSystem:refillTanksFromSource(maxAmount)
         if tankObj and tankObj:isTank() then
             local isoObject = tankObj:getIsoObject()
             if isoObject then
-                local fluidComponent = isoObject:getComponent("Fluid")
-                if fluidComponent then
-                    local currentAmount = fluidComponent:getAmount()
-                    local newAmount = math.min(currentAmount + maxAmount, fluidComponent:getCapacity())
-                    fluidComponent:setAmount(newAmount)
+                -- @TODO this no longer works
+                -- local fluidComponent = isoObject:getComponent(ComponentType.FluidContainer)
+                -- local fluidComponent = isoObject:getFluidContainer()
+                -- if fluidComponent then
+                --     local currentAmount = fluidComponent:getAmount()
+                --     local newAmount = math.min(currentAmount + maxAmount, fluidComponent:getCapacity())
+                --     fluidComponent:setAmount(newAmount)
+                --     self:noise(string.format("Refilled tank at %d,%d,%d to %d/%d",
+                --         isoObject:getX(), isoObject:getY(), isoObject:getZ(),
+                --         newAmount, fluidComponent:getCapacity()))
+                -- end
+                local cap = isoObject:getFluidCapacity()
+                local currentAmount = isoObject:getFluidAmount()
+                local amountToAdd = maxAmount
+
+                if currentAmount + amountToAdd > cap then
+                    amountToAdd = cap - currentAmount
+                end
+                if amountToAdd > 0 then
+                    isoObject:addFluid(FluidType.Water, amountToAdd)
                     self:noise(string.format("Refilled tank at %d,%d,%d to %d/%d",
                         isoObject:getX(), isoObject:getY(), isoObject:getZ(),
-                        newAmount, fluidComponent:getCapacity()))
+                        currentAmount + amountToAdd, cap))
                 end
             end
         end
