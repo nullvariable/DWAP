@@ -185,7 +185,7 @@ local function fillContainer(container, config, index, coordsKey)
                 local item = allMaps[i]
                 if item then
                     addItem(container, item)
-                    allMaps[i] = nil
+                    -- allMaps[i] = nil
                 end
             end
         elseif config.special == "skillbooks1" then
@@ -194,7 +194,7 @@ local function fillContainer(container, config, index, coordsKey)
                 local item = skillBooks1[i]
                 if item then
                     addItem(container, item)
-                    skillBooks1[i] = nil
+                    -- skillBooks1[i] = nil
                 end
             end
         elseif config.special == "skillbooks2" then
@@ -203,7 +203,7 @@ local function fillContainer(container, config, index, coordsKey)
                 local item = skillBooks2[i]
                 if item then
                     addItem(container, item)
-                    skillBooks2[i] = nil
+                    -- skillBooks2[i] = nil
                 end
             end
         elseif config.special == "skillmags" then
@@ -212,7 +212,7 @@ local function fillContainer(container, config, index, coordsKey)
                 local item = allSkillMags[i]
                 if item then
                     addItem(container, item)
-                    allSkillMags[i] = nil
+                    -- allSkillMags[i] = nil
                 end
             end
         elseif config.special == "SeedLibrary" then
@@ -380,16 +380,16 @@ local function loadConfigs()
         local config = configs[i]
         local count = 0
         if config and config.loot then
-            if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex) or nonPrimaryLootLevel == 4 then
+            if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex and not config.addonLootOverride) or nonPrimaryLootLevel == 4 then
                 config.loot = {}
             else
-                local rewriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex
+                local rewriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex and not config.addonLootOverride
                 for j = 1, #config.loot do
                     if rewriteLevel and type(config.loot[j].level) == "string" then
                         -- overwrite to low
                         config.loot[j].level = 3
                     end
-                    if config.loot[j].special and config.loot[j].special ~= "gunlocker" and i ~= safehouseIndex then
+                    if config.loot[j].special and config.loot[j].special ~= "gunlocker" and i ~= safehouseIndex and not config.addonLootOverride then
                         config.loot[j] = nil
                     else
                         setLootConfigValue(config.loot[j])
