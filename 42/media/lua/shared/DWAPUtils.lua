@@ -3,7 +3,6 @@ local IsoObjectUtils = require("Starlit/IsoObjectUtils")
 local TableUtils = require("Starlit/TableUtils")
 
 DWAPUtils.currentVersion = 17
-DWAPUtils.safehouseKeyId = nil
 
 local getSandboxOptions = getSandboxOptions
 local getGameTime = getGameTime
@@ -129,7 +128,9 @@ end
 --- @return number
 function DWAPUtils.getRandomSelected()
     local random = newrandom()
-    random:seed(WGParams.instance:getSeedString())
+    local seed = WGParams.instance:getSeedString()
+    random:seed(seed)
+    DWAPUtils.dprint("Random seed: " .. seed)
     return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
 end
 
@@ -178,17 +179,48 @@ function DWAPUtils.getPrimaryConfigIndex()
 end
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
-    if isNewGame then
-        cachedBaseIndex = nil
-        cachedPrimaryConfigIndex = nil
-        DWAPUtils.loadConfigs(true)
-    end
-    DWAPUtils.safehouseKeyId = DWAPUtils.getSafehouseKeyId()
     DWAPUtils.dprint(("OnInitGlobalModData Primary Safehouse: %d"):format(DWAPUtils.getPrimaryConfigIndex()))
 
     local modData = ModData.getOrCreate("DWAP_Utils")
     if not modData.saveVersion then
         modData.saveVersion = DWAPUtils.currentVersion
+    end
+    if not modData.cachedBaseIndex then
+        modData.cachedBaseIndex = DWAPUtils.getBaseSafehouseIndex()
+        cachedBaseIndex = modData.cachedBaseIndex
+        WGParams.instance:save()
+    end
+    if not modData.cachedPrimaryConfigIndex then
+        modData.cachedPrimaryConfigIndex = DWAPUtils.getPrimaryConfigIndex()
+        cachedPrimaryConfigIndex = modData.cachedPrimaryConfigIndex
+    end
+    if not modData.originalSeed then
+        DWAPUtils.dprint("No original seed found, setting to current seed")
+        local seed = WGParams.instance:getSeedString()
+        modData.originalSeed = seed
+        WGParams.instance:save()
+    else
+        local seed = WGParams.instance:getSeedString()
+        if seed ~= modData.originalSeed then
+            local message = ("DWAP Warning: Current world seed (%s) does not match original seed (%s). This may cause issues with safehouse selection and loot spawning."):format(seed, modData.originalSeed)
+            print(message)
+            DWAPUtils.dprint(message)
+            WGParams.instance:setSeedString(modData.originalSeed)
+            WGParams.instance:save()
+            print("DWAP Attempting to restore original seed")
+        end
+    end
+
+    local configs = DWAPUtils.loadConfigs()
+    if configs then
+        local config = configs[DWAPUtils.getPrimaryConfigIndex()]
+        if config.spawn then
+            DWAPSPAWN = {
+                x = config.spawn.x,
+                y = config.spawn.y,
+                z = config.spawn.z
+            }
+        end
     end
 end)
 
@@ -268,9 +300,9 @@ function DWAPUtils.loadConfigs(noCache)
         configFilesToUse = configFiles_17
     end
     local index = DWAPUtils.getBaseSafehouseIndex()
+    if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
     local primaryIndex = DWAPUtils.getPrimaryConfigIndex()
     DWAPUtils.dprint("Base Safehouse Index: " .. index .. ", Primary Safehouse Index: " .. primaryIndex)
-    if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
     if SandboxVars.DWAP.EnableAllLocations then
         if debugEnabled then
             DWAPUtils.dprint("Loading all configs: " .. #configFilesToUse)
@@ -304,6 +336,7 @@ function DWAPUtils.loadConfigs(noCache)
 
     DWAPUtils.dprint("Loading external configs: " .. #DWAP_ExternalConfigs)
     for i = 1, #DWAP_ExternalConfigs do
+        local specialCount = 0
         local extConfig = DWAP_ExternalConfigs[i]
         if saveVersion >= (extConfig.minimumVersion or 0) then
             local success, config = pcall(require, extConfig.file)
@@ -320,32 +353,51 @@ function DWAPUtils.loadConfigs(noCache)
                     if not extConfig.overrides.makePrimary then
                         local lootVal = extConfig.overrides.regularLoot
                         local removeSpecials = extConfig.overrides.essentialLoot and extConfig.overrides.essentialLoot < 3
-                        for j = 1, #config.loot do
-                            if config.loot[j] and config.loot[j].special ~= nil and removeSpecials then
-                                config.loot[j] = nil
-                            elseif config.loot[j] then
-                                if lootVal == 2 then
+                        if config.loot then
+                            for j = 1, #config.loot do
+                                if config.loot[j] and config.loot[j].special then
+                                    specialCount = specialCount + 1
+                                end
+                                if config.loot[j] and config.loot[j].special ~= nil and removeSpecials then
+                                    DWAPUtils.dprint(extConfig.file .. " removing special loot: " .. tostring(config.loot[j].special))
                                     config.loot[j] = nil
-                                elseif lootVal == 3 then -- high, or extra high
-                                    config.loot[j].level = 1
-                                elseif lootVal == 4 then
-                                    config.loot[j].level = 2
-                                elseif lootVal == 5 then
-                                    config.loot[j].level = 3
+                                elseif config.loot[j] and type(config.loot[j].level) == "string" then
+                                    if lootVal == 2 then
+                                        config.loot[j] = nil
+                                    elseif lootVal == 3 then -- high, or extra high
+                                        config.loot[j].level = 1
+                                    elseif lootVal == 4 then
+                                        config.loot[j].level = 2
+                                    elseif lootVal == 5 then
+                                        config.loot[j].level = 3
+                                    end
                                 end
                             end
                         end
                     end
-                    if (extConfig.overrides.essentialLoot and extConfig.overrides.essentialLoot > 2) or (extConfig.overrides.regularLoot and extConfig.overrides.regularLoot > 2) then
+                    if (extConfig.overrides.essentialLoot and extConfig.overrides.essentialLoot > 2) then
+                        config.essentialLootOverride = true
+                    end
+                    if (extConfig.overrides.regularLoot and extConfig.overrides.regularLoot > 2) then
                         config.addonLootOverride = true
                     end
                     if extConfig.overrides.keyAndMap and extConfig.overrides.keyAndMap > 1 then
                         DWAPUtils.dprint("External config override to include key and map")
                         config.doorKeys.extra = true
+                        if config.map then
+                            config.map.extra = true
+                        end
+                    end
+                    if extConfig.overrides.key and extConfig.overrides.key == 2 then
+                        DWAPUtils.dprint("External config override to include key")
+                        config.doorKeys.extra = true
+                    end
+                    if config.map and extConfig.overrides.map and extConfig.overrides.map == 2 then
+                        DWAPUtils.dprint("External config override to include map")
+                        config.map.extra = true
                     end
                 end
                 table.insert(configs, config)
-                DWAPUtils.dprint("Loaded external config: " .. extConfig.file .. " with loot: " .. tostring(type(config.loot) == "table"))
             else
                 DWAPUtils.dprint("Error loading external config: " .. extConfig.file)
             end

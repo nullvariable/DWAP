@@ -23,11 +23,6 @@ DWAPKeys.onNewGame = function(playerObj, _)
                     playerObj:getInventory():AddItem(key)
                     DWAPUtils.dprint(("Added key %s (%d) to player inventory"):format(key:getDisplayName(), keyId))
                 end
-                -- @todo for bases that might be super dark to spawn in, add starter items to the config
-                -- if SandboxVars.DWAP.SpawnInBase then
-                --     local flashlight = instanceItem("Base.HandTorch")
-                --     playerObj:getInventory():AddItem(flashlight)
-                -- end
             end
         end
     end

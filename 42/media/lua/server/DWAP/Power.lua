@@ -19,6 +19,7 @@ MapObjects.OnNewWithSprite(ghostGeneratorSpriteName, function(object)
 end, PRIORITY)
 
 MapObjects.OnLoadWithSprite(ghostGeneratorSpriteName, function(object)
+    if not object then return end
     DWAPPowerSystem.instance:noise("Loading ghost generator at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
 
     DWAPPowerSystem.instance:configureGhostGenerator(object)
