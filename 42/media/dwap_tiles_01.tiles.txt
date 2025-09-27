@@ -60,7 +60,6 @@ tileset
         xy = 0,1
         AmbientSound = RadiatorAmbiance
         BlocksPlacement = 
-        EntityScript = DWAPWaterTankWest
         IsWaterCollector = 
         Material = MetalPlates
         Material2 = Plumbing
@@ -74,7 +73,6 @@ tileset
         xy = 1,1
         AmbientSound = RadiatorAmbiance
         BlocksPlacement = 
-        EntityScript = DWAPWaterTankEast
         Material = MetalPlates
         Material2 = Plumbing
         ScrapUseSkill = 
