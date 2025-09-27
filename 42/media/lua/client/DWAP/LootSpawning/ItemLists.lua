@@ -604,7 +604,7 @@ end
 --- @param item Item: The item to test
 --- @return number: 0 if not a skill book, 1 if a skill book, 2 if a skill magazine
 local function isSkillLiterature(category, name, item)
-    if category == "SkillBook" and not (name:find("Set")) and not item:getLuaCreate() then
+    if category == "SkillBook" and not (name:find("Set")) then
         if item:hasTag("Magazine") then
             return 2
         else

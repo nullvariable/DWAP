@@ -379,30 +379,52 @@ local function loadConfigs()
     for i = 1, #configs do
         local config = configs[i]
         local count = 0
+        local specialCount = 0
         if config and config.loot then
             if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex and not config.addonLootOverride) or nonPrimaryLootLevel == 4 then
                 config.loot = {}
             else
-                local rewriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex and not config.addonLootOverride
+                local rewriteLevel = nonPrimaryLootLevel == 3 and i ~= safehouseIndex
+                if config.addonLootOverride then
+                    rewriteLevel = false
+                end
                 for j = 1, #config.loot do
-                    if rewriteLevel and type(config.loot[j].level) == "string" then
-                        -- overwrite to low
-                        config.loot[j].level = 3
-                    end
-                    if config.loot[j].special and config.loot[j].special ~= "gunlocker" and i ~= safehouseIndex and not config.addonLootOverride then
-                        config.loot[j] = nil
-                    else
-                        setLootConfigValue(config.loot[j])
-                        -- try to precache the items
-                        if config.loot[j].dist then
-                            DWAP_LootSpawning.getItemsWithDistLists(config.loot[j].dist, config.loot[j].distIncludeJunk)
+                    local lootEntry = config.loot[j]
+                    if lootEntry then
+                        if not lootEntry.level then
+                            lootEntry.level = 3 -- default to low
                         end
-                        count = count + 1
+                        if rewriteLevel and type(lootEntry.level) == "string" then
+                            -- overwrite to low
+                            lootEntry.level = 3
+                        end
+                        if lootEntry.special and lootEntry.special ~= "gunlocker" and i ~= safehouseIndex then
+                            if not config.essentialLootOverride then
+                                DWAPUtils.dprint("Config " .. i .. " removing special loot: " .. tostring(lootEntry.special))
+                                config.loot[j] = nil
+                            else
+                                setLootConfigValue(lootEntry)
+                                if lootEntry.special then
+                                    specialCount = specialCount + 1
+                                end
+                                count = count + 1
+                            end
+                        else
+                            setLootConfigValue(lootEntry)
+                            -- try to precache the items
+                            if lootEntry.dist then
+                                DWAP_LootSpawning.getItemsWithDistLists(lootEntry.dist, lootEntry.distIncludeJunk)
+                            end
+                            if lootEntry.special then
+                                specialCount = specialCount + 1
+                            end
+                            count = count + 1
+                        end
                     end
                 end
             end
         end
-        DWAPUtils.dprint("Done. Loot config count: " .. count .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
+        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
 end
 
