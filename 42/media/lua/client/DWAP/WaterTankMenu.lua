@@ -11,6 +11,7 @@ end
 local customNameObjects = {
     ["Shower"] = true,
     ["Washing Machine"] = true,
+    ["White Washing Machine"] = true,
     ["Combo Washer Dryer"] = true,
     ["Sink"] = true,
     ["Toilet"] = true,
@@ -237,8 +238,9 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
                 DWAPUtils.dprint("No water tank found")
                 return
             end
-            DWAPUtils.dprint("canBeWaterPiped: " .. tostring(obj:getModData().canBeWaterPiped))
-            if obj:getModData().canBeWaterPiped and tank then
+            local cbwp = obj:getModData().canBeWaterPiped
+            DWAPUtils.dprint("canBeWaterPiped: " .. tostring(cbwp))
+            if (cbwp or cbwp == nil) and tank then
                 object = obj
                 break
             end
