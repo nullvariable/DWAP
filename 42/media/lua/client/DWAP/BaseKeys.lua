@@ -65,7 +65,7 @@ DWAPKeysCL.updateBuildingKeyId = function(params)
     end
 end
 
-Events.OnNewGame.Add(function()
+Events.OnNewGame.Add(function(playerObj)
         DWAPUtils.dprint("DWAPKeysCL.OnNewGame")
         local configs = DWAPUtils.loadConfigs()
         local configIndex = DWAPUtils.getPrimaryConfigIndex()
@@ -97,41 +97,29 @@ Events.OnNewGame.Add(function()
                             end
                         end
                     end
-                    if config.map then
-                        local playerObj = getPlayer()
-                        if not playerObj then return end
-                        local stash = StashSystem.getStash(config.map.name)
-                        if stash then
-                            local mapItem = instanceItem(stash:getItem())
-                            StashSystem.doStashItem(stash, mapItem)
-                            mapItem:setCustomName(true)
-                            playerObj:getInventory():AddItem(mapItem)
-                            DWAPUtils.dprint(("Added map %s to player inventory"):format(mapItem:getDisplayName()))
+                end
+                if config.map and ((SandboxVars.DWAP.SpawnWithMapAndKeys and i == configIndex) or config.map.extra) then
+                    local stash = StashSystem.getStash(config.map.name)
+                    if stash then
+                        local mapItem = instanceItem(stash:getItem())
+                        StashSystem.doStashItem(stash, mapItem)
+                        mapItem:setCustomName(true)
+                        playerObj:getInventory():AddItem(mapItem)
+                        DWAPUtils.dprint(("Added map %s to player inventory"):format(mapItem:getDisplayName()))
 
-                            -- readd the original stash so it can be used if the player dies and starts a new character etc.
-                            pcall(function()
-                                local stashBuilding = StashBuilding.new(stash:getName(), stash:getBuildingX(), stash:getBuildingY())
-                                local possibleStashes = StashSystem.getPossibleStashes()
-                                possibleStashes:add(stashBuilding)
-                            end)
-                        else
-                            DWAPUtils.dprint(("No stash found for map %s"):format(config.map))
-                        end
+                        -- readd the original stash so it can be used if the player dies and starts a new character etc.
+                        pcall(function()
+                            local stashBuilding = StashBuilding.new(stash:getName(), stash:getBuildingX(), stash:getBuildingY())
+                            local possibleStashes = StashSystem.getPossibleStashes()
+                            possibleStashes:add(stashBuilding)
+                        end)
+                    else
+                        DWAPUtils.dprint(("No stash found for map %s"):format(tostring(config.map)))
                     end
                 end
             end
         end
         table.wipe(configs)
-    -- local stashList = StashSystem.getAllStashes()
-    -- for i=0,stashList:size()-1 do
-    --     local stash = stashList:get(i)
-    --     local name = stash:getName()
-    --     if name and name:find("DWAPStashMap") then
-    --         local mapItem = instanceItem(stash:getItem())
-    --         StashSystem.doStashItem(stash, mapItem)
-    --         DWAPUtils.dprint(("Removed stash %s"):format(name))
-    --     end
-    -- end
 end)
 
 Events.OnLoad.Add(function()
