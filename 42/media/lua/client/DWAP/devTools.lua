@@ -552,8 +552,10 @@ function ShowElec(index)
                 generatorCount = generatorCount + 1
             end
 
-            DWAPUtils.dprint("Electricity visualization enabled for " .. configName .. " (" .. generatorCount .. " generators)")
-            DWAPUtils.dprint("Green = config generators with generator, Red = missing config generators, Purple = generators not in config, Blue = powered squares, Orange = unpowered squares")
+            DWAPUtils.dprint("Electricity visualization enabled for " ..
+            configName .. " (" .. generatorCount .. " generators)")
+            DWAPUtils.dprint(
+            "Green = config generators with generator, Red = missing config generators, Purple = generators not in config, Blue = powered squares, Orange = unpowered squares")
         else
             currentGeneratorLookup = nil
             DWAPUtils.dprint("Electricity visualization enabled (no config)")
@@ -1046,13 +1048,13 @@ local function checkSquareContainers(square, containerLookup)
 
     -- First, check if there are containers in the config for this square that are missing
     local expectedContainers = {}
-    
+
     -- Check for normal container at this z level
     local normalKey = DWAPUtils.hashCoords(x, y, z)
     if containerLookup[normalKey] then
         expectedContainers[normalKey] = containerLookup[normalKey]
     end
-    
+
     -- Check for upper container at z + 0.5
     local upperKey = DWAPUtils.hashCoords(x, y, z + 0.5)
     if containerLookup[upperKey] then
@@ -1166,7 +1168,7 @@ function VisualizeContainersStatus(radius, containerLookup)
 
                 -- Check if we should highlight this square
                 local shouldHighlight = containerStatus.totalContainers > 0 or containerStatus.missingContainers > 0
-                
+
                 if shouldHighlight then
                     -- Priority order: error containers or missing containers (red) > special (blue) > normal logic
                     if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0 then
@@ -1239,7 +1241,8 @@ function ShowContainers(index)
 
         Events.OnTick.Add(containersTick)
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
-        DWAPUtils.dprint("Red = config errors or missing containers, Orange = containers not in config, Purple = partial config, Blue = special containers, Green = all containers in config")
+        DWAPUtils.dprint(
+        "Red = config errors or missing containers, Orange = containers not in config, Purple = partial config, Blue = special containers, Green = all containers in config")
     else
         Events.OnTick.Remove(containersTick)
         currentContainerLookup = nil
@@ -1706,7 +1709,7 @@ function FindUnconnectedPlumbing()
 
                             if obj then
                                 spriteName = obj:getSpriteName() or ""
-                                
+
                                 -- Check if object has fluid (tanks)
                                 if obj:hasFluid() then
                                     local fluidContainer = obj:getFluidContainer()
@@ -1778,7 +1781,12 @@ function FindUnconnectedPlumbing()
         print("    waterTanks = {")
         for i = 1, #waterTanks do
             local tank = waterTanks[i]
-            print("        { sprite = \"" .. tank.sprite .. "\", x = " .. tank.x .. ", y = " .. tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount)
+            print("        { sprite = \"" ..
+            tank.sprite ..
+            "\", x = " ..
+            tank.x ..
+            ", y = " ..
+            tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount)
         end
         print("    },")
     else
@@ -1790,7 +1798,10 @@ function FindUnconnectedPlumbing()
         print("    waterFixtures = {")
         for i = 1, #unconnectedFixtures do
             local fixture = unconnectedFixtures[i]
-            print("        { sprite = \"" .. fixture.sprite .. "\", x = " .. fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, ")
+            print("        { sprite = \"" ..
+            fixture.sprite ..
+            "\", x = " ..
+            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, ")
         end
         print("    },")
     else
@@ -1801,7 +1812,9 @@ function FindUnconnectedPlumbing()
         DWAPUtils.dprint("=== CONNECTED FIXTURES FOUND (" .. #connectedFixtures .. ") ===")
         for i = 1, #connectedFixtures do
             local fixture = connectedFixtures[i]
-            DWAPUtils.dprint("  " .. fixture.sprite .. " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ")")
+            DWAPUtils.dprint("  " ..
+            fixture.sprite ..
+            " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ")")
         end
     end
 
@@ -1815,5 +1828,257 @@ function FindUnconnectedPlumbing()
         waterTanks = waterTanks,
         unconnectedFixtures = unconnectedFixtures,
         connectedFixtures = connectedFixtures
+    }
+end
+
+local sourceConfig = 1
+local destConfig = 43
+local coords = {
+    old = { x = 5575, y = 9365, z = -1 },
+    new = { x = 10264, y = 8717, z = -1 }
+}
+function copyConfig()
+    local pSquare = getPlayer():getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
+    local targetZ = pSquare:getZ()
+    local targetRoom = pSquare:getRoom()
+
+    DWAPUtils.dprint("=== COPYING LOOT CONFIG FROM SOURCE " .. sourceConfig .. " ===")
+    DWAPUtils.dprint("Old coordinates: " .. coords.old.x .. "," .. coords.old.y .. "," .. coords.old.z)
+    DWAPUtils.dprint("New coordinates: " .. coords.new.x .. "," .. coords.new.y .. "," .. coords.new.z)
+    DWAPUtils.dprint("Player Z level: " .. targetZ)
+    if targetRoom then
+        DWAPUtils.dprint("Player room: " .. tostring(targetRoom:getName() or "Unnamed Room"))
+    else
+        DWAPUtils.dprint("Player room: None (outdoor)")
+    end
+
+    -- Load configs
+    local configs = DWAPUtils.loadConfigs(true)
+    if not configs or #configs == 0 then
+        DWAPUtils.dprint("No configs found")
+        return
+    end
+
+    if sourceConfig > #configs then
+        DWAPUtils.dprint("Source config " .. sourceConfig .. " not found (only " .. #configs .. " configs available)")
+        return
+    end
+
+    local config = configs[sourceConfig]
+    if not config or not config.loot then
+        DWAPUtils.dprint("Source config " .. sourceConfig .. " has no loot section")
+        return
+    end
+
+    -- Calculate coordinate offset
+    local offsetX = coords.new.x - coords.old.x
+    local offsetY = coords.new.y - coords.old.y
+    local offsetZ = coords.new.z - coords.old.z
+
+    DWAPUtils.dprint("Coordinate offset: " .. offsetX .. "," .. offsetY .. "," .. offsetZ)
+
+    local copiedContainers = {}
+    local skippedContainers = {}
+
+    -- Process each loot container
+    for i = 1, #config.loot do
+        local lootItem = config.loot[i]
+
+        if lootItem and lootItem.coords then
+            -- Only process containers on the same Z level as the reference coordinates
+            if lootItem.coords.z == targetZ then
+                -- Calculate new coordinates
+                local newX = lootItem.coords.x + offsetX
+                local newY = lootItem.coords.y + offsetY
+                local newZ = lootItem.coords.z + offsetZ
+
+                -- Check if container physically exists at new coordinates
+                local square = getSquare(newX, newY, math.floor(newZ))
+                if not square then
+                    table.insert(skippedContainers, {
+                        originalCoords = { x = lootItem.coords.x, y = lootItem.coords.y, z = lootItem.coords.z },
+                        newCoords = { x = newX, y = newY, z = newZ },
+                        reason = "Square not found at new coordinates"
+                    })
+                else
+                    -- Check if the new coordinates are in the same room as the player
+                    local squareRoom = square:getRoom()
+                    if not targetRoom or not squareRoom or squareRoom ~= targetRoom then
+                        table.insert(skippedContainers, {
+                            originalCoords = { x = lootItem.coords.x, y = lootItem.coords.y, z = lootItem.coords.z },
+                            newCoords = { x = newX, y = newY, z = newZ },
+                            reason = "New coordinates not in same room as player"
+                        })
+                    else
+                    -- Check if there's a physical container at the new coordinates
+                    local physicalContainer = nil
+                    local needsUpperContainer = (newZ % 1) ~= 0 -- Check if target z has decimal part (0.5 offset)
+                    
+                    local objects = square:getObjects()
+                    if objects then
+                        for j = 0, objects:size() - 1 do
+                            local obj = objects:get(j)
+                            if obj and obj:getContainer() then
+                                local objContainer = obj:getContainer()
+                                local containerType = objContainer:getType()
+                                
+                                -- Skip stoves and microwaves (similar to Events.lua logic)
+                                if not (containerType == "microwave" or objContainer:isStove()) then
+                                    -- Use the same logic as Events.lua onFillContainer
+                                    local isHighContainer = objContainer:getContainerPosition() == "High"
+                                    
+                                    if needsUpperContainer and isHighContainer then
+                                        -- Found upper container for upper loot config
+                                        physicalContainer = obj
+                                        break
+                                    elseif not needsUpperContainer and not isHighContainer then
+                                        -- Found normal container for normal loot config
+                                        physicalContainer = obj
+                                        break
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    
+                    if not physicalContainer then
+                        table.insert(skippedContainers, {
+                            originalCoords = { x = lootItem.coords.x, y = lootItem.coords.y, z = lootItem.coords.z },
+                            newCoords = { x = newX, y = newY, z = newZ },
+                            reason = "No physical container found at new coordinates"
+                        })
+                    else
+                        -- Check if destination config already has a loot entry for this coordinate
+                        local destConfigHasLoot = false
+                        if destConfig <= #configs and configs[destConfig] and configs[destConfig].loot then
+                            local destLoot = configs[destConfig].loot
+                            for k = 1, #destLoot do
+                                local destEntry = destLoot[k]
+                                if destEntry and destEntry.coords and
+                                   destEntry.coords.x == newX and
+                                   destEntry.coords.y == newY and
+                                   destEntry.coords.z == newZ then
+                                    destConfigHasLoot = true
+                                    break
+                                end
+                            end
+                        end
+                        
+                        if destConfigHasLoot then
+                            table.insert(skippedContainers, {
+                                originalCoords = { x = lootItem.coords.x, y = lootItem.coords.y, z = lootItem.coords.z },
+                                newCoords = { x = newX, y = newY, z = newZ },
+                                reason = "Destination config already has loot entry for this coordinate"
+                            })
+                        else
+                            -- Create a copy of the loot item with new coordinates
+                            local newLootItem = {}
+                            for key, value in pairs(lootItem) do
+                                if key == 'coords' then
+                                    newLootItem.coords = { x = newX, y = newY, z = newZ }
+                                else
+                                    newLootItem[key] = value
+                                end
+                            end
+                            table.insert(copiedContainers, newLootItem)
+                        end
+                    end
+                    end -- end of room check
+                end -- end of square check
+            end -- end of targetZ check
+        end -- end of lootItem check
+    end -- end of for loop
+
+    -- Print results in config format
+    DWAPUtils.dprint("=== COPIED CONTAINERS (" .. #copiedContainers .. ") ===")
+    if #copiedContainers > 0 then
+        print("    loot = {")
+        for i = 1, #copiedContainers do
+            local container = copiedContainers[i]
+            local coordsStr = "coords = {x=" ..
+            container.coords.x .. ", y=" .. container.coords.y .. ", z=" .. container.coords.z .. "},"
+
+            print("        {")
+            print("            type = 'container',")
+            if container.sprite then
+                print("            sprite = '" .. container.sprite .. "',")
+            end
+            print("            " .. coordsStr)
+            if container.dist then
+                local distStr = "{"
+                for j = 1, #container.dist do
+                    distStr = distStr .. "\"" .. container.dist[j] .. "\""
+                    if j < #container.dist then
+                        distStr = distStr .. ", "
+                    end
+                end
+                distStr = distStr .. "}"
+                print("            dist = " .. distStr .. ",")
+            end
+            if container.items then
+                print("            items = {")
+                for j = 1, #container.items do
+                    local item = container.items[j]
+                    local itemStr = "                { name = \"" .. item.name .. "\""
+                    if item.count then
+                        itemStr = itemStr .. ", count = {" .. item.count[1] .. ", " .. item.count[2] .. "}"
+                    end
+                    if item.chance then
+                        itemStr = itemStr .. ", chance = " .. item.chance
+                    end
+                    itemStr = itemStr .. " },"
+                    print(itemStr)
+                end
+                print("            },")
+            end
+            if container.special then
+                print("            special = \"" .. container.special .. "\",")
+            end
+            if container.distIncludeJunk ~= nil then
+                print("            distIncludeJunk = " .. tostring(container.distIncludeJunk) .. ",")
+            end
+            if container.randUntilFull ~= nil then
+                print("            randUntilFull = " .. tostring(container.randUntilFull) .. ",")
+            end
+            if container.level then
+                print("            level = \"" .. container.level .. "\",")
+            end
+            if container.sandboxEnable then
+                print("            sandboxEnable = \"" .. container.sandboxEnable .. "\",")
+            end
+            print("        },")
+        end
+        print("    },")
+    else
+        print("    loot = {},")
+    end
+
+    if #skippedContainers > 0 then
+        DWAPUtils.dprint("=== SKIPPED CONTAINERS (" .. #skippedContainers .. ") ===")
+        -- for i = 1, #skippedContainers do
+        --     local skipped = skippedContainers[i]
+        --     DWAPUtils.dprint("  " ..
+        --         skipped.originalCoords.x .. "," .. skipped.originalCoords.y .. "," .. skipped.originalCoords.z ..
+        --         " -> " .. skipped.newCoords.x .. "," .. skipped.newCoords.y .. "," .. skipped.newCoords.z ..
+        --         " (" .. skipped.reason .. ")")
+        -- end
+    end
+
+    DWAPUtils.dprint("=== SUMMARY ===")
+    DWAPUtils.dprint("Source config: " .. sourceConfig)
+    DWAPUtils.dprint("Total containers in source: " .. #config.loot)
+    DWAPUtils.dprint("Copied containers: " .. #copiedContainers)
+    DWAPUtils.dprint("Skipped containers: " .. #skippedContainers)
+    DWAPUtils.dprint("Coordinate transformation: (" .. offsetX .. "," .. offsetY .. "," .. offsetZ .. ")")
+
+    return {
+        copiedContainers = copiedContainers,
+        skippedContainers = skippedContainers,
+        sourceConfig = sourceConfig,
+        offset = { x = offsetX, y = offsetY, z = offsetZ }
     }
 end
