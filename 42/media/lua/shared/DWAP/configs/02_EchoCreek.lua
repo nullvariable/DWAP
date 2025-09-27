@@ -76,7 +76,6 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3581, y=10897,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

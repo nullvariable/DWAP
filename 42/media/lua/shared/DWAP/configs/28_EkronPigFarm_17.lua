@@ -235,7 +235,6 @@ local EkronPigFarm = {
         {
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

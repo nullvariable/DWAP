@@ -312,7 +312,6 @@ local PrisonBreak = {
         {
             type = 'container',
             coords = {x=7686,y=12220,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

@@ -353,7 +353,6 @@ local DrugShack = {
         {
             type = 'container',
             coords = {x=11587,y=9295,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- living area

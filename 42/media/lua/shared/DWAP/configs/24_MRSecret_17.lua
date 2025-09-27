@@ -710,7 +710,6 @@ local MRSecret = {
         {
             type = 'container',
             coords = {x=9845,y=13126,z=-4},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

@@ -173,7 +173,6 @@ local CortmanMedical = {
         {
             type = 'container',
             coords = {x=10880,y=10023,z=1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

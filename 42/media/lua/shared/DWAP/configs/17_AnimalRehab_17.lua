@@ -295,7 +295,6 @@ local AnimalRehab = {
         { -- far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

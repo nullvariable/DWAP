@@ -241,7 +241,6 @@ local CentralLVilleMansion = {
         { -- locker
             type = 'container',
             coords = {x = 13435, y = 1899, z = -2},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         { -- locker

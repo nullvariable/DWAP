@@ -231,7 +231,6 @@ local QuillManor = {
         {
             type = 'container',
             coords = {x=1222,y=7372,z=-10},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

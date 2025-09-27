@@ -345,7 +345,6 @@ local Parsonage = {
         {
             type = 'container',
             coords = {x=8151,y=11541,z=-2},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- kitchen cabinets

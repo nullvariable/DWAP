@@ -132,7 +132,6 @@ local ELVilleFarm = {
         { -- east bluish bunk room
             type = 'container',
             coords = {x=14577,y=3039,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         { -- center hallway crates

@@ -238,7 +238,6 @@ local RustyRifle = {
         {
             type = 'container',
             coords = {x=10754,y=10542,z=1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

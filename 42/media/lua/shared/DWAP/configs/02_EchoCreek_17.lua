@@ -178,7 +178,6 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3581, y=10897,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {
@@ -634,7 +633,6 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3572,y=10894,z=-1},
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
@@ -644,7 +642,6 @@ local EchoCreek = {
         {
             type = 'container',
             coords = {x=3571,y=10894,z=-1},
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },

@@ -355,7 +355,6 @@ local RiverSafeHouse = {
         {
             type = 'container',
             coords = {x=6950,y=5560,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- infirmary/bathroom

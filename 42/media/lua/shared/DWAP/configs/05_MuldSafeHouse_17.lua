@@ -564,7 +564,6 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = { x = 10661, y = 9570, z = -1 },
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = { 8, 10 } },
             },
@@ -574,7 +573,6 @@ local MuldSafeHouse = {
         {
             type = 'container',
             coords = { x = 10661, y = 9569, z = -1 },
-            sandboxEnable = 'SeedLibrary',
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = { 9, 12 } },
             },

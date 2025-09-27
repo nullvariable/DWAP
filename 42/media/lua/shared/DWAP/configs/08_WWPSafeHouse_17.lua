@@ -264,7 +264,6 @@ local WWestPointSafeHouse = {
         {
             type = 'container',
             coords = {x=10148,y=6627,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

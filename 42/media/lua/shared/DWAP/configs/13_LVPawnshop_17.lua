@@ -373,7 +373,6 @@ local LVPawnshop = {
         {
             type = 'container',
             coords = {x=12323,y=1328,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

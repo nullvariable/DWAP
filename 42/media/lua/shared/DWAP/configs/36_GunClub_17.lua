@@ -701,7 +701,6 @@ local GunClub = {
         {
             type = 'container',
             coords = {x=1846,y=14145,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

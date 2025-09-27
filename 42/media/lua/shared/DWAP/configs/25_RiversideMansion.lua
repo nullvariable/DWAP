@@ -431,7 +431,6 @@ local RiversideMansion = {
         {
             type = 'container',
             coords = {x=6676,y=5514,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

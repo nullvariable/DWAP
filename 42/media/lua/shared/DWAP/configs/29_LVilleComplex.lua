@@ -311,8 +311,6 @@ local LVilleComplex = {
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+12,z=bunker1TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
-            -- sandboxEnable = 'Loot',
-            -- special = "essentials",
         },
         {
             type = 'container',
@@ -458,7 +456,6 @@ local LVilleComplex = {
         -- {
         --     type = 'container',
         --     coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+12,z=bunker2TopLeft.z},
-        --     sandboxEnable = 'Loot',
         --     special = "essentials",
         -- },
         {
@@ -645,7 +642,6 @@ local LVilleComplex = {
         -- {
         --     type = 'container',
         --     coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+12,z=bunker3TopLeft.z},
-        --     sandboxEnable = 'Loot',
         --     special = "essentials",
         -- },
         {
@@ -773,7 +769,6 @@ local LVilleComplex = {
         { -- decon locker
             type = 'container',
             coords = {x = 14149, y = 2630, z = -1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- infirmary

@@ -270,7 +270,6 @@ local WestMaple = {
         {
             type = 'container',
             coords = {x=1667,y=5750,z=-3},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- main work room

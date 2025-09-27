@@ -502,7 +502,7 @@ local PSDelilah = {
             dist = {"CrateToiletPaper", "CrateLinens", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_FarmLevel",
+            level = "Loot_LockersLevel",
         },
         {
             type = 'container',

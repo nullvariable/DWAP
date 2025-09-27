@@ -123,7 +123,6 @@ local TheDrake = {
         {
             type = 'container',
             coords = {x=11901,y=6841,z=-1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         {

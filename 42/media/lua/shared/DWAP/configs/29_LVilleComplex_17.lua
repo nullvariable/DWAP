@@ -784,7 +784,6 @@ local LVilleComplex = {
         { -- decon locker
             type = 'container',
             coords = {x = 14149, y = 2630, z = -1},
-            sandboxEnable = 'Loot',
             special = "essentials",
         },
         -- infirmary
@@ -1286,8 +1285,8 @@ local LVilleComplex = {
             type = 'container',
             coords = {x = 14146, y = 2627, z = -4},
             items = {
-                { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
-                { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
+                { name = 'Base.AnimalFeedBag', },
+                { name = 'Base.Fertilizer', },
             },
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -1296,8 +1295,8 @@ local LVilleComplex = {
             type = 'container',
             coords = {x = 14148, y = 2628, z = -4},
             items = {
-                { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
-                { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
+                { name = 'Base.AnimalFeedBag', },
+                { name = 'Base.Fertilizer', },
             },
             randUntilFull = true,
             level = "Loot_FarmLevel",
@@ -1306,8 +1305,8 @@ local LVilleComplex = {
             type = 'container',
             coords = {x = 14148, y = 2627, z = -4},
             items = {
-                { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
-                { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
+                { name = 'Base.AnimalFeedBag', },
+                { name = 'Base.Fertilizer', },
             },
             randUntilFull = true,
             level = "Loot_FarmLevel",

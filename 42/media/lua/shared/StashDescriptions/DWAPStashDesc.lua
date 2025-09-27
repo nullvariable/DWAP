@@ -390,4 +390,6 @@ for i = 1, #configs do
         DWAPStashMap:addStamp(stamp[1], stamp[2], stamp[3], stamp[4], stamp[5], stamp[6], stamp[7])
     end
     DWAPStashMap.customName = config.name
+    DWAPStashMap.minDayToSpawn = 100
+    DWAPStashMap.maxDayToSpawn = 1
 end
