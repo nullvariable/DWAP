@@ -385,6 +385,7 @@ function DWAP_Gen:ensureSound(index)
         -- end
         -- manager:addSoundRepeating(obj, coords.x, coords.y, coords.z, 20.0, 20.0, false)
         DWAPUtils.dprint("Playing sound")
+        self.emitters[index]:setPos(coords.x, coords.y, coords.z)
         self.emitters[index]:playSound("GeneratorLoop")
         self.emitters[index]:setVolumeAll(SOUNDVOLUME)
     else

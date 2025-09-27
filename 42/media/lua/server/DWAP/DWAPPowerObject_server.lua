@@ -22,6 +22,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
         DWAPPowerSystem.instance:noise("convertToIsoGenerator called with nil isoObject")
         return nil
     end
+    local cell = getCell()
 
     if instanceof(isoObject, "IsoGenerator") then
         -- Already a generator, no conversion needed
@@ -29,6 +30,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
         isoObject:setCondition(100)
         isoObject:setFuel(100)
         isoObject:setConnected(true)
+        cell:addToProcessIsoObjectRemove(isoObject)
         return isoObject
     end
 
@@ -48,7 +50,6 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
         DWAPPowerSystem.instance:noise("DWAPPowerObject: Warning - failed to remove original object")
     end
 
-    local cell = getCell()
     local generator = nil
     local createSuccess = pcall(function()
         generator = IsoGenerator.new(cell)
@@ -148,6 +149,7 @@ function DWAPPowerObject:makeNoise(makeNoise)
     if makeNoise then
         if not self.emitter then
             self.emitter = getWorld():getFreeEmitter(x, y, z)
+            self.emitter:setPos(x, y, z)
             self.emitter:setVolumeAll(self.luaSystem:getSoundVolume(self.DWAPGeneratorIndex))
             self.emitter:playSound("GeneratorLoop")
         else
@@ -158,6 +160,7 @@ function DWAPPowerObject:makeNoise(makeNoise)
             if not success then
                 DWAPPowerSystem.instance:noise("DWAPPowerObject:makeNoise - pcall failed: " .. tostring(result))
             elseif not result then
+                self.emitter:setPos(x, y, z)
                 self.emitter:setVolumeAll(self.luaSystem:getSoundVolume(self.DWAPGeneratorIndex))
                 self.emitter:playSound("GeneratorLoop")
             end
