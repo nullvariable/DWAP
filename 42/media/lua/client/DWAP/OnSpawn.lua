@@ -4,6 +4,7 @@ function DWAPProfessionInitWorld(isNewGame)
     if not isNewGame then return end
     local spawnRegion = MapSpawnSelect.instance.selectedRegion
     if not spawnRegion then
+        DWAPUtils.dprint("No spawn region found, using default")
         spawnRegion = MapSpawnSelect.instance:useDefaultSpawnRegion()
     end
     DWAPUtils.dprint("Selected spawn region: " .. tostring(spawnRegion.name))
@@ -13,14 +14,15 @@ function DWAPProfessionInitWorld(isNewGame)
     end
     DWAPUtils.dprint("Safehouse spawn selected")
     local configs = DWAPUtils.loadConfigs()
-    local safeHouseIndex = DWAPUtils.getBaseSafehouseIndex()
+    local safeHouseIndex = DWAPUtils.getPrimaryConfigIndex()
     local config = configs[safeHouseIndex]
     local coords = {}
     if config and config.spawn then
         coords = config.spawn
     end
     table.wipe(configs)
-    if coords then
+    if coords and safeHouseIndex and coords.x and coords.y and coords.z then
+        print("Events.OnNewGame OnSpawn 3")
         DWAPUtils.dprint(coords)
         local name = ("#%s | %s %s %s"):format(safeHouseIndex, coords.x, coords.y, coords.z)
         DWAPUtils.dprint("Overriding spawn to ".. name)
@@ -35,11 +37,25 @@ function DWAPProfessionInitWorld(isNewGame)
             )
         end
     end
+    print("Events.OnNewGame OnSpawn 4")
 end
 Events.OnInitWorld.Add(function()
+    if MainScreen.instance == nil then
+        return
+    end
     DWAPProfessionInitWorld(true)
 end)
 Events.OnInitGlobalModData.Add(DWAPProfessionInitWorld)
+Events.OnNewGame.Add(function(player)
+    if not player then return end
+    print("Events.OnNewGame OnSpawn 1")
+    local modData = player:getModData()
+    if not modData.DWAPDidSpawn then
+        modData.DWAPDidSpawn = true
+    print("Events.OnNewGame OnSpawn 2")
+        DWAPProfessionInitWorld(true)
+    end
+end)
 
 
 local optionalSpawnFunctions = {
