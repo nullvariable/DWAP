@@ -49,7 +49,28 @@ Events.OnInitGlobalModData.Add(function()
         local configs = DWAPUtils.loadConfigs()
         for i = 1, #configs do
             local config = configs[i]
-            if config and config.doorKeys and not config.allowStories then
+            local allowStories = false
+            if config.allowStories ~= nil then
+                if type(config.allowStories) == "string" then
+                    -- loop all the . characters so we can access the full SandboxVars key, like: DWAP_HWFF.KeepZombies
+                    local key = config.allowStories
+                    local parts = {}
+                    for part in key:gmatch("[^%.]+") do
+                        parts[#parts + 1] = part
+                    end
+                    DWAPUtils.dprint("DWAP PreventStories: Checking allowStories key parts: " .. #parts)
+                    DWAPUtils.dprint(parts)
+
+                    allowStories = SandboxVars[parts[1]] and SandboxVars[parts[1]][parts[2]]
+
+                elseif type(config.allowStories) == "boolean" then
+                    allowStories = config.allowStories
+                else
+                    local name = config.doorKeys and config.doorKeys.name or "Unknown, index " .. i
+                    print("DWAP PreventStories: Invalid allowStories type in config " .. name)
+                end
+            end
+            if config and config.doorKeys and not allowStories then
                 for j = 1, #config.doorKeys.doors do
                     local door = config.doorKeys.doors[j]
                     local hash = DWAPUtils.hashCoords(door.x, door.y, door.z)
