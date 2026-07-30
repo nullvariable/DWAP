@@ -104,14 +104,14 @@ local function isWTPlumbable(object)
     if thisSprite then
         -- DWAPUtils.dprint("isWTPlumbable: " .. tostring(object:getSpriteName()))
         local properties = thisSprite:getProperties()
-        if properties and properties:Is("CustomName") then
-            local name = tostring(properties:Val("CustomName"))
-            local groupName = properties:Is("GroupName") and tostring(properties:Val("GroupName")) or ""
+        if properties and properties:has("CustomName") then
+            local name = tostring(properties:get("CustomName"))
+            local groupName = properties:has("GroupName") and tostring(properties:get("GroupName")) or ""
             -- DWAPUtils.dprint("isWTPlumbable: " .. name)
             -- DWAPUtils.dprint(tostring(customNameObjects[name]))
             return customNameObjects[name] == true or customNameObjects[groupName] == true
-        elseif properties and properties:Is("GroupName") then
-            local groupName = tostring(properties:Val("GroupName"))
+        elseif properties and properties:has("GroupName") then
+            local groupName = tostring(properties:get("GroupName"))
             DWAPUtils.dprint("isWTPlumbable: " .. groupName)
             if customNameObjects[groupName] then
                 return true
@@ -126,10 +126,10 @@ local function getMoveableDisplayName(obj)
     if not obj then return nil end
     if not obj:getSprite() then return nil end
     local props = obj:getSprite():getProperties()
-    if props:Is("CustomName") then
-        local name = props:Val("CustomName")
-        if props:Is("GroupName") then
-            name = props:Val("GroupName") .. " " .. name
+    if props:has("CustomName") then
+        local name = props:get("CustomName")
+        if props:has("GroupName") then
+            name = props:get("GroupName") .. " " .. name
         end
         return Translator.getMoveableDisplayName(name)
     end

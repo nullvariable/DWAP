@@ -128,7 +128,7 @@ end
 --- @return number
 function DWAPUtils.getRandomSelected()
     local random = newrandom()
-    local seed = WGParams.instance:getSeedString()
+    local seed = WorldGenParams.INSTANCE:getSeedString()
     random:seed(seed)
     DWAPUtils.dprint("Random seed: " .. seed)
     return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
@@ -136,7 +136,7 @@ end
 
 function DWAPUtils.getSafehouseKeyId()
     local random = newrandom()
-    random:seed(WGParams.instance:getSeedString())
+    random:seed(WorldGenParams.INSTANCE:getSeedString())
     return random:random(10000, 99999)
 end
 
@@ -188,7 +188,7 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     if not modData.cachedBaseIndex then
         modData.cachedBaseIndex = DWAPUtils.getBaseSafehouseIndex()
         cachedBaseIndex = modData.cachedBaseIndex
-        WGParams.instance:save()
+        WorldGenParams.INSTANCE:save()
     end
     if not modData.cachedPrimaryConfigIndex then
         modData.cachedPrimaryConfigIndex = DWAPUtils.getPrimaryConfigIndex()
@@ -196,17 +196,17 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     end
     if not modData.originalSeed then
         DWAPUtils.dprint("No original seed found, setting to current seed")
-        local seed = WGParams.instance:getSeedString()
+        local seed = WorldGenParams.INSTANCE:getSeedString()
         modData.originalSeed = seed
-        WGParams.instance:save()
+        WorldGenParams.INSTANCE:save()
     else
-        local seed = WGParams.instance:getSeedString()
+        local seed = WorldGenParams.INSTANCE:getSeedString()
         if seed ~= modData.originalSeed then
             local message = ("DWAP Warning: Current world seed (%s) does not match original seed (%s). This may cause issues with safehouse selection and loot spawning."):format(seed, modData.originalSeed)
             print(message)
             DWAPUtils.dprint(message)
-            WGParams.instance:setSeedString(modData.originalSeed)
-            WGParams.instance:save()
+            WorldGenParams.INSTANCE:setSeedString(modData.originalSeed)
+            WorldGenParams.INSTANCE:save()
             print("DWAP Attempting to restore original seed")
         end
     end

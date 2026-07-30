@@ -613,7 +613,7 @@ local locations = {}
 
 local function getRandomSelected()
     local random = newrandom()
-    random:seed(WGParams.instance:getSeedString())
+    random:seed(WorldGenParams.INSTANCE:getSeedString())
     return random:random(1, #fullConfig) -- IMPORTANT, must match the number of safehouse configs. See also DWAPUtils.lua
 end
 

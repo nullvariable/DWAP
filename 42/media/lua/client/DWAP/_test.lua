@@ -101,7 +101,7 @@ function NVDebug:new(x, y, width, height)
 end
 
 function seedTest()
-    local seedString = WGParams.instance:getSeedString()
+    local seedString = WorldGenParams.INSTANCE:getSeedString()
     DWAPUtils.dprint(seedString)
     -- convert to an int
     local seed = seedString
@@ -1377,3 +1377,86 @@ function TestFindWaterSourceOnSquare()
     DWAPUtils.dprint("TestFindWaterSourceOnSquare: Found water source on square")
     DWAPUtils.dprint(("TestFindWaterSourceOnSquare: Water source %s found"):format(foundObject:getSprite():getName()))
 end
+
+local originalNew = ISInventoryTransferAction.new
+local trolleylist = {
+    TrolleyContainer = true,
+    TrolleyContainer2 = true,
+    CartContainer = true,
+    CartContainer2 = true,
+}
+function ISInventoryTransferAction:new(character, item, srcContainer, destContainer, time)
+    local o = originalNew(self, character, item, srcContainer, destContainer, time)
+
+    if destContainer and destContainer:getType() then
+        local containerType = destContainer:getType()
+        if trolleylist[containerType] then
+            o.maxTime = o.maxTime * 0.5
+        end
+    elseif srcContainer and srcContainer:getType() then
+        local containerType = srcContainer:getType()
+        if trolleylist[containerType] then
+            o.maxTime = o.maxTime * 0.5
+        end
+    end
+    return o
+end
+
+function SeedTest()
+    print(DWAPUtils.getSafehouseKeyId())
+    print(DWAPUtils.getSafehouseKeyId())
+    print(DWAPUtils.getSafehouseKeyId())
+    print(DWAPUtils.getSafehouseKeyId())
+end
+
+
+function StashTest1()
+    local player = getPlayer()
+    -- require "StashDescriptions/StashUtil";
+    -- local stashMap = StashUtil.newStash("PrisonBreakKYS", "Map", "Base.RosewoodMap", "Stash_AnnotedMap");
+    -- stashMap:addStamp("Asterisk", nil, 1359, 5858, 0.65, 0.054, 0.054)
+    -- stashMap.spawnTable = "SurvivorCache1";
+    -- stashMap:addContainer("SurvivorCrate", "carpentry_01_16", nil, nil, 1359, 5858, 0)
+
+    -- StashSystem.prepareBuildingStash("PrisonBreakKYS")
+
+    -- Base.Bag_DuffelBagTINT
+    local pSquare = player:getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("No square found")
+        return
+    end
+    local square
+    local room = pSquare:getRoom()
+    if not room then
+        DWAPUtils.dprint("No room found")
+        square = pSquare
+    else
+        square = room:getRandomFreeSquare()
+    end
+    local ii = instanceItem("HollowBook_Prison")
+    local md = ii:getModData()
+    md.PBSTash = true
+    square:AddWorldInventoryItem(ii, 0.0, 0.0, 0.0)
+    DWAPUtils.dprint("HollowBook added to square? x "..square:getX().." y "..square:getY())
+end
+
+-- local DWAPPowerSystem = require("DWAPPowerSystem_client")
+-- function stopGenSoundTest()
+--     local ps = DWAPPowerSystem.instance
+
+--     local generators = ps.generators
+--     for i = 1, #generators do
+--         for j = 1, #generators[i].fakeGenerators do
+--             local fakeGen = generators[i].fakeGenerators[j]
+--             if fakeGen then
+--                 DWAPUtils.dprint("Stopping sound for fake generator at "..tostring(fakeGen.x)..","..tostring(fakeGen.y)..","..tostring(fakeGen.z))
+--                 local generator = ps:getIsoObjectAt(fakeGen.x, fakeGen.y, fakeGen.z)
+--                 if generator then
+--                     print("Found fake generator object")
+--                 end
+--             end
+--         end
+--     end
+-- end
+

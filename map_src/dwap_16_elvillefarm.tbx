@@ -409,39 +409,7 @@
  <room Name="shooting" InternalName="shooting" Color="255 110 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="utility" InternalName="utility" Color="255 255 255" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <floor>
-  <object type="wall" length="25" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="0" dir="N" Tile="0"/>
-  <object type="wall" length="6" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="25" dir="W" Tile="0"/>
-  <object type="wall" length="7" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="18" dir="N" Tile="0"/>
-  <object type="wall" length="10" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="15" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="18" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="23" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="7" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="23" y="15" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="30" y="12" dir="N" Tile="0"/>
-  <object type="wall" length="7" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="23" y="12" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="23" y="9" dir="N" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="9" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="9" dir="N" Tile="0"/>
-  <object type="wall" length="2" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="12" dir="W" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="0" dir="N" Tile="0"/>
-  <object type="wall" length="9" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="0" dir="W" Tile="0"/>
-  <object type="wall" length="12" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="11" y="12" dir="W" Tile="0"/>
-  <object type="wall" length="11" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="15" dir="W" Tile="0"/>
-  <object type="wall" length="9" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="15" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="9" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="0" y="12" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="14" y="9" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="17" y="9" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="20" y="9" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="20" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="17" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="2" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="15" dir="W" Tile="0"/>
   <object type="stairs" x="8" y="20" dir="N" Tile="11"/>
-  <object type="wall" length="7" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="8" y="18" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="9" y="15" dir="N" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="6" y="18" dir="W" Tile="0"/>
-  <object type="wall" length="3" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="8" y="25" dir="W" Tile="0"/>
   <rooms>
 11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 11,11,11,11,11,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -37,7 +37,7 @@ function DWAPPowerSystem:loadGenerators()
             for j = 1, #config.generators do
                 local gen = config.generators[j]
                 local running = _running
-                if gen.startsOn then
+                if gen.startsOn and SandboxVars.DWAP.AutoPowerGenSystem then
                     running = true
                 end
                 if gen then
@@ -544,13 +544,13 @@ local function getPoweredItemName(object)
 
     -- Check for custom moveable object names
     local properties = object:getProperties()
-    if properties and properties:Is("CustomName") then
+    if properties and properties:has("CustomName") then
         local customName = "Moveable Object"
-        if properties:Is("CustomName") then
-            if properties:Is("GroupName") then
-                customName = properties:Val("GroupName") .. " " .. properties:Val("CustomName")
+        if properties:has("CustomName") then
+            if properties:has("GroupName") then
+                customName = properties:get("GroupName") .. " " .. properties:get("CustomName")
             else
-                customName = properties:Val("CustomName")
+                customName = properties:get("CustomName")
             end
         end
         itemName = Translator.getMoveableDisplayName(customName)
@@ -639,10 +639,10 @@ function DWAPPowerSystem.getSquarePowerDrain(square, x, y, z)
                 drain = drain + 0.08
                 items[#items + 1] = getPoweredItemName(object)
             end
-            -- bStreetLight = this.sprite != null && this.sprite.getProperties().Is("streetlight")
+            -- bStreetLight = this.sprite != null && this.sprite.getProperties().has("streetlight")
             if instanceof(object, "IsoLightSwitch") and object:isActivated() then
                 local sprite = object:getSprite()
-                if sprite and not sprite:getProperties():Is("streetlight") then
+                if sprite and not sprite:getProperties():has("streetlight") then
                     drain = drain + 0.002
                     items[#items + 1] = getPoweredItemName(object)
                 end

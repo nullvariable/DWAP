@@ -155,7 +155,7 @@ DWAP.worldObjectContextMenu = function(_, context, worldobjects, test)
             end
         end
 
-        local hose = playerInventory:getFirstTagRecurse("SiphonGas")
+        local hose = playerInventory:getFirstTagRecurse(ItemTag.SIPHON_GAS)
         if hose then
             local possibleGasContainers = playerInventory:getAllEvalRecurse(predicatePetrolNotFull)
             if possibleGasContainers:size() > 0 then
@@ -258,12 +258,10 @@ DWAP.worldObjectContextMenu_17 = function(_, context, worldObjects, test)
                         local tooltip = ISInventoryPaneContextMenu.addToolTip();
                         tooltip.description = getText("ContextMenu_TooDarkToSee");
                         opt.toolTip = tooltip;
-                        return
                     end
-                    return
                 end
             end
-            local hose = playerInventory:getFirstTagRecurse("SiphonGas")
+            local hose = playerInventory:getFirstTagRecurse(ItemTag.SIPHON_GAS)
             if hose then
                 local possibleGasContainers = playerInventory:getAllEvalRecurse(predicatePetrolNotFull)
                 if possibleGasContainers:size() > 0 then

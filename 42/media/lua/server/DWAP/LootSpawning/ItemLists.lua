@@ -123,6 +123,7 @@ local kitchenTools = {
     "P38",
     "Spork",
     "Spork",
+    "RollingPin",
 }
 local kitchenToolsSpices = {
     "Salt",
@@ -479,6 +480,217 @@ local gunLockersVanillaExpansion = {
     },
 }
 
+local gunLockersFirearmsMod = {
+}
+
+local function respectFirearmsModSandboxSettings()
+    LootSuppressor = (SandboxVars.Firearms.LootSuppressor)
+
+    SpawnAK47 = (SandboxVars.Firearms.SpawnAK47)
+    SpawnSKS = (SandboxVars.Firearms.SpawnSKS)
+    SpawnM1Garand = (SandboxVars.Firearms.SpawnM1Garand)
+    SpawnMP5 = (SandboxVars.Firearms.SpawnMP5)
+    SpawnMAC10 = (SandboxVars.Firearms.SpawnMAC10)
+    SpawnUZI = (SandboxVars.Firearms.SpawnUZI)
+    SpawnSPAS12 = (SandboxVars.Firearms.SpawnSPAS12)
+    SpawnWinchester73 = (SandboxVars.Firearms.SpawnWinchester73)
+    SpawnWinchester94 = (SandboxVars.Firearms.SpawnWinchester94)
+    SpawnRossi92 = (SandboxVars.Firearms.SpawnRossi92)
+    SpawnPython = (SandboxVars.Firearms.SpawnPython)
+    SpawnAR15 = (SandboxVars.Firearms.SpawnAR15)
+    SpawnColtAce = (SandboxVars.Firearms.SpawnColtAce)
+    SpawnColtScout = (SandboxVars.Firearms.SpawnColtScout)
+    SpawnM733 = (SandboxVars.Firearms.SpawnM733)
+    SpawnGlock17 = (SandboxVars.Firearms.SpawnGlock17)
+    SpawnAnaconda = (SandboxVars.Firearms.SpawnAnaconda)
+    SpawnFNFal = (SandboxVars.Firearms.SpawnFNFal)
+    SpawnG3 = (SandboxVars.Firearms.SpawnG3)
+    SpawnM37 = (SandboxVars.Firearms.SpawnM37)
+    SpawnM16A2 = (SandboxVars.Firearms.SpawnM16A2)
+    SpawnM24 = (SandboxVars.Firearms.SpawnM24)
+    SpawnRuger22 = (SandboxVars.Firearms.SpawnRuger22)
+    SpawnMossberg500 = (SandboxVars.Firearms.SpawnMossberg500)
+    SpawnMossberg500Tactical = (SandboxVars.Firearms.SpawnMossberg500Tactical)
+    SpawnRemington870 = (SandboxVars.Firearms.SpawnRemington870)
+    SpawnICA19 = (SandboxVars.Firearms.SpawnICA19)
+
+    SpawnSuppressors = (SandboxVars.Firearms.SpawnSuppressors)
+    SpawnHandgunSuppressors = (SandboxVars.Firearms.SpawnHandgunSuppressors)
+    SpawnRifleSuppressors = (SandboxVars.Firearms.SpawnRifleSuppressors)
+    SpawnShotgunSuppressors = (SandboxVars.Firearms.SpawnShotgunSuppressors)
+
+    if SpawnAK47 then
+        local akItems = {
+            "AK47",
+            "AK_Mag",
+            "AK_Mag",
+            "AK_Mag",
+            "AK_Mag",
+            "AK_Mag",
+            "Sling_Camo",
+            "Rifle_Flashlight",
+            "762x39Box",
+        }
+        if SpawnSuppressors and SpawnRifleSuppressors then
+            table.insert(akItems, "308Silencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = akItems
+    end
+    if SpawnSKS then
+        local sksItems = {
+            "SKS",
+            "Sling_Olive",
+            "Rifle_Flashlight",
+            "762x39Box",
+        }
+        if SpawnSuppressors and SpawnRifleSuppressors then
+            table.insert(sksItems, "308Silencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = sksItems
+    end
+    if SpawnM1Garand then
+        local m1Items = {
+            "M1Garand",
+            "M1GarandClip",
+            "M1GarandClip",
+            "M1GarandClip",
+            "M1GarandClip",
+            "M1GarandClip",
+            "Sling_Leather",
+            "Bullets3006Box",
+        }
+        if SpawnSuppressors and SpawnRifleSuppressors then
+            table.insert(m1Items, "ImprovisedSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = m1Items
+    end
+    if SpawnMP5 then
+        local mp5Items = {
+            "MP510",
+            "MP510Mag",
+            "MP510Mag",
+            "MP510Mag",
+            "MP510Mag",
+            "MP510Mag",
+            "MP5_Stock_Extended",
+            "Sling_Camo",
+            "RedDot",
+            "x2Scope",
+            "x4Scope",
+            "Bullets10mmBox",
+        }
+        if SpawnSuppressors and SpawnHandgunSuppressors then
+            table.insert(mp5Items, "10mmSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = mp5Items
+    end
+    if SpawnMAC10 then
+        local mac10Items = {
+            "Mac10",
+            "Mac10Mag",
+            "Mac10Mag",
+            "Mac10Mag",
+            "Mac10Mag",
+            "Mac10Mag",
+            "Mac10_Stock_Extended",
+            "Sling",
+            "RedDot",
+            "x2Scope",
+            "Bullets45Box",
+        }
+        if SpawnSuppressors and SpawnHandgunSuppressors then
+            table.insert(mac10Items, "45Silencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = mac10Items
+    end
+    if SpawnUZI then
+        local uziItems = {
+            "UZI",
+            "UZIMag",
+            "UZIMag",
+            "UZIMag",
+            "UZIMag",
+            "UZIMag",
+            "9mmCompensator",
+            "UZI_Stock_Extended",
+            "Sling",
+            "RedDot",
+            "x2Scope",
+            "Bullets9mmBox",
+        }
+        if SpawnSuppressors and SpawnHandgunSuppressors then
+            table.insert(uziItems, "9mmSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = uziItems
+    end
+    if SpawnSPAS12 then
+        local SPAS12Items = {
+            "SPAS12",
+            "AmmoStock",
+            "SPAS12_Stock_Extended",
+            "GunLightImprovised",
+            "ChokeTubeFull",
+            "ChokeTubeImproved",
+            "Sling_Leather",
+            "ShotgunShellsBox",
+        }
+        if SpawnSuppressors and SpawnShotgunSuppressors then
+            table.insert(SPAS12Items, "ShotgunSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = SPAS12Items
+    end
+    if SpawnWinchester73 then
+        local win73Items = {
+            "Winchester73",
+            "Sling",
+            "RecoilPad",
+            "AmmoStraps",
+            "Bullets4440Box",
+        }
+        if SpawnSuppressors and SpawnRifleSuppressors then
+            table.insert(win73Items, "ImprovisedSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = win73Items
+    end
+    if SpawnAR15 then
+        local ar15Items = {
+            "AR15",
+            "556Clip",
+            "556Clip",
+            "556Clip",
+            "556Clip",
+            "556Clip",
+            "Rifle_Flashlight",
+            "Sling",
+            "x4ACOGScope",
+            "556Box",
+        }
+        if SpawnSuppressors and SpawnRifleSuppressors then
+            table.insert(ar15Items, "ImprovisedSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = ar15Items
+    end
+    if SpawnGlock17 then
+        local glock17Items = {
+            "Glock17",
+            "Glock17Mag",
+            "Glock17Mag",
+            "Glock17Mag",
+            "Glock17Mag",
+            "Glock17Mag",
+            "9mmCompensator",
+            "GunLight",
+            "Laser",
+            "RedDot",
+            "Bullets9mmBox",
+        }
+        if SpawnSuppressors and SpawnHandgunSuppressors then
+            table.insert(glock17Items, "9mmSilencer")
+        end
+        gunLockersFirearmsMod[#gunLockersFirearmsMod + 1] = glock17Items
+    end
+end
+
 Events.OnInitRecordedMedia.Add(function(_recordedMedia)
     --- @cast recordedMedia RecordedMedia
     recordedMedia = _recordedMedia
@@ -605,7 +817,7 @@ end
 --- @return number: 0 if not a skill book, 1 if a skill book, 2 if a skill magazine
 local function isSkillLiterature(category, name, item)
     if category == "SkillBook" and not (name:find("Set")) then
-        if item:hasTag("Magazine") then
+        if item:hasTag(ItemTag.MAGAZINE) then
             return 2
         else
             return 1
@@ -623,7 +835,7 @@ local function isSeed(category, name, item)
     if seedPackets[name] then
         return true
     end
-    if item:hasTag("isSeed") and not item:hasTag("isCutting") and item:getActualWeight() < 1 then
+    if item:hasTag(ItemTag.IS_SEED) and not item:hasTag(ItemTag.IS_CUTTING) and item:getActualWeight() < 1 then
         return true
     end
     return false
@@ -722,6 +934,13 @@ function DWAP_LootSpawning.populateItems()
             else
                 table.insert(skillBooks2, item)
             end
+        end
+    end
+    if getActivatedMods():contains("\\2256623447/firearmmod") or getActivatedMods():contains("\\2256623447/firearmmodbeta") then
+        gunLockers = {}
+        respectFirearmsModSandboxSettings()
+        for i = 1, #gunLockersFirearmsMod do
+            gunLockers[#gunLockers+1] = gunLockersFirearmsMod[i]
         end
     end
     local testItem = getItem("RFNGP_GunCase_M249")

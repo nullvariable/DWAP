@@ -433,7 +433,7 @@ end
 --- @param containerType string
 --- @param container ItemContainer
 local function onFillContainer(roomType, containerType, container)
-    if isMultiplayer() and isClient() then return end
+    -- Server-side only - no client check needed as OnFillContainer runs on server
     if not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3 then return end
     if not container or roomType == "Container" or roomType == "Zombie Bag" then return end
     if not instanceof(container, "ItemContainer") then
@@ -451,6 +451,11 @@ local function onFillContainer(roomType, containerType, container)
             DWAPUtils.DeferThrottled(function()
                 fillContainer(container, loot, index, coordsKey)
                 ItemPickerJava.updateOverlaySprite(container:getParent())
+                -- Re-trigger OnFillContainer so other mods (like VFX) can process the container
+                -- Our loot entry has been removed, so this won't cause infinite recursion
+                if getActivatedMods():contains("\\VanillaFoodsExpanded") then
+                    triggerEvent("OnFillContainer", roomType, containerType, container)
+                end
             end)
         end
     end
