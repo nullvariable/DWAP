@@ -348,6 +348,8 @@ DWAP.hideGeneratorMenuItems = function(_, context, worldobjects, test)
     if gen then
         DWAPUtils.dprint("Generator found, hiding menu items")
         -- Remove vanilla generator menu options
+        -- 42.20+: the vanilla options are nested in a submenu under a single "Generator" option
+        context:removeOptionByName(getText("ContextMenu_Generator"))
         context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
         context:removeOptionByName(getText("ContextMenu_Turn_Off"))
         context:removeOptionByName(getText("ContextMenu_Turn_On"))
@@ -370,6 +372,8 @@ DWAP.hideGeneratorMenuItems_17 = function(_, context, worldObjects, test)
     for i = 1, #worldObjects do
         local object = worldObjects[i]
         if object and object:getModData().DWAPObjectType == "generator" then
+            -- 42.20+: the vanilla options are nested in a submenu under a single "Generator" option
+            context:removeOptionByName(getText("ContextMenu_Generator"))
             context:removeOptionByName(getText("ContextMenu_GeneratorInfo"))
             context:removeOptionByName(getText("ContextMenu_Turn_Off"))
             context:removeOptionByName(getText("ContextMenu_Turn_On"))
@@ -406,7 +410,7 @@ Events.OnInitGlobalModData.Add(function()
         }
     end
     if SandboxVars.IndustrialRevolution then
-        stringCache.removeFA = {
+        local removeIR = {
             ["UI_IndustrialRevolution_turngeneratoron"] = getText("UI_IndustrialRevolution_turngeneratoron"),
             ["UI_IndustrialRevolution_turngeneratoroff"] = getText("UI_IndustrialRevolution_turngeneratoroff"),
             ["UI_IndustrialRevolution_status"] = getText("UI_IndustrialRevolution_status"),
@@ -421,11 +425,17 @@ Events.OnInitGlobalModData.Add(function()
             ["UI_IndustrialRevolution_fixgenerator"] = getText("UI_IndustrialRevolution_fixgenerator"),
             ["UI_IndustrialRevolution_takegeneratormagazine"] = getText("UI_IndustrialRevolution_takegeneratormagazine"),
         }
+        stringCache.removeFA = stringCache.removeFA or {}
+        for k, v in pairs(removeIR) do
+            stringCache.removeFA[k] = v
+        end
     end
 
     if SandboxVars.DWAP.EnableGenSystem then
         if DWAPUtils.getSaveVersion() < 17 then
-            Events.OnPreFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
+            -- 42.20+: the vanilla generator menu is built in Java after OnPreFill fires,
+            -- so removal only works from OnFill (added before worldObjectContextMenu below)
+            Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems)
             Events.OnFillWorldObjectContextMenu.Add(DWAP.worldObjectContextMenu)
         else
             Events.OnFillWorldObjectContextMenu.Add(DWAP.hideGeneratorMenuItems_17)

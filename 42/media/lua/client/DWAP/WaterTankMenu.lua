@@ -121,19 +121,10 @@ local function isWTPlumbable(object)
     return false
 end
 
---- @see ISWorldObjectContextMenu.lua :139
+-- 42.20+ exports this publicly; use it instead of keeping a drift-prone copy.
+-- Resolved at call time because client/DWAP loads before client/ISUI.
 local function getMoveableDisplayName(obj)
-    if not obj then return nil end
-    if not obj:getSprite() then return nil end
-    local props = obj:getSprite():getProperties()
-    if props:has("CustomName") then
-        local name = props:get("CustomName")
-        if props:has("GroupName") then
-            name = props:get("GroupName") .. " " .. name
-        end
-        return Translator.getMoveableDisplayName(name)
-    end
-    return nil
+    return ISWorldObjectContextMenu.getMoveableDisplayName(obj)
 end
 
 --- Refresh water fixtures that have lost their connection to tanks

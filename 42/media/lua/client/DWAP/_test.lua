@@ -1160,7 +1160,7 @@ function watertest()
     fixtureObj:getModData().canBeWaterPiped = false
     fixtureObj:setUsesExternalWaterSource(true)
     fixtureObj:transmitModData()
-    fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
+    fixtureObj:sendObjectChange(IsoObjectChange.USES_EXTERNAL_WATER_SOURCE, { value = true })
     fixtureObj:doFindExternalWaterSource()
     fixtureObj:transmitModData()
     fixtureSquare:transmitModdata()
