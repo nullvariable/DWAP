@@ -41,10 +41,11 @@ ekron industrial basement 575 9379
   drain changes automatically. Keep `getPoweredItemName` for the UI list.
 * Same file, `powerScan` z-range math: use new `IsoGenerator.getMinAffectedLevel()`/`getMaxAffectedLevel()`
   where a generator instance is in hand.
-* If the commented `getObjectList()` in `client/DWAP/Generators.lua:85` is ever re-enabled: 42.20 changed
-  it to return a Java Set (breaks Lua indexing) — use `getCell():getObjectListForLua()` instead.
 * Optional cleanup: drop inert `entityscript=DWAP/dwap_entities` line from mod.info (module is empty);
   remove dead `[201]` sentinel entry in `StashDescriptions/DWAPStashDesc.lua`.
+* Legacy (pre-v17) save support was removed for 42.20 (42.20 map update broke old saves anyway).
+  The `getSaveVersion() < 17` guards left in the server systems / client objects / SolarSupport /
+  ISAPatches are intentional safeties that simply deactivate the mod on an impossibly-old save.
 
 ### Known multiplayer issues (SP unaffected; fix before any MP release)
 * `DWAPAddFuel.lua:7`, `DWAPFixGenerator.lua`, `DWAPSiphonFuel.lua`: `require "DWAP/DWAPPowerSystem_client"`
@@ -54,8 +55,7 @@ ekron industrial basement 575 9379
   `getPlayer()` is nil on a dedicated server.
 * 42.20 gates `OnFillWorldObjectContextMenu` on MP safehouse permissions (`fetch.safehouseAllowInteract`),
   so DWAP context menus won't fire on protected squares in MP.
-* Client-side world mutation (`Props.lua`, `BaseKeys.lua`, `PreventStories.lua`, legacy `Generators.lua`/
-  `WaterTanks.lua`) runs per-client in MP. `DWAPUtils.lua` world-seed rewrite via `WorldGenParams` runs on
-  whichever side loads it.
+* Client-side world mutation (`Props.lua`, `BaseKeys.lua`, `PreventStories.lua`) runs per-client in MP.
+  `DWAPUtils.lua` world-seed rewrite via `WorldGenParams` runs on whichever side loads it.
 * ISA integration nits: dead `wrappedUpdatePowerbanks` code in `ISAPatches.lua`; `Powerbank` vs `PowerBank`
   require-path case inconsistency; `ISAUIMenuPatch.lua` checks `contains("ISA")` without the leading `\`.

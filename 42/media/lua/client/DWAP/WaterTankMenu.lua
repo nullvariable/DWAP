@@ -3,11 +3,6 @@ DWAP = DWAP or {}
 local DWAPUtils = require("DWAPUtils")
 DWAPWaterSystem = DWAPWaterSystem or require("DWAPWaterSystem_client")
 
--- Simple hash function for coordinates (moved from old DWAP_WaterSystem)
-local function hashCoords(x, y, z)
-    return DWAPUtils.hashCoords(x, y, z)
-end
-
 local customNameObjects = {
     ["Shower"] = true,
     ["Washing Machine"] = true,
@@ -133,72 +128,39 @@ local function refreshLostFixtures(clickCoords)
     local tank = getWaterTank(clickCoords)
     if not tank then return end
 
-    if DWAPUtils.getSaveVersion() >= 17 then
-        -- New system: Use DWAPWaterSystem to find and refresh fixtures
-        DWAPUtils.dprint("DWAPWaterSystem: Refreshing fixtures for tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
+    DWAPUtils.dprint("DWAPWaterSystem: Refreshing fixtures for tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
 
-        -- Get fixtures connected to this tank from the DWAPWaterSystem
-        local waterSystem = DWAPWaterSystem.instance
-        if not waterSystem then
-            DWAPUtils.dprint("DWAPWaterSystem instance not found")
-            return
-        end
+    -- Get fixtures connected to this tank from the DWAPWaterSystem
+    local waterSystem = DWAPWaterSystem.instance
+    if not waterSystem then
+        DWAPUtils.dprint("DWAPWaterSystem instance not found")
+        return
+    end
 
-        local refreshedCount = 0
-        for i = 1, waterSystem:getLuaObjectCount() do
-            local luaObj = waterSystem:getLuaObjectByIndex(i)
-            if luaObj and luaObj:isFixture() then
-                local conn = luaObj.connection
-                -- Check if this fixture is connected to our tank
-                if conn and conn.x == tank.x and conn.y == tank.y and conn.z == tank.z then
-                    local isoObject = luaObj:getIsoObject()
-                    if isoObject then
-                        -- Check if this fixture has lost its connection
-                        if not isoObject:getUsesExternalWaterSource() or not isoObject:hasExternalWaterSource() then
-                            DWAPUtils.dprint("Refreshing lost fixture connection: " ..
-                                tostring(isoObject:getSpriteName()) .. " at " .. isoObject:getX() .. ", " .. isoObject:getY() .. ", " .. isoObject:getZ())
-                            -- Reconnect the fixture to the tank
-                            DWAPUtils.connectWaterTank(isoObject, { x = conn.x, y = conn.y, z = conn.z })
-                            refreshedCount = refreshedCount + 1
-                        end
+    local refreshedCount = 0
+    for i = 1, waterSystem:getLuaObjectCount() do
+        local luaObj = waterSystem:getLuaObjectByIndex(i)
+        if luaObj and luaObj:isFixture() then
+            local conn = luaObj.connection
+            -- Check if this fixture is connected to our tank
+            if conn and conn.x == tank.x and conn.y == tank.y and conn.z == tank.z then
+                local isoObject = luaObj:getIsoObject()
+                if isoObject then
+                    -- Check if this fixture has lost its connection
+                    if not isoObject:getUsesExternalWaterSource() or not isoObject:hasExternalWaterSource() then
+                        DWAPUtils.dprint("Refreshing lost fixture connection: " ..
+                            tostring(isoObject:getSpriteName()) .. " at " .. isoObject:getX() .. ", " .. isoObject:getY() .. ", " .. isoObject:getZ())
+                        -- Reconnect the fixture to the tank
+                        DWAPUtils.connectWaterTank(isoObject, { x = conn.x, y = conn.y, z = conn.z })
+                        refreshedCount = refreshedCount + 1
                     end
                 end
             end
         end
+    end
 
-        if refreshedCount > 0 then
-            DWAPUtils.dprint("Refreshed " .. refreshedCount .. " lost fixture connections")
-        end
-    else
-        DWAPUtils.dprint("DWAPWaterSystem: Refreshing fixtures for tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
-        -- Old system: Use the old DWAP_WaterSystem client-side logic
-        local tankHash = hashCoords(tank.x, tank.y, tank.z)
-        local fixtures = DWAP_WaterSystem.fixtures[tankHash]
-        if not fixtures then return end
-
-        DWAPUtils.dprint("Checking " ..
-        #fixtures .. " fixtures for lost connections near tank at " .. tank.x .. ", " .. tank.y .. ", " .. tank.z)
-
-        for i = 1, #fixtures do
-            local fixture = fixtures[i]
-            local fixtureSquare = getSquare(fixture.x, fixture.y, fixture.z)
-            if fixtureSquare then
-                local objects = fixtureSquare:getObjects()
-                local osize = objects:size() - 1
-                for j = 0, osize do
-                    local obj = objects:get(j)
-                    if obj and obj:getSpriteName() == fixture.sprite then
-                        -- Check if this fixture has lost its connection
-                        if not obj:getUsesExternalWaterSource() or not obj:hasExternalWaterSource() then
-                            DWAPUtils.dprint("Refreshing lost fixture connection: " ..
-                            fixture.sprite .. " at " .. fixture.x .. ", " .. fixture.y .. ", " .. fixture.z)
-                            DWAP_WaterSystem:InitializeFixture(fixture)
-                        end
-                        break
-                    end
-                end
-            end
-        end
+    if refreshedCount > 0 then
+        DWAPUtils.dprint("Refreshed " .. refreshedCount .. " lost fixture connections")
     end
 end
 

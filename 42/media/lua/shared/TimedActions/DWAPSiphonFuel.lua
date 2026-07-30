@@ -49,11 +49,7 @@ end
 function DWAPSiphonFuel:complete()
 	self.fluidCont:addFluid(Fluid.Petrol, self.itemTarget - self.itemStart)
     DWAPUtils.dprint("DWAPSiphonFuel:complete " ..tostring(self.itemTarget).." "..tostring(self.tankStart).." "..tostring(self.tankTarget))
-    if self.version == 1 then
-        DWAP_Gen:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
-    else
-        DWAPPowerSystem.instance:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
-    end
+    DWAPPowerSystem.instance:RemoveFuel(self.genIndex, self.tankStart - self.tankTarget)
 
     self.petrol:syncItemFields()
 
@@ -83,8 +79,6 @@ function DWAPSiphonFuel:new(character, generator, petrolCan, generatorData, genI
     o.generatorData = generatorData;
     o.genIndex = genIndex;
     o.maxTime = o:getDuration();
-
-    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
     -- print(o.maxTime)
     -- print("DWAPSiphonFuel:new end")
     return o;

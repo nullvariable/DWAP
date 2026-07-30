@@ -55,11 +55,7 @@ function DWAPAddFuel:complete()
     self.fluidCont:adjustAmount(self.fluidCont:getAmount() - endFuel)
 
     self.petrol:syncItemFields()
-    if self.version == 1 then
-        DWAP_Gen:AddFuel(self.genIndex, endFuel)
-    else
-        DWAPPowerSystem.instance:AddFuel(self.genIndex, endFuel)
-    end
+    DWAPPowerSystem.instance:AddFuel(self.genIndex, endFuel)
 
     return true;
 end
@@ -80,7 +76,5 @@ function DWAPAddFuel:new(character, generator, petrolCan, generatorData, genInde
     o.generatorData = generatorData;
     o.genIndex = genIndex;
     o.maxTime = o:getDuration();
-
-    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
     return o;
 end

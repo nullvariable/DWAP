@@ -395,18 +395,6 @@ Events.OnInitGlobalModData.Add(function()
         modData.init = true
         modData.spawned = {}
     end
-    local DWAP_UtilsmodData = ModData.getOrCreate("DWAP_Utils")
-        if DWAP_UtilsmodData.saveVersion and DWAP_UtilsmodData.saveVersion < 16 then
-            hashObjectSpawn = function(spawn)
-            local h = 5381
-            local str = spawn.sprite or ""
-            for i = 1, #str do
-            h = h*32 + h + str:byte(i)
-            end
-            return hashCoords(spawn.x, spawn.y, spawn.z) + h
-        end
-    end
-
     local configs = DWAPUtils.loadConfigs()
     DWAPUtils.dprint("DWAP_Props.OnInitGlobalModData "..#configs)
     for i = 1, #configs do
