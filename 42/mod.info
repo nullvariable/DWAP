@@ -9,3 +9,4 @@ pack=dwap_tiles_01
 pack=dwap_tiles_01.floor
 tiledef=dwap_tiles_01 1337
 entityscript=DWAP/dwap_entities
+versionMin=42.20.0
