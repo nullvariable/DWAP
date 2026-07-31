@@ -816,12 +816,13 @@ end
 --- @param item Item: The item to test
 --- @return number: 0 if not a skill book, 1 if a skill book, 2 if a skill magazine
 local function isSkillLiterature(category, name, item)
-    if category == "SkillBook" and not (name:find("Set")) then
-        if item:hasTag(ItemTag.MAGAZINE) then
-            return 2
-        else
-            return 1
-        end
+    if name:find("Set") then return 0 end
+    -- 42.20 moved recipe/skill magazines from SkillBook to RecipeResource
+    if (category == "SkillBook" or category == "RecipeResource") and item:hasTag(ItemTag.MAGAZINE) then
+        return 2
+    end
+    if category == "SkillBook" then
+        return 1
     end
     return 0
 end
