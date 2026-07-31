@@ -45,7 +45,10 @@ end
 -- end
 
 local lastBuilding = nil
+DWAP_AutoLightsEnabled = false
 function DoAutoLights()
+    if DWAP_AutoLightsEnabled then return end
+    DWAP_AutoLightsEnabled = true
     Events.OnTick.Add(function()
         local ply = getPlayer()
         local square = ply:getCurrentSquare()

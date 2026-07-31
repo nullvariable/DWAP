@@ -705,6 +705,40 @@ function CheckTargetSquare()
     end
 end
 
+-- After a teleport, lightsOn can "succeed" before the destination's rooms are
+-- streamed in, flipping 0 switches. Poll until the building's rooms actually
+-- have light switches in the cell's room list, then light it up.
+local autoLightsTicks = 0
+local function autoLightsAfterTeleport()
+    autoLightsTicks = autoLightsTicks + 1
+    if autoLightsTicks > 600 then
+        Events.OnTick.Remove(autoLightsAfterTeleport)
+        return
+    end
+    local player = getPlayer()
+    local square = player and player:getCurrentSquare()
+    if not square then return end
+    local building = square:getBuilding()
+    if not building then return end
+    local rooms = getCell():getRoomList()
+    local switchRooms = 0
+    for i = 1, rooms:size() do
+        local room = rooms:get(i - 1)
+        if room:getBuilding() == building and room:getLightSwitches():size() > 0 then
+            switchRooms = switchRooms + 1
+        end
+    end
+    if switchRooms == 0 then return end
+    Events.OnTick.Remove(autoLightsAfterTeleport)
+    DWAPUtils.lightsOn(square, building)
+end
+
+function startAutoLightsAfterTeleport()
+    autoLightsTicks = 0
+    Events.OnTick.Remove(autoLightsAfterTeleport)
+    Events.OnTick.Add(autoLightsAfterTeleport)
+end
+
 function DWAPGoto(index)
     local configs = DWAPUtils.loadConfigs(true)
     if not configs or #configs == 0 then
@@ -757,6 +791,10 @@ function DWAPGoto(index)
         dest = config.doorKeys.name
     end
     player:Say("Teleported to: " .. dest)
+
+    if DWAP_AutoLightsEnabled then
+        startAutoLightsAfterTeleport()
+    end
 end
 
 local tlc
@@ -1087,10 +1125,10 @@ local function checkSquareContainers(square, containerLookup)
                     -- Check if this is a trash container
                     local isTrashContainer = false
                     local properties = obj:getProperties()
-                    if properties:Is("GroupName") and properties:Val("GroupName") == "Garbage" then
+                    if properties:has("GroupName") and properties:get("GroupName") == "Garbage" then
                         isTrashContainer = true
-                    elseif properties:Is("container") then
-                        local containerName = properties:Val("container")
+                    elseif properties:has("container") then
+                        local containerName = properties:get("container")
                         local list = {
                             bin = true,
                             dumpster = true,
@@ -1492,7 +1530,7 @@ local function checkSquarePlumbing(square, plumbingLookup, tankLookup)
                 if objectSprite then
                     local props = objectSprite and objectSprite:getProperties()
 
-                    local customName = props and props:Is("CustomName") and props:Val("CustomName")
+                    local customName = props and props:has("CustomName") and props:get("CustomName")
                     if customName and plumbingNames[customName] then
                         isPlumbingFixture = true
                         customNameStr = customName
@@ -1730,7 +1768,7 @@ function FindUnconnectedPlumbing()
                                     local objectSprite = obj:getSprite()
                                     if objectSprite then
                                         local props = objectSprite:getProperties()
-                                        local customName = props and props:Is("CustomName") and props:Val("CustomName")
+                                        local customName = props and props:has("CustomName") and props:get("CustomName")
                                         if customName and plumbingNames[customName] then
                                             isPlumbingFixture = true
                                             customNameStr = customName
