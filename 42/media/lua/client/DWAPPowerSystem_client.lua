@@ -30,6 +30,13 @@ function DWAPPowerSystem:newLuaObject(globalObject)
     return DWAPPowerObject:new(self, globalObject)
 end
 
+-- 42.20: CGlobalObjectSystem:getLuaObjectAt calls updateFromIsoObject on every
+-- lookup, which reaches isValidIsoObject on the client too (base class errors)
+function DWAPPowerSystem:isValidIsoObject(isoObject)
+    if not isoObject then return false end
+    return isoObject:getModData().DWAPObjectType ~= nil
+end
+
 function DWAPPowerSystem:getGeneratorInfo(index)
 
     if not self.generators or not self.generators[index] then

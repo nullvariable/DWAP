@@ -122,8 +122,13 @@ function DWAPSquareLoaded:RunHook(name, x, y, z, _params)
     DWAPUtils.dprint(("DWAPSquareLoaded:RunHook running %s %s %s %s %s"):format(name, x, y, coordKey,
         #self.HookedEvents[name][coordKey]))
     DWAPUtils.dprint(self.HookedEvents[name])
-    for i = 1, #self.HookedEvents[name][coordKey] do
-        local event = self.HookedEvents[name][coordKey][i]
+    -- Snapshot and clear BEFORE running: AddEvent can run its callback synchronously
+    -- (loaded square), and a spawned prop's PropSpawned hook re-enters RunHook for
+    -- this same coord. Clearing after the loop caused infinite recursion (42.20).
+    local events = self.HookedEvents[name][coordKey]
+    self.HookedEvents[name][coordKey] = nil
+    for i = 1, #events do
+        local event = events[i]
         if event then
             local params = {}
             if event.params then
@@ -138,7 +143,6 @@ function DWAPSquareLoaded:RunHook(name, x, y, z, _params)
             self:AddEvent(event.cb, x, y, z, event.once, params)
         end
     end
-    self.HookedEvents[name][coordKey] = nil
     DWAPUtils.dprint(("DWAPSquareLoaded:RunHook %s %s %s %s done"):format(name, coordKey, x, y))
     self.needsSave = true
 end
@@ -298,13 +302,16 @@ function DWAPSquareLoaded:RunCoord(x, y, z)
             local callbackKey = self.EventsByXYZ[coordKey][i]
             local event = self.Events[callbackKey]
             if event then
+                -- Remove once-events BEFORE invoking: the callback can re-enter
+                -- RunCoord for this coord (prop spawn chains), and removing after
+                -- meant the in-flight event re-fired, spawning duplicates forever.
+                if event.once == true then
+                    self:RemoveEvent(callbackKey)
+                end
                 if event.params then
                     event.callback(event.params)
                 else
                     event.callback()
-                end
-                if event.once == true then
-                    self:RemoveEvent(callbackKey)
                 end
             end
         end

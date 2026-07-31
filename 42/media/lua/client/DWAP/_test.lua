@@ -45,7 +45,10 @@ end
 -- end
 
 local lastBuilding = nil
+DWAP_AutoLightsEnabled = false
 function DoAutoLights()
+    if DWAP_AutoLightsEnabled then return end
+    DWAP_AutoLightsEnabled = true
     Events.OnTick.Add(function()
         local ply = getPlayer()
         local square = ply:getCurrentSquare()
@@ -1160,7 +1163,7 @@ function watertest()
     fixtureObj:getModData().canBeWaterPiped = false
     fixtureObj:setUsesExternalWaterSource(true)
     fixtureObj:transmitModData()
-    fixtureObj:sendObjectChange('usesExternalWaterSource', { value = true })
+    fixtureObj:sendObjectChange(IsoObjectChange.USES_EXTERNAL_WATER_SOURCE, { value = true })
     fixtureObj:doFindExternalWaterSource()
     fixtureObj:transmitModData()
     fixtureSquare:transmitModdata()

@@ -13,45 +13,7 @@ local table = table
 print(("DWAPUtils.lua loaded: debug = %s"):format(tostring(getDebug())))
 local debugEnabled = getDebug()
 
-local configFiles = { -- should match order in Sandbox_EN and other translations, which should also be alphabetical
-    [1] = "DWAP/configs/01_DoeValleyBunker",
-    [2] = "DWAP/configs/02_EchoCreek",
-    [3] = "DWAP/configs/03_LVilleMansion",
-    [4] = "DWAP/configs/04_MarchRidgeBunker",
-    [5] = "DWAP/configs/05_MuldSafeHouse",
-    [6] = "DWAP/configs/06_RiverSafeHouse",
-    [7] = "DWAP/configs/07_RosewoodGas",
-    [8] = "DWAP/configs/08_WWPSafeHouse",
-    [9] = "DWAP/configs/09_LowryCourt",
-    [10] = "DWAP/configs/10_GrandOhio",
-    [11] = "DWAP/configs/11_PSDelilah",
-    [12] = "DWAP/configs/12_EkronCC",
-    [13] = "DWAP/configs/13_LVPawnshop",
-    [14] = "DWAP/configs/14_LVAutoshop",
-    [15] = "DWAP/configs/15_EkronLakeHouse",
-    [16] = "DWAP/configs/16_ELVilleFarm",
-    [17] = "DWAP/configs/17_AnimalRehab",
-    [18] = "DWAP/configs/18_McCoyEstate",
-    [19] = "DWAP/configs/19_CentralLVilleMansion",
-    [20] = "DWAP/configs/20_ScrapYard",
-    [21] = "DWAP/configs/21_EkronFactory",
-    [22] = "DWAP/configs/22_CortmanMedical",
-    [23] = "DWAP/configs/23_RustyRifle",
-    [24] = "DWAP/configs/24_MRSecret",
-    [25] = "DWAP/configs/25_RiversideMansion",
-    [26] = "DWAP/configs/26_WestPointHome",
-    [27] = "DWAP/configs/27_TheDrake",
-    [28] = "DWAP/configs/28_EkronPigFarm",
-    [29] = "DWAP/configs/29_LVilleComplex",
-    [30] = "DWAP/configs/30_IrvingtonTH",
-    [31] = "DWAP/configs/31_PrisonBreak",
-    [32] = "DWAP/configs/32_QuillManor",
-    [33] = "DWAP/configs/33_DarkWallow",
-    [34] = "DWAP/configs/34_HuntingCabin",
-    [35] = "DWAP/configs/35_DrugShack",
-    [36] = "DWAP/configs/36_GunClub",
-    [37] = "DWAP/configs/37_GasCorner_17",
-}
+-- should match order in Sandbox_EN and other translations, which should also be alphabetical
 local configFiles_17 = {
     [1] = "DWAP/configs/01_DoeValleyBunker_17",
     [2] = "DWAP/configs/02_EchoCreek_17",
@@ -97,6 +59,17 @@ local configFiles_17 = {
     [42] = "DWAP/configs/42_LvilleTownhouse_17",
 }
 
+-- @TEMP: disable configs while re-verifying maps for 42.20. false placeholders
+-- keep safehouse numbering aligned; keep in sync with the matching block in
+-- common/media/maps/DWAP/basements.lua. Delete this block to restore.
+local tempDisabledConfigs = { 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 21, 24, 25, 26, 27, 29, 30, 31, 32, 37, 41 }
+for i = 1, #tempDisabledConfigs do
+    configFiles_17[tempDisabledConfigs[i]] = false
+end
+-- Maps the shrunken DWAP.Safehouse enum (numValues = 21) to real config indices:
+-- dropdown value V (2..22) selects config tempEnabledConfigs[V - 1]; value 1 = random.
+local tempEnabledConfigs = { 1, 2, 11, 13, 14, 15, 17, 18, 19, 22, 23, 28, 33, 34, 35, 36, 38, 39, 40, 42 }
+
 local configCache = {}
 local cachedBaseIndex = nil
 local cachedPrimaryConfigIndex = nil
@@ -131,7 +104,10 @@ function DWAPUtils.getRandomSelected()
     local seed = WorldGenParams.INSTANCE:getSeedString()
     random:seed(seed)
     DWAPUtils.dprint("Random seed: " .. seed)
-    return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
+    -- @TEMP: pick only from enabled configs; original line below. Must stay
+    -- identical to basements.lua getRandomSelected (same seed, same single draw).
+    return tempEnabledConfigs[random:random(1, #tempEnabledConfigs)]
+    -- return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
 end
 
 function DWAPUtils.getSafehouseKeyId()
@@ -142,7 +118,9 @@ end
 
 function DWAPUtils.getBaseSafehouseIndex()
     if cachedBaseIndex then return cachedBaseIndex end
-    local selected = SandboxVars.DWAP.Safehouse - 1
+    -- @TEMP: remap shrunken enum value to real config index; original line below
+    local selected = tempEnabledConfigs[SandboxVars.DWAP.Safehouse - 1]
+    -- local selected = SandboxVars.DWAP.Safehouse - 1
     if SandboxVars.DWAP.Safehouse == 1 then
         selected = DWAPUtils.getRandomSelected()
     end
@@ -214,7 +192,7 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     local configs = DWAPUtils.loadConfigs()
     if configs then
         local config = configs[DWAPUtils.getPrimaryConfigIndex()]
-        if config.spawn then
+        if config and config.spawn then
             DWAPSPAWN = {
                 x = config.spawn.x,
                 y = config.spawn.y,
@@ -260,31 +238,6 @@ function DWAPUtils.areCoordsInList(coords, list)
     return false
 end
 
-local function maybeApplyOverrides(config)
-    if config.overrides then
-        local modData = ModData.getOrCreate("DWAP_Utils")
-        if not modData.saveVersion or modData.saveVersion >= DWAPUtils.currentVersion then
-            config.overrides = nil
-            DWAPUtils.dprint("No overrides applied")
-        else
-            -- traverse backwards and load the newest overrides prior to the save version if there's not a matching save version
-            for i = #config.overrides, 1, -1 do
-                local override = config.overrides[i]
-                if override.version == modData.saveVersion then
-                    DWAPUtils.dprint("Applying overrides for version " .. override.version)
-                    for k, v in pairs(override) do
-                        config[k] = v
-                    end
-                    break
-                end
-            end
-        end
-    end
-    config.overrides = nil
-    return config
-end
-
-
 function DWAPUtils.loadConfigs(noCache)
     if noCache == nil then
         noCache = false
@@ -293,14 +246,10 @@ function DWAPUtils.loadConfigs(noCache)
         return configCache
     end
     local configs = table.newarray()
-    local configFilesToUse = configFiles
+    local configFilesToUse = configFiles_17
     local saveVersion = DWAPUtils.getSaveVersion()
-    if saveVersion == 17 then
-        DWAPUtils.dprint("Using config files for version 17")
-        configFilesToUse = configFiles_17
-    end
     local index = DWAPUtils.getBaseSafehouseIndex()
-    if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
+    if index == nil then index = tempEnabledConfigs[SandboxVars.DWAP.Safehouse - 1] end -- @TEMP remap (was: SandboxVars.DWAP.Safehouse - 1)
     local primaryIndex = DWAPUtils.getPrimaryConfigIndex()
     DWAPUtils.dprint("Base Safehouse Index: " .. index .. ", Primary Safehouse Index: " .. primaryIndex)
     if SandboxVars.DWAP.EnableAllLocations then
@@ -308,25 +257,22 @@ function DWAPUtils.loadConfigs(noCache)
             DWAPUtils.dprint("Loading all configs: " .. #configFilesToUse)
         end
         for i = 1, #configFilesToUse do
-            local config = require(configFilesToUse[i])
+            local file = configFilesToUse[i]
+            local config = file and require(file) or false
             if config then
                 if i ~= index and (not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3) then
                     config.loot = nil
                 end
-                if saveVersion < 17 then
-                    config = maybeApplyOverrides(config)
-                end
-                table.insert(configs, config)
-                DWAPUtils.dprint("Loaded config: " .. configFilesToUse[i])
+                DWAPUtils.dprint("Loaded config: " .. file)
             end
+            -- false placeholders keep configs[i] aligned with safehouse numbering
+            configs[#configs + 1] = config
         end
     else
         DWAPUtils.dprint("Loading config: " .. index)
-        local config = require(configFilesToUse[index])
+        local file = configFilesToUse[index]
+        local config = file and require(file)
         if config then
-            if saveVersion < 17 then
-                config = maybeApplyOverrides(config)
-            end
             table.insert(configs, config)
             DWAPUtils.dprint("Loaded config: " .. configFilesToUse[index])
         else
@@ -412,19 +358,11 @@ end
 local useGen = false
 function DWAPUtils.getStartingLocations()
     local spawns = {}
-    local configFilesToUse = {}
+    local configFilesToUse = configFiles_17
     local saveVersion = DWAPUtils.getSaveVersion()
-    if saveVersion == 17 then
-        for i = 1, #configFiles_17 do
-            configFilesToUse[#configFilesToUse + 1] = configFiles_17[i]
-        end
-    else
-        for i = 1, #configFiles do
-            configFilesToUse[#configFilesToUse + 1] = configFiles[i]
-        end
-    end
     for i = 1, #configFilesToUse do
-        local config = require(configFilesToUse[i])
+        local file = configFilesToUse[i]
+        local config = file and require(file)
         if useGen and config and config.generators and config.generators[1].controls then
             spawns[#spawns+1] = {
                 x = config.generators[1].controls.x,

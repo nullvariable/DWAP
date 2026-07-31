@@ -43,12 +43,7 @@ function DWAPFixGenerator:stop()
 end
 
 function DWAPFixGenerator:continueFixing()
-    local generator
-    if self.version == 1 then
-        generator = DWAP_Gen:GetGenerator(self.genIndex)
-    else
-        generator = DWAPPowerSystem.instance.generators[self.genIndex]
-    end
+    local generator = DWAPPowerSystem.instance.generators[self.genIndex]
     DWAPUtils.dprint(generator.condition)
     DWAPUtils.dprint(generator.condition < 100)
     if generator and generator.condition < 100 then
@@ -85,13 +80,8 @@ function DWAPFixGenerator:complete()
     self.character:getInventory():Remove(scrapItem);
     sendRemoveItemFromContainer(self.character:getInventory(), scrapItem);
 
-    if self.version == 1 then
-        DWAP_Gen:RepairGen(self.genIndex, 4 +
+    DWAPPowerSystem.instance:RepairGen(self.genIndex, 4 +
         (1 * (self.character:getPerkLevel(Perks.Electricity)) / 2))
-    else
-        DWAPPowerSystem.instance:RepairGen(self.genIndex, 4 +
-        (1 * (self.character:getPerkLevel(Perks.Electricity)) / 2))
-    end
 
     addXp(self.character, Perks.Electricity, 5)
 
@@ -120,8 +110,6 @@ function DWAPFixGenerator:new(character, generatorObj, generatorData, genIndex)
     o.genIndex = genIndex;
     o.maxTime = o:getDuration()
     o.caloriesModifier = 4;
-
-    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
 
     return o;
 end

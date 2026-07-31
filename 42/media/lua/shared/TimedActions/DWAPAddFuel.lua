@@ -50,19 +50,12 @@ function DWAPAddFuel:perform()
 end
 
 function DWAPAddFuel:complete()
-    local endFuel = 0;
-    while self.fluidCont and self.fluidCont:getAmount() >= 1.0 and self.generatorData.fuel + endFuel < self.generatorData.capacity do
-        local amount = self.fluidCont:getAmount() - 1.0;
-        self.fluidCont:adjustAmount(amount);
-        endFuel = endFuel + 1;
-    end
+    -- matches vanilla ISAddFuel:complete (42.20): fill by exact amount instead of whole liters
+    local endFuel = math.min(self.fluidCont:getAmount(), self.generatorData.capacity - self.generatorData.fuel)
+    self.fluidCont:adjustAmount(self.fluidCont:getAmount() - endFuel)
 
     self.petrol:syncItemFields()
-    if self.version == 1 then
-        DWAP_Gen:AddFuel(self.genIndex, endFuel)
-    else
-        DWAPPowerSystem.instance:AddFuel(self.genIndex, endFuel)
-    end
+    DWAPPowerSystem.instance:AddFuel(self.genIndex, endFuel)
 
     return true;
 end
@@ -83,7 +76,5 @@ function DWAPAddFuel:new(character, generator, petrolCan, generatorData, genInde
     o.generatorData = generatorData;
     o.genIndex = genIndex;
     o.maxTime = o:getDuration();
-
-    o.version = DWAPUtils.getSaveVersion() < 17 and 1 or 2
     return o;
 end
