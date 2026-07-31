@@ -372,22 +372,30 @@ function DWAP_Props.maybeSpawnObject(params)
                     barricade:addPlank(nil, nil)
                     barricade:addPlank(nil, nil)
                 end
-                local barricade2 = IsoBarricade.AddBarricadeToObject(obj, false)
-                if params.barricade == "metalbar" then
-                    barricade2:addMetalBar(nil, nil)
+                local barricade2
+                success, err = pcall(function()
+                    barricade2 = IsoBarricade.AddBarricadeToObject(barricadeTarget, false)
+                end)
+                if not success then
+                    DWAPUtils.dprint(("DWAP_Props: Failed to add opposite barricade to object %s: %s (%s %s)"):format(params.sprite, err, tostring(params.x), tostring(params.y)))
                 end
-                if params.barricade == "metal" then
-                    barricade2:addMetal(nil, nil)
-                end
-                if params.barricade == "wood" then
-                    barricade2:addPlank(nil, nil)
-                    barricade2:addPlank(nil, nil)
-                    barricade2:addPlank(nil, nil)
-                    barricade2:addPlank(nil, nil)
-                end
-                if params.barricade == "woodhalf" then
-                    barricade2:addPlank(nil, nil)
-                    barricade2:addPlank(nil, nil)
+                if barricade2 then
+                    if params.barricade == "metalbar" then
+                        barricade2:addMetalBar(nil, nil)
+                    end
+                    if params.barricade == "metal" then
+                        barricade2:addMetal(nil, nil)
+                    end
+                    if params.barricade == "wood" then
+                        barricade2:addPlank(nil, nil)
+                        barricade2:addPlank(nil, nil)
+                        barricade2:addPlank(nil, nil)
+                        barricade2:addPlank(nil, nil)
+                    end
+                    if params.barricade == "woodhalf" then
+                        barricade2:addPlank(nil, nil)
+                        barricade2:addPlank(nil, nil)
+                    end
                 end
                 break
             end
