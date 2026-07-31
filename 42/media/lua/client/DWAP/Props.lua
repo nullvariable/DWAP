@@ -54,22 +54,22 @@ end
 local function canDestroy(object)
     local props = object:getProperties()
 	if not props then return false end
-	if props:Is(IsoFlagType.vegitation) then return false end
-    if props:Is(IsoFlagType.solidfloor) then return false end
-    if props:Is(IsoFlagType.transparentFloor) then return false end
-    -- if props:Is(IsoFlagType.attachedFloor) then return false end
-    if props:Is(IsoFlagType.diamondFloor) then return false end
-    if props:Is(IsoFlagType.floorE) then return false end
-    if props:Is(IsoFlagType.floorS) then return false end
-    if props:Is(IsoFlagType.DoorWallN) then return false end
-    if props:Is(IsoFlagType.DoorWallW) then return false end
-    if props:Is(IsoFlagType.WallN) then return false end
-    if props:Is(IsoFlagType.WallNTrans) then return false end
-    if props:Is(IsoFlagType.WallNW) then return false end
-    if props:Is(IsoFlagType.WallOverlay) then return false end
-    if props:Is(IsoFlagType.WallSE) then return false end
-    if props:Is(IsoFlagType.WallW) then return false end
-    if props:Is(IsoFlagType.WallWTrans) then return false end
+	if props:has(IsoFlagType.vegitation) then return false end
+    if props:has(IsoFlagType.solidfloor) then return false end
+    if props:has(IsoFlagType.transparentFloor) then return false end
+    -- if props:has(IsoFlagType.attachedFloor) then return false end
+    if props:has(IsoFlagType.diamondFloor) then return false end
+    if props:has(IsoFlagType.floorE) then return false end
+    if props:has(IsoFlagType.floorS) then return false end
+    if props:has(IsoFlagType.DoorWallN) then return false end
+    if props:has(IsoFlagType.DoorWallW) then return false end
+    if props:has(IsoFlagType.WallN) then return false end
+    if props:has(IsoFlagType.WallNTrans) then return false end
+    if props:has(IsoFlagType.WallNW) then return false end
+    if props:has(IsoFlagType.WallOverlay) then return false end
+    if props:has(IsoFlagType.WallSE) then return false end
+    if props:has(IsoFlagType.WallW) then return false end
+    if props:has(IsoFlagType.WallWTrans) then return false end
     local spriteName = object:getSprite():getName()
     if spriteName then
         if spriteName == "advertising_01_14" then return false end
@@ -125,15 +125,15 @@ end
 
 local function isWall(object)
     local props = object:getProperties()
-    if props:Is(IsoFlagType.DoorWallN) then return true end
-    if props:Is(IsoFlagType.DoorWallW) then return true end
-    if props:Is(IsoFlagType.WallN) then return true end
-    if props:Is(IsoFlagType.WallNTrans) then return true end
-    if props:Is(IsoFlagType.WallNW) then return true end
-    if props:Is(IsoFlagType.WallOverlay) then return true end
-    if props:Is(IsoFlagType.WallSE) then return true end
-    if props:Is(IsoFlagType.WallW) then return true end
-    if props:Is(IsoFlagType.WallWTrans) then return true end
+    if props:has(IsoFlagType.DoorWallN) then return true end
+    if props:has(IsoFlagType.DoorWallW) then return true end
+    if props:has(IsoFlagType.WallN) then return true end
+    if props:has(IsoFlagType.WallNTrans) then return true end
+    if props:has(IsoFlagType.WallNW) then return true end
+    if props:has(IsoFlagType.WallOverlay) then return true end
+    if props:has(IsoFlagType.WallSE) then return true end
+    if props:has(IsoFlagType.WallW) then return true end
+    if props:has(IsoFlagType.WallWTrans) then return true end
     return false
 end
 
@@ -253,7 +253,7 @@ function DWAP_Props.maybeSpawnObject(params)
             if params.renderYOffset then
                 DWAPUtils.dprint(("DWAP_Props: Setting renderYOffset %s"):format(params.renderYOffset))
                 local sharedSprite = getSprite(params.sprite)
-                if square and sharedSprite and sharedSprite:getProperties():Is("IsStackable") then
+                if square and sharedSprite and sharedSprite:getProperties():has("IsStackable") then
                     local props = ISMoveableSpriteProps.new(sharedSprite)
                     prop:setRenderYOffset(props:getTotalTableHeight(square))
                 end
@@ -331,9 +331,24 @@ function DWAP_Props.maybeSpawnObject(params)
                 else
                     return
                 end
+                local barricadeTarget = obj
+                if not (instanceof(obj, "IsoWindowFrame") or instanceof(obj, "IsoWindow")
+                    or instanceof(obj, "IsoDoor") or instanceof(obj, "IsoThumpable")) then
+                    -- 42.20: CellLoader.treatWindowFrameAsOverlay merges window-frame sprites
+                    -- into an existing wall as an overlay instead of creating an IsoWindowFrame,
+                    -- so the sprite match can land on a plain (non-BarricadeAble) object.
+                    -- Fall back to any barricadeable window/frame on the square.
+                    barricadeTarget = square:getWindowFrame(true) or square:getWindowFrame(false)
+                        or square:getWindow(true) or square:getWindow(false)
+                end
+                if not barricadeTarget then
+                    DWAPUtils.dprint(("DWAP_Props: No barricadeable object for target %s at %s %s %s"):format(
+                        tostring(params.target), tostring(params.x), tostring(params.y), tostring(params.z)))
+                    return
+                end
                 local barricade
                 local success, err = pcall(function()
-                    barricade = IsoBarricade.AddBarricadeToObject(obj, true)
+                    barricade = IsoBarricade.AddBarricadeToObject(barricadeTarget, true)
                 end)
                 if not success then
                     DWAPUtils.dprint(("DWAP_Props: Failed to add barricade to object %s: %s (%s %s)"):format(params.sprite, err, tostring(params.x), tostring(params.y)))
