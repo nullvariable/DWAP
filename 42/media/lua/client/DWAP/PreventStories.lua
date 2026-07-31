@@ -50,7 +50,7 @@ Events.OnInitGlobalModData.Add(function()
         for i = 1, #configs do
             local config = configs[i]
             local allowStories = false
-            if config.allowStories ~= nil then
+            if config and config.allowStories ~= nil then
                 if type(config.allowStories) == "string" then
                     -- loop all the . characters so we can access the full SandboxVars key, like: DWAP_HWFF.KeepZombies
                     local key = config.allowStories
