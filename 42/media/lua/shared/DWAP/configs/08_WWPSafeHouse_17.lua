@@ -1,7 +1,7 @@
-local wtc = {x = 10158, y = 6620, z = -1} -- waterTankCoords
-local pb1 = { x = 10149, y = 6620, z = -1 }
+local wtc = {x = 10096, y = 7348, z = -1} -- waterTankCoords
+local pb1 = { x = 10088, y = 7347, z = -1 }
 local WWestPointSafeHouse = {
-    spawn = { x = 10162, y = 6622, z = 1 },
+    spawn = { x = 10091, y = 7352, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 10149, y = 6620, z = -1} },
     },
@@ -38,7 +38,8 @@ local WWestPointSafeHouse = {
     map = { name = "DWAPStashMap8", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10087, y = 7348, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 10085, y= 7348, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -125,23 +126,12 @@ local WWestPointSafeHouse = {
                 },
             },
             fakeGenerators = {
-                { x = 10153, y = 6627, z = -1, createTile = false },
-            },
-            chunks = {
-                {1268, 827},
-                {1268, 828},
-                {1268, 829},
-                {1269, 827},
-                {1269, 828},
-                {1269, 829},
-                {1270, 827},
-                {1270, 828},
+                { x = 10087, y = 7366, z = -1, createTile = false },
             },
         },
     },
     objectSpawns = {
         { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-        { sprite = "trashcontainers_01_24", x = 10150, y = 6626, z = 0, enabled = "Loot", },
 
         { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_5", x = 10157, y = 6633, z = 0, },
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_02_9", x = 10160, y = 6632, z = 0, },

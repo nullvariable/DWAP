@@ -17,7 +17,8 @@ local MarchRidgeConfig = {
     },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 9947, y = 12616, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = 9947, y = 12616, z = -4, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 9945, y = 12616, z = -4, },
             fakeGenerators = {
                 { x = 9920, y = 12625, z = -4, createTile = false },
                 { x = 9943, y = 12628, z = -4, createTile = false },

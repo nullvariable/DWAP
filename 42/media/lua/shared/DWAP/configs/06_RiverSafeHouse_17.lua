@@ -1,7 +1,7 @@
-local wtc = {x = 6946, y = 5554, z = -1} -- waterTankCoords
-local pb1 = { x = 6944, y = 5554, z = -1 }
+local wtc = {x = 6957, y = 5565, z = -1} -- waterTankCoords
+local pb1 = { x = 6952, y = 5566, z = -1 }
 local RiverSafeHouse = {
-    spawn = { x = 6953, y = 5565, z = 1 },
+    spawn = { x = 6965, y = 5584, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 6962, y = 5564, z = -1} },
     },
@@ -32,7 +32,8 @@ local RiverSafeHouse = {
     map = { name = "DWAPStashMap6", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 6953, y = 5565, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 6955, y= 5565, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

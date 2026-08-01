@@ -1,10 +1,11 @@
-local wtc = {x = 8168, y = 11255, z = -1}
-local pb1 = { x = 8172, y = 11255, z = -1 }
-local RosewoodGas = {
-    spawn = { x = 8179, y = 11269, z = 1 },
+local wtc = {x = 8084, y = 11550, z = -1}
+local pb1 = { x = 8079, y = 11551, z = -1 }
+local RosewoodZippee = {
+    spawn = { x = 8087, y = 11558, z = 2 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 8082, y = 11550, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 8080, y= 11550, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -106,28 +107,6 @@ local RosewoodGas = {
                 -- { x = 8152, y = 11263, z = 1, createTile = false },
                 { x = 8152, y = 11263, z = -1, createTile = false },
             },
-            chunks = {
-                {1021, 1408},
-                {1021, 1409},
-                {1022, 1407},
-                {1022, 1408},
-                {1022, 1409},
-                {1023, 1408},
-                {1023, 1409},
-                -- gas pumps
-                {1019, 1407},
-                {1019, 1408},
-                {1018, 1407},
-                {1018, 1408},
-                {1017, 1407},
-                {1017, 1408},
-                {1020, 1406},
-                {1020, 1407},
-                {1021, 1406},
-                {1021, 1407},
-                {1021, 1404},
-                {1021, 1405},
-            },
         },
     },
     waterTanks = {
@@ -147,7 +126,7 @@ local RosewoodGas = {
         { sprite = "fixtures_bathroom_01_28", x = 8182, y = 11272, z = 1, sourceType="tank", source = wtc },
     },
     doorKeys = {
-        name = "Rosewood Gas Station Key",
+        name = "Rosewood Zippee Apts Key",
         doors = {
             { sprite = "fixtures_doors_02_4", x = 8175, y = 11268, z = 0, },
             { sprite = "fixtures_doors_01_56", x = 8174, y = 11260, z = -1, },
@@ -502,13 +481,13 @@ local RosewoodGas = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11255, z = -1, removeWall = "north" })
-    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11215, z = 0, removeFloor = true, })
-    table.insert(RosewoodGas.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
-    table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
-    table.insert(RosewoodGas.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
+    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11255, z = -1, removeWall = "north" })
+    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11215, z = 0, removeFloor = true, })
+    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
+    table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
+    table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
 
-    table.insert(RosewoodGas.generators[1].fakeGenerators, { x = 8173, y = 11234, z = -1, createTile = false })
+    table.insert(RosewoodZippee.generators[1].fakeGenerators, { x = 8173, y = 11234, z = -1, createTile = false })
 end
 
-return RosewoodGas
+return RosewoodZippee

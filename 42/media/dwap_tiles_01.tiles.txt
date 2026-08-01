@@ -229,4 +229,12 @@ tileset
         MaterialType = Metal
         solid = 
     }
+    // dwap_tiles_01_24
+    tile
+    {
+        xy = 0,3
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
 }

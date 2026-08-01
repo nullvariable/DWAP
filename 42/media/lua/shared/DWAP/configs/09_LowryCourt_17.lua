@@ -38,7 +38,8 @@ local LowryCourt = {
     map = { name = "DWAPStashMap9", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 12989, y = 1912, z = 0, },
+            controls = { sprite = "dwap_tiles_01_22", x = 12982, y = 1912, z = 0, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 12984, y= 1920, z= 0, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z, spawn = false, },
                 panels = {

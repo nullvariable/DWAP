@@ -4,7 +4,8 @@ local LVilleMansion = {
     spawn = { x = 12021, y = 2588, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 12049, y = 2578, z = 0, },
+            controls = { sprite = "dwap_tiles_01_22", x = 12049, y = 2578, z = 0, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 12047, y= 2578, z= 0, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -113,31 +114,6 @@ local LVilleMansion = {
             fakeGenerators = {
                 { x = 12024, y = 2602, z = -1 },
                 { x = 12038, y = 2582, z = -1 },
-            },
-            chunks = {
-                -- garage
-                {1504, 322},
-                {1504, 323},
-                {1505, 322},
-                {1505, 323},
-                {1506, 322},
-                {1506, 323},
-                -- house
-                {1502, 323},
-                {1502, 324},
-                {1502, 325},
-                {1503, 323},
-                {1503, 324},
-                {1503, 325},
-                -- basement
-                {1503, 322},
-                -- {1503, 323},
-                -- {1503, 324},
-                -- {1503, 325},
-                -- {1504, 322},
-                -- {1504, 323},
-                {1504, 324},
-                {1504, 325},
             },
         },
     },

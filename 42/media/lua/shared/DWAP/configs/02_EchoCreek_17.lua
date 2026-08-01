@@ -4,29 +4,12 @@ local EchoCreek = {
     spawn = { x = 3573, y = 10896, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 3584, y= 10898, z= -1, },
             fakeGenerators = {
                 { x = 3569, y = 10907, z = -1 }, -- dummy
                 { x = 3588, y = 10898, z = -1 },
                 { x = 3612, y = 10903, z = -1 },
-            },
-            chunks = {
-                {445, 1362},
-                {445, 1363},
-                {446, 1362},
-                {446, 1363},
-                {446, 1361},
-                {447, 1361},
-                {447, 1362},
-                {447, 1363},
-                {446, 1364}, -- gas pumps outside
-                {448, 1361},
-                {448, 1362},
-                {449, 1362},
-                {450, 1362},
-                {451, 1362},
-                {450, 1363},
-                {451, 1363},
             },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },

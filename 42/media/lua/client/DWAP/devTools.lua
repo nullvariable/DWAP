@@ -9,15 +9,47 @@ local function getTableSize(tbl)
     return DWAPUtils.tableSize(tbl)
 end
 
+-- B42 chunks are 8x8 tiles
+local CHUNK_SIZE = 8
+
 -- Helper function to get chunk center coordinates
 local function getChunkCenterXY(chunk)
     local wx = Reflection.getField(chunk, "wx")
     local wy = Reflection.getField(chunk, "wy")
-    local startX = wx * 10
-    local startY = wy * 10
-    local endX = startX + 10 - 1
-    local endY = startY + 10 - 1
-    return math.floor((startX + endX) / 2), math.floor((startY + endY) / 2)
+    local half = math.floor(CHUNK_SIZE / 2)
+    return wx * CHUNK_SIZE + half, wy * CHUNK_SIZE + half
+end
+
+-- Power reaches a Euclidean disc, see IsoGenerator.isPoweringSquare
+local function distanceSquared(x1, y1, x2, y2)
+    local dx, dy = x1 - x2, y1 - y2
+    return dx * dx + dy * dy
+end
+
+-- Only used to break ties toward the middle of the building
+local function chebyshev(x1, y1, x2, y2)
+    return math.max(math.abs(x1 - x2), math.abs(y1 - y2))
+end
+
+-- Interior generators are legal and are what this mod ships, so a square only
+-- has to be walkable and dry
+local function isValidGeneratorSquare(square)
+    if not square then return false end
+    if not square:isFree(false) then return false end
+    if square:isWaterSquare() then return false end
+    return true
+end
+
+-- Mirrors IsoGenerator.touchesChunk: does the generator's range reach the chunk
+local function generatorTouchesChunk(x, y, range, wx, wy)
+    local minX = wx * CHUNK_SIZE
+    local minY = wy * CHUNK_SIZE
+    local maxX = minX + CHUNK_SIZE - 1
+    local maxY = minY + CHUNK_SIZE - 1
+    if x - range > maxX then return false end
+    if x + range < minX then return false end
+    if y - range > maxY then return false end
+    return y + range >= minY
 end
 
 -- Simple utilities for the new fakeGenerators system
@@ -121,8 +153,13 @@ function ListNearbyGenerators()
     end
 end
 
-function FindOptimalExteriorSquaresForBuilding()
-    local pSquare = getPlayer():getCurrentSquare()
+function FindOptimalGeneratorSquaresForBuilding()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
     local building = pSquare:getBuilding()
     if not building then
         DWAPUtils.dprint("No building found")
@@ -130,194 +167,282 @@ function FindOptimalExteriorSquaresForBuilding()
     end
 
     local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
-    local squaresInBuilding = {}
+    local range = SandboxVars.GeneratorTileRange or 20
+    local rangeSq = range * range
+    local verticalRange = SandboxVars.GeneratorVerticalPowerRange or 3
 
-    -- Find all squares in the building (expanded search area)
-    for x = playerX - 50, playerX + 50 do
-        for y = playerY - 50, playerY + 50 do
-            local square = getSquare(x, y, playerZ)
-            if square then
-                local building2 = square:getBuilding()
-                if building2 and building2 == building then
-                    squaresInBuilding[#squaresInBuilding + 1] = square
+    -- Group building squares by chunk, tracking the real tile bounds of each
+    -- chunk instead of assuming the whole chunk is occupied
+    local uniqueChunks = {}
+    local chunkBounds = {}
+    local occupiedLevels = {}
+    local squareCount = 0
+    local minX, maxX, minY, maxY
+
+    local function collectLevel(z)
+        local found = 0
+        for x = playerX - 50, playerX + 50 do
+            for y = playerY - 50, playerY + 50 do
+                local square = getSquare(x, y, z)
+                if square and square:getBuilding() == building then
+                    found = found + 1
+                    local chunk = square:getChunk()
+                    local wx = Reflection.getField(chunk, "wx")
+                    local wy = Reflection.getField(chunk, "wy")
+                    local chunkKey = wx .. "_" .. wy
+
+                    local bounds = chunkBounds[chunkKey]
+                    if not bounds then
+                        uniqueChunks[chunkKey] = { chunk = chunk, wx = wx, wy = wy }
+                        bounds = {
+                            minX = x,
+                            maxX = x,
+                            minY = y,
+                            maxY = y,
+                            minZ = z,
+                            maxZ = z,
+                            squares = 0
+                        }
+                        chunkBounds[chunkKey] = bounds
+                    end
+
+                    bounds.minX = math.min(bounds.minX, x)
+                    bounds.maxX = math.max(bounds.maxX, x)
+                    bounds.minY = math.min(bounds.minY, y)
+                    bounds.maxY = math.max(bounds.maxY, y)
+                    bounds.minZ = math.min(bounds.minZ, z)
+                    bounds.maxZ = math.max(bounds.maxZ, z)
+                    bounds.squares = bounds.squares + 1
+
+                    minX = minX and math.min(minX, x) or x
+                    maxX = maxX and math.max(maxX, x) or x
+                    minY = minY and math.min(minY, y) or y
+                    maxY = maxY and math.max(maxY, y) or y
                 end
             end
         end
-    end
-
-    DWAPUtils.dprint("SquaresInBuilding " .. #squaresInBuilding)
-
-    -- Group squares by chunk and find chunk boundaries
-    local uniqueChunks = {}
-    local chunkBounds = {}
-
-    for i = 1, #squaresInBuilding do
-        local square = squaresInBuilding[i]
-        local chunk = square:getChunk()
-        local wx = Reflection.getField(chunk, "wx")
-        local wy = Reflection.getField(chunk, "wy")
-        local chunkKey = wx .. "_" .. wy
-
-        if not uniqueChunks[chunkKey] then
-            uniqueChunks[chunkKey] = {
-                chunk = chunk,
-                wx = wx,
-                wy = wy,
-                squares = {}
-            }
-            chunkBounds[chunkKey] = {
-                minX = square:getX(),
-                maxX = square:getX(),
-                minY = square:getY(),
-                maxY = square:getY()
-            }
+        if found > 0 then
+            occupiedLevels[#occupiedLevels + 1] = z
         end
-
-        table.insert(uniqueChunks[chunkKey].squares, square)
-
-        -- Update chunk bounds for building squares
-        local bounds = chunkBounds[chunkKey]
-        bounds.minX = math.min(bounds.minX, square:getX())
-        bounds.maxX = math.max(bounds.maxX, square:getX())
-        bounds.minY = math.min(bounds.minY, square:getY())
-        bounds.maxY = math.max(bounds.maxY, square:getY())
+        squareCount = squareCount + found
+        return found
     end
 
-    DWAPUtils.dprint("UniqueChunks found: " .. getTableSize(uniqueChunks))
+    -- Basements are frequently larger than the ground footprint, so walk the
+    -- z levels out from the player until two empty levels in a row
+    local zSearch = 8
+    local minLevel, maxLevel = playerZ, playerZ
+    collectLevel(playerZ)
+    local emptyLevels = 0
+    for z = playerZ + 1, playerZ + zSearch do
+        if collectLevel(z) > 0 then
+            emptyLevels = 0
+            maxLevel = z
+        else
+            emptyLevels = emptyLevels + 1
+            if emptyLevels >= 2 then break end
+        end
+    end
+    emptyLevels = 0
+    for z = playerZ - 1, playerZ - zSearch, -1 do
+        if collectLevel(z) > 0 then
+            emptyLevels = 0
+            minLevel = z
+        else
+            emptyLevels = emptyLevels + 1
+            if emptyLevels >= 2 then break end
+        end
+    end
 
-    -- Find nearest exterior square for each chunk
-    local chunkExteriorSquares = {}
+    table.sort(occupiedLevels)
+
+    local totalChunks = getTableSize(uniqueChunks)
+    DWAPUtils.dprint(("SquaresInBuilding %d across z %d..%d"):format(squareCount, minLevel, maxLevel))
+    DWAPUtils.dprint("UniqueChunks found: " .. totalChunks)
+    if totalChunks == 0 then
+        DWAPUtils.dprint("No building squares found")
+        return
+    end
 
     for chunkKey, chunkData in pairs(uniqueChunks) do
         local bounds = chunkBounds[chunkKey]
-        local nearestExterior = nil
-        local minDistance = math.huge
+        local centerX, centerY = getChunkCenterXY(chunkData.chunk)
+        DWAPUtils.dprint(("Chunk %s center %d,%d tiles %d (x %d..%d, y %d..%d, z %d..%d)"):format(
+            chunkKey, centerX, centerY, bounds.squares,
+            bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ))
+    end
 
-        -- Search around the chunk bounds to find exterior squares
-        local searchRadius = 5
-        for x = bounds.minX - searchRadius, bounds.maxX + searchRadius do
-            for y = bounds.minY - searchRadius, bounds.maxY + searchRadius do
-                local square = getSquare(x, y, playerZ)
-                if square then
-                    local squareBuilding = square:getBuilding()
-                    -- Check if this is an exterior square (no building or different building)
-                    if not squareBuilding or squareBuilding ~= building then
-                        -- Calculate distance to chunk center
-                        local chunkCenterX, chunkCenterY = getChunkCenterXY(chunkData.chunk)
-                        local distance = math.sqrt((x - chunkCenterX) ^ 2 + (y - chunkCenterY) ^ 2)
+    -- A candidate powers a chunk only when every building tile in that chunk is
+    -- inside the generator's disc, so test the corners of the chunk's tile bounds
+    local function coversChunk(candidateX, candidateY, candidateZ, bounds)
+        if math.abs(candidateZ - bounds.minZ) > verticalRange then return false end
+        if math.abs(candidateZ - bounds.maxZ) > verticalRange then return false end
+        if distanceSquared(candidateX, candidateY, bounds.minX, bounds.minY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.minX, bounds.maxY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.maxX, bounds.minY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.maxX, bounds.maxY) > rangeSq then return false end
+        return true
+    end
 
-                        if distance < minDistance then
-                            minDistance = distance
-                            nearestExterior = { x = x, y = y, z = playerZ, distance = distance }
+    -- Collect every valid square within reach of the building, on each level the
+    -- building occupies, as a set cover candidate
+    DWAPUtils.dprint(("Scanning candidates on %d levels with range %d, vertical %d"):format(
+        #occupiedLevels, range, verticalRange))
+
+    local candidates = {}
+    local candidateKeys = {}
+
+    for i = 1, #occupiedLevels do
+        local z = occupiedLevels[i]
+        for x = minX - range, maxX + range do
+            for y = minY - range, maxY + range do
+                local key = x .. "_" .. y .. "_" .. z
+                if not candidates[key] then
+                    local square = getSquare(x, y, z)
+                    if isValidGeneratorSquare(square) then
+                        local coveredChunks = {}
+                        local chunkCount = 0
+                        for chunkKey, _ in pairs(uniqueChunks) do
+                            if coversChunk(x, y, z, chunkBounds[chunkKey]) then
+                                coveredChunks[chunkKey] = true
+                                chunkCount = chunkCount + 1
+                            end
+                        end
+                        -- squares that cannot power anything are not candidates
+                        if chunkCount > 0 then
+                            candidates[key] = {
+                                x = x,
+                                y = y,
+                                z = z,
+                                coveredChunks = coveredChunks,
+                                chunkCount = chunkCount
+                            }
+                            candidateKeys[#candidateKeys + 1] = key
                         end
                     end
                 end
             end
         end
-
-        if nearestExterior then
-            chunkExteriorSquares[chunkKey] = nearestExterior
-            DWAPUtils.dprint(("Chunk %s nearest exterior: %d,%d (distance: %.2f)"):format(
-                chunkKey, nearestExterior.x, nearestExterior.y, nearestExterior.distance))
-        else
-            DWAPUtils.dprint(("No exterior square found for chunk %s"):format(chunkKey))
-        end
     end
 
-    -- Now optimize to find minimal set of exterior squares that cover maximum chunks
-    local exteriorCoverage = {}
-    local coverageRadius = 25 -- Generator power range
+    table.sort(candidateKeys)
+    DWAPUtils.dprint("Candidate squares: " .. #candidateKeys)
 
-    -- For each potential exterior square, calculate which chunks it can cover
-    for chunkKey, exteriorSquare in pairs(chunkExteriorSquares) do
-        local exteriorKey = exteriorSquare.x .. "_" .. exteriorSquare.y
+    -- Select the minimal set greedily; ties go to the candidate nearest the
+    -- building center, then to the lowest key, so results are reproducible
+    local centerX = math.floor((minX + maxX) / 2)
+    local centerY = math.floor((minY + maxY) / 2)
 
-        if not exteriorCoverage[exteriorKey] then
-            exteriorCoverage[exteriorKey] = {
-                x = exteriorSquare.x,
-                y = exteriorSquare.y,
-                z = exteriorSquare.z,
-                coveredChunks = {},
-                chunkCount = 0
-            }
-        end
-
-        -- Check which chunks this exterior square can cover
-        for otherChunkKey, otherChunkData in pairs(uniqueChunks) do
-            local chunkCenterX, chunkCenterY = getChunkCenterXY(otherChunkData.chunk)
-            local distance = math.sqrt((exteriorSquare.x - chunkCenterX) ^ 2 + (exteriorSquare.y - chunkCenterY) ^ 2)
-
-            if distance <= coverageRadius then
-                if not exteriorCoverage[exteriorKey].coveredChunks[otherChunkKey] then
-                    exteriorCoverage[exteriorKey].coveredChunks[otherChunkKey] = true
-                    exteriorCoverage[exteriorKey].chunkCount = exteriorCoverage[exteriorKey].chunkCount + 1
-                end
-            end
-        end
-    end
-
-    -- Select optimal exterior squares using greedy algorithm
-    local selectedExteriors = {}
+    local selectedSquares = {}
     local coveredChunks = {}
-    local totalChunks = getTableSize(uniqueChunks)
+    local coveredCount = 0
+    local usedKeys = {}
 
-    while getTableSize(coveredChunks) < totalChunks do
-        local bestExterior = nil
-        local bestCoverage = 0
-        local bestKey = nil
+    while coveredCount < totalChunks do
+        local bestSquare, bestKey = nil, nil
+        local bestCoverage, bestDistance = 0, math.huge
 
-        -- Find exterior square that covers the most uncovered chunks
-        for exteriorKey, coverage in pairs(exteriorCoverage) do
-            local newCoverage = 0
-            for chunkKey, _ in pairs(coverage.coveredChunks) do
-                if not coveredChunks[chunkKey] then
-                    newCoverage = newCoverage + 1
+        for i = 1, #candidateKeys do
+            local key = candidateKeys[i]
+            if not usedKeys[key] then
+                local candidate = candidates[key]
+                local newCoverage = 0
+                for chunkKey, _ in pairs(candidate.coveredChunks) do
+                    if not coveredChunks[chunkKey] then
+                        newCoverage = newCoverage + 1
+                    end
                 end
-            end
 
-            if newCoverage > bestCoverage then
-                bestCoverage = newCoverage
-                bestExterior = coverage
-                bestKey = exteriorKey
+                if newCoverage > 0 then
+                    local distance = chebyshev(candidate.x, candidate.y, centerX, centerY)
+                    if newCoverage > bestCoverage or (newCoverage == bestCoverage and distance < bestDistance) then
+                        bestSquare = candidate
+                        bestKey = key
+                        bestCoverage = newCoverage
+                        bestDistance = distance
+                    end
+                end
             end
         end
 
-        if bestExterior and bestCoverage > 0 then
-            table.insert(selectedExteriors, bestExterior)
-
-            -- Mark chunks as covered
-            for chunkKey, _ in pairs(bestExterior.coveredChunks) do
-                coveredChunks[chunkKey] = true
-            end
-
-            -- Remove this exterior from consideration
-            if bestKey then
-                exteriorCoverage[bestKey] = nil
-            end
-
-            DWAPUtils.dprint(("Selected exterior %d,%d covering %d chunks"):format(
-                bestExterior.x, bestExterior.y, bestCoverage))
-        else
+        if not bestSquare then
             -- No more coverage possible, break to avoid infinite loop
             break
         end
+
+        usedKeys[bestKey] = true
+        table.insert(selectedSquares, bestSquare)
+
+        for chunkKey, _ in pairs(bestSquare.coveredChunks) do
+            if not coveredChunks[chunkKey] then
+                coveredChunks[chunkKey] = true
+                coveredCount = coveredCount + 1
+            end
+        end
+
+        DWAPUtils.dprint(("Selected square %d,%d,%d covering %d new chunks"):format(
+            bestSquare.x, bestSquare.y, bestSquare.z, bestCoverage))
     end
 
-    DWAPUtils.dprint(("Optimal solution: %d exterior squares covering %d/%d chunks"):format(
-        #selectedExteriors, getTableSize(coveredChunks), totalChunks))
+    DWAPUtils.dprint(("Optimal solution: %d generator squares covering %d/%d chunks"):format(
+        #selectedSquares, coveredCount, totalChunks))
 
-    -- Optional: Add generator positions for testing
-    for i = 1, #selectedExteriors do
-        local exterior = selectedExteriors[i]
-        local square = getSquare(exterior.x, exterior.y, exterior.z)
-        if square then
-            local chunk = square:getChunk()
-            chunk:addGeneratorPos(exterior.x, exterior.y, exterior.z)
-            DWAPUtils.dprint(("Added generator at %d,%d,%d"):format(exterior.x, exterior.y, exterior.z))
+    for chunkKey, _ in pairs(uniqueChunks) do
+        if not coveredChunks[chunkKey] then
+            DWAPUtils.dprint(("No candidate square can fully power chunk %s"):format(chunkKey))
         end
     end
 
-    return selectedExteriors
+    return selectedSquares
+end
+
+-- Drop the invisible generators into the world so a placement can be tested.
+-- haveElectricity() asks the target square's own chunk, so the position has to
+-- be registered with every chunk it touches, like IsoGenerator does
+function ApplyGeneratorPositions(positions)
+    if not positions then
+        DWAPUtils.dprint("No generator positions to apply")
+        return 0
+    end
+
+    local cell = getCell()
+    local range = SandboxVars.GeneratorTileRange or 20
+    local chunkRange = math.floor(range / CHUNK_SIZE) + 1
+    local applied = 0
+
+    for i = 1, #positions do
+        local pos = positions[i]
+        local square = getSquare(pos.x, pos.y, pos.z)
+        if square then
+            local originChunk = square:getChunk()
+            if originChunk then
+                local wx = Reflection.getField(originChunk, "wx")
+                local wy = Reflection.getField(originChunk, "wy")
+                local touched = 0
+                for dy = -chunkRange, chunkRange do
+                    for dx = -chunkRange, chunkRange do
+                        if generatorTouchesChunk(pos.x, pos.y, range, wx + dx, wy + dy) then
+                            local chunk = cell:getChunk(wx + dx, wy + dy)
+                            if chunk then
+                                chunk:addGeneratorPos(pos.x, pos.y, pos.z)
+                                touched = touched + 1
+                            end
+                        end
+                    end
+                end
+                applied = applied + 1
+                DWAPUtils.dprint(("Added generator at %d,%d,%d in %d chunks"):format(
+                    pos.x, pos.y, pos.z, touched))
+            end
+        else
+            DWAPUtils.dprint(("Square not loaded for generator at %d,%d,%d"):format(pos.x, pos.y, pos.z))
+        end
+    end
+
+    DWAPUtils.dprint("Visualization only: these positions have no IsoGenerator, so " ..
+        "checkForMissingGenerators drops them on the next chunk load")
+
+    return applied
 end
 
 -- Config migration utilities
@@ -336,27 +461,26 @@ function GenerateOptimalPositionsForBase(baseName, configFileName)
         DWAPUtils.dprint("Generator " ..
             i .. " - Controls at: " .. gen.controls.x .. "," .. gen.controls.y .. "," .. gen.controls.z)
 
-        if gen.chunks then
-            DWAPUtils.dprint("Original chunks count: " .. #gen.chunks)
-
-            -- Calculate building center from chunks
+        -- Aim the operator at the middle of what the config already powers: the
+        -- current generator positions, falling back to the control panel
+        local centerX, centerY = gen.controls.x, gen.controls.y
+        if gen.fakeGenerators and #gen.fakeGenerators > 0 then
+            DWAPUtils.dprint("Current fakeGenerators count: " .. #gen.fakeGenerators)
             local totalX, totalY = 0, 0
-            for j = 1, #gen.chunks do
-                local worldX = gen.chunks[j][1] * 10 + 5
-                local worldY = gen.chunks[j][2] * 10 + 5
-                totalX = totalX + worldX
-                totalY = totalY + worldY
+            for j = 1, #gen.fakeGenerators do
+                totalX = totalX + gen.fakeGenerators[j].x
+                totalY = totalY + gen.fakeGenerators[j].y
             end
-            local centerX = math.floor(totalX / #gen.chunks)
-            local centerY = math.floor(totalY / #gen.chunks)
-
-            DWAPUtils.dprint("Building center: " .. centerX .. "," .. centerY)
-            DWAPUtils.dprint("To get optimal positions:")
-            DWAPUtils.dprint("1. Stand inside the building near " .. centerX .. "," .. centerY .. "," .. gen.controls.z)
-            DWAPUtils.dprint("2. Run FindOptimalExteriorSquaresForBuilding()")
-            DWAPUtils.dprint("3. Copy the returned positions to the config")
-            DWAPUtils.dprint("")
+            centerX = math.floor(totalX / #gen.fakeGenerators)
+            centerY = math.floor(totalY / #gen.fakeGenerators)
         end
+
+        DWAPUtils.dprint("Building center: " .. centerX .. "," .. centerY)
+        DWAPUtils.dprint("To get optimal positions:")
+        DWAPUtils.dprint("1. Stand inside the building near " .. centerX .. "," .. centerY .. "," .. gen.controls.z)
+        DWAPUtils.dprint("2. Run FindOptimalGeneratorSquaresForBuilding()")
+        DWAPUtils.dprint("3. Copy the returned positions to the config")
+        DWAPUtils.dprint("")
     end
 
     return config
@@ -386,13 +510,16 @@ function AutoMigrateConfigAtPlayerPosition(baseName, configFileName)
     end
 
     -- Generate optimal positions
-    local optimalPositions = FindOptimalExteriorSquaresForBuilding()
+    local optimalPositions = FindOptimalGeneratorSquaresForBuilding()
     if not optimalPositions or #optimalPositions == 0 then
         DWAPUtils.dprint("No optimal positions found")
         return
     end
 
     DWAPUtils.dprint("Found " .. #optimalPositions .. " optimal positions")
+
+    -- The finder no longer places anything, so place them here for testing
+    ApplyGeneratorPositions(optimalPositions)
 
     -- Print simple fakeGenerators format
     DWAPUtils.dprint("=== FAKE GENERATORS CONFIG ===")
@@ -410,20 +537,21 @@ end
 local function testSquareForGenerator(square)
     if not square then return false end
     local x, y, z = square:getX(), square:getY(), square:getZ()
-    local interval = SandboxVars.GeneratorVerticalPowerRange or 1
-    local zMin = z - interval
-    local zMax = z + interval
+    local interval = SandboxVars.GeneratorVerticalPowerRange or 3
 
-    for i = zMin, zMax do
+    for i = z - interval, z + interval do
         local testSquare = getSquare(x, y, i)
         if testSquare then
-            local objects = square:getObjects()
+            local objects = testSquare:getObjects()
             if objects then
                 local size = objects:size() - 1
                 for j = size, 0, -1 do
                     local object = objects:get(j)
                     if instanceof(object, "IsoGenerator") or object:getSpriteName() == "dwap_tiles_01_1" then
-                        return true
+                        -- let the game decide whether that generator reaches here
+                        if IsoGenerator.isPoweringSquare(x, y, i, x, y, z) then
+                            return true
+                        end
                     end
                 end
             end

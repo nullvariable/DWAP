@@ -1,4 +1,4 @@
-local bunkerTopLeft = {x = 5575, y = 9363, z = -1}
+local bunkerTopLeft = {x = 5584, y = 9371, z = -1}
 local wtc = {x = 5579, y = 9372, z = -1}
 local pb1 = { x = 5583, y = 9372, z = -1 }
 local DoeValleyBunker = {
@@ -13,7 +13,8 @@ local DoeValleyBunker = {
     },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 5583, y = 9372, z = -1 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 5581, y= 9372, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -61,12 +62,6 @@ local DoeValleyBunker = {
             },
             fakeGenerators = {
                 { x = 5579, y = 9370, z = -1, },
-            },
-            chunks = {
-                {696, 1170},
-                {696, 1171},
-                {697, 1170},
-                {697, 1171},
             },
         },
     },

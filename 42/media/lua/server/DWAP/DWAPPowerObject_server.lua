@@ -28,7 +28,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
         -- Already a generator, no conversion needed
         DWAPPowerSystem.instance:noise("DWAPPowerObject: Object is already an IsoGenerator")
         isoObject:setCondition(100)
-        isoObject:setFuel(100)
+        isoObject:setFuel(isoObject:getMaxFuel())
         isoObject:setConnected(true)
         cell:addToProcessIsoObjectRemove(isoObject)
         return isoObject
@@ -63,7 +63,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
     end
 
     generator:setCondition(100)
-    generator:setFuel(100)
+    generator:setFuel(generator:getMaxFuel())
     generator:setConnected(true)
     square:AddSpecialObject(generator, index)
     -- Transmit to clients (following base game pattern)
@@ -92,9 +92,16 @@ function DWAPPowerObject:setActivated(activated)
         return
     end
     isoObject:setCondition(100)
-    isoObject:setFuel(100)
+    isoObject:setFuel(isoObject:getMaxFuel())
     isoObject:setConnected(true)
     isoObject:setActivated(activated)
+    -- 42.20 setActivated gasses the building it sits in, which is real CO damage
+    -- to anyone inside. These generators are invisible plumbing, so undo it.
+    local square = isoObject:getSquare()
+    local building = square and square:getBuilding()
+    if building and building:isToxic() then
+        building:setToxic(false)
+    end
     DWAPUtils.Defer(function()
         if isoObject then
             isoObject:setSurroundingElectricity()

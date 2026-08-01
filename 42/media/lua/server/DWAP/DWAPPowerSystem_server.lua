@@ -64,7 +64,7 @@ end
 function DWAPPowerSystem:initSystem()
     SGlobalObjectSystem.initSystem(self)
     DWAPUtils.dprint("System initialized")
-    self.system:setModDataKeys({ 'setupDone', 'generators', 'haveWorldPower', 'ghostHashToIndex', 'controlHashToIndex', })
+    self.system:setModDataKeys({ 'setupDone', 'generators', 'haveWorldPower', 'ghostHashToIndex', 'controlHashToIndex', 'tankHashToIndex', })
     self.system:setObjectModDataKeys({ 'DWAPObjectType', 'DWAPGeneratorIndex', 'DWAPEmitter' })
     self.system:setObjectSyncKeys({ 'DWAPObjectType', 'DWAPGeneratorIndex', 'DWAPEmitter' })
     if DWAPUtils.getSaveVersion() < 17 or not SandboxVars.DWAP.EnableGenSystem then
@@ -84,7 +84,7 @@ function DWAPPowerSystem:initSystem()
         local generators = self:loadGenerators()
         self.generators = generators
 
-        self.ghostHashToIndex, self.controlHashToIndex = {}, {}
+        self.ghostHashToIndex, self.controlHashToIndex, self.tankHashToIndex = {}, {}, {}
         for i = 1, #generators do
             local gen = generators[i]
             if gen and gen.fakeGenerators then
@@ -99,6 +99,10 @@ function DWAPPowerSystem:initSystem()
             if gen and gen.controls then
                 local hash = DWAPUtils.hashCoords(gen.controls.x, gen.controls.y, gen.controls.z)
                 self.controlHashToIndex[hash] = i
+            end
+            if gen and gen.fuelTank then
+                local hash = DWAPUtils.hashCoords(gen.fuelTank.x, gen.fuelTank.y, gen.fuelTank.z)
+                self.tankHashToIndex[hash] = i
             end
         end
         self:noise("Loaded " .. #generators .. " generator configurations")
@@ -132,6 +136,64 @@ function DWAPPowerSystem:maybeConfigureControlPanel(isoObject)
         modData.DWAPGeneratorIndex = genIndex
         isoObject:transmitModData()
     end
+end
+
+--- Replace a fuel tank map tile with a thumpable carrying a FluidContainer of Petrol
+--- @param isoObject IsoObject The map tile found by MapObjects
+--- @return IsoThumpable|nil thumpable The converted object, or nil if it isn't one of ours
+function DWAPPowerSystem:maybeConfigureFuelTank(isoObject)
+    if not self.active or not isoObject then return nil end
+    if not self.tankHashToIndex then return nil end
+
+    local x, y, z = isoObject:getX(), isoObject:getY(), isoObject:getZ()
+    local hash = DWAPUtils.hashCoords(x, y, z)
+    local genIndex = self.tankHashToIndex[hash]
+    if not genIndex then return nil end
+
+    local gen = self.generators[genIndex]
+    if not gen or not gen.fuelTank then return nil end
+
+    local sprite = isoObject:getSprite()
+    if not sprite or sprite:getName() ~= gen.fuelTank.sprite then return nil end
+
+    if isoObject:getModData().DWAPObjectType then
+        -- already converted
+        return nil
+    end
+
+    local square = isoObject:getSquare()
+    if not square then
+        self:noise("No square found for fuel tank at " .. x .. "," .. y .. "," .. z)
+        return nil
+    end
+    local index = isoObject:getObjectIndex()
+    local thumpable = IsoThumpable.new(isoObject:getCell(), square, gen.fuelTank.sprite, false)
+
+    local thumpableModData = thumpable:getModData()
+    thumpableModData.DWAPObjectType = "fuelTank"
+    thumpableModData.DWAPGeneratorIndex = genIndex
+
+    local fluidContainer = ComponentType.FluidContainer:CreateComponent()
+    if fluidContainer then
+        -- Use pcall to safely attempt fluid container setup
+        pcall(function()
+            if fluidContainer.setCapacity then
+                fluidContainer:setCapacity(gen.capacity)
+            end
+            if fluidContainer.addFluid then
+                fluidContainer:addFluid(FluidType.Petrol, math.min(gen.fuel, gen.capacity))
+            end
+        end)
+        GameEntityFactory.AddComponent(thumpable, true, fluidContainer)
+    end
+
+    square:AddTileObject(thumpable)
+    square:transmitRemoveItemFromSquare(isoObject)
+    square:RemoveTileObject(isoObject)
+    square:transmitAddObjectToSquare(thumpable, index)
+
+    self:noise("Fuel tank for generator " .. genIndex .. " configured at " .. x .. "," .. y .. "," .. z)
+    return thumpable
 end
 
 function DWAPPowerSystem:isValidIsoObject(isoObject)
@@ -178,6 +240,7 @@ function DWAPPowerSystem:OnClientCommand(command, playerObj, args)
     if command == "refreshGenData" then
         self:noise("Received refreshGenData command")
         if args and args.generatorIndex then
+            self:pullTankFuel(args.generatorIndex)
             self:refreshClientGeneratorData(args.generatorIndex)
         else
             self:noise("refreshGenData command missing generatorIndex or data")
@@ -204,6 +267,7 @@ end
 function DWAPPowerSystem:TurnOnGen(index)
     local gen = self.generators[index]
     if gen then
+        self:pullTankFuel(index)
         gen.running = true
         self:noise("Generator " .. index .. " turned on")
         local controlObj = self:getLuaObjectAt(gen.controls.x, gen.controls.y, gen.controls.z)
@@ -289,6 +353,7 @@ function DWAPPowerSystem:RemoveFuel(index, fuelAmount)
     local gen = self.generators[index]
     if gen then
         gen.fuel = math.max(0, gen.fuel - fuelAmount)
+        self:pushTankFuel(index)
         self:noise("Generator " .. index .. " fuel reduced by " .. fuelAmount .. ", new fuel level: " .. gen.fuel)
         self:sendCommand("refreshGenData", {
             generatorIndex = index,
@@ -303,6 +368,7 @@ function DWAPPowerSystem:AddFuel(index, fuelAmount)
     local gen = self.generators[index]
     if gen then
         gen.fuel = math.min(gen.fuel + fuelAmount, gen.capacity)
+        self:pushTankFuel(index)
         self:noise("Generator " .. index .. " fuel increased by " .. fuelAmount .. ", new fuel level: " .. gen.fuel)
         self:sendCommand("refreshGenData", {
             generatorIndex = index,
@@ -311,6 +377,46 @@ function DWAPPowerSystem:AddFuel(index, fuelAmount)
             }
         })
     end
+end
+
+--- Get the IsoObject for a generator's fuel tank, if its square is currently loaded
+--- @param index number The generator index
+--- @return IsoObject|nil isoObject
+function DWAPPowerSystem:getTankIsoObject(index)
+    local gen = self.generators[index]
+    if not gen or not gen.fuelTank then return nil end
+    local luaObject = self:getLuaObjectAt(gen.fuelTank.x, gen.fuelTank.y, gen.fuelTank.z)
+    if not luaObject then return nil end
+    return luaObject:getIsoObject()
+end
+
+--- Copy the physical tank's fluid level into the gen.fuel mirror
+--- @param index number The generator index
+function DWAPPowerSystem:pullTankFuel(index)
+    local gen = self.generators[index]
+    if not gen or not gen.fuelTank then return end
+    local isoObject = self:getTankIsoObject(index)
+    if not isoObject then return end
+    pcall(function()
+        gen.fuel = math.min(isoObject:getFluidAmount(), gen.capacity)
+    end)
+end
+
+--- Copy the gen.fuel mirror back onto the physical tank
+--- @param index number The generator index
+function DWAPPowerSystem:pushTankFuel(index)
+    local gen = self.generators[index]
+    if not gen or not gen.fuelTank then return end
+    local isoObject = self:getTankIsoObject(index)
+    if not isoObject then return end
+    pcall(function()
+        if isoObject:getFluidAmount() == gen.fuel then return end
+        isoObject:emptyFluid()
+        if gen.fuel > 0 then
+            isoObject:addFluid(FluidType.Petrol, gen.fuel)
+        end
+        isoObject:transmitModData()
+    end)
 end
 
 function DWAPPowerSystem:getSoundVolume(index)
@@ -338,8 +444,14 @@ function DWAPPowerSystem:dailyMaintenance()
             if globalObject:getModData().DWAPObjectType == "generator" then
                 local isoObject = globalObject:getIsoObject()
                 if isoObject then
-                    isoObject:setCondition(100)
-                    isoObject:setFuel(100)
+                    -- each setter syncs to every client, so only touch what drifted
+                    if isoObject:getCondition() ~= 100 then
+                        isoObject:setCondition(100)
+                    end
+                    local maxFuel = isoObject:getMaxFuel()
+                    if isoObject:getFuel() ~= maxFuel then
+                        isoObject:setFuel(maxFuel)
+                    end
                 end
             end
         end
@@ -465,6 +577,32 @@ function DWAPPowerSystem:hourly()
     if not self.active then
         return
     end
+    -- keep the mirror fresh for loaded tanks even while the generator is off or
+    -- world power is still on, so fuel added at the tank survives an unload
+    for i = 1, #self.generators do
+        self:pullTankFuel(i)
+    end
+    -- these generators are pulled out of the cell's process list, so the engine
+    -- never consumes their updateSurrounding flag. Chunks that stream in after
+    -- the generator's own chunk would never get registered, so re-assert here.
+    -- Power registration matters whether or not world power is still on.
+    for i = 1, #self.generators do
+        local gen = self.generators[i]
+        if gen and gen.running and gen.fakeGenerators then
+            for j = 1, #gen.fakeGenerators do
+                local fakeGen = gen.fakeGenerators[j]
+                if fakeGen then
+                    local luaObject = self:getLuaObjectAt(fakeGen.x, fakeGen.y, fakeGen.z)
+                    local isoObject = luaObject and luaObject:getIsoObject()
+                    if isoObject then
+                        pcall(function()
+                            isoObject:setSurroundingElectricity()
+                        end)
+                    end
+                end
+            end
+        end
+    end
     local nowPower = DWAPUtils.WorldPowerStillAvailable()
     if not nowPower then
         if self.haveWorldPower then
@@ -486,6 +624,7 @@ function DWAPPowerSystem:hourly()
         for i = 1, #self.generators do
             local gen = self.generators[i]
             if gen and gen.running then
+                self:pullTankFuel(i)
                 local gasUse, batteryUse = self:calculateGeneratorFuelUse(i)
                 if batteryUse > 0 then
                     -- Handle battery use if applicable
@@ -514,6 +653,7 @@ function DWAPPowerSystem:hourly()
                     self:noise("Generator " .. i .. " ran out of fuel, shutting down")
                     self:TurnOffGen(i)
                 end
+                self:pushTankFuel(i)
 
                 gen.condition = gen.condition - getRandDecay()
                 if gen.condition <= 0 then
@@ -561,11 +701,34 @@ local function getPoweredItemName(object)
         itemName = getText("IGUI_Lights")
     end
 
+    -- Vanilla lists battery chargers as "Other", even when they carry a custom name
+    if instanceof(object, "IsoCarBatteryCharger") then
+        itemName = getText("IGUI_VehiclePartCatOther")
+    end
+
+    -- getText() should never hand back nil, but a class we don't special case
+    -- shouldn't be able to drop an item out of the UI list either
+    if not itemName then
+        local sprite = object:getSprite()
+        itemName = object:getName() or (sprite and sprite:getName()) or "Unknown"
+    end
+
     return itemName
 end
 
+--- Ask the object itself what it is drawing right now
+--- New in 42.20: IsoObject.couldBePoweredByGenerator/getGeneratorPowerConsumption,
+--- overridden per appliance class, so vanilla drain changes are picked up for free
+--- @param object IsoObject The object to check
+--- @return number drain the object's current draw, 0 if it isn't generator powered
+local function getObjectPowerDrain(object)
+    if not object:couldBePoweredByGenerator() then
+        return 0
+    end
+    return object:getGeneratorPowerConsumption() or 0
+end
+
 --- Get the power drain for a square
---- This mirrors the logic in IsoGenerator as of 42.10
 --- @param square IsoGridSquare|nil The square to check, or nil to use coordinates
 --- @param x ?number The X coordinate of the square
 --- @param y ?number The Y coordinate of the square
@@ -589,71 +752,37 @@ function DWAPPowerSystem.getSquarePowerDrain(square, x, y, z)
     end
     for i = size, 0, -1 do
         local object = objects:get(i)
-        if object and not instanceof(object, "IsoWorldInventoryObject") then
-            if instanceof(object, "IsoClothingDryer") and object:isActivated() then
-                drain = drain + 0.09
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            if instanceof(object, "IsoClothingWasher") and object:isActivated() then
-                drain = drain + 0.09
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            if instanceof(object, "IsoCombinationWasherDryer") and object:isActivated() then
-                drain = drain + 0.09
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            if instanceof(object, "IsoStackedWasherDryer") then
-                local power = 0.0
-                if object:isDryerActivated() then
-                    power = power + 0.9
-                end
-                if object:isWasherActivated() then
-                    power = power + 0.9
-                end
-                if power > 0.0 then
-                    drain = drain + power
-                    items[#items + 1] = getPoweredItemName(object)
-                end
-            end
-            if instanceof(object, "IsoTelevision") and object:getDeviceData():getIsTurnedOn() then
-                drain = drain + 0.03
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            if instanceof(object, "IsoRadio") then
-                local deviceData = object:getDeviceData()
-                if deviceData:getIsTurnedOn() and not deviceData:getIsBatteryPowered() then
-                    drain = drain + 0.01
-                    items[#items + 1] = getPoweredItemName(object)
-                end
-            end
-            if instanceof(object, "IsoStove") and object:Activated() then
-                drain = drain + 0.09
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            local fridgeContainer = object:getContainerByType("fridge")
-            local freezerContainer = object:getContainerByType("freezer")
-            if fridgeContainer and freezerContainer then
-                drain = drain + 0.13
-                items[#items + 1] = getPoweredItemName(object)
-            elseif fridgeContainer or freezerContainer then
-                drain = drain + 0.08
-                items[#items + 1] = getPoweredItemName(object)
-            end
-            -- bStreetLight = this.sprite != null && this.sprite.getProperties().has("streetlight")
-            if instanceof(object, "IsoLightSwitch") and object:isActivated() then
-                local sprite = object:getSprite()
-                if sprite and not sprite:getProperties():has("streetlight") then
-                    drain = drain + 0.002
-                    items[#items + 1] = getPoweredItemName(object)
-                end
-            end
-            if object:getPipedFuelAmount() > 0 then
-                drain = drain + 0.03
+        if object then
+            -- IsoWorldInventoryObject (loose items on the floor) answers false, and
+            -- light switches answer false for streetlights, so no filtering needed here
+            local ok, objectDrain = pcall(getObjectPowerDrain, object)
+            if ok and objectDrain and objectDrain > 0 then
+                drain = drain + objectDrain
                 items[#items + 1] = getPoweredItemName(object)
             end
         end
     end
     return drain, items
+end
+
+--- Get the vertical range a generator reaches
+--- Prefers the 42.20 IsoGenerator API (which clamps to the world's level limits),
+--- falling back to the sandbox var while the generator's square is unloaded
+--- @param isoObject IsoObject|nil The generator, if it is loaded
+--- @param z number The generator's Z level
+--- @return number minZ the lowest level the generator powers
+--- @return number maxZ the highest level the generator powers
+local function getGeneratorLevelRange(isoObject, z)
+    if isoObject then
+        local ok, minZ, maxZ = pcall(function()
+            return isoObject:getMinAffectedLevel(), isoObject:getMaxAffectedLevel()
+        end)
+        if ok and minZ and maxZ then
+            return minZ, maxZ
+        end
+    end
+    local verticalRange = SandboxVars.GeneratorVerticalPowerRange or 3
+    return z - verticalRange, z + verticalRange
 end
 
 function DWAPPowerSystem:powerScan()
@@ -662,7 +791,6 @@ function DWAPPowerSystem:powerScan()
     end
     local cell = getCell()
     local tileRange = SandboxVars.GeneratorTileRange or 20
-    local verticalRange = SandboxVars.GeneratorVerticalPowerRange or 3
     local count = self.system:getObjectCount()
     for i = 0, count - 1 do
         local globalObject = self.system:getObjectByIndex(i)
@@ -676,8 +804,9 @@ function DWAPPowerSystem:powerScan()
                     y = globalObject:getY(),
                     z = globalObject:getZ()
                 }
+                local minZ, maxZ = getGeneratorLevelRange(globalObject:getIsoObject(), generatorCoords.z)
                 if not lastCoords then
-                    lastCoords = { y = generatorCoords.y - tileRange, z = generatorCoords.z - verticalRange }
+                    lastCoords = { y = generatorCoords.y - tileRange, z = minZ }
                 end
                 -- scan one row
                 local startX = generatorCoords.x - tileRange
@@ -705,8 +834,8 @@ function DWAPPowerSystem:powerScan()
                 else
                     lastCoords.y = generatorCoords.y - tileRange
                     lastCoords.z = lastCoords.z + 1
-                    if lastCoords.z > generatorCoords.z + verticalRange then
-                        lastCoords.z = generatorCoords.z - verticalRange
+                    if lastCoords.z > maxZ or lastCoords.z < minZ then
+                        lastCoords.z = minZ
                     end
                 end
 

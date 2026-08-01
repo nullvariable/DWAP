@@ -12,7 +12,8 @@ local GrandOhioConfig = {
     map = { name = "DWAPStashMap10", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = generatorStartCoords.x, y = generatorStartCoords.y, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = generatorStartCoords.x, y = generatorStartCoords.y, z = -4, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= generatorStartCoords.x-2, y= generatorStartCoords.y, z= -4, },
             fakeGenerators = {
                 { x = generatorStartCoords.x-22, y = generatorStartCoords.y+12, z = -4, createTile = false },
                 { x = generatorStartCoords.x-5, y = generatorStartCoords.y+12, z = -4, createTile = false },

@@ -53,6 +53,7 @@ function DWAPPowerSystem:getGeneratorInfo(index)
         condition = generator.condition,
         solarEnabled = generator.solarEnabled or false,
         hasSolar = generator.solar and generator.solar.powerbank ~= nil,
+        fuelTank = generator.fuelTank,
         totalPowerUsing = 0,
         itemsPowered = {},
     }
