@@ -54,6 +54,38 @@ tileset
         solidfloor = 
         transparentFloor = 
     }
+    // dwap_tiles_01_4
+    tile
+    {
+        xy = 4,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_5
+    tile
+    {
+        xy = 5,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_6
+    tile
+    {
+        xy = 6,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_7
+    tile
+    {
+        xy = 7,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
     // dwap_tiles_01_8
     tile
     {
@@ -132,5 +164,69 @@ tileset
         MaterialType = Metal_Light
         attachedW = 
         doorN = 
+    }
+    // dwap_tiles_01_16
+    tile
+    {
+        xy = 0,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_17
+    tile
+    {
+        xy = 1,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_18
+    tile
+    {
+        xy = 2,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_19
+    tile
+    {
+        xy = 3,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_20
+    tile
+    {
+        xy = 4,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_21
+    tile
+    {
+        xy = 5,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_22
+    tile
+    {
+        xy = 6,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_23
+    tile
+    {
+        xy = 7,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
     }
 }
