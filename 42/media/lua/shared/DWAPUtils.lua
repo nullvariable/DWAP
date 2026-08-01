@@ -59,17 +59,6 @@ local configFiles_17 = {
     [42] = "DWAP/configs/42_LvilleTownhouse_17",
 }
 
--- @TEMP: disable configs while re-verifying maps for 42.20. false placeholders
--- keep safehouse numbering aligned; keep in sync with the matching block in
--- common/media/maps/DWAP/basements.lua. Delete this block to restore.
-local tempDisabledConfigs = { 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 21, 24, 25, 26, 27, 29, 30, 31, 32, 37, 41 }
-for i = 1, #tempDisabledConfigs do
-    configFiles_17[tempDisabledConfigs[i]] = false
-end
--- Maps the shrunken DWAP.Safehouse enum (numValues = 21) to real config indices:
--- dropdown value V (2..22) selects config tempEnabledConfigs[V - 1]; value 1 = random.
-local tempEnabledConfigs = { 1, 2, 11, 13, 14, 15, 17, 18, 19, 22, 23, 28, 33, 34, 35, 36, 38, 39, 40, 42 }
-
 local configCache = {}
 local cachedBaseIndex = nil
 local cachedPrimaryConfigIndex = nil
@@ -104,10 +93,7 @@ function DWAPUtils.getRandomSelected()
     local seed = WorldGenParams.INSTANCE:getSeedString()
     random:seed(seed)
     DWAPUtils.dprint("Random seed: " .. seed)
-    -- @TEMP: pick only from enabled configs; original line below. Must stay
-    -- identical to basements.lua getRandomSelected (same seed, same single draw).
-    return tempEnabledConfigs[random:random(1, #tempEnabledConfigs)]
-    -- return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
+    return random:random(1, #configFiles_17) -- IMPORTANT, must match the number of safehouse configs. See also basements.lua
 end
 
 function DWAPUtils.getSafehouseKeyId()
@@ -118,9 +104,7 @@ end
 
 function DWAPUtils.getBaseSafehouseIndex()
     if cachedBaseIndex then return cachedBaseIndex end
-    -- @TEMP: remap shrunken enum value to real config index; original line below
-    local selected = tempEnabledConfigs[SandboxVars.DWAP.Safehouse - 1]
-    -- local selected = SandboxVars.DWAP.Safehouse - 1
+    local selected = SandboxVars.DWAP.Safehouse - 1
     if SandboxVars.DWAP.Safehouse == 1 then
         selected = DWAPUtils.getRandomSelected()
     end
@@ -249,7 +233,7 @@ function DWAPUtils.loadConfigs(noCache)
     local configFilesToUse = configFiles_17
     local saveVersion = DWAPUtils.getSaveVersion()
     local index = DWAPUtils.getBaseSafehouseIndex()
-    if index == nil then index = tempEnabledConfigs[SandboxVars.DWAP.Safehouse - 1] end -- @TEMP remap (was: SandboxVars.DWAP.Safehouse - 1)
+    if index == nil then index = SandboxVars.DWAP.Safehouse - 1 end
     local primaryIndex = DWAPUtils.getPrimaryConfigIndex()
     DWAPUtils.dprint("Base Safehouse Index: " .. index .. ", Primary Safehouse Index: " .. primaryIndex)
     if SandboxVars.DWAP.EnableAllLocations then

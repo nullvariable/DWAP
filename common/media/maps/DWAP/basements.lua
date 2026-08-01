@@ -609,26 +609,12 @@ if doSolar then
     fullConfig[42].locations[1].access="ba_dwap_42_solar"
 end
 
--- @TEMP: disable basements while re-verifying maps for 42.20. false placeholders
--- keep numbering aligned (getRandomSelected range, Safehouse index); keep in sync
--- with the matching block in DWAPUtils.lua. Delete this block to restore.
-local tempDisabledConfigs = { 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 21, 24, 25, 26, 27, 29, 30, 31, 32, 37, 41 }
-for i = 1, #tempDisabledConfigs do
-    fullConfig[tempDisabledConfigs[i]] = false
-end
--- Maps the shrunken DWAP.Safehouse enum (numValues = 21) to real config indices;
--- must stay identical to tempEnabledConfigs in DWAPUtils.lua.
-local tempEnabledConfigs = { 1, 2, 11, 13, 14, 15, 17, 18, 19, 22, 23, 28, 33, 34, 35, 36, 38, 39, 40, 42 }
-
 local locations = {}
 
 local function getRandomSelected()
     local random = newrandom()
     random:seed(WorldGenParams.INSTANCE:getSeedString())
-    -- @TEMP: pick only from enabled configs; original line below. Must stay
-    -- identical to DWAPUtils.getRandomSelected (same seed, same single draw).
-    return tempEnabledConfigs[random:random(1, #tempEnabledConfigs)]
-    -- return random:random(1, #fullConfig) -- IMPORTANT, must match the number of safehouse configs. See also DWAPUtils.lua
+    return random:random(1, #fullConfig) -- IMPORTANT, must match the number of safehouse configs. See also DWAPUtils.lua
 end
 
 if SandboxVars.DWAP.EnableAllLocations then
@@ -640,7 +626,7 @@ if SandboxVars.DWAP.EnableAllLocations then
         end
     end
 else
-    local index = SandboxVars.DWAP.Safehouse == 1 and getRandomSelected() or tempEnabledConfigs[SandboxVars.DWAP.Safehouse - 1] -- @TEMP remap (was: SandboxVars.DWAP.Safehouse - 1)
+    local index = SandboxVars.DWAP.Safehouse == 1 and getRandomSelected() or SandboxVars.DWAP.Safehouse - 1
     if fullConfig[index] and fullConfig[index].locations then
         for j = 1, #fullConfig[index].locations do
             table.insert(locations, fullConfig[index].locations[j])
