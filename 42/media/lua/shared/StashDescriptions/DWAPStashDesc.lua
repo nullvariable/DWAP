@@ -250,12 +250,12 @@ local configs = {
         buildingY = 14458,
     },
     [31] = {
-        name = "Fallas Lake Diner Map",
+        name = "Fallas Hotel Map",
         stamps = {
-            {"Asterisk", nil, 7231, 8210, 0, 0, 0},
+            {"Asterisk", nil, 7253, 8248, 0, 0, 0},
         },
-        buildingX = 7231,
-        buildingY = 8210,
+        buildingX = 7253,
+        buildingY = 8248,
     },
     [32] = {
         name = "Quill Manor Map",

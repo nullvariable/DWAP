@@ -1,9 +1,9 @@
 
 local bunkerTopLeft = {x = 7226, y = 8197, z = -1}
 local wtc = {x = 7234, y = 8215, z = 0}
-local pb1 = { x = 7231, y = 8215, z = 0 }
-local FallasDiner = {
-    spawn = { x = 7231, y = 8210, z = 0 },
+local pb1 = { x = 7253, y = 8253, z = -1 }
+local FallasHotel = {
+    spawn = { x = 7244, y = 8258, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 7681, y = 12221, z = -1} },
     },
@@ -18,7 +18,8 @@ local FallasDiner = {
     },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
+            controls = { sprite = "dwap_tiles_01_22", x = 7258, y = 8250, z = -1 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 7256, y = 8250, z = -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -145,12 +146,12 @@ local FallasDiner = {
                 }
             },
             fakeGenerators = {
-                { x = 7238, y = 8212, z = -1, },
+                { x = 7253, y = 8254, z = -1, },
             },
         },
     },
     doorKeys = {
-        name = "Fallas Lake Diner Keys",
+        name = "Fallas Hotel Keys",
         doors = {
             { sprite = "fixtures_doors_01_45", x = 7236, y = 8199, z = 0, },
             { sprite = "fixtures_doors_01_53", x = 7231, y = 8217, z = 0, },
@@ -309,9 +310,9 @@ local FallasDiner = {
 }
 
 -- if getActivatedMods():contains("\\Ladders") then
---     table.insert(FallasDiner.objectSpawns, { x = 7678, y = 12206, z = -1, removeWall = "west" })
---     table.insert(FallasDiner.objectSpawns, { x = 7679, y = 12205, z = 0, removeFloor = true, clearExisting = true, })
+--     table.insert(FallasHotel.objectSpawns, { x = 7678, y = 12206, z = -1, removeWall = "west" })
+--     table.insert(FallasHotel.objectSpawns, { x = 7679, y = 12205, z = 0, removeFloor = true, clearExisting = true, })
 -- else
--- --     table.insert(FallasDiner.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
+-- --     table.insert(FallasHotel.objectSpawns, { sprite = "industry_trucks_01_4", x = 2607, y = 14453, z = -1, replaceWall = true, })
 -- end
-return FallasDiner
+return FallasHotel
