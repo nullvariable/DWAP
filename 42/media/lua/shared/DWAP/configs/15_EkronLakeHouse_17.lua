@@ -1,5 +1,5 @@
 local wtc = {x = 1907, y = 9944, z = -1} -- waterTankCoords
-local pb1 = { x = 1911, y = 9944, z = -1 }
+local pb1 = { x = 1913, y = 9943, z = -1 }
 -- local bunkerTopLeft = {x = 1895, y = 9946, z = -2}
 local bunkerTopLeft = {x = 1917, y = 9934, z = -1}
 local EkronLakeHouse = {
@@ -37,7 +37,8 @@ local EkronLakeHouse = {
     map = { name = "DWAPStashMap15", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 1911, y = 9944, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 1909, y= 9944, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

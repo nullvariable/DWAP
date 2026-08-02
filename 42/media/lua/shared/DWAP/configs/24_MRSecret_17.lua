@@ -4,7 +4,8 @@ local MRSecret = {
     spawn = { x = 9850, y = 13111, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 9848, y = 13117, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = 9848, y = 13117, z = -4 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 9846, y = 13117, z = -4, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

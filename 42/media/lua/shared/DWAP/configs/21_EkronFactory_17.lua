@@ -5,7 +5,8 @@ local EkronFactory = {
     spawn = { x = 565, y = 9374, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 583, y = 9374, z = -1, },
+            controls = { sprite = "dwap_tiles_01_22", x = 583, y = 9374, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 581, y= 9374, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

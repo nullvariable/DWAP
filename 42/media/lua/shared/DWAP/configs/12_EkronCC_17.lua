@@ -12,7 +12,8 @@ local EkronCC = {
     map = { name = "DWAPStashMap12", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = genCoords.x, y = genCoords.y, z = genCoords.z, },
+            controls = { sprite = "dwap_tiles_01_22", x = genCoords.x, y = genCoords.y, z = genCoords.z, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= genCoords.x-2, y = genCoords.y, z = genCoords.z, },
             fakeGenerators = {
                 { x = genCoords.x-22, y = genCoords.y+12, z = -5, createTile = false },
                 { x = genCoords.x-5, y = genCoords.y+12, z = -5, createTile = false },

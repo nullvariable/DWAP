@@ -1,5 +1,5 @@
 local wtc = {x = 12327, y = 1326, z = -1} -- waterTankCoords
-local pb1 = { x = 12331, y = 1326, z = -1 }
+local pb1 = { x = 12325, y = 1325, z = -1 }
 local LVPawnshop = {
     spawn = { x = 12324, y = 1325, z = 0 },
     waterTanks = {
@@ -53,7 +53,8 @@ local LVPawnshop = {
     map = { name = "DWAPStashMap13", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 12331, y = 1326, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 12329, y= 1326, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

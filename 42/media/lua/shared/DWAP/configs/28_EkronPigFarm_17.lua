@@ -1,11 +1,12 @@
 local wtc1 = {x = 108, y = 8945, z = -1,}
-local pb1 = { x = 112, y = 8945, z = -1 }
+local pb1 = { x = 113, y = 8945, z = -1 }
 local bunkerTopLeft = {x = 103, y = 8944, z = -1}
 local EkronPigFarm = {
     spawn = { x = 104, y = 8955, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 112, y = 8945, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 110, y = 8945, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

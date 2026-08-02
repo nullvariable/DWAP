@@ -1,10 +1,11 @@
 local wtc1 = {x = 6663, y = 5503, z = -1,}
-local pb1 = { x = 6666, y = 5500, z = -1 }
+local pb1 = { x = 6659, y = 5514, z = -1 }
 local RiversideMansion = {
-    spawn = { x = 6674, y = 5514, z = 1 },
+    spawn = { x = 6680, y = 5509, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 6663, y = 5513, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 6661, y = 5513, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -131,7 +132,7 @@ local RiversideMansion = {
                 },
             },
             fakeGenerators = {
-                { x = 6674, y = 5510, z = -2, },
+                { x = 6671, y = 5523, z = -2, },
             },
         },
     },

@@ -1,5 +1,5 @@
 local wtc = {x = 10094, y = 8259, z = 3}
-local pb1 = {x = 10120, y = 8239, z = -1}
+local pb1 = {x = 10112, y = 8240, z = -1}
 local McCoyEstate = {
     spawn = { x = 10081, y = 8259, z = 1 },
     waterTanks = {
@@ -52,7 +52,8 @@ local McCoyEstate = {
     map = { name = "DWAPStashMap18", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10120, y = 8239, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 10118, y= 8239, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

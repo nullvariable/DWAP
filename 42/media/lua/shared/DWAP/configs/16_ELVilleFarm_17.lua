@@ -1,5 +1,5 @@
 local wtc = {x = 14556, y = 3044, z = -1} -- waterTankCoords
-local pb1 = {x = 14560, y = 3038, z = -1} -- powerbankCoords
+local pb1 = {x = 14555, y = 3040, z = -1} -- powerbankCoords
 local ELVilleFarm = {
     spawn = { x = 14584, y = 3036, z = 1 },
     waterTanks = {
@@ -42,7 +42,8 @@ local ELVilleFarm = {
     map = { name = "DWAPStashMap16", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 14558, y = 3038, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 14560, y= 3038, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

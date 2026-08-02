@@ -1,10 +1,11 @@
 local wtc1 = {x = 10888, y = 10028, z = -1,}
-local pb1 = { x = 10885, y = 10028, z = -1 }
+local pb1 = { x = 10882, y = 10028, z = -1 }
 local CortmanMedical = {
     spawn = { x = 10881, y = 10022, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10884, y = 10028, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 10886, y= 10028, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

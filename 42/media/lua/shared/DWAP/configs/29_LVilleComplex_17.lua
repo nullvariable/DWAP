@@ -10,7 +10,8 @@ local LVilleComplex = {
     spawn = { x = 14140, y = 2656, z = 1 },
     generators = {
         { -- southern house
-            controls = { sprite = "industry_02_67", x = 14156, y = 2632, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = 14154, y = 2632, z = -4 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 14156, y = 2632, z = -4, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -142,13 +143,15 @@ local LVilleComplex = {
             },
         },
         { -- eastern house
-            controls = { sprite = "industry_02_67", x = 14156, y = 2628, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = 14154, y = 2628, z = -4 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 14156, y = 2628, z = -4, },
             fakeGenerators = {
                 { x = 14180, y = 2631, z = -1, createTile = true },
             },
         },
         { -- northern house
-            controls = { sprite = "industry_02_67", x = 14156, y = 2624, z = -4, },
+            controls = { sprite = "dwap_tiles_01_22", x = 14154, y = 2624, z = -4 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 14156, y = 2624, z = -4, },
             fakeGenerators = {
                 { x = 14158, y = 2605, z = -1, createTile = true },
             },

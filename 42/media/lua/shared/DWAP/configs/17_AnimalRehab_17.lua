@@ -1,5 +1,5 @@
 local wtc = {x = 3115, y = 12065, z = -1} -- waterTankCoords
-local pb1 = { x = 3121, y = 12065, z = -1 }
+local pb1 = { x = 3114, y = 12067, z = -1 }
 local bunkerTopLeft = {x = 3115, y = 12048, z = -1}
 local AnimalRehab = {
     spawn = { x = 3108, y = 12053, z = 1 },
@@ -34,7 +34,8 @@ local AnimalRehab = {
     map = { name = "DWAPStashMap17", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 3121, y = 12065, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 3119, y= 12065, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

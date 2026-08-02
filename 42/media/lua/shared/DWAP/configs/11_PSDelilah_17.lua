@@ -1,5 +1,5 @@
 local wtc = {x = 2051, y = 5692, z = -1} -- waterTankCoords
-local pb1 = { x = 2061, y = 5690, z = -1 }
+local pb1 = { x = 2057, y = 5690, z = -1 }
 local PSDelilah = {
     spawn = { x = 2037, y = 5686, z = 2 },
     waterTanks = {
@@ -40,7 +40,8 @@ local PSDelilah = {
     map = { name = "DWAPStashMap11", },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 2059, y = 5690, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 2061, y= 5690, z= -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z, spawn = false, },
                 panels = {

@@ -5,7 +5,8 @@ local ScrapYard = {
     spawn = { x = 2937, y = 12523, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = 2964, y = 12560, z = 0, },
+            controls = { sprite = "dwap_tiles_01_18", x = 2962, y = 12560, z = 0 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 2964, y= 12560, z= 0, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {

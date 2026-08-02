@@ -1,10 +1,11 @@
 local wtc = {x = 13454, y = 1884, z = -2,}
-local pb1 = { x = 13459, y = 1884, z = -2 }
+local pb1 = { x = 13452, y = 1883, z = -2 }
 local CentralLVilleMansion = {
     spawn = { x = 13441, y = 1895, z = 1 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 13459, y = 1884, z = pb1.z },
+            fuelTank = { sprite = "dwap_tiles_01_24", x= 13457, y= 1884, z= -2, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
