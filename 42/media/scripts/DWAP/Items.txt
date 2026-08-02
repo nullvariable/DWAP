@@ -4,7 +4,9 @@ module DWAP
 
     item GhostGenerator {
         Weight	=	1,
-        Type	=	Normal,
+        ItemType = base:normal,
+        DisplayCategory = Hidden,
+        hidden = true,
         DisplayName	= Ghost Generator,
         GeneratorSound = Silent,
         SoundRadius = 0,
