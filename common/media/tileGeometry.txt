@@ -1,0 +1,158 @@
+tileGeometry
+{
+    VERSION = 2,
+
+    tileset
+    {
+        name = dwap_tiles_01,
+
+        /* Industrial generator: one shared solid per variant, declared on each
+           quadrant tile with the vanilla +-5000 quadrant translation pattern
+           (borrowed from industry_02 72-75). Quadrant roles by our layout:
+           north = back/top, east/west = side slivers, south = front body.
+           Solids: full 2x2 base slab + inset machine body box.
+           Heights are first guesses - tune in the in-game Tile Geometry editor. */
+
+        /* --- plain generator (4=E, 5=N, 6=S, 7=W) --- */
+        tile
+        {
+            xy = 4x0,
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24700x8000, }
+            properties { Translucent = true, }
+        }
+        tile
+        {
+            xy = 5x0,
+            box { translate = 5000x0x5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = 5000x0x5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24700x8000, }
+            cylinder { translate = 5000x14000x5000, rotate = 2700000x0x0, radius1 = 1200, radius2 = 1200, height = 6000, }
+            properties { Translucent = true, }
+        }
+        tile
+        {
+            xy = 6x0,
+            box { translate = -5000x0x-5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = -5000x0x-5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24700x8000, }
+            properties { Translucent = true, }
+        }
+        tile
+        {
+            xy = 7x0,
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24700x8000, }
+            properties { Translucent = true, }
+        }
+
+        /* --- hooded generator (16=E, 17=N, 18=S, 19=W): same body, slightly
+               taller for the hood cap --- */
+        tile
+        {
+            xy = 0x2,
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24736x8000, }
+            properties { Translucent = true, }
+        }
+        /* dwap_tiles_01_17 — authored in the in-game Tile Geometry editor */
+        tile
+        {
+            xy = 1x2,
+            box { translate = -1801x19920x248, rotate = 0x0x0, min = -3199x0x-3178, max = 3199x799x3178, }
+        }
+        /* dwap_tiles_01_18 — authored in the in-game Tile Geometry editor */
+        tile
+        {
+            xy = 2x2,
+            box { translate = -683x792x-927, rotate = 0x0x0, min = -5936x0x-4073, max = 5936x24736x4073, }
+            box { translate = -2234x25466x-211, rotate = 0x0x0, min = -3188x0x-3103, max = 3188x2333x3103, }
+            properties { OpaquePixelsOnly = true, }
+        }
+        tile
+        {
+            xy = 3x2,
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24736x8000, }
+            properties { Translucent = true, }
+        }
+
+        /* --- basement generator (20=E, 21=N, 22=S, 23=W): only the low cap
+               is visible above the floor --- */
+        tile
+        {
+            xy = 4x2,
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = -5000x0x5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24495x8000, }
+            properties { OpaquePixelsOnly = true, }
+        }
+        /* dwap_tiles_01_21 — authored in the in-game Tile Geometry editor */
+        tile
+        {
+            xy = 5x2,
+            box { translate = -3092x18568x-980, rotate = 0x0x0, min = -1908x0x-1991, max = 1908x320x1991, }
+            properties { OpaquePixelsOnly = true, }
+        }
+        /* dwap_tiles_01_22 — authored in the in-game Tile Geometry editor */
+        tile
+        {
+            xy = 6x2,
+            box { translate = -1770x69x-1829, rotate = 0x0x0, min = -6264x0x-4216, max = 6264x24495x4216, }
+            properties { OpaquePixelsOnly = true, }
+        }
+        tile
+        {
+            xy = 7x2,
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -10000x0x-10000, max = 10000x2000x10000, }
+            box { translate = 5000x0x-5000, rotate = 0x0x0, min = -8000x2000x-8000, max = 8000x24495x8000, }
+            properties { OpaquePixelsOnly = true, }
+        }
+
+        /* --- fuel tank (24): single-tile cylinder, vanilla tank pattern
+               scaled to one tile --- */
+        tile
+        {
+            xy = 0x3,
+            cylinder { translate = 0x100x0, rotate = 2700000x0x0, radius1 = 6000, radius2 = 6000, height = 200, }
+            cylinder { translate = 0x9100x0, rotate = 2700000x0x0, radius1 = 5000, radius2 = 5000, height = 18000, }
+            properties { Translucent = true, }
+        }
+
+        /* --- secret metal doors (12=W closed, 13=N closed, 14=W open,
+               15=N open): thin edge slabs copied from vanilla
+               fixtures_doors_01 cells 0-3 --- */
+        tile
+        {
+            xy = 4x1,
+            box { translate = -4764x0x0, rotate = 0x0x0, min = -234x0x-5000, max = 234x24494x5000, }
+        }
+        tile
+        {
+            xy = 5x1,
+            box { translate = 0x0x-4765, rotate = 0x0x0, min = -5000x0x-234, max = 5000x24494x234, }
+        }
+        tile
+        {
+            xy = 6x1,
+            box { translate = -936x0x-3652, rotate = 0x0x0, min = -3984x0x-292, max = 3984x19601x292, }
+        }
+        tile
+        {
+            xy = 7x1,
+            box { translate = -3671x0x-976, rotate = 0x0x0, min = -312x0x-4101, max = 312x19519x4101, }
+        }
+
+        /* --- secret locker door (25=closed, 27=open): shell box copied from
+               vanilla furniture_storage_02_0 (same art) --- */
+        tile
+        {
+            xy = 1x3,
+            box { translate = -4x0x-983, rotate = 0x0x0, min = -5000x0x-3157, max = 5000x17738x3157, }
+            properties { Surface = 70, }
+        }
+        tile
+        {
+            xy = 3x3,
+            box { translate = -4x0x-983, rotate = 0x0x0, min = -5000x0x-3157, max = 5000x17738x3157, }
+            properties { Surface = 70, }
+        }
+    }
+}
