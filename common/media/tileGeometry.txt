@@ -1,5 +1,10 @@
 tileGeometry
 {
+    /* IMPORTANT: this file is EDITOR-ONLY at runtime (42.20). The game
+       renders depth from common/media/depthmaps/DEPTH_dwap_tiles_01.png.
+       After editing geometry here, rebake with SourceTextures/bake_depth.py
+       or the change will NOT appear in-game. See docs/tile-depth-pipeline.md */
+
     VERSION = 2,
 
     tileset
@@ -140,19 +145,20 @@ tileGeometry
             box { translate = -3671x0x-976, rotate = 0x0x0, min = -312x0x-4101, max = 312x19519x4101, }
         }
 
-        /* --- secret locker door (25=closed, 27=open): shell box copied from
-               vanilla furniture_storage_02_0 (same art) --- */
+        /* --- secret locker door (25=closed, 27=open): shell box tuned in the
+               in-game Tile Geometry editor; Surface kept from vanilla
+               furniture_storage_02_0 so items sit on top --- */
         tile
         {
             xy = 1x3,
-            box { translate = -4x0x-983, rotate = 0x0x0, min = -5000x0x-3157, max = 5000x17738x3157, }
-            properties { Surface = 70, }
+            box { translate = 0x0x-1034, rotate = 0x0x0, min = -5000x0x-3073, max = 5000x17759x3073, }
+            properties { Surface = 70, OpaquePixelsOnly = true, }
         }
         tile
         {
             xy = 3x3,
-            box { translate = -4x0x-983, rotate = 0x0x0, min = -5000x0x-3157, max = 5000x17738x3157, }
-            properties { Surface = 70, }
+            box { translate = 0x0x-1034, rotate = 0x0x0, min = -5000x0x-3073, max = 5000x17759x3073, }
+            properties { Surface = 70, OpaquePixelsOnly = true, }
         }
     }
 }
