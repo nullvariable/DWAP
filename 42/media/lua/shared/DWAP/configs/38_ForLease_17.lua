@@ -1,9 +1,10 @@
 local wtc1 = {x = 12538, y = 5213, z = -1,}
 local pb1 = { x = 12536, y = 5213, z = -1 }
 local ForLease = {
-    group = "",
+    group = "Valley Station", -- pretty far west, but this seems closest
     baseBuildings = {
-        { x = 12538, y = 5211, z = 0 }, -- house
+        { x = 12538, y = 5211, z = 0 }, -- building
+        { x = 12535, y = 5214, z = -1 }, -- building
     },
     spawn = { x = 12538, y = 5211, z = 0 },
     generators = {

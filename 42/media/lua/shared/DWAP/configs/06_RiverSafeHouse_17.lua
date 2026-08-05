@@ -4,6 +4,8 @@ local RiverSafeHouse = {
     group = "Riverside",
     baseBuildings = {
         { x = 6965, y = 5584, z = 0 }, -- house
+        { x = 6964, y = 5555, z = 0 }, -- barn/chicken coop
+        { x = 7006, y = 5599, z = 0 }, -- barn/farm storage
     },
     spawn = { x = 6965, y = 5584, z = 0 },
     waterTanks = {
@@ -135,6 +137,7 @@ local RiverSafeHouse = {
             },
             fakeGenerators = {
                 { x = 6968, y = 5579, z = -1, createTile = false },
+                { x = 7003, y = 5596, z = -1, createTile = false },
             },
         },
     },

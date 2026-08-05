@@ -6,6 +6,8 @@ local EkronLakeHouse = {
     group = "Ekron",
     baseBuildings = {
         { x = 1902, y = 9951, z = 1 }, -- lake house
+        { x = 1904, y = 9955, z = -1 }, -- main basement
+        { x = 1908, y = 9946, z = -1 }, -- generator/bunker addon
     },
     spawn = { x = 1902, y = 9951, z = 1 },
     waterTanks = {

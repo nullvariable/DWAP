@@ -3,9 +3,11 @@ local wtcMainFloor = {x = 1242, y = 7386, z = 2}
 local generator = {x = 1251, y = 7373, z = -10}
 
 local QuillManor = {
-    group = "",
+    group = "Brandenburg", -- bit south and west but close enough
     baseBuildings = {
         { x = 1221, y = 7384, z = 1 }, -- manor
+        { x = 1248, y = 7322, z = 0 }, -- shed
+        { x = 1226, y = 7366, z = -10 }, -- basement
     },
     spawn = { x = 1221, y = 7384, z = 1 },
     waterTanks = {

@@ -4,6 +4,7 @@ local LVPawnshop = {
     group = "Louisville",
     baseBuildings = {
         { x = 12324, y = 1325, z = 0 }, -- pawnshop
+        { x = 12324, y = 1325, z = -1 }, -- basement
     },
     spawn = { x = 12324, y = 1325, z = 0 },
     waterTanks = {

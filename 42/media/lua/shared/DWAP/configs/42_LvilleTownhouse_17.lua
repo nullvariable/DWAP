@@ -5,6 +5,7 @@ local LouisvilleTownhouse = {
     group = "Louisville",
     baseBuildings = {
         { x = 12832, y = 1619, z = 0 }, -- townhouse
+        { x = 12829, y = 1613, z = -1 }, -- bunker
     },
     spawn = { x = 12832, y = 1619, z = 0 },
     waterTanks = {

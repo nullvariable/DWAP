@@ -3,7 +3,9 @@ local pb1 = { x = 9850, y = 13108, z = -1 }
 local MRSecret = {
     group = "March Ridge",
     baseBuildings = {
-        { x = 9850, y = 13111, z = 1 }, -- complex
+        { x = 9850, y = 13111, z = 1 }, -- apartment
+        { x = 9841, y = 13119, z = -4 }, -- basement
+        { x = 9833, y = 13127, z = 0 }, -- shed
     },
     spawn = { x = 9850, y = 13111, z = 1 },
     generators = {

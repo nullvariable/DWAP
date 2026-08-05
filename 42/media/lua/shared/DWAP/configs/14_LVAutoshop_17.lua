@@ -5,6 +5,8 @@ local LVAutoshop = {
     group = "Louisville",
     baseBuildings = {
         { x = 13140, y = 3028, z = 0 }, -- autoshop
+        { x = 13135, y = 3019, z = -1 }, -- bunker
+        { x = 13140, y = 3031, z = -1 }, -- generator room
     },
     spawn = { x = 13140, y = 3028, z = 0 },
     waterTanks = {

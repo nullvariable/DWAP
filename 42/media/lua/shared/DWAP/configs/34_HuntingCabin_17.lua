@@ -2,9 +2,10 @@ local wtc = {x = 12718, y = 8739, z = -1}
 local bunkerTopLeft = {x = 12716, y = 8729, z = -1}
 local pb1 = {x = 12723, y = 8739, z = -1}
 local HuntingCabin = {
-    group = "",
+    group = "Muldraugh", -- actually deep in the woods past the abandoned settlement to the south east
     baseBuildings = {
         { x = 12722, y = 8749, z = 1 }, -- cabin
+        { x = 12717, y = 8738, z = -1 }, -- bunker
     },
     spawn = { x = 12722, y = 8749, z = 1 },
     waterTanks = {

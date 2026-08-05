@@ -1,9 +1,13 @@
 local wtc1 = {x = 10773, y = 10551, z = -1,}
 local pb1 = { x = 10771, y = 10551, z = -1 }
 local RustyRifle = {
-    group = "",
+    group = "Muldraugh",
     baseBuildings = {
-        { x = 10748, y = 10543, z = 1 },
+        { x = 10748, y = 10543, z = 1 }, --main bar
+        { x = 10764, y = 10544, z = -1 }, --bar basement
+        { x = 10765, y = 10553, z = -1 }, --extended basement
+        { x = 10778, y = 10574, z = 0 }, --workshop/booze storage
+        { x = 10763, y = 10529, z = 0 }, --shed
     },
     spawn = { x = 10748, y = 10543, z = 1 },
     generators = {

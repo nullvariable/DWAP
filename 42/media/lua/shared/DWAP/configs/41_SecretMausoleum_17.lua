@@ -3,7 +3,8 @@ local pb1  = {x = 8145, y = 11509, z = -2,}
 local SecretMausoleum = {
     group = "",
     baseBuildings = {
-        { x = 8143, y = 11515, z = 0 }, -- mausoleum
+        { x = 8143, y = 11515, z = 0 }, -- church
+        { x = 8141, y = 11513, z = -1 }, -- Mausoleum
     },
     spawn = { x = 8143, y = 11515, z = 0 },
     generators = {

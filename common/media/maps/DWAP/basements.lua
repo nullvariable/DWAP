@@ -213,6 +213,7 @@ end
 
 fullConfig[6] = { -- Riverside
     locations = {
+        {x=7003, y = 5596, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
         {x=6961, y=5575, stairDir="N", choices={"dwap_06_riverside_farm"}, access="ba_dwap_06"},
     },
 }

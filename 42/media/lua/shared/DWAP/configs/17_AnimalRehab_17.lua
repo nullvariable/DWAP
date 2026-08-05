@@ -2,9 +2,11 @@ local wtc = {x = 3115, y = 12065, z = -1} -- waterTankCoords
 local pb1 = { x = 3114, y = 12067, z = -1 }
 local bunkerTopLeft = {x = 3115, y = 12048, z = -1}
 local AnimalRehab = {
-    group = "",
+    group = "Echo Creek",
     baseBuildings = {
-        { x = 3108, y = 12053, z = 1 }, -- rehab center
+        { x = 3108, y = 12053, z = 1 }, -- house
+        { x = 3111, y = 12052, z = -1 }, -- basement
+        { x = 3124, y = 12072, z = 0 }, -- nearest rehab building
     },
     spawn = { x = 3108, y = 12053, z = 1 },
     waterTanks = {

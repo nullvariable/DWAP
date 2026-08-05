@@ -4,6 +4,7 @@ local MuldSafeHouse = {
     group = "Muldraugh",
     baseBuildings = {
         { x = 10710, y = 9549, z = 1 }, -- house
+        { x = 10703, y = 9552, z = -1 }, -- house
     },
     spawn = { x = 10710, y=9549, z = 1 },
     waterTanks = {

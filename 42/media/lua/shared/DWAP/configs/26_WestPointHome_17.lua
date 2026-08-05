@@ -4,6 +4,10 @@ local WestPointHome = {
     group = "West Point",
     baseBuildings = {
         { x = 11766, y = 6667, z = 0 }, -- house
+        { x = 11759, y = 6658, z = 0 }, -- garage
+        { x = 11766, y = 6638, z = 0 }, -- greenhouse
+        { x = 11774, y = 6639, z = 0 }, -- shed
+        { x = 11764, y = 6665, z = -1 }, -- basement
     },
     spawn = { x = 11766, y = 6667, z = 0 },
     generators = {

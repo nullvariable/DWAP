@@ -9,7 +9,12 @@ local bunker3TopLeft = {x = 14148, y = 2597, z = -1}
 local LVilleComplex = {
     group = "Louisville",
     baseBuildings = {
-        { x = 14140, y = 2656, z = 1 }, -- complex
+        { x = 14140, y = 2656, z = 1 }, -- south house
+        { x = 14146, y = 2661, z = -1 }, -- basementA
+        { x = 14155, y = 2610, z = -1 }, -- basementB
+        { x = 14154, y = 2598, z = 0 }, -- north house
+        { x = 14185, y = 2633, z = 0 }, -- east house
+        { x = 14177, y = 2632, z = -1 }, -- basementC
     },
     spawn = { x = 14140, y = 2656, z = 1 },
     generators = {

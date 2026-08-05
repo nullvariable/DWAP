@@ -1,9 +1,12 @@
 local wtc = {x = 10094, y = 8259, z = 3}
 local pb1 = {x = 10112, y = 8240, z = -1}
 local McCoyEstate = {
-    group = "",
+    group = "McCoy Estate", -- Perhaps muldraugh, but kinda half way between there and west point, east of Dixie but really not close to anything
     baseBuildings = {
         { x = 10081, y = 8259, z = 1 }, -- estate house
+        { x = 10093, y = 8290, z = 0 }, -- dock house/fishing
+        { x = 10112, y = 8239, z = 0 }, -- workshop
+        { x = 10112, y = 8239, z = -1 }, -- generator basement
     },
     spawn = { x = 10081, y = 8259, z = 1 },
     waterTanks = {

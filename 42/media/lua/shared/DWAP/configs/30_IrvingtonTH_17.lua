@@ -5,6 +5,8 @@ local IrvingtonTH = {
     group = "Irvington",
     baseBuildings = {
         { x = 2609, y = 14458, z = 1 }, -- townhome
+        { x = 2609, y = 14458, z = -1 }, -- townhome basement
+        { x = 2609, y = 14449, z = -1 }, -- bunker
     },
     spawn = { x = 2609, y = 14458, z = 1 },
     waterTanks = {

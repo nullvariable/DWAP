@@ -1,9 +1,10 @@
 local wtc1 = {x = 12394, y = 3411, z = -2,}
 local pb1 = {x = 12396, y = 3415, z = -2,}
 local LeafHill = {
-    group = "",
+    group = "Louisville",
     baseBuildings = {
         { x = 12395, y = 3404, z = 1 }, -- house
+        { x = 12396, y = 3411, z = -1 }, -- basement
     },
     spawn = { x = 12395, y = 3404, z = 1 },
     generators = {

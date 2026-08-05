@@ -3,7 +3,8 @@ local pb1 = { x = 10088, y = 7347, z = -1 }
 local WWestPointSafeHouse = {
     group = "West Point",
     baseBuildings = {
-        { x = 10091, y = 7352, z = 0 }, -- house
+        { x = 10091, y = 7352, z = 0 }, -- shed w/basement
+        { x = 10083, y = 7371, z = 0 }, -- house
     },
     spawn = { x = 10091, y = 7352, z = 0 },
     waterTanks = {

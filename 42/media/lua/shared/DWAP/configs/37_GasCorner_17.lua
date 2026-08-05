@@ -4,6 +4,8 @@ local GasCorner = {
     group = "Brandenburg",
     baseBuildings = {
         { x = 1664, y = 5746, z = 1 }, -- gas station
+        { x = 1664, y = 5746, z = -1 }, -- basement 1
+        { x = 1664, y = 5746, z = -4 }, -- basement 2
     },
     spawn = { x = 1664, y = 5746, z = 1 },
     generators = {

@@ -6,6 +6,12 @@ local FallasHotel = {
     group = "Fallas Lake",
     baseBuildings = {
         { x = 7244, y = 8258, z = 1 }, -- hotel
+        { x = 7254, y = 8257, z = -1 }, -- hotel basement
+        { x = 7258, y = 8252, z = -2 }, -- bunkers entrance
+        { x = 7255, y = 8250, z = -3 }, -- bunker west
+        { x = 7255+4, y = 8250, z = -3 }, -- bunker west center
+        { x = 7255+8, y = 8250, z = -3 }, -- bunker east center
+        { x = 7255+12, y = 8250, z = -3 }, -- bunker east
     },
     spawn = { x = 7244, y = 8258, z = 1 },
     waterTanks = {

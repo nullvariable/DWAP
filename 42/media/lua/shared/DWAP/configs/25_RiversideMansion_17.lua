@@ -4,6 +4,7 @@ local RiversideMansion = {
     group = "Riverside",
     baseBuildings = {
         { x = 6680, y = 5509, z = 1 }, -- mansion
+        { x = 6669, y = 5519, z = -1 }, -- basement
     },
     spawn = { x = 6680, y = 5509, z = 1 },
     generators = {

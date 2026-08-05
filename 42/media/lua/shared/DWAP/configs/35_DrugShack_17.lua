@@ -1,9 +1,11 @@
 local wtc = {x = 11606, y = 9299, z = -1}
 local pb1 = {x = 11608, y = 9291, z = -1}
 local DrugShack = {
-    group = "",
+    group = "Muldraugh",
     baseBuildings = {
-        { x = 11613, y = 9293, z = 0 }, -- drug shack
+        { x = 11613, y = 9293, z = 0 }, -- trailer
+        { x = 11615, y = 9296, z = -1 }, -- basement
+        { x = 11582, y = 9290, z = 0 }, -- rundown house
     },
     spawn = { x = 11613, y = 9293, z = 0 },
     waterTanks = {

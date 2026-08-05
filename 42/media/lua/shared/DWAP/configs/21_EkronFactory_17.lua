@@ -5,6 +5,8 @@ local EkronFactory = {
     group = "Ekron",
     baseBuildings = {
         { x = 565, y = 9374, z = 1 }, -- factory
+        { x = 581, y = 9376, z = -1 }, -- factory basement
+        { x = 592, y = 9375, z = -1 }, -- bunker
     },
     spawn = { x = 565, y = 9374, z = 1 },
     generators = {

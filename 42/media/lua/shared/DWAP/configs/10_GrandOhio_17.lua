@@ -1,7 +1,7 @@
 local generatorStartCoords = { x = 13636, y = 1262, z = -4, }
 local wtc = { x = generatorStartCoords.x+8, y = generatorStartCoords.y+4, z = -4, }
 local GrandOhioConfig = {
-    group = "",
+    group = "Louisville",
     baseBuildings = {
         { x = 13649, y = 1272, z = -4 }, -- fallout shelter
     },

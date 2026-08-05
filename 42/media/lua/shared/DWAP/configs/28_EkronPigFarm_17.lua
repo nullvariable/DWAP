@@ -5,6 +5,7 @@ local EkronPigFarm = {
     group = "Ekron",
     baseBuildings = {
         { x = 104, y = 8955, z = 1 }, -- farmhouse
+        { x = 104, y = 8953, z = -1 }, -- basement
     },
     spawn = { x = 104, y = 8955, z = 1 },
     generators = {

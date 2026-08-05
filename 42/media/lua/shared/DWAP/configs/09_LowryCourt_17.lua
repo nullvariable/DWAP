@@ -4,7 +4,8 @@ local bunkerTopLeft = {x = 12981, y = 1907, z = -1}
 local LowryCourt = {
     group = "",
     baseBuildings = {
-        { x = 12993, y = 1914, z = 2 },
+        { x = 12993, y = 1914, z = 2 }, -- apartment building
+        { x = 12981, y = 1907, z = -1 }, -- bunker
     },
     spawn = { x = 12993, y = 1914, z = 2 },
     waterTanks = {

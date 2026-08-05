@@ -2,9 +2,10 @@ local wtc = {x = 8711, y = 15303, z = -1}
 local bunkerTopLeft = {x = 8709, y = 15293, z = -1}
 local pb1 = { x = 8716, y = 15303, z = -1 }
 local DarkWallow = {
-    group = "",
+    group = "Dark Wallow",
     baseBuildings = {
         { x = 8718, y = 15311, z = 1 }, -- lake house
+        { x = 8710, y = 15306, z = -1 }, -- bunker
     },
     spawn = { x = 8718, y = 15311, z = 1 },
     waterTanks = {

@@ -4,6 +4,7 @@ local CentralLVilleMansion = {
     group = "Louisville",
     baseBuildings = {
         { x = 13441, y = 1895, z = 1 }, -- mansion
+        { x = 13438, y = 1902, z = -2 }, -- basement
     },
     spawn = { x = 13441, y = 1895, z = 1 },
     generators = {

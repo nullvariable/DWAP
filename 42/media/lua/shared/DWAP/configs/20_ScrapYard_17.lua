@@ -2,9 +2,14 @@ local wtc1 = {x = 2938, y = 12520, z = 2,}
 local wtc2 = {x = 2937, y = 12562, z = 2,}
 local pb1 = { x = 2947, y = 12558, z = -1 }
 local ScrapYard = {
-    group = "",
+    group = "Echo Creek", -- cluster of houses about half way between Irvington and Echo Creek
     baseBuildings = {
-        { x = 2937, y = 12523, z = 1 }, -- scrapyard
+        { x = 2937, y = 12523, z = 1 }, -- north house
+        { x = 2945, y = 12519, z = -1 }, -- north basement
+        { x = 2931, y = 12495, z = 0 }, -- north garage
+        { x = 2938, y = 12495, z = 0 }, -- north barn/shed
+        { x = 2942, y = 12562, z = -1 }, -- south basement
+        { x = 2936, y = 12562, z = 0 }, -- south house
     },
     spawn = { x = 2937, y = 12523, z = 1 },
     generators = {

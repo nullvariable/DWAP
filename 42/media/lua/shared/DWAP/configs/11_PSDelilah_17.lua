@@ -1,9 +1,10 @@
 local wtc = {x = 2051, y = 5692, z = -1} -- waterTankCoords
 local pb1 = { x = 2057, y = 5690, z = -1 }
 local PSDelilah = {
-    group = "",
+    group = "Brandenburg",
     baseBuildings = {
         { x = 2037, y = 5686, z = 2 }, -- riverboat
+        { x = 2043, y = 5708, z = 0 }, -- ticket building/office
     },
     spawn = { x = 2037, y = 5686, z = 2 },
     waterTanks = {

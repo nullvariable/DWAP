@@ -4,6 +4,9 @@ local ELVilleFarm = {
     group = "Louisville",
     baseBuildings = {
         { x = 14584, y = 3036, z = 1 }, -- farmhouse
+        { x = 14571, y = 3035, z = -1 }, -- farmhouse basement
+        { x = 14558, y = 3043, z = 0 }, -- barn
+        { x = 14575, y = 3068, z = 0 }, -- shed
     },
     spawn = { x = 14584, y = 3036, z = 1 },
     waterTanks = {

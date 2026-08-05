@@ -5,6 +5,10 @@ local GunClub = {
     group = "Irvington",
     baseBuildings = {
         { x = 1850, y = 14165, z = 0 }, -- gun club
+        { x = 1845, y = 14125, z = 0 }, -- gun range room
+        { x = 1833, y = 14111, z = 0 }, -- utility bldg
+        { x = 1860, y = 14166, z = -1 }, -- range basement
+        { x = 1860, y = 14150, z = -1 }, -- bunker basement
     },
     spawn = { x = 1850, y = 14165, z = 0 },
     generators = {
