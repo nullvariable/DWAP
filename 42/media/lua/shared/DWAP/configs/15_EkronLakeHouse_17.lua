@@ -3,6 +3,10 @@ local pb1 = { x = 1913, y = 9943, z = -1 }
 -- local bunkerTopLeft = {x = 1895, y = 9946, z = -2}
 local bunkerTopLeft = {x = 1917, y = 9934, z = -1}
 local EkronLakeHouse = {
+    group = "Ekron",
+    baseBuildings = {
+        { x = 1902, y = 9951, z = 1 }, -- lake house
+    },
     spawn = { x = 1902, y = 9951, z = 1 },
     waterTanks = {
         { sprite = "industry_02_75", x = 1898, y = 9964, z = -1, },

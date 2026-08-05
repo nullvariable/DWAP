@@ -2,6 +2,10 @@ local bunkerTopLeft = {x = 12828, y = 1604, z = -1}
 local wtc = {x = 12835, y = 1614, z = 1}
 local pb1 = { x = 12836, y = 1611, z = 1 }
 local LouisvilleTownhouse = {
+    group = "Louisville",
+    baseBuildings = {
+        { x = 12832, y = 1619, z = 0 }, -- townhouse
+    },
     spawn = { x = 12832, y = 1619, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = 1 },

@@ -2,6 +2,10 @@ local wtc1 = {x = 108, y = 8945, z = -1,}
 local pb1 = { x = 113, y = 8945, z = -1 }
 local bunkerTopLeft = {x = 103, y = 8944, z = -1}
 local EkronPigFarm = {
+    group = "Ekron",
+    baseBuildings = {
+        { x = 104, y = 8955, z = 1 }, -- farmhouse
+    },
     spawn = { x = 104, y = 8955, z = 1 },
     generators = {
         {
@@ -275,14 +279,6 @@ local EkronPigFarm = {
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
-            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',

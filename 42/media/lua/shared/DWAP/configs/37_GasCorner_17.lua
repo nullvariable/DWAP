@@ -1,6 +1,10 @@
 local wtc1 = {x = 1662, y = 5746, z = -2,}
 local pb1 = { x = 1666, y = 5746, z = -4 }
 local GasCorner = {
+    group = "Brandenburg",
+    baseBuildings = {
+        { x = 1664, y = 5746, z = 1 }, -- gas station
+    },
     spawn = { x = 1664, y = 5746, z = 1 },
     generators = {
         {

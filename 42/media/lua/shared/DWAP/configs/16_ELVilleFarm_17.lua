@@ -1,6 +1,10 @@
 local wtc = {x = 14556, y = 3044, z = -1} -- waterTankCoords
 local pb1 = {x = 14555, y = 3040, z = -1} -- powerbankCoords
 local ELVilleFarm = {
+    group = "Louisville",
+    baseBuildings = {
+        { x = 14584, y = 3036, z = 1 }, -- farmhouse
+    },
     spawn = { x = 14584, y = 3036, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 14556, y = 3041, z = 0} },
@@ -689,7 +693,7 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14592,y=3039,z=0},
+            coords = {x=14593,y=3039,z=0},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
             randUntilFull = true,

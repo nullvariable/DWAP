@@ -2,6 +2,10 @@ local wtc = {x = 8711, y = 15303, z = -1}
 local bunkerTopLeft = {x = 8709, y = 15293, z = -1}
 local pb1 = { x = 8716, y = 15303, z = -1 }
 local DarkWallow = {
+    group = "",
+    baseBuildings = {
+        { x = 8718, y = 15311, z = 1 }, -- lake house
+    },
     spawn = { x = 8718, y = 15311, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = pb1.x-1, y = pb1.y, z = pb1.z} },

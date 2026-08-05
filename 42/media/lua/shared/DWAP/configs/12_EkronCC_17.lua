@@ -1,6 +1,10 @@
 local genCoords = { x = 751, y = 9812, z = -5, }
 local wtc = { x = genCoords.x+8, y = genCoords.y+4, z = genCoords.z, }
 local EkronCC = {
+    group = "Ekron",
+    baseBuildings = {
+        { x = 764, y = 9821, z = -5 }, -- community college
+    },
     spawn = { x = 764, y = 9821, z = -5, },
     doorKeys = {
         name = "Ekron Community College",

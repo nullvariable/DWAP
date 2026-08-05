@@ -1,6 +1,10 @@
 local wtc = {x = 2051, y = 5692, z = -1} -- waterTankCoords
 local pb1 = { x = 2057, y = 5690, z = -1 }
 local PSDelilah = {
+    group = "",
+    baseBuildings = {
+        { x = 2037, y = 5686, z = 2 }, -- riverboat
+    },
     spawn = { x = 2037, y = 5686, z = 2 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = pb1.x-1, y = pb1.y, z = pb1.z} },
@@ -602,7 +606,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- @TODO duplicate coords with entry 41
             type = 'container',
             coords = {x=2036,y=5689,z=-1},
             dist = {"CarSupplyTools","GasStorageMechanics",},

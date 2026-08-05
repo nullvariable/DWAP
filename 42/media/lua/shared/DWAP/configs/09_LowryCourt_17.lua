@@ -2,6 +2,10 @@ local wtc = {x = 12980, y = 1920, z = 0} -- waterTankCoords
 local pb1 = { x = 12981, y = 1922, z = -1 }
 local bunkerTopLeft = {x = 12981, y = 1907, z = -1}
 local LowryCourt = {
+    group = "",
+    baseBuildings = {
+        { x = 12993, y = 1914, z = 2 },
+    },
     spawn = { x = 12993, y = 1914, z = 2 },
     waterTanks = {
         { sprite = "industry_02_73", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 12989, y = 1912, z = 0} },

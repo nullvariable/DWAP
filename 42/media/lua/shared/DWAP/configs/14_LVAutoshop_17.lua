@@ -2,6 +2,10 @@ local wtc = {x = 13141, y = 3042, z = -1} -- waterTankCoords
 local pb1 = { x = 13142, y = 3041, z = -1 }
 local bunkerTopLeft = {x = 13135, y = 3019, z = -1}
 local LVAutoshop = {
+    group = "Louisville",
+    baseBuildings = {
+        { x = 13140, y = 3028, z = 0 }, -- autoshop
+    },
     spawn = { x = 13140, y = 3028, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 13141, y = 3032, z = 0} },

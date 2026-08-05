@@ -1,6 +1,10 @@
 local wtc1 = {x = 11912, y = 6844, z = -1,}
 local pb1 = { x = 11907, y = 6843, z = -1 }
 local TheDrake = {
+    group = "",
+    baseBuildings = {
+        { x = 11908, y = 6853, z = 1 },
+    },
     spawn = { x = 11908, y = 6853, z = 1 },
     generators = {
         {

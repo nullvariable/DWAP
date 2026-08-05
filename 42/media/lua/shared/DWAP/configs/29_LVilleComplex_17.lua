@@ -7,6 +7,10 @@ local bunker1TopLeft = {x = 14145, y = 2648, z = -1}
 local bunker2TopLeft = {x = 14176, y = 2619, z = -1}
 local bunker3TopLeft = {x = 14148, y = 2597, z = -1}
 local LVilleComplex = {
+    group = "Louisville",
+    baseBuildings = {
+        { x = 14140, y = 2656, z = 1 }, -- complex
+    },
     spawn = { x = 14140, y = 2656, z = 1 },
     generators = {
         { -- southern house
@@ -431,14 +435,6 @@ local LVilleComplex = {
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y,z=bunker1TopLeft.z},
-            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
         },
         {
             type = 'container',

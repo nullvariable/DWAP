@@ -2,6 +2,10 @@ local wtc1 = {x = 2938, y = 12520, z = 2,}
 local wtc2 = {x = 2937, y = 12562, z = 2,}
 local pb1 = { x = 2947, y = 12558, z = -1 }
 local ScrapYard = {
+    group = "",
+    baseBuildings = {
+        { x = 2937, y = 12523, z = 1 }, -- scrapyard
+    },
     spawn = { x = 2937, y = 12523, z = 1 },
     generators = {
         {

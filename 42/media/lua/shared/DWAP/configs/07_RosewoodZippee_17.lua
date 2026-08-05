@@ -1,6 +1,10 @@
 local wtc = {x = 8084, y = 11550, z = -1}
 local pb1 = { x = 8079, y = 11551, z = -1 }
 local RosewoodZippee = {
+    group = "Rosewood",
+    baseBuildings = {
+        { x = 8087, y = 11558, z = 2 }, -- apartments
+    },
     spawn = { x = 8087, y = 11558, z = 2 },
     generators = {
         {
@@ -102,10 +106,7 @@ local RosewoodZippee = {
                 },
             },
             fakeGenerators = {
-                { x = 8173, y = 11261, z = -1, createTile = false },
-                -- { x = 8183, y = 11265, z = -1, createTile = false },
-                -- { x = 8152, y = 11263, z = 1, createTile = false },
-                { x = 8152, y = 11263, z = -1, createTile = false },
+                { x = 8082, y = 11548, z = -1, createTile = false },
             },
         },
     },

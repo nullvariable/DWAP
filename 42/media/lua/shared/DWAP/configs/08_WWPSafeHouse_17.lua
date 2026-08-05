@@ -1,6 +1,10 @@
 local wtc = {x = 10096, y = 7348, z = -1} -- waterTankCoords
 local pb1 = { x = 10088, y = 7347, z = -1 }
 local WWestPointSafeHouse = {
+    group = "West Point",
+    baseBuildings = {
+        { x = 10091, y = 7352, z = 0 }, -- house
+    },
     spawn = { x = 10091, y = 7352, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 10149, y = 6620, z = -1} },

@@ -1,6 +1,12 @@
 local wtc = {x = 3563, y = 10904, z = -1}
 local pb1 = { x = 3586, y = 10898, z = -1 }
 local EchoCreek = {
+    group = "Echo Creek",
+    baseBuildings = {
+        { x = 3573, y = 10896, z = 1 }, -- gas station
+        { x = 3583, y = 10899, z = -1 }, -- addon basement
+        { x = 3608, y = 10903, z = 0 }, -- shed
+    },
     spawn = { x = 3573, y = 10896, z = 1 },
     generators = {
         {

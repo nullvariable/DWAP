@@ -2,6 +2,10 @@ local wtc1 = {x = 1835, y = 14134, z = -2,}
 local wtc2 = {x = 1858, y = 14163, z = 1,}
 local pb1 = { x = 1835, y = 14137, z = -2 }
 local GunClub = {
+    group = "Irvington",
+    baseBuildings = {
+        { x = 1850, y = 14165, z = 0 }, -- gun club
+    },
     spawn = { x = 1850, y = 14165, z = 0 },
     generators = {
         {
@@ -333,7 +337,7 @@ local GunClub = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- @TODO duplicate coords with entry 16
             type = 'container',
             coords = {x=1838,y=14136,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },

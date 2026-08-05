@@ -1,7 +1,17 @@
-local bunkerTopLeft = {x = 5584, y = 9371, z = -1}
+local bunkerTopLeft = {x = 5574, y = 9362, z = -1}
 local wtc = {x = 5579, y = 9372, z = -1}
-local pb1 = { x = 5583, y = 9372, z = -1 }
+local pb1 = { x = 5584, y = 9371, z = -1 }
+--- Notes:
+--- Lives in the woods, remote with poor car access
+--- fairly small but low local zombies and plenty of room to
+--- do custom building. Not a bad walk West to Doe Valley which is
+--- a small town with a big survivalist gun store, mechanic, gas station,
+--- clinic, grocery, and restaurant
 local DoeValleyBunker = {
+    group = "Doe Valley",
+    baseBuildings = {
+        { x = 5576, y = 9365, z = -1}, -- bunker
+    },
     spawn = { x = 5576, y = 9365, z = -1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 5583, y = 9371, z = -1} },
@@ -242,7 +252,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- @TODO this entry and the next two (5584x9374-9376) confirmed red in ShowContainers(1): no containers there - remap onto orange (unclaimed) squares or delete
             type = 'container',
             coords = {x = 5584, y = 9376, z = -1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
@@ -265,21 +275,6 @@ local DoeValleyBunker = {
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x = 5584, y = 9371, z = -1},
-            items = {
-                { name = 'Base.NailsBox', },
-                { name = 'Base.Sheet', },
-                { name = 'Base.WoodAxe', },
-                { name = 'Base.Machete', },
-                { name = 'Base.Plank', },
-                { name = 'Base.SteelBar', },
-                { name = 'Base.PropaneTank', },
-            },
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
         },
     },
 }

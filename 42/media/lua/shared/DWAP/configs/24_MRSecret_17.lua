@@ -1,6 +1,10 @@
 local wtc1 = {x = 9850, y = 13117, z = -4,}
 local pb1 = { x = 9850, y = 13108, z = -1 }
 local MRSecret = {
+    group = "March Ridge",
+    baseBuildings = {
+        { x = 9850, y = 13111, z = 1 }, -- complex
+    },
     spawn = { x = 9850, y = 13111, z = 1 },
     generators = {
         {

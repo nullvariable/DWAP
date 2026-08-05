@@ -1,6 +1,10 @@
 local wtc1 = {x = 10773, y = 10551, z = -1,}
 local pb1 = { x = 10771, y = 10551, z = -1 }
 local RustyRifle = {
+    group = "",
+    baseBuildings = {
+        { x = 10748, y = 10543, z = 1 },
+    },
     spawn = { x = 10748, y = 10543, z = 1 },
     generators = {
         {
@@ -620,7 +624,7 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10761,y=10562,z=-1},
+            coords = {x=10762,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -628,7 +632,7 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10761,y=10562,z=-1},
+            coords = {x=10763,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = true,
             randUntilFull = true,

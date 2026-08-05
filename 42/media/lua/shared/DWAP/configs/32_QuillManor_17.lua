@@ -3,6 +3,10 @@ local wtcMainFloor = {x = 1242, y = 7386, z = 2}
 local generator = {x = 1251, y = 7373, z = -10}
 
 local QuillManor = {
+    group = "",
+    baseBuildings = {
+        { x = 1221, y = 7384, z = 1 }, -- manor
+    },
     spawn = { x = 1221, y = 7384, z = 1 },
     waterTanks = {
         { sprite = "industry_02_72", x = wtcBasement.x, y = wtcBasement.y, z = wtcBasement.z, sourceType="generator", source = {x = generator.x, y = generator.y, z = generator.z} },

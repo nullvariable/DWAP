@@ -1,6 +1,10 @@
 local wtc = {x = 10094, y = 8259, z = 3}
 local pb1 = {x = 10112, y = 8240, z = -1}
 local McCoyEstate = {
+    group = "",
+    baseBuildings = {
+        { x = 10081, y = 8259, z = 1 }, -- estate house
+    },
     spawn = { x = 10081, y = 8259, z = 1 },
     waterTanks = {
         { sprite = "crafted_01_11", x = wtc.x, y = wtc.y, z = wtc.z, isProp = true, sourceType="generator", source = {x = 10120, y = 8239, z = -1}},
@@ -369,12 +373,6 @@ local McCoyEstate = {
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=10092,y=8255,z=1},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
         },
         {
             type = 'container',

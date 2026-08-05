@@ -1,8 +1,12 @@
 
 local bunkerTopLeft = {x = 7226, y = 8197, z = -1}
 local wtc = {x = 7234, y = 8215, z = 0}
-local pb1 = { x = 7253, y = 8253, z = -1 }
+local pb1 = { x = 7254, y = 8253, z = -1 }
 local FallasHotel = {
+    group = "Fallas Lake",
+    baseBuildings = {
+        { x = 7244, y = 8258, z = 1 }, -- hotel
+    },
     spawn = { x = 7244, y = 8258, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 7681, y = 12221, z = -1} },
@@ -18,8 +22,8 @@ local FallasHotel = {
     },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 7258, y = 8250, z = -1 },
-            fuelTank = { sprite = "dwap_tiles_01_24", x = 7256, y = 8250, z = -1, },
+            controls = { sprite = "dwap_tiles_01_22", x = 7259, y = 8250, z = -1 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 7257, y = 8250, z = -1, },
             solar = {
                 powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
                 panels = {
@@ -146,7 +150,7 @@ local FallasHotel = {
                 }
             },
             fakeGenerators = {
-                { x = 7253, y = 8254, z = -1, },
+                { x = 7254, y = 8254, z = -1, },
             },
         },
     },

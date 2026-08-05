@@ -1,6 +1,10 @@
 local wtc1 = {x = 10888, y = 10028, z = -1,}
 local pb1 = { x = 10882, y = 10028, z = -1 }
 local CortmanMedical = {
+    group = "",
+    baseBuildings = {
+        { x = 10881, y = 10022, z = 1 }, -- medical clinic
+    },
     spawn = { x = 10881, y = 10022, z = 1 },
     generators = {
         {

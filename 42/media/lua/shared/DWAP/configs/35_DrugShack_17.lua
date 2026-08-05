@@ -1,6 +1,10 @@
 local wtc = {x = 11606, y = 9299, z = -1}
 local pb1 = {x = 11608, y = 9291, z = -1}
 local DrugShack = {
+    group = "",
+    baseBuildings = {
+        { x = 11613, y = 9293, z = 0 }, -- drug shack
+    },
     spawn = { x = 11613, y = 9293, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = pb1.x-1, y = pb1.y, z = pb1.z} },

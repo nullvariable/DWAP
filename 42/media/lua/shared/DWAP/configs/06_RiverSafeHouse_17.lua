@@ -1,6 +1,10 @@
 local wtc = {x = 6957, y = 5565, z = -1} -- waterTankCoords
 local pb1 = { x = 6952, y = 5566, z = -1 }
 local RiverSafeHouse = {
+    group = "Riverside",
+    baseBuildings = {
+        { x = 6965, y = 5584, z = 0 }, -- house
+    },
     spawn = { x = 6965, y = 5584, z = 0 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 6962, y = 5564, z = -1} },
@@ -130,7 +134,7 @@ local RiverSafeHouse = {
                 },
             },
             fakeGenerators = {
-                { x = 6957, y = 5568, z = -1, createTile = false },
+                { x = 6968, y = 5579, z = -1, createTile = false },
             },
         },
     },

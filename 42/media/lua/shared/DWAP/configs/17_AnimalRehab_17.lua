@@ -2,6 +2,10 @@ local wtc = {x = 3115, y = 12065, z = -1} -- waterTankCoords
 local pb1 = { x = 3114, y = 12067, z = -1 }
 local bunkerTopLeft = {x = 3115, y = 12048, z = -1}
 local AnimalRehab = {
+    group = "",
+    baseBuildings = {
+        { x = 3108, y = 12053, z = 1 }, -- rehab center
+    },
     spawn = { x = 3108, y = 12053, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 3121, y = 12065, z = -1} },
@@ -636,7 +640,7 @@ local AnimalRehab = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- @TODO duplicate coords with entry 56
             type = 'container',
             coords = {x=3107,y=12054,z=0},
             dist = {"GunStoreKnives", "SafehouseTraps", "ArmyStorageAmmunition"},

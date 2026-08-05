@@ -1,6 +1,10 @@
 local wtc = { x = 10704, y = 9548, z = -1 } -- waterTankCoords
 local pb1 = { x = 10703, y = 9549, z = -1 }
 local MuldSafeHouse = {
+    group = "Muldraugh",
+    baseBuildings = {
+        { x = 10710, y = 9549, z = 1 }, -- house
+    },
     spawn = { x = 10710, y=9549, z = 1 },
     waterTanks = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = 10663, y = 9562, z = -1 } },
@@ -143,7 +147,7 @@ local MuldSafeHouse = {
                 }
             },
             fakeGenerators = {
-                { x = 10665, y = 9569, z = -1 },
+                { x = 10710, y = 9555, z = -1 },
             },
         },
     },
