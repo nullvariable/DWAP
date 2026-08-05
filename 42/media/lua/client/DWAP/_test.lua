@@ -46,23 +46,35 @@ end
 
 local lastBuilding = nil
 DWAP_AutoLightsEnabled = false
+
+local function autoLightsTick()
+    local ply = getPlayer()
+    local square = ply and ply:getCurrentSquare()
+    if not square then return end
+    local building = square:getBuilding()
+    -- def-id comparison: streaming recreates IsoBuilding instances, so
+    -- identity would re-trigger on the same physical building
+    if building and not DWAPUtils.sameBuilding(building, lastBuilding) then
+        DWAPUtils.dprint("Building changed, starting settle-lit pass")
+        -- rooms stream in over many ticks; the settle poll keeps
+        -- flipping until the building stops growing
+        startAutoLightsAfterTeleport()
+    end
+    lastBuilding = building
+end
+
 function DoAutoLights()
-    if DWAP_AutoLightsEnabled then return end
-    DWAP_AutoLightsEnabled = true
-    Events.OnTick.Add(function()
-        local ply = getPlayer()
-        local square = ply:getCurrentSquare()
-        if not square then return end
-        local building = square:getBuilding()
-        local bn = building and building or nil
-        if bn ~= lastBuilding then
-            DWAPUtils.dprint("Building changed "..tostring(bn))
-            if building then
-                DWAPUtils.lightsOn(square)
-            end
-            lastBuilding = bn
-        end
-    end)
+    DWAP_AutoLightsEnabled = not DWAP_AutoLightsEnabled
+    if DWAP_AutoLightsEnabled then
+        -- forget the last building so turning it on while inside one
+        -- lights it immediately
+        lastBuilding = nil
+        Events.OnTick.Add(autoLightsTick)
+        DWAPUtils.dprint("AutoLights: on")
+    else
+        Events.OnTick.Remove(autoLightsTick)
+        DWAPUtils.dprint("AutoLights: off")
+    end
 end
 
 require "ISUI/ISCollapsableWindow"

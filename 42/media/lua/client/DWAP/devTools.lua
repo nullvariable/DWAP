@@ -4,6 +4,9 @@
 local DWAPUtils = require("DWAPUtils")
 local Reflection = require("Starlit/utils/Reflection")
 
+-- Live overlay state, displayed by the dev panel button labels
+DWAP_DevToggles = DWAP_DevToggles or { elec = false, plumbing = false, containers = false, where = false, barricades = false }
+
 -- Helper function to get table size
 local function getTableSize(tbl)
     return DWAPUtils.tableSize(tbl)
@@ -691,8 +694,10 @@ function ShowElec(index)
         end
 
         Events.OnTick.Add(elecTick)
+        DWAP_DevToggles.elec = true
     else
         Events.OnTick.Remove(elecTick)
+        DWAP_DevToggles.elec = false
         currentGeneratorLookup = nil
         DWAPUtils.dprint("Electricity visualization disabled")
         -- Clear highlights by calling the visualization with radius 0
@@ -833,10 +838,13 @@ function CheckTargetSquare()
     end
 end
 
--- After a teleport, lightsOn can "succeed" before the destination's rooms are
--- streamed in, flipping 0 switches. Poll until the building's rooms actually
--- have light switches in the cell's room list, then light it up.
+-- After a teleport (or walking into a building) the rooms stream in over
+-- many ticks. A single early lightsOn only catches whatever was loaded at
+-- that instant, so keep flipping every time the building's switch-room
+-- count grows and stop only once it has been stable for a second.
 local autoLightsTicks = 0
+local autoLightsLastCount = 0
+local autoLightsStableTicks = 0
 local function autoLightsAfterTeleport()
     autoLightsTicks = autoLightsTicks + 1
     if autoLightsTicks > 600 then
@@ -857,12 +865,22 @@ local function autoLightsAfterTeleport()
         end
     end
     if switchRooms == 0 then return end
-    Events.OnTick.Remove(autoLightsAfterTeleport)
-    DWAPUtils.lightsOn(square, building)
+    if switchRooms > autoLightsLastCount then
+        autoLightsLastCount = switchRooms
+        autoLightsStableTicks = 0
+        DWAPUtils.lightsOn(square, building)
+        return
+    end
+    autoLightsStableTicks = autoLightsStableTicks + 1
+    if autoLightsStableTicks >= 60 then
+        Events.OnTick.Remove(autoLightsAfterTeleport)
+    end
 end
 
 function startAutoLightsAfterTeleport()
     autoLightsTicks = 0
+    autoLightsLastCount = 0
+    autoLightsStableTicks = 0
     Events.OnTick.Remove(autoLightsAfterTeleport)
     Events.OnTick.Add(autoLightsAfterTeleport)
 end
@@ -874,6 +892,34 @@ local whereShowing = false
 local whereLastKey = nil
 local whereLines = {}
 
+-- Build the where-readout lines for a square. Shared by the person overlay
+-- and the dev panel so both always show the same data the same way
+function DWAPWhereLines(square)
+    local room = square:getRoom()
+    local building = square:getBuilding()
+    -- BuildingDef ID is the map-stable one (cellX,cellY#index packed
+    -- long); IsoBuilding:getID() is only a per-session streaming counter
+    local bldStr = "bld: none"
+    if building then
+        local def = building.getDef and building:getDef()
+        local defId = def and def.getID and def:getID()
+        if defId then
+            local hi = math.floor(defId / 4294967296)
+            local index = defId % 4294967296
+            local cellX = hi % 65536
+            local cellY = math.floor(hi / 65536)
+            bldStr = ("bld: %d,%d#%d (session %d)"):format(cellX, cellY, index, building:getID())
+        else
+            bldStr = "bld: session " .. tostring(building:getID())
+        end
+    end
+    return {
+        ("%d,%d,%d"):format(square:getX(), square:getY(), square:getZ()),
+        "room: " .. (room and room:getName() or "outside"),
+        bldStr,
+    }
+end
+
 function whereDraw()
     if not whereShowing then return end
     local player = getPlayer()
@@ -882,29 +928,7 @@ function whereDraw()
     local key = square:getX() .. "," .. square:getY() .. "," .. square:getZ()
     if key ~= whereLastKey then
         whereLastKey = key
-        local room = square:getRoom()
-        local building = square:getBuilding()
-        -- BuildingDef ID is the map-stable one (cellX,cellY#index packed
-        -- long); IsoBuilding:getID() is only a per-session streaming counter
-        local bldStr = "bld: none"
-        if building then
-            local def = building.getDef and building:getDef()
-            local defId = def and def.getID and def:getID()
-            if defId then
-                local hi = math.floor(defId / 4294967296)
-                local index = defId % 4294967296
-                local cellX = hi % 65536
-                local cellY = math.floor(hi / 65536)
-                bldStr = ("bld: %d,%d#%d (session %d)"):format(cellX, cellY, index, building:getID())
-            else
-                bldStr = "bld: session " .. tostring(building:getID())
-            end
-        end
-        whereLines = {
-            ("%d,%d,%d"):format(square:getX(), square:getY(), square:getZ()),
-            "room: " .. (room and room:getName() or "outside"),
-            bldStr,
-        }
+        whereLines = DWAPWhereLines(square)
     end
     local playerNum = player:getPlayerNum()
     local sx = isoToScreenX(playerNum, player:getX(), player:getY(), player:getZ())
@@ -934,6 +958,7 @@ function ensureDevOverlay()
     ui.render = function()
         whereDraw()
         containerLabelsDraw()
+        barricadeLabelsDraw()
     end
     ui:addToUIManager()
     devOverlay = ui
@@ -942,12 +967,46 @@ end
 
 function DWAPWhere()
     whereShowing = not whereShowing
+    DWAP_DevToggles.where = whereShowing
     if whereShowing then
         whereLastKey = nil
         ensureDevOverlay()
         DWAPUtils.dprint("DWAPWhere: on")
     else
         DWAPUtils.dprint("DWAPWhere: off")
+    end
+end
+
+-- Noclip + fast-move off a staircase can wedge the player in a persistent
+-- falling state (fractional z, falling flags) that even survives saves.
+-- teleportTo doesn't clear any of it, so DWAPGoto does explicitly
+local function resetFallState(player)
+    if player.setbFalling then player:setbFalling(false) end
+    if player.setFallTime then player:setFallTime(0) end
+    if player.setLastFallSpeed then player:setLastFallSpeed(0) end
+end
+
+-- Teleporting into a not-yet-streamed area leaves the player without a
+-- square at the target z, and the fall/snap logic can dump them at ground
+-- level before the destination chunk arrives - basements lose their z.
+-- Poll until the target square exists, then re-assert the position
+local gotoTarget = nil
+local gotoTicks = 0
+local function reassertGoto()
+    gotoTicks = gotoTicks + 1
+    local player = getPlayer()
+    if not player or not gotoTarget or gotoTicks > 300 then
+        Events.OnTick.Remove(reassertGoto)
+        return
+    end
+    local t = gotoTarget
+    if getSquare(t.x, t.y, t.z) then
+        if player:getCurrentSquare() == nil or math.floor(player:getZ()) ~= t.z then
+            player:teleportTo(t.x, t.y, t.z)
+        end
+        resetFallState(player)
+        Events.OnTick.Remove(reassertGoto)
+        gotoTarget = nil
     end
 end
 
@@ -997,6 +1056,12 @@ function DWAPGoto(index)
             return
         end
     end
+
+    resetFallState(player)
+    gotoTarget = { x = tonumber(x), y = tonumber(y), z = tonumber(z) }
+    gotoTicks = 0
+    Events.OnTick.Remove(reassertGoto)
+    Events.OnTick.Add(reassertGoto)
 
     local dest = tostring(index)
     if config and config.doorKeys and config.doorKeys.name then
@@ -1781,6 +1846,110 @@ function containerLabelsDraw()
     end
 end
 
+-- Barricade overlay: for each objectSpawns barricade entry, draw its entry
+-- number with the barricade type underneath, green when an IsoBarricade is
+-- actually present on the square and red when it is missing
+local currentBarricadeLabels = nil
+
+local function squareHasBarricade(square)
+    if not square then return false end
+    local lists = { square:getObjects(), square:getSpecialObjects() }
+    for l = 1, 2 do
+        local objects = lists[l]
+        if objects then
+            for j = 0, objects:size() - 1 do
+                if instanceof(objects:get(j), "IsoBarricade") then return true end
+            end
+        end
+    end
+    return false
+end
+
+local function buildBarricadeLabels(config)
+    local labels = {}
+    if not config or not config.objectSpawns then return labels end
+    for i = 1, #config.objectSpawns do
+        local e = config.objectSpawns[i]
+        if e and e.barricade and e.x then
+            labels[#labels + 1] = {
+                x = e.x,
+                y = e.y,
+                z = e.z or 0,
+                num = tostring(i),
+                btype = tostring(e.barricade),
+            }
+        end
+    end
+    return labels
+end
+
+function barricadeLabelsDraw()
+    if not currentBarricadeLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    for i = 1, #currentBarricadeLabels do
+        local l = currentBarricadeLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local seen = squareHasBarricade(getSquare(l.x, l.y, l.z))
+            local r, g, b = 1, 0.25, 0.25
+            if seen then r, g, b = 0.25, 1, 0.25 end
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.num, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.num, r, g, b, 1)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + lineH + 1, l.btype, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy + lineH, l.btype, r, g, b, 1)
+        end
+    end
+end
+
+local showingBarricades = false
+
+function ShowBarricades(index)
+    showingBarricades = not showingBarricades
+    DWAP_DevToggles.barricades = showingBarricades
+    if showingBarricades then
+        local configs = DWAPUtils.loadConfigs(true)
+        if not configs or #configs == 0 then
+            DWAPUtils.dprint("No configs found")
+            showingBarricades = false
+            DWAP_DevToggles.barricades = false
+            return
+        end
+        if not index or index < 1 or index > #configs then
+            DWAPUtils.dprint("Invalid index: " .. tostring(index) .. ". Must be between 1 and " .. #configs)
+            showingBarricades = false
+            DWAP_DevToggles.barricades = false
+            return
+        end
+        local config = configs[index]
+        local labels = buildBarricadeLabels(config)
+        if #labels == 0 then
+            DWAPUtils.dprint("Config " .. index .. " has no barricade objectSpawns")
+            showingBarricades = false
+            DWAP_DevToggles.barricades = false
+            return
+        end
+        local configName = "Config " .. index
+        if config.doorKeys and config.doorKeys.name then
+            configName = config.doorKeys.name
+        end
+        currentBarricadeLabels = labels
+        ensureDevOverlay()
+        DWAPUtils.dprint("Barricade overlay enabled for " .. configName .. " (" .. #labels .. " barricades)")
+        DWAPUtils.dprint("Green = barricade present, Red = missing")
+    else
+        currentBarricadeLabels = nil
+        DWAPUtils.dprint("Barricade overlay disabled")
+    end
+end
+
 local showingContainers = false
 
 function ShowContainers(index)
@@ -1822,6 +1991,7 @@ function ShowContainers(index)
         end
 
         Events.OnTick.Add(containersTick)
+        DWAP_DevToggles.containers = true
         ensureDevOverlay()
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
         DWAPUtils.dprint(
@@ -1829,6 +1999,7 @@ function ShowContainers(index)
         DWAPUtils.dprint("Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry")
     else
         Events.OnTick.Remove(containersTick)
+        DWAP_DevToggles.containers = false
         currentContainerLookup = nil
         currentContainerLabels = nil
         DWAPUtils.dprint("Container visualization disabled")
@@ -2230,12 +2401,14 @@ function ShowPlumbing(index)
         }
 
         Events.OnTick.Add(plumbingTick)
+        DWAP_DevToggles.plumbing = true
         DWAPUtils.dprint("Plumbing visualization enabled for " ..
             configName .. " (" .. fixtureCount .. " total fixtures, " .. tankCount .. " tanks)")
         DWAPUtils.dprint(
             "Purple = industry_02_73/72, Red = not in config or <100 fluid, Blue = water tank with fluid, Green = fixture in config with >100 fluid")
     else
         Events.OnTick.Remove(plumbingTick)
+        DWAP_DevToggles.plumbing = false
         currentPlumbingLookup = nil
         DWAPUtils.dprint("Plumbing visualization disabled")
     end
