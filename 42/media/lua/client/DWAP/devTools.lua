@@ -1305,6 +1305,80 @@ function TestLootConfig(index, startFrom, retainedConfig)
 
     DWAPUtils.dprint("Progress: 100%")
 
+    -- baseBuildings coverage: enumerate every container in each declared
+    -- building (rooms -> squares -> containers) and record the ones no loot
+    -- entry addresses. Skips stoves/microwaves and trash-class containers,
+    -- and dedups buildings in case two anchors resolve to the same one
+    local unclaimedContainers = {}
+    local anchorProblems = {}
+    local trashTypes = {
+        bin = true,
+        dumpster = true,
+        clothingdryer = true,
+        clothingdryerbasic = true,
+        clothingrack = true,
+        clothingwasher = true,
+    }
+    if config.baseBuildings then
+        local seenBuildings = {}
+        for b = 1, #config.baseBuildings do
+            local anchor = config.baseBuildings[b]
+            local aSq = anchor and anchor.x and getSquare(anchor.x, anchor.y, math.floor(anchor.z or 0))
+            local building = aSq and aSq:getBuilding()
+            if not building then
+                anchorProblems[#anchorProblems + 1] = ("anchor %d at %s,%s,%s: %s"):format(
+                    b, tostring(anchor and anchor.x), tostring(anchor and anchor.y),
+                    tostring(anchor and anchor.z),
+                    aSq and "no building on square" or "square not loaded")
+            else
+                local def = building.getDef and building:getDef()
+                local bldKey = def and def:getID() or building:getID()
+                if not seenBuildings[bldKey] then
+                    seenBuildings[bldKey] = true
+                    local rooms = getCell():getRoomList()
+                    for i = 1, rooms:size() do
+                        local room = rooms:get(i - 1)
+                        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
+                            local squares = room:getSquares()
+                            for s = 0, squares:size() - 1 do
+                                local rsq = squares:get(s)
+                                local squareContainers = DWAPUtils.getSquareContainers(rsq)
+                                for c = 1, #squareContainers do
+                                    local sc = squareContainers[c]
+                                    local ctype = sc.container:getType()
+                                    local skip = ctype == "microwave" or sc.container:isStove()
+                                    if not skip then
+                                        local props = sc.object.getProperties and sc.object:getProperties()
+                                        if props then
+                                            if props:has("GroupName") and props:get("GroupName") == "Garbage" then
+                                                skip = true
+                                            elseif props:has("container") and trashTypes[props:get("container")] then
+                                                skip = true
+                                            end
+                                        end
+                                    end
+                                    if not skip then
+                                        local cx, cy, cz = rsq:getX(), rsq:getY(), rsq:getZ()
+                                        if not allCoordKeys[DWAPUtils.hashCoords(cx, cy, cz)]
+                                            and not allCoordKeys[DWAPUtils.hashCoords(cx, cy, cz + 0.5)] then
+                                            unclaimedContainers[#unclaimedContainers + 1] = {
+                                                x = cx, y = cy, z = cz,
+                                                ctype = ctype,
+                                                room = room:getName() or "?",
+                                            }
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        DWAPUtils.dprint(("baseBuildings coverage: %d unclaimed containers, %d anchor problems"):format(
+            #unclaimedContainers, #anchorProblems))
+    end
+
     -- Print results
     if #failedContainers > 0 then
         DWAPUtils.dprint("=== TEST FAILED ===")
@@ -1359,6 +1433,8 @@ function TestLootConfig(index, startFrom, retainedConfig)
         distTags = distTags,
         specialTags = specialTags,
         containerDetails = containerDetails,
+        unclaimedContainers = unclaimedContainers,
+        anchorProblems = anchorProblems,
     }
 end
 
@@ -1464,6 +1540,36 @@ local function allLootFinishConfig(unloaded, badZ)
         end
         local typeRoomStr = allLootTallyString(typeRooms)
         if typeRoomStr ~= "" then allLootWrite("  containers: " .. typeRoomStr) end
+
+        -- baseBuildings coverage: containers no loot entry addresses
+        if result.anchorProblems then
+            for i = 1, #result.anchorProblems do
+                allLootWrite("  BASEBUILDING: " .. result.anchorProblems[i])
+            end
+        end
+        if config and config.baseBuildings and #config.baseBuildings > 0 and result.unclaimedContainers then
+            local list = result.unclaimedContainers
+            if #list == 0 then
+                allLootWrite("  baseBuildings: all containers claimed")
+            else
+                local tally = {}
+                for i = 1, #list do
+                    local u = list[i]
+                    local key = u.ctype .. "@" .. u.room
+                    tally[key] = (tally[key] or 0) + 1
+                end
+                allLootWrite(("  unclaimed containers: %d"):format(#list))
+                allLootWrite("  unclaimed: " .. allLootTallyString(tally))
+                local cap = 250
+                for i = 1, math.min(#list, cap) do
+                    local u = list[i]
+                    allLootWrite(("    %d,%d,%d %s@%s"):format(u.x, u.y, u.z, u.ctype, u.room))
+                end
+                if #list > cap then
+                    allLootWrite(("    ...and %d more (raise the cap in allLootFinishConfig to see them)"):format(#list - cap))
+                end
+            end
+        end
     else
         allLootWrite("  SKIPPED (no loot data)")
         st.skipped = st.skipped + 1
@@ -1539,6 +1645,20 @@ allLootTick = function()
                 end
             end
         end
+        -- baseBuildings anchors need their areas streamed too, so their
+        -- buildings' rooms are in the cell list for the coverage pass
+        if config.baseBuildings then
+            for i = 1, #config.baseBuildings do
+                local a = config.baseBuildings[i]
+                if a and a.x and not getSquare(a.x, a.y, math.floor(a.z or 0)) then
+                    if getSquare(a.x, a.y, 0) then
+                        badZ = badZ + 1
+                    else
+                        unstreamed = unstreamed + 1
+                    end
+                end
+            end
+        end
 
         if unstreamed == 0 then
             allLootFinishConfig(0, badZ)
@@ -1558,6 +1678,21 @@ allLootTick = function()
                         failedJumps = failedJumps + 1
                     elseif not jumpTo then
                         jumpTo = e
+                    end
+                end
+            end
+            if config.baseBuildings then
+                for i = 1, #config.baseBuildings do
+                    local a = config.baseBuildings[i]
+                    if a and a.x
+                        and not getSquare(a.x, a.y, math.floor(a.z or 0))
+                        and not getSquare(a.x, a.y, 0) then
+                        local key = a.x .. "," .. a.y
+                        if st.jumped[key] then
+                            failedJumps = failedJumps + 1
+                        elseif not jumpTo then
+                            jumpTo = { coords = { x = a.x, y = a.y, z = a.z or 0 } }
+                        end
                     end
                 end
             end
