@@ -44,7 +44,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     dwap_38_for_lease = { width=13, height=9, stairx=0, stairy=2, stairDir="N" },
     dwap_39_leaf_hill_heights = { width=9, height=8, stairx=2, stairy=0, stairDir="W" },
     dwap_40_west_maple = { width=10, height=21, stairx=7, stairy=1, stairDir="N" },
-    dwap_41_parsonage = { width=21, height=14, stairx=14, stairy=2, stairDir="W" },
+    dwap_41_secret_mausoleum = { width=21, height=14, stairx=14, stairy=2, stairDir="W" },
 }
 
 local basement_access = {
@@ -63,7 +63,7 @@ local basement_access = {
     ba_dwap_05_water_solar = { width=5, height=10, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_06 = { width=1, height=4, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_06_solar = { width=8, height=11, stairx=-1, stairy=5, stairDir="N" },
-    ba_dwap_07_rosewood_zippee = { width=5, height=3, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_07_rosewood_zippee = { width=5, height=4, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_07_solar = { width=8, height=1, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_08 = { width=2, height=3, stairx=2, stairy=1, stairDir="N" },
     ba_dwap_08_solar = { width=2, height=3, stairx=0, stairy=0, stairDir="N" }, -- was missing; verify stair offsets in-game
@@ -115,7 +115,8 @@ local basement_access = {
     ba_dwap_29_solar = { width=2, height=3, stairx=-10, stairy=0, stairDir="N" },
     ba_dwap_30 = { width=2, height=2, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_30_solar = { width=3, height=15, stairx=2, stairy=14, stairDir="N" },
-    ba_dwap_31_fallas_hotel = { width=6, height=12, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_31_fallas_hotel = { width=16, height=12, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_31 = { width=3, height=8, stairx=0, stairy=0, stairDir="N" }, -- copy of ba_dwap_jamieton_bunker_01, tweaked for fallas hotel
     ba_dwap_32 = { width=4, height=9, stairx=2, stairy=0, stairDir="N" },
     ba_dwap_32_water = { width=2, height=3, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_33 = { width=3, height=6, stairx=0, stairy=1, stairDir="N" },
@@ -490,7 +491,15 @@ end
 
 fullConfig[31] = { -- Fallas Hotel
     locations = {
-        {x=7253, y=8256-7, z=-2, stairDir="N", choices={"dummy"}, access="ba_dwap_31_fallas_hotel"},
+        {x=7254, y=8256-7, z=-3, stairDir="N", choices={"dummy"}, access="ba_dwap_31_fallas_hotel"},
+        {x=7256, y = 8250, z=-2, stairDir="N", choices={"lot_basement_jamieton_bunker_01"},},
+        {x=7254, y = 8241, z = -3, stairDir="N", choices={"dummy"}, access="ba_dwap_31"},
+        {x=7256+4, y = 8250, z=-2, stairDir="N", choices={"lot_basement_jamieton_bunker_01"},},
+        {x=7254+4, y = 8241, z = -3, stairDir="N", choices={"dummy"}, access="ba_dwap_31"},
+        {x=7256+8, y = 8250, z=-2, stairDir="N", choices={"lot_basement_jamieton_bunker_01"},},
+        {x=7254+8, y = 8241, z = -3, stairDir="N", choices={"dummy"}, access="ba_dwap_31"},
+        {x=7256+12, y = 8250, z=-2, stairDir="N", choices={"lot_basement_jamieton_bunker_01"},},
+        {x=7254+12, y = 8241, z = -3, stairDir="N", choices={"dummy"}, access="ba_dwap_31"},
     },
 }
 -- TODO: needs a ba_dwap_31_fallas_hotel_solar access for the new layout
@@ -583,9 +592,9 @@ if doSolar then
     fullConfig[40].locations[1].access="ba_dwap_40_solar"
 end
 
-fullConfig[41] = { -- Rosewood Parsonage
+fullConfig[41] = { -- Secret Mausoleum
     locations = {
-        {x=8156, y=11538, z=0, stairDir="W", choices={"dwap_41_parsonage"}, access="ba_dwap_41"},
+        {x=8142, y=11510, z=0, stairDir="W", choices={"dwap_41_secret_mausoleum"}, access="ba_dwap_41"},
     },
 }
 if doSolar then
