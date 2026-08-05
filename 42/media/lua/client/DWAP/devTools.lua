@@ -184,7 +184,7 @@ function FindOptimalGeneratorSquaresForBuilding()
         for x = playerX - 50, playerX + 50 do
             for y = playerY - 50, playerY + 50 do
                 local square = getSquare(x, y, z)
-                if square and square:getBuilding() == building then
+                if square and DWAPUtils.sameBuilding(square:getBuilding(), building) then
                     found = found + 1
                     local chunk = square:getChunk()
                     local wx = Reflection.getField(chunk, "wx")
@@ -852,7 +852,7 @@ local function autoLightsAfterTeleport()
     local switchRooms = 0
     for i = 1, rooms:size() do
         local room = rooms:get(i - 1)
-        if room:getBuilding() == building and room:getLightSwitches():size() > 0 then
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) and room:getLightSwitches():size() > 0 then
             switchRooms = switchRooms + 1
         end
     end
@@ -865,6 +865,90 @@ function startAutoLightsAfterTeleport()
     autoLightsTicks = 0
     Events.OnTick.Remove(autoLightsAfterTeleport)
     Events.OnTick.Add(autoLightsAfterTeleport)
+end
+
+-- Where am I: sticky readout of coords, room name, and building ID pinned
+-- above the player. DWAPWhere() toggles it on/off; the text refreshes
+-- whenever you cross onto a new square
+local whereShowing = false
+local whereLastKey = nil
+local whereLines = {}
+
+function whereDraw()
+    if not whereShowing then return end
+    local player = getPlayer()
+    local square = player and player:getCurrentSquare()
+    if not square then return end
+    local key = square:getX() .. "," .. square:getY() .. "," .. square:getZ()
+    if key ~= whereLastKey then
+        whereLastKey = key
+        local room = square:getRoom()
+        local building = square:getBuilding()
+        -- BuildingDef ID is the map-stable one (cellX,cellY#index packed
+        -- long); IsoBuilding:getID() is only a per-session streaming counter
+        local bldStr = "bld: none"
+        if building then
+            local def = building.getDef and building:getDef()
+            local defId = def and def.getID and def:getID()
+            if defId then
+                local hi = math.floor(defId / 4294967296)
+                local index = defId % 4294967296
+                local cellX = hi % 65536
+                local cellY = math.floor(hi / 65536)
+                bldStr = ("bld: %d,%d#%d (session %d)"):format(cellX, cellY, index, building:getID())
+            else
+                bldStr = "bld: session " .. tostring(building:getID())
+            end
+        end
+        whereLines = {
+            ("%d,%d,%d"):format(square:getX(), square:getY(), square:getZ()),
+            "room: " .. (room and room:getName() or "outside"),
+            bldStr,
+        }
+    end
+    local playerNum = player:getPlayerNum()
+    local sx = isoToScreenX(playerNum, player:getX(), player:getY(), player:getZ())
+    local sy = isoToScreenY(playerNum, player:getX(), player:getY(), player:getZ())
+    local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    -- stack upward so the bottom line stays just above the head
+    local baseY = sy - 110 - (#whereLines - 1) * lineH
+    for i = 1, #whereLines do
+        local ly = baseY + (i - 1) * lineH
+        tm:DrawStringCentre(UIFont.Small, sx + 1, ly + 1, whereLines[i], 0, 0, 0, 0.8)
+        tm:DrawStringCentre(UIFont.Small, sx, ly, whereLines[i], 1, 1, 1, 1)
+    end
+end
+
+-- Single invisible UI element whose render() hosts all our world-pinned text
+-- overlays. TextManager draw calls only render reliably from the UI draw
+-- pass: OnPostUIDraw never fires in 42.20 (its trigger is gated behind a
+-- main-thread check the threaded renderer fails), so overlays must live on
+-- a UI element like vanilla's debug text overlays do
+local devOverlay = nil
+function ensureDevOverlay()
+    if devOverlay then return devOverlay end
+    local ui = ISUIElement:new(0, 0, 1, 1)
+    ui:initialise()
+    ui.render = function()
+        whereDraw()
+        containerLabelsDraw()
+    end
+    ui:addToUIManager()
+    devOverlay = ui
+    return ui
+end
+
+function DWAPWhere()
+    whereShowing = not whereShowing
+    if whereShowing then
+        whereLastKey = nil
+        ensureDevOverlay()
+        DWAPUtils.dprint("DWAPWhere: on")
+    else
+        DWAPUtils.dprint("DWAPWhere: off")
+    end
 end
 
 function DWAPGoto(index)
@@ -968,6 +1052,16 @@ function TestLootConfig(index, startFrom, retainedConfig)
         configName = config.doorKeys.name
     end
 
+    -- coord-key set so upper entries can tell whether their lower half is
+    -- also configured (drives resolveLootContainer's pairPresent fallback)
+    local allCoordKeys = {}
+    for i = 1, totalEntries do
+        local e = lootEntries[i]
+        if e and e.coords then
+            allCoordKeys[DWAPUtils.hashCoords(e.coords.x, e.coords.y, e.coords.z)] = true
+        end
+    end
+
     DWAPUtils.dprint("=== TESTING LOOT CONFIG: " .. configName .. " ===")
     DWAPUtils.dprint("Total loot entries to test: " .. totalEntries)
 
@@ -991,6 +1085,10 @@ function TestLootConfig(index, startFrom, retainedConfig)
         -- If retainedConfig is provided, use its coordsHashes
         coordsHashes = retainedConfig.coordsHashes
     end
+    local containerDetails = retainedConfig.containerDetails or {}
+    -- fill check: default 80%%; pass fillThreshold = 0 for worlds created with
+    -- base-game loot disabled, where any item at all proves the DWAP fill ran
+    local fillThreshold = retainedConfig.fillThreshold or 80
     local lastProgressPrint = 0
     if retainedConfig.lastProgressPrint then
         -- If retainedConfig is provided, use its lastProgressPrint
@@ -1035,68 +1133,86 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     x ..
                     "," ..
                     y .. "," .. z .. ": Duplicate coordinates (first seen at entry " .. coordsHashes[coordsHash] .. ")")
-                break
+                -- keep going: the container just gets tested twice
             else
                 coordsHashes[coordsHash] = i
             end
 
-            -- Check if square exists, teleport if not
+            -- A missing square in an otherwise-loaded area means the coord
+            -- points at empty air (typo) or an unspawned basement/building -
+            -- record it and keep testing the remaining entries
             local square = getSquare(x, y, math.floor(z))
             if not square then
                 DWAPUtils.dprint("Square not found at " ..
                     x .. "," .. y .. "," .. math.floor(z) .. " - FAILED")
                 table.insert(failedContainers,
-                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Square not found")
-                break
+                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Square not found (bad z or unspawned area)")
             end
+            if square then
 
-            -- Find container at coordinates (handle upper containers with +0.5 z)
-            local container = nil
-            local isUpperContainer = (z % 1) ~= 0 -- Check if z has decimal part
-
-            local objects = square:getObjects()
-            if objects then
-                for j = 0, objects:size() - 1 do
-                    local obj = objects:get(j)
-                    if obj and obj:getContainer() then
-                        local objContainer = obj:getContainer()
-                        if isUpperContainer then
-                            -- For upper containers, check if object has "High" position or renderYOffset
-                            if objContainer:getContainerPosition() == "High" or
-                                (obj:getRenderYOffset() and obj:getRenderYOffset() > 32) then
-                                container = objContainer
-                                break
-                            end
-                        else
-                            -- For lower containers, check for normal position
-                            if objContainer:getContainerPosition() ~= "High" and
-                                (not obj:getRenderYOffset() or obj:getRenderYOffset() == 0) then
-                                container = objContainer
-                                break
-                            end
-                        end
-                    end
-                end
+            -- Resolve through the shared source of truth (same logic the
+            -- loot fill uses): stack ordinal > flagged upper > order fallbacks
+            local isUpperContainer = (z % 1) ~= 0
+            local pairPresent = false
+            if isUpperContainer then
+                pairPresent = allCoordKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
             end
+            local container = DWAPUtils.resolveLootContainer(square, {
+                upper = isUpperContainer,
+                stack = entry.stack,
+                pairPresent = pairPresent,
+            })
 
             if not container then
+                -- List what IS on the square so upper/lower mismatches (High /
+                -- overhead / renderYOffset conventions) are diagnosable from
+                -- the report without revisiting in-game
+                local present = {}
+                local squareContainers = DWAPUtils.getSquareContainers(square)
+                for j = 1, #squareContainers do
+                    local sc = squareContainers[j]
+                    present[#present + 1] = tostring(sc.container:getType()) ..
+                        "(pos=" .. tostring(sc.container:getContainerPosition()) ..
+                        ",yoff=" .. tostring(sc.object:getRenderYOffset()) ..
+                        (sc.isHigh and ",HIGH" or "") .. ")"
+                end
+                local presentStr = #present > 0 and table.concat(present, " ") or "no containers on square"
                 DWAPUtils.dprint("Entry " ..
                     i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container not found - FAILED")
                 table.insert(failedContainers,
-                    "Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. ": Container not found")
+                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Container not found; square has: " .. presentStr)
                 -- break
             else
+                -- Record what the container is and where it lives, for the
+                -- balance audit (detached sheds report their own room name)
+                local room = square:getRoom()
+                table.insert(containerDetails, {
+                    entry = i,
+                    x = x, y = y, z = z,
+                    containerType = container:getType(),
+                    room = room and room:getName() or "outside",
+                })
+
                 -- Test if container is 80% full
                 local capacity = container:getCapacity()
                 local usedCapacity = container:getCapacityWeight()
                 local fillPercentage = capacity > 0 and (usedCapacity / capacity) * 100 or 0
 
-                if not entry.special and fillPercentage < 80 then
-                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
-                        string.format("%.1f", fillPercentage) .. "% full - FAILED")
-                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
-                    -- break
+                if not entry.special then
+                    if fillThreshold <= 0 then
+                        if container:getItems():size() == 0 then
+                            DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                                " - Container empty - FAILED")
+                            table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                                ": Empty")
+                        end
+                    elseif fillPercentage < fillThreshold then
+                        DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
+                            string.format("%.1f", fillPercentage) .. "% full - FAILED")
+                        table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                            ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
+                        -- break
+                    end
                 end
 
                 -- Track distribution tags
@@ -1112,6 +1228,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     specialTags[entry.special] = (specialTags[entry.special] or 0) + 1
                 end
             end
+            end -- if square
         elseif not entry then
             DWAPUtils.dprint("Entry " .. i .. " is nil - SKIPPING")
         elseif not entry.coords then
@@ -1170,9 +1287,264 @@ function TestLootConfig(index, startFrom, retainedConfig)
     end
 
     DWAPUtils.dprint("=== TEST COMPLETE ===")
+
+    return {
+        totalEntries = totalEntries,
+        failedContainers = failedContainers,
+        distTags = distTags,
+        specialTags = specialTags,
+        containerDetails = containerDetails,
+    }
 end
 
 tlc = TestLootConfig
+
+-- Drive TestLootConfig across every config in one debug session: teleport to
+-- each base with DWAPGoto, wait for its loot squares to stream in (jumping to
+-- stragglers to force-load them), run the test, and write a combined report
+-- to Zomboid/Lua/DWAP_loot_audit.txt. Call TestAllLootConfigs() to start,
+-- call it again to abort. TestAllLootConfigs(n) starts from config n.
+local allLootState = nil
+local allLootTick
+local ALLLOOT_WAIT_TICKS = 300 -- chunk-streaming grace before jumping/giving up
+local ALLLOOT_SETTLE_TICKS = 120 -- pause between bases: back-to-back teleports can
+-- race the world streamer's vehicle chunk unload (BaseVehicle.update NPE)
+
+local function allLootTeleport(x, y, z)
+    if isClient() then
+        SendCommandToServer("/teleportto " .. x .. "," .. y .. "," .. z)
+    else
+        getPlayer():teleportTo(x, y, z)
+    end
+end
+
+local function allLootWrite(line)
+    if allLootState and allLootState.writer then
+        allLootState.writer:write(line .. "\r\n")
+    end
+end
+
+local function allLootConfigName(index, config)
+    local name = string.format("%02d", index)
+    if config and config.doorKeys and config.doorKeys.name then
+        name = name .. " " .. config.doorKeys.name
+    end
+    return name
+end
+
+-- Render a {key = count} table as "key=count, ..." sorted by count desc
+local function allLootTallyString(tbl)
+    local sorted = {}
+    for tag, count in pairs(tbl) do
+        sorted[#sorted + 1] = { tag = tag, count = count }
+    end
+    table.sort(sorted, function(a, b)
+        if a.count == b.count then return a.tag < b.tag end
+        return a.count > b.count
+    end)
+    local parts = {}
+    for i = 1, #sorted do
+        parts[i] = sorted[i].tag .. "=" .. sorted[i].count
+    end
+    return table.concat(parts, ", ")
+end
+
+local function allLootStop(summary)
+    if not allLootState then return end
+    if summary then allLootWrite(summary) end
+    if allLootState.writer then allLootState.writer:close() end
+    Events.OnTick.Remove(allLootTick)
+    allLootState = nil
+    DWAPUtils.dprint("Loot audit report: Zomboid/Lua/DWAP_loot_audit.txt")
+end
+
+local function allLootFinishConfig(unloaded, badZ)
+    local st = allLootState
+    local config = st.configs[st.index]
+    local name = allLootConfigName(st.index, config)
+    local result = TestLootConfig(st.index, nil, { fillThreshold = st.fillThreshold })
+
+    allLootWrite(("=== %s: %d loot entries ==="):format(name, result and result.totalEntries or 0))
+    if unloaded > 0 then
+        allLootWrite(("  STALE?: %d squares in chunks that never streamed in - building/basement missing from this save; results below are unreliable"):format(
+            unloaded))
+    end
+    if badZ and badZ > 0 then
+        allLootWrite(("  BAD-Z: %d coords have no square at their z level (unspawned basement, moved building, or typo) - see Square-not-found lines"):format(
+            badZ))
+    end
+    if result then
+        if #result.failedContainers == 0 then
+            allLootWrite("  PASS")
+            st.passed = st.passed + 1
+        else
+            allLootWrite(("  FAIL (%d):"):format(#result.failedContainers))
+            for i = 1, #result.failedContainers do
+                allLootWrite("    " .. result.failedContainers[i])
+            end
+            st.failed = st.failed + 1
+        end
+
+        local special = allLootTallyString(result.specialTags)
+        if special ~= "" then allLootWrite("  special: " .. special) end
+        local dist = allLootTallyString(result.distTags)
+        if dist ~= "" then allLootWrite("  dist: " .. dist) end
+
+        -- container type per room, e.g. "filingcabinet@office=2"
+        local typeRooms = {}
+        for i = 1, #result.containerDetails do
+            local d = result.containerDetails[i]
+            local key = d.containerType .. "@" .. d.room
+            typeRooms[key] = (typeRooms[key] or 0) + 1
+        end
+        local typeRoomStr = allLootTallyString(typeRooms)
+        if typeRoomStr ~= "" then allLootWrite("  containers: " .. typeRoomStr) end
+    else
+        allLootWrite("  SKIPPED (no loot data)")
+        st.skipped = st.skipped + 1
+    end
+
+    -- level keys and explicit-item entries aren't tallied by TestLootConfig
+    local levels, itemEntries = {}, 0
+    if config and config.loot then
+        for i = 1, #config.loot do
+            local e = config.loot[i]
+            if e then
+                if e.level ~= nil then
+                    local key = tostring(e.level)
+                    levels[key] = (levels[key] or 0) + 1
+                end
+                if e.items then itemEntries = itemEntries + 1 end
+            end
+        end
+    end
+    local levelStr = allLootTallyString(levels)
+    if levelStr ~= "" then allLootWrite("  levels: " .. levelStr) end
+    if itemEntries > 0 then allLootWrite("  explicit-item entries: " .. itemEntries) end
+    allLootWrite("")
+
+    st.index = st.index + 1
+    st.phase = "settle"
+    st.ticksWaited = 0
+end
+
+allLootTick = function()
+    local st = allLootState
+    if not st then return end
+    if st.index > #st.configs then
+        allLootStop(("=== DONE: %d passed, %d failed, %d skipped ==="):format(st.passed, st.failed, st.skipped))
+        return
+    end
+
+    local config = st.configs[st.index]
+    if st.phase == "settle" then
+        st.ticksWaited = st.ticksWaited + 1
+        if st.ticksWaited >= ALLLOOT_SETTLE_TICKS then
+            st.phase = "teleport"
+        end
+    elseif st.phase == "teleport" then
+        if not config or not config.loot or #config.loot == 0 then
+            allLootWrite("=== " .. allLootConfigName(st.index, config) .. ": no loot entries, skipped ===")
+            allLootWrite("")
+            st.skipped = st.skipped + 1
+            st.index = st.index + 1
+            return
+        end
+        DWAPUtils.dprint(("Loot audit %d/%d: %s"):format(st.index, #st.configs, allLootConfigName(st.index, config)))
+        DWAPGoto(st.index)
+        st.phase = "load"
+        st.ticksWaited = 0
+        st.jumped = {}
+    elseif st.phase == "load" then
+        st.ticksWaited = st.ticksWaited + 1
+
+        -- Sort absent squares into truly unstreamed chunks (ground square at
+        -- z=0 absent too) vs bad-z coords (chunk is in, that z just has no
+        -- square: unspawned basement, moved building, or typo). Only
+        -- unstreamed chunks are worth jumping to; bad-z gets recorded by
+        -- TestLootConfig as Square-not-found
+        local unstreamed, badZ = 0, 0
+        for i = 1, #config.loot do
+            local e = config.loot[i]
+            if e and e.coords and not getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z)) then
+                if getSquare(e.coords.x, e.coords.y, 0) then
+                    badZ = badZ + 1
+                else
+                    unstreamed = unstreamed + 1
+                end
+            end
+        end
+
+        if unstreamed == 0 then
+            allLootFinishConfig(0, badZ)
+        elseif st.ticksWaited >= ALLLOOT_WAIT_TICKS then
+            -- Count force-load jumps whose chunk STILL isn't in: three of
+            -- those means the area can't stream in this save - stop grinding
+            -- instead of visiting every dead coordinate
+            local failedJumps = 0
+            local jumpTo = nil
+            for i = 1, #config.loot do
+                local e = config.loot[i]
+                if e and e.coords
+                    and not getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z))
+                    and not getSquare(e.coords.x, e.coords.y, 0) then
+                    local key = e.coords.x .. "," .. e.coords.y
+                    if st.jumped[key] then
+                        failedJumps = failedJumps + 1
+                    elseif not jumpTo then
+                        jumpTo = e
+                    end
+                end
+            end
+            if failedJumps >= 3 or not jumpTo then
+                allLootFinishConfig(unstreamed, badZ)
+            else
+                st.jumped[jumpTo.coords.x .. "," .. jumpTo.coords.y] = true
+                allLootTeleport(jumpTo.coords.x, jumpTo.coords.y, math.floor(jumpTo.coords.z))
+                st.ticksWaited = 0
+            end
+        end
+    end
+end
+
+-- fillThreshold: percent a container must be filled to pass (default 80).
+-- Pass 0 when the world was created with base-game loot disabled - then any
+-- item at all proves the DWAP fill ran, so only truly empty containers fail.
+function TestAllLootConfigs(startIndex, fillThreshold)
+    if allLootState then
+        DWAPUtils.dprint("Loot audit already running - aborting it")
+        allLootStop("=== ABORTED at config " .. allLootState.index .. " ===")
+        return
+    end
+    local configs = DWAPUtils.loadConfigs(true)
+    if not configs or #configs == 0 then
+        DWAPUtils.dprint("No configs found")
+        return
+    end
+    -- resuming mid-list appends to the existing report instead of truncating it
+    local resuming = (startIndex or 1) > 1
+    allLootState = {
+        configs = configs,
+        index = startIndex or 1,
+        phase = "teleport",
+        ticksWaited = 0,
+        jumped = {},
+        writer = getFileWriter("DWAP_loot_audit.txt", true, resuming),
+        passed = 0,
+        failed = 0,
+        skipped = 0,
+        fillThreshold = fillThreshold,
+    }
+    if resuming then
+        allLootWrite("--- resumed at config " .. startIndex .. " ---")
+    else
+        allLootWrite("DWAP loot audit - " .. #configs .. " configs, fill threshold " ..
+            tostring(fillThreshold or 80) .. "%")
+    end
+    allLootWrite("")
+    DWAPUtils.dprint("Starting loot audit across " .. #configs .. " configs")
+    Events.OnTick.Add(allLootTick)
+end
 
 local currentContainerLookup = nil
 
@@ -1366,6 +1738,49 @@ function containersTick()
     end
 end
 
+local currentContainerLabels = nil
+
+-- One label per loot entry: its 1-based entry number, with "^" appended for
+-- upper (+0.5 z) containers so stacked pairs on one tile stay readable
+local function buildContainerLabels(config)
+    local labels = {}
+    if not config or not config.loot then return labels end
+    for i = 1, #config.loot do
+        local entry = config.loot[i]
+        if entry and entry.coords then
+            local z = entry.coords.z
+            labels[#labels + 1] = {
+                x = entry.coords.x,
+                y = entry.coords.y,
+                z = z,
+                text = tostring(i) .. (entry.stack and ("s" .. entry.stack) or "") .. ((z % 1 ~= 0) and "^" or ""),
+            }
+        end
+    end
+    return labels
+end
+
+-- Draw entry numbers pinned to their squares (same pattern the foraging
+-- icons use: isoToScreenX/Y + TextManager during UI draw)
+function containerLabelsDraw()
+    if not currentContainerLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #currentContainerLabels do
+        local l = currentContainerLabels[i]
+        if math.floor(l.z) == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 1, 0.2, 1)
+        end
+    end
+end
+
 local showingContainers = false
 
 function ShowContainers(index)
@@ -1400,18 +1815,22 @@ function ShowContainers(index)
 
         -- Build container lookup table
         currentContainerLookup = buildContainerLookup(config)
+        currentContainerLabels = buildContainerLabels(config)
         local containerCount = 0
         for _ in pairs(currentContainerLookup) do
             containerCount = containerCount + 1
         end
 
         Events.OnTick.Add(containersTick)
+        ensureDevOverlay()
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
         DWAPUtils.dprint(
         "Red = config errors or missing containers, Orange = containers not in config, Purple = partial config, Blue = special containers, Green = all containers in config")
+        DWAPUtils.dprint("Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry")
     else
         Events.OnTick.Remove(containersTick)
         currentContainerLookup = nil
+        currentContainerLabels = nil
         DWAPUtils.dprint("Container visualization disabled")
     end
 end
@@ -1864,7 +2283,7 @@ function FindUnconnectedPlumbing()
             if square then
                 -- Only check squares that are part of the same building
                 local squareBuilding = square:getBuilding()
-                if squareBuilding == building then
+                if DWAPUtils.sameBuilding(squareBuilding, building) then
                     local objects = square:getObjects()
                     if objects then
                         for j = 0, objects:size() - 1 do

@@ -23,7 +23,23 @@ local function setLootConfigValue(config)
     local coordsKey = hashCoords(x, y, z)
     local index = #lootConfig + 1
     lootConfig[index] = config
-    lootByCoords[coordsKey] = index
+    if config.stack then
+        -- stacked entries share one coords key; slot becomes a table keyed
+        -- by stack ordinal (plus "base" for a legacy non-stack entry)
+        local slot = lootByCoords[coordsKey]
+        if type(slot) ~= "table" then
+            slot = { base = slot }
+            lootByCoords[coordsKey] = slot
+        end
+        slot[config.stack] = index
+    else
+        local slot = lootByCoords[coordsKey]
+        if type(slot) == "table" then
+            slot.base = index
+        else
+            lootByCoords[coordsKey] = index
+        end
+    end
 end
 
 --- get the loot config for a set of coords
@@ -31,9 +47,15 @@ end
 --- @param y number
 --- @param z number
 --- @return table|nil lootConfig, number|nil index, number|nil coordsKey loot config, lootByCoords index, hash of coords
-local function getLootForCoords(x, y, z)
+local function getLootForCoords(x, y, z, stack)
     local coordsKey = hashCoords(x, y, z)
-    local index = lootByCoords[coordsKey]
+    local slot = lootByCoords[coordsKey]
+    local index
+    if type(slot) == "table" then
+        index = stack and slot[stack] or slot.base
+    elseif not stack then
+        index = slot
+    end
     if index then
         return lootConfig[index], index, coordsKey
     end
@@ -48,7 +70,16 @@ local function removeLootEntry(index, coordsKey)
     local config = lootConfig[index]
     if not config then return end
     lootConfig[index] = nil
-    lootByCoords[coordsKey] = nil
+    local slot = lootByCoords[coordsKey]
+    if type(slot) == "table" then
+        -- clear only this entry's member; drop the slot once empty
+        for k, v in pairs(slot) do
+            if v == index then slot[k] = nil end
+        end
+        if not next(slot) then lootByCoords[coordsKey] = nil end
+    else
+        lootByCoords[coordsKey] = nil
+    end
 end
 
 --- check if there's room in a container, based on the desired level and the container's max capacity
@@ -442,9 +473,47 @@ local function onFillContainer(roomType, containerType, container)
     end
     local square = container:getSourceGrid()
     if square then
-        local z = square:getZ()
-        if containerType == "overhead" or container:getContainerPosition() == "High" then z = z + 0.5 end
-        local loot, index, coordsKey = getLootForCoords(square:getX(), square:getY(), z)
+        local x, y, z = square:getX(), square:getY(), square:getZ()
+        -- Per-square resolution: each entry addresses exactly one container
+        -- (stack ordinal > property-flagged upper > order fallbacks), so
+        -- multiple containers on one tile can't race for the same entry.
+        -- DWAPUtils.resolveLootContainer is the shared source of truth.
+        local loot, index, coordsKey
+
+        -- stack entry for this container's ordinal on the square?
+        local list = DWAPUtils.getSquareContainers(square)
+        local ordinal
+        for i = 1, #list do
+            if list[i].container == container then
+                ordinal = i
+                break
+            end
+        end
+        if ordinal then
+            loot, index, coordsKey = getLootForCoords(x, y, z, ordinal)
+        end
+
+        -- upper (+0.5) entry that resolves to this container?
+        if not loot then
+            local upLoot, upIndex, upKey = getLootForCoords(x, y, z + 0.5)
+            if upLoot then
+                local baseLoot = getLootForCoords(x, y, z)
+                if DWAPUtils.resolveLootContainer(square, { upper = true, pairPresent = baseLoot ~= nil }) == container then
+                    loot, index, coordsKey = upLoot, upIndex, upKey
+                end
+            end
+        end
+
+        -- base entry that resolves to this container?
+        if not loot then
+            local baseLoot, baseIndex, baseKey = getLootForCoords(x, y, z)
+            if baseLoot and not baseLoot.stack then
+                if DWAPUtils.resolveLootContainer(square, {}) == container then
+                    loot, index, coordsKey = baseLoot, baseIndex, baseKey
+                end
+            end
+        end
+
         if loot and index and coordsKey then
             -- DWAPUtils.dprint(("onFillContainer: %s %s"):format(square:getX(), square:getY()))
             -- DWAPUtils.dprint({ index = index, roomType = roomType, containerType = containerType, coordsKey = coordsKey })

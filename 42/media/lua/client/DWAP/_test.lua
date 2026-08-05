@@ -516,7 +516,7 @@ function ShowChunkXYForLightSwitches()
     local rooms = getCell():getRoomList()
     for i = 0, rooms:size()-1 do
         local room = rooms:get(i)
-        if room:getBuilding() == building then
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
             local lightSwitches = room:getLightSwitches()
             for j = 0, lightSwitches:size()-1 do
                 local lightSwitch = lightSwitches:get(j)
@@ -615,7 +615,7 @@ function ListChunksForBuilding()
             local square = getSquare(x, y, playerZ)
             if square then
                 local building2 = square:getBuilding()
-                if building2 and building2 == building then
+                if building2 and DWAPUtils.sameBuilding(building2, building) then
                     squaresInBuilding[#squaresInBuilding+1] = square
                 end
             end

@@ -512,6 +512,19 @@ end
 --- @param building IsoBuilding|nil
 --- @param attempts number|nil
 --- @return boolean
+--- Same physical building? Runtime IsoBuilding instances are recreated per
+--- streaming pass (one physical building can carry several instances right
+--- after a teleport), so object identity fails - compare the map-stable
+--- BuildingDef IDs instead
+function DWAPUtils.sameBuilding(a, b)
+    if not a or not b then return false end
+    if a == b then return true end
+    local da = a.getDef and a:getDef()
+    local db = b.getDef and b:getDef()
+    if not da or not db then return false end
+    return da:getID() == db:getID()
+end
+
 function DWAPUtils.lightsOn(square, building, attempts)
     DWAPUtils.dprint("lightsOn")
     local player = getPlayer()
@@ -540,7 +553,7 @@ function DWAPUtils.lightsOn(square, building, attempts)
     local switches = 0
     for i = 1, rooms:size() do
         local room = rooms:get(i - 1)
-        if room:getBuilding() == building then
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
             local lightSwitches = room:getLightSwitches()
             for j = 1, lightSwitches:size() do
                 local lightSwitch = lightSwitches:get(j - 1)
@@ -608,6 +621,73 @@ end
 --- @return number
 function DWAPUtils.hashCoords(x, y, z)
     return x * 24593 + y * 49157 + z * 193
+end
+
+--- Whether a square container counts as "upper" (wall-mounted) for loot.
+--- 42.20 tile defs are inconsistent: overhead cabinets have type "overhead"
+--- but pos=nil; trailer cabinets have ContainerPosition High/Low; medicine
+--- cabinets and wall shelves have neither - callers must handle isHigh=false
+--- wall containers via ordering fallbacks (see resolveLootContainer)
+local function isHighContainer(object, container)
+    if container:getType() == "overhead" then return true end
+    if container:getContainerPosition() == "High" then return true end
+    local yoff = object.getRenderYOffset and object:getRenderYOffset()
+    if yoff and yoff > 32 then return true end
+    return false
+end
+
+--- All containers on a square in object-list order (stable: authored into
+--- the map data, floor furniture before wall furniture in practice).
+--- @return table array of { object, container, isHigh }
+function DWAPUtils.getSquareContainers(square)
+    local result = {}
+    if not square then return result end
+    local objects = square:getObjects()
+    if not objects then return result end
+    for j = 0, objects:size() - 1 do
+        local obj = objects:get(j)
+        local c = obj and obj:getContainer()
+        if c then
+            result[#result + 1] = { object = obj, container = c, isHigh = isHighContainer(obj, c) }
+        end
+    end
+    return result
+end
+
+--- Resolve which container on a square a loot entry addresses. Single source
+--- of truth shared by the loot fill (Events.lua) and the dev audit tools.
+--- opts.stack   = n: the nth container in object-list order (crate stacks)
+--- opts.upper   = true when the entry's z carries the +0.5 flag
+--- opts.pairPresent = true when the square also has the complementary
+---                    (lower/upper) entry configured
+--- @return ItemContainer|nil
+function DWAPUtils.resolveLootContainer(square, opts)
+    opts = opts or {}
+    local list = DWAPUtils.getSquareContainers(square)
+    if #list == 0 then return nil end
+    if opts.stack then
+        local hit = list[opts.stack]
+        return hit and hit.container or nil
+    end
+    if opts.upper then
+        -- property-flagged wall container wins outright
+        for i = 1, #list do
+            if list[i].isHigh then return list[i].container end
+        end
+        -- no flags (medicine/shelves/metal_shelves in 42.20): a lone
+        -- container satisfies a lone upper entry; with a base+upper pair,
+        -- the wall-mounted container is the LAST in object order
+        if #list == 1 then
+            if not opts.pairPresent then return list[1].container end
+            return nil
+        end
+        return list[#list].container
+    end
+    -- base entry: first non-high container in object order
+    for i = 1, #list do
+        if not list[i].isHigh then return list[i].container end
+    end
+    return nil
 end
 
 function DWAPUtils.tableSize(tbl)
