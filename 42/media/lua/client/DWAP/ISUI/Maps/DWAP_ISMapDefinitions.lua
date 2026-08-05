@@ -319,12 +319,12 @@ LootMaps.Init.DWAPStashMap40 = function(mapUI)
     mapAPI:setBoundsInSquares(5920, 6480, 6327, 6783)
 end
 
--- Rosewood Parsonage
+-- Secret Mausoleum
 LootMaps.Init.DWAPStashMap41 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(8072, 11520, 8199, 11591)
+    mapAPI:setBoundsInSquares(8058, 11492, 8185, 11563)
 end
 
 -- Louisville Townhouse

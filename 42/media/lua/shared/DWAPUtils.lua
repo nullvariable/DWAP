@@ -55,7 +55,7 @@ local configFiles_17 = {
     [38] = "DWAP/configs/38_ForLease_17",
     [39] = "DWAP/configs/39_LeafHill_17",
     [40] = "DWAP/configs/40_WestMaple_17",
-    [41] = "DWAP/configs/41_Parsonage_17",
+    [41] = "DWAP/configs/41_SecretMausoleum_17",
     [42] = "DWAP/configs/42_LvilleTownhouse_17",
 }
 

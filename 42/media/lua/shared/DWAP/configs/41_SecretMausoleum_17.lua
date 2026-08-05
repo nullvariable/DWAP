@@ -1,7 +1,11 @@
-local wtc1 = {x = 8160, y = 11537, z = -2,}
-local pb1  = {x = 8159, y = 11537, z = -2,}
-local Parsonage = {
-    spawn = { x = 8157, y = 11543, z = 0 },
+local wtc1 = {x = 8146, y = 11509, z = -2,}
+local pb1  = {x = 8145, y = 11509, z = -2,}
+local SecretMausoleum = {
+    group = "",
+    baseBuildings = {
+        { x = 8143, y = 11515, z = 0 }, -- mausoleum
+    },
+    spawn = { x = 8143, y = 11515, z = 0 },
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
@@ -12,8 +16,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_7",
-                        x = 8149,
-                        y = 11545,
+                        x = 8135,
+                        y = 11517,
                         z = 0,
                         pb = 1,
                         spawn = false,
@@ -22,8 +26,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_7",
-                        x = 8150,
-                        y = 11545,
+                        x = 8136,
+                        y = 11517,
                         z = 0,
                         pb = 1,
                         spawn = false,
@@ -32,8 +36,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_7",
-                        x = 8151,
-                        y = 11545,
+                        x = 8137,
+                        y = 11517,
                         z = 0,
                         pb = 1,
                         spawn = false,
@@ -42,8 +46,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_7",
-                        x = 8152,
-                        y = 11545,
+                        x = 8138,
+                        y = 11517,
                         z = 0,
                         pb = 1,
                         spawn = false,
@@ -52,8 +56,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_10",
-                        x = 8149,
-                        y = 11544,
+                        x = 8135,
+                        y = 11516,
                         z = 1,
                         pb = 1,
                         spawn = false,
@@ -62,8 +66,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_10",
-                        x = 8150,
-                        y = 11544,
+                        x = 8136,
+                        y = 11516,
                         z = 1,
                         pb = 1,
                         spawn = false,
@@ -72,8 +76,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_10",
-                        x = 8151,
-                        y = 11544,
+                        x = 8137,
+                        y = 11516,
                         z = 1,
                         pb = 1,
                         spawn = false,
@@ -82,8 +86,8 @@ local Parsonage = {
                         type = "panel",
                         isSpecial = true,
                         sprite = "solarmod_tileset_01_10",
-                        x = 8152,
-                        y = 11544,
+                        x = 8138,
+                        y = 11516,
                         z = 1,
                         pb = 1,
                         spawn = false,
@@ -91,7 +95,7 @@ local Parsonage = {
                 },
             },
             fakeGenerators = {
-                { x = 8145, y = 11547, z = -1 },
+                { x = 8131, y = 11519, z = -1 },
             },
         },
     },
@@ -99,26 +103,26 @@ local Parsonage = {
         { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = 1 },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_9", x = 8150, y = 11538, z = 0, sourceType="tank", source = 1 },
-        { sprite = "fixtures_sinks_01_13", x = 8152, y = 11541, z = 0, sourceType="tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_32", x = 8152, y = 11539, z = 0, sourceType="tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_0", x = 8153, y = 11539, z = 0, sourceType="tank", source = 1 },
-        { sprite = "fixtures_sinks_01_16", x = 8151, y = 11536, z = -2, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_9", x = 8136, y = 11510, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_13", x = 8138, y = 11513, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_32", x = 8138, y = 11511, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_0", x = 8139, y = 11511, z = 0, sourceType="tank", source = 1 },
+        { sprite = "fixtures_sinks_01_16", x = 8137, y = 11508, z = -2, sourceType="tank", source = 1 },
     },
     doorKeys = {
-        name = "Rosewood Parsonage Key",
+        name = "Secret Mausoleum Key",
         doors = {
-            { sprite = "fixtures_doors_02_5", x = 8155, y = 11544, z = 0, },
-            { sprite = "fixtures_doors_02_5", x = 8144, y = 11544, z = -1, },
+            { sprite = "fixtures_doors_02_5", x = 8141, y = 11516, z = 0, },
+            { sprite = "fixtures_doors_02_5", x = 8130, y = 11516, z = -1, },
         },
     },
     map = { name = "DWAPStashMap41", },
     objectSpawns = {
 
-        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8153, y = 11545, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8157, y = 11545, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_1", x = 8150, y = 11538, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_02_24", x = 8159, y = 11540, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8139, y = 11517, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target="fixtures_windows_01_1", x = 8143, y = 11517, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_1", x = 8136, y = 11510, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_02_24", x = 8145, y = 11512, z = 0, },
 
     },
     loot = {
@@ -126,13 +130,13 @@ local Parsonage = {
         -- kitchen
         {
             type = 'container',
-            coords = {x=8149,y=11541,z=0},
+            coords = {x=8135,y=11513,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
-            coords = {x=8149,y=11538,z=0},
+            coords = {x=8135,y=11510,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -140,7 +144,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8150,y=11538,z=0},
+            coords = {x=8136,y=11510,z=0},
             dist = {"CrateFishing","MusicStoreCDs"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -148,7 +152,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8151,y=11538,z=0},
+            coords = {x=8137,y=11510,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood", "CrateLiquor", "StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -156,7 +160,7 @@ local Parsonage = {
         },
         { -- fridge
             type = 'container',
-            coords = {x=8151,y=11539,z=0},
+            coords = {x=8137,y=11511,z=0},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -165,7 +169,7 @@ local Parsonage = {
         },
         { -- mini fridge
             type = 'container',
-            coords = {x=8151,y=11540,z=0},
+            coords = {x=8137,y=11512,z=0},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -175,7 +179,7 @@ local Parsonage = {
         -- bathroom
         {
             type = 'container',
-            coords = {x=8152,y=11541,z=0.5},
+            coords = {x=8138,y=11513,z=0.5},
             dist = {"MedicalCabinet", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -184,7 +188,7 @@ local Parsonage = {
         -- living room
         {
             type = 'container',
-            coords = {x=8154,y=11539,z=0},
+            coords = {x=8140,y=11511,z=0},
             dist = {"SafehouseFireplace", "SafehouseLighting", "LivingRoomShelfClassy" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -193,13 +197,13 @@ local Parsonage = {
         -- bedrooms
         {
             type = 'container',
-            coords = {x=8157,y=11542,z=0},
+            coords = {x=8143,y=11514,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         {
             type = 'container',
-            coords = {x=8158,y=11541,z=0},
+            coords = {x=8144,y=11513,z=0},
             dist = {"GunStoreKnives","ClothingStorageWinter",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -208,7 +212,7 @@ local Parsonage = {
         -- entrance hall
         {
             type = 'container',
-            coords = {x=8152,y=11538,z=0},
+            coords = {x=8138,y=11510,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
@@ -217,7 +221,7 @@ local Parsonage = {
         -- crates by stairs
         {
             type = 'container',
-            coords = {x=8142,y=11548,z=-2},
+            coords = {x=8128,y=11520,z=-2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateBootsArmy", "CampingStoreBackpacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -225,7 +229,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8143,y=11548,z=-2},
+            coords = {x=8129,y=11520,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -234,13 +238,13 @@ local Parsonage = {
         -- chests by cots
         {
             type = 'container',
-            coords = {x=8142,y=11543,z=-2},
+            coords = {x=8128,y=11515,z=-2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         {
             type = 'container',
-            coords = {x=8142,y=11540,z=-2},
+            coords = {x=8128,y=11512,z=-2},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -248,7 +252,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8142,y=11537,z=-2},
+            coords = {x=8128,y=11509,z=-2},
             dist = { "SafehouseTraps", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -256,7 +260,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8146,y=11540,z=-2},
+            coords = {x=8132,y=11512,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -264,7 +268,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8146,y=11537,z=-2},
+            coords = {x=8132,y=11509,z=-2},
             items = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.Sheet', },
@@ -277,7 +281,7 @@ local Parsonage = {
         -- crates by cots
         {
             type = 'container',
-            coords = {x=8145,y=11541,z=-2},
+            coords = {x=8131,y=11513,z=-2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -285,7 +289,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8146,y=11541,z=-2},
+            coords = {x=8132,y=11513,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -294,7 +298,7 @@ local Parsonage = {
         -- shelving
         {
             type = 'container',
-            coords = {x=8149,y=11536,z=-2},
+            coords = {x=8135,y=11508,z=-2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -302,7 +306,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8149,y=11537,z=-2},
+            coords = {x=8135,y=11509,z=-2},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -310,7 +314,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8149,y=11538,z=-2},
+            coords = {x=8135,y=11510,z=-2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -318,25 +322,25 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8149,y=11539,z=-2},
+            coords = {x=8135,y=11511,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         {
             type = 'container',
-            coords = {x=8149,y=11540,z=-2},
+            coords = {x=8135,y=11512,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         {
             type = 'container',
-            coords = {x=8149,y=11541,z=-2},
+            coords = {x=8135,y=11513,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         {
             type = 'container',
-            coords = {x=8151,y=11540,z=-2},
+            coords = {x=8137,y=11512,z=-2},
             dist = {"SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -344,13 +348,13 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8151,y=11541,z=-2},
+            coords = {x=8137,y=11513,z=-2},
             special = "essentials",
         },
         -- kitchen cabinets
         {
             type = 'container',
-            coords = {x=8151,y=11536,z=-2},
+            coords = {x=8137,y=11508,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood", "JanitorCleaning"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -358,7 +362,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8151,y=11537,z=-2},
+            coords = {x=8137,y=11509,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -366,7 +370,7 @@ local Parsonage = {
         },
         { -- fridge
             type = 'container',
-            coords = {x=8151,y=11539,z=-2},
+            coords = {x=8137,y=11511,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -376,7 +380,7 @@ local Parsonage = {
         -- crates
         {
             type = 'container',
-            coords = {x=8158,y=11541,z=-2},
+            coords = {x=8144,y=11513,z=-2},
             dist = {"CrateToiletPaper", "CrateLinens", "BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -384,7 +388,7 @@ local Parsonage = {
         },
         {
             type = 'container',
-            coords = {x=8159,y=11541,z=-2},
+            coords = {x=8145,y=11513,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal", "CrateClayBags", "CrateMasonry"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -394,8 +398,8 @@ local Parsonage = {
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(Parsonage.objectSpawns, { enabled = "EnableLadders", x = 8142, y = 11542, z = 0, removeFloor = true, })
-    table.insert(Parsonage.objectSpawns, { enabled = "EnableLadders", x = 8142, y = 11543, z = -1, removeWall = "north", })
+    table.insert(SecretMausoleum.objectSpawns, { enabled = "EnableLadders", x = 8128, y = 11514, z = 0, removeFloor = true, })
+    table.insert(SecretMausoleum.objectSpawns, { enabled = "EnableLadders", x = 8128, y = 11515, z = -1, removeWall = "north", })
 end
 
-return Parsonage
+return SecretMausoleum

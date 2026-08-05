@@ -331,13 +331,13 @@ local configs = {
         buildingY = 6638,
     },
     [41] = {
-        name = "Rosewood Parsonage Map",
+        name = "Secret Mausoleum Map",
         stamps = {
-            {"Asterisk", nil, 8157, 11543, 0, 0, 0},
-            {nil, "Stash_DWAP_41_text1", 8104, 11561, 0.00, 0.00, 0.0, 0.129, 0.129, 0.129},
+            {"Asterisk", nil, 8143, 11515, 0, 0, 0},
+            {nil, "Stash_DWAP_41_text1", 8090, 11533, 0.00, 0.00, 0.0, 0.129, 0.129, 0.129},
         },
-        buildingX = 8157,
-        buildingY = 11543,
+        buildingX = 8143,
+        buildingY = 11515,
     },
     [42] = {
         name = "Louisville Townhouse Map",
@@ -375,7 +375,7 @@ if getActivatedMods():contains("\\Ladders") then
     table.insert(configs[31].stamps, {"Ladder", nil, 7679, 12205, 0, 0, 0})
     table.insert(configs[33].stamps, {"Ladder", nil, 8716, 15314, 0, 0, 0})
     table.insert(configs[36].stamps, {"Ladder", nil, 1831, 14111, 0, 0, 0})
-    table.insert(configs[41].stamps, {"Ladder", nil, 8142, 11542, 0, 0, 0})
+    table.insert(configs[41].stamps, {"Ladder", nil, 8128, 11514, 0, 0, 0})
 end
 
 for i = 1, #configs do
