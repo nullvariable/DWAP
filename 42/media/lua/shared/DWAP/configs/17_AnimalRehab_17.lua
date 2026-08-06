@@ -632,7 +632,7 @@ local AnimalRehab = {
         -- 2nd floor
         {
             type = 'container',
-            coords = {x=3107,y=12051,z=0},
+            coords = {x=3107,y=12051,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -640,7 +640,7 @@ local AnimalRehab = {
         },
         {
             type = 'container',
-            coords = {x=3107,y=12050,z=0},
+            coords = {x=3107,y=12050,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -648,7 +648,7 @@ local AnimalRehab = {
         },
         { -- @TODO duplicate coords with entry 56
             type = 'container',
-            coords = {x=3107,y=12054,z=0},
+            coords = {x=3107,y=12054,z=1},
             dist = {"GunStoreKnives", "SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -656,7 +656,7 @@ local AnimalRehab = {
         },
         {
             type = 'container',
-            coords = {x=3107,y=12053,z=0},
+            coords = {x=3107,y=12053,z=1},
             dist = {"CampingLockers", "CampingStoreBackpacks",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -664,7 +664,7 @@ local AnimalRehab = {
         },
         {
             type = 'container',
-            coords = {x=3111,y=12052,z=0},
+            coords = {x=3111,y=12052,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -672,13 +672,12 @@ local AnimalRehab = {
         },
         {
             type = 'container',
-            coords = {x=3111,y=12054,z=0},
+            coords = {x=3111,y=12054,z=1},
             dist = {"SewingStoreTools", "SewingStoreFabric", "CrateLeather",},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_TailorLevel",
-        },
-    },
+        },},
 }
 
 if getActivatedMods():contains("\\Ladders") then
