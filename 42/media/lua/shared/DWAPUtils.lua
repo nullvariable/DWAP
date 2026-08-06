@@ -195,6 +195,14 @@ function DWAPUtils.dprint(var)
     debugLuaTable(var)
 end
 
+-- The global object systems inherit wantNoise = getDebug() from vanilla, so
+-- every -debug launch gets the full per-object lifecycle running commentary -
+-- thousands of lines that bury everything else. Their high-frequency messages
+-- go through :chatter() instead of :noise() and stay off unless this is set.
+-- Toggle it in game with DWAPPowerLog() or the dev panel button. Single-state
+-- (SP/debug) flag: a client toggle cannot reach a remote server's copy.
+DWAPUtils.verbosePower = false
+
 --- Test if a set of coords are in a given table/list
 --- @param coords table{ x = number, y = number, z = number }
 --- @param list table
@@ -532,6 +540,50 @@ function DWAPUtils.sameBuilding(a, b)
     return da:getID() == db:getID()
 end
 
+--- Turn a light switch on so it STAYS on, repairing a room that streaming
+--- left half-lit.
+---
+--- Two 42.20 behaviours combine into a stuck room. A room-wide switch takes
+--- its state from room.def.lightsActive, and IsoLightSwitch's constructor
+--- forces that def field to false when its own square has no power yet - so a
+--- switch streaming in late (or before the generator's deferred
+--- setSurroundingElectricity reaches it) silently switches the whole room's
+--- def off, while the switches flipped earlier still report activated = true.
+--- setActive then early-returns on "already on" and never calls switchLight,
+--- which is the only thing that would set the def back to true, so the room
+--- is stuck: switch on, room dark, and no number of retries helps.
+---
+--- Dropping the flag bool-only first (no lights touched, no sync) guarantees
+--- the real call sees a state change and re-runs switchLight.
+--- switchLight() writes back into the room's own lightSwitches list, so this
+--- MUST NOT be called while iterating that list live - snapshot it first with
+--- DWAPUtils.snapshotSwitches. Errors are contained: a switch whose square has
+--- been torn down throws out of Java, and one bad switch must not abort the
+--- rest of the building (or, on a repeating watcher, flood the log forever).
+--- @param lightSwitch IsoLightSwitch
+function DWAPUtils.forceSwitchOn(lightSwitch)
+    if not lightSwitch then return end
+    pcall(function()
+        lightSwitch:setActive(false, true, true)
+        lightSwitch:setActive(true, false, true)
+    end)
+end
+
+--- Copy a room's live light-switch list into a plain Lua array before
+--- touching any of them: toggling mutates the Java list underneath, which
+--- throws IndexOutOfBounds partway through an in-place loop.
+--- @param room IsoRoom
+--- @return table array of IsoLightSwitch
+function DWAPUtils.snapshotSwitches(room)
+    local out = {}
+    local switches = room and room:getLightSwitches()
+    if not switches then return out end
+    for i = 1, switches:size() do
+        out[#out + 1] = switches:get(i - 1)
+    end
+    return out
+end
+
 function DWAPUtils.lightsOn(square, building, attempts)
     DWAPUtils.dprint("lightsOn")
     local player = getPlayer()
@@ -561,10 +613,9 @@ function DWAPUtils.lightsOn(square, building, attempts)
     for i = 1, rooms:size() do
         local room = rooms:get(i - 1)
         if DWAPUtils.sameBuilding(room:getBuilding(), building) then
-            local lightSwitches = room:getLightSwitches()
-            for j = 1, lightSwitches:size() do
-                local lightSwitch = lightSwitches:get(j - 1)
-                lightSwitch:setActive(true, false, true)
+            local snapshot = DWAPUtils.snapshotSwitches(room)
+            for j = 1, #snapshot do
+                DWAPUtils.forceSwitchOn(snapshot[j])
                 switches = switches + 1
             end
         end
@@ -598,10 +649,9 @@ function DWAPUtils.lightsOnCurrentRoom(square, attempts)
     end
 
     local switches = 0
-    local lightSwitches = room:getLightSwitches()
-    for j = 1, lightSwitches:size() do
-        local lightSwitch = lightSwitches:get(j - 1)
-        lightSwitch:setActive(true, false, true)
+    local snapshot = DWAPUtils.snapshotSwitches(room)
+    for j = 1, #snapshot do
+        DWAPUtils.forceSwitchOn(snapshot[j])
         switches = switches + 1
     end
     

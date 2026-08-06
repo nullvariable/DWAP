@@ -14,6 +14,14 @@ function DWAPPowerSystem:noise(message)
     end
 end
 
+-- Command/refresh traffic: one pair per generator window refresh, so it is
+-- off unless DWAPUtils.verbosePower is set
+function DWAPPowerSystem:chatter(message)
+    if DWAPUtils.verbosePower then
+        self:noise(message)
+    end
+end
+
 function DWAPPowerSystem:new()
     return CGlobalObjectSystem.new(self, "DWAPPowerSystem")
 end
@@ -111,12 +119,12 @@ end
 
 function DWAPPowerSystem:OnServerCommand(command, args)
     if command == "refreshGenData" then
-        self:noise("Received refreshGenData command")
+        self:chatter("Received refreshGenData command")
         if args and args.generatorIndex then
             for key, value in pairs(args.data) do
                 self.generators[args.generatorIndex][key] = value
             end
-            self:noise("Updated generator data for index " .. args.generatorIndex)
+            self:chatter("Updated generator data for index " .. args.generatorIndex)
         else
             self:noise("refreshGenData command missing generatorIndex or data")
         end

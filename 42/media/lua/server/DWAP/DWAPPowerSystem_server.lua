@@ -20,6 +20,14 @@ function DWAPPowerSystem:noise(message)
     end
 end
 
+-- Per-object lifecycle traffic: fires for every generator, panel and tank on
+-- every load, so it is off unless DWAPUtils.verbosePower is set
+function DWAPPowerSystem:chatter(message)
+    if DWAPUtils.verbosePower then
+        self:noise(message)
+    end
+end
+
 function DWAPPowerSystem:new()
     local o = SGlobalObjectSystem.new(self, "DWAPPowerSystem")
     setmetatable(o, self)
@@ -192,7 +200,7 @@ function DWAPPowerSystem:maybeConfigureFuelTank(isoObject)
     square:RemoveTileObject(isoObject)
     square:transmitAddObjectToSquare(thumpable, index)
 
-    self:noise("Fuel tank for generator " .. genIndex .. " configured at " .. x .. "," .. y .. "," .. z)
+    self:chatter("Fuel tank for generator " .. genIndex .. " configured at " .. x .. "," .. y .. "," .. z)
     return thumpable
 end
 
@@ -205,12 +213,12 @@ function DWAPPowerSystem:isValidIsoObject(isoObject)
 end
 
 function DWAPPowerSystem:newLuaObject(globalObject)
-    self:noise("DWAPPowerSystem:newLuaObject")
+    self:chatter("DWAPPowerSystem:newLuaObject")
     return DWAPPowerObject:new(self, globalObject)
 end
 
 function DWAPPowerSystem:getInitialStateForClient()
-    self:noise("DWAPPowerSystem:getInitialStateForClient")
+    self:chatter("DWAPPowerSystem:getInitialStateForClient")
     return {
         generators = self.generators,
         active = self.active,
@@ -238,7 +246,7 @@ end
 
 function DWAPPowerSystem:OnClientCommand(command, playerObj, args)
     if command == "refreshGenData" then
-        self:noise("Received refreshGenData command")
+        self:chatter("Received refreshGenData command")
         if args and args.generatorIndex then
             self:pullTankFuel(args.generatorIndex)
             self:refreshClientGeneratorData(args.generatorIndex)

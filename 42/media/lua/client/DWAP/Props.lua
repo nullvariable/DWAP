@@ -103,6 +103,26 @@ local function getSpriteObject(objects, sprite)
     return nil, size
 end
 
+-- IsoGridSquare:RemoveTileObject routes through
+-- IsoObjectUtils.safelyRemoveTileObjectFromSquare, which returns -1 and
+-- removes NOTHING when it cannot find every part of a multi-tile object. In
+-- -debug it also warns per attempt, so anything that keeps retrying such an
+-- object buries the log (30k lines in one frame on 2026-08-06) and takes the
+-- evidence with it. Record each failure once, by square and sprite, so the
+-- offender is named instead of drowned.
+local removeFailures = {}
+local function tryRemoveTileObject(square, sqObject)
+    local result = square:RemoveTileObject(sqObject)
+    if result ~= -1 then return true end
+    local sprite = sqObject.getSpriteName and sqObject:getSpriteName() or "?"
+    local key = ("%d,%d,%d|%s"):format(square:getX(), square:getY(), square:getZ(), tostring(sprite))
+    if not removeFailures[key] then
+        removeFailures[key] = true
+        DWAPUtils.dprint(("DWAP_Props: multi-tile removal REFUSED at %s (missing parts) - leaving it in place"):format(key))
+    end
+    return false
+end
+
 --- clear all objects from a square except for the one with the given sprite
 --- @param objects PZArrayList<IsoObject>
 --- @param square IsoGridSquare
@@ -115,8 +135,9 @@ local function clearObjectsExcluding(objects, square, sprite)
         if sqObject and canDestroy(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
             square:transmitRemoveItemFromSquare(sqObject)
-            square:RemoveTileObject(sqObject)
-            sledgeDestroy(sqObject)
+            if tryRemoveTileObject(square, sqObject) then
+                sledgeDestroy(sqObject)
+            end
         else
             DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
         end
@@ -144,8 +165,9 @@ local function clearWalls(objects, square, sprite)
         if sqObject and isWall(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
             square:transmitRemoveItemFromSquare(sqObject)
-            square:RemoveTileObject(sqObject)
-            sledgeDestroy(sqObject)
+            if tryRemoveTileObject(square, sqObject) then
+                sledgeDestroy(sqObject)
+            end
         else
             DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
         end
@@ -229,8 +251,9 @@ function DWAP_Props.maybeSpawnObject(params)
                 if sqObject and sqObject:getSpriteName() == params.sprite then
                     DWAPUtils.dprint(("DWAP_Props: Deleting object %s %s %s"):format(params.sprite, params.x, params.y))
                     square:transmitRemoveItemFromSquare(sqObject)
-                    square:RemoveTileObject(sqObject)
-                    sledgeDestroy(sqObject)
+                    if tryRemoveTileObject(square, sqObject) then
+                        sledgeDestroy(sqObject)
+                    end
                 end
             end
             DWAPUtils.dprint(("DWAP_Props: Deleted object %s %s %s"):format(params.sprite, params.x, params.y))

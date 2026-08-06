@@ -12,6 +12,16 @@ local Reflection = require("Starlit/utils/Reflection")
 -- Live overlay state, displayed by the dev panel button labels
 DWAP_DevToggles = DWAP_DevToggles or { elec = false, plumbing = false, containers = false, where = false, barricades = false }
 
+-- The power system's per-object lifecycle trace is the loudest thing in a
+-- -debug log (~2800 of 2900 DWAPPowerSystem lines last run), so it ships off
+-- and gets turned on only while working on power. Errors and state changes -
+-- generator on/off, fuel, breakdowns - are never gated and always print.
+function DWAPPowerLog()
+    DWAPUtils.verbosePower = not DWAPUtils.verbosePower
+    DWAP_DevToggles.powerLog = DWAPUtils.verbosePower
+    DWAPUtils.dprint("Power system verbose logging: " .. (DWAPUtils.verbosePower and "on" or "off"))
+end
+
 -- Helper function to get table size
 local function getTableSize(tbl)
     return DWAPUtils.tableSize(tbl)
@@ -845,14 +855,31 @@ end
 
 -- After a teleport (or walking into a building) the rooms stream in over
 -- many ticks. A single early lightsOn only catches whatever was loaded at
--- that instant, so keep flipping every time the building's switch-room
+-- that instant, so keep flipping every time the building's light-switch
 -- count grows and stop only once it has been stable for a second.
-local autoLightsTicks = 0
+-- Counting SWITCHES rather than rooms matters: a switch streaming into a
+-- room that was already counted forces that room's def lightsActive false
+-- in its constructor when its square has no power yet (see
+-- DWAPUtils.forceSwitchOn), which is how a room ends up switch-on but dark.
+-- The room count would not move for that, so no repair pass would run.
+-- It never stops while the toggle is on, either: a wing you first walk into
+-- an hour later streams its switches in then, and the old fixed 600-tick
+-- window had long since given up. Once a building settles the watcher drops
+-- to a slow poll instead of quitting.
+local AUTOLIGHTS_SETTLED_TICKS = 60 -- stable ticks before easing off
+local AUTOLIGHTS_IDLE_POLL = 30     -- ticks between checks after that
+-- Hard stop on re-asserts for one building. Without a timeout a watcher that
+-- keeps seeing the count move (or keeps hitting an error) re-fires forever;
+-- that is how the 2026-08-06 log flood happened. Legitimate settling takes a
+-- handful of passes, so anything past this is a fault, not streaming.
+local AUTOLIGHTS_MAX_PASSES = 25
 local autoLightsLastCount = 0
 local autoLightsStableTicks = 0
+local autoLightsIdleCountdown = 0
+local autoLightsPasses = 0
 local function autoLightsAfterTeleport()
-    autoLightsTicks = autoLightsTicks + 1
-    if autoLightsTicks > 600 then
+    -- the toggle owns the watcher's lifetime now that it has no timeout
+    if not DWAP_AutoLightsEnabled then
         Events.OnTick.Remove(autoLightsAfterTeleport)
         return
     end
@@ -860,32 +887,55 @@ local function autoLightsAfterTeleport()
     local square = player and player:getCurrentSquare()
     if not square then return end
     local building = square:getBuilding()
-    if not building then return end
+    if not building then
+        -- stepping outside clears the tally so coming back re-asserts
+        autoLightsLastCount = 0
+        autoLightsStableTicks = 0
+        return
+    end
+    if autoLightsStableTicks >= AUTOLIGHTS_SETTLED_TICKS then
+        autoLightsIdleCountdown = autoLightsIdleCountdown - 1
+        if autoLightsIdleCountdown > 0 then return end
+        autoLightsIdleCountdown = AUTOLIGHTS_IDLE_POLL
+    end
     local rooms = getCell():getRoomList()
-    local switchRooms = 0
+    local switchCount = 0
     for i = 1, rooms:size() do
         local room = rooms:get(i - 1)
-        if DWAPUtils.sameBuilding(room:getBuilding(), building) and room:getLightSwitches():size() > 0 then
-            switchRooms = switchRooms + 1
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
+            switchCount = switchCount + room:getLightSwitches():size()
         end
     end
-    if switchRooms == 0 then return end
-    if switchRooms > autoLightsLastCount then
-        autoLightsLastCount = switchRooms
+    if switchCount == 0 then return end
+    -- any CHANGE, not just growth: unloading a wing drops the count, and the
+    -- switches rebuilt on the way back in land on the old total, which a
+    -- growth-only test would sail past - and those rebuilt switches are
+    -- exactly the ones that force their room's def dark
+    if switchCount ~= autoLightsLastCount then
+        autoLightsLastCount = switchCount
         autoLightsStableTicks = 0
+        autoLightsPasses = autoLightsPasses + 1
+        if autoLightsPasses > AUTOLIGHTS_MAX_PASSES then
+            DWAPUtils.dprint(("AutoLights: %d re-asserts without settling, standing down for this building"):format(
+                autoLightsPasses))
+            Events.OnTick.Remove(autoLightsAfterTeleport)
+            return
+        end
         DWAPUtils.lightsOn(square, building)
         return
     end
-    autoLightsStableTicks = autoLightsStableTicks + 1
-    if autoLightsStableTicks >= 60 then
-        Events.OnTick.Remove(autoLightsAfterTeleport)
+    if autoLightsStableTicks < AUTOLIGHTS_SETTLED_TICKS then
+        autoLightsStableTicks = autoLightsStableTicks + 1
     end
 end
 
 function startAutoLightsAfterTeleport()
-    autoLightsTicks = 0
     autoLightsLastCount = 0
     autoLightsStableTicks = 0
+    autoLightsIdleCountdown = 0
+    -- a new building gets a fresh pass budget; the cap is per building, not
+    -- for the lifetime of the session
+    autoLightsPasses = 0
     Events.OnTick.Remove(autoLightsAfterTeleport)
     Events.OnTick.Add(autoLightsAfterTeleport)
 end
@@ -964,6 +1014,9 @@ function ensureDevOverlay()
         whereDraw()
         containerLabelsDraw()
         barricadeLabelsDraw()
+        plumbingLabelsDraw()
+        plumbPickDraw()
+        roomPickDraw()
     end
     ui:addToUIManager()
     devOverlay = ui
@@ -1112,9 +1165,12 @@ function TestLootConfig(index, startFrom, retainedConfig)
     local lootEntries = config.loot
     local totalEntries = #lootEntries
 
+    -- A wiped table still runs: the baseBuildings coverage pass below is what
+    -- produces the unclaimed-container menu, and that menu is the whole point
+    -- of auditing a config you have just emptied. The entry loop simply does
+    -- nothing when there are no entries.
     if totalEntries == 0 then
-        DWAPUtils.dprint("No loot entries found in config " .. index)
-        return
+        DWAPUtils.dprint("No loot entries in config " .. index .. " - running coverage only")
     end
 
     local configName = "Config " .. index
@@ -1270,13 +1326,21 @@ function TestLootConfig(index, startFrom, retainedConfig)
                 -- break
             else
                 -- Record what the container is and where it lives, for the
-                -- balance audit (detached sheds report their own room name)
+                -- balance audit (detached sheds report their own room name).
+                -- The entry's own dist/special/level rides along: pairing what
+                -- was authored with the room and container type it actually
+                -- landed in is the only place those two facts meet, and it is
+                -- what a generator needs to learn "canned food goes in a
+                -- kitchen counter, not a warehouse shelf"
                 local room = square:getRoom()
                 table.insert(containerDetails, {
                     entry = i,
                     x = x, y = y, z = z,
                     containerType = container:getType(),
                     room = room and room:getName() or "outside",
+                    dist = entry.dist,
+                    special = entry.special,
+                    level = entry.level,
                 })
 
                 -- Test if container is 80% full
@@ -1366,6 +1430,15 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     aSq and "no building on square" or "square not loaded")
             else
                 local def = building.getDef and building:getDef()
+                -- Story canary: PreventStories marks our buildings explored,
+                -- which since 42.20 is the ONLY thing stopping RBShopLooted
+                -- (it drops the stash exemption the base class has). If a def
+                -- is unmarked, a story may have run here and the loot results
+                -- below are suspect - say so rather than let it read as rot
+                if def and def.isAllExplored and not def:isAllExplored() then
+                    anchorProblems[#anchorProblems + 1] = ("STORY-RISK: anchor %d at %s,%s,%s is not marked explored - a building story may have run here"):format(
+                        b, tostring(anchor.x), tostring(anchor.y), tostring(anchor.z))
+                end
                 local bldKey = def and def:getID() or building:getID()
                 if not seenBuildings[bldKey] then
                     seenBuildings[bldKey] = true
@@ -1474,6 +1547,134 @@ end
 
 tlc = TestLootConfig
 
+-- Systems audit: the loot pass only ever looks at containers, so a config can
+-- read PASS while its generator, tank or plumbing is broken. This walks the
+-- power and water declarations and reports only what is WRONG, so the output
+-- is a to-do list rather than an inventory. Opt-in: it costs a square lookup
+-- and an object scan per declared part.
+local function systemsObjectAt(x, y, z, sprite)
+    local square = getSquare(x, y, math.floor(z or 0))
+    if not square then return nil, "square not loaded (bad z or unstreamed)" end
+    local objects = square:getObjects()
+    if objects then
+        for i = 0, objects:size() - 1 do
+            local obj = objects:get(i)
+            if obj and (not sprite or obj:getSpriteName() == sprite) then
+                return obj, nil
+            end
+        end
+    end
+    -- ghost generators live in the special-objects list once converted
+    local specials = square:getSpecialObjects()
+    if specials then
+        for i = 0, specials:size() - 1 do
+            local obj = specials:get(i)
+            if obj and (not sprite or obj:getSpriteName() == sprite) then
+                return obj, nil
+            end
+        end
+    end
+    return nil, sprite and ("no object with sprite " .. sprite) or "no object on square"
+end
+
+-- Solar is the ISA mod's. Without it active - or with the sandbox option off -
+-- the powerbank and panels are never spawned at all, so checking them would
+-- manufacture problems. Same condition DWAPPowerSystem uses to decide whether
+-- it can touch solar.
+local function solarSystemActive()
+    if not getActivatedMods():contains("\\ISA") then return false end
+    return SandboxVars.DWAP and SandboxVars.DWAP.EnableGenSystemSolar and true or false
+end
+
+--- @return table array of problem strings, empty when everything checks out
+function CheckConfigSystems(config)
+    local problems = {}
+    local function report(fmt, ...)
+        problems[#problems + 1] = string.format(fmt, ...)
+    end
+
+    -- power: control panel, fuel tank, solar powerbank/panels, ghost generators
+    if config.generators then
+        for i = 1, #config.generators do
+            local gen = config.generators[i]
+            local function checkPart(part, label, wantModData)
+                if not part or not part.x then return end
+                local obj, err = systemsObjectAt(part.x, part.y, part.z, part.sprite)
+                if not obj then
+                    report("gen %d %s at %d,%d,%d: %s", i, label, part.x, part.y, part.z or 0, err)
+                elseif wantModData then
+                    local md = obj:getModData()
+                    if not md or not md.DWAPObjectType then
+                        report("gen %d %s at %d,%d,%d: present but not converted (no DWAPObjectType)",
+                            i, label, part.x, part.y, part.z or 0)
+                    end
+                end
+            end
+            checkPart(gen.controls, "controls", true)
+            checkPart(gen.fuelTank, "fuelTank", true)
+            if gen.solar and solarSystemActive() then
+                checkPart(gen.solar.powerbank, "solar powerbank", false)
+                if gen.solar.panels then
+                    for p = 1, #gen.solar.panels do
+                        local panel = gen.solar.panels[p]
+                        if panel and panel.spawn ~= false then
+                            checkPart(panel, "solar panel " .. p, false)
+                        end
+                    end
+                end
+            end
+            if gen.fakeGenerators then
+                for f = 1, #gen.fakeGenerators do
+                    local fake = gen.fakeGenerators[f]
+                    if fake and fake.x then
+                        local obj, err = systemsObjectAt(fake.x, fake.y, fake.z, nil)
+                        if not obj then
+                            report("gen %d ghost %d at %d,%d,%d: %s", i, f, fake.x, fake.y, fake.z or 0, err)
+                        elseif not instanceof(obj, "IsoGenerator") then
+                            report("gen %d ghost %d at %d,%d,%d: never converted to IsoGenerator",
+                                i, f, fake.x, fake.y, fake.z or 0)
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- water: tanks need a fluid container, fixtures need the objectType stamp
+    if config.waterTanks then
+        for i = 1, #config.waterTanks do
+            local tank = config.waterTanks[i]
+            if tank and tank.x then
+                local obj, err = systemsObjectAt(tank.x, tank.y, tank.z, tank.sprite)
+                if not obj then
+                    report("waterTank %d at %d,%d,%d: %s", i, tank.x, tank.y, tank.z or 0, err)
+                elseif not obj:hasFluid() then
+                    report("waterTank %d at %d,%d,%d: present but has no fluid container",
+                        i, tank.x, tank.y, tank.z or 0)
+                end
+            end
+        end
+    end
+    if config.waterFixtures then
+        for i = 1, #config.waterFixtures do
+            local fix = config.waterFixtures[i]
+            if fix and fix.x then
+                local obj, err = systemsObjectAt(fix.x, fix.y, fix.z, fix.sprite)
+                if not obj then
+                    report("waterFixture %d at %d,%d,%d: %s", i, fix.x, fix.y, fix.z or 0, err)
+                else
+                    local md = obj:getModData()
+                    if not md or not md.objectType then
+                        report("waterFixture %d at %d,%d,%d: present but not converted (no objectType)",
+                            i, fix.x, fix.y, fix.z or 0)
+                    end
+                end
+            end
+        end
+    end
+    return problems
+end
+
 -- Drive TestLootConfig across every config in one debug session: teleport to
 -- each base with DWAPGoto, wait for its loot squares to stream in (jumping to
 -- stragglers to force-load them), run the test, and write a combined report
@@ -1549,7 +1750,14 @@ local function allLootFinishConfig(unloaded, badZ)
             badZ))
     end
     if result then
-        if #result.failedContainers == 0 then
+        if (result.totalEntries or 0) == 0 then
+            -- A wiped table has nothing to fail, so the PASS branch below
+            -- would call it healthy. Say what it is instead, and keep it out
+            -- of the pass tally - the unclaimed list further down is the
+            -- rebuild menu for exactly these
+            allLootWrite("  EMPTY (no loot entries - rebuild from the unclaimed list)")
+            st.skipped = st.skipped + 1
+        elseif #result.failedContainers == 0 then
             allLootWrite("  PASS")
             st.passed = st.passed + 1
         else
@@ -1577,6 +1785,40 @@ local function allLootFinishConfig(unloaded, badZ)
         end
         local typeRoomStr = allLootTallyString(typeRooms)
         if typeRoomStr ~= "" then allLootWrite("  containers: " .. typeRoomStr) end
+
+        -- One line per RESOLVED entry, joining what was authored to where it
+        -- landed: "containers:" and "dist:" above are separate histograms, so
+        -- the pairing exists nowhere else. Only resolved entries appear -
+        -- an entry whose container was not found proves nothing about which
+        -- loot suits which room. Format is fixed and greppable on purpose:
+        --   <containerType>@<room> | <level|-> | <dist,dist|special:name|->
+        if #result.containerDetails > 0 then
+            allLootWrite(("  entry-map (%d):"):format(#result.containerDetails))
+            for i = 1, #result.containerDetails do
+                local d = result.containerDetails[i]
+                local tags = "-"
+                if d.special then
+                    tags = "special:" .. tostring(d.special)
+                elseif d.dist and #d.dist > 0 then
+                    tags = table.concat(d.dist, ",")
+                end
+                allLootWrite(("    %s@%s | %s | %s"):format(
+                    d.containerType, d.room, tostring(d.level or "-"), tags))
+            end
+        end
+
+        -- opt-in systems pass: only prints what is broken, so an empty section
+        -- means power and water are fine for this config
+        if st.checkSystems and config then
+            local sys = CheckConfigSystems(config)
+            if #sys > 0 then
+                allLootWrite(("  SYSTEMS (%d):"):format(#sys))
+                for i = 1, #sys do
+                    allLootWrite("    " .. sys[i])
+                end
+                st.systemsFlagged = (st.systemsFlagged or 0) + #sys
+            end
+        end
 
         -- baseBuildings coverage: containers no loot entry addresses
         if result.anchorProblems then
@@ -1640,7 +1882,9 @@ allLootTick = function()
     local st = allLootState
     if not st then return end
     if st.index > #st.configs then
-        allLootStop(("=== DONE: %d passed, %d failed, %d skipped ==="):format(st.passed, st.failed, st.skipped))
+        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s ==="):format(
+            st.passed, st.failed, st.skipped,
+            st.checkSystems and (", " .. (st.systemsFlagged or 0) .. " systems problems") or ""))
         return
     end
 
@@ -1748,7 +1992,9 @@ end
 -- modData), so audits work in normal loot-on worlds. fillThreshold is an
 -- optional extra for loot-off worlds: 0 = fail empty containers, >0 = fail
 -- below that fill percent.
-function TestAllLootConfigs(startIndex, fillThreshold)
+-- checkSystems (3rd arg, off by default) adds the power/water pass: keeps the
+-- normal run light, and gives a combined fix list when you want one
+function TestAllLootConfigs(startIndex, fillThreshold, checkSystems)
     if allLootState then
         DWAPUtils.dprint("Loot audit already running - aborting it")
         allLootStop("=== ABORTED at config " .. allLootState.index .. " ===")
@@ -1772,12 +2018,19 @@ function TestAllLootConfigs(startIndex, fillThreshold)
         failed = 0,
         skipped = 0,
         fillThreshold = fillThreshold,
+        checkSystems = checkSystems and true or false,
     }
     if resuming then
         allLootWrite("--- resumed at config " .. startIndex .. " ---")
     else
         allLootWrite("DWAP loot audit - " .. #configs .. " configs, verification: " ..
-            (fillThreshold and ("stamp + fill threshold " .. fillThreshold .. "%") or "stamp-based"))
+            (fillThreshold and ("stamp + fill threshold " .. fillThreshold .. "%") or "stamp-based") ..
+            (checkSystems and ", systems pass ON" or ", loot only"))
+    end
+    -- state what the systems pass is NOT covering, so a quiet report is not
+    -- mistaken for solar being healthy
+    if checkSystems and not solarSystemActive() then
+        allLootWrite("  (solar checks skipped: ISA mod inactive or EnableGenSystemSolar off)")
     end
     allLootWrite("")
     DWAPUtils.dprint("Starting loot audit across " .. #configs .. " configs")
@@ -1787,6 +2040,10 @@ end
 local currentContainerLookup = nil
 
 -- Build a lookup table of container coordinates from a config
+-- One record per square, holding every loot entry that addresses it. The old
+-- flat coord->value map could only express two states per square (z and
+-- z+0.5), so a fridge + freezer + upper cabinet collapsed into one key and
+-- slot/stack entries were invisible to the overlay.
 local function buildContainerLookup(config)
     local lookup = {}
     if not config or not config.loot then
@@ -1796,137 +2053,111 @@ local function buildContainerLookup(config)
     for i = 1, #config.loot do
         local entry = config.loot[i]
         if entry and entry.coords then
-            local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
-            -- slot = "upper" entries use the same internal key shape the
-            -- legacy +0.5 convention did
-            if entry.slot == "upper" and z % 1 == 0 then z = z + 0.5 end
+            local x, y = entry.coords.x, entry.coords.y
+            local z = math.floor(entry.coords.z)
             local key = DWAPUtils.hashCoords(x, y, z)
-            lookup[key] = 1
+            local record = lookup[key]
+            if not record then
+                record = { slots = {}, hasBase = false, hasUpper = false }
+                lookup[key] = record
+            end
+
+            -- legacy +0.5 coords still mean upper
+            local isUpper = entry.slot == "upper" or entry.coords.z % 1 ~= 0
+            local value = 1
             if not entry.dist and not entry.items and not entry.special then
-                lookup[key] = 0 -- highlight as an error since there's nothing to spawn
+                value = 0 -- nothing to spawn: an authoring error
             elseif entry.special then
-                lookup[key] = 2 -- special containers
+                value = 2
+            end
+
+            record.slots[#record.slots + 1] = {
+                entry = i,
+                upper = isUpper,
+                freezer = entry.slot == "freezer",
+                stack = entry.stack,
+                value = value,
+            }
+            if isUpper then
+                record.hasUpper = true
+            elseif not entry.stack and entry.slot ~= "freezer" then
+                record.hasBase = true
             end
         end
     end
     return lookup
 end
 
--- Check containers on a square and return their status
+-- Status of one square: what the config asks for there, and whether the
+-- shared resolver can actually find it. Resolution goes through
+-- DWAPUtils.resolveLootContainer - the same call the loot fill and the audit
+-- make - so the overlay cannot disagree with them about which container an
+-- entry owns. Reimplementing the High/overhead/ordering rules here is what
+-- used to paint correctly-filled squares red.
 local function checkSquareContainers(square, containerLookup)
-    if not square then
-        return { totalContainers = 0, foundContainers = 0, errorContainers = 0, specialContainers = 0, missingContainers = 0 }
-    end
+    local status = { totalContainers = 0, foundContainers = 0, errorContainers = 0,
+        specialContainers = 0, missingContainers = 0 }
+    if not square then return status end
 
     local x, y, z = square:getX(), square:getY(), square:getZ()
-    local totalContainers = 0
-    local foundContainers = 0
-    local errorContainers = 0
-    local specialContainers = 0
-    local missingContainers = 0
+    local record = containerLookup[DWAPUtils.hashCoords(x, y, z)]
 
-    -- First, check if there are containers in the config for this square that are missing
-    local expectedContainers = {}
-
-    -- Check for normal container at this z level
-    local normalKey = DWAPUtils.hashCoords(x, y, z)
-    if containerLookup[normalKey] then
-        expectedContainers[normalKey] = containerLookup[normalKey]
-    end
-
-    -- Check for upper container at z + 0.5
-    local upperKey = DWAPUtils.hashCoords(x, y, z + 0.5)
-    if containerLookup[upperKey] then
-        expectedContainers[upperKey] = containerLookup[upperKey]
-    end
-
-    -- Track which expected containers we find
-    local foundExpectedContainers = {}
-
-    local objects = square:getObjects()
-    if objects then
-        for j = 0, objects:size() - 1 do
-            local obj = objects:get(j)
-            if obj and obj:getContainer() then
-                local objContainer = obj:getContainer()
-                local containerType = objContainer:getType()
-
-                -- Skip stoves and microwaves (similar to Events.lua logic)
-                if not (containerType == "microwave" or objContainer:isStove()) then
-                    -- Check if it's an upper container (similar to TestLootConfig logic)
-                    local containerZ = z
-                    if objContainer:getContainerPosition() == "High" or
-                        (obj:getRenderYOffset() and obj:getRenderYOffset() > 32) then
-                        containerZ = z + 0.5
-                    end
-
-                    local key = DWAPUtils.hashCoords(x, y, containerZ)
-                    local lookupValue = containerLookup[key]
-
-                    -- Check if this is a trash container
-                    local isTrashContainer = false
-                    local properties = obj:getProperties()
-                    if properties:has("GroupName") and properties:get("GroupName") == "Garbage" then
-                        isTrashContainer = true
-                    elseif properties:has("container") then
-                        local containerName = properties:get("container")
-                        local list = {
-                            bin = true,
-                            dumpster = true,
-                            clothingdryer = true,
-                            clothingdryerbasic = true,
-                            clothingrack = true,
-                            clothingwasher = true,
-                        }
-                        isTrashContainer = list[containerName] == true
-                    end
-
-                    -- Only count trash containers if they're in the config, count all other containers
-                    local shouldCount = not isTrashContainer or lookupValue ~= nil
-
-                    if shouldCount then
-                        totalContainers = totalContainers + 1
-
-                        if lookupValue == 0 then
-                            errorContainers = errorContainers + 1
-                        elseif lookupValue == 1 then
-                            foundContainers = foundContainers + 1
-                            foundExpectedContainers[key] = true
-                        elseif lookupValue == 2 then
-                            specialContainers = specialContainers + 1
-                            foundExpectedContainers[key] = true
-                            -- Early return for special containers - we found what we need
-                            return {
-                                totalContainers = totalContainers,
-                                foundContainers = foundContainers,
-                                errorContainers = errorContainers,
-                                specialContainers = specialContainers,
-                                missingContainers = missingContainers
-                            }
-                        end
-                    end
-                end
+    -- Count what is physically here, minus the things the loot fill never
+    -- touches. Trash containers only count when the square is configured,
+    -- otherwise every bin in town lights up as unclaimed
+    local containers = DWAPUtils.getSquareContainers(square)
+    for i = 1, #containers do
+        local entry = containers[i]
+        local container = entry.container
+        local containerType = container:getType()
+        if not (containerType == "microwave" or container:isStove()) then
+            local isTrash = false
+            local properties = entry.object:getProperties()
+            if properties:has("GroupName") and properties:get("GroupName") == "Garbage" then
+                isTrash = true
+            elseif properties:has("container") then
+                local trashTypes = {
+                    bin = true,
+                    dumpster = true,
+                    clothingdryer = true,
+                    clothingdryerbasic = true,
+                    clothingrack = true,
+                    clothingwasher = true,
+                }
+                isTrash = trashTypes[properties:get("container")] == true
+            end
+            if not isTrash or record then
+                status.totalContainers = status.totalContainers + 1
             end
         end
     end
 
-    -- Check for missing containers (in config but not found on square)
-    for expectedKey, expectedValue in pairs(expectedContainers) do
-        if not foundExpectedContainers[expectedKey] and expectedValue > 0 then
-            missingContainers = missingContainers + 1
+    if not record then return status end
+
+    for i = 1, #record.slots do
+        local slot = record.slots[i]
+        local container = DWAPUtils.resolveLootContainer(square, {
+            upper = slot.upper,
+            stack = slot.stack,
+            freezer = slot.freezer,
+            -- an upper entry only has to yield to a base entry when one is
+            -- actually configured on the same square
+            pairPresent = slot.upper and record.hasBase or false,
+        })
+        if not container then
+            status.missingContainers = status.missingContainers + 1
+        elseif slot.value == 0 then
+            status.errorContainers = status.errorContainers + 1
+        elseif slot.value == 2 then
+            status.specialContainers = status.specialContainers + 1
+        else
+            status.foundContainers = status.foundContainers + 1
         end
     end
 
-    return {
-        totalContainers = totalContainers,
-        foundContainers = foundContainers,
-        errorContainers = errorContainers,
-        specialContainers = specialContainers,
-        missingContainers = missingContainers
-    }
+    return status
 end
 
--- Visualize containers status around the player
 function VisualizeContainersStatus(radius, containerLookup)
     local pSquare = getPlayer():getCurrentSquare()
     if not pSquare then
@@ -2038,10 +2269,53 @@ function containerLabelsDraw()
     end
 end
 
+-- Everything IsoBarricade can attach to. All four implement BarricadeAble,
+-- so they all answer isBarricadeAllowed/isBarricaded/getNorth. Shared by the
+-- barricade overlay and FindUnbarricaded
+local BARRICADEABLE_TYPES = {
+    { class = "IsoWindow",      kind = "window", tag = "win" },
+    { class = "IsoWindowFrame", kind = "frame",  tag = "frm" },
+    { class = "IsoDoor",        kind = "door",   tag = "door" },
+    { class = "IsoThumpable",   kind = "thumpable", tag = "thmp" },
+}
+
+local function barricadeableType(obj)
+    if not obj then return nil end
+    for i = 1, #BARRICADEABLE_TYPES do
+        if instanceof(obj, BARRICADEABLE_TYPES[i].class) then
+            return BARRICADEABLE_TYPES[i]
+        end
+    end
+    return nil
+end
+
+-- Garage doors report as barricadeable but a barricade will not stick to
+-- them, so they are never a real target. Matched on the sprite rather than
+-- the class: the same door can come through as IsoDoor or IsoThumpable
+local function isGarageOpening(sprite)
+    return sprite:sub(1, 12) == "walls_garage"
+end
+
+-- Only the building shell is worth barricading. An opening separates two
+-- squares (itself and getOppositeSquare, per its N/W facing); a shell
+-- opening has a room on exactly one of them. Rooms on both sides means an
+-- interior door, no room on either means it is not an entry into anything.
+-- A missing square counts as open air, which is what map edges look like.
+local function isExteriorOpening(obj)
+    if not obj.getOppositeSquare then return false end
+    local near, far = obj:getSquare(), obj:getOppositeSquare()
+    local nearInside = near ~= nil and near:getRoom() ~= nil
+    local farInside = far ~= nil and far:getRoom() ~= nil
+    return nearInside ~= farInside
+end
+
 -- Barricade overlay: for each objectSpawns barricade entry, draw its entry
 -- number with the barricade type underneath, green when an IsoBarricade is
--- actually present on the square and red when it is missing
+-- actually present on the square and red when it is missing. Openings that
+-- could take a barricade but are in neither state - what FindUnbarricaded
+-- dumps - draw orange underneath, so gaps are visible without leaving the game
 local currentBarricadeLabels = nil
+local currentOpenLabels = nil
 
 local function squareHasBarricade(square)
     if not square then return false end
@@ -2069,14 +2343,98 @@ local function buildBarricadeLabels(config)
                 z = e.z or 0,
                 num = tostring(i),
                 btype = tostring(e.barricade),
+                -- Props.lua matches its target by sprite name; keeping it
+                -- lets the open-opening scan tell a covered opening from a
+                -- second one sharing the square
+                target = e.target,
             }
         end
     end
     return labels
 end
 
+local BARRICADE_SCAN_RADIUS = 30 -- matches the label draw cutoff below
+local BARRICADE_SCAN_INTERVAL = 30 -- ticks; the scan is far too heavy per frame
+local barricadeScanCountdown = 0
+
+-- An opening the config already addresses: same square, and the same sprite
+-- when the entry names a target (so a window and a door sharing one square
+-- stay distinguishable)
+local function openingIsConfigured(x, y, z, sprite)
+    if not currentBarricadeLabels then return false end
+    for i = 1, #currentBarricadeLabels do
+        local l = currentBarricadeLabels[i]
+        if l.x == x and l.y == y and l.z == z and (not l.target or l.target == sprite) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Rebuild the list of shell openings around the player that could take a
+-- barricade and have none. Same filters FindUnbarricaded applies - exterior
+-- facing, no garage doors - so the overlay and the dump agree; anything the
+-- config already covers is left to its own red/green label
+local function rescanOpenBarricades()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local found, seen = {}, {}
+    local function consider(obj, x, y)
+        local btype = barricadeableType(obj)
+        if not btype then return end
+        local sprite = obj:getSpriteName() or ""
+        local facing = obj:getNorth() and "N" or "W"
+        local key = ("%d,%d,%s,%s"):format(x, y, sprite, facing)
+        if seen[key] then return end
+        seen[key] = true
+        if isGarageOpening(sprite) or not isExteriorOpening(obj) then return end
+        if not obj:isBarricadeAllowed() or obj:isBarricaded() then return end
+        if openingIsConfigured(x, y, playerZ, sprite) then return end
+        found[#found + 1] = {
+            x = x, y = y, z = playerZ,
+            text = btype.tag .. " " .. facing,
+        }
+    end
+    for x = playerX - BARRICADE_SCAN_RADIUS, playerX + BARRICADE_SCAN_RADIUS do
+        for y = playerY - BARRICADE_SCAN_RADIUS, playerY + BARRICADE_SCAN_RADIUS do
+            local square = getSquare(x, y, playerZ)
+            if square then
+                local objects = square:getObjects()
+                if objects then
+                    for j = 0, objects:size() - 1 do
+                        consider(objects:get(j), x, y)
+                    end
+                end
+                -- 42.20 overlay-merged window frames never appear as their
+                -- own object; same fallback Props.lua and the dump use
+                consider(square:getWindowFrame(true), x, y)
+                consider(square:getWindowFrame(false), x, y)
+                consider(square:getWindow(true), x, y)
+                consider(square:getWindow(false), x, y)
+            end
+        end
+    end
+    currentOpenLabels = found
+end
+
+function barricadesTick()
+    barricadeScanCountdown = barricadeScanCountdown - 1
+    if barricadeScanCountdown <= 0 then
+        barricadeScanCountdown = BARRICADE_SCAN_INTERVAL
+        rescanOpenBarricades()
+    end
+end
+
+-- A barricade belongs to the opening in the wall, not to the floor of the
+-- tile, so lift the labels half a level to sit against the window or door.
+-- Offset in z rather than screen pixels, the way the container labels do it,
+-- so it stays put as you zoom
+local BARRICADE_LABEL_RISE = 0.5
+
 function barricadeLabelsDraw()
-    if not currentBarricadeLabels then return end
+    if not currentBarricadeLabels and not currentOpenLabels then return end
     local player = getPlayer()
     local pSquare = player and player:getCurrentSquare()
     if not pSquare then return end
@@ -2085,18 +2443,32 @@ function barricadeLabelsDraw()
     local tm = getTextManager()
     local lineH = tm:getFontHeight(UIFont.Small)
     if not lineH or lineH <= 0 then lineH = 14 end
-    for i = 1, #currentBarricadeLabels do
+    for i = 1, currentBarricadeLabels and #currentBarricadeLabels or 0 do
         local l = currentBarricadeLabels[i]
         if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
             local seen = squareHasBarricade(getSquare(l.x, l.y, l.z))
             local r, g, b = 1, 0.25, 0.25
             if seen then r, g, b = 0.25, 1, 0.25 end
-            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, l.z)
-            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+            local drawZ = l.z + BARRICADE_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
             tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.num, 0, 0, 0, 0.8)
             tm:DrawStringCentre(UIFont.Small, sx, sy, l.num, r, g, b, 1)
             tm:DrawStringCentre(UIFont.Small, sx + 1, sy + lineH + 1, l.btype, 0, 0, 0, 0.8)
             tm:DrawStringCentre(UIFont.Small, sx, sy + lineH, l.btype, r, g, b, 1)
+        end
+    end
+    -- Unconfigured gaps, orange to match the containers overlay's
+    -- "here but not in the config" colour. Drawn a line lower than a config
+    -- label would sit so the two never collide on a shared square
+    for i = 1, currentOpenLabels and #currentOpenLabels or 0 do
+        local l = currentOpenLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + BARRICADE_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ) + lineH * 2
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 0.55, 0.1, 1)
         end
     end
 end
@@ -2122,22 +2494,27 @@ function ShowBarricades(index)
         end
         local config = configs[index]
         local labels = buildBarricadeLabels(config)
-        if #labels == 0 then
-            DWAPUtils.dprint("Config " .. index .. " has no barricade objectSpawns")
-            showingBarricades = false
-            DWAP_DevToggles.barricades = false
-            return
-        end
         local configName = "Config " .. index
         if config.doorKeys and config.doorKeys.name then
             configName = config.doorKeys.name
         end
         currentBarricadeLabels = labels
+        -- A config with no barricades yet is exactly when the gap markers are
+        -- worth having, so an empty list no longer refuses to turn on
+        if #labels == 0 then
+            DWAPUtils.dprint("Config " .. index .. " has no barricade objectSpawns - showing open ones only")
+        end
+        currentOpenLabels = nil
+        barricadeScanCountdown = 0
+        Events.OnTick.Remove(barricadesTick)
+        Events.OnTick.Add(barricadesTick)
         ensureDevOverlay()
         DWAPUtils.dprint("Barricade overlay enabled for " .. configName .. " (" .. #labels .. " barricades)")
-        DWAPUtils.dprint("Green = barricade present, Red = missing")
+        DWAPUtils.dprint("Green = barricade present, Red = missing, Orange = exterior opening not in config")
     else
+        Events.OnTick.Remove(barricadesTick)
         currentBarricadeLabels = nil
+        currentOpenLabels = nil
         DWAPUtils.dprint("Barricade overlay disabled")
     end
 end
@@ -2177,9 +2554,10 @@ function ShowContainers(index)
         -- Build container lookup table
         currentContainerLookup = buildContainerLookup(config)
         currentContainerLabels = buildContainerLabels(config)
+        -- the lookup is keyed by square now, so count the entries inside it
         local containerCount = 0
-        for _ in pairs(currentContainerLookup) do
-            containerCount = containerCount + 1
+        for _, record in pairs(currentContainerLookup) do
+            containerCount = containerCount + #record.slots
         end
 
         Events.OnTick.Add(containersTick)
@@ -2402,6 +2780,67 @@ local function buildPlumbingLookup(config)
     return lookup, tankLookup
 end
 
+local currentPlumbingLabels = nil
+
+-- Fixtures sit at counter/wall height rather than on the floor, same reason
+-- the barricade labels lift: offset in z so it survives zooming
+local PLUMBING_LABEL_RISE = 0.5
+
+-- One label per config entry, so a square's colour can be traced back to the
+-- line that put it there. Tanks are numbered separately with a T prefix,
+-- matching how waterTanks and waterFixtures are separate lists in the config
+local function buildPlumbingLabels(config)
+    local labels = {}
+    if not config then return labels end
+    if config.waterTanks then
+        for i = 1, #config.waterTanks do
+            local tank = config.waterTanks[i]
+            if tank and tank.x and tank.y and tank.z then
+                labels[#labels + 1] = {
+                    x = tank.x, y = tank.y, z = math.floor(tank.z),
+                    text = "T" .. i, tank = true,
+                }
+            end
+        end
+    end
+    if config.waterFixtures then
+        for i = 1, #config.waterFixtures do
+            local fixture = config.waterFixtures[i]
+            if fixture and fixture.x and fixture.y and fixture.z then
+                labels[#labels + 1] = {
+                    x = fixture.x, y = fixture.y, z = math.floor(fixture.z),
+                    text = tostring(i),
+                }
+            end
+        end
+    end
+    return labels
+end
+
+-- Same draw pattern as the container and barricade labels: isoToScreenX/Y
+-- during the UI pass, dark shadow under white-ish text
+function plumbingLabelsDraw()
+    if not currentPlumbingLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #currentPlumbingLabels do
+        local l = currentPlumbingLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + PLUMBING_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local r, g, b = 0.4, 0.85, 1
+            if l.tank then r, g, b = 0.4, 0.6, 1 end
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, r, g, b, 1)
+        end
+    end
+end
+
 -- Check plumbing fixtures on a square and return their status
 local function checkSquarePlumbing(square, plumbingLookup, tankLookup)
     if not square then
@@ -2591,9 +3030,11 @@ function ShowPlumbing(index)
             lookup = plumbingLookup,
             tankLookup = tankLookup
         }
+        currentPlumbingLabels = buildPlumbingLabels(config)
 
         Events.OnTick.Add(plumbingTick)
         DWAP_DevToggles.plumbing = true
+        ensureDevOverlay()
         DWAPUtils.dprint("Plumbing visualization enabled for " ..
             configName .. " (" .. fixtureCount .. " total fixtures, " .. tankCount .. " tanks)")
         DWAPUtils.dprint(
@@ -2602,8 +3043,88 @@ function ShowPlumbing(index)
         Events.OnTick.Remove(plumbingTick)
         DWAP_DevToggles.plumbing = false
         currentPlumbingLookup = nil
+        currentPlumbingLabels = nil
         DWAPUtils.dprint("Plumbing visualization disabled")
     end
+end
+
+-- short stable building tag for the dump comments, shared by the survey tools
+local function bldTag(b)
+    if not b then return "outside" end
+    local def = b.getDef and b:getDef()
+    local defId = def and def.getID and def:getID()
+    if not defId then return "bld?" end
+    local hi = math.floor(defId / 4294967296)
+    return ("bld %d,%d#%d"):format(hi % 65536, math.floor(hi / 65536), defId % 4294967296)
+end
+
+-- Bounds for the survey tools: inside a building scan its actual footprint
+-- (def bounds) so neighbouring houses can't leak in; outside take a small
+-- grab around the player
+local function surveyBounds(building, playerX, playerY)
+    if building then
+        local def = building.getDef and building:getDef()
+        if def then
+            local minX, maxX, minY, maxY = def:getX(), def:getX2(), def:getY(), def:getY2()
+            DWAPUtils.dprint(("Scanning building footprint %d,%d - %d,%d"):format(minX, minY, maxX, maxY))
+            return minX, maxX, minY, maxY
+        end
+        DWAPUtils.dprint("No building def; falling back to 50-tile radius")
+        return playerX - 50, playerX + 50, playerY - 50, playerY + 50
+    end
+    DWAPUtils.dprint("Standing outside: scanning 10-tile radius")
+    return playerX - 10, playerX + 10, playerY - 10, playerY + 10
+end
+
+-- Plumbing fixture names to look for
+local PLUMBING_FIXTURE_NAMES = {
+    ["Bath"] = true,
+    ["Shower"] = true,
+    ["Toilet"] = true,
+    ["Combo Washer Dryer"] = true,
+    ["Gallery Toilet"] = true,
+    ["Sink"] = true,
+    ["Soda Machine"] = true,
+    ["Washing Machine"] = true,
+}
+
+local function plumbingConnected(obj)
+    if obj.getUsesExternalWaterSource and obj.hasExternalWaterSource then
+        return obj:getUsesExternalWaterSource() and obj:hasExternalWaterSource()
+    end
+    if obj:hasFluid() and obj.getFluidAmount then
+        -- fluid-backed fixtures count as connected once they hold something
+        return (obj:getFluidAmount() or 0) > 50
+    end
+    return false
+end
+
+--- Classify one object as a water tank, a plumbing fixture, or neither.
+--- Shared by the footprint scan and the click picker so both dump the same
+--- lines for the same object.
+--- @param obj IsoObject|nil
+--- @return table|nil info { kind = "tank"|"fixture", sprite, customName, isConnected, capacity, amount }
+local function plumbingInfo(obj)
+    if not obj then return nil end
+    local sprite = obj:getSpriteName() or ""
+    if obj:hasFluid() then
+        local fluidContainer = obj:getFluidContainer()
+        if fluidContainer and fluidContainer:getCapacity() > 1000 then
+            return { kind = "tank", sprite = sprite,
+                capacity = fluidContainer:getCapacity(), amount = fluidContainer:getAmount() }
+        end
+        return { kind = "fixture", sprite = sprite, customName = "Unknown",
+            isConnected = plumbingConnected(obj) }
+    end
+    if obj:isFloor() then return nil end
+    local objectSprite = obj:getSprite()
+    local props = objectSprite and objectSprite:getProperties()
+    local customName = props and props:has("CustomName") and props:get("CustomName")
+    if customName and PLUMBING_FIXTURE_NAMES[customName] then
+        return { kind = "fixture", sprite = sprite, customName = customName,
+            isConnected = plumbingConnected(obj) }
+    end
+    return nil
 end
 
 -- Find unconnected plumbing fixtures in the same building and floor as the player
@@ -2619,47 +3140,7 @@ function FindUnconnectedPlumbing()
     DWAPUtils.dprint("=== FINDING UNCONNECTED PLUMBING FIXTURES ===")
     DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
 
-    -- Inside a building: scan its actual footprint (def bounds) so nearby
-    -- houses can't leak in. Outside: small 10-tile grab for outdoor fixtures
-    local minX, maxX, minY, maxY
-    if building then
-        local def = building.getDef and building:getDef()
-        if def then
-            minX, maxX = def:getX(), def:getX2()
-            minY, maxY = def:getY(), def:getY2()
-            DWAPUtils.dprint(("Scanning building footprint %d,%d - %d,%d"):format(minX, minY, maxX, maxY))
-        else
-            minX, maxX = playerX - 50, playerX + 50
-            minY, maxY = playerY - 50, playerY + 50
-            DWAPUtils.dprint("No building def; falling back to 50-tile radius")
-        end
-    else
-        minX, maxX = playerX - 10, playerX + 10
-        minY, maxY = playerY - 10, playerY + 10
-        DWAPUtils.dprint("Standing outside: scanning 10-tile radius")
-    end
-
-    -- short stable building tag for the dump comments
-    local function bldTag(b)
-        if not b then return "outside" end
-        local def = b.getDef and b:getDef()
-        local defId = def and def.getID and def:getID()
-        if not defId then return "bld?" end
-        local hi = math.floor(defId / 4294967296)
-        return ("bld %d,%d#%d"):format(hi % 65536, math.floor(hi / 65536), defId % 4294967296)
-    end
-
-    -- Plumbing fixture names to look for
-    local plumbingNames = {
-        ["Bath"] = true,
-        ["Shower"] = true,
-        ["Toilet"] = true,
-        ["Combo Washer Dryer"] = true,
-        ["Gallery Toilet"] = true,
-        ["Sink"] = true,
-        ["Soda Machine"] = true,
-        ["Washing Machine"] = true
-    }
+    local minX, maxX, minY, maxY = surveyBounds(building, playerX, playerY)
 
     local unconnectedFixtures = {}
     local connectedFixtures = {}
@@ -2679,72 +3160,31 @@ function FindUnconnectedPlumbing()
                     local objects = square:getObjects()
                     if objects then
                         for j = 0, objects:size() - 1 do
-                            local obj = objects:get(j)
-                            local isPlumbingFixture = false
-                            local customNameStr = "Unknown"
-                            local spriteName = ""
-
-                            if obj then
-                                spriteName = obj:getSpriteName() or ""
-
-                                -- Check if object has fluid (tanks)
-                                if obj:hasFluid() then
-                                    local fluidContainer = obj:getFluidContainer()
-                                    if fluidContainer and fluidContainer:getCapacity() > 1000 then
-                                        -- This is likely a water tank
-                                        table.insert(waterTanks, {
-                                            sprite = spriteName,
-                                            x = x,
-                                            y = y,
-                                            z = playerZ,
-                                            capacity = fluidContainer:getCapacity(),
-                                            amount = fluidContainer:getAmount(),
-                                            where = whereTag
-                                        })
-                                    else
-                                        isPlumbingFixture = true
-                                    end
+                            local info = plumbingInfo(objects:get(j))
+                            if info and info.kind == "tank" then
+                                table.insert(waterTanks, {
+                                    sprite = info.sprite,
+                                    x = x,
+                                    y = y,
+                                    z = playerZ,
+                                    capacity = info.capacity,
+                                    amount = info.amount,
+                                    where = whereTag
+                                })
+                            elseif info then
+                                local fixtureData = {
+                                    sprite = info.sprite,
+                                    x = x,
+                                    y = y,
+                                    z = playerZ,
+                                    customName = info.customName,
+                                    isConnected = info.isConnected,
+                                    where = whereTag
+                                }
+                                if info.isConnected then
+                                    table.insert(connectedFixtures, fixtureData)
                                 else
-                                    local objectSprite = obj:getSprite()
-                                    if objectSprite then
-                                        local props = objectSprite:getProperties()
-                                        local customName = props and props:has("CustomName") and props:get("CustomName")
-                                        if customName and plumbingNames[customName] then
-                                            isPlumbingFixture = true
-                                            customNameStr = customName
-                                        end
-                                        if obj:isFloor() then
-                                            isPlumbingFixture = false
-                                        end
-                                    end
-                                end
-
-                                if isPlumbingFixture then
-                                    -- Check if the fixture is connected to water
-                                    local isConnected = false
-                                    if obj.getUsesExternalWaterSource and obj.hasExternalWaterSource then
-                                        isConnected = obj:getUsesExternalWaterSource() and obj:hasExternalWaterSource()
-                                    elseif obj:hasFluid() and obj.getFluidAmount then
-                                        -- For fluid-based fixtures, check if they have water
-                                        local fluidAmount = obj:getFluidAmount() or 0
-                                        isConnected = fluidAmount > 50 -- Consider connected if has significant water
-                                    end
-
-                                    local fixtureData = {
-                                        sprite = spriteName,
-                                        x = x,
-                                        y = y,
-                                        z = playerZ,
-                                        customName = customNameStr,
-                                        isConnected = isConnected,
-                                        where = whereTag
-                                    }
-
-                                    if isConnected then
-                                        table.insert(connectedFixtures, fixtureData)
-                                    else
-                                        table.insert(unconnectedFixtures, fixtureData)
-                                    end
+                                    table.insert(unconnectedFixtures, fixtureData)
                                 end
                             end
                         end
@@ -2780,7 +3220,7 @@ function FindUnconnectedPlumbing()
             print("        { sprite = \"" ..
             fixture.sprite ..
             "\", x = " ..
-            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, -- " .. (fixture.where or ""))
+            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = wtc, }, -- " .. (fixture.where or ""))
         end
         print("    },")
     else
@@ -2808,6 +3248,527 @@ function FindUnconnectedPlumbing()
         unconnectedFixtures = unconnectedFixtures,
         connectedFixtures = connectedFixtures
     }
+end
+
+-- Find barricadeable openings with no barricade on them, in the same building
+-- and floor as the player. Counterpart to FindUnconnectedPlumbing: same
+-- footprint-bounded scan, same paste-ready dump - objectSpawns lines this
+-- time. Only shell openings are dumped: interior doors and garage doors are
+-- counted in the summary but never listed. Note this reads LIVE state, so
+-- barricades the mod already spawned read as done and drop out of the dump;
+-- with the Barricade sandbox option off, every opening looks like a gap.
+function FindUnbarricaded()
+    local pSquare = getPlayer():getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
+
+    local building = pSquare:getBuilding()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    DWAPUtils.dprint("=== FINDING UNBARRICADED OPENINGS ===")
+    DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
+
+    local minX, maxX, minY, maxY = surveyBounds(building, playerX, playerY)
+    -- PZ only stores north and west walls, so a building's SOUTH and EAST
+    -- shell openings live on the outside square one tile past the footprint.
+    -- Widen by a tile to reach them; ownership is settled per opening below
+    if building then
+        minX, maxX, minY, maxY = minX - 1, maxX + 1, minY - 1, maxY + 1
+    end
+
+    local unbarricaded, barricaded, blocked = {}, {}, 0
+    local skippedInterior, skippedGarage = 0, 0
+    local seen = {}
+
+    -- Props.lua matches its target by sprite name against the square's object
+    -- list, so that is the name worth dumping
+    local function record(obj, x, y)
+        local btype = barricadeableType(obj)
+        if not btype then return end
+        local sprite = obj:getSpriteName() or ""
+        local facing = obj:getNorth() and "N" or "W"
+        local key = ("%d,%d,%d,%s,%s"):format(x, y, playerZ, sprite, facing)
+        if seen[key] then return end
+        seen[key] = true
+        if isGarageOpening(sprite) then
+            skippedGarage = skippedGarage + 1
+            return
+        end
+        if not isExteriorOpening(obj) then
+            skippedInterior = skippedInterior + 1
+            return
+        end
+        -- Exactly one side is roomed (isExteriorOpening guarantees it): that
+        -- side owns the opening. Testing the square the object happens to sit
+        -- on instead would drop every south/east opening, whose object lives
+        -- on the unroomed outside square
+        local near = obj:getSquare()
+        local far = obj.getOppositeSquare and obj:getOppositeSquare()
+        local inside = (near and near:getRoom()) and near or far
+        local insideBuilding = inside and inside:getBuilding()
+        if building and not DWAPUtils.sameBuilding(insideBuilding, building) then
+            return -- a neighbour's shell, pulled in by the widened bounds
+        end
+        local room = inside and inside:getRoom()
+        local whereTag = (room and room:getName() or "outside") .. ", " .. bldTag(insideBuilding)
+        if not obj:isBarricadeAllowed() then
+            blocked = blocked + 1
+            return
+        end
+        local entry = {
+            sprite = sprite, x = x, y = y, z = playerZ,
+            kind = btype.kind, facing = facing, where = whereTag,
+        }
+        if obj:isBarricaded() then
+            barricaded[#barricaded + 1] = entry
+        else
+            unbarricaded[#unbarricaded + 1] = entry
+        end
+    end
+
+    for x = minX, maxX do
+        for y = minY, maxY do
+            local square = getSquare(x, y, playerZ)
+            if square then
+                local objects = square:getObjects()
+                if objects then
+                    for j = 0, objects:size() - 1 do
+                        record(objects:get(j), x, y)
+                    end
+                end
+                -- 42.20 can merge a window frame into the wall as an
+                -- overlay, so it never shows up in the object list as its
+                -- own barricadeable object - same fallback Props.lua uses
+                record(square:getWindowFrame(true), x, y)
+                record(square:getWindowFrame(false), x, y)
+                record(square:getWindow(true), x, y)
+                record(square:getWindow(false), x, y)
+            end
+        end
+    end
+
+    DWAPUtils.dprint("=== UNBARRICADED OPENINGS FOUND (" .. #unbarricaded .. ") ===")
+    if #unbarricaded > 0 then
+        print("    objectSpawns = {")
+        for i = 1, #unbarricaded do
+            local o = unbarricaded[i]
+            print(("        { barricade = \"woodhalf\", enabled = \"Barricade\", target=\"%s\", x = %d, y = %d, z = %d, }, -- %s %s | %s")
+                :format(o.sprite, o.x, o.y, o.z, o.kind, o.facing, o.where or ""))
+        end
+        print("    },")
+        DWAPUtils.dprint("barricade = wood | woodhalf | metal | metalbar (nothing else is applied)")
+    else
+        DWAPUtils.dprint("No unbarricaded openings found!")
+    end
+
+    if #barricaded > 0 then
+        DWAPUtils.dprint("=== ALREADY BARRICADED (" .. #barricaded .. ") ===")
+        for i = 1, #barricaded do
+            local o = barricaded[i]
+            DWAPUtils.dprint(("  %s %s at %d,%d,%d (%s) -- %s"):format(
+                o.kind, o.facing, o.x, o.y, o.z, o.sprite, o.where or ""))
+        end
+    end
+
+    DWAPUtils.dprint("=== SUMMARY ===")
+    DWAPUtils.dprint("Unbarricaded: " .. #unbarricaded)
+    DWAPUtils.dprint("Already barricaded: " .. #barricaded)
+    DWAPUtils.dprint("Barricading not allowed: " .. blocked)
+    DWAPUtils.dprint("Skipped, interior (room on both sides): " .. skippedInterior)
+    DWAPUtils.dprint("Skipped, garage door (barricades do not stick): " .. skippedGarage)
+    DWAPUtils.dprint("Total openings: "
+        .. (#unbarricaded + #barricaded + blocked + skippedInterior + skippedGarage))
+
+    return {
+        unbarricaded = unbarricaded,
+        barricaded = barricaded,
+    }
+end
+
+-- Plumbing picker: click tiles to build an export by hand. The footprint scan
+-- is all-or-nothing, which is unusable in something like Rosewood where the
+-- config only wants a few rooms out of a huge building. Selection is per
+-- square (every fixture on it) and toggles, so clicking a picked tile again
+-- drops it.
+local plumbPickedSquares = {} -- ordered: { x, y, z, key, entries = { info... } }
+local plumbPickedKeys = {}    -- key -> true, for the toggle test
+
+local function plumbPickKey(x, y, z)
+    return x .. "," .. y .. "," .. z
+end
+
+local function plumbPickRemove(key)
+    for i = 1, #plumbPickedSquares do
+        if plumbPickedSquares[i].key == key then
+            table.remove(plumbPickedSquares, i)
+            break
+        end
+    end
+    plumbPickedKeys[key] = nil
+end
+
+-- Named function: an anonymous handler could never be removed from the event
+function plumbPickClick(tile)
+    if not DWAP_DevToggles.plumbPick then return end
+    local square = tile and tile.getSquare and tile:getSquare()
+    if not square then return end
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local key = plumbPickKey(x, y, z)
+    if plumbPickedKeys[key] then
+        plumbPickRemove(key)
+        DWAPUtils.dprint(("Plumb pick: removed %s (%d left)"):format(key, #plumbPickedSquares))
+        return
+    end
+
+    local entries = {}
+    local objects = square:getObjects()
+    if objects then
+        for j = 0, objects:size() - 1 do
+            local info = plumbingInfo(objects:get(j))
+            if info then entries[#entries + 1] = info end
+        end
+    end
+    if #entries == 0 then
+        DWAPUtils.dprint("Plumb pick: no tank or fixture on " .. key)
+        return
+    end
+
+    local room = square:getRoom()
+    plumbPickedKeys[key] = true
+    plumbPickedSquares[#plumbPickedSquares + 1] = {
+        x = x, y = y, z = z, key = key, entries = entries,
+        where = (room and room:getName() or "outside") .. ", " .. bldTag(square:getBuilding()),
+    }
+    DWAPUtils.dprint(("Plumb pick: added %s (%d fixture(s), %d picked)"):format(
+        key, #entries, #plumbPickedSquares))
+end
+
+function plumbPickTick()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerZ = pSquare:getZ()
+    for i = 1, #plumbPickedSquares do
+        local p = plumbPickedSquares[i]
+        if p.z == playerZ then
+            addAreaHighlightForPlayer(playerNum, p.x, p.y, p.x + 1, p.y + 1, p.z, 0.2, 0.9, 0.9, 0.6)
+        end
+    end
+end
+
+-- Pick order is the export order, so the numbers double as a preview of the
+-- lines you are about to get
+function plumbPickDraw()
+    if not DWAP_DevToggles.plumbPick or #plumbPickedSquares == 0 then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerZ = pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #plumbPickedSquares do
+        local p = plumbPickedSquares[i]
+        if p.z == playerZ then
+            local drawZ = p.z + PLUMBING_LABEL_RISE
+            local sx = isoToScreenX(playerNum, p.x + 0.5, p.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, p.x + 0.5, p.y + 0.5, drawZ)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, tostring(i), 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, tostring(i), 0.2, 1, 1, 1)
+        end
+    end
+end
+
+function DWAPPlumbPick()
+    DWAP_DevToggles.plumbPick = not DWAP_DevToggles.plumbPick
+    if DWAP_DevToggles.plumbPick then
+        Events.OnObjectLeftMouseButtonDown.Remove(plumbPickClick)
+        Events.OnObjectLeftMouseButtonDown.Add(plumbPickClick)
+        Events.OnTick.Remove(plumbPickTick)
+        Events.OnTick.Add(plumbPickTick)
+        ensureDevOverlay()
+        DWAPUtils.dprint("Plumb pick: ON - left click tiles to add/remove, then Export")
+        DWAPUtils.dprint("Left click is also attack, so expect the odd swing at air")
+    else
+        Events.OnObjectLeftMouseButtonDown.Remove(plumbPickClick)
+        Events.OnTick.Remove(plumbPickTick)
+        DWAPUtils.dprint(("Plumb pick: OFF (%d squares still held - Export or Clear)"):format(
+            #plumbPickedSquares))
+    end
+end
+
+function DWAPPlumbClear()
+    plumbPickedSquares = {}
+    plumbPickedKeys = {}
+    DWAPUtils.dprint("Plumb pick: cleared")
+end
+
+-- Same line shapes FindUnconnectedPlumbing emits, so picked output can be
+-- pasted into a config the same way
+function DWAPPlumbExport()
+    if #plumbPickedSquares == 0 then
+        DWAPUtils.dprint("Plumb pick: nothing picked")
+        return
+    end
+    local tanks, fixtures = {}, {}
+    for i = 1, #plumbPickedSquares do
+        local p = plumbPickedSquares[i]
+        for j = 1, #p.entries do
+            local info = p.entries[j]
+            local row = { info = info, x = p.x, y = p.y, z = p.z, where = p.where }
+            if info.kind == "tank" then
+                tanks[#tanks + 1] = row
+            else
+                fixtures[#fixtures + 1] = row
+            end
+        end
+    end
+
+    DWAPUtils.dprint(("=== PICKED PLUMBING (%d squares, %d tanks, %d fixtures) ==="):format(
+        #plumbPickedSquares, #tanks, #fixtures))
+    if #tanks > 0 then
+        print("    waterTanks = {")
+        for i = 1, #tanks do
+            local t = tanks[i]
+            print(("        { sprite = \"%s\", x = %d, y = %d, z = %d }, -- capacity: %s, current: %s | %s")
+                :format(t.info.sprite, t.x, t.y, t.z, tostring(t.info.capacity), tostring(t.info.amount), t.where or ""))
+        end
+        print("    },")
+    end
+    if #fixtures > 0 then
+        print("    waterFixtures = {")
+        for i = 1, #fixtures do
+            local f = fixtures[i]
+            print(("        { sprite = \"%s\", x = %d, y = %d, z = %d, sourceType=\"tank\", source = wtc, }, -- %s%s")
+                :format(f.info.sprite, f.x, f.y, f.z,
+                    f.info.isConnected and "CONNECTED already | " or "", f.where or ""))
+        end
+        print("    },")
+    end
+end
+
+-- Room picker: click a tile to take its whole room. Buildings like Rosewood
+-- share walls across several businesses, so a footprint-wide pass grabs rooms
+-- that are not ours; picking rooms narrows the target set before any loot is
+-- authored. Rooms are identified by their RoomDef rect rather than the live
+-- IsoRoom, which churns with streaming.
+local roomPicked = {}     -- ordered: { key, name, dx, dy, dz, dw, dh }
+local roomPickedKeys = {} -- key -> true
+
+local function roomKey(room)
+    local def = room and room.getRoomDef and room:getRoomDef()
+    if not def then return nil end
+    return ("%s@%d,%d,%d"):format(room:getName() or "?", def:getX(), def:getY(), def:getZ())
+end
+
+-- Every container in a room, through the shared resolver so the picker counts
+-- exactly what the loot fill and the audit would see. Trash and appliances the
+-- fill never touches are left out, matching the audit's coverage pass.
+local ROOM_TRASH_TYPES = {
+    bin = true, dumpster = true, clothingdryer = true, clothingdryerbasic = true,
+    clothingrack = true, clothingwasher = true,
+}
+local function roomContainers(room)
+    local out = {}
+    local squares = room:getSquares()
+    if not squares then return out end
+    for i = 0, squares:size() - 1 do
+        local square = squares:get(i)
+        if square then
+            local list = DWAPUtils.getSquareContainers(square)
+            for j = 1, #list do
+                local container = list[j].container
+                local ctype = container:getType()
+                local isTrash = ROOM_TRASH_TYPES[ctype] == true
+                if not isTrash and ctype ~= "microwave" and not container:isStove() then
+                    out[#out + 1] = {
+                        x = square:getX(), y = square:getY(), z = square:getZ(),
+                        ctype = ctype, isHigh = list[j].isHigh,
+                    }
+                end
+            end
+        end
+    end
+    return out
+end
+
+function roomPickClick(tile)
+    if not DWAP_DevToggles.roomPick then return end
+    local square = tile and tile.getSquare and tile:getSquare()
+    local room = square and square:getRoom()
+    if not room then
+        DWAPUtils.dprint("Room pick: that tile is not in a room")
+        return
+    end
+    local key = roomKey(room)
+    if not key then
+        DWAPUtils.dprint("Room pick: room has no def, cannot identify it")
+        return
+    end
+    if roomPickedKeys[key] then
+        for i = 1, #roomPicked do
+            if roomPicked[i].key == key then
+                table.remove(roomPicked, i)
+                break
+            end
+        end
+        roomPickedKeys[key] = nil
+        DWAPUtils.dprint(("Room pick: removed %s (%d left)"):format(key, #roomPicked))
+        return
+    end
+    local def = room:getRoomDef()
+    roomPickedKeys[key] = true
+    roomPicked[#roomPicked + 1] = {
+        key = key, name = room:getName() or "?",
+        dx = def:getX(), dy = def:getY(), dz = def:getZ(),
+        dw = def:getW(), dh = def:getH(),
+    }
+    DWAPUtils.dprint(("Room pick: added %s (%d containers streamed, %d rooms picked)"):format(
+        key, #roomContainers(room), #roomPicked))
+end
+
+-- Rooms are found live each tick: getSquares() only holds what has streamed,
+-- so a room keeps filling in as you walk it
+local function pickedRoomObjects()
+    local out = {}
+    local rooms = getCell():getRoomList()
+    if not rooms then return out end
+    for i = 1, rooms:size() do
+        local room = rooms:get(i - 1)
+        local key = roomKey(room)
+        if key and roomPickedKeys[key] then out[#out + 1] = room end
+    end
+    return out
+end
+
+function roomPickTick()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum, playerZ = player:getPlayerNum(), pSquare:getZ()
+    local rooms = pickedRoomObjects()
+    for i = 1, #rooms do
+        local squares = rooms[i]:getSquares()
+        if squares then
+            for j = 0, squares:size() - 1 do
+                local s = squares:get(j)
+                if s and s:getZ() == playerZ then
+                    addAreaHighlightForPlayer(playerNum, s:getX(), s:getY(), s:getX() + 1, s:getY() + 1,
+                        playerZ, 0.9, 0.5, 1, 0.35)
+                end
+            end
+        end
+    end
+end
+
+function roomPickDraw()
+    if not DWAP_DevToggles.roomPick or #roomPicked == 0 then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum, playerZ = player:getPlayerNum(), pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #roomPicked do
+        local r = roomPicked[i]
+        if r.dz == playerZ then
+            -- label at the def rect's centre so it does not sit on a wall
+            local cx, cy = r.dx + r.dw / 2, r.dy + r.dh / 2
+            local sx = isoToScreenX(playerNum, cx, cy, r.dz)
+            local sy = isoToScreenY(playerNum, cx, cy, r.dz)
+            local text = ("%d %s"):format(i, r.name)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, text, 0.95, 0.6, 1, 1)
+        end
+    end
+end
+
+function DWAPRoomPick()
+    DWAP_DevToggles.roomPick = not DWAP_DevToggles.roomPick
+    if DWAP_DevToggles.roomPick then
+        -- both pickers claim left click, so they cannot both be live
+        if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
+        Events.OnObjectLeftMouseButtonDown.Remove(roomPickClick)
+        Events.OnObjectLeftMouseButtonDown.Add(roomPickClick)
+        Events.OnTick.Remove(roomPickTick)
+        Events.OnTick.Add(roomPickTick)
+        ensureDevOverlay()
+        DWAPUtils.dprint("Room pick: ON - left click a tile to take/drop its whole room")
+    else
+        Events.OnObjectLeftMouseButtonDown.Remove(roomPickClick)
+        Events.OnTick.Remove(roomPickTick)
+        DWAPUtils.dprint(("Room pick: OFF (%d rooms still held)"):format(#roomPicked))
+    end
+end
+
+function DWAPRoomClear()
+    roomPicked = {}
+    roomPickedKeys = {}
+    DWAPUtils.dprint("Room pick: cleared")
+end
+
+--- Inventory of the picked rooms, split by whether a loot entry already
+--- addresses the square. `claimed` is the work already done, `free` is what a
+--- generator would have to fill. Pass a config index to compare against, or
+--- omit it to just list what is there.
+function DWAPRoomExport(index)
+    if #roomPicked == 0 then
+        DWAPUtils.dprint("Room pick: nothing picked")
+        return
+    end
+    local lookup = nil
+    if index then
+        local configs = DWAPUtils.loadConfigs(true)
+        local config = configs and configs[index]
+        if not config then
+            DWAPUtils.dprint("Room pick: no config at index " .. tostring(index))
+            return
+        end
+        lookup = buildContainerLookup(config)
+        DWAPUtils.dprint(("=== PICKED ROOMS vs config %d ==="):format(index))
+    else
+        DWAPUtils.dprint("=== PICKED ROOMS (no config compared) ===")
+    end
+
+    local rooms = pickedRoomObjects()
+    local byKey = {}
+    for i = 1, #rooms do byKey[roomKey(rooms[i])] = rooms[i] end
+
+    local totalFree, totalClaimed = 0, 0
+    for i = 1, #roomPicked do
+        local r = roomPicked[i]
+        local room = byKey[r.key]
+        if not room then
+            DWAPUtils.dprint(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
+        else
+            local containers = roomContainers(room)
+            local free, claimed, tally = {}, 0, {}
+            for j = 1, #containers do
+                local c = containers[j]
+                local isClaimed = lookup and lookup[DWAPUtils.hashCoords(c.x, c.y, c.z)] ~= nil
+                if isClaimed then
+                    claimed = claimed + 1
+                else
+                    free[#free + 1] = c
+                    tally[c.ctype] = (tally[c.ctype] or 0) + 1
+                end
+            end
+            totalFree = totalFree + #free
+            totalClaimed = totalClaimed + claimed
+            DWAPUtils.dprint(("  %d %s | %d containers: %d free, %d already in config"):format(
+                i, r.key, #containers, #free, claimed))
+            if #free > 0 then
+                DWAPUtils.dprint("     free: " .. allLootTallyString(tally))
+                for j = 1, #free do
+                    local c = free[j]
+                    print(("        { type = 'container', coords = {x=%d,y=%d,z=%d},%s }, -- %s @ %s")
+                        :format(c.x, c.y, c.z, c.isHigh and ' slot = "upper",' or "", c.ctype, r.name))
+                end
+            end
+        end
+    end
+    DWAPUtils.dprint(("=== TOTAL: %d free, %d already in config, across %d rooms ==="):format(
+        totalFree, totalClaimed, #roomPicked))
 end
 
 local sourceConfig = 1

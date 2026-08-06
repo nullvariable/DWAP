@@ -45,6 +45,33 @@ local function withNearest(fn, label)
     fn(index)
 end
 
+-- Each Show* overlay bakes in the config it was enabled for, so travelling
+-- otherwise leaves a lit overlay still drawing the base we just left. They
+-- read their index only on the way ON, so re-pointing one means calling it
+-- twice: once to drop the old config, once to bind the new. Safe to do
+-- immediately after the teleport - the lookups are built from config data,
+-- and only the per-tick renderers touch the world.
+local nearestOverlays = {
+    { key = "containers", show = function(i) ShowContainers(i) end },
+    { key = "elec",       show = function(i) ShowElec(i) end },
+    { key = "plumbing",   show = function(i) ShowPlumbing(i) end },
+    { key = "barricades", show = function(i) ShowBarricades(i) end },
+}
+
+-- An overlay whose new config has nothing to show (no generators, no water
+-- system, no barricade objectSpawns) refuses to re-enable and says why - it
+-- just stays dark, and its button goes back to black.
+local function retargetOverlays(index)
+    if not DWAP_DevToggles then return end
+    for i = 1, #nearestOverlays do
+        local overlay = nearestOverlays[i]
+        if DWAP_DevToggles[overlay.key] then
+            overlay.show(index)
+            overlay.show(index)
+        end
+    end
+end
+
 -- Step from the nearest config to the previous/next valid one, wrapping at
 -- both ends (config list can hold false placeholders - skip those)
 local function gotoStep(delta)
@@ -57,10 +84,19 @@ local function gotoStep(delta)
         if index > n then index = 1 elseif index < 1 then index = n end
         if configs[index] then
             DWAPGoto(index)
+            retargetOverlays(index)
             return
         end
     end
 end
+
+-- Toggle buttons carry their state in the background colour instead of a
+-- label suffix: green while the overlay is live, dark enough that the white
+-- label still reads. Off values are ISButton's own defaults.
+local BTN_ON       = { r = 0.13, g = 0.42, b = 0.15 }
+local BTN_ON_OVER  = { r = 0.20, g = 0.60, b = 0.22 }
+local BTN_OFF      = { r = 0.00, g = 0.00, b = 0.00 }
+local BTN_OFF_OVER = { r = 0.30, g = 0.30, b = 0.30 }
 
 DWAPDevPanelUI = ISCollapsableWindow:derive("DWAPDevPanelUI")
 
@@ -96,7 +132,7 @@ function DWAPDevPanelUI:createChildren()
             self:addChild(btn)
             if def.state then
                 self.stateButtons = self.stateButtons or {}
-                self.stateButtons[#self.stateButtons + 1] = { btn = btn, label = def.label, state = def.state }
+                self.stateButtons[#self.stateButtons + 1] = { btn = btn, state = def.state }
             end
         end
         y = y + rowH + 4
@@ -104,8 +140,28 @@ function DWAPDevPanelUI:createChildren()
     self:setHeight(y + pad)
 end
 
+-- Reflect live overlay state on the toggle buttons, so an overlay enabled
+-- out of visual range (or dropped by a Prev/Next re-point) can't leave a
+-- button out of phase. Unthrottled - it is a handful of writes and only on
+-- an actual state change - so clicks light up immediately.
+function DWAPDevPanelUI:refreshToggleColors()
+    if not self.stateButtons then return end
+    for i = 1, #self.stateButtons do
+        local entry = self.stateButtons[i]
+        local lit = entry.state() and true or false
+        if lit ~= entry.lit then
+            entry.lit = lit
+            local bg = lit and BTN_ON or BTN_OFF
+            local over = lit and BTN_ON_OVER or BTN_OFF_OVER
+            entry.btn:setBackgroundRGBA(bg.r, bg.g, bg.b, 1)
+            entry.btn:setBackgroundColorMouseOverRGBA(over.r, over.g, over.b, 1)
+        end
+    end
+end
+
 function DWAPDevPanelUI:render()
     ISCollapsableWindow.render(self)
+    self:refreshToggleColors()
     local now = getTimestampMs()
     if now - (self.lastInfoUpdate or 0) >= 1000 then
         self.lastInfoUpdate = now
@@ -128,14 +184,6 @@ function DWAPDevPanelUI:render()
             end
         end
         self.infoLines = lines
-        -- reflect live overlay state on the toggle buttons so an overlay
-        -- enabled out of visual range can't leave the toggle out of phase
-        if self.stateButtons then
-            for i = 1, #self.stateButtons do
-                local e = self.stateButtons[i]
-                e.btn:setTitle(e.label .. (e.state() and " [ON]" or ""))
-            end
-        end
     end
     if self.infoLines then
         local pad = 6
@@ -169,14 +217,39 @@ function DWAPDevPanel()
             local player = getPlayer()
             if player then player:getInventory():AddItem("Base.HandTorch") end
         end },
-        { label = "Containers (nearest)", fn = function() withNearest(ShowContainers, "ShowContainers") end,
+        { label = "Containers", fn = function() withNearest(ShowContainers, "ShowContainers") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.containers end },
-        { label = "Electricity (nearest)", fn = function() withNearest(ShowElec, "ShowElec") end,
+        { label = "Electricity", fn = function() withNearest(ShowElec, "ShowElec") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.elec end },
-        { label = "Plumbing (nearest)", fn = function() withNearest(ShowPlumbing, "ShowPlumbing") end,
+        { label = "Plumbing", fn = function() withNearest(ShowPlumbing, "ShowPlumbing") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.plumbing end },
-        { label = "Barricades (nearest)", fn = function() withNearest(ShowBarricades, "ShowBarricades") end,
+        -- One-shot scan of wherever the player is standing (building footprint
+        -- inside, 10-tile grab outside), so no config index and no toggle
+        -- state - output goes to the console as config-ready waterFixtures
+        { label = "Find Unconn. Plumbing", fn = function() FindUnconnectedPlumbing() end },
+        -- Hand-picked alternative for buildings too big to scan wholesale
+        { label = "Plumb Pick", fn = function() DWAPPlumbPick() end,
+            state = function() return DWAP_DevToggles and DWAP_DevToggles.plumbPick end },
+        { pairRow = {
+            { label = "Export Picked", fn = function() DWAPPlumbExport() end },
+            { label = "Clear Picked", fn = function() DWAPPlumbClear() end },
+        } },
+        -- Room-level selection for buildings shared between businesses, where
+        -- a whole-footprint pass would grab rooms that are not ours
+        { label = "Room Pick", fn = function() DWAPRoomPick() end,
+            state = function() return DWAP_DevToggles and DWAP_DevToggles.roomPick end },
+        { pairRow = {
+            { label = "Export Rooms", fn = function() withNearest(DWAPRoomExport, "DWAPRoomExport") end },
+            { label = "Clear Rooms", fn = function() DWAPRoomClear() end },
+        } },
+        { label = "Barricades", fn = function() withNearest(ShowBarricades, "ShowBarricades") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.barricades end },
+        -- Same one-shot, player-position shape as the plumbing scan
+        { label = "Find Unbarricaded", fn = function() FindUnbarricaded() end },
+        -- Green here means the power system's per-object trace is printing;
+        -- off by default because it drowns out everything else in -debug
+        { label = "Power Log", fn = function() DWAPPowerLog() end,
+            state = function() return DWAPUtils.verbosePower end },
     }
     local panel = DWAPDevPanelUI:new(getCore():getScreenWidth() - 270, 100, 240, 40)
     panel.buttonDefs = defs

@@ -11,6 +11,12 @@ function DWAPPowerObject:new(luaSystem, globalObject)
     return SGlobalObject.new(self, luaSystem, globalObject)
 end
 
+-- Mirrors SGlobalObject:noise, which hands off to the system - so the
+-- per-object trace obeys the same DWAPUtils.verbosePower switch
+function DWAPPowerObject:chatter(message)
+    self.luaSystem:chatter(message)
+end
+
 function DWAPPowerObject:initNew()
     self.DWAPObjectType = "generator" -- "generator" or "fixture"
     self.DWAPGeneratorIndex = -1 -- Index in the generator list
@@ -26,7 +32,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
 
     if instanceof(isoObject, "IsoGenerator") then
         -- Already a generator, no conversion needed
-        DWAPPowerSystem.instance:noise("DWAPPowerObject: Object is already an IsoGenerator")
+        DWAPPowerSystem.instance:chatter("DWAPPowerObject: Object is already an IsoGenerator")
         isoObject:setCondition(100)
         isoObject:setFuel(isoObject:getMaxFuel())
         isoObject:setConnected(true)
@@ -70,7 +76,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
     generator:transmitCompleteItemToClients()
     cell:addToProcessIsoObjectRemove(generator)
 
-    DWAPPowerSystem.instance:noise("DWAPPowerObject: Successfully converted to IsoGenerator at " .. square:getX() .. "," .. square:getY() .. "," .. square:getZ())
+    DWAPPowerSystem.instance:chatter("DWAPPowerObject: Successfully converted to IsoGenerator at " .. square:getX() .. "," .. square:getY() .. "," .. square:getZ())
     return generator
 
 end
@@ -182,16 +188,16 @@ end
 
 ---called from loadIsoObject function when making new globalObject & luaObject
 function DWAPPowerObject:stateFromIsoObject(isoObject)
-    self:noise("DWAPPowerObject:stateFromIsoObject called")
+    self:chatter("DWAPPowerObject:stateFromIsoObject called")
     if not isoObject then return end
     self:initNew()
 
     self:fromModData(isoObject:getModData())
     if self.DWAPObjectType == "generator" then
-        self:noise("DWAPPowerObject:stateFromIsoObject - setting up generator state")
+        self:chatter("DWAPPowerObject:stateFromIsoObject - setting up generator state")
         self:setActivated(self:shouldBeRunning())
     elseif self.DWAPObjectType == "controlPanel" then
-        self:noise("DWAPPowerObject:stateFromIsoObject - configuring control panel")
+        self:chatter("DWAPPowerObject:stateFromIsoObject - configuring control panel")
         self:makeNoise(self:shouldMakeNoise())
     end
 end
@@ -199,13 +205,13 @@ end
 function DWAPPowerObject:stateToIsoObject(isoObject)
     -- Sync lua object state to iso object
     self:toModData(isoObject:getModData())
-    self:noise("DWAPPowerObject:stateToIsoObject called")
+    self:chatter("DWAPPowerObject:stateToIsoObject called")
 
     if self.DWAPObjectType == "generator" then
-        self:noise("DWAPPowerObject:stateToIsoObject - setting generator state")
+        self:chatter("DWAPPowerObject:stateToIsoObject - setting generator state")
         self:setActivated(self:shouldBeRunning())
     elseif self.DWAPObjectType == "controlPanel" then
-        self:noise("DWAPPowerObject:stateToIsoObject - configuring control panel")
+        self:chatter("DWAPPowerObject:stateToIsoObject - configuring control panel")
         self:makeNoise(self:shouldMakeNoise())
     end
 

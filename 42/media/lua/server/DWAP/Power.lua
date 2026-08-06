@@ -8,10 +8,10 @@ local PRIORITY = 37
 
 
 MapObjects.OnNewWithSprite(ghostGeneratorSpriteName, function(object)
-    DWAPPowerSystem.instance:noise("New Ghost generator found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+    DWAPPowerSystem.instance:chatter("New Ghost generator found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
     local generator = DWAPPowerObject.convertToIsoGenerator(object)
     if generator then
-        DWAPPowerSystem.instance:noise("Ghost generator IsoGenerator found/created")
+        DWAPPowerSystem.instance:chatter("Ghost generator IsoGenerator found/created")
         DWAPPowerSystem.instance:configureGhostGenerator(generator)
     else
         DWAPPowerSystem.instance:noise("Failed to convert ghost generator")
@@ -20,7 +20,7 @@ end, PRIORITY)
 
 MapObjects.OnLoadWithSprite(ghostGeneratorSpriteName, function(object)
     if not object then return end
-    DWAPPowerSystem.instance:noise("Loading ghost generator at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+    DWAPPowerSystem.instance:chatter("Loading ghost generator at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
 
     DWAPPowerSystem.instance:configureGhostGenerator(object)
     local generator = DWAPPowerObject.convertToIsoGenerator(object)
@@ -33,11 +33,11 @@ local function registerControlSprite(spriteName)
     if registeredControlSprites[spriteName] then return end
     registeredControlSprites[spriteName] = true
     MapObjects.OnNewWithSprite(spriteName, function(object)
-        DWAPPowerSystem.instance:noise("Control panel found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+        DWAPPowerSystem.instance:chatter("Control panel found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
         DWAPPowerSystem.instance:maybeConfigureControlPanel(object)
     end, PRIORITY)
     MapObjects.OnLoadWithSprite(spriteName, function(object)
-        DWAPPowerSystem.instance:noise("Loading control panel at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+        DWAPPowerSystem.instance:chatter("Loading control panel at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
         DWAPPowerSystem.instance:maybeConfigureControlPanel(object)
         DWAPPowerSystem.instance:loadIsoObject(object)
     end, PRIORITY)
@@ -48,12 +48,12 @@ local function registerTankSprite(spriteName)
     if registeredTankSprites[spriteName] then return end
     registeredTankSprites[spriteName] = true
     MapObjects.OnNewWithSprite(spriteName, function(object)
-        DWAPPowerSystem.instance:noise("Fuel tank found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+        DWAPPowerSystem.instance:chatter("Fuel tank found at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
         DWAPPowerSystem.instance:maybeConfigureFuelTank(object)
     end, PRIORITY)
     MapObjects.OnLoadWithSprite(spriteName, function(object)
         if not object then return end
-        DWAPPowerSystem.instance:noise("Loading fuel tank at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
+        DWAPPowerSystem.instance:chatter("Loading fuel tank at " .. tostring(object:getX()) .. ", " .. tostring(object:getY()) .. ", " .. tostring(object:getZ()))
         local modData = object:getModData()
         if modData.DWAPObjectType ~= "fuelTank" then
             -- never converted, the chunk was saved before the tank existed

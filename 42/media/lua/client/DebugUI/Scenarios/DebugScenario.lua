@@ -3,50 +3,19 @@
 -- players, no sandbox UI exposure
 if not getDebug() then return end
 
-if debugScenarios == nil then
-    debugScenarios = {}
-end
 print("DebugScenario.lua loaded")
 
--- Hide/override unwanted base game debug scenarios
-debugScenarios.AiteronScenario = nil
-debugScenarios.BobKates = nil
-debugScenarios.DebugScenario = nil
-debugScenarios.FenrisScenario = nil
-debugScenarios.LotsaZombies = nil
-debugScenarios.MarkR = nil
-debugScenarios.Multiplayer = nil
-debugScenarios.PatrickScenario = nil
-debugScenarios.SashaScenario = nil
-debugScenarios.SteveS = nil
-debugScenarios.Trailer1Scenario = nil
-debugScenarios.Trailer2Scenario = nil
-debugScenarios.Trailer2_LimpWPScenario = nil
-debugScenarios.Trailer2_PoliceScenario = nil
-debugScenarios.Trailer3Scenario = nil
-debugScenarios.Trailer3Scenario_Arrival = nil
-debugScenarios.Trailer3Scenario_Building = nil
-debugScenarios.Trailer3Scenario_Fishing = nil
-debugScenarios.Trailer3Scenario_GasStation = nil
-debugScenarios.Trailer3Scenario_Roadtrip = nil
-debugScenarios.TurboGreenTest = nil
-debugScenarios.TurboSaveTest = nil
-debugScenarios.Water = nil
-debugScenarios.Water2 = nil
-debugScenarios.Water3 = nil
-debugScenarios.Water4 = nil
-debugScenarios.Water5 = nil
-debugScenarios.Water6 = nil
-debugScenarios.Water7 = nil
-debugScenarios.Water8 = nil
-debugScenarios.WeaponScenario = nil
-debugScenarios.SteveProfile = nil
-debugScenarios.DebugScenarioTGreen = nil
-debugScenarios.DebugScenarioTSave = nil
+-- Drop every base-game scenario so the picker only lists ours. Mod Lua loads
+-- after the vanilla DebugUIs/Scenarios files, so wiping the table is both
+-- shorter and drift-proof: the old per-key blacklist nil'd file names rather
+-- than the keys those files actually register (BobKates.lua registers
+-- BobKateHouse, Multiplayer.lua registers MP1Scenario), so those two always
+-- leaked through, and any scenario TIS adds would leak through too.
+debugScenarios = {}
 
 DebugScenarioAllMaps = false
 
-local target = 38
+local target = 7
 
 
 local DWAPUtils = require "DWAPUtils"
@@ -61,28 +30,64 @@ if not spawns or #spawns == 0 then
 end
 print(("Loaded %d DWAP spawns"):format(#spawns))
 
--- target = #spawns
+-- target is hand-edited constantly; an out-of-range value would otherwise
+-- blow up indexing spawns[target] below, before the picker ever opens.
+if not spawns[target] then
+    print(("DWAP scenario target %d out of range (1-%d), using 1"):format(target, #spawns))
+    target = 1
+end
 
 debugScenarios.DebugScenarioDWAP = {
-    name = "DWAP Scenario " .. target,
-    -- world = "Muldraugh, KY",
-    startLoc = { x = 12659, y = 6402, z = 2 },
-    -- startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
+    -- coords in the name confirm at a glance which spawn target resolved to
+    name = ("DWAP Scenario %d (%d,%d,%d)"):format(target, spawns[target].x, spawns[target].y, spawns[target].z),
+    -- world = "Muldraugh, KY",  -- runner defaults to this when unset
+    -- Skips the scenario picker on launch, but only when the DebugScenario
+    -- .ForceLaunch debug option is enabled (defaults off), so it stays inert
+    -- until you want it. Keep it on exactly one scenario.
+    forceLaunch = true,
+    -- startLoc is NOT optional: IsoWorld reads it with no nil check and NPEs
+    -- the world load if a selected scenario lacks it.
+    -- startLoc = { x = 12659, y = 6402, z = 2 },
+    startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
     setSandbox = function()
+        -- 7 = Always Tries, deliberately. Max story rate makes this world a
+        -- canary for PreventStories: 42.20 moved building stories to Java and
+        -- RBShopLooted quietly stopped honouring the stash exemption, which
+        -- showed up here as a ransacked config 37 instead of a player report
+        -- weeks later. Turning this down would hide the next such change.
         SandboxVars.SurvivorHouseChance = 7
-        SandboxVars.HouseAlarmFrequency = 6
+        -- Was HouseAlarmFrequency, which is only this option's translation
+        -- key - the SandboxVars name is Alarm, so the old line set nothing
+        -- and alarms ran at the default (Sometimes). 1 = Never, which is
+        -- what a teleport-heavy audit world wants.
+        SandboxVars.Alarm = 1
         SandboxVars.VehicleEasyUse = true;
         SandboxVars.Zombies = 6; -- none
         SandboxVars.WaterShutModifier = -1;
         SandboxVars.ElecShutModifier = -1;
         SandboxVars.WaterShut = 1;
         SandboxVars.ElecShut = 1;
+        -- Infinite pump gas makes IsoObject.getPipedFuelAmount return early
+        -- instead of lazily rolling a pump's fuel. That lazy roll also fires
+        -- from removeFromWorld during chunk unload, and on an empty roll it
+        -- tries to spawn an "out of gas" sign on a square whose chunk is
+        -- already torn down -> NPE that kills IngameState (crashed the
+        -- 2026-08-06 audit at config 37, the Brandenburg gas station).
+        SandboxVars.FuelStationGasInfinite = true;
         -- SandboxVars.DayLength = 26;
         SandboxVars.DayLength = 1;
         -- SandboxVars.TimeSinceApo = 3;
         SandboxVars.StartTime = 2;
-        SandboxVars.AnimalRanchChance = 1;
-        SandboxVars.BasementSpawnFrequency = 7;
+        SandboxVars.AnimalRanchChance = 1; -- Never
+        -- BasementSpawnFrequency is likewise only a translation key; the real
+        -- option is nested (Basement.SpawnFrequency), so the old flat line
+        -- never applied and vanilla random basements have always run at the
+        -- default (Sometimes). Left off deliberately: turning it to 7/Always
+        -- injects a new worldgen variable into the audit, and random vanilla
+        -- basements are a prime suspect for the duplicate RoomDef.metaID
+        -- errors. Uncomment when testing basement interactions specifically.
+        -- SandboxVars.Basement = SandboxVars.Basement or {};
+        -- SandboxVars.Basement.SpawnFrequency = 7; -- Always
         if not SandboxVars.GunsElevator then
             SandboxVars.GunsElevator = {};
         end
