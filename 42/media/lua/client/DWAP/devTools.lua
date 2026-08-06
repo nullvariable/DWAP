@@ -1678,11 +1678,20 @@ end
 -- Drive TestLootConfig across every config in one debug session: teleport to
 -- each base with DWAPGoto, wait for its loot squares to stream in (jumping to
 -- stragglers to force-load them), run the test, and write a combined report
--- to Zomboid/Lua/DWAP_loot_audit.txt. Call TestAllLootConfigs() to start,
--- call it again to abort. TestAllLootConfigs(n) starts from config n.
+-- to Zomboid/Lua/DWAP_loot_audit.txt. Call DWAPAudit() to start, call it
+-- again to abort. DWAPAudit(n) starts from config n.
 local allLootState = nil
 local allLootTick
 local ALLLOOT_WAIT_TICKS = 300 -- chunk-streaming grace before jumping/giving up
+-- Squares existing does NOT mean the loot fill has run: the fill lands on
+-- later ticks, so verifying the moment chunks are in reported containers as
+-- unfilled that were about to be filled - 521 of 633 failures in the
+-- 2026-08-06 run, and config 37 flipped from 68 failures to PASS purely by
+-- being revisited. Hold after streaming until the number of stamped squares
+-- stops growing, rather than guessing a fixed delay.
+local ALLLOOT_FILL_POLL = 10    -- ticks between stamp counts
+local ALLLOOT_FILL_STABLE = 6   -- unchanged polls (~1s) before trusting the count
+local ALLLOOT_FILL_MAX = 900    -- absolute cap, for configs that never fill
 local ALLLOOT_SETTLE_TICKS = 120 -- pause between bases: back-to-back teleports can
 -- race the world streamer's vehicle chunk unload (BaseVehicle.update NPE)
 
@@ -1855,7 +1864,7 @@ local function allLootFinishConfig(unloaded, badZ)
     end
 
     -- level keys and explicit-item entries aren't tallied by TestLootConfig
-    local levels, itemEntries = {}, 0
+    local levels, itemEntries, skeletons = {}, 0, {}
     if config and config.loot then
         for i = 1, #config.loot do
             local e = config.loot[i]
@@ -1865,12 +1874,25 @@ local function allLootFinishConfig(unloaded, badZ)
                     levels[key] = (levels[key] or 0) + 1
                 end
                 if e.items then itemEntries = itemEntries + 1 end
+                -- An entry with coords but nothing to spawn still gets stamped
+                -- "filled" by the fill (Events.lua stamps unconditionally), so
+                -- stamp verification calls it a pass. Count them separately or
+                -- a config freshly picked from rooms reads as green while every
+                -- container it names stays empty.
+                if e.coords and not e.dist and not e.items and not e.special then
+                    skeletons[#skeletons + 1] = i
+                end
             end
         end
     end
     local levelStr = allLootTallyString(levels)
     if levelStr ~= "" then allLootWrite("  levels: " .. levelStr) end
     if itemEntries > 0 then allLootWrite("  explicit-item entries: " .. itemEntries) end
+    if #skeletons > 0 then
+        allLootWrite(("  SKELETON: %d entries define no loot yet (coords only) - entries %s"):format(
+            #skeletons, table.concat(skeletons, ",")))
+        st.skeletonTotal = (st.skeletonTotal or 0) + #skeletons
+    end
     allLootWrite("")
 
     st.index = st.index + 1
@@ -1878,12 +1900,49 @@ local function allLootFinishConfig(unloaded, badZ)
     st.ticksWaited = 0
 end
 
+-- Progress proxy for the fill: squares holding at least one object the fill
+-- has stamped. Cheaper than resolving every entry's container, and it only
+-- has to detect "still working" versus "done"
+local function allLootStampedSquares(config)
+    local n = 0
+    if not config or not config.loot then return n end
+    for i = 1, #config.loot do
+        local e = config.loot[i]
+        if e and e.coords then
+            local square = getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z))
+            local objects = square and square:getObjects()
+            if objects then
+                local stamped = false
+                for j = 0, objects:size() - 1 do
+                    local obj = objects:get(j)
+                    local md = obj and obj:getModData()
+                    if md and md.DWAPLoot then stamped = true end
+                end
+                if stamped then n = n + 1 end
+            end
+        end
+    end
+    return n
+end
+
+-- Hand off from streaming to the fill wait, carrying the counts the report
+-- needs so they survive the extra phase
+local function allLootBeginFillWait(st, unstreamed, badZ)
+    st.phase = "fill"
+    st.ticksWaited = 0
+    st.pendingUnstreamed = unstreamed
+    st.pendingBadZ = badZ
+    st.stampCount = -1
+    st.stampStable = 0
+end
+
 allLootTick = function()
     local st = allLootState
     if not st then return end
     if st.index > #st.configs then
-        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s ==="):format(
+        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s%s ==="):format(
             st.passed, st.failed, st.skipped,
+            (st.skeletonTotal or 0) > 0 and (", " .. st.skeletonTotal .. " skeleton entries awaiting loot") or "",
             st.checkSystems and (", " .. (st.systemsFlagged or 0) .. " systems problems") or ""))
         return
     end
@@ -1895,7 +1954,12 @@ allLootTick = function()
             st.phase = "teleport"
         end
     elseif st.phase == "teleport" then
-        if not config or not config.loot or #config.loot == 0 then
+        -- An emptied config still has a coverage pass worth running: the
+        -- unclaimed-container list is the menu you rebuild it from, and
+        -- skipping here meant a wiped table produced nothing at all
+        local hasLoot = config and config.loot and #config.loot > 0
+        local hasAnchors = config and config.baseBuildings and #config.baseBuildings > 0
+        if not config or (not hasLoot and not hasAnchors) then
             allLootWrite("=== " .. allLootConfigName(st.index, config) .. ": no loot entries, skipped ===")
             allLootWrite("")
             st.skipped = st.skipped + 1
@@ -1942,7 +2006,7 @@ allLootTick = function()
         end
 
         if unstreamed == 0 then
-            allLootFinishConfig(0, badZ)
+            allLootBeginFillWait(st, 0, badZ)
         elseif st.ticksWaited >= ALLLOOT_WAIT_TICKS then
             -- Count force-load jumps whose chunk STILL isn't in: three of
             -- those means the area can't stream in this save - stop grinding
@@ -1978,12 +2042,30 @@ allLootTick = function()
                 end
             end
             if failedJumps >= 3 or not jumpTo then
-                allLootFinishConfig(unstreamed, badZ)
+                -- whatever DID stream still deserves the fill wait
+                allLootBeginFillWait(st, unstreamed, badZ)
             else
                 st.jumped[jumpTo.coords.x .. "," .. jumpTo.coords.y] = true
                 allLootTeleport(jumpTo.coords.x, jumpTo.coords.y, math.floor(jumpTo.coords.z))
                 st.ticksWaited = 0
             end
+        end
+    elseif st.phase == "fill" then
+        st.ticksWaited = st.ticksWaited + 1
+        if st.ticksWaited % ALLLOOT_FILL_POLL == 0 then
+            local stamped = allLootStampedSquares(config)
+            if stamped > st.stampCount then
+                st.stampCount = stamped
+                st.stampStable = 0
+            else
+                st.stampStable = st.stampStable + 1
+            end
+        end
+        if st.stampStable >= ALLLOOT_FILL_STABLE or st.ticksWaited >= ALLLOOT_FILL_MAX then
+            if st.ticksWaited >= ALLLOOT_FILL_MAX then
+                DWAPUtils.dprint("Loot audit: fill wait hit its cap, verifying anyway")
+            end
+            allLootFinishConfig(st.pendingUnstreamed or 0, st.pendingBadZ)
         end
     end
 end
@@ -1994,7 +2076,14 @@ end
 -- below that fill percent.
 -- checkSystems (3rd arg, off by default) adds the power/water pass: keeps the
 -- normal run light, and gives a combined fix list when you want one
-function TestAllLootConfigs(startIndex, fillThreshold, checkSystems)
+--- Whether an audit is currently running, for the dev panel's toggle state.
+--- allLootState is file-local, so the panel cannot read it directly.
+--- @return boolean
+function DWAPAuditRunning()
+    return allLootState ~= nil
+end
+
+function DWAPAudit(startIndex, fillThreshold, checkSystems)
     if allLootState then
         DWAPUtils.dprint("Loot audit already running - aborting it")
         allLootStop("=== ABORTED at config " .. allLootState.index .. " ===")
@@ -3386,6 +3475,45 @@ function FindUnbarricaded()
     }
 end
 
+--- Nearest config by spawn distance to the player. Shared by the dev panel
+--- and the export dumps so they cannot disagree about what "nearest" means.
+--- @param useCache boolean|nil
+--- @return number|nil index, string|nil name
+function DWAPNearestConfig(useCache)
+    local player = getPlayer()
+    if not player then return nil end
+    local px, py = player:getX(), player:getY()
+    local configs = DWAPUtils.loadConfigs(not useCache)
+    if not configs then return nil end
+    local best, bestDist
+    for i = 1, #configs do
+        local config = configs[i]
+        local spawn = config and config.spawn
+        if spawn and spawn.x then
+            local dx, dy = spawn.x - px, spawn.y - py
+            local d = dx * dx + dy * dy
+            if not bestDist or d < bestDist then
+                best, bestDist = i, d
+            end
+        end
+    end
+    if not best then return nil end
+    local config = configs[best]
+    return best, (config and config.doorKeys and config.doorKeys.name) or ("Config " .. best)
+end
+
+-- Exports land in a long console and are easy to lose. Stamp each dump with
+-- the config it belongs to so it can be found - and pasted into the right
+-- file - long after the fact.
+local function exportHeader(what, extra)
+    local index, name = DWAPNearestConfig(true)
+    DWAPUtils.dprint(("=== %s | nearest config: %s %s%s ==="):format(
+        what,
+        index and ("%02d"):format(index) or "??",
+        name or "unknown",
+        extra or ""))
+end
+
 -- Plumbing picker: click tiles to build an export by hand. The footprint scan
 -- is all-or-nothing, which is unusable in something like Rosewood where the
 -- config only wants a few rooms out of a huge building. Selection is per
@@ -3525,7 +3653,7 @@ function DWAPPlumbExport()
         end
     end
 
-    DWAPUtils.dprint(("=== PICKED PLUMBING (%d squares, %d tanks, %d fixtures) ==="):format(
+    exportHeader("PICKED PLUMBING", (" | %d squares, %d tanks, %d fixtures"):format(
         #plumbPickedSquares, #tanks, #fixtures))
     if #tanks > 0 then
         print("    waterTanks = {")
@@ -3725,9 +3853,9 @@ function DWAPRoomExport(index)
             return
         end
         lookup = buildContainerLookup(config)
-        DWAPUtils.dprint(("=== PICKED ROOMS vs config %d ==="):format(index))
+        exportHeader("PICKED ROOMS", (" | compared against config %02d"):format(index))
     else
-        DWAPUtils.dprint("=== PICKED ROOMS (no config compared) ===")
+        exportHeader("PICKED ROOMS", " | no config compared")
     end
 
     local rooms = pickedRoomObjects()
@@ -4022,3 +4150,7 @@ function copyConfig()
         offset = { x = offsetX, y = offsetY, z = offsetZ }
     }
 end
+
+-- Old name kept as an alias: it is in CLAUDE.md, the handoff notes and a lot
+-- of muscle memory. Drop it once those have caught up.
+TestAllLootConfigs = DWAPAudit

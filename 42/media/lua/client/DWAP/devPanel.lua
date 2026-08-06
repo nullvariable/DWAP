@@ -13,26 +13,11 @@ require "ISUI/ISButton"
 local DWAPUtils = require("DWAPUtils")
 
 -- Nearest config by spawn distance to the player: the Show* toggles all
--- take a config index, and "the base I'm standing in" is the one you want
+-- take a config index, and "the base I'm standing in" is the one you want.
+-- DWAPNearestConfig (devTools) is the single implementation, so the panel
+-- readout and the export headers can never name different configs.
 local function nearestConfigIndex(useCache)
-    local player = getPlayer()
-    if not player then return nil end
-    local px, py = player:getX(), player:getY()
-    local configs = DWAPUtils.loadConfigs(not useCache)
-    if not configs then return nil end
-    local best, bestDist
-    for i = 1, #configs do
-        local c = configs[i]
-        local s = c and c.spawn
-        if s and s.x then
-            local dx, dy = s.x - px, s.y - py
-            local d = dx * dx + dy * dy
-            if not bestDist or d < bestDist then
-                best, bestDist = i, d
-            end
-        end
-    end
-    return best
+    return DWAPNearestConfig(useCache)
 end
 
 local function withNearest(fn, label)
@@ -250,6 +235,12 @@ function DWAPDevPanel()
         -- off by default because it drowns out everything else in -debug
         { label = "Power Log", fn = function() DWAPPowerLog() end,
             state = function() return DWAPUtils.verbosePower end },
+        -- Full run from config 1, loot only. DWAPAudit doubles as its own
+        -- abort, so the button stops a run in progress; green while running.
+        -- For a resume or the systems pass use the console: DWAPAudit(31) /
+        -- DWAPAudit(1, nil, true)
+        { label = "Run Audit", fn = function() DWAPAudit(1) end,
+            state = function() return DWAPAuditRunning and DWAPAuditRunning() end },
     }
     local panel = DWAPDevPanelUI:new(getCore():getScreenWidth() - 270, 100, 240, 40)
     panel.buttonDefs = defs
