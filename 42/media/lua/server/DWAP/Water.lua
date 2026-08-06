@@ -32,6 +32,15 @@ local function onLoadWithSprite(isoObject)
         DWAPUtils.dprint("DWAPWaterSystem instance not found, cannot load water object")
         return
     end
+    -- Retroactive conversion: a square first visited BEFORE its config
+    -- entry existed never fires onNew again, and loadIsoObject only
+    -- re-attaches objects that already carry water modData - without this,
+    -- fixtures added to a config mid-save stay unplumbed in that save
+    -- forever (converted objects pass isValidIsoObject and skip this)
+    if not DWAPWaterSystem.instance:isValidIsoObject(isoObject) then
+        onNewWithSprite(isoObject)
+        return
+    end
     pcall(function()
         DWAPWaterSystem.instance:loadIsoObject(isoObject)
     end)
@@ -66,6 +75,10 @@ Events.OnInitGlobalModData.Add(function()
                         tankSprites[tank.sprite] = true
                     end
                 end
+            end
+            -- fixtures register independently of tanks: a tankless config's
+            -- fixtures (and configs with tanks but no fixtures) both work
+            if config.waterFixtures then
                 for j = 1, #config.waterFixtures do
                     local fixture = config.waterFixtures[j]
                     if fixture and fixture.sprite then
