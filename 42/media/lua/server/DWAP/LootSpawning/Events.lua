@@ -202,6 +202,26 @@ end
 --- @param config table
 --- @param index number
 --- @param coordsKey number
+--- Stamp the container's parent object when a loot entry is consumed so
+--- audits can verify the DWAP fill actually ran regardless of the world's
+--- base-loot setting (with loot on, "container has items" proves nothing).
+--- Keyed per vertical member so fridge/freezer and stack pairs stamp
+--- independently. state: "filled" or "disabled" (sandbox option off)
+local function stampFill(container, config, state)
+    local parent = container and container:getParent()
+    if not parent then return end
+    local md = parent:getModData()
+    local stamps = md.DWAPLoot
+    if not stamps then
+        stamps = {}
+        md.DWAPLoot = stamps
+    end
+    local member = config.stack
+        or ((config.coords and config.coords.z % 1 ~= 0) and "upper")
+        or config.slot or "base"
+    stamps[tostring(member)] = state or "filled"
+end
+
 local function fillContainer(container, config, index, coordsKey)
     if not container or not config then return end
     local containerType = container:getType()
@@ -221,6 +241,7 @@ local function fillContainer(container, config, index, coordsKey)
         level = SandboxVars.DWAP.Loot_GunLevel or 3
     end
     if config.sandboxEnable ~= nil and not SandboxVars.DWAP[config.sandboxEnable] then
+        stampFill(container, config, "disabled")
         removeLootEntry(index, coordsKey)
         return
     end
@@ -414,6 +435,7 @@ local function fillContainer(container, config, index, coordsKey)
             end
         end
     end
+    stampFill(container, config, "filled")
     removeLootEntry(index, coordsKey)
 end
 
@@ -437,31 +459,37 @@ local function loadConfigs()
                 for j = 1, #config.loot do
                     local lootEntry = config.loot[j]
                     if lootEntry then
-                        if not lootEntry.level then
-                            lootEntry.level = 3 -- default to low
-                        end
-                        if rewriteLevel and type(lootEntry.level) == "string" then
-                            -- overwrite to low
-                            lootEntry.level = 3
-                        end
-                        if lootEntry.special and lootEntry.special ~= "gunlocker" and i ~= safehouseIndex then
-                            if not config.essentialLootOverride then
-                                DWAPUtils.dprint("Config " .. i .. " removing special loot: " .. tostring(lootEntry.special))
-                                config.loot[j] = nil
-                            else
-                                setLootConfigValue(lootEntry)
-                                if lootEntry.special then
-                                    specialCount = specialCount + 1
-                                end
-                                count = count + 1
-                            end
+                        -- in -debug every config gets its specials so audits
+                        -- and base-hopping test sessions see the full loadout;
+                        -- players still only get them at the selected base
+                        local skipSpecial = lootEntry.special and lootEntry.special ~= "gunlocker"
+                            and i ~= safehouseIndex and not config.essentialLootOverride
+                            and not getDebug()
+                        if skipSpecial then
+                            -- just don't register it: nil-ing config.loot[j]
+                            -- punched holes in the SHARED require-cached
+                            -- table, truncating #loot for every consumer
+                            -- (the audit was silently missing entries)
+                            DWAPUtils.dprint("Config " .. i .. " skipping special loot: " .. tostring(lootEntry.special))
                         else
-                            setLootConfigValue(lootEntry)
-                            -- try to precache the items
-                            if lootEntry.dist then
-                                DWAP_LootSpawning.getItemsWithDistLists(lootEntry.dist, lootEntry.distIncludeJunk)
+                            -- register a shallow copy: level defaulting and
+                            -- the non-primary rewrite must not leak into the
+                            -- shared config tables
+                            local entry = {}
+                            for k, v in pairs(lootEntry) do entry[k] = v end
+                            if not entry.level then
+                                entry.level = 3 -- default to low
                             end
-                            if lootEntry.special then
+                            if rewriteLevel and type(entry.level) == "string" then
+                                -- overwrite to low
+                                entry.level = 3
+                            end
+                            setLootConfigValue(entry)
+                            -- try to precache the items
+                            if entry.dist then
+                                DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
+                            end
+                            if entry.special then
                                 specialCount = specialCount + 1
                             end
                             count = count + 1

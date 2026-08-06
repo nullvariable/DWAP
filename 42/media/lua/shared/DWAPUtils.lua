@@ -245,7 +245,14 @@ function DWAPUtils.loadConfigs(noCache)
             local config = file and require(file) or false
             if config then
                 if i ~= index and (not SandboxVars.DWAP.Loot or SandboxVars.DWAP.Loot > 3) then
-                    config.loot = nil
+                    -- shallow copy instead of stripping in place: require()
+                    -- caches these tables, so every consumer (audit, dev
+                    -- tools, systems) shares them - an in-place strip would
+                    -- corrupt the config for the whole session
+                    local stripped = {}
+                    for k, v in pairs(config) do stripped[k] = v end
+                    stripped.loot = nil
+                    config = stripped
                 end
                 DWAPUtils.dprint("Loaded config: " .. file)
             end
