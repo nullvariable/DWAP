@@ -771,6 +771,61 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
+
+        -- main house
+        { type = 'container', coords = {x=6680,y=5507,z=1}, }, -- desk @ kidsbedroom
+        { type = 'container', coords = {x=6679,y=5507,z=1}, }, -- dresser @ kidsbedroom
+        { type = 'container', coords = {x=6678,y=5509,z=1}, }, -- wardrobe @ kidsbedroom
+        { type = 'container', coords = {x=6678,y=5510,z=1}, }, -- wardrobe @ kidsbedroom
+        { type = 'container', coords = {x=6681,y=5514,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6681,y=5515,z=1}, }, -- shelves @ kidsbedroom
+        { type = 'container', coords = {x=6678,y=5518,z=1}, }, -- dresser @ kidsbedroom
+        { type = 'container', coords = {x=6672,y=5511,z=1}, }, -- wardrobe @ hall
+        { type = 'container', coords = {x=6673,y=5511,z=1}, }, -- wardrobe @ hall
+        { type = 'container', coords = {x=6673,y=5517,z=1}, }, -- dresser @ hall
+        { type = 'container', coords = {x=6669,y=5516,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6667,y=5515,z=1}, }, -- wardrobe @ closet
+        { type = 'container', coords = {x=6667,y=5516,z=1}, }, -- wardrobe @ closet
+        { type = 'container', coords = {x=6667,y=5511,z=1}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=6670,y=5511,z=1}, }, -- shelves @ bedroom
+        { type = 'container', coords = {x=6667,y=5514,z=1}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=6675,y=5507,z=1}, }, -- fireplace @ livingroom
+        { type = 'container', coords = {x=6677,y=5508,z=1}, }, -- sidetable @ livingroom
+        { type = 'container', coords = {x=6677,y=5509,z=1}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=6677,y=5510,z=1}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=6672,y=5515,z=0}, }, -- medicine @ bathroom
+        { type = 'container', coords = {x=6667,y=5511,z=0}, }, -- metal_shelves @ garagestorage
+        { type = 'container', coords = {x=6671,y=5511,z=0}, }, -- barbecue @ garagestorage
+        { type = 'container', coords = {x=6667,y=5512,z=0}, }, -- counter @ garagestorage
+        { type = 'container', coords = {x=6667,y=5513,z=0}, }, -- counter @ garagestorage
+        { type = 'container', coords = {x=6671,y=5514,z=0}, }, -- locker @ garagestorage
+        { type = 'container', coords = {x=6671,y=5515,z=0}, }, -- cardboardbox @ garagestorage
+        { type = 'container', coords = {x=6667,y=5516,z=0}, }, -- metal_shelves @ garagestorage
+        { type = 'container', coords = {x=6671,y=5516,z=0}, }, -- cardboardbox @ garagestorage
+        { type = 'container', coords = {x=6667,y=5517,z=0}, }, -- metal_shelves @ garagestorage
+        { type = 'container', coords = {x=6671,y=5517,z=0}, }, -- cardboardbox @ garagestorage
+        { type = 'container', coords = {x=6671,y=5517,z=0}, slot = "upper", }, -- cardboardbox @ garagestorage
+        { type = 'container', coords = {x=6674,y=5511,z=0}, }, -- metal_shelves @ laundry
+        { type = 'container', coords = {x=6672,y=5513,z=0}, }, -- counter @ laundry
+        { type = 'container', coords = {x=6672,y=5513,z=0}, slot = "upper", }, -- overhead @ laundry
+        { type = 'container', coords = {x=6672,y=5514,z=0}, slot = "upper", }, -- overhead @ laundry
+        { type = 'container', coords = {x=6672,y=5507,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=6675,y=5507,z=0}, }, -- fireplace @ livingroom
+        { type = 'container', coords = {x=6681,y=5507,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6681,y=5507,z=0}, slot = "upper", }, -- overhead @ kitchen
+        { type = 'container', coords = {x=6681,y=5508,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6681,y=5509,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6678,y=5507,z=0}, }, -- fridge @ kitchen
+        { type = 'container', coords = {x=6678,y=5507,z=0}, }, -- freezer @ kitchen
+        { type = 'container', coords = {x=6678,y=5507,z=0}, slot = "upper", }, -- overhead @ kitchen
+        { type = 'container', coords = {x=6679,y=5507,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6679,y=5507,z=0}, slot = "upper", }, -- overhead @ kitchen
+        { type = 'container', coords = {x=6678,y=5513,z=0}, }, -- dishescabinet @ kitchen
+        { type = 'container', coords = {x=6678,y=5514,z=0}, }, -- dishescabinet @ kitchen
+        { type = 'container', coords = {x=6681,y=5515,z=0}, }, -- dresser @ office
+        { type = 'container', coords = {x=6681,y=5519,z=0}, }, -- desk @ office
+        { type = 'container', coords = {x=6678,y=5515,z=0}, }, -- dresser @ office
+        { type = 'container', coords = {x=6678,y=5519,z=0}, }, -- filingcabinet @ office
     },
 }
 

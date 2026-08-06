@@ -494,6 +494,45 @@ local WestPointHome = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
+        -- house and out buildings
+        { type = 'container', coords = {x=11767,y=6665,z=0}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=11768,y=6667,z=0}, }, -- medicine @ bathroom
+        { type = 'container', coords = {x=11772,y=6665,z=0}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=11764,y=6669,z=0}, }, -- dresser @ livingroom
+        { type = 'container', coords = {x=11772,y=6668,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=11772,y=6669,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=11772,y=6670,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=11770,y=6671,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11770,y=6671,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6671,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6671,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11770,y=6672,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11770,y=6672,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6673,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6673,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6674,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6674,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11770,y=6675,z=0}, }, -- fridge @ kitchen
+        { type = 'container', coords = {x=11770,y=6675,z=0}, }, -- freezer @ kitchen
+        { type = 'container', coords = {x=11771,y=6675,z=0}, }, -- dishwasher @ kitchen
+        { type = 'container', coords = {x=11772,y=6675,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11772,y=6675,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=11764,y=6673,z=0}, }, -- dresser @ livingroom
+        { type = 'container', coords = {x=11764,y=6677,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=11765,y=6677,z=0}, }, -- dresser @ livingroom
+        { type = 'container', coords = {x=11766,y=6677,z=0}, }, -- sidetable @ livingroom
+        { type = 'container', coords = {x=11769,y=6677,z=0}, }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=11765,y=6640,z=0}, }, -- composter @ greenhouse
+        { type = 'container', coords = {x=11767,y=6640,z=0}, }, -- composter @ greenhouse
+        { type = 'container', coords = {x=11765,y=6637,z=0}, }, -- counter @ greenhouse
+        { type = 'container', coords = {x=11767,y=6637,z=0}, }, -- composter @ greenhouse
+        { type = 'container', coords = {x=11767,y=6638,z=0}, }, -- composter @ greenhouse
+        { type = 'container', coords = {x=11767,y=6639,z=0}, }, -- composter @ greenhouse
+        { type = 'container', coords = {x=11773,y=6640,z=0}, }, -- metal_shelves @ garagestorage
+        { type = 'container', coords = {x=11773,y=6638,z=0}, }, -- counter @ garagestorage
+        { type = 'container', coords = {x=11773,y=6639,z=0}, }, -- counter @ garagestorage
+
+
     },
 }
 

@@ -1,9 +1,9 @@
-local wtc1 = {x = 12538, y = 5213, z = -1,}
+local wtc1 = { x = 12538, y = 5213, z = -1, }
 local pb1 = { x = 12534, y = 5214, z = -1 }
 local ForLease = {
-    group = "Valley Station", -- pretty far west, but this seems closest
+    group = "Valley Station",            -- pretty far west, but this seems closest
     baseBuildings = {
-        { x = 12538, y = 5211, z = 0 }, -- building
+        { x = 12538, y = 5211, z = 0 },  -- building
         { x = 12535, y = 5214, z = -1 }, -- building
     },
     spawn = { x = 12538, y = 5211, z = 0 },
@@ -122,11 +122,11 @@ local ForLease = {
         },
     },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType="generator", source = {x = pb1.x-1, y = pb1.y, z = pb1.z} },
+        { sprite = "dwap_tiles_01_9", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
     },
     waterFixtures = {
-        { sprite = "fixtures_bathroom_01_1", x = 12534, y = 5217, z = 0, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
-        { sprite = "fixtures_sinks_01_13", x = 12534, y = 5218, z = 0, sourceType="tank", source = {x = wtc1.x, y = wtc1.y, z = wtc1.z} },
+        { sprite = "fixtures_bathroom_01_1", x = 12534, y = 5217, z = 0, sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
+        { sprite = "fixtures_sinks_01_13",   x = 12534, y = 5218, z = 0, sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
     },
     doorKeys = {
         name = "Kinsella Rd Realtor Key",
@@ -137,124 +137,67 @@ local ForLease = {
     },
     map = { name = "DWAPStashMap38", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
+        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                       z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
         -- { sprite = "camping_01_16", x = 12529, y = 5213, z = 0, enabled = "EnableWaterSystem", }, -- well
 
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5219, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5218, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5217, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="fixtures_doors_01_48", x = 12546, y = 5215, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="fixtures_doors_01_48", x = 12546, y = 5214, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5212, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5211, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_40", x = 12546, y = 5210, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_01_49", x = 12544, y = 5209, z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5219,                        z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5218,                        z = 0, },
+        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5217,                        z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "fixtures_doors_01_48", x = 12546, y = 5215,                          z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "fixtures_doors_01_48", x = 12546, y = 5214,                          z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5212,                        z = 0, },
+        { barricade = "wood",         enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5211,                        z = 0, },
+        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_commercial_01_40", x = 12546, y = 5210,                        z = 0, },
+        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_01_49", x = 12544, y = 5209,                          z = 0, },
 
     },
     loot = {
-        -- store basement
-        {
-            type = 'container',
-            coords = {x=12535,y=5215,z=-1},
-            slot = "upper",
-            dist = {"CrateToiletPaper", "CrateLinens"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12535,y=5214,z=-1},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12535,y=5213,z=-1},
-            dist = {"CrateBlacksmithing" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12541,y=5212,z=-1},
-            slot = "upper",
-            dist = {"ArmyStorageOutfit",},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12542,y=5212,z=-1},
-            slot = "upper",
-            dist = {"DrugLabOutfit",},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12539,y=5214,z=-1},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12540,y=5214,z=-1},
-            dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12541,y=5214,z=-1},
-            dist = {"SafehouseMedical", "LiquorStoreWhiskey" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12540,y=5215,z=-1},
-            dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12541,y=5215,z=-1},
-            dist = {"CrateVHSTapes"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=12541,y=5216,z=-1},
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        {
-            type = 'container',
-            coords = {x=12540,y=5219,z=-1},
-            dist = {"CrateLiquor", "LiquorStoreWhiskey"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
+        { type = 'container', coords = { x = 12537, y = 5210, z = 0 }, }, -- cardboardbox @ empty
+        { type = 'container', coords = { x = 12540, y = 5210, z = 0 }, }, -- counter @ empty
+        { type = 'container', coords = { x = 12541, y = 5210, z = 0 }, }, -- counter @ empty
+        { type = 'container', coords = { x = 12542, y = 5210, z = 0 }, }, -- counter @ empty
+        { type = 'container', coords = { x = 12539, y = 5215, z = 0 }, }, -- cardboardbox @ empty
+        { type = 'container', coords = { x = 12539, y = 5216, z = 0 }, }, -- cardboardbox @ empty
+        { type = 'container', coords = { x = 12536, y = 5211, z = 0 }, }, -- crate @ grocerystorage
+        { type = 'container', coords = { x = 12538, y = 5217, z = -1 }, }, -- fridge @ bunker
+        { type = 'container', coords = { x = 12538, y = 5217, z = -1 }, }, -- freezer @ bunker
+        { type = 'container', coords = { x = 12539, y = 5217, z = -1 }, }, -- counter @ bunker
+        { type = 'container', coords = { x = 12539, y = 5217, z = -1 }, slot = "upper", }, -- overhead @ bunker
+        { type = 'container', coords = { x = 12540, y = 5217, z = -1 }, }, -- woodstove @ bunker
+        { type = 'container', coords = { x = 12541, y = 5217, z = -1 }, }, -- counter @ bunker
+        { type = 'container', coords = { x = 12541, y = 5217, z = -1 }, slot = "upper", }, -- overhead @ bunker
+        { type = 'container', coords = { x = 12537, y = 5218, z = -1 }, }, -- medicine @ bunker
+        { type = 'container', coords = { x = 12536, y = 5219, z = -1 }, }, -- shelves @ bunker
+        { type = 'container', coords = { x = 12539, y = 5219, z = -1 }, }, -- crate @ bunker
+        { type = 'container', coords = { x = 12535, y = 5218, z = -1 }, }, -- counter @ bunker
+        { type = 'container', coords = { x = 12535, y = 5218, z = -1 }, }, -- medicine @ bunker
+        { type = 'container', coords = { x = 12543, y = 5212, z = -1 }, }, -- militarylocker @ gunstore
+        { type = 'container', coords = { x = 12539, y = 5212, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12539, y = 5212, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12540, y = 5212, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12542, y = 5214, z = -1 }, }, -- shelves @ farmstorage
+        { type = 'container', coords = { x = 12543, y = 5214, z = -1 }, }, -- shelves @ farmstorage
+        { type = 'container', coords = { x = 12536, y = 5216, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12536, y = 5216, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12537, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12538, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12539, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12540, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12542, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12543, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
+        { type = 'container', coords = { x = 12544, y = 5212, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12544, y = 5214, z = -1 }, }, -- shelves @ farmstorage
+        { type = 'container', coords = { x = 12535, y = 5216, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12535, y = 5216, z = -1 }, }, -- crate @ farmstorage
+        { type = 'container', coords = { x = 12534, y = 5218, z = -1 }, }, -- militarycrate @ farmstorage
+        { type = 'container', coords = { x = 12534, y = 5218, z = -1 }, }, -- militarycrate @ farmstorage
+        { type = 'container', coords = { x = 12544, y = 5216, z = -1 }, }, -- metal_shelves @ farmstorage
     },
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(ForLease.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
+    table.insert(ForLease.objectSpawns,
+        { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
 end
 
 return ForLease
