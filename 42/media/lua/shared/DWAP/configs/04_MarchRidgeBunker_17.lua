@@ -277,15 +277,7 @@ local MarchRidgeConfig = {
         {
             type = 'container',
             coords = {x=9980,y=12632,z=-4},
-            dist = {"BookstoreNonFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = 1,
-        },
-        {
-            type = 'container',
-            coords = {x=9980,y=12631,z=-4},
-            dist = {"BookstoreMilitaryHistory"},
+            dist = {"BookstoreNonFiction", "BookstoreMilitaryHistory"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = 1,
