@@ -638,6 +638,8 @@ end
 
 --- All containers on a square in object-list order (stable: authored into
 --- the map data, floor furniture before wall furniture in practice).
+--- Enumerates EVERY container per object - fridge/freezer combos carry a
+--- secondary "freezer" container on the same object.
 --- @return table array of { object, container, isHigh }
 function DWAPUtils.getSquareContainers(square)
     local result = {}
@@ -646,9 +648,20 @@ function DWAPUtils.getSquareContainers(square)
     if not objects then return result end
     for j = 0, objects:size() - 1 do
         local obj = objects:get(j)
-        local c = obj and obj:getContainer()
-        if c then
-            result[#result + 1] = { object = obj, container = c, isHigh = isHighContainer(obj, c) }
+        if obj then
+            if obj.getContainerCount and obj:getContainerCount() > 0 then
+                for c = 0, obj:getContainerCount() - 1 do
+                    local cont = obj:getContainerByIndex(c)
+                    if cont then
+                        result[#result + 1] = { object = obj, container = cont, isHigh = isHighContainer(obj, cont) }
+                    end
+                end
+            else
+                local cont = obj:getContainer()
+                if cont then
+                    result[#result + 1] = { object = obj, container = cont, isHigh = isHighContainer(obj, cont) }
+                end
+            end
         end
     end
     return result
@@ -669,6 +682,14 @@ function DWAPUtils.resolveLootContainer(square, opts)
         local hit = list[opts.stack]
         return hit and hit.container or nil
     end
+    if opts.freezer then
+        -- the freezer compartment of a fridge/freezer combo (secondary
+        -- container with type "freezer")
+        for i = 1, #list do
+            if list[i].container:getType() == "freezer" then return list[i].container end
+        end
+        return nil
+    end
     if opts.upper then
         -- property-flagged wall container wins outright
         for i = 1, #list do
@@ -683,11 +704,19 @@ function DWAPUtils.resolveLootContainer(square, opts)
         end
         return list[#list].container
     end
-    -- base entry: first non-high container in object order
+    -- base entry: first non-high, non-freezer container in object order.
+    -- A lone freezer-type container (standalone freezer unit) still
+    -- satisfies base so plain entries keep working on those
+    local fallback = nil
     for i = 1, #list do
-        if not list[i].isHigh then return list[i].container end
+        if not list[i].isHigh then
+            if list[i].container:getType() ~= "freezer" then
+                return list[i].container
+            end
+            fallback = fallback or list[i].container
+        end
     end
-    return nil
+    return fallback
 end
 
 function DWAPUtils.tableSize(tbl)

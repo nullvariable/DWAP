@@ -1117,13 +1117,21 @@ function TestLootConfig(index, startFrom, retainedConfig)
         configName = config.doorKeys.name
     end
 
-    -- coord-key set so upper entries can tell whether their lower half is
-    -- also configured (drives resolveLootContainer's pairPresent fallback)
-    local allCoordKeys = {}
+    -- tile-key sets, always keyed on the integer z (slot/stack carry the
+    -- vertical): allTileKeys marks tiles with any entry (coverage check);
+    -- baseTileKeys marks tiles with a bottom entry (pairPresent for upper
+    -- resolution)
+    local allTileKeys = {}
+    local baseTileKeys = {}
     for i = 1, totalEntries do
         local e = lootEntries[i]
         if e and e.coords then
-            allCoordKeys[DWAPUtils.hashCoords(e.coords.x, e.coords.y, e.coords.z)] = true
+            local key = DWAPUtils.hashCoords(e.coords.x, e.coords.y, math.floor(e.coords.z))
+            allTileKeys[key] = true
+            local isUpper = e.slot == "upper" or (e.coords.z % 1) ~= 0
+            if not isUpper and not e.stack and e.slot ~= "freezer" then
+                baseTileKeys[key] = true
+            end
         end
     end
 
@@ -1151,6 +1159,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
         coordsHashes = retainedConfig.coordsHashes
     end
     local containerDetails = retainedConfig.containerDetails or {}
+    local legacyHalfZ = 0
     -- fill check: default 80%%; pass fillThreshold = 0 for worlds created with
     -- base-game loot disabled, where any item at all proves the DWAP fill ran
     local fillThreshold = retainedConfig.fillThreshold or 80
@@ -1178,9 +1187,15 @@ function TestLootConfig(index, startFrom, retainedConfig)
         -- Check if entry exists (not nil) and process it
         if entry and entry.coords then
             local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
+            local isUpperContainer = entry.slot == "upper" or (z % 1) ~= 0
+            if (z % 1) ~= 0 then
+                legacyHalfZ = legacyHalfZ + 1
+            end
+            local member = entry.stack or (isUpperContainer and "upper") or entry.slot or "base"
 
-            -- Check for duplicate coordinates using hash function
-            local coordsHash = DWAPUtils.hashCoords(x, y, z)
+            -- Duplicates are per tile AND vertical member: a bottom and an
+            -- upper entry sharing a tile are legitimate neighbors
+            local coordsHash = tostring(DWAPUtils.hashCoords(x, y, math.floor(z))) .. ":" .. tostring(member)
             if coordsHashes[coordsHash] then
                 DWAPUtils.dprint("Entry " ..
                     i ..
@@ -1217,14 +1232,14 @@ function TestLootConfig(index, startFrom, retainedConfig)
 
             -- Resolve through the shared source of truth (same logic the
             -- loot fill uses): stack ordinal > flagged upper > order fallbacks
-            local isUpperContainer = (z % 1) ~= 0
             local pairPresent = false
             if isUpperContainer then
-                pairPresent = allCoordKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
+                pairPresent = baseTileKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
             end
             local container = DWAPUtils.resolveLootContainer(square, {
                 upper = isUpperContainer,
                 stack = entry.stack,
+                freezer = entry.slot == "freezer",
                 pairPresent = pairPresent,
             })
 
@@ -1359,8 +1374,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
                                     end
                                     if not skip then
                                         local cx, cy, cz = rsq:getX(), rsq:getY(), rsq:getZ()
-                                        if not allCoordKeys[DWAPUtils.hashCoords(cx, cy, cz)]
-                                            and not allCoordKeys[DWAPUtils.hashCoords(cx, cy, cz + 0.5)] then
+                                        if not allTileKeys[DWAPUtils.hashCoords(cx, cy, cz)] then
                                             unclaimedContainers[#unclaimedContainers + 1] = {
                                                 x = cx, y = cy, z = cz,
                                                 ctype = ctype,
@@ -1435,6 +1449,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
         containerDetails = containerDetails,
         unclaimedContainers = unclaimedContainers,
         anchorProblems = anchorProblems,
+        legacyHalfZ = legacyHalfZ,
     }
 end
 
@@ -1526,6 +1541,9 @@ local function allLootFinishConfig(unloaded, badZ)
             st.failed = st.failed + 1
         end
 
+        if result.legacyHalfZ and result.legacyHalfZ > 0 then
+            allLootWrite(("  legacy +0.5 entries: %d (convert to slot = \"upper\")"):format(result.legacyHalfZ))
+        end
         local special = allLootTallyString(result.specialTags)
         if special ~= "" then allLootWrite("  special: " .. special) end
         local dist = allLootTallyString(result.distTags)
@@ -1759,6 +1777,9 @@ local function buildContainerLookup(config)
         local entry = config.loot[i]
         if entry and entry.coords then
             local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
+            -- slot = "upper" entries use the same internal key shape the
+            -- legacy +0.5 convention did
+            if entry.slot == "upper" and z % 1 == 0 then z = z + 0.5 end
             local key = DWAPUtils.hashCoords(x, y, z)
             lookup[key] = 1
             if not entry.dist and not entry.items and not entry.special then
@@ -1949,11 +1970,26 @@ local function buildContainerLabels(config)
         local entry = config.loot[i]
         if entry and entry.coords then
             local z = entry.coords.z
+            local isUpper = z % 1 ~= 0 or entry.slot == "upper"
+            -- draw-height offset in z units so co-tile labels separate at
+            -- their containers' rough heights (zoom-aware via projection):
+            -- uppers at wall-cabinet height, stacks a third of a level per
+            -- crate, bottom on the floor
+            local rise = 0
+            if isUpper then
+                rise = 0.66
+            elseif entry.slot == "freezer" then
+                rise = 0.4
+            elseif entry.stack then
+                rise = (entry.stack - 1) * 0.33
+            end
             labels[#labels + 1] = {
                 x = entry.coords.x,
                 y = entry.coords.y,
-                z = z,
-                text = tostring(i) .. (entry.stack and ("s" .. entry.stack) or "") .. ((z % 1 ~= 0) and "^" or ""),
+                z = math.floor(z),
+                rise = rise,
+                text = tostring(i) .. (entry.stack and ("s" .. entry.stack) or "")
+                    .. (isUpper and "^" or "") .. (entry.slot == "freezer" and "f" or ""),
             }
         end
     end
@@ -1972,9 +2008,10 @@ function containerLabelsDraw()
     local tm = getTextManager()
     for i = 1, #currentContainerLabels do
         local l = currentContainerLabels[i]
-        if math.floor(l.z) == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
-            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, l.z)
-            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, l.z)
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + (l.rise or 0)
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
             tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
             tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 1, 0.2, 1)
         end

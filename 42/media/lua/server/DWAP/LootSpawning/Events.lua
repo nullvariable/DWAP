@@ -20,25 +20,31 @@ local function setLootConfigValue(config)
     local x = config.coords.x
     local y = config.coords.y
     local z = config.coords.z
+    -- Normalize the vertical conventions: slot = "upper"/"freezer" are the
+    -- explicit forms, legacy fractional z (+0.5) still means upper, stack
+    -- ordinals address crate stacks. Bottom is the default
+    local member = config.stack
+    if not member then
+        if z % 1 ~= 0 then
+            member = "upper"
+        else
+            member = config.slot or "base"
+        end
+    end
+    z = math.floor(z)
     local coordsKey = hashCoords(x, y, z)
     local index = #lootConfig + 1
     lootConfig[index] = config
-    if config.stack then
-        -- stacked entries share one coords key; slot becomes a table keyed
-        -- by stack ordinal (plus "base" for a legacy non-stack entry)
-        local slot = lootByCoords[coordsKey]
+    local slot = lootByCoords[coordsKey]
+    if member == "base" and slot == nil then
+        -- common case stays a plain number (matches legacy modData shape)
+        lootByCoords[coordsKey] = index
+    else
         if type(slot) ~= "table" then
             slot = { base = slot }
             lootByCoords[coordsKey] = slot
         end
-        slot[config.stack] = index
-    else
-        local slot = lootByCoords[coordsKey]
-        if type(slot) == "table" then
-            slot.base = index
-        else
-            lootByCoords[coordsKey] = index
-        end
+        slot[member] = index
     end
 end
 
@@ -47,13 +53,16 @@ end
 --- @param y number
 --- @param z number
 --- @return table|nil lootConfig, number|nil index, number|nil coordsKey loot config, lootByCoords index, hash of coords
-local function getLootForCoords(x, y, z, stack)
+-- member: nil/"base" for the bottom container, "upper" for wall-mounted,
+-- or a stack ordinal number
+local function getLootForCoords(x, y, z, member)
+    member = member or "base"
     local coordsKey = hashCoords(x, y, z)
     local slot = lootByCoords[coordsKey]
     local index
     if type(slot) == "table" then
-        index = stack and slot[stack] or slot.base
-    elseif not stack then
+        index = slot[member]
+    elseif member == "base" then
         index = slot
     end
     if index then
@@ -73,10 +82,16 @@ local function removeLootEntry(index, coordsKey)
     local slot = lootByCoords[coordsKey]
     if type(slot) == "table" then
         -- clear only this entry's member; drop the slot once empty
+        -- (PZ's Kahlua has no `next` global, so probe emptiness with pairs)
+        local empty = true
         for k, v in pairs(slot) do
-            if v == index then slot[k] = nil end
+            if v == index then
+                slot[k] = nil
+            else
+                empty = false
+            end
         end
-        if not next(slot) then lootByCoords[coordsKey] = nil end
+        if empty then lootByCoords[coordsKey] = nil end
     else
         lootByCoords[coordsKey] = nil
     end
@@ -493,14 +508,26 @@ local function onFillContainer(roomType, containerType, container)
             loot, index, coordsKey = getLootForCoords(x, y, z, ordinal)
         end
 
-        -- upper (+0.5) entry that resolves to this container?
+        -- upper entry that resolves to this container? (legacy fallback:
+        -- modData snapshots from older saves key uppers at z + 0.5)
         if not loot then
-            local upLoot, upIndex, upKey = getLootForCoords(x, y, z + 0.5)
+            local upLoot, upIndex, upKey = getLootForCoords(x, y, z, "upper")
+            if not upLoot then
+                upLoot, upIndex, upKey = getLootForCoords(x, y, z + 0.5)
+            end
             if upLoot then
                 local baseLoot = getLootForCoords(x, y, z)
                 if DWAPUtils.resolveLootContainer(square, { upper = true, pairPresent = baseLoot ~= nil }) == container then
                     loot, index, coordsKey = upLoot, upIndex, upKey
                 end
+            end
+        end
+
+        -- freezer-slot entry that resolves to this container?
+        if not loot then
+            local fLoot, fIndex, fKey = getLootForCoords(x, y, z, "freezer")
+            if fLoot and DWAPUtils.resolveLootContainer(square, { freezer = true }) == container then
+                loot, index, coordsKey = fLoot, fIndex, fKey
             end
         end
 
