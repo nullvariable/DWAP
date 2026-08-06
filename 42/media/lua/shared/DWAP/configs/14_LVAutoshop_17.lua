@@ -133,7 +133,8 @@ local LVAutoshop = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -148,7 +149,8 @@ local LVAutoshop = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -166,7 +168,8 @@ local LVAutoshop = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -322,7 +325,8 @@ local LVAutoshop = {
         -- auto shop
         {
             type = 'container',
-            coords = {x=13150,y=3018,z=0.5},
+            coords = {x=13150,y=3018,z=0},
+            slot = "upper",
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,

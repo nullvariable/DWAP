@@ -181,7 +181,8 @@ local TheDrake = {
         -- shelter area
         {
             type = 'container',
-            coords = {x=11896,y=6843,z=-0.5},
+            coords = {x=11896,y=6843,z=-1},
+            slot = "upper",
             dist = {"SafehouseMedical", "BathroomCounter", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -189,7 +190,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11900,y=6841,z=-0.5},
+            coords = {x=11900,y=6841,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -210,7 +212,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11902,y=6841,z=-0.5},
+            coords = {x=11902,y=6841,z=-1},
+            slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning", "Homesteading"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -226,7 +229,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11903,y=6841,z=-0.5},
+            coords = {x=11903,y=6841,z=-1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -242,7 +246,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11904,y=6841,z=-0.5},
+            coords = {x=11904,y=6841,z=-1},
+            slot = "upper",
             dist = {"SafehouseFireplace", "SafehouseLighting", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -630,7 +635,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11902,y=6859,z=0.5},
+            coords = {x=11902,y=6859,z=0},
+            slot = "upper",
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -670,7 +676,8 @@ local TheDrake = {
         },
         {
             type = 'container',
-            coords = {x=11905,y=6851,z=1.5},
+            coords = {x=11905,y=6851,z=1},
+            slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter",},
             distIncludeJunk = true,
             randUntilFull = true,

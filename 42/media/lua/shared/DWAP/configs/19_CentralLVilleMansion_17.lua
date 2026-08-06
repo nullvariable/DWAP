@@ -279,7 +279,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13431, y = 1901, z = -1.5},
+            coords = {x = 13431, y = 1901, z = -2},
+            slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -1168,7 +1169,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13437, y = 1904, z = 0.5},
+            coords = {x = 13437, y = 1904, z = 0},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1184,7 +1186,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13437, y = 1903, z = 0.5},
+            coords = {x = 13437, y = 1903, z = 0},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1200,7 +1203,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13437, y = 1901, z = 0.5},
+            coords = {x = 13437, y = 1901, z = 0},
+            slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1216,7 +1220,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13437, y = 1900, z = 0.5},
+            coords = {x = 13437, y = 1900, z = 0},
+            slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1232,7 +1237,8 @@ local CentralLVilleMansion = {
         },
         {
             type = 'container',
-            coords = {x = 13437, y = 1899, z = 0.5},
+            coords = {x = 13437, y = 1899, z = 0},
+            slot = "upper",
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -1249,7 +1255,8 @@ local CentralLVilleMansion = {
         -- laundry
         {
             type = 'container',
-            coords = {x=13444,y=1897,z=0.5},
+            coords = {x=13444,y=1897,z=0},
+            slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
             randUntilFull = true,

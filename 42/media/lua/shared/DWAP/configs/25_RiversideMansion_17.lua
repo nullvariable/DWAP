@@ -206,7 +206,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6674,y=5507,z=1.5},
+            coords = {x=6674,y=5507,z=1},
+            slot = "upper",
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -257,7 +258,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6672,y=5512,z=1.5},
+            coords = {x=6672,y=5512,z=1},
+            slot = "upper",
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -283,7 +285,8 @@ local RiversideMansion = {
         -- closet
         {
             type = 'container',
-            coords = {x=6669,y=5508,z=1.5},
+            coords = {x=6669,y=5508,z=1},
+            slot = "upper",
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -324,7 +327,8 @@ local RiversideMansion = {
         -- closet
         {
             type = 'container',
-            coords = {x=6672,y=5516,z=0.5},
+            coords = {x=6672,y=5516,z=0},
+            slot = "upper",
             dist = { "BurglarTools", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -333,7 +337,8 @@ local RiversideMansion = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=6670,y=5507,z=0.5},
+            coords = {x=6670,y=5507,z=0},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -450,7 +455,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6680,y=5504,z=0.5},
+            coords = {x=6680,y=5504,z=0},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -466,7 +472,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6680,y=5505,z=0.5},
+            coords = {x=6680,y=5505,z=0},
+            slot = "upper",
             dist = {"GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -640,7 +647,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6672,y=5501,z=-0.5},
+            coords = {x=6672,y=5501,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -986,7 +994,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6662,y=5519,z=-0.5},
+            coords = {x=6662,y=5519,z=-1},
+            slot = "upper",
             dist = {"StoreKitchenPotatoes"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1002,7 +1011,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6662,y=5518,z=-0.5},
+            coords = {x=6662,y=5518,z=-1},
+            slot = "upper",
             dist = {"ArenaKitchenSauce"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1018,7 +1028,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6662,y=5517,z=-0.5},
+            coords = {x=6662,y=5517,z=-1},
+            slot = "upper",
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1034,7 +1045,8 @@ local RiversideMansion = {
         },
         {
             type = 'container',
-            coords = {x=6662,y=5516,z=-0.5},
+            coords = {x=6662,y=5516,z=-1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,

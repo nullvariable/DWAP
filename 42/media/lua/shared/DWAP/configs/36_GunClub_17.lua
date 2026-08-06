@@ -569,7 +569,8 @@ local GunClub = {
         ---------------
         {
             type = 'container',
-            coords = {x=1862,y=14150,z=-0.5},
+            coords = {x=1862,y=14150,z=-1},
+            slot = "upper",
             dist = {"SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -577,7 +578,8 @@ local GunClub = {
         },
         {
             type = 'container',
-            coords = {x=1867,y=14149,z=-0.5},
+            coords = {x=1867,y=14149,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -585,7 +587,8 @@ local GunClub = {
         },
         {
             type = 'container',
-            coords = {x=1868,y=14149,z=-0.5},
+            coords = {x=1868,y=14149,z=-1},
+            slot = "upper",
             dist = {"MedicalClinicDrugs" },
             distIncludeJunk = true,
             randUntilFull = true,

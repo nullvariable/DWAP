@@ -311,7 +311,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z+0.5},
+            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -325,7 +326,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z+0.5},
+            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -342,7 +344,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z+0.5},
+            coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -452,7 +455,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z+0.5},
+            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -466,7 +470,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z+0.5},
+            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -483,7 +488,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z+0.5},
+            coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -609,7 +615,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z+0.5},
+            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -623,7 +630,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z+0.5},
+            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -640,7 +648,8 @@ local LVilleComplex = {
         {
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z+0.5},
+            coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -858,7 +867,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x = 14148, y = 2626, z = -0.5},
+            coords = {x = 14148, y = 2626, z = -1},
+            slot = "upper",
             dist = {"FitnessTrainer"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -866,7 +876,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x = 14148, y = 2625, z = -0.5},
+            coords = {x = 14148, y = 2625, z = -1},
+            slot = "upper",
             dist = {"CrateFitnessWeights"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -1088,7 +1099,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x = 14144, y = 2641, z = -1.5},
+            coords = {x = 14144, y = 2641, z = -2},
+            slot = "upper",
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -1096,7 +1108,8 @@ local LVilleComplex = {
         },
         {
             type = 'container',
-            coords = {x = 14145, y = 2641, z = -1.5},
+            coords = {x = 14145, y = 2641, z = -2},
+            slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,

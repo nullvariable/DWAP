@@ -155,7 +155,8 @@ local WWestPointSafeHouse = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=10146,y=6636,z=-1+0.5},
+            coords = {x=10146,y=6636,z=-1},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -170,7 +171,8 @@ local WWestPointSafeHouse = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=10146,y=6635,z=-1+0.5},
+            coords = {x=10146,y=6635,z=-1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -188,7 +190,8 @@ local WWestPointSafeHouse = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=10146,y=6634,z=-1+0.5},
+            coords = {x=10146,y=6634,z=-1},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -438,7 +441,8 @@ local WWestPointSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=10154,y=6630,z=0.5},
+            coords = {x=10154,y=6630,z=0},
+            slot = "upper",
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -446,7 +450,8 @@ local WWestPointSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=10159,y=6630,z=0.5},
+            coords = {x=10159,y=6630,z=0},
+            slot = "upper",
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -611,7 +616,8 @@ local WWestPointSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=10150,y=6625,z=1.5},
+            coords = {x=10150,y=6625,z=1},
+            slot = "upper",
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,

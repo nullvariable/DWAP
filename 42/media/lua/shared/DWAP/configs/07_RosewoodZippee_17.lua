@@ -313,7 +313,8 @@ local RosewoodZippee = {
         },
         {
             type = 'container',
-            coords = {x=8182,y=11272,z=1.5},
+            coords = {x=8182,y=11272,z=1},
+            slot = "upper",
             dist = {"MedicalCabinet", "MedicalClinicTools", "MedicalStorageDrugs", "ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,

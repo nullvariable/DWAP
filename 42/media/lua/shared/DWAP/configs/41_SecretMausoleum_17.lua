@@ -180,7 +180,8 @@ local SecretMausoleum = {
         -- bathroom
         {
             type = 'container',
-            coords = {x=8138,y=11513,z=0.5},
+            coords = {x=8138,y=11513,z=0},
+            slot = "upper",
             dist = {"MedicalCabinet", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,

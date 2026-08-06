@@ -177,7 +177,8 @@ local LowryCourt = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -192,7 +193,8 @@ local LowryCourt = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -210,7 +212,8 @@ local LowryCourt = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -315,7 +318,8 @@ local LowryCourt = {
         -- 2nd floor
         {
             type = 'container',
-            coords = {x=12995,y=1911,z=2.5},
+            coords = {x=12995,y=1911,z=2},
+            slot = "upper",
             dist = {"BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
             distIncludeJunk = true,
             randUntilFull = true,

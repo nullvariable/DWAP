@@ -203,7 +203,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10658, y = 9564, z = 0.5 },
+            coords = { x = 10658, y = 9564, z = 0 },
+            slot = "upper",
             dist = { "GasStoreEmergency" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -243,7 +244,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10657, y = 9567, z = 0.5 },
+            coords = { x = 10657, y = 9567, z = 0 },
+            slot = "upper",
             dist = { "CrateToiletPaper", "KitchenDryFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -295,7 +297,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10663, y = 9573, z = 0.5 },
+            coords = { x = 10663, y = 9573, z = 0 },
+            slot = "upper",
             dist = { "MedicalClinicTools", "MedicalStorageDrugs" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -344,7 +347,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10657, y = 9567, z = 1.5 },
+            coords = { x = 10657, y = 9567, z = 1 },
+            slot = "upper",
             dist = { "BathroomCounter", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -389,7 +393,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10657, y = 9569, z = 0.5 },
+            coords = { x = 10657, y = 9569, z = 0 },
+            slot = "upper",
             dist = { "CrateFishing", "FishermanTools", "HuntingLockers", "RangerTools" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -497,7 +502,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10660, y = 9564, z = -0.5 },
+            coords = { x = 10660, y = 9564, z = -1 },
+            slot = "upper",
             dist = { "ButcherSpices", "GigamartSpices", "GroceryBagGourmet", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -513,7 +519,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10661, y = 9564, z = -0.5 },
+            coords = { x = 10661, y = 9564, z = -1 },
+            slot = "upper",
             dist = { "ButcherSpices", "GigamartSpices", "GroceryBagGourmet", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -529,7 +536,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10662, y = 9564, z = -0.5 },
+            coords = { x = 10662, y = 9564, z = -1 },
+            slot = "upper",
             dist = { "BakeryKitchenFreezer", "CrateCannedFood", "CafeKitchenCoffee" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -537,7 +545,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10663, y = 9564, z = -0.5 },
+            coords = { x = 10663, y = 9564, z = -1 },
+            slot = "upper",
             dist = { "GigamartCrisps", "SafehouseFireplace" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -553,7 +562,8 @@ local MuldSafeHouse = {
         },
         {
             type = 'container',
-            coords = { x = 10661, y = 9573, z = -0.5 },
+            coords = { x = 10661, y = 9573, z = -1 },
+            slot = "upper",
             dist = { "SafehouseMedical", "CrateLinens" },
             distIncludeJunk = true,
             randUntilFull = true,

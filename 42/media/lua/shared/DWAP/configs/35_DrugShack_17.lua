@@ -397,7 +397,8 @@ local DrugShack = {
         },
         {
             type = 'container',
-            coords = {x=11591,y=9298,z=-0.5},
+            coords = {x=11591,y=9298,z=-1},
+            slot = "upper",
             dist = {"ArmyStorageMedical", "DrugLabSupplies"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -413,7 +414,8 @@ local DrugShack = {
         },
         {
             type = 'container',
-            coords = {x=11592,y=9298,z=-0.5},
+            coords = {x=11592,y=9298,z=-1},
+            slot = "upper",
             dist = {"MedicalClinicDrugs","MedicalCabinet","ArmyStorageMedical", "DerelictHouseDrugs"},
             distIncludeJunk = false,
             randUntilFull = true,

@@ -314,7 +314,8 @@ local MRSecret = {
         -- bedroom
         {
             type = 'container',
-            coords = {x=9852,y=13110,z=1.5},
+            coords = {x=9852,y=13110,z=1},
+            slot = "upper",
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -348,7 +349,8 @@ local MRSecret = {
         -- closet
         {
             type = 'container',
-            coords = {x=9849,y=13108,z=1.5},
+            coords = {x=9849,y=13108,z=1},
+            slot = "upper",
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -750,7 +752,8 @@ local MRSecret = {
         },
         {
             type = 'container',
-            coords = {x=9851,y=13124,z=-3.5},
+            coords = {x=9851,y=13124,z=-4},
+            slot = "upper",
             dist = {"GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -766,7 +769,8 @@ local MRSecret = {
         },
         {
             type = 'container',
-            coords = {x=9849,y=13124,z=-3.5},
+            coords = {x=9849,y=13124,z=-4},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -783,7 +787,8 @@ local MRSecret = {
         },
         {
             type = 'container',
-            coords = {x=9848,y=13124,z=-3.5},
+            coords = {x=9848,y=13124,z=-4},
+            slot = "upper",
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -808,7 +813,8 @@ local MRSecret = {
         },
         {
             type = 'container',
-            coords = {x=9845,y=13121,z=-3.5},
+            coords = {x=9845,y=13121,z=-4},
+            slot = "upper",
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,

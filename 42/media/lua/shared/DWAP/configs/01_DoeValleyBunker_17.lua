@@ -1,6 +1,3 @@
-local bunkerTopLeft = {x = 5574, y = 9362, z = -1}
-local wtc = {x = 5579, y = 9372, z = -1}
-local pb1 = { x = 5584, y = 9371, z = -1 }
 --- Notes:
 --- Lives in the woods, remote with poor car access
 --- fairly small but low local zombies and plenty of room to
@@ -14,7 +11,7 @@ local DoeValleyBunker = {
     },
     spawn = { x = 5576, y = 9365, z = -1 },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 5583, y = 9371, z = -1} },
+        { sprite = "dwap_tiles_01_9", x = 5579, y = 9372, z = -1, sourceType="generator", source = {x = 5583, y = 9371, z = -1} },
     },
     waterFixtures = {
         { sprite = "fixtures_bathroom_01_6", x = 5577, y = 9371, z = -1, sourceType="tank", source = 1 },
@@ -26,7 +23,7 @@ local DoeValleyBunker = {
             controls = { sprite = "dwap_tiles_01_22", x = 5583, y = 9372, z = -1 },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 5581, y= 9372, z= -1, },
             solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
+                powerbank = { sprite = "dwap_tiles_01_0", x = 5584, y = 9371, z = -1 },
                 panels = {
                     {
                         type = "panel",
@@ -89,13 +86,14 @@ local DoeValleyBunker = {
     loot = {
         { -- cabinet next to bunk beds (9365)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9365,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- upper
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
+            coords = {x=5575,y=9366,z=-1},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -103,13 +101,14 @@ local DoeValleyBunker = {
         },
         { -- lower (66)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9366,z=-1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- upper
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
+            coords = {x=5575,y=9367,z=-1},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -118,7 +117,7 @@ local DoeValleyBunker = {
         { -- lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9367,z=-1},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -127,7 +126,8 @@ local DoeValleyBunker = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
+            coords = {x=5575,y=9368,z=-1},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -136,16 +136,35 @@ local DoeValleyBunker = {
         { -- lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9368,z=-1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
+        { -- index 8, fridge/freezer
+            type = 'container',
+            coords = {x=5575,y=9369,z=-1},
+            dist = {"FridgeFarmStorage", "FridgeGeneric"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- index 9, fridge/freezer
+            type = 'container',
+            slot = "freezer",
+            frozen = true,
+            coords = {x=5575,y=9369,z=-1},
+            dist = {"FreezerIceCream", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
         { -- metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9370,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -153,36 +172,36 @@ local DoeValleyBunker = {
         },
         { -- metal shelves (71)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9371,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- next to inner door (9372)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9372,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- (73)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9373,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- (9374)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9374,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- far end next to stairs (9375)
             type = 'container',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
+            coords = {x=5575,y=9375,z=-1},
             special = "essentials",
         },
         { -- metal wall shelves
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            coords = {x=5577,y=9368,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -190,13 +209,13 @@ local DoeValleyBunker = {
         },
         { -- metal wall shelves
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            coords = {x=5577,y=9369,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- metal wall shelves
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
+            coords = {x=5577,y=9370,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -206,7 +225,17 @@ local DoeValleyBunker = {
         -- extra spawns
         {
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            coords = {x=5577,y=9363,z=-1},
+            stack = 1,
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        { -- @TODO doubled lower loot for the top crate; review later
+            type = 'container',
+            coords = {x=5577,y=9363,z=-1},
+            stack = 2,
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -214,7 +243,17 @@ local DoeValleyBunker = {
         },
         {
             type = 'container',
-            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            coords = {x=5577,y=9364,z=-1},
+            stack = 1,
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        { -- @TODO doubled lower loot for the top crate; review later
+            type = 'container',
+            coords = {x=5577,y=9364,z=-1},
+            stack = 2,
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,

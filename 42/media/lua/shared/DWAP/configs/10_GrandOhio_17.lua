@@ -252,7 +252,8 @@ local GrandOhioConfig = {
         -- medical
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+9,z=-4+0.5},
+            coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+9,z=-4},
+            slot = "upper",
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -535,7 +536,8 @@ local GrandOhioConfig = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+27,z=-4+0.5},
+            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+27,z=-4},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -543,7 +545,8 @@ local GrandOhioConfig = {
         },
         {
             type = 'container',
-            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-9,z=-4+0.5},
+            coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-9,z=-4},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,

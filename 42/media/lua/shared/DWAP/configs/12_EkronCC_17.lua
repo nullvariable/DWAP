@@ -254,7 +254,8 @@ local EkronCC = {
         -- medical
         {
             type = 'container',
-            coords = {x=genCoords.x+22,y=genCoords.y+9,z=genCoords.z+0.5},
+            coords = {x=genCoords.x+22,y=genCoords.y+9,z=genCoords.z},
+            slot = "upper",
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -545,7 +546,8 @@ local EkronCC = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=genCoords.x+12,y=genCoords.y+27,z=genCoords.z+0.5},
+            coords = {x=genCoords.x+12,y=genCoords.y+27,z=genCoords.z},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -553,7 +555,8 @@ local EkronCC = {
         },
         {
             type = 'container',
-            coords = {x=genCoords.x+12,y=genCoords.y-9,z=genCoords.z+0.5},
+            coords = {x=genCoords.x+12,y=genCoords.y-9,z=genCoords.z},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,

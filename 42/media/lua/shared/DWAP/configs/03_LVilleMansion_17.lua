@@ -194,7 +194,8 @@ local LVilleMansion = {
         -- garage
         {
             type = 'container',
-            coords = { x = 12026, y = 2596, z = 0.5 },
+            coords = { x = 12026, y = 2596, z = 0 },
+            slot = "upper",
             dist = { "GasStoreEmergency", "StoreCounterTobacco" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -256,7 +257,8 @@ local LVilleMansion = {
         },
         { -- front door closet
             type = 'container',
-            coords = { x = 12029, y = 2591, z = 0.5 },
+            coords = { x = 12029, y = 2591, z = 0 },
+            slot = "upper",
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -353,7 +355,8 @@ local LVilleMansion = {
         },
         {
             type = 'container',
-            coords = { x = 12024, y = 2591, z = 1.5 },
+            coords = { x = 12024, y = 2591, z = 1 },
+            slot = "upper",
             dist = { "ArmyStorageAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -385,7 +388,8 @@ local LVilleMansion = {
         },
         {
             type = 'container',
-            coords = { x = 12023, y = 2600, z = 1.5 },
+            coords = { x = 12023, y = 2600, z = 1 },
+            slot = "upper",
             dist = { "ArmyStorageAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -409,7 +413,8 @@ local LVilleMansion = {
         },
         {
             type = 'container',
-            coords = { x = 12026, y = 2595, z = 1.5 },
+            coords = { x = 12026, y = 2595, z = 1 },
+            slot = "upper",
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -425,7 +430,8 @@ local LVilleMansion = {
         },
         {
             type = 'container',
-            coords = { x = 12029, y = 2591, z = 1.5 },
+            coords = { x = 12029, y = 2591, z = 1 },
+            slot = "upper",
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = true,
             randUntilFull = true,

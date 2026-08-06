@@ -155,7 +155,8 @@ local QuillManor = {
         },
         {
             type = 'container',
-            coords = {x=1217,y=7370,z=-9.5},
+            coords = {x=1217,y=7370,z=-10},
+            slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -737,7 +738,8 @@ local QuillManor = {
         },
         {
             type = 'container',
-            coords = {x=1228,y=7373,z=-9.5},
+            coords = {x=1228,y=7373,z=-10},
+            slot = "upper",
             dist = {"BathroomCounter", "SafehouseMedical"},
             distIncludeJunk = true,
             randUntilFull = true,

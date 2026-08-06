@@ -162,7 +162,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1664,y=5749,z=-3.5},
+            coords = {x=1664,y=5749,z=-4},
+            slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
@@ -176,7 +177,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1663,y=5749,z=-3.5},
+            coords = {x=1663,y=5749,z=-4},
+            slot = "upper",
             dist = {"GigamartCrisps","ControlRoomCounter" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -184,7 +186,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1661,y=5749,z=-3.5},
+            coords = {x=1661,y=5749,z=-4},
+            slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -192,7 +195,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1660,y=5750,z=-3.5},
+            coords = {x=1660,y=5750,z=-4},
+            slot = "upper",
             items = {
                 { name = 'Base.Hat_GasMask', },
                 { name = 'Base.GasmaskFilter', },
@@ -202,7 +206,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1659,y=5750,z=-3.5},
+            coords = {x=1659,y=5750,z=-4},
+            slot = "upper",
             dist = {"SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -377,7 +382,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1659,y=5744,z=-1.5},
+            coords = {x=1659,y=5744,z=-2},
+            slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -545,7 +551,8 @@ local ForLease = {
         -- store basement
         {
             type = 'container',
-            coords = {x=1658,y=5747,z=-0.5},
+            coords = {x=1658,y=5747,z=-1},
+            slot = "upper",
             dist = {"CrateToiletPaper", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -569,7 +576,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1664,y=5744,z=-0.5},
+            coords = {x=1664,y=5744,z=-1},
+            slot = "upper",
             dist = {"ArmyStorageOutfit",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -577,7 +585,8 @@ local ForLease = {
         },
         {
             type = 'container',
-            coords = {x=1665,y=5744,z=-0.5},
+            coords = {x=1665,y=5744,z=-1},
+            slot = "upper",
             dist = {"DrugLabOutfit",},
             distIncludeJunk = true,
             randUntilFull = true,

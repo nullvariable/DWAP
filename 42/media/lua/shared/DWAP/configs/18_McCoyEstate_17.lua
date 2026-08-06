@@ -281,7 +281,8 @@ local McCoyEstate = {
         -- sitting area
         {
             type = 'container',
-            coords = {x=10095,y=8257,z=1.5},
+            coords = {x=10095,y=8257,z=1},
+            slot = "upper",
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -289,7 +290,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10099,y=8257,z=1.5},
+            coords = {x=10099,y=8257,z=1},
+            slot = "upper",
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -448,7 +450,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10084,y=8262,z=1.5},
+            coords = {x=10084,y=8262,z=1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -465,7 +468,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10084,y=8263,z=1.5},
+            coords = {x=10084,y=8263,z=1},
+            slot = "upper",
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -659,7 +663,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10090,y=8260,z=2.5},
+            coords = {x=10090,y=8260,z=2},
+            slot = "upper",
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -826,7 +831,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10081,y=8257,z=0.5},
+            coords = {x=10081,y=8257,z=0},
+            slot = "upper",
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -1040,7 +1046,8 @@ local McCoyEstate = {
         },
         {
             type = 'container',
-            coords = {x=10114,y=8239,z=0.5},
+            coords = {x=10114,y=8239,z=0},
+            slot = "upper",
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
             randUntilFull = true,

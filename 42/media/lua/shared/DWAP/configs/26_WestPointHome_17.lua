@@ -250,7 +250,8 @@ local WestPointHome = {
         -- entry closet
         {
             type = 'container',
-            coords = {x=11604,y=6733,z=0.5},
+            coords = {x=11604,y=6733,z=0},
+            slot = "upper",
             dist = {"ArmySurplusBackpacks", "CampingStoreBackpacks" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -259,7 +260,8 @@ local WestPointHome = {
         -- bathroom
         {
             type = 'container',
-            coords = {x=11600,y=6723,z=0.5},
+            coords = {x=11600,y=6723,z=0},
+            slot = "upper",
             dist = {"SafehouseMedical_Late", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -277,7 +279,8 @@ local WestPointHome = {
         -- kitchen
         {
             type = 'container',
-            coords = {x=11602,y=6723,z=0.5},
+            coords = {x=11602,y=6723,z=0},
+            slot = "upper",
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -325,7 +328,8 @@ local WestPointHome = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=11602,y=6721,z=0.5},
+            coords = {x=11602,y=6721,z=0},
+            slot = "upper",
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -439,7 +443,8 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11603,y=6718,z=-0.5},
+            coords = {x=11603,y=6718,z=-1},
+            slot = "upper",
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,

@@ -250,7 +250,8 @@ local MarchRidgeConfig = {
         -- medical
         {
             type = 'container',
-            coords = {x=9969,y=12625,z=-4+0.5},
+            coords = {x=9969,y=12625,z=-4},
+            slot = "upper",
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -558,7 +559,8 @@ local MarchRidgeConfig = {
         -- laundry room
         {
             type = 'container',
-            coords = {x=9959,y=12643,z=-4+0.5},
+            coords = {x=9959,y=12643,z=-4},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -566,7 +568,8 @@ local MarchRidgeConfig = {
         },
         {
             type = 'container',
-            coords = {x=9959,y=12607,z=-4+0.5},
+            coords = {x=9959,y=12607,z=-4},
+            slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
             randUntilFull = true,

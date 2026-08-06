@@ -275,7 +275,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10755,y=10546,z=1.5},
+            coords = {x=10755,y=10546,z=1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -478,7 +479,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10747,y=10542,z=0.5},
+            coords = {x=10747,y=10542,z=0},
+            slot = "upper",
             dist = {"CampingStoreBackpacks","CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -579,7 +581,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10760,y=10557,z=-0.5},
+            coords = {x=10760,y=10557,z=-1},
+            slot = "upper",
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -595,7 +598,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10760,y=10556,z=-0.5},
+            coords = {x=10760,y=10556,z=-1},
+            slot = "upper",
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -611,7 +615,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10760,y=10555,z=-0.5},
+            coords = {x=10760,y=10555,z=-1},
+            slot = "upper",
             dist = { "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -653,7 +658,8 @@ local RustyRifle = {
         -- workshop area
         {
             type = 'container',
-            coords = {x=10782,y=10575,z=0.5},
+            coords = {x=10782,y=10575,z=0},
+            slot = "upper",
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -793,7 +799,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10761,y=10528,z=0.5},
+            coords = {x=10761,y=10528,z=0},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -801,7 +808,8 @@ local RustyRifle = {
         },
         {
             type = 'container',
-            coords = {x=10762,y=10528,z=0.5},
+            coords = {x=10762,y=10528,z=0},
+            slot = "upper",
             dist = {"ArtStorePottery",},
             distIncludeJunk = true,
             randUntilFull = true,

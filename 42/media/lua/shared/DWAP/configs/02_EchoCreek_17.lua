@@ -271,7 +271,8 @@ local EchoCreek = {
         },
         { -- twin bedroom closet
             type = 'container',
-            coords = {x=3576,y=10900,z=1.5},
+            coords = {x=3576,y=10900,z=1},
+            slot = "upper",
             dist = {"SewingStoreTools","SewingStoreFabric","CrateLeather"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -279,7 +280,8 @@ local EchoCreek = {
         },
         { -- master bedroom closet
             type = 'container',
-            coords = {x=3576,y=10899,z=1.5},
+            coords = {x=3576,y=10899,z=1},
+            slot = "upper",
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -323,7 +325,8 @@ local EchoCreek = {
         },
          { -- bathroom
             type = 'container',
-            coords = {x=3569,y=10899,z=1.5},
+            coords = {x=3569,y=10899,z=1},
+            slot = "upper",
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "BathroomCounter"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -340,6 +343,7 @@ local EchoCreek = {
         -- kitchen
         {
             type = 'container',
+            slot = "freezer",
             coords = {x=3569,y=10900,z=1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -388,7 +392,8 @@ local EchoCreek = {
         -- mechanic's storage
         {
             type = 'container',
-            coords = {x=3581,y=10894,z=0.5},
+            coords = {x=3581,y=10894,z=0},
+            slot = "upper",
             dist = {"FirearmWeapons_Late"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -682,7 +687,8 @@ local EchoCreek = {
         },
         { -- metal shelves by sink
             type = 'container',
-            coords = {x=3567,y=10905,z=-0.5},
+            coords = {x=3567,y=10905,z=-1},
+            slot = "upper",
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
             randUntilFull = true,

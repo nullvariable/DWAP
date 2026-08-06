@@ -281,7 +281,8 @@ local ScrapYard = {
         -- laundry
         {
             type = 'container',
-            coords = {x=2941,y=12525,z=0.5},
+            coords = {x=2941,y=12525,z=0},
+            slot = "upper",
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -363,7 +364,8 @@ local ScrapYard = {
         },
         {
             type = 'container',
-            coords = {x=2937,y=12493,z=0.5},
+            coords = {x=2937,y=12493,z=0},
+            slot = "upper",
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -371,7 +373,8 @@ local ScrapYard = {
         },
         {
             type = 'container',
-            coords = {x=2936,y=12493,z=0.5},
+            coords = {x=2936,y=12493,z=0},
+            slot = "upper",
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -379,7 +382,8 @@ local ScrapYard = {
         },
         {
             type = 'container',
-            coords = {x=2930,y=12494,z=0.5},
+            coords = {x=2930,y=12494,z=0},
+            slot = "upper",
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -527,7 +531,8 @@ local ScrapYard = {
         -- living area
         {
             type = 'container',
-            coords = {x=2934,y=12565,z=0.5},
+            coords = {x=2934,y=12565,z=0},
+            slot = "upper",
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
             randUntilFull = true,

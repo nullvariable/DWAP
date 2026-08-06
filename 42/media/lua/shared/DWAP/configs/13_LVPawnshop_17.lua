@@ -199,7 +199,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12324,y=1331,z=-0.5},
+            coords = {x=12324,y=1331,z=-1},
+            slot = "upper",
             dist = {"GigamartCrisps", "SafehouseFireplace"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -215,7 +216,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12324,y=1332,z=-0.5},
+            coords = {x=12324,y=1332,z=-1},
+            slot = "upper",
             dist = {"GigamartBakingMisc","CrateFlour", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -231,7 +233,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12324,y=1333,z=-0.5},
+            coords = {x=12324,y=1333,z=-1},
+            slot = "upper",
             dist = { "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -247,7 +250,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12324,y=1334,z=-0.5},
+            coords = {x=12324,y=1334,z=-1},
+            slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
@@ -335,7 +339,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12315,y=1334,z=-0.5},
+            coords = {x=12315,y=1334,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -352,7 +357,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12314,y=1334,z=-0.5},
+            coords = {x=12314,y=1334,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet", "SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -644,7 +650,8 @@ local LVPawnshop = {
         },
         { -- closet
             type = 'container',
-            coords = {x=12330,y=1329,z=0.5},
+            coords = {x=12330,y=1329,z=0},
+            slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -745,7 +752,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12316,y=1325,z=0.5},
+            coords = {x=12316,y=1325,z=0},
+            slot = "upper",
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -753,7 +761,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12317,y=1325,z=0.5},
+            coords = {x=12317,y=1325,z=0},
+            slot = "upper",
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -761,7 +770,8 @@ local LVPawnshop = {
         },
         {
             type = 'container',
-            coords = {x=12318,y=1325,z=0.5},
+            coords = {x=12318,y=1325,z=0},
+            slot = "upper",
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
             randUntilFull = true,

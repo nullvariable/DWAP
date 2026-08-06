@@ -307,7 +307,8 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14569,y=3037,z=-0.5},
+            coords = {x=14569,y=3037,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -381,7 +382,8 @@ local ELVilleFarm = {
         -- bathroom
         {
             type = 'container',
-            coords = {x=14561,y=3037,z=-0.5},
+            coords = {x=14561,y=3037,z=-1},
+            slot = "upper",
             dist = {"SafehouseMedical", "BathroomCounter", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -491,7 +493,8 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14566,y=3031,z=-0.5},
+            coords = {x=14566,y=3031,z=-1},
+            slot = "upper",
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -499,7 +502,8 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14566,y=3032,z=-0.5},
+            coords = {x=14566,y=3032,z=-1},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -515,7 +519,8 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14566,y=3033,z=-0.5},
+            coords = {x=14566,y=3033,z=-1},
+            slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -615,7 +620,8 @@ local ELVilleFarm = {
         -- kitchen
         {
             type = 'container',
-            coords = {x=14584,y=3039,z=0.5},
+            coords = {x=14584,y=3039,z=0},
+            slot = "upper",
             dist = {"TheatrePopcorn", "FridgeSoda",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -827,7 +833,8 @@ local ELVilleFarm = {
         -- shed
         {
             type = 'container',
-            coords = {x=14573,y=3069,z=0.5},
+            coords = {x=14573,y=3069,z=0},
+            slot = "upper",
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -835,7 +842,8 @@ local ELVilleFarm = {
         },
         {
             type = 'container',
-            coords = {x=14573,y=3068,z=0.5},
+            coords = {x=14573,y=3068,z=0},
+            slot = "upper",
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
             randUntilFull = true,

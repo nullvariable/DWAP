@@ -269,7 +269,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10875,y=10023,z=1.5},
+            coords = {x=10875,y=10023,z=1},
+            slot = "upper",
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -277,7 +278,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10874,y=10023,z=1.5},
+            coords = {x=10874,y=10023,z=1},
+            slot = "upper",
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -495,7 +497,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10872,y=10018,z=0.5},
+            coords = {x=10872,y=10018,z=0},
+            slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
@@ -507,7 +510,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10872,y=10017,z=0.5},
+            coords = {x=10872,y=10017,z=0},
+            slot = "upper",
             dist = {"KitchenDryFood",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -531,7 +535,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10877,y=10017,z=0.5},
+            coords = {x=10877,y=10017,z=0},
+            slot = "upper",
             dist = {"GigamartBreakfast","GigamartCandy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -547,7 +552,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10878,y=10017,z=0.5},
+            coords = {x=10878,y=10017,z=0},
+            slot = "upper",
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -563,7 +569,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10879,y=10017,z=0.5},
+            coords = {x=10879,y=10017,z=0},
+            slot = "upper",
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -572,7 +579,8 @@ local CortmanMedical = {
         -- pantry
         {
             type = 'container',
-            coords = {x=10880,y=10017,z=0.5},
+            coords = {x=10880,y=10017,z=0},
+            slot = "upper",
             dist = {"GroceryStorageCrate1", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -580,7 +588,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10881,y=10017,z=0.5},
+            coords = {x=10881,y=10017,z=0},
+            slot = "upper",
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -588,7 +597,8 @@ local CortmanMedical = {
         },
         {
             type = 'container',
-            coords = {x=10882,y=10017,z=0.5},
+            coords = {x=10882,y=10017,z=0},
+            slot = "upper",
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
             randUntilFull = true,

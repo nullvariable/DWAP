@@ -197,7 +197,8 @@ local DarkWallow = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -212,7 +213,8 @@ local DarkWallow = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -230,7 +232,8 @@ local DarkWallow = {
         { -- upper
             type = 'container',
             sprite = 'location_trailer_02_23',
-            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z+0.5},
+            coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -407,7 +410,8 @@ local DarkWallow = {
         },
         {
             type = 'container',
-            coords = {x=8710,y=15305,z=0.5},
+            coords = {x=8710,y=15305,z=0},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -423,7 +427,8 @@ local DarkWallow = {
         },
         {
             type = 'container',
-            coords = {x=8712,y=15305,z=0.5},
+            coords = {x=8712,y=15305,z=0},
+            slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
@@ -437,7 +442,8 @@ local DarkWallow = {
         },
         {
             type = 'container',
-            coords = {x=8713,y=15305,z=0.5},
+            coords = {x=8713,y=15305,z=0},
+            slot = "upper",
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -453,7 +459,8 @@ local DarkWallow = {
         },
         {
             type = 'container',
-            coords = {x=8714,y=15305,z=0.5},
+            coords = {x=8714,y=15305,z=0},
+            slot = "upper",
             dist = {"TheatrePopcorn", "TheatreSnacks"},
             distIncludeJunk = false,
             randUntilFull = true,

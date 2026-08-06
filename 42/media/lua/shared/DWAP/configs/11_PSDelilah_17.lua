@@ -175,7 +175,8 @@ local PSDelilah = {
         },
         {
             type = 'container',
-            coords = {x=2037,y=5684,z=2.5},
+            coords = {x=2037,y=5684,z=2},
+            slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -205,7 +206,8 @@ local PSDelilah = {
         },
         {-- change this to a firewood and starters container and put the tools elsewhere
             type = 'container',
-            coords = {x=2038,y=5684,z=2.5},
+            coords = {x=2038,y=5684,z=2},
+            slot = "upper",
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
             },
@@ -238,7 +240,8 @@ local PSDelilah = {
         },
         {
             type = 'container',
-            coords = {x=2039,y=5684,z=2.5},
+            coords = {x=2039,y=5684,z=2},
+            slot = "upper",
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -496,7 +499,8 @@ local PSDelilah = {
         },
         {
             type = 'container',
-            coords = {x=2042,y=5692,z=-0.5},
+            coords = {x=2042,y=5692,z=-1},
+            slot = "upper",
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -504,7 +508,8 @@ local PSDelilah = {
         },
         {
             type = 'container',
-            coords = {x=2042,y=5684,z=-0.5},
+            coords = {x=2042,y=5684,z=-1},
+            slot = "upper",
             dist = {"CrateToiletPaper", "CrateLinens", "GasStoreToiletries"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -617,7 +622,8 @@ local PSDelilah = {
         },
         { -- medicine cabinet
             type = 'container',
-            coords = {x=2036,y=5686,z=-0.5},
+            coords = {x=2036,y=5686,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter"},
             distIncludeJunk = false,
             randUntilFull = true,

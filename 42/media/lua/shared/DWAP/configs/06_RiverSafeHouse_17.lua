@@ -392,7 +392,8 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5557,z=-0.5},
+            coords = {x=6947,y=5557,z=-1},
+            slot = "upper",
             dist = {"MedicalCabinet", "SafehouseMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -416,7 +417,8 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5554,z=-0.5},
+            coords = {x=6947,y=5554,z=-1},
+            slot = "upper",
             dist = {"BathroomCounter","CrateToiletPaper", "GasStoreToiletries", },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -617,7 +619,8 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6954,y=5562,z=0.5},
+            coords = {x=6954,y=5562,z=0},
+            slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -657,7 +660,8 @@ local RiverSafeHouse = {
         -- living area
         {
             type = 'container',
-            coords = {x=6955,y=5565,z=0.5},
+            coords = {x=6955,y=5565,z=0},
+            slot = "upper",
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -665,7 +669,8 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6955,y=5568,z=0.5},
+            coords = {x=6955,y=5568,z=0},
+            slot = "upper",
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
