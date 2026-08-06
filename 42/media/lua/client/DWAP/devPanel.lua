@@ -223,6 +223,10 @@ function DWAPDevPanel()
         -- a whole-footprint pass would grab rooms that are not ours
         { label = "Room Pick", fn = function() DWAPRoomPick() end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.roomPick end },
+        -- Green = the export also lists containers the config already has,
+        -- for reworking a whole room rather than filling around it
+        { label = "Incl. Configured", fn = function() DWAPRoomExportAll() end,
+            state = function() return DWAP_DevToggles and DWAP_DevToggles.roomExportAll end },
         { pairRow = {
             { label = "Export Rooms", fn = function() withNearest(DWAPRoomExport, "DWAPRoomExport") end },
             { label = "Clear Rooms", fn = function() DWAPRoomClear() end },

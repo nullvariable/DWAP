@@ -3505,9 +3505,12 @@ end
 -- Exports land in a long console and are easy to lose. Stamp each dump with
 -- the config it belongs to so it can be found - and pasted into the right
 -- file - long after the fact.
+-- print(), NOT dprint(): dprint goes through log(DebugType.Lua, ...) into the
+-- DebugLog, while the dump itself is print()ed to console.txt. A header in a
+-- different file to the lines it labels is no header at all.
 local function exportHeader(what, extra)
     local index, name = DWAPNearestConfig(true)
-    DWAPUtils.dprint(("=== %s | nearest config: %s %s%s ==="):format(
+    print(("=== %s | nearest config: %s %s%s ==="):format(
         what,
         index and ("%02d"):format(index) or "??",
         name or "unknown",
@@ -3693,9 +3696,13 @@ end
 -- Every container in a room, through the shared resolver so the picker counts
 -- exactly what the loot fill and the audit would see. Trash and appliances the
 -- fill never touches are left out, matching the audit's coverage pass.
-local ROOM_TRASH_TYPES = {
+-- Container types we never author loot into: bins and laundry appliances the
+-- fill already ignores, plus composters, which read as containers but are
+-- garden fixtures. They still highlight with their room in the picker - this
+-- only keeps them out of the exported table.
+local ROOM_SKIP_TYPES = {
     bin = true, dumpster = true, clothingdryer = true, clothingdryerbasic = true,
-    clothingrack = true, clothingwasher = true,
+    clothingrack = true, clothingwasher = true, composter = true,
 }
 local function roomContainers(room)
     local out = {}
@@ -3705,20 +3712,63 @@ local function roomContainers(room)
         local square = squares:get(i)
         if square then
             local list = DWAPUtils.getSquareContainers(square)
+            -- Two containers on one square need DIFFERENT addressing or their
+            -- entries share coords and neither resolves - that is where the 75
+            -- duplicate-coordinate failures came from. Mirror what
+            -- resolveLootContainer can actually target: the freezer
+            -- compartment, the wall-mounted container, the plain base entry
+            -- for the first floor container, and stack = n (index in object
+            -- order, matching opts.stack) for anything still ambiguous.
+            local usedUpper, usedFreezer, usedBase = false, false, false
             for j = 1, #list do
                 local container = list[j].container
                 local ctype = container:getType()
-                local isTrash = ROOM_TRASH_TYPES[ctype] == true
-                if not isTrash and ctype ~= "microwave" and not container:isStove() then
+                local isSkipped = ROOM_SKIP_TYPES[ctype] == true
+                if not isSkipped and ctype ~= "microwave" and not container:isStove() then
+                    local slot, stack = nil, nil
+                    if ctype == "freezer" and #list > 1 and not usedFreezer then
+                        -- a lone freezer unit satisfies a base entry, so only
+                        -- claim the freezer slot when it shares the square
+                        slot = "freezer"
+                        usedFreezer = true
+                    elseif list[j].isHigh and not usedUpper then
+                        slot = "upper"
+                        usedUpper = true
+                    elseif not list[j].isHigh and ctype ~= "freezer" and not usedBase then
+                        usedBase = true
+                    else
+                        stack = j
+                    end
                     out[#out + 1] = {
                         x = square:getX(), y = square:getY(), z = square:getZ(),
                         ctype = ctype, isHigh = list[j].isHigh,
+                        slot = slot, stack = stack,
                     }
                 end
             end
         end
     end
     return out
+end
+
+-- Whether a config entry already addresses this exact container, rather than
+-- just its square: a square with a claimed fridge and a free upper cabinet
+-- must still offer the cabinet.
+local function containerClaimed(record, c)
+    if not record then return false end
+    for i = 1, #record.slots do
+        local s = record.slots[i]
+        if c.stack then
+            if s.stack == c.stack then return true end
+        elseif c.slot == "upper" then
+            if s.upper then return true end
+        elseif c.slot == "freezer" then
+            if s.freezer then return true end
+        elseif not s.upper and not s.freezer and not s.stack then
+            return true
+        end
+    end
+    return false
 end
 
 function roomPickClick(tile)
@@ -3835,6 +3885,16 @@ function DWAPRoomClear()
     DWAPUtils.dprint("Room pick: cleared")
 end
 
+--- Include containers the config already addresses in the export. Off by
+--- default so a dump can be pasted alongside existing entries; on when you
+--- are replacing a room's entries wholesale and want the full set.
+function DWAPRoomExportAll()
+    DWAP_DevToggles.roomExportAll = not DWAP_DevToggles.roomExportAll
+    DWAPUtils.dprint("Room export: " .. (DWAP_DevToggles.roomExportAll
+        and "ALL containers, including ones already in the config"
+        or "only containers not yet in the config"))
+end
+
 --- Inventory of the picked rooms, split by whether a loot entry already
 --- addresses the square. `claimed` is the work already done, `free` is what a
 --- generator would have to fill. Pass a config index to compare against, or
@@ -3853,7 +3913,9 @@ function DWAPRoomExport(index)
             return
         end
         lookup = buildContainerLookup(config)
-        exportHeader("PICKED ROOMS", (" | compared against config %02d"):format(index))
+        exportHeader("PICKED ROOMS", (" | compared against config %02d%s"):format(
+            index,
+            DWAP_DevToggles.roomExportAll and " | INCLUDING already-configured containers" or ""))
     else
         exportHeader("PICKED ROOMS", " | no config compared")
     end
@@ -3867,35 +3929,46 @@ function DWAPRoomExport(index)
         local r = roomPicked[i]
         local room = byKey[r.key]
         if not room then
-            DWAPUtils.dprint(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
+            print(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
         else
             local containers = roomContainers(room)
             local free, claimed, tally = {}, 0, {}
             for j = 1, #containers do
                 local c = containers[j]
-                local isClaimed = lookup and lookup[DWAPUtils.hashCoords(c.x, c.y, c.z)] ~= nil
-                if isClaimed then
-                    claimed = claimed + 1
-                else
+                local isClaimed = lookup
+                    and containerClaimed(lookup[DWAPUtils.hashCoords(c.x, c.y, c.z)], c)
+                if isClaimed then claimed = claimed + 1 end
+                -- Claimed containers are normally left out, so an export can be
+                -- pasted alongside what is already there. With roomExportAll on
+                -- they are listed anyway: reworking a whole room means replacing
+                -- its entries, not filling around them. They still count as
+                -- claimed so the summary shows what is being superseded.
+                if not isClaimed or DWAP_DevToggles.roomExportAll then
                     free[#free + 1] = c
                     tally[c.ctype] = (tally[c.ctype] or 0) + 1
                 end
             end
             totalFree = totalFree + #free
             totalClaimed = totalClaimed + claimed
-            DWAPUtils.dprint(("  %d %s | %d containers: %d free, %d already in config"):format(
+            print(("  %d %s | %d containers: %d listed, %d already in config"):format(
                 i, r.key, #containers, #free, claimed))
             if #free > 0 then
-                DWAPUtils.dprint("     free: " .. allLootTallyString(tally))
+                print("     " .. allLootTallyString(tally))
                 for j = 1, #free do
                     local c = free[j]
+                    local qualifier = ""
+                    if c.slot then
+                        qualifier = (' slot = "%s",'):format(c.slot)
+                    elseif c.stack then
+                        qualifier = (' stack = %d,'):format(c.stack)
+                    end
                     print(("        { type = 'container', coords = {x=%d,y=%d,z=%d},%s }, -- %s @ %s")
-                        :format(c.x, c.y, c.z, c.isHigh and ' slot = "upper",' or "", c.ctype, r.name))
+                        :format(c.x, c.y, c.z, qualifier, c.ctype, r.name))
                 end
             end
         end
     end
-    DWAPUtils.dprint(("=== TOTAL: %d free, %d already in config, across %d rooms ==="):format(
+    print(("=== TOTAL: %d listed, %d already in config, across %d rooms ==="):format(
         totalFree, totalClaimed, #roomPicked))
 end
 
