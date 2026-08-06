@@ -1,3 +1,8 @@
+-- Dev tooling: inert outside debug mode so shipping this file is safe.
+-- getDebug() is the -debug launch flag - per-launch, never set for normal
+-- players, no sandbox UI exposure
+if not getDebug() then return end
+
 local DWAPUtils = require("DWAPUtils")
 local random = newrandom()
 

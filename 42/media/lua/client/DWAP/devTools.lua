@@ -1,3 +1,8 @@
+-- Dev tooling: inert outside debug mode so shipping this file is safe.
+-- getDebug() is the -debug launch flag - per-launch, never set for normal
+-- players, no sandbox UI exposure
+if not getDebug() then return end
+
 -- devTools.lua
 -- Development tools for the DWAP generator system
 
@@ -1160,9 +1165,10 @@ function TestLootConfig(index, startFrom, retainedConfig)
     end
     local containerDetails = retainedConfig.containerDetails or {}
     local legacyHalfZ = 0
-    -- fill check: default 80%%; pass fillThreshold = 0 for worlds created with
-    -- base-game loot disabled, where any item at all proves the DWAP fill ran
-    local fillThreshold = retainedConfig.fillThreshold or 80
+    -- Fill verification is stamp-based by default (works with base-game loot
+    -- on or off). fillThreshold is an optional EXTRA check for loot-off
+    -- worlds: 0 = fail empty containers, >0 = fail below that fill percent
+    local fillThreshold = retainedConfig.fillThreshold
     local lastProgressPrint = 0
     if retainedConfig.lastProgressPrint then
         -- If retainedConfig is provided, use its lastProgressPrint
@@ -1278,7 +1284,20 @@ function TestLootConfig(index, startFrom, retainedConfig)
                 local usedCapacity = container:getCapacityWeight()
                 local fillPercentage = capacity > 0 and (usedCapacity / capacity) * 100 or 0
 
-                if not entry.special then
+                -- Primary check: the DWAP fill stamp on the parent object,
+                -- valid whether base-game loot is on or off
+                local stampState = nil
+                local parentObj = container:getParent()
+                if parentObj then
+                    local stamps = parentObj:getModData().DWAPLoot
+                    if stamps then stampState = stamps[tostring(member)] end
+                end
+                if not stampState then
+                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        " - no DWAP fill stamp - FAILED")
+                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        ": Not filled (no DWAP stamp)")
+                elseif stampState ~= "disabled" and fillThreshold and not entry.special then
                     if fillThreshold <= 0 then
                         if container:getItems():size() == 0 then
                             DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
@@ -1725,9 +1744,10 @@ allLootTick = function()
     end
 end
 
--- fillThreshold: percent a container must be filled to pass (default 80).
--- Pass 0 when the world was created with base-game loot disabled - then any
--- item at all proves the DWAP fill ran, so only truly empty containers fail.
+-- Verification is stamp-based by default (the fill marks parent-object
+-- modData), so audits work in normal loot-on worlds. fillThreshold is an
+-- optional extra for loot-off worlds: 0 = fail empty containers, >0 = fail
+-- below that fill percent.
 function TestAllLootConfigs(startIndex, fillThreshold)
     if allLootState then
         DWAPUtils.dprint("Loot audit already running - aborting it")
@@ -1756,8 +1776,8 @@ function TestAllLootConfigs(startIndex, fillThreshold)
     if resuming then
         allLootWrite("--- resumed at config " .. startIndex .. " ---")
     else
-        allLootWrite("DWAP loot audit - " .. #configs .. " configs, fill threshold " ..
-            tostring(fillThreshold or 80) .. "%")
+        allLootWrite("DWAP loot audit - " .. #configs .. " configs, verification: " ..
+            (fillThreshold and ("stamp + fill threshold " .. fillThreshold .. "%") or "stamp-based"))
     end
     allLootWrite("")
     DWAPUtils.dprint("Starting loot audit across " .. #configs .. " configs")
@@ -2595,14 +2615,39 @@ function FindUnconnectedPlumbing()
     end
 
     local building = pSquare:getBuilding()
-    if not building then
-        DWAPUtils.dprint("Player is not inside a building")
-        return
-    end
-
     local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
     DWAPUtils.dprint("=== FINDING UNCONNECTED PLUMBING FIXTURES ===")
     DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
+
+    -- Inside a building: scan its actual footprint (def bounds) so nearby
+    -- houses can't leak in. Outside: small 10-tile grab for outdoor fixtures
+    local minX, maxX, minY, maxY
+    if building then
+        local def = building.getDef and building:getDef()
+        if def then
+            minX, maxX = def:getX(), def:getX2()
+            minY, maxY = def:getY(), def:getY2()
+            DWAPUtils.dprint(("Scanning building footprint %d,%d - %d,%d"):format(minX, minY, maxX, maxY))
+        else
+            minX, maxX = playerX - 50, playerX + 50
+            minY, maxY = playerY - 50, playerY + 50
+            DWAPUtils.dprint("No building def; falling back to 50-tile radius")
+        end
+    else
+        minX, maxX = playerX - 10, playerX + 10
+        minY, maxY = playerY - 10, playerY + 10
+        DWAPUtils.dprint("Standing outside: scanning 10-tile radius")
+    end
+
+    -- short stable building tag for the dump comments
+    local function bldTag(b)
+        if not b then return "outside" end
+        local def = b.getDef and b:getDef()
+        local defId = def and def.getID and def:getID()
+        if not defId then return "bld?" end
+        local hi = math.floor(defId / 4294967296)
+        return ("bld %d,%d#%d"):format(hi % 65536, math.floor(hi / 65536), defId % 4294967296)
+    end
 
     -- Plumbing fixture names to look for
     local plumbingNames = {
@@ -2619,16 +2664,18 @@ function FindUnconnectedPlumbing()
     local unconnectedFixtures = {}
     local connectedFixtures = {}
     local waterTanks = {}
-    local searchRadius = 50 -- Search in a larger area to cover the building
 
-    -- Search all squares in the radius on the same floor
-    for x = playerX - searchRadius, playerX + searchRadius do
-        for y = playerY - searchRadius, playerY + searchRadius do
+    -- Search all squares in the bounds on the same floor
+    for x = minX, maxX do
+        for y = minY, maxY do
             local square = getSquare(x, y, playerZ)
             if square then
-                -- Only check squares that are part of the same building
+                -- Inside a building only its own squares count; outside
+                -- (small radius) everything counts
                 local squareBuilding = square:getBuilding()
-                if DWAPUtils.sameBuilding(squareBuilding, building) then
+                if not building or DWAPUtils.sameBuilding(squareBuilding, building) then
+                    local room = square:getRoom()
+                    local whereTag = (room and room:getName() or "outside") .. ", " .. bldTag(squareBuilding)
                     local objects = square:getObjects()
                     if objects then
                         for j = 0, objects:size() - 1 do
@@ -2651,7 +2698,8 @@ function FindUnconnectedPlumbing()
                                             y = y,
                                             z = playerZ,
                                             capacity = fluidContainer:getCapacity(),
-                                            amount = fluidContainer:getAmount()
+                                            amount = fluidContainer:getAmount(),
+                                            where = whereTag
                                         })
                                     else
                                         isPlumbingFixture = true
@@ -2688,7 +2736,8 @@ function FindUnconnectedPlumbing()
                                         y = y,
                                         z = playerZ,
                                         customName = customNameStr,
-                                        isConnected = isConnected
+                                        isConnected = isConnected,
+                                        where = whereTag
                                     }
 
                                     if isConnected then
@@ -2716,7 +2765,7 @@ function FindUnconnectedPlumbing()
             "\", x = " ..
             tank.x ..
             ", y = " ..
-            tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount)
+            tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount .. " | " .. (tank.where or ""))
         end
         print("    },")
     else
@@ -2731,7 +2780,7 @@ function FindUnconnectedPlumbing()
             print("        { sprite = \"" ..
             fixture.sprite ..
             "\", x = " ..
-            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, ")
+            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, -- " .. (fixture.where or ""))
         end
         print("    },")
     else
@@ -2744,7 +2793,7 @@ function FindUnconnectedPlumbing()
             local fixture = connectedFixtures[i]
             DWAPUtils.dprint("  " ..
             fixture.sprite ..
-            " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ")")
+            " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ") -- " .. (fixture.where or ""))
         end
     end
 

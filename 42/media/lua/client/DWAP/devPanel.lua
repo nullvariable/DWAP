@@ -1,3 +1,8 @@
+-- Dev tooling: inert outside debug mode so shipping this file is safe.
+-- getDebug() is the -debug launch flag - per-launch, never set for normal
+-- players, no sandbox UI exposure
+if not getDebug() then return end
+
 -- devPanel.lua
 -- Small debug-mode button panel for the DWAP dev tools.
 -- Auto-opens in debug mode; DWAPDevPanel() toggles it from the console.
