@@ -170,176 +170,11 @@ local WestPointHome = {
 
     },
     loot = {
-        -- 2nd floor
-        -- bathroom
-        {
-            type = 'container',
-            coords = {x=11600,y=6725,z=1},
-            dist = {"BathroomCounter", "GasStoreToiletries"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11600,y=6726,z=1},
-            dist = {"BathroomCounter", "SafehouseMedical"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        -- master bedroom
-        {
-            type = 'container',
-            coords = {x=11600,y=6733,z=1},
-            dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11606,y=6730,z=1},
-            dist = {"SafehouseArmor", "SafehouseLighting"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11607,y=6730,z=1},
-            dist = {"TestingLab", "GasStoreToiletries"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        -- hallway
-        {
-            type = 'container',
-            coords = {x=11603,y=6726,z=1},
-            dist = {"ArmySurplusOutfit", "ArmyStorageOutfit", "ArmySurplusFootwear", "ArmySurplusHeadwear", "ArmySurplusMisc" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11603,y=6725,z=1},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        -- kids room
-        {
-            type = 'container',
-            coords = {x=11602,y=6721,z=1},
-            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom",},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        -- otherbedroom
-        {
-            type = 'container',
-            coords = {x=11605,y=6721,z=1},
-            dist = {"SafehouseArmor",},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        -- 1st floor
-        -- entry closet
-        {
-            type = 'container',
-            coords = {x=11604,y=6733,z=0},
-            slot = "upper",
-            dist = {"ArmySurplusBackpacks", "CampingStoreBackpacks" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        -- bathroom
-        {
-            type = 'container',
-            coords = {x=11600,y=6723,z=0},
-            slot = "upper",
-            dist = {"SafehouseMedical_Late", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        -- office
-        {
-            type = 'container',
-            coords = {x=11606,y=6728,z=0},
-            dist = {"MusicStoreCDs"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        -- kitchen
-        {
-            type = 'container',
-            coords = {x=11602,y=6723,z=0},
-            slot = "upper",
-            dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11607,y=6724,z=0},
-            dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11607,y=6722,z=0},
-            dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11607,y=6721,z=0},
-            special = "kitchentools",
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11606,y=6721,z=0},
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=11605,y=6721,z=0},
-            dist = {"PizzaKitchenFreezer", "PizzaKitchenFridge"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        -- laundry room
-        {
-            type = 'container',
-            coords = {x=11602,y=6721,z=0},
-            slot = "upper",
-            dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
         -- basement
         -- rec room
         {
             type = 'container',
-            coords = {x=11614,y=6732,z=-1},
+            coords = {x=11770,y=6672,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -347,7 +182,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11614,y=6731,z=-1},
+            coords = {x=11770,y=6671,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -355,13 +190,13 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11614,y=6723,z=-1},
+            coords = {x=11770,y=6663,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         {
             type = 'container',
-            coords = {x=11609,y=6723,z=-1},
+            coords = {x=11765,y=6663,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -369,7 +204,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11608,y=6723,z=-1},
+            coords = {x=11764,y=6663,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -377,7 +212,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11607,y=6723,z=-1},
+            coords = {x=11763,y=6663,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -385,7 +220,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11611,y=6727,z=-1},
+            coords = {x=11767,y=6667,z=-1},
             dist = {"TheatreSnacks", "CrateSodaBottles", "CrateSodaCans"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -393,7 +228,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11608,y=6726,z=-1},
+            coords = {x=11764,y=6666,z=-1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -401,7 +236,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11608,y=6727,z=-1},
+            coords = {x=11764,y=6667,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -409,7 +244,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11608,y=6728,z=-1},
+            coords = {x=11764,y=6668,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -418,24 +253,24 @@ local WestPointHome = {
         -- shelter room
         {
             type = 'container',
-            coords = {x=11605,y=6722,z=-1},
+            coords = {x=11761,y=6662,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         {
             type = 'container',
-            coords = {x=11603,y=6720,z=-1},
+            coords = {x=11759,y=6660,z=-1},
             special = "essentials",
         },
         {
             type = 'container',
-            coords = {x=11603,y=6719,z=-1},
+            coords = {x=11759,y=6659,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         {
             type = 'container',
-            coords = {x=11603,y=6718,z=-1},
+            coords = {x=11759,y=6658,z=-1},
             dist = {"BathroomCounter", "SafehouseMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -443,7 +278,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11603,y=6718,z=-1},
+            coords = {x=11759,y=6658,z=-1},
             slot = "upper",
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -453,19 +288,19 @@ local WestPointHome = {
         -- main storage room
         {
             type = 'container',
-            coords = {x=11606,y=6723,z=-1},
+            coords = {x=11762,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
-            coords = {x=11605,y=6723,z=-1},
+            coords = {x=11761,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         {
             type = 'container',
-            coords = {x=11603,y=6723,z=-1},
+            coords = {x=11759,y=6663,z=-1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "PawnShopKnives",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -473,7 +308,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11602,y=6723,z=-1},
+            coords = {x=11758,y=6663,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -481,19 +316,19 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11606,y=6725,z=-1},
+            coords = {x=11762,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         {
             type = 'container',
-            coords = {x=11605,y=6725,z=-1},
+            coords = {x=11761,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         {
             type = 'container',
-            coords = {x=11603,y=6726,z=-1},
+            coords = {x=11759,y=6666,z=-1},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -501,7 +336,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11602,y=6726,z=-1},
+            coords = {x=11758,y=6666,z=-1},
             dist = {"JewelerTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -509,7 +344,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11601,y=6726,z=-1},
+            coords = {x=11757,y=6666,z=-1},
             dist = {"CrateLongStick"},
             items = {
                 { name = 'Base.LongStick', chance = 1, count = {10,10} },
@@ -520,7 +355,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11606,y=6727,z=-1},
+            coords = {x=11762,y=6667,z=-1},
             dist = {"CrateAntiqueStove", "CampingStoreLighting"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -528,7 +363,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11605,y=6727,z=-1},
+            coords = {x=11761,y=6667,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
             },
@@ -537,7 +372,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11603,y=6728,z=-1},
+            coords = {x=11759,y=6668,z=-1},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -545,7 +380,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11602,y=6728,z=-1},
+            coords = {x=11758,y=6668,z=-1},
             dist = {"Trapper", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -553,7 +388,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11601,y=6728,z=-1},
+            coords = {x=11757,y=6668,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -561,7 +396,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11598,y=6728,z=-1},
+            coords = {x=11754,y=6668,z=-1},
             dist = { "CarSupplyTools", "GasStoreEmergency"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -569,7 +404,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11606,y=6729,z=-1},
+            coords = {x=11762,y=6669,z=-1},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -577,7 +412,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11605,y=6729,z=-1},
+            coords = {x=11761,y=6669,z=-1},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -585,7 +420,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11603,y=6730,z=-1},
+            coords = {x=11759,y=6670,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -593,7 +428,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11602,y=6730,z=-1},
+            coords = {x=11758,y=6670,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -601,7 +436,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11601,y=6730,z=-1},
+            coords = {x=11757,y=6670,z=-1},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -609,7 +444,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11606,y=6731,z=-1},
+            coords = {x=11762,y=6671,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.ScrewsBox', },
@@ -619,7 +454,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11605,y=6731,z=-1},
+            coords = {x=11761,y=6671,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -627,7 +462,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11603,y=6732,z=-1},
+            coords = {x=11759,y=6672,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -635,7 +470,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11602,y=6732,z=-1},
+            coords = {x=11758,y=6672,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -643,7 +478,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11601,y=6732,z=-1},
+            coords = {x=11757,y=6672,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -651,7 +486,7 @@ local WestPointHome = {
         },
         {
             type = 'container',
-            coords = {x=11600,y=6732,z=-1},
+            coords = {x=11756,y=6672,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },

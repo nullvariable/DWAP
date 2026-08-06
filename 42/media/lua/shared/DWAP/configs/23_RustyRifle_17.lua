@@ -180,10 +180,10 @@ local RustyRifle = {
         -- { sprite = "furniture_shelving_01_40", x = 10765, y = 10542, z = -1, isContainer = true, clearExisting = false, },
         -- { sprite = "furniture_shelving_01_40", x = 10766, y = 10542, z = -1, isContainer = true, clearExisting = false, },
 
-        { barricade = "metalbars", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10748, y = 10548, z = 1, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10748, y = 10548, z = 1, },
         { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_01_5", x = 10748, y = 10548, z = 0, },
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10754, y = 10548, z = 0, },
-        { barricade = "metalbars", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10754, y = 10548, z = 1, },
+        { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10754, y = 10548, z = 1, },
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10757, y = 10555, z = 0, },
         { barricade = "wood", enabled = "Barricade", target="walls_exterior_wooden_01_33", x = 10759, y = 10555, z = 0, },
         { barricade = "woodhalf", enabled = "Barricade", target="location_community_church_small_01_65", x = 10761, y = 10555, z = 0, },

@@ -12,21 +12,23 @@ local RiverSafeHouse = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType="generator", source = {x = 6962, y = 5564, z = -1} },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_16", x = 6948, y = 5570, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_16", x = 6948, y = 5569, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_1", x = 6948, y = 5567, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_16", x = 6948, y = 5563, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_17", x = 6955, y = 5562, z = 0, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_17", x = 6958, y = 5581, z = 0, sourceType="tank", source = wtc, }, -- kitchen, bld 27,21#0
+        { sprite = "fixtures_sinks_01_17", x = 6964, y = 5589, z = 0, sourceType="tank", source = wtc, }, -- laundry, bld 27,21#0
+        { sprite = "appliances_laundry_01_6", x = 6964, y = 5591, z = 0, sourceType="tank", source = wtc, }, -- laundry, bld 27,21#0
+        { sprite = "fixtures_sinks_01_13", x = 6966, y = 5589, z = 0, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_bathroom_01_1", x = 6966, y = 5590, z = 0, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_bathroom_01_32", x = 6968, y = 5589, z = 0, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
         -- 2nd floor
-        { sprite = "fixtures_bathroom_01_1", x = 6956, y = 5566, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_16", x = 6956, y = 5564, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_26", x = 6956, y = 5562, z = 1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-
+        { sprite = "fixtures_bathroom_01_1", x = 6961, y = 5575, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_sinks_01_1", x = 6961, y = 5576, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_sinks_01_1", x = 6961, y = 5577, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_bathroom_01_25", x = 6963, y = 5575, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
+        { sprite = "fixtures_bathroom_01_24", x = 6963, y = 5576, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 27,21#0
         -- basement fixtures
-        { sprite = "appliances_laundry_01_3", x = 6949, y = 5553, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_6", x = 6949, y = 5554, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_sinks_01_1", x = 6947, y = 5554, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
-        { sprite = "fixtures_bathroom_01_33", x = 6947, y = 5553, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "appliances_laundry_01_3", x = 6960, y = 5564, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_6", x = 6960, y = 5565, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_sinks_01_1", x = 6958, y = 5565, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
+        { sprite = "fixtures_bathroom_01_33", x = 6958, y = 5564, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
         name = "Riverside Safe House",
@@ -142,21 +144,27 @@ local RiverSafeHouse = {
         },
     },
     objectSpawns = {
-        -- { sprite = "camping_01_16", x = 6953, y = 5580, z = 0, enabled = "EnableWaterSystem", }, -- fountain
-        { clearExisting = true, x = 6959, y = 5559, z = 0, disabled = "EnableWaterSystem", }, -- fountain
         { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
 
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_57", x = 6957, y = 5571, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_56", x = 6959, y = 5567, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_57", x = 6953, y = 5573, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_57", x = 6951, y = 5573, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="location_restaurant_pileocrepe_01_8", x = 6948, y = 5563, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_24", x = 6957, y = 5586, z = 0, }, -- window W | livingroom, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_24", x = 6957, y = 5587, z = 0, }, -- window W | livingroom, bld 27,21#0
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_25", x = 6958, y = 5581, z = 0, }, -- window N | kitchen, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_01_44", x = 6961, y = 5590, z = 0, }, -- door W | laundry, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_13", x = 6962, y = 5592, z = 0, }, -- window N | laundry, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_25", x = 6967, y = 5592, z = 0, }, -- window N | bathroom, bld 27,21#0
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_24", x = 6969, y = 5582, z = 0, }, -- window W | diningroom, bld 27,21#0
+        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_24", x = 6969, y = 5583, z = 0, }, -- window W | diningroom, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_24", x = 6969, y = 5590, z = 0, }, -- window W | bathroom, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_24", x = 6970, y = 5576, z = 0, }, -- window W | garagestorage, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_24", x = 6970, y = 5579, z = 0, }, -- window W | garagestorage, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="location_community_church_small_01_64", x = 6970, y = 5586, z = 0, }, -- door W | hall, bld 27,21#0
+        { barricade = "woodhalf", enabled = "Barricade", target="location_community_church_small_01_68", x = 6970, y = 5587, z = 0, }, -- door W | hall, bld 27,21#0
     },
     loot = {
         -- basement
         { -- liquor cabinet
             type = 'container',
-            coords = {x=6944,y=5569,z=-1},
+            coords = {x=6955,y=5580,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -164,7 +172,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6944,y=5568,z=-1},
+            coords = {x=6955,y=5579,z=-1},
             dist = {"LiquorStoreWine"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -172,7 +180,7 @@ local RiverSafeHouse = {
         },
         { -- liquor cabinet
             type = 'container',
-            coords = {x=6947,y=5561,z=-1},
+            coords = {x=6958,y=5572,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -180,14 +188,14 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5561,z=-1},
+            coords = {x=6959,y=5572,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- crates by stairs
         {
             type = 'container',
-            coords = {x=6949,y=5566,z=-1},
+            coords = {x=6960,y=5577,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -195,7 +203,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6949,y=5565,z=-1},
+            coords = {x=6960,y=5576,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -203,7 +211,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6949,y=5564,z=-1},
+            coords = {x=6960,y=5575,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -211,7 +219,7 @@ local RiverSafeHouse = {
         },
         { -- foot locker
             type = 'container',
-            coords = {x=6951,y=5566,z=-1},
+            coords = {x=6962,y=5577,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives",},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -219,7 +227,7 @@ local RiverSafeHouse = {
         },
         { -- cardboardbox
             type = 'container',
-            coords = {x=6956,y=5565,z=-1},
+            coords = {x=6967,y=5576,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
             },
@@ -229,7 +237,7 @@ local RiverSafeHouse = {
         -- basement rec room
         {
             type = 'container',
-            coords = {x=6953,y=5557,z=-1},
+            coords = {x=6964,y=5568,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -237,7 +245,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6953,y=5556,z=-1},
+            coords = {x=6964,y=5567,z=-1},
             dist = {"SafehouseBooze"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -245,7 +253,7 @@ local RiverSafeHouse = {
         },
         { -- popcorn machine
             type = 'container',
-            coords = {x=6953,y=5555,z=-1},
+            coords = {x=6964,y=5566,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -253,19 +261,19 @@ local RiverSafeHouse = {
         },
         { --bookcase
             type = 'container',
-            coords = {x=6953,y=5553,z=-1},
+            coords = {x=6964,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- bookcase
             type = 'container',
-            coords = {x=6954,y=5553,z=-1},
+            coords = {x=6965,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- media stand
             type = 'container',
-            coords = {x=6955,y=5553,z=-1},
+            coords = {x=6966,y=5564,z=-1},
             dist = {"CrateLiquor", "CrateVHSTapes",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -273,14 +281,14 @@ local RiverSafeHouse = {
         },
         { -- bookcase
             type = 'container',
-            coords = {x=6956,y=5553,z=-1},
+            coords = {x=6967,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         -- basement armory
         {
             type = 'container',
-            coords = {x=6952,y=5559,z=-1},
+            coords = {x=6963,y=5570,z=-1},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -289,7 +297,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6952,y=5558,z=-1},
+            coords = {x=6963,y=5569,z=-1},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -297,13 +305,13 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6952,y=5557,z=-1},
+            coords = {x=6963,y=5568,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         {
             type = 'container',
-            coords = {x=6952,y=5556,z=-1},
+            coords = {x=6963,y=5567,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -311,7 +319,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6952,y=5555,z=-1},
+            coords = {x=6963,y=5566,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "FreezerRich"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -320,25 +328,25 @@ local RiverSafeHouse = {
         },
         { -- mil locker
             type = 'container',
-            coords = {x=6950,y=5554,z=-1},
+            coords = {x=6961,y=5565,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- mil locker
             type = 'container',
-            coords = {x=6950,y=5555,z=-1},
+            coords = {x=6961,y=5566,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- mil locker
             type = 'container',
-            coords = {x=6950,y=5556,z=-1},
+            coords = {x=6961,y=5567,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- mil locker
             type = 'container',
-            coords = {x=6950,y=5557,z=-1},
+            coords = {x=6961,y=5568,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "GasStorageMechanics", "DrugLabOutfit"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -346,7 +354,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6950,y=5558,z=-1},
+            coords = {x=6961,y=5569,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -354,7 +362,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6950,y=5559,z=-1},
+            coords = {x=6961,y=5570,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -362,13 +370,13 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6950,y=5560,z=-1},
+            coords = {x=6961,y=5571,z=-1},
             special = "essentials",
         },
         -- infirmary/bathroom
         {
             type = 'container',
-            coords = {x=6947,y=5560,z=-1},
+            coords = {x=6958,y=5571,z=-1},
             dist = {"LaboratoryLockers", "TestingLab","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -376,7 +384,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5559,z=-1},
+            coords = {x=6958,y=5570,z=-1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -384,7 +392,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5558,z=-1},
+            coords = {x=6958,y=5569,z=-1},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -392,7 +400,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5557,z=-1},
+            coords = {x=6958,y=5568,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -401,7 +409,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6949,y=5555,z=-1},
+            coords = {x=6960,y=5566,z=-1},
             dist = {"CrateToiletPaper" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -409,7 +417,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5554,z=-1},
+            coords = {x=6958,y=5565,z=-1},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -417,7 +425,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6947,y=5554,z=-1},
+            coords = {x=6958,y=5565,z=-1},
             slot = "upper",
             dist = {"BathroomCounter","CrateToiletPaper", "GasStoreToiletries", },
             distIncludeJunk = false,
@@ -427,7 +435,7 @@ local RiverSafeHouse = {
         -- basement utility room/warehouse
         {
             type = 'container',
-            coords = {x=6945,y=5560,z=-1},
+            coords = {x=6956,y=5571,z=-1},
             dist = {"GigamartCrisps","GigamartDryGoods"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -435,7 +443,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6944,y=5560,z=-1},
+            coords = {x=6955,y=5571,z=-1},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -443,7 +451,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6943,y=5560,z=-1},
+            coords = {x=6954,y=5571,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -451,7 +459,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6942,y=5560,z=-1},
+            coords = {x=6953,y=5571,z=-1},
             dist = {"CrateCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -459,7 +467,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6941,y=5560,z=-1},
+            coords = {x=6952,y=5571,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -467,7 +475,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6945,y=5558,z=-1},
+            coords = {x=6956,y=5569,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -475,7 +483,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6944,y=5558,z=-1},
+            coords = {x=6955,y=5569,z=-1},
             dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -483,7 +491,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6943,y=5558,z=-1},
+            coords = {x=6954,y=5569,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -491,7 +499,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6942,y=5558,z=-1},
+            coords = {x=6953,y=5569,z=-1},
             dist = {"CrateLiquor", "MusicStoreCDs", "ComicStoreDisplayDice", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -499,7 +507,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6941,y=5558,z=-1},
+            coords = {x=6952,y=5569,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -507,7 +515,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6945,y=5556,z=-1},
+            coords = {x=6956,y=5567,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -515,7 +523,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6944,y=5556,z=-1},
+            coords = {x=6955,y=5567,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -523,7 +531,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6943,y=5556,z=-1},
+            coords = {x=6954,y=5567,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
             },
@@ -532,7 +540,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6942,y=5556,z=-1},
+            coords = {x=6953,y=5567,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
             },
@@ -541,7 +549,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6941,y=5556,z=-1},
+            coords = {x=6952,y=5567,z=-1},
             dist = {"GigamartCrisps","GasStoreEmergency"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -550,7 +558,7 @@ local RiverSafeHouse = {
         -- first floor
         {
             type = 'container',
-            coords = {x=6948,y=5570,z=0},
+            coords = {x=6961,y=5579,z=1},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -558,7 +566,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5569,z=0},
+            coords = {x=6965,y=5580,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -566,7 +574,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5568,z=0},
+            coords = {x=6964,y=5580,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -574,12 +582,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5565,z=0},
-            special = "essentials",
-        },
-        {
-            type = 'container',
-            coords = {x=6948,y=5564,z=0},
+            stack = 1,
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -587,7 +590,24 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5563,z=0},
+            stack = 2,
+            dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6963,y=5555,z=0},
+            slot = "upper", -- square carries only a High metal_shelves
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6963,y=5556,z=0},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -595,7 +615,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5562,z=0},
+            coords = {x=6963,y=5583,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -604,7 +624,8 @@ local RiverSafeHouse = {
         -- kitchen
         {
             type = 'container',
-            coords = {x=6956,y=5563,z=0},
+            slot = 'freezer',
+            coords = {x=6957,y=5582,z=0},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -613,22 +634,40 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6954,y=5562,z=0},
+            coords = {x=6957,y=5582,z=0},
+            dist = { "MotelFridge", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            frozen = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            slot = 'upper',
+            coords = {x=6957,y=5582,z=0},
+            dist = {"ButcherSpices","GigamartSpices",},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6957,y=5581,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
-            coords = {x=6954,y=5562,z=0},
+            coords = {x=6957,y=5581,z=0},
             slot = "upper",
-            dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
+            dist = {"GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
         {
             type = 'container',
-            coords = {x=6955,y=5562,z=0},
+            coords = {x=6958,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -636,16 +675,8 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6956,y=5562,z=0},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        -- storage room next to kitchen
-        {
-            type = 'container',
-            coords = {x=6957,y=5562,z=0},
+            slot = 'upper',
+            coords = {x=6958,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
             randUntilFull = true,
@@ -653,14 +684,47 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6958,y=5562,z=0},
+            coords = {x=6959,y=5581,z=0},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6961,y=5581,z=0},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            slot = 'upper',
+            coords = {x=6961,y=5581,z=0},
+            dist = {"KitchenBottles", "KitchenBreakfast", "KitchenRandom"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6961,y=5578,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- living area
         {
             type = 'container',
-            coords = {x=6955,y=5565,z=0},
+            coords = {x=6957,y=5586,z=0},
+            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6964,y=5576,z=1},
             slot = "upper",
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -669,16 +733,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6955,y=5568,z=0},
-            slot = "upper",
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=6955,y=5566,z=0},
+            coords = {x=6964,y=5581,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -686,7 +741,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6955,y=5567,z=0},
+            coords = {x=7002,y=5590,z=0},
             dist = {"ToolFactoryHandles", "ToolFactoryIngots" },
             distIncludeJunk = false,
             randUntilFull = true,
@@ -695,7 +750,7 @@ local RiverSafeHouse = {
         -- other bathrom/sink area
         {
             type = 'container',
-            coords = {x=6948,y=5568,z=0},
+            coords = {x=6966,y=5591,z=0},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -703,7 +758,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5569,z=0},
+            coords = {x=6963,y=5584,z=0},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -711,7 +766,7 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=6948,y=5570,z=0},
+            coords = {x=7002,y=5591,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
             randUntilFull = true,
@@ -728,13 +783,22 @@ local RiverSafeHouse = {
         },
         {
             type = 'container',
-            coords = {x=7005,y=5590,z=0},
+            coords = {x=7004,y=5590,z=0},
+            slot = "upper", -- square carries only a High metal_shelves
             items = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.ScrewsBox', },
             },
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
+        },
+        {
+            type = 'container',
+            coords = {x=6964,y=5589,z=0},
+            dist = {"GigamartHousewares", "GigamartBedding" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
         },
     },
 }

@@ -115,16 +115,27 @@ local RosewoodZippee = {
         { sprite = "industry_02_73", x = 8177, y = 11259, z = -1, },
     },
     waterFixtures = {
-        -- basement
-        { sprite = "fixtures_sinks_01_5", x = 8180, y = 11267, z = -1, sourceType="tank", source = wtc },
-        { sprite = "fixtures_bathroom_01_4", x = 8181, y = 11267, z = -1, sourceType="tank", source = wtc },
-        -- 1st floor
-        { sprite = "fixtures_sinks_01_19", x = 8182, y = 11272, z = 0, sourceType="tank", source = wtc },
-        -- 2nd floor
-        { sprite = "fixtures_sinks_01_8", x = 8175, y = 11268, z = 1, sourceType="tank", source = wtc },
-        { sprite = "fixtures_bathroom_01_52", x = 8180, y = 11272, z = 1, sourceType="tank", source = wtc },
-        { sprite = "fixtures_bathroom_01_3", x = 8181, y = 11272, z = 1, sourceType="tank", source = wtc },
-        { sprite = "fixtures_bathroom_01_28", x = 8182, y = 11272, z = 1, sourceType="tank", source = wtc },
+        -- 3rd floor apts
+        { sprite = "fixtures_sinks_01_1", x = 8085, y = 11552, z = 2, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_1", x = 8085, y = 11553, z = 2, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_25", x = 8087, y = 11552, z = 2, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_24", x = 8087, y = 11553, z = 2, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        -- 2nd floor apts
+        { sprite = "fixtures_sinks_01_5", x = 8074, y = 11552, z = 1, sourceType="tank", source = wtc, }, -- kitchen, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_26", x = 8077, y = 11560, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_sinks_01_11", x = 8078, y = 11551, z = 1, sourceType="tank", source = wtc, }, -- kitchen, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_2", x = 8078, y = 11558, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_sinks_01_29", x = 8078, y = 11559, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_27", x = 8078, y = 11560, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_25", x = 8087, y = 11552, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_sinks_01_4", x = 8085, y = 11552, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_1", x = 8085, y = 11553, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_sinks_01_5", x = 8092, y = 11552, z = 1, sourceType="tank", source = wtc, }, -- kitchen, bld 31,45#6
+        -- 1st floor businesses
+        { sprite = "fixtures_sinks_01_8", x = 8076, y = 11557, z = 0, sourceType="tank", source = wtc, }, -- breakroom, bld 31,45#6
+        { sprite = "fixtures_sinks_01_12", x = 8078, y = 11552, z = 0, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "fixtures_bathroom_01_0", x = 8079, y = 11552, z = 0, sourceType="tank", source = wtc, }, -- bathroom, bld 31,45#6
+        { sprite = "location_shop_zippee_01_60", x = 8093, y = 11560, z = 0, sourceType="tank", source = wtc, }, -- zippeestore, bld 31,45#6
     },
     doorKeys = {
         name = "Rosewood Zippee Apts Key",
@@ -135,350 +146,12 @@ local RosewoodZippee = {
     },
     map = {name = "DWAPStashMap7",},
     objectSpawns = {
-        -- { sprite = "camping_01_16", x = 8190, y = 11270, z = 0, enabled = "EnableWaterSystem", }, -- well
         { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-        -- { sprite = "walls_commercial_03_35", x = 8176, y = 11260, z = -1, removeWall = "west", clearExisting = true, },
-        -- { sprite = "walls_commercial_03_49", x = 8175, y = 11260, z = -1,  },
-        -- { sprite = "floors_exterior_street_01_16", x = 8175, y = 11260, z = -1, isFloor = true, },
-        -- { sprite = "walls_commercial_03_49", x = 8175, y = 11261, z = -1 },
-
-        -- { sprite = "appliances_cooking_01_17", x = 8179, y = 11267, z = 1, isFireplace = true,},
-
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_40", x = 8175, y = 11271, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_40", x = 8175, y = 11270, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_doors_02_4", x = 8175, y = 11268, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11264, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11263, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11260, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="walls_commercial_01_40", x = 8176, y = 11259, z = 0, },
-        { barricade = "wood", enabled = "Barricade", target="walls_commercial_01_41", x = 8177, y = 11258, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 8178, y = 11258, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_metal_16", x = 8096, y = 11555, z = 2, }, -- window W | livingroom, bld 31,45#6
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_metal_16", x = 8096, y = 11557, z = 2, }, -- window W | livingroom, bld 31,45#6
+        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_metal_16", x = 8096, y = 11559, z = 2, }, -- window W | livingroom, bld 31,45#6
     },
     loot = {
-        -- ground floor
-        {
-            type = 'container',
-            coords = {x=8179,y=11270,z=0},
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        {
-            type = 'container',
-            coords = {x=8180,y=11270,z=0},
-            dist = {"StoreCounterTobacco"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8181,y=11270,z=0},
-            items = {
-                { name = 'Base.NailsBox', },
-                { name = 'Base.ScrewsBox', },
-            },
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8182,y=11272,z=0},
-            dist = {"LaundryCleaning", "JanitorCleaning"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8182,y=11269,z=0},
-            dist = {"CafeteriaSnacks"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8182,y=11268,z=0},
-            special = "essentials",
-        },
-        {
-            type = 'container',
-            coords = {x=8182,y=11267,z=0},
-            dist = {"CrateFishing", "FishermanTools"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8185,y=11269,z=0},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8185,y=11270,z=0},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8185,y=11271,z=0},
-            dist = {"ArmyStorageElectronics", "RandomFiller" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8185,y=11272,z=0},
-            dist = {"CrateLumber", "CrateSheetMetal"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8184,y=11272,z=0},
-            dist = {"WeldingWorkshopMetal"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        -- upstairs apt
-        {
-            type = 'container',
-            coords = {x=8178,y=11267,z=1},
-            dist = {"FreezerRich", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11269,z=1},
-            special = "kitchentools",
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11268,z=1},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11267,z=1},
-            dist = {"GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8176,y=11267,z=1},
-            dist = {"CrateCannedFood", "KitchenCannedFood"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8180,y=11267,z=1},
-            dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8181,y=11267,z=1},
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8185,y=11272,z=1},
-            dist = { "ArmyStorageAmmunition","GunStoreKnives", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_GunLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8182,y=11272,z=1},
-            slot = "upper",
-            dist = {"MedicalCabinet", "MedicalClinicTools", "MedicalStorageDrugs", "ArmyStorageMedical", "ArmyBunkerMedical"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        -- addon basement
-        {
-            type = 'container',
-            coords = {x=8166,y=11259,z=-1},
-            dist = {"ArtStorePottery","CrateMasonry" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8166,y=11258,z=-1},
-            dist = {"CrateCannedFood","LiquorStoreBeer","CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8166,y=11257,z=-1},
-            dist = {"FreezerRich", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8166,y=11256,z=-1},
-            dist = {"FreezerIceCream", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        
-        -- basement
-        {
-            type = 'container',
-            coords = {x=8180,y=11267,z=-1},
-            dist = {"CrateLiquor", "DishCabinetVIPLounge", "JanitorCleaning", "BathroomCounter", "CrateLinens"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11267,z=-1},
-            sandboxEnable = 'SeedLibrary',
-            special = 'SeedLibrary',
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11268,z=-1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11269,z=-1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11270,z=-1},
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11271,z=-1},
-            dist = {"CampingStoreTools", "ArmyHangarTools", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8175,y=11272,z=-1},
-            dist = {"CrateFishing", "FishermanTools"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8181,y=11265,z=-1},
-            dist = {"CrateTools", "GarageTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8181,y=11266,z=-1},
-            dist = {"BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8181,y=11262,z=-1},
-            dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools", "WeldingWorkshopTools", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        -- store
-        {
-            type = 'container',
-            coords = {x=8181,y=11258,z=0},
-            dist = {"CrateVHSTapes"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8180,y=11258,z=0},
-            dist = {"MusicStoreCDs"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8176,y=11261,z=0},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8176,y=11262,z=0},
-            dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        -- external bathrooms
-        {
-            type = 'container',
-            coords = {x=8177,y=11278,z=0},
-            dist = {"CrateToiletPaper"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = {x=8177,y=11282,z=0},
-            dist = {"CrateToiletPaper"},
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
     },
 }
 
