@@ -137,322 +137,78 @@ local LeafHill = {
         { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_0", x = 12394, y = 3407, z = 0, },
     },
     loot = {
-        -- -2 level, laundry, main storage
-        {
-            type = 'container',
-            coords = { x = 12392, y = 3410, z = -2 },
-            dist = { "LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "CrateBootsArmy" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12392, y = 3410, z = -2 },
-            slot = "upper",
-            dist = { "LaundryCleaning", "JanitorCleaning" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12394, y = 3416, z = -2 },
-            dist = { "FreezerIceCream", "WesternKitchenFreezer", },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12394, y = 3415, z = -2 },
-            dist = { "FridgeFarmStorage", "FreezerIceCream" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            frozen = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12395, y = 3416, z = -2 },
-            items = {
-                { name = 'Base.Firewood', chance = 1, count = { 10, 10 } },
-            },
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3416, z = -2 },
-            dist = { "SafehouseFireplace", "SafehouseLighting", },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12397, y = 3416, z = -2 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3416, z = -2 },
-            dist = { "CrateTortillaChips", "KitchenDryFood" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12399, y = 3416, z = -2 },
-            dist = { "GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12400, y = 3416, z = -2 },
-            dist = { "CrateFlour", "CrateOilVegetable" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3413, z = -2 },
-            dist = { "SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3412, z = -2 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3411, z = -2 },
-            dist = { "LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3414, z = -2 },
-            items = {
-                { name = 'Base.NailsBox', },
-                { name = 'Base.Sheet', },
-                { name = 'Base.WoodAxe', },
-                { name = 'Base.Machete', },
-            },
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3413, z = -2 },
-            dist = { "ClothingStorageWinter", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3412, z = -2 },
-            dist = { "HuntingLockers", "RangerTools" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3411, z = -2 },
-            dist = { "TheatrePopcorn", "FridgeSoda", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12400, y = 3414, z = -2 },
-            dist = { "CrateFishing", },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12400, y = 3413, z = -2 },
-            dist = { "CrateLumber", "CrateSheetMetal" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12400, y = 3412, z = -2 },
-            dist = { "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12400, y = 3411, z = -2 },
-            dist = { "CrateGravelBags", "CrateSandBags", "CrateClayBags" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
-        },
-        -- store basement
-        {
-            type = 'container',
-            coords = { x = 12391, y = 3413, z = -1 },
-            slot = "upper",
-            dist = { "CrateToiletPaper", "CrateLinens" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12391, y = 3412, z = -1 },
-            dist = { "BurglarTools", "CarpenterTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12391, y = 3411, z = -1 },
-            dist = { "CrateBlacksmithing" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12397, y = 3410, z = -1 },
-            slot = "upper",
-            dist = { "ArmyStorageOutfit", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12398, y = 3410, z = -1 },
-            slot = "upper",
-            dist = { "DrugLabOutfit", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12395, y = 3412, z = -1 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3412, z = -1 },
-            dist = { "CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12397, y = 3412, z = -1 },
-            dist = { "SafehouseMedical", "LiquorStoreWhiskey" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3413, z = -1 },
-            dist = { "LiquorStoreBeer", "LiquorStoreBeerFancy" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12397, y = 3413, z = -1 },
-            dist = { "CrateVHSTapes" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 12397, y = 3414, z = -1 },
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        {
-            type = 'container',
-            coords = { x = 12396, y = 3417, z = -1 },
-            dist = { "CrateLiquor", "LiquorStoreWhiskey" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-
-        -- main house
-        { type = 'container', coords = { x = 12395, y = 3411, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 12396, y = 3411, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 12394, y = 3415, z = 1 }, }, -- sidetable @ bedroom
-        { type = 'container', coords = { x = 12402, y = 3415, z = 1 }, }, -- medicine @ bathroom
-        { type = 'container', coords = { x = 12403, y = 3414, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 12403, y = 3415, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 12405, y = 3415, z = 1 }, }, -- dresser @ bedroom
-        { type = 'container', coords = { x = 12404, y = 3409, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 12404, y = 3410, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 12405, y = 3409, z = 1 }, }, -- counter @ bathroom
-        { type = 'container', coords = { x = 12405, y = 3410, z = 1 }, }, -- counter @ bathroom
-        { type = 'container', coords = { x = 12408, y = 3410, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 12406, y = 3406, z = 1 }, }, -- cardboardbox @ bedroom
-        { type = 'container', coords = { x = 12406, y = 3407, z = 1 }, }, -- cardboardbox @ bedroom
-        { type = 'container', coords = { x = 12407, y = 3407, z = 1 }, }, -- cardboardbox @ bedroom
-        { type = 'container', coords = { x = 12407, y = 3407, z = 1 }, slot = "upper", }, -- cardboardbox @ bedroom
-        { type = 'container', coords = { x = 12408, y = 3407, z = 1 }, }, -- cardboardbox @ bedroom
-        { type = 'container', coords = { x = 12403, y = 3404, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 12400, y = 3404, z = 1 }, }, -- shelves @ hall
-        { type = 'container', coords = { x = 12401, y = 3404, z = 1 }, }, -- shelves @ hall
-        { type = 'container', coords = { x = 12398, y = 3406, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 12394, y = 3403, z = 1 }, }, -- dresser @ kidsbedroom
-        { type = 'container', coords = { x = 12395, y = 3406, z = 1 }, }, -- shelves @ kidsbedroom
-        { type = 'container', coords = { x = 12400, y = 3402, z = 0 }, }, -- cardboardbox @ closet
-        { type = 'container', coords = { x = 12400, y = 3402, z = 0 }, slot = "upper", }, -- cardboardbox @ closet
-        { type = 'container', coords = { x = 12408, y = 3405, z = 0 }, }, -- metal_shelves @ garage
-        { type = 'container', coords = { x = 12408, y = 3406, z = 0 }, }, -- metal_shelves @ garage
-        { type = 'container', coords = { x = 12405, y = 3412, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12405, y = 3413, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12405, y = 3415, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12406, y = 3415, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12407, y = 3415, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12408, y = 3412, z = 0 }, }, -- fridge @ kitchen
-        { type = 'container', coords = { x = 12408, y = 3412, z = 0 }, }, -- freezer @ kitchen
-        { type = 'container', coords = { x = 12408, y = 3413, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12408, y = 3415, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 12400, y = 3415, z = 0 }, }, -- counter @ laundry
-        { type = 'container', coords = { x = 12394, y = 3413, z = 0 }, }, -- dishescabinet @ diningroom
-        { type = 'container', coords = { x = 12394, y = 3414, z = 0 }, }, -- dishescabinet @ diningroom
+        { type = 'container', coords = {x=12394,y=3403,z=1}, }, -- dresser @ kidsbedroom
+        { type = 'container', coords = {x=12395,y=3406,z=1}, }, -- shelves @ kidsbedroom
+        { type = 'container', coords = {x=12400,y=3404,z=1}, }, -- shelves @ hall
+        { type = 'container', coords = {x=12401,y=3404,z=1}, }, -- shelves @ hall
+        { type = 'container', coords = {x=12395,y=3411,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=12396,y=3411,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=12394,y=3415,z=1}, }, -- sidetable @ bedroom
+        { type = 'container', coords = {x=12402,y=3415,z=1}, }, -- medicine @ bathroom
+        { type = 'container', coords = {x=12403,y=3414,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=12403,y=3415,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=12405,y=3415,z=1}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=12408,y=3410,z=1}, }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=12405,y=3409,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=12405,y=3410,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=12404,y=3409,z=1}, }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=12404,y=3410,z=1}, }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=12406,y=3406,z=1}, }, -- cardboardbox @ bedroom
+        { type = 'container', coords = {x=12406,y=3407,z=1}, }, -- cardboardbox @ bedroom
+        { type = 'container', coords = {x=12407,y=3407,z=1}, }, -- cardboardbox @ bedroom
+        { type = 'container', coords = {x=12407,y=3407,z=1}, slot = "upper", }, -- cardboardbox @ bedroom
+        { type = 'container', coords = {x=12408,y=3407,z=1}, }, -- cardboardbox @ bedroom
+        { type = 'container', coords = {x=12403,y=3404,z=1}, }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=12394,y=3413,z=0}, }, -- dishescabinet @ diningroom
+        { type = 'container', coords = {x=12394,y=3414,z=0}, }, -- dishescabinet @ diningroom
+        { type = 'container', coords = {x=12400,y=3415,z=0}, }, -- counter @ laundry
+        { type = 'container', coords = {x=12405,y=3412,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12405,y=3413,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12405,y=3415,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12406,y=3415,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12407,y=3415,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12408,y=3412,z=0}, }, -- fridge @ kitchen
+        { type = 'container', coords = {x=12408,y=3412,z=0}, slot = "freezer", }, -- freezer @ kitchen
+        { type = 'container', coords = {x=12408,y=3413,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12408,y=3415,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=12408,y=3405,z=0}, }, -- metal_shelves @ garage
+        { type = 'container', coords = {x=12408,y=3406,z=0}, }, -- metal_shelves @ garage
+        { type = 'container', coords = {x=12400,y=3402,z=0}, }, -- cardboardbox @ closet
+        { type = 'container', coords = {x=12400,y=3402,z=0}, slot = "upper", }, -- cardboardbox @ closet
+        { type = 'container', coords = {x=12395,y=3411,z=-1}, }, -- shelves @ bar
+        { type = 'container', coords = {x=12395,y=3412,z=-1}, }, -- shelves @ bar
+        { type = 'container', coords = {x=12395,y=3413,z=-1}, }, -- shelves @ bar
+        { type = 'container', coords = {x=12397,y=3413,z=-1}, }, -- counter @ bar
+        { type = 'container', coords = {x=12395,y=3414,z=-1}, }, -- shelves @ bar
+        { type = 'container', coords = {x=12397,y=3414,z=-1}, }, -- counter @ bar
+        { type = 'container', coords = {x=12395,y=3415,z=-1}, }, -- shelves @ bar
+        { type = 'container', coords = {x=12397,y=3415,z=-1}, }, -- counter @ bar
+        { type = 'container', coords = {x=12393,y=3410,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=12393,y=3410,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=12393,y=3411,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3412,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3413,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3414,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3415,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3416,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12399,y=3410,z=-2}, }, -- wardrobe @ warehouse
+        { type = 'container', coords = {x=12395,y=3411,z=-2}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12396,y=3411,z=-2}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12397,y=3411,z=-2}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12393,y=3412,z=-2}, }, -- wardrobe @ warehouse
+        { type = 'container', coords = {x=12399,y=3412,z=-2}, }, -- locker @ warehouse
+        { type = 'container', coords = {x=12393,y=3413,z=-2}, }, -- wardrobe @ warehouse
+        { type = 'container', coords = {x=12397,y=3414,z=-2}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12399,y=3414,z=-2}, }, -- locker @ warehouse
+        { type = 'container', coords = {x=12397,y=3415,z=-2}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=12400,y=3410,z=-2}, }, -- wardrobe @ warehouse
+        { type = 'container', coords = {x=12400,y=3412,z=-2}, }, -- locker @ warehouse
+        { type = 'container', coords = {x=12400,y=3414,z=-2}, }, -- locker @ warehouse
+        { type = 'container', coords = {x=12393,y=3416,z=-2}, }, -- locker @ warehouse
+        { type = 'container', coords = {x=12399,y=3416,z=-2}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=12399,y=3416,z=-2}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=12400,y=3416,z=-2}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=12400,y=3416,z=-2}, stack = 2, }, -- crate @ warehouse
     },
 }
 

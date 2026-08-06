@@ -139,287 +139,81 @@ local WestMaple = {
 
     },
     loot = {
-        -- store basement
-        {
-            type = 'container',
-            coords = { x = 6117, y = 6650, z = -1 },
-            slot = "upper",
-            dist = { "CrateToiletPaper", "CrateLinens" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6117, y = 6649, z = -1 },
-            dist = { "BurglarTools", "CarpenterTools", "BarnTools" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6117, y = 6648, z = -1 },
-            dist = { "CrateBlacksmithing" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6123, y = 6647, z = -1 },
-            slot = "upper",
-            dist = { "ArmyStorageOutfit", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6124, y = 6647, z = -1 },
-            slot = "upper",
-            dist = { "DrugLabOutfit", },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6121, y = 6649, z = -1 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6122, y = 6649, z = -1 },
-            dist = { "CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6123, y = 6649, z = -1 },
-            dist = { "SafehouseMedical", "LiquorStoreWhiskey" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6122, y = 6650, z = -1 },
-            dist = { "LiquorStoreBeer", "LiquorStoreBeerFancy" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6123, y = 6650, z = -1 },
-            dist = { "CrateVHSTapes" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
-        },
-        {
-            type = 'container',
-            coords = { x = 6123, y = 6651, z = -1 },
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        {
-            type = 'container',
-            coords = { x = 6122, y = 6654, z = -1 },
-            dist = { "CrateLiquor", "LiquorStoreWhiskey" },
-            distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
-        },
-
-        -- main house
-        { type = 'container', coords = { x = 7246, y = 8256, z = 1 }, }, -- dresser @ motelroom
-        { type = 'container', coords = { x = 7243, y = 8259, z = 1 }, }, -- wardrobe @ motelroom
-        { type = 'container', coords = { x = 7244, y = 8259, z = 1 }, }, -- wardrobe @ motelroom
-        { type = 'container', coords = { x = 7246, y = 8259, z = 1 }, }, -- dresser @ motelroom
-        { type = 'container', coords = { x = 7249, y = 8261, z = 1 }, }, -- medicine @ bathroom
-        { type = 'container', coords = { x = 7249, y = 8261, z = 1 }, }, -- counter @ bathroom
-        { type = 'container', coords = { x = 7248, y = 8259, z = 1 }, }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7250, y = 8259, z = 1 }, }, -- smallbox @ janitor
-        { type = 'container', coords = { x = 7248, y = 8260, z = 1 }, }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7248, y = 8260, z = 1 }, slot = "upper", }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7250, y = 8260, z = 1 }, }, -- metal_shelves @ janitor
-        { type = 'container', coords = { x = 7248, y = 8260, z = 2 }, }, -- locker @ janitor
-        { type = 'container', coords = { x = 7250, y = 8260, z = 2 }, }, -- locker @ janitor
-        { type = 'container', coords = { x = 7248, y = 8261, z = 2 }, }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7248, y = 8262, z = 2 }, }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7248, y = 8262, z = 2 }, slot = "upper", }, -- cardboardbox @ janitor
-        { type = 'container', coords = { x = 7248, y = 8259, z = -1 }, }, -- metal_shelves @ grocerystorage
-        { type = 'container', coords = { x = 7248, y = 8260, z = -1 }, }, -- metal_shelves @ grocerystorage
-        { type = 'container', coords = { x = 7248, y = 8261, z = -1 }, }, -- metal_shelves @ grocerystorage
-        { type = 'container', coords = { x = 7251, y = 8261, z = -1 }, }, -- cardboardbox @ grocerystorage
-        { type = 'container', coords = { x = 7248, y = 8262, z = -1 }, }, -- metal_shelves @ grocerystorage
-        { type = 'container', coords = { x = 7250, y = 8262, z = -1 }, }, -- smallbox @ grocerystorage
-        { type = 'container', coords = { x = 7251, y = 8262, z = -1 }, }, -- cardboardbox @ grocerystorage
-        { type = 'container', coords = { x = 7256, y = 8256, z = -1 }, }, -- counter @ janitor
-        { type = 'container', coords = { x = 7257, y = 8256, z = -1 }, }, -- metal_shelves @ janitor
-        { type = 'container', coords = { x = 7258, y = 8253, z = -1 }, }, -- cardboardbox @ storage
-        { type = 'container', coords = { x = 7259, y = 8253, z = -1 }, }, -- cardboardbox @ storage
-        { type = 'container', coords = { x = 7259, y = 8253, z = -1 }, slot = "upper", }, -- cardboardbox @ storage
-        { type = 'container', coords = { x = 7254, y = 8256, z = -2 }, }, -- locker @ laundry
-        { type = 'container', coords = { x = 7255, y = 8253, z = -2 }, }, -- medicine @ laundry
-        { type = 'container', coords = { x = 7258, y = 8249, z = -2 }, }, -- militarylocker @ storage
-        { type = 'container', coords = { x = 7262, y = 8249, z = -2 }, }, -- militarylocker @ storage
-        { type = 'container', coords = { x = 7256, y = 8253, z = -2 }, }, -- woodstove @ storage
-        { type = 'container', coords = { x = 7260, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7261, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7261, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7262, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7262, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7263, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7256, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7260, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7261, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7261, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7262, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7262, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7263, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7263, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7267, y = 8256, z = -2 }, }, -- militarycrate @ storage
-        { type = 'container', coords = { x = 7268, y = 8256, z = -2 }, }, -- militarycrate @ storage
-        { type = 'container', coords = { x = 7266, y = 8249, z = -2 }, }, -- militarylocker @ storage
-        { type = 'container', coords = { x = 7264, y = 8254, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7264, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7264, y = 8255, z = -2 }, }, -- crate @ storage
-        { type = 'container', coords = { x = 7268, y = 8255, z = -2 }, }, -- militarycrate @ storage
-        { type = 'container', coords = { x = 7254, y = 8250, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8251, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8252, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8253, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8248, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8249, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7254, y = 8243, z = -3 }, }, -- dresser @ bunker
-        { type = 'container', coords = { x = 7254, y = 8244, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7254, y = 8244, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7254, y = 8245, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7254, y = 8245, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7254, y = 8246, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7254, y = 8246, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7254, y = 8247, z = -3 }, }, -- fridge @ bunker
-        { type = 'container', coords = { x = 7254, y = 8247, z = -3 }, }, -- freezer @ bunker
-        { type = 'container', coords = { x = 7256, y = 8248, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7256, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7256, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7256, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7256, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7256, y = 8246, z = -3 }, }, -- locker @ bunker
-        { type = 'container', coords = { x = 7256, y = 8247, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7258, y = 8248, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7260, y = 8248, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7258, y = 8249, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7260, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7260, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7260, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7260, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7258, y = 8243, z = -3 }, }, -- dresser @ bunker
-        { type = 'container', coords = { x = 7258, y = 8244, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7258, y = 8244, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7258, y = 8245, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7258, y = 8245, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7258, y = 8246, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7258, y = 8246, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7260, y = 8246, z = -3 }, }, -- locker @ bunker
-        { type = 'container', coords = { x = 7258, y = 8247, z = -3 }, }, -- fridge @ bunker
-        { type = 'container', coords = { x = 7258, y = 8247, z = -3 }, }, -- freezer @ bunker
-        { type = 'container', coords = { x = 7260, y = 8247, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7258, y = 8250, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7258, y = 8251, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7258, y = 8252, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7258, y = 8253, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8248, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8249, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8243, z = -3 }, }, -- dresser @ bunker
-        { type = 'container', coords = { x = 7262, y = 8244, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7262, y = 8244, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7262, y = 8245, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7262, y = 8245, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7262, y = 8246, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7262, y = 8246, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7262, y = 8247, z = -3 }, }, -- fridge @ bunker
-        { type = 'container', coords = { x = 7262, y = 8247, z = -3 }, }, -- freezer @ bunker
-        { type = 'container', coords = { x = 7264, y = 8248, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7264, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7264, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7264, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7264, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7264, y = 8246, z = -3 }, }, -- locker @ bunker
-        { type = 'container', coords = { x = 7264, y = 8247, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7262, y = 8250, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8251, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8252, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7262, y = 8253, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7266, y = 8250, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7266, y = 8251, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7266, y = 8252, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7266, y = 8253, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7266, y = 8248, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7268, y = 8248, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 7266, y = 8249, z = -3 }, }, -- metal_shelves @ bunker
-        { type = 'container', coords = { x = 7268, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7268, y = 8241, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7268, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7268, y = 8242, z = -3 }, }, -- crate @ bunker
-        { type = 'container', coords = { x = 7266, y = 8243, z = -3 }, }, -- dresser @ bunker
-        { type = 'container', coords = { x = 7266, y = 8244, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7266, y = 8244, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7266, y = 8245, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7266, y = 8245, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7266, y = 8246, z = -3 }, slot = "upper", }, -- overhead @ bunker
-        { type = 'container', coords = { x = 7266, y = 8246, z = -3 }, }, -- counter @ bunker
-        { type = 'container', coords = { x = 7268, y = 8246, z = -3 }, }, -- locker @ bunker
-        { type = 'container', coords = { x = 7266, y = 8247, z = -3 }, }, -- fridge @ bunker
-        { type = 'container', coords = { x = 7266, y = 8247, z = -3 }, }, -- freezer @ bunker
-        { type = 'container', coords = { x = 7268, y = 8247, z = -3 }, }, -- militarylocker @ bunker
-        { type = 'container', coords = { x = 6115, y = 6635, z = 1 }, }, -- sidetable @ bedroom
-        { type = 'container', coords = { x = 6115, y = 6638, z = 1 }, }, -- sidetable @ bedroom
-        { type = 'container', coords = { x = 6120, y = 6636, z = 1 }, }, -- shelves @ bedroom
-        { type = 'container', coords = { x = 6120, y = 6637, z = 1 }, }, -- dresser @ bedroom
-        { type = 'container', coords = { x = 6121, y = 6634, z = 1 }, }, -- shelves @ kidsbedroom
-        { type = 'container', coords = { x = 6122, y = 6634, z = 1 }, }, -- shelves @ kidsbedroom
-        { type = 'container', coords = { x = 6123, y = 6634, z = 1 }, }, -- dresser @ kidsbedroom
-        { type = 'container', coords = { x = 6121, y = 6638, z = 1 }, }, -- sidetable @ kidsbedroom
-        { type = 'container', coords = { x = 6123, y = 6632, z = 1 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 6119, y = 6628, z = 1 }, }, -- filingcabinet @ bedroom
-        { type = 'container', coords = { x = 6119, y = 6629, z = 1 }, }, -- filingcabinet @ bedroom
-        { type = 'container', coords = { x = 6118, y = 6630, z = 1 }, }, -- shelves @ bedroom
-        { type = 'container', coords = { x = 6118, y = 6631, z = 1 }, }, -- shelves @ bedroom
-        { type = 'container', coords = { x = 6116, y = 6629, z = 1 }, }, -- counter @ bathroom
-        { type = 'container', coords = { x = 6116, y = 6630, z = 1 }, }, -- counter @ bathroom
-        { type = 'container', coords = { x = 6112, y = 6628, z = 1 }, }, -- sidetable @ bedroom
-        { type = 'container', coords = { x = 6115, y = 6629, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 6115, y = 6630, z = 1 }, }, -- wardrobe @ bedroom
-        { type = 'container', coords = { x = 6112, y = 6637, z = 0 }, }, -- fireplace @ livingroom
-        { type = 'container', coords = { x = 6116, y = 6639, z = 0 }, }, -- shelves @ livingroom
-        { type = 'container', coords = { x = 6116, y = 6640, z = 0 }, }, -- shelves @ livingroom
-        { type = 'container', coords = { x = 6120, y = 6640, z = 0 }, }, -- metal_shelves @ closet
-        { type = 'container', coords = { x = 6121, y = 6634, z = 0 }, }, -- metal_shelves @ garage
-        { type = 'container', coords = { x = 6124, y = 6634, z = 0 }, }, -- cardboardbox @ garage
-        { type = 'container', coords = { x = 6125, y = 6634, z = 0 }, }, -- cardboardbox @ garage
-        { type = 'container', coords = { x = 6121, y = 6635, z = 0 }, }, -- metal_shelves @ garage
-        { type = 'container', coords = { x = 6122, y = 6631, z = 0 }, }, -- metal_shelves @ laundry
-        { type = 'container', coords = { x = 6122, y = 6628, z = 0 }, }, -- medicine @ bathroom
-        { type = 'container', coords = { x = 6112, y = 6628, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6112, y = 6628, z = 0 }, }, -- shelves @ kitchen
-        { type = 'container', coords = { x = 6114, y = 6628, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6115, y = 6628, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6117, y = 6628, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6118, y = 6628, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6112, y = 6629, z = 0 }, }, -- counter @ kitchen
-        { type = 'container', coords = { x = 6112, y = 6629, z = 0 }, }, -- shelves @ kitchen
-        { type = 'container', coords = { x = 6118, y = 6629, z = 0 }, }, -- fridge @ kitchen
-        { type = 'container', coords = { x = 6118, y = 6629, z = 0 }, }, -- freezer @ kitchen
-        { type = 'container', coords = { x = 6118, y = 6630, z = 0 }, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6115,y=6635,z=1}, }, -- sidetable @ bedroom
+        { type = 'container', coords = {x=6115,y=6638,z=1}, }, -- sidetable @ bedroom
+        { type = 'container', coords = {x=6120,y=6636,z=1}, slot = "upper", }, -- shelves @ bedroom
+        { type = 'container', coords = {x=6120,y=6637,z=1}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=6112,y=6638,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6112,y=6639,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6112,y=6628,z=1}, }, -- sidetable @ bedroom
+        { type = 'container', coords = {x=6115,y=6629,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=6115,y=6630,z=1}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=6116,y=6629,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6116,y=6630,z=1}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=6119,y=6628,z=1}, }, -- filingcabinet @ bedroom
+        { type = 'container', coords = {x=6119,y=6629,z=1}, }, -- filingcabinet @ bedroom
+        { type = 'container', coords = {x=6118,y=6630,z=1}, slot = "upper", }, -- shelves @ bedroom
+        { type = 'container', coords = {x=6118,y=6631,z=1}, slot = "upper", }, -- shelves @ bedroom
+        { type = 'container', coords = {x=6123,y=6632,z=1}, slot = "upper", }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=6121,y=6634,z=1}, }, -- shelves @ kidsbedroom
+        { type = 'container', coords = {x=6122,y=6634,z=1}, }, -- shelves @ kidsbedroom
+        { type = 'container', coords = {x=6123,y=6634,z=1}, }, -- dresser @ kidsbedroom
+        { type = 'container', coords = {x=6121,y=6638,z=1}, }, -- sidetable @ kidsbedroom
+        { type = 'container', coords = {x=6112,y=6637,z=0}, }, -- fireplace @ livingroom
+        { type = 'container', coords = {x=6116,y=6639,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=6116,y=6640,z=0}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=6112,y=6628,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6112,y=6628,z=0}, slot = "upper", }, -- shelves @ kitchen
+        { type = 'container', coords = {x=6114,y=6628,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6115,y=6628,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6117,y=6628,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6118,y=6628,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6112,y=6629,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6112,y=6629,z=0}, slot = "upper", }, -- shelves @ kitchen
+        { type = 'container', coords = {x=6118,y=6629,z=0}, }, -- fridge @ kitchen
+        { type = 'container', coords = {x=6118,y=6629,z=0}, slot = "freezer", }, -- freezer @ kitchen
+        { type = 'container', coords = {x=6118,y=6630,z=0}, }, -- counter @ kitchen
+        { type = 'container', coords = {x=6122,y=6628,z=0}, slot = "upper", }, -- medicine @ bathroom
+        { type = 'container', coords = {x=6122,y=6631,z=0}, slot = "upper", }, -- metal_shelves @ laundry
+        { type = 'container', coords = {x=6121,y=6634,z=0}, }, -- metal_shelves @ garage
+        { type = 'container', coords = {x=6124,y=6634,z=0}, }, -- cardboardbox @ garage
+        { type = 'container', coords = {x=6125,y=6634,z=0}, }, -- cardboardbox @ garage
+        { type = 'container', coords = {x=6121,y=6635,z=0}, }, -- metal_shelves @ garage
+        { type = 'container', coords = {x=6120,y=6640,z=0}, slot = "upper", }, -- metal_shelves @ closet
+        { type = 'container', coords = {x=6118,y=6646,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6118,y=6646,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6119,y=6646,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6119,y=6646,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6120,y=6646,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6120,y=6646,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6121,y=6646,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6121,y=6646,z=-1}, stack = 2, }, -- militarycrate @ warehouse
+        { type = 'container', coords = {x=6122,y=6646,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6122,y=6646,z=-1}, stack = 2, }, -- militarycrate @ warehouse
+        { type = 'container', coords = {x=6118,y=6648,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6118,y=6648,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6119,y=6648,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6119,y=6648,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6118,y=6649,z=-1}, }, -- shelves @ warehouse
+        { type = 'container', coords = {x=6118,y=6650,z=-1}, }, -- shelves @ warehouse
+        { type = 'container', coords = {x=6118,y=6651,z=-1}, }, -- shelves @ warehouse
+        { type = 'container', coords = {x=6118,y=6654,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=6119,y=6654,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=6120,y=6648,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6120,y=6648,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6121,y=6648,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6121,y=6648,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6122,y=6648,z=-1}, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6120,y=6650,z=-1}, }, -- militarycrate @ warehouse
+        { type = 'container', coords = {x=6120,y=6650,z=-1}, stack = 2, }, -- crate @ warehouse
+        { type = 'container', coords = {x=6120,y=6651,z=-1}, }, -- shelves @ warehouse
+        { type = 'container', coords = {x=6121,y=6651,z=-1}, }, -- cardboardbox @ warehouse
+        { type = 'container', coords = {x=6121,y=6651,z=-1}, slot = "upper", }, -- cardboardbox @ warehouse
+        { type = 'container', coords = {x=6120,y=6652,z=-1}, }, -- smallbox @ warehouse
+        { type = 'container', coords = {x=6121,y=6652,z=-1}, }, -- smallbox @ warehouse
+        { type = 'container', coords = {x=6120,y=6654,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=6121,y=6654,z=-1}, }, -- metal_shelves @ warehouse
+        { type = 'container', coords = {x=6122,y=6654,z=-1}, slot = "upper", }, -- metal_shelves @ warehouse
     },
 }
 

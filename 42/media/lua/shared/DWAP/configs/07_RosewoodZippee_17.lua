@@ -152,64 +152,80 @@ local RosewoodZippee = {
         { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_metal_16", x = 8096, y = 11559, z = 2, }, -- window W | livingroom, bld 31,45#6
     },
     loot = {
-        { type = 'container', coords = {x=8090,y=11554,z=2}, }, -- shelves @ livingroom
-        { type = 'container', coords = {x=8093,y=11559,z=2}, }, -- sidetable @ livingroom
-        { type = 'container', coords = {x=8090,y=11560,z=2}, }, -- sidetable @ livingroom
+        { type = 'container', coords = {x=8089,y=11560,z=2}, }, -- dresser @ bedroom
+        { type = 'container', coords = {x=8088,y=11556,z=2}, }, -- sidetable @ bedroom
+        { type = 'container', coords = {x=8086,y=11556,z=2}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=8086,y=11557,z=2}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=8086,y=11559,z=2}, }, -- shelves @ bedroom
+        { type = 'container', coords = {x=8082,y=11556,z=2}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=8082,y=11557,z=2}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=8089,y=11554,z=2}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=8083,y=11552,z=2}, }, -- wardrobe @ livingroom
+        { type = 'container', coords = {x=8084,y=11552,z=2}, }, -- wardrobe @ livingroom
+        { type = 'container', coords = {x=8082,y=11555,z=2}, }, -- dresser @ livingroom
+        { type = 'container', coords = {x=8085,y=11552,z=2}, }, -- counter @ bathroom
+        { type = 'container', coords = {x=8085,y=11552,z=2}, slot = "upper", }, -- medicine @ bathroom
+        { type = 'container', coords = {x=8088,y=11552,z=2}, }, -- cardboardbox @ closet
+        { type = 'container', coords = {x=8088,y=11552,z=2}, slot = "upper", }, -- cardboardbox @ closet
+        { type = 'container', coords = {x=8089,y=11552,z=2}, slot = "upper", }, -- metal_shelves @ closet
         { type = 'container', coords = {x=8090,y=11552,z=2}, }, -- counter @ kitchen
-        { type = 'container', coords = {x=8091,y=11552,z=2}, }, -- shelves @ kitchen
+        { type = 'container', coords = {x=8091,y=11552,z=2}, slot = "upper", }, -- shelves @ kitchen
         { type = 'container', coords = {x=8091,y=11552,z=2}, }, -- counter @ kitchen
         { type = 'container', coords = {x=8092,y=11552,z=2}, }, -- counter @ kitchen
         { type = 'container', coords = {x=8094,y=11552,z=2}, }, -- counter @ kitchen
         { type = 'container', coords = {x=8090,y=11553,z=2}, }, -- fridge @ kitchen
-        { type = 'container', coords = {x=8090,y=11553,z=2}, }, -- freezer @ kitchen
-        { type = 'container', coords = {x=8083,y=11552,z=2}, }, -- wardrobe @ livingroom
-        { type = 'container', coords = {x=8084,y=11552,z=2}, }, -- wardrobe @ livingroom
-        { type = 'container', coords = {x=8082,y=11555,z=2}, }, -- dresser @ livingroom
-        { type = 'container', coords = {x=8089,y=11554,z=2}, }, -- shelves @ livingroom
-        { type = 'container', coords = {x=8088,y=11552,z=2}, }, -- cardboardbox @ closet
-        { type = 'container', coords = {x=8088,y=11552,z=2}, slot = "upper", }, -- cardboardbox @ closet
-        { type = 'container', coords = {x=8089,y=11552,z=2}, }, -- metal_shelves @ closet
-        { type = 'container', coords = {x=8085,y=11552,z=2}, }, -- counter @ bathroom
-        { type = 'container', coords = {x=8085,y=11552,z=2}, }, -- medicine @ bathroom
-        { type = 'container', coords = {x=8086,y=11556,z=2}, }, -- wardrobe @ bedroom
-        { type = 'container', coords = {x=8086,y=11557,z=2}, }, -- wardrobe @ bedroom
-        { type = 'container', coords = {x=8086,y=11559,z=2}, }, -- shelves @ bedroom
-        { type = 'container', coords = {x=8088,y=11556,z=2}, }, -- sidetable @ bedroom
-        { type = 'container', coords = {x=8089,y=11560,z=2}, }, -- dresser @ bedroom
-        { type = 'container', coords = {x=8082,y=11556,z=2}, }, -- wardrobe @ bedroom
-        { type = 'container', coords = {x=8082,y=11557,z=2}, }, -- wardrobe @ bedroom
+        { type = 'container', coords = {x=8090,y=11553,z=2}, slot = "freezer", }, -- freezer @ kitchen
+        { type = 'container', coords = {x=8090,y=11560,z=2}, }, -- sidetable @ livingroom
+        { type = 'container', coords = {x=8090,y=11554,z=2}, }, -- shelves @ livingroom
+        { type = 'container', coords = {x=8093,y=11559,z=2}, }, -- sidetable @ livingroom
         { type = 'container', coords = {x=8080,y=11552,z=1}, }, -- cardboardbox @ livingroom
         { type = 'container', coords = {x=8081,y=11552,z=1}, }, -- cardboardbox @ livingroom
         { type = 'container', coords = {x=8081,y=11552,z=1}, slot = "upper", }, -- cardboardbox @ livingroom
         { type = 'container', coords = {x=8081,y=11553,z=1}, }, -- smallbox @ livingroom
         { type = 'container', coords = {x=8078,y=11557,z=-1}, }, -- shelves @ hall
         { type = 'container', coords = {x=8079,y=11558,z=-1}, }, -- smallbox @ hall
-        { type = 'container', coords = {x=8081,y=11552,z=-1}, }, -- metal_shelves @ storage
+        { type = 'container', coords = {x=8081,y=11552,z=-1}, slot = "upper", }, -- metal_shelves @ storage
         { type = 'container', coords = {x=8090,y=11552,z=-1}, }, -- smallbox @ storageunit
+        { type = 'container', coords = {x=8089,y=11549,z=-1}, }, -- desk @ storageunit
+        { type = 'container', coords = {x=8092,y=11549,z=-1}, }, -- shelves @ storageunit
+        { type = 'container', coords = {x=8092,y=11551,z=-1}, }, -- cardboardbox @ storageunit
         { type = 'container', coords = {x=8087,y=11549,z=-1}, }, -- metal_shelves @ storageunit
         { type = 'container', coords = {x=8087,y=11550,z=-1}, }, -- cardboardbox @ storageunit
         { type = 'container', coords = {x=8087,y=11550,z=-1}, slot = "upper", }, -- cardboardbox @ storageunit
         { type = 'container', coords = {x=8087,y=11551,z=-1}, }, -- cardboardbox @ storageunit
-        { type = 'container', coords = {x=8089,y=11549,z=-1}, }, -- desk @ storageunit
-        { type = 'container', coords = {x=8092,y=11549,z=-1}, }, -- shelves @ storageunit
-        { type = 'container', coords = {x=8092,y=11551,z=-1}, }, -- cardboardbox @ storageunit
-        { type = 'container', coords = {x=8090,y=11557,z=-1}, }, -- cardboardbox @ storageunit
         { type = 'container', coords = {x=8090,y=11560,z=-1}, }, -- locker @ storageunit
         { type = 'container', coords = {x=8093,y=11560,z=-1}, }, -- smallbox @ storageunit
-        { type = 'container', coords = {x=8086,y=11557,z=-1}, }, -- toolcabinet @ storageunit
+        { type = 'container', coords = {x=8090,y=11557,z=-1}, }, -- cardboardbox @ storageunit
         { type = 'container', coords = {x=8086,y=11560,z=-1}, }, -- metal_shelves @ storageunit
         { type = 'container', coords = {x=8087,y=11560,z=-1}, }, -- metal_shelves @ storageunit
+        { type = 'container', coords = {x=8086,y=11557,z=-1}, }, -- toolcabinet @ storageunit
+        { type = 'container', coords = {x=8073,y=11556,z=0}, }, -- filingcabinet @ office
+        { type = 'container', coords = {x=8075,y=11557,z=0}, }, -- desk @ office
+        { type = 'container', coords = {x=8073,y=11558,z=0}, }, -- shelves @ office
+        { type = 'container', coords = {x=8076,y=11556,z=0}, }, -- counter @ breakroom
+        { type = 'container', coords = {x=8076,y=11557,z=0}, }, -- counter @ breakroom
+        { type = 'container', coords = {x=8076,y=11558,z=0}, }, -- counter @ breakroom
+        { type = 'container', coords = {x=8073,y=11552,z=0}, }, -- cardboardbox @ zippeestorage
+        { type = 'container', coords = {x=8073,y=11552,z=0}, slot = "upper", }, -- cardboardbox @ zippeestorage
+        { type = 'container', coords = {x=8074,y=11552,z=0}, }, -- metal_shelves @ zippeestorage
+        { type = 'container', coords = {x=8075,y=11552,z=0}, }, -- metal_shelves @ zippeestorage
+        { type = 'container', coords = {x=8076,y=11552,z=0}, }, -- metal_shelves @ zippeestorage
+        { type = 'container', coords = {x=8077,y=11552,z=0}, }, -- metal_shelves @ zippeestorage
+        { type = 'container', coords = {x=8073,y=11553,z=0}, }, -- cardboardbox @ zippeestorage
+        { type = 'container', coords = {x=8077,y=11553,z=0}, }, -- smallbox @ zippeestorage
+        { type = 'container', coords = {x=8079,y=11552,z=0}, slot = "upper", }, -- medicine @ bathroom
     },
 }
 
 if getActivatedMods():contains("\\Ladders") then
-    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11255, z = -1, removeWall = "north" })
-    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11215, z = 0, removeFloor = true, })
-    table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
-    table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
-    table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
+    -- @TODO this needs to be remapped and updated for the new location
+    -- table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11255, z = -1, removeWall = "north" })
+    -- table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", x = 8174, y = 11215, z = 0, removeFloor = true, })
+    -- table.insert(RosewoodZippee.objectSpawns, { enabled = "EnableLadders", sprite = "fencing_01_59", x = 8175, y = 11215, z = 0 })
+    -- table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_fences_01_25", x = 8175, y = 11213, z = 0, })
+    -- table.insert(RosewoodZippee.doorKeys.doors, { sprite = "fixtures_doors_01_57", x = 8175, y = 11214, z = 0, })
 
-    table.insert(RosewoodZippee.generators[1].fakeGenerators, { x = 8173, y = 11234, z = -1, createTile = false })
+    -- table.insert(RosewoodZippee.generators[1].fakeGenerators, { x = 8173, y = 11234, z = -1, createTile = false })
 end
 
 return RosewoodZippee
