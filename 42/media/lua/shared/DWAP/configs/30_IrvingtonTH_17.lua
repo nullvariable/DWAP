@@ -1,3 +1,8 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: generator controls declare industry_02_67 but no such object
+--     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
+--     configs use dwap_tiles_01_22 - the maps look to have moved on and these
+--     configs did not. Confirm what is actually there before editing
 local bunkerTopLeft = {x = 2607, y = 14436, z = -1}
 local wtc = {x = 2609, y = 14446, z = -1}
 local pb1 = { x = 2614, y = 14446, z = -1 }
@@ -24,131 +29,6 @@ local IrvingtonTH = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14441,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14442,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14443,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14444,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14445,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2606,
-                        y = 14446,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14441,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14442,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14443,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14444,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14445,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2608,
-                        y = 14446,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 2606, y = 14454, z = -1, createTile = true },
             },
@@ -176,13 +56,13 @@ local IrvingtonTH = {
         { barricade = "metal", enabled = "Barricade", target="walls_exterior_house_01_25", x = 2611, y = 14466, z = 0, },
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        { -- E1 cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        { -- E2 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
@@ -192,13 +72,13 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        { -- E3 lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        { -- E4 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -208,7 +88,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        { -- E5 lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -217,7 +97,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        { -- E6 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -227,7 +107,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        { -- E7 lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -236,7 +116,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- metal shelves (70)
+        { -- E8 metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
@@ -245,36 +125,36 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        { -- E9 metal shelves (71)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        { -- E10 next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        { -- E11 (73)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        { -- E12 (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        { -- E13 far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- metal wall shelves
+        { -- E14 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -282,13 +162,13 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        { -- E15 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- metal wall shelves
+        { -- E16 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "Homesteading", "CrateFarming"},
@@ -296,7 +176,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -304,7 +184,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"ToolCabinetMechanics","CrateMechanics", "CarSupplyTools",},
@@ -312,7 +192,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=2609,y=14448,z=-1},
             items = {
@@ -321,7 +201,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=2610,y=14448,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},

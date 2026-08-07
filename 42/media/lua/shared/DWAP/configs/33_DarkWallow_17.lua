@@ -1,3 +1,8 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: generator controls declare industry_02_67 but no such object
+--     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
+--     configs use dwap_tiles_01_22 - the maps look to have moved on and these
+--     configs did not. Confirm what is actually there before editing
 local wtc = {x = 8711, y = 15303, z = -1}
 local bunkerTopLeft = {x = 8709, y = 15293, z = -1}
 local pb1 = { x = 8716, y = 15303, z = -1 }
@@ -35,131 +40,6 @@ local DarkWallow = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15306,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15307,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15308,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15309,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15310,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8722,
-                        y = 15311,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15306,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15307,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15308,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15309,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15310,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 8724,
-                        y = 15311,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 8712, y = 15310, z = -1, createTile = true },
             },
@@ -188,13 +68,13 @@ local DarkWallow = {
         { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_9", x = 8714, y = 15305, z = 0, },
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        { -- E1 cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        { -- E2 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
@@ -204,13 +84,13 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        { -- E3 lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        { -- E4 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -220,7 +100,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        { -- E5 lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -229,7 +109,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        { -- E6 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -239,7 +119,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        { -- E7 lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -248,7 +128,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- metal shelves (70)
+        { -- E8 metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
@@ -257,36 +137,36 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        { -- E9 metal shelves (71)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        { -- E10 next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        { -- E11 (73)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        { -- E12 (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        { -- E13 far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- metal wall shelves
+        { -- E14 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -294,13 +174,13 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        { -- E15 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- metal wall shelves
+        { -- E16 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -308,7 +188,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -316,7 +196,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
@@ -324,7 +204,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=8711,y=15310,z=-1},
             items = {
@@ -333,7 +213,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=8711,y=15305,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -341,7 +221,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=8712,y=15305,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -352,7 +232,7 @@ local DarkWallow = {
         ---------------------
         ---- First Floor ----
         ---------------------
-        {
+        { -- E22
             type = 'container',
             coords = {x=8707,y=15311,z=0},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
@@ -360,7 +240,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=8707,y=15310,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -368,7 +248,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=8707,y=15305,z=0},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -376,7 +256,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=8708,y=15305,z=0},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -384,7 +264,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=8704,y=15305,z=0},
             dist = {"CrateToiletPaper"},
@@ -392,7 +272,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=8704,y=15310,z=0},
             dist = {"CrateVHSTapes"},
@@ -400,7 +280,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=8710,y=15305,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -408,7 +288,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=8710,y=15305,z=0},
             slot = "upper",
@@ -417,7 +297,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=8712,y=15305,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -425,14 +305,14 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=8712,y=15305,z=0},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=8713,y=15305,z=0},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
@@ -440,7 +320,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=8713,y=15305,z=0},
             slot = "upper",
@@ -449,7 +329,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=8714,y=15305,z=0},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
@@ -457,7 +337,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=8714,y=15305,z=0},
             slot = "upper",
@@ -466,34 +346,31 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=8716,y=15307,z=0},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=8716,y=15308,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=8716,y=15309,z=0},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=8717,y=15308,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -501,16 +378,15 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=8719,y=15305,z=0},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=8720,y=15305,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -518,7 +394,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=8721,y=15305,z=0},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
@@ -526,7 +402,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=8717,y=15307,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -537,7 +413,7 @@ local DarkWallow = {
         -----------------------
         ---- Second Floor -----
         -----------------------
-        {
+        { -- E44
             type = 'container',
             coords = {x=8704,y=15310,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -545,13 +421,13 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=8704,y=15307,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=8704,y=15306,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -559,7 +435,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=8704,y=15305,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -567,7 +443,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=8708,y=15309,z=1},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
@@ -575,7 +451,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=8709,y=15309,z=1},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -583,7 +459,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=8709,y=15305,z=1},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
@@ -591,7 +467,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=8710,y=15305,z=1},
             dist = {"BathroomCounter", "GasStoreToiletries"},
@@ -599,7 +475,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=8719,y=15305,z=1},
             dist = {"MedicalCabinet","BathroomCounter", "GasStoreToiletries"},
@@ -607,7 +483,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=8721,y=15308,z=1},
             dist = {"CampingStoreBackpacks"},
@@ -615,7 +491,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=8721,y=15310,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -623,7 +499,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=8721,y=15313,z=1},
             dist = {"LivingRoomShelfClassy"},
@@ -631,7 +507,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=8709,y=15312,z=1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
@@ -639,7 +515,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=8709,y=15311,z=1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
@@ -647,7 +523,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=8715,y=15308,z=1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -655,7 +531,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=8716,y=15308,z=1},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
@@ -666,7 +542,7 @@ local DarkWallow = {
         ----------------
         ---- Attic -----
         ----------------
-        {
+        { -- E60
             type = 'container',
             coords = {x=8704,y=15309,z=2},
             items = {
@@ -675,7 +551,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=8704,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -683,7 +559,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=8717,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -691,7 +567,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=8718,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -699,7 +575,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=8719,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -707,7 +583,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=8720,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -715,7 +591,7 @@ local DarkWallow = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=8721,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},

@@ -1,3 +1,7 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: 1 component at 13431,1906 z=0 names a sprite that is not on
+--     the square, though the square itself loads - config drifted from the
+--     map
 local wtc = {x = 13454, y = 1884, z = -2,}
 local pb1 = { x = 13452, y = 1883, z = -2 }
 local CentralLVilleMansion = {
@@ -11,91 +15,6 @@ local CentralLVilleMansion = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 13459, y = 1884, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 13457, y= 1884, z= -2, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1898,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1897,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1896,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1895,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1894,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1893,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1892,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_6",
-                        x = 13445,
-                        y = 1891,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 13439, y = 1888+6, z = -1, },
                 { x = 13438, y = 1874, z = -4, },
@@ -195,7 +114,7 @@ local CentralLVilleMansion = {
     },
     loot = {
         --- Basement ---
-        { -- decon locker
+        { -- E1 decon locker
             type = 'container',
             coords = {x = 13438, y = 1902, z = -2},
             items = {
@@ -211,7 +130,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- decon locker
+        { -- E2 decon locker
             type = 'container',
             coords = {x = 13438, y = 1904, z = -2},
             items = {
@@ -220,7 +139,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- short locker
+        { -- E3 short locker
             type = 'container',
             coords = {x = 13442, y = 1901, z = -2},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -228,7 +147,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- short locker
+        { -- E4 short locker
             type = 'container',
             coords = {x = 13441, y = 1901, z = -2},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -236,7 +155,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- desk
+        { -- E5 desk
             type = 'container',
             coords = {x = 13438, y = 1899, z = -2},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
@@ -244,12 +163,12 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- locker
+        { -- E6 locker
             type = 'container',
             coords = {x = 13435, y = 1899, z = -2},
             special = "essentials",
         },
-        { -- locker
+        { -- E7 locker
             type = 'container',
             coords = {x = 13435, y = 1902, z = -2},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
@@ -257,19 +176,19 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- mil locker
+        { -- E8 mil locker
             type = 'container',
             coords = {x = 13432, y = 1899, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- mil locker
+        { -- E9 mil locker
             type = 'container',
             coords = {x = 13432, y = 1902, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- bathroom
+        { -- E10 bathroom
             type = 'container',
             coords = {x = 13431, y = 1901, z = -2},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
@@ -277,7 +196,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x = 13431, y = 1901, z = -2},
             slot = "upper",
@@ -289,7 +208,7 @@ local CentralLVilleMansion = {
         --------------------------
         ----- Recreation Area ----
         --------------------------
-        { -- bar
+        { -- E12 bar
             type = 'container',
             coords = {x = 13442, y = 1897, z = -2},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
@@ -297,7 +216,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- bar
+        { -- E13 bar
             type = 'container',
             coords = {x = 13442, y = 1896, z = -2},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -305,7 +224,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- bar
+        { -- E14 bar
             type = 'container',
             coords = {x = 13442, y = 1895, z = -2},
             dist = {"LiquorStoreBrandy", "LiquorStoreGin"},
@@ -313,7 +232,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- movie snack stand
+        { -- E15 movie snack stand
             type = 'container',
             coords = {x = 13438, y = 1890, z = -2},
             dist = {"TheatreDrinks", "TheatreSnacks"},
@@ -321,7 +240,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- movie snack stand
+        { -- E16 movie snack stand
             type = 'container',
             coords = {x = 13437, y = 1890, z = -2},
             dist = {"TheatrePopcorn", "TheatreSnacks"},
@@ -332,7 +251,7 @@ local CentralLVilleMansion = {
         ------------------------------
         ----- Kitchen/Dining Area ----
         ------------------------------
-        { -- under drink machine
+        { -- E17 under drink machine
             type = 'container',
             coords = {x = 13434, y = 1882, z = -2},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -340,7 +259,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- under toaster
+        { -- E18 under toaster
             type = 'container',
             coords = {x = 13434, y = 1878, z = -2},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
@@ -348,13 +267,13 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x = 13434, y = 1877, z = -2},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x = 13434, y = 1875, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -362,7 +281,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- under microwave
+        { -- E21 under microwave
             type = 'container',
             coords = {x = 13438, y = 1877, z = -2},
             dist = {"KitchenCannedFood"},
@@ -370,7 +289,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x = 13438, y = 1876, z = -2},
             dist = {"KitchenDryFood"},
@@ -378,7 +297,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x = 13438, y = 1875, z = -2},
             dist = {"SafehouseFood"},
@@ -386,7 +305,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- drink stand
+        { -- E24 drink stand
             type = 'container',
             coords = {x = 13441, y = 1877, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
@@ -394,7 +313,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- drink stand
+        { -- E25 drink stand
             type = 'container',
             coords = {x = 13443, y = 1877, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
@@ -402,47 +321,42 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- ice freezer
+        { -- E26 ice freezer
             type = 'container',
             coords = {x = 13444, y = 1875, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- ice freezer
+        { -- E27 ice freezer
             type = 'container',
             coords = {x = 13443, y = 1875, z = -2},
             dist = {"PizzaKitchenFreezer", "PizzaKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- coolers
+        { -- E28 coolers
             type = 'container',
             coords = {x = 13442, y = 1875, z = -2},
             dist = {"SafehouseFridge"},
-            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x = 13441, y = 1875, z = -2},
             dist = {"UniversityFridge"},
-            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x = 13440, y = 1875, z = -2},
             dist = {"WesternKitchenFridge"},
-            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
@@ -450,7 +364,7 @@ local CentralLVilleMansion = {
         ------------------------------
         --- Library and School Area --
         ------------------------------
-        {
+        { -- E31
             type = 'container',
             coords = {x = 13425, y = 1897, z = -2},
             dist = {"LivingRoomShelfClassy"},
@@ -458,7 +372,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x = 13425, y = 1896, z = -2},
             dist = {"CrateBooks", "BookstoreChilds", "CrateMagazines"},
@@ -466,25 +380,25 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x = 13428, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x = 13429, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x = 13430, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x = 13431, y = 1897, z = -2},
             dist = {"CrateVHSTapes"},
@@ -492,7 +406,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- desk
+        { -- E37 desk
             type = 'container',
             coords = {x = 13430, y = 1893, z = -2},
             dist = {"MusicStoreCDs"},
@@ -500,7 +414,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- desk
+        { -- E38 desk
             type = 'container',
             coords = {x = 13432, y = 1893, z = -2},
             sandboxEnable = 'Loot_EnableMaps',
@@ -509,7 +423,7 @@ local CentralLVilleMansion = {
         -----------------
         --- Infirmary ---
         -----------------
-        {
+        { -- E39
             type = 'container',
             coords = {x = 13419, y = 1897, z = -2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
@@ -517,7 +431,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x = 13419, y = 1896, z = -2},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -525,7 +439,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x = 13419, y = 1895, z = -2},
             dist = {"MedicalClinicDrugs" },
@@ -533,7 +447,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x = 13419, y = 1893, z = -2},
             dist = {"MedicalCabinet" },
@@ -544,13 +458,13 @@ local CentralLVilleMansion = {
         --------------------
         ----- Gun Range ----
         --------------------
-        {
+        { -- E43
             type = 'container',
             coords = {x = 13433, y = 1872, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x = 13430, y = 1869, z = -2},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
@@ -558,7 +472,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x = 13430, y = 1873, z = -2},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
@@ -569,7 +483,7 @@ local CentralLVilleMansion = {
         ---------------------------
         ----- Workroom / Power ----
         ---------------------------
-        {
+        { -- E46
             type = 'container',
             coords = {x = 13445, y = 1886, z = -2},
             dist = {"CrateCarpentry","LoggingFactoryTools"},
@@ -577,7 +491,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x = 13445, y = 1884, z = -2},
             dist = {"RadioFactoryComponents", "CrateElectronics", "ArmyStorageElectronics"},
@@ -585,7 +499,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x = 13445, y = 1883, z = -2},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
@@ -593,7 +507,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x = 13447, y = 1883, z = -2},
             dist = {"RailYardSpikes", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -601,7 +515,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x = 13449, y = 1883, z = -2},
             dist = {"ToolStoreMetalwork","ToolStoreMisc", "ToolStoreTools", },
@@ -609,7 +523,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x = 13450, y = 1883, z = -2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
@@ -617,7 +531,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x = 13450, y = 1885, z = -2},
             dist = {"GolfFactoryTools","KnifeFactoryTools"},
@@ -625,7 +539,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x = 13451, y = 1883, z = -2},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -633,7 +547,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x = 13451, y = 1884, z = -2},
             dist = {"CrateCarpentry","MannequinFactoryTools"},
@@ -641,7 +555,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x = 13451, y = 1885, z = -2},
             dist = {"WireFactoryBarbed", "CrateLongStick", "WireFactoryBasic"},
@@ -649,7 +563,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x = 13451, y = 1886, z = -2},
             dist = {"RailYardTools","Homesteading","SurvivalGear"},
@@ -660,7 +574,7 @@ local CentralLVilleMansion = {
         -----------------------
         ----- Laundry Room ----
         -----------------------
-        {
+        { -- E57
             type = 'container',
             coords = {x = 13445, y = 1882, z = -2},
             dist = {"ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -668,7 +582,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x = 13446, y = 1882, z = -2},
             dist = {"CrateClothesRandom"},
@@ -676,7 +590,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x = 13447, y = 1882, z = -2},
             dist = {"DrugLabOutfit", "MechanicOutfit", "WildWestClothing"},
@@ -684,7 +598,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x = 13448, y = 1882, z = -2},
             dist = {"BackstageClothingRack", "ArmySurplusOutfit"},
@@ -692,7 +606,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x = 13449, y = 1882, z = -2},
             dist = {"ClothingStorageWinter", "GymLaundry"},
@@ -700,7 +614,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x = 13450, y = 1882, z = -2},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -708,7 +622,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- counter under sink
+        { -- E63 counter under sink
             type = 'container',
             coords = {x = 13451, y = 1878, z = -2},
             dist = {"LaundryCleaning"},
@@ -719,7 +633,7 @@ local CentralLVilleMansion = {
         ----------------------
         ----- Shower Room ----
         ----------------------
-        { -- counter under sink
+        { -- E64 counter under sink
             type = 'container',
             coords = {x = 13455, y = 1881, z = -2},
             dist = {"BathroomCabinet", "BathroomCounter","BathroomShelf"},
@@ -727,7 +641,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- counter under sink
+        { -- E65 counter under sink
             type = 'container',
             coords = {x = 13452, y = 1881, z = -2},
             dist = {"CrateToiletPaper", "CrateLinens","GasStoreToiletries"},
@@ -738,7 +652,7 @@ local CentralLVilleMansion = {
         --------------
         ----- Gym ----
         --------------
-        {
+        { -- E66
             type = 'container',
             coords = {x = 13429, y = 1882, z = -2},
             dist = {"FitnessTrainer"},
@@ -746,7 +660,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x = 13430, y = 1882, z = -2},
             dist = {"CrateFitnessWeights"},
@@ -757,82 +671,74 @@ local CentralLVilleMansion = {
         -----------------------------
         ----- Warehouse Freezers ----
         -----------------------------
-        {
+        { -- E68
             type = 'container',
             coords = {x = 13437, y = 1870, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x = 13438, y = 1870, z = -2},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x = 13440, y = 1870, z = -2},
             dist = {"ArenaKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x = 13441, y = 1870, z = -2},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x = 13437, y = 1872, z = -2},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x = 13438, y = 1872, z = -2},
             dist = {"CafeteriaKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x = 13440, y = 1872, z = -2},
             dist = {"DeepFryKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x = 13441, y = 1872, z = -2},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         --------------------
         ----- Warehouse ----
         --------------------
-        {
+        { -- E76
             type = 'container',
             coords = {x = 13434, y = 1869, z = -2},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools",},
@@ -840,7 +746,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x = 13435, y = 1869, z = -2},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -848,7 +754,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x = 13436, y = 1869, z = -2},
             items = {
@@ -858,7 +764,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x = 13437, y = 1869, z = -2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -866,7 +772,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E80
             type = 'container',
             coords = {x = 13438, y = 1869, z = -2},
             items = {
@@ -876,7 +782,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E81
             type = 'container',
             coords = {x = 13434, y = 1873, z = -2},
             items = {
@@ -886,7 +792,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E82
             type = 'container',
             coords = {x = 13435, y = 1873, z = -2},
             items = {
@@ -896,7 +802,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x = 13436, y = 1873, z = -2},
             items = {
@@ -906,7 +812,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x = 13437, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -914,7 +820,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E85
             type = 'container',
             coords = {x = 13438, y = 1873, z = -2},
             dist = {"CrateTortillaChips"},
@@ -923,7 +829,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         -- ⬆ West of door way ⬇ East of door way
-        {
+        { -- E86
             type = 'container',
             coords = {x = 13440, y = 1869, z = -2},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
@@ -931,7 +837,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x = 13441, y = 1869, z = -2},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -939,7 +845,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x = 13440, y = 1873, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
@@ -947,7 +853,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x = 13441, y = 1873, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
@@ -955,7 +861,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E90
             type = 'container',
             coords = {x = 13443, y = 1869, z = -2},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
@@ -963,7 +869,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x = 13443, y = 1870, z = -2},
             dist = {"Trapper", "CrateFishing", "FishermanTools"},
@@ -971,7 +877,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E92
             type = 'container',
             coords = {x = 13447, y = 1869, z = -2},
             items = {
@@ -980,7 +886,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E93
             type = 'container',
             coords = {x = 13447, y = 1870, z = -2},
             dist = {"CrateAntiqueStove", "CampingStoreLighting"},
@@ -988,7 +894,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E94
             type = 'container',
             coords = {x = 13449, y = 1869, z = -2},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
@@ -996,7 +902,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E95
             type = 'container',
             coords = {x = 13449, y = 1870, z = -2},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
@@ -1005,7 +911,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         -- south side crates
-        {
+        { -- E96
             type = 'container',
             coords = {x = 13444, y = 1873, z = -2},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
@@ -1013,7 +919,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E97
             type = 'container',
             coords = {x = 13445, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1021,7 +927,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E98
             type = 'container',
             coords = {x = 13446, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1029,7 +935,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E99
             type = 'container',
             coords = {x = 13447, y = 1873, z = -2},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -1037,7 +943,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E100
             type = 'container',
             coords = {x = 13448, y = 1873, z = -2},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -1045,7 +951,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E101
             type = 'container',
             coords = {x = 13449, y = 1873, z = -2},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
@@ -1053,7 +959,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E102
             type = 'container',
             coords = {x = 13450, y = 1873, z = -2},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -1061,7 +967,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E103
             type = 'container',
             coords = {x = 13451, y = 1873, z = -2},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
@@ -1071,7 +977,7 @@ local CentralLVilleMansion = {
         },
 
         -- garage
-        {
+        { -- E104
             type = 'container',
             coords = {x=13433,y=1910,z=0},
             dist = {"GigamartDryGoods" },
@@ -1079,7 +985,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E105
             type = 'container',
             coords = {x=13434,y=1910,z=0},
             dist = {"GigamartDryGoods" },
@@ -1087,7 +993,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E106
             type = 'container',
             coords = {x = 13435, y = 1910, z = 0},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
@@ -1095,7 +1001,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E107
             type = 'container',
             coords = {x = 13436, y = 1910, z = 0},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -1103,7 +1009,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E108
             type = 'container',
             coords = {x = 13434, y = 1908, z = 0},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1111,7 +1017,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E109
             type = 'container',
             coords = {x = 13433, y = 1908, z = 0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1119,7 +1025,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E110
             type = 'container',
             coords = {x = 13432, y = 1908, z = 0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -1127,7 +1033,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E111
             type = 'container',
             coords = {x = 13431, y = 1908, z = 0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -1136,16 +1042,15 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         -- kitchen
-        { -- fridge
+        { -- E112 fridge
             type = 'container',
             coords = {x = 13440, y = 1904, z = 0},
             dist = {"WesternKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E113
             type = 'container',
             coords = {x = 13439, y = 1904, z = 0},
             dist = {"KitchenDryFood",},
@@ -1153,13 +1058,13 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E114
             type = 'container',
             coords = {x = 13438, y = 1904, z = 0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E115
             type = 'container',
             coords = {x = 13437, y = 1904, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -1167,7 +1072,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E116
             type = 'container',
             coords = {x = 13437, y = 1904, z = 0},
             slot = "upper",
@@ -1176,7 +1081,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E117
             type = 'container',
             coords = {x = 13437, y = 1903, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -1184,7 +1089,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E118
             type = 'container',
             coords = {x = 13437, y = 1903, z = 0},
             slot = "upper",
@@ -1193,7 +1098,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E119
             type = 'container',
             coords = {x = 13437, y = 1901, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -1201,7 +1106,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E120
             type = 'container',
             coords = {x = 13437, y = 1901, z = 0},
             slot = "upper",
@@ -1210,7 +1115,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E121
             type = 'container',
             coords = {x = 13437, y = 1900, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -1218,7 +1123,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E122
             type = 'container',
             coords = {x = 13437, y = 1900, z = 0},
             slot = "upper",
@@ -1227,7 +1132,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E123
             type = 'container',
             coords = {x = 13437, y = 1899, z = 0},
             dist = {"CrateTortillaChips", "CandyStoreSnacks","FridgeSoda",},
@@ -1235,7 +1140,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E124
             type = 'container',
             coords = {x = 13437, y = 1899, z = 0},
             slot = "upper",
@@ -1244,7 +1149,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E125
             type = 'container',
             coords = {x = 13438, y = 1899, z = 0},
             dist = {"WesternKitchenSauce", "WhiskeyBottlingFull", "WesternKitchenBaking"},
@@ -1253,7 +1158,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         -- laundry
-        {
+        { -- E126
             type = 'container',
             coords = {x=13444,y=1897,z=0},
             slot = "upper",
@@ -1262,7 +1167,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E127
             type = 'container',
             coords = {x=13444,y=1898,z=0},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -1271,7 +1176,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         -- office
-        {
+        { -- E128
             type = 'container',
             coords = {x=13441,y=1891,z=0},
             items = {
@@ -1282,7 +1187,7 @@ local CentralLVilleMansion = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E129
             type = 'container',
             coords = {x=13440,y=1891,z=0},
             dist = {"BookstoreMilitaryHistory"},
@@ -1290,7 +1195,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E130
             type = 'container',
             coords = {x=13440,y=1892,z=0},
             dist = {"BookstoreNonFiction"},
@@ -1298,7 +1203,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E131
             type = 'container',
             coords = {x=13440,y=1893,z=0},
             dist = {"CrateVHSTapes"},
@@ -1306,7 +1211,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E132
             type = 'container',
             coords = {x=13444,y=1894,z=0},
             dist = {"SafehouseTraps", },
@@ -1314,7 +1219,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E133
             type = 'container',
             coords = {x=13444,y=1893,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -1322,7 +1227,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E134
             type = 'container',
             coords = {x=13444,y=1892,z=0},
             dist = {"ArmyStorageAmmunition", },
@@ -1330,14 +1235,14 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E135
             type = 'container',
             coords = {x=13444,y=1891,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- piano room
-        {
+        { -- E136
             type = 'container',
             coords = {x=13436,y=1891,z=0},
             dist = {"FirearmWeapons_Late","ArmyStorageAmmunition",},
@@ -1345,7 +1250,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E137
             type = 'container',
             coords = {x=13431,y=1894,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -1354,7 +1259,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         -- dining room
-        {
+        { -- E138
             type = 'container',
             coords = {x=13431,y=1899,z=0},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -1362,7 +1267,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E139
             type = 'container',
             coords = {x=13434,y=1899,z=0},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs","MedicalCabinet"},
@@ -1371,13 +1276,13 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         -- 2nd floor
-        {
+        { -- E140
             type = 'container',
             coords = {x=13431,y=1897,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E141
             type = 'container',
             coords = {x=13431,y=1896,z=1},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition"},
@@ -1385,7 +1290,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E142
             type = 'container',
             coords = {x=13431,y=1895,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -1393,7 +1298,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E143
             type = 'container',
             coords = {x=13431,y=1891,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -1401,7 +1306,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E144
             type = 'container',
             coords = {x=13434,y=1891,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -1409,7 +1314,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E145
             type = 'container',
             coords = {x=13431,y=1904,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -1417,7 +1322,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E146
             type = 'container',
             coords = {x=13431,y=1903,z=1},
             dist = {"CampingStoreBackpacks"},
@@ -1425,7 +1330,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E147
             type = 'container',
             coords = {x=13434,y=1902,z=1},
             dist = {"SewingStoreTools"},
@@ -1433,7 +1338,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E148
             type = 'container',
             coords = {x=13435,y=1902,z=1},
             dist = {"SewingStoreFabric","CrateLeather"},
@@ -1441,7 +1346,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E149
             type = 'container',
             coords = {x=13438,y=1902,z=1},
             dist = {"SewingStoreFabric","CrateLeather", "ArtSupplies"},
@@ -1449,7 +1354,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E150
             type = 'container',
             coords = {x=13439,y=1894,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -1457,7 +1362,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E151
             type = 'container',
             coords = {x=13441,y=1893,z=1},
             dist = {"LivingRoomShelfClassy"},
@@ -1465,7 +1370,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E152
             type = 'container',
             coords = {x=13441,y=1892,z=1},
             dist = {"CrateVHSTapes","BookstoreNonFiction"},
@@ -1473,7 +1378,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E153
             type = 'container',
             coords = {x=13440,y=1894,z=1},
             dist = {"SurvivalGear",},
@@ -1481,7 +1386,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E154
             type = 'container',
             coords = {x=13444,y=1896,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -1489,7 +1394,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E155
             type = 'container',
             coords = {x=13444,y=1893,z=1},
             dist = {"SurvivalGear",},
@@ -1497,7 +1402,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E156
             type = 'container',
             coords = {x=13439,y=1893,z=1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -1505,13 +1410,13 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E157
             type = 'container',
             coords = {x=13439,y=1892,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E158
             type = 'container',
             coords = {x=13439,y=1891,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -1520,7 +1425,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         -- attic
-        {
+        { -- E159
             type = 'container',
             coords = {x=13432,y=1896,z=2},
             dist = {"BarnTools", "CrateAnimalFeed", },
@@ -1528,7 +1433,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E160
             type = 'container',
             coords = {x=13432,y=1901,z=2},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
@@ -1536,7 +1441,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E161
             type = 'container',
             coords = {x=13437,y=1901,z=2},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -1544,7 +1449,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E162
             type = 'container',
             coords = {x=13434,y=1895,z=2},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -1552,7 +1457,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E163
             type = 'container',
             coords = {x=13434,y=1894,z=2},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -1560,7 +1465,7 @@ local CentralLVilleMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E164
             type = 'container',
             coords = {x=13435,y=1894,z=2},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "ArtStorePottery",},

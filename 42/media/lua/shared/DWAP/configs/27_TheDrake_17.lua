@@ -1,3 +1,13 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entries 1,53,54,56,57,59,60,61,63: square holds no container at all -
+--     coords are stale or the object was removed
+--   * entries 2,7,9: square has a container but not the one addressed - needs
+--     slot = "upper" / "freezer" or stack = n
+--   * entries 58,62: resolved to a container but no DWAP stamp - the freezer
+--     bug is fixed, so these are the only unexplained fills left
+--   * systems: 19 components at 11903-11908,6845-6865 z=0,1 name a sprite
+--     that is not on the square, though the square itself loads - config
+--     drifted from the map
 local wtc1 = {x = 11912, y = 6844, z = -1,}
 local pb1 = { x = 11907, y = 6843, z = -1 }
 local TheDrake = {
@@ -11,111 +21,6 @@ local TheDrake = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 11908, y = 6844, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 11910, y = 6844, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6860,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6859,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6858,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6857,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6856,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6855,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6854,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6853,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6852,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 11913,
-                        y = 6851,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 11913, y = 6851, z = -1, createTile = false },
             },
@@ -179,7 +84,7 @@ local TheDrake = {
     loot = {
         -- basement
         -- shelter area
-        {
+        { -- E1
             type = 'container',
             coords = {x=11896,y=6843,z=-1},
             slot = "upper",
@@ -188,7 +93,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=11900,y=6841,z=-1},
             slot = "upper",
@@ -197,12 +102,12 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=11901,y=6839,z=-1},
             special = "essentials",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=11902,y=6839,z=-1},
             dist = {"CrateToiletPaper"},
@@ -210,7 +115,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=11902,y=6841,z=-1},
             slot = "upper",
@@ -219,7 +124,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=11903,y=6839,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -227,7 +132,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=11903,y=6841,z=-1},
             slot = "upper",
@@ -236,7 +141,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=11904,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -244,7 +149,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=11904,y=6841,z=-1},
             slot = "upper",
@@ -253,7 +158,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=11906,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -261,19 +166,19 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=11907,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=11908,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=11909,y=6839,z=-1},
             dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
@@ -281,7 +186,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=11910,y=6839,z=-1},
             dist = {"GunStoreAmmunition", "GunStoreKnives", "GunStoreBodyArmor", "GunStoreMagsAmmo", "GunStoreGuns", },
@@ -289,7 +194,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=11911,y=6839,z=-1},
             dist = {"CrateFishing", "FishermanTools", "Trapper"},
@@ -297,7 +202,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=11912,y=6839,z=-1},
             dist = {"GasStoreEmergency"},
@@ -305,7 +210,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=11913,y=6839,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
@@ -313,7 +218,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=11914,y=6839,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
@@ -321,7 +226,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=11914,y=6841,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -329,7 +234,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=11913,y=6841,z=-1},
             items = {
@@ -339,13 +244,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=11912,y=6841,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=11911,y=6841,z=-1},
             dist = {"CrateBooks", "MusicStoreCDs", "CrateVHSTapes"},
@@ -353,7 +258,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=11910,y=6841,z=-1},
             dist = {"ArmySurplusBackpacks", "ArmySurplusOutfit", "ArmyStorageOutfit", "ArmySurplusFootwear", "ArmySurplusHeadwear", "ArmySurplusMisc" },
@@ -361,7 +266,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=11909,y=6841,z=-1},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -369,13 +274,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=11908,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=11907,y=6841,z=-1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -383,13 +288,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=11906,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=11904,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -397,7 +302,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=11903,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit",},
@@ -405,20 +310,20 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=11900,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=11899,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- rest of basement
-        {
+        { -- E32
             type = 'container',
             coords = {x=11907,y=6846,z=-1},
             dist = {"CrateLumber"},
@@ -426,7 +331,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=11907,y=6847,z=-1},
             items = {
@@ -436,7 +341,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=11913,y=6857,z=-1},
             dist = {"CrateSheetMetal" },
@@ -444,7 +349,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=11913,y=6869,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -452,7 +357,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=11907,y=6865,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -461,7 +366,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         -- storage rooms, south to north
-        {
+        { -- E37
             type = 'container',
             coords = {x=11904,y=6858,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -469,7 +374,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=11904,y=6854,z=-1},
             dist = {"SafehouseTraps",},
@@ -477,7 +382,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=11902,y=6854,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -485,7 +390,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=11902,y=6853,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -493,7 +398,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=11902,y=6852,z=-1},
             dist = {"StoreShelfMechanics",},
@@ -501,7 +406,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=11904,y=6850,z=-1},
             dist = { "CrateLeather", },
@@ -509,7 +414,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=11902,y=6848,z=-1},
             dist = {"SewingStoreTools", },
@@ -517,7 +422,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=11902,y=6847,z=-1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "ArmySurplusOutfit", "CrateLinens"},
@@ -525,7 +430,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=11903,y=6847,z=-1},
             dist = { "SewingStoreFabric"},
@@ -533,7 +438,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=11904,y=6846,z=-1},
             dist = {"ArtStorePottery",},
@@ -543,7 +448,7 @@ local TheDrake = {
         },
         -- first floor
         -- bar area
-        {
+        { -- E47
             type = 'container',
             coords = {x=11902,y=6853,z=0},
             dist = {"CrateBeer",},
@@ -551,7 +456,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=11902,y=6852,z=0},
             dist = {"CrateWine",},
@@ -559,7 +464,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=11902,y=6851,z=0},
             dist = {"StoreCounterTobacco"},
@@ -567,7 +472,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=11902,y=6850,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -575,7 +480,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=11902,y=6849,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -583,7 +488,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=11902,y=6848,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -591,7 +496,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=11904,y=6849,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -599,7 +504,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=11904,y=6848,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
@@ -608,16 +513,15 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         -- bar kitchen
-        {
+        { -- E55
             type = 'container',
             coords = {x=11902,y=6846,z=0},
             dist = {"BurgerKitchenFridge","BurgerKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=11902,y=6845,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -625,7 +529,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=11904,y=6845,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -633,7 +537,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=11902,y=6859,z=0},
             slot = "upper",
@@ -643,7 +547,7 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         -- 2nd floor apt
-        {
+        { -- E59
             type = 'container',
             coords = {x=11909,y=6851,z=1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -651,22 +555,21 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=11908,y=6851,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=11907,y=6851,z=1},
             dist = {"BurgerKitchenFridge","BurgerKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=11913,y=6851,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -674,7 +577,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=11905,y=6851,z=1},
             slot = "upper",

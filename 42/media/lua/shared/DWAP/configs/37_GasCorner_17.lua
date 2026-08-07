@@ -1,3 +1,11 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * 2 skeleton entries carry coords but no loot yet - entries 26-27
+--   * systems: generator controls declare industry_02_67 but no such object
+--     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
+--     configs use dwap_tiles_01_22 - the maps look to have moved on and these
+--     configs did not. Confirm what is actually there before editing
+--   * systems: 1 component at 1659,5747 z=0 names a sprite that is not on the
+--     square, though the square itself loads - config drifted from the map
 local wtc1 = {x = 1662, y = 5746, z = -2,}
 local pb1 = { x = 1666, y = 5746, z = -4 }
 local GasCorner = {
@@ -11,101 +19,6 @@ local GasCorner = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5744,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5745,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5746,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5747,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5748,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5749,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5750,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5751,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 1665,
-                        y = 5752,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 1659, y = 5749, z = -1, createTile = true },
             },
@@ -153,7 +66,7 @@ local GasCorner = {
     },
     loot = {
         -- lowest level
-        {
+        { -- E1
             type = 'container',
             coords = {x=1664,y=5749,z=-4},
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -161,14 +74,14 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=1664,y=5749,z=-4},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=1663,y=5749,z=-4},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -176,7 +89,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=1663,y=5749,z=-4},
             slot = "upper",
@@ -185,7 +98,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=1661,y=5749,z=-4},
             slot = "upper",
@@ -194,7 +107,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=1660,y=5750,z=-4},
             slot = "upper",
@@ -205,7 +118,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=1659,y=5750,z=-4},
             slot = "upper",
@@ -214,7 +127,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=1658,y=5749,z=-4},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
@@ -222,7 +135,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=1660,y=5745,z=-4},
             dist = { "SafehouseTraps", "SafehouseArmor", "SafehouseArmor_Late", },
@@ -230,19 +143,19 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=1661,y=5745,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=1662,y=5745,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=1667,y=5745,z=-4},
             dist = {"CrateOilVegetable","GunStoreMagsAmmo", "GunStoreAmmunition", },
@@ -251,25 +164,25 @@ local GasCorner = {
             level = "Loot_GunLevel",
         },
         -- -3, books and crafting room
-        {
+        { -- E13
             type = 'container',
             coords = {x=1659,y=5744,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=1659,y=5745,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=1659,y=5746,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=1659,y=5747,z=-3},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -278,13 +191,13 @@ local GasCorner = {
             level = "Loot_MediaLevel",
         },
         -- small back room
-        {
+        { -- E17
             type = 'container',
             coords = {x=1665,y=5750,z=-3},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=1665,y=5748,z=-3},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -292,13 +205,13 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=1667,y=5750,z=-3},
             special = "essentials",
         },
         -- main work room
-        {
+        { -- E20
             type = 'container',
             coords = {x=1661,y=5750,z=-3},
             items = {
@@ -307,7 +220,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=1661,y=5749,z=-3},
             items = {
@@ -316,7 +229,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=1661,y=5747,z=-3},
             dist = {"GasStoreEmergency","CarSupplyTools","GasStorageMechanics",},
@@ -324,7 +237,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=1661,y=5746,z=-3},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
@@ -332,7 +245,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=1661,y=5745,z=-3},
             dist = {"CrateTools", "GarageTools", "BarnTools",  },
@@ -340,7 +253,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=1663,y=5745,z=-3},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -348,15 +261,15 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=1665,y=5745,z=-3},
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=1665,y=5746,z=-3},
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=1667,y=5745,z=-3},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
@@ -364,7 +277,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=1667,y=5746,z=-3},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -373,7 +286,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         -- -2 level, laundry, main storage
-        {
+        { -- E30
             type = 'container',
             coords = {x=1659,y=5744,z=-2},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "CrateBootsArmy"},
@@ -381,7 +294,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=1659,y=5744,z=-2},
             slot = "upper",
@@ -390,25 +303,23 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=1661,y=5750,z=-2},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=1661,y=5749,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=1662,y=5750,z=-2},
             items = {
@@ -417,7 +328,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=1663,y=5750,z=-2},
             dist = {"SafehouseFireplace", "SafehouseLighting", },
@@ -425,7 +336,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=1664,y=5750,z=-2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -433,7 +344,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=1665,y=5750,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -441,7 +352,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=1666,y=5750,z=-2},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -449,7 +360,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=1667,y=5750,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -457,7 +368,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=1663,y=5747,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -465,7 +376,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=1663,y=5746,z=-2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -473,7 +384,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=1663,y=5745,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
@@ -481,7 +392,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=1665,y=5748,z=-2},
             items = {
@@ -493,7 +404,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=1665,y=5747,z=-2},
             dist = {"ClothingStorageWinter",},
@@ -501,7 +412,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=1665,y=5746,z=-2},
             dist = {"HuntingLockers", "RangerTools"},
@@ -509,7 +420,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=1665,y=5745,z=-2},
             dist = {"TheatrePopcorn", "FridgeSoda",},
@@ -517,7 +428,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=1667,y=5748,z=-2},
             dist = {"CrateFishing",},
@@ -525,7 +436,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=1667,y=5747,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -533,7 +444,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=1667,y=5746,z=-2},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -541,7 +452,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=1667,y=5745,z=-2},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
@@ -550,7 +461,7 @@ local GasCorner = {
             level = "Loot_BuildMatsLevel",
         },
         -- store basement
-        {
+        { -- E51
             type = 'container',
             coords = {x=1658,y=5747,z=-1},
             slot = "upper",
@@ -559,7 +470,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=1658,y=5746,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -567,7 +478,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=1658,y=5745,z=-1},
             dist = {"CrateBlacksmithing" },
@@ -575,7 +486,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=1664,y=5744,z=-1},
             slot = "upper",
@@ -584,7 +495,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=1665,y=5744,z=-1},
             slot = "upper",
@@ -593,7 +504,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=1662,y=5746,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -601,7 +512,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=1663,y=5746,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -609,7 +520,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=1664,y=5746,z=-1},
             dist = {"SafehouseMedical", "LiquorStoreWhiskey" },
@@ -617,7 +528,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=1663,y=5747,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
@@ -625,7 +536,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=1664,y=5747,z=-1},
             dist = {"CrateVHSTapes"},
@@ -633,13 +544,13 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=1664,y=5748,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=1663,y=5751,z=-1},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -648,7 +559,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         -- store area
-        {
+        { -- E63
             type = 'container',
             coords = {x=1661,y=5746,z=0},
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
@@ -656,7 +567,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=1662,y=5746,z=0},
             dist = {"CrateBootsArmy",},
@@ -664,7 +575,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=1663,y=5746,z=0},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
@@ -672,7 +583,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=1664,y=5746,z=0},
             dist = {"SafehouseTraps","GunStoreKnives","CrateLiquor", "CarSupplyTools",},
@@ -680,7 +591,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=1660,y=5751,z=0},
             dist = {"LivingRoomShelfClassy"},
@@ -688,7 +599,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=1660,y=5752,z=0},
             dist = {"MusicStoreCDs"},
@@ -696,7 +607,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=1664,y=5750,z=0},
             dist = { "GasStoreEmergency", "StoreCounterTobacco" },
@@ -705,22 +616,21 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         -- upper house level
-        {
+        { -- E70
             type = 'container',
             coords = {x=1659,y=5744,z=1},
             dist = {"SushiKitchenFreezer", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=1660,y=5744,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=1661,y=5744,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning", "MedicalStorageDrugs"},
@@ -728,7 +638,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=1662,y=5744,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -736,13 +646,13 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=1664,y=5744,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=1665,y=5747,z=1},
             dist = {"LaundryLoad1", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -750,7 +660,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=1659,y=5747,z=1},
             dist = {"MedicalClinicDrugs", "MedicalCabinet" },
@@ -758,7 +668,7 @@ local GasCorner = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=1665,y=5749,z=1},
             items = {

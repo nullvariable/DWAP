@@ -1,3 +1,8 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entries 17,42,43: square holds no container at all - coords are stale
+--     or the object was removed
+--   * entry 58: duplicate coordinates with an earlier entry - one of each
+--     pair needs slot or stack addressing, or is redundant
 local wtc = {x = 2051, y = 5692, z = -1} -- waterTankCoords
 local pb1 = { x = 2057, y = 5690, z = -1 }
 local PSDelilah = {
@@ -47,91 +52,6 @@ local PSDelilah = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 2059, y = 5690, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 2061, y= 5690, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z, spawn = false, },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2057,
-                        y = 5685,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2057,
-                        y = 5686,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2057,
-                        y = 5687,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2057,
-                        y = 5688,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2059,
-                        y = 5685,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2059,
-                        y = 5686,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2059,
-                        y = 5687,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 2059,
-                        y = 5688,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 2046, y = 5693, z = -1, createTile = false },
             },
@@ -152,12 +72,12 @@ local PSDelilah = {
     },
     loot = {
         -- command deck
-        {
+        { -- E1
             type = 'container',
             coords = {x = 2040, y = 5684, z = 2},
             special = "essentials",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=2035,y=5684,z=2},
             dist = {"KitchenDryFood"},
@@ -165,7 +85,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=2037,y=5684,z=2},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
@@ -173,7 +93,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=2037,y=5684,z=2},
             slot = "upper",
@@ -182,7 +102,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=2036,y=5684,z=2},
             dist = {"FirearmWeapons_Late",},
@@ -190,13 +110,13 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=2035,y=5687,z=2},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=2035,y=5689,z=2},
             dist = {"MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -204,7 +124,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {-- change this to a firewood and starters container and put the tools elsewhere
+        {-- E8 change this to a firewood and starters container and put the tools elsewhere
             type = 'container',
             coords = {x=2038,y=5684,z=2},
             slot = "upper",
@@ -214,7 +134,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=2035,y=5692,z=2},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -222,7 +142,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=2039,y=5684,z=2},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -230,7 +150,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=2040,y=5687,z=2},
             dist = {"GigamartTools", "JanitorTools" },
@@ -238,7 +158,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=2039,y=5684,z=2},
             slot = "upper",
@@ -247,7 +167,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=2039,y=5685,z=2},
             dist = {"CampingStoreLighting"},
@@ -255,7 +175,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=2040,y=5685,z=2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -263,7 +183,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=2039,y=5687,z=2},
             dist = {"CrateVHSTapes", "MusicStoreCDs", "StoreCounterTobacco"},
@@ -271,7 +191,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- @TODO change
+        { -- E16 @TODO change
             type = 'container',
             coords = {x=2041,y=5687,z=2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateFishing"},
@@ -279,7 +199,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x = 2035, y = 5688, z = 2},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
@@ -287,31 +207,31 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=2039,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=2040,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=2041,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x = 2035, y = 5686, z = 2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x = 2035, y = 5685, z = 2},
             dist = {"SurvivalGear", "LaundryCleaning", "LaundryLoad1", "CrateLeather", "SewingStoreFabric",},
@@ -321,7 +241,7 @@ local PSDelilah = {
         },
 
         -- middle deck bar area (z=1)
-        {
+        { -- E23
             type = 'container',
             coords = {x=2044,y=5689,z=1},
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
@@ -329,7 +249,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=2044,y=5690,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -337,7 +257,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=2044,y=5691,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -345,7 +265,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=2044,y=5693,z=1},
             dist = {"CrateTortillaChips", "StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -353,7 +273,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=2042,y=5690,z=1},
             dist = {"CrateFlour","CrateOilVegetable",},
@@ -361,7 +281,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=2042,y=5691,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -369,7 +289,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=2042,y=5692,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -377,7 +297,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=2044,y=5692,z=1},
             special = "gunlocker",
@@ -385,7 +305,7 @@ local PSDelilah = {
         },
 
         -- main deck (mostly kitchen) (z=0)
-        {
+        { -- E31
             type = 'container',
             coords = {x=2061,y=5684,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -393,13 +313,13 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=2061,y=5685,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=2061,y=5686,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -407,7 +327,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=2061,y=5687,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -415,7 +335,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=2046,y=5692,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -429,7 +349,7 @@ local PSDelilah = {
         -- },
 
         -- ticket office
-        {
+        { -- E36
             type = 'container',
             coords = {x=2043,y=5710,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -437,7 +357,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=2044,y=5710,z=0},
             dist = {"GasStoreEmergency"},
@@ -445,7 +365,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = 2,
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=2044,y=5709,z=0},
             items = {
@@ -455,7 +375,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=2044,y=5708,z=0},
             dist = {"WeldingWorkshopMetal"},
@@ -463,7 +383,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=2044,y=5707,z=0},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -473,7 +393,7 @@ local PSDelilah = {
         },
 
         -- below decks (z=-1)
-        {
+        { -- E41
             type = 'container',
             coords = {x=2036,y=5689,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -481,7 +401,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=2036,y=5688,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -489,7 +409,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=2036,y=5687,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -497,7 +417,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=2042,y=5692,z=-1},
             slot = "upper",
@@ -506,7 +426,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=2042,y=5684,z=-1},
             slot = "upper",
@@ -515,34 +435,31 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=2037,y=5685,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=2038,y=5685,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=2039,y=5685,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=2044,y=5692,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -550,7 +467,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=2043,y=5692,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
@@ -558,7 +475,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=2032,y=5686,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -566,7 +483,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=2033,y=5686,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -574,7 +491,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {-- two stack now, move guns to mil locker
+        {-- E53 two stack now, move guns to mil locker
             type = 'container',
             coords = {x=2034,y=5686,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -582,13 +499,13 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- mil locker
+        { -- E54 mil locker
             type = 'container',
             coords = {x=2033,y=5690,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=2034,y=5690,z=-1},
             dist = {"CrateBlacksmithing", "CrateMechanics", "CrateMetalwork" },
@@ -596,7 +513,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=2034,y=5689,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -604,7 +521,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=2036,y=5690,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "BurglarTools", "CarpenterTools", "BarnTools","CampingStoreTools", "ArmyHangarTools", },
@@ -612,7 +529,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- @TODO duplicate coords with entry 41
+        { -- E58 @TODO duplicate coords with entry 41
             type = 'container',
             coords = {x=2036,y=5689,z=-1},
             dist = {"CarSupplyTools","GasStorageMechanics",},
@@ -620,7 +537,7 @@ local PSDelilah = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- medicine cabinet
+        { -- E59 medicine cabinet
             type = 'container',
             coords = {x=2036,y=5686,z=-1},
             slot = "upper",

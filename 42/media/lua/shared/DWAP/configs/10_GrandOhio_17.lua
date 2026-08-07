@@ -1,3 +1,10 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: 4 components at 13637-13640,1233-1235 z=-4 report "square not
+--     loaded" - those chunks never stream when travelling to this base, which
+--     is what a pre-move or otherwise wrong coordinate looks like
+--   * systems: 8 components at 13637-13645,1247-1288 z=-4 name a sprite that
+--     is not on the square, though the square itself loads - config drifted
+--     from the map
 local generatorStartCoords = { x = 13636, y = 1262, z = -4, }
 local wtc = { x = generatorStartCoords.x+8, y = generatorStartCoords.y+4, z = -4, }
 local GrandOhioConfig = {
@@ -108,7 +115,7 @@ local GrandOhioConfig = {
         -- { sprite = "appliances_cooking_01_16", x = 12989, y = 1915, z = 2, },
     },
     loot = {
-        {
+        { -- E1
             -- filingcabinet next to spawn in operations room
             type = 'container',
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+11,z=-4},
@@ -120,7 +127,7 @@ local GrandOhioConfig = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E2
             -- 2nd filingcabinet next to spawn in operations room
             type = 'container',
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+12,z=-4},
@@ -128,13 +135,13 @@ local GrandOhioConfig = {
             special = "maps",
         },
         -- kitchen
-        {
+        { -- E3
             type = 'container',
             coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y-6,z=-4},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -142,7 +149,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood",},
@@ -150,7 +157,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-4,z=-4},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -158,7 +165,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=generatorStartCoords.x+15,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood",},
@@ -166,7 +173,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=generatorStartCoords.x+17,y=generatorStartCoords.y-4,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -174,7 +181,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y-4,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -182,7 +189,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-4,z=-4},
             dist = {"StoreKitchenBaking",},
@@ -191,13 +198,13 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         -- Armory
-        {
+        { -- E11
             type = 'container',
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y-2,z=-4},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -205,19 +212,19 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+1,z=-4},
             dist = {"FirearmWeapons_Late",},
@@ -225,7 +232,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+1,z=-4},
             dist = {"DrugLabGuns"},
@@ -233,7 +240,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+1,z=-4},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
@@ -241,7 +248,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+1,z=-4},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
@@ -250,7 +257,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         -- medical
-        {
+        { -- E19
             type = 'container',
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+9,z=-4},
             slot = "upper",
@@ -259,7 +266,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+10,z=-4},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -267,7 +274,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+10,z=-4},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -276,7 +283,7 @@ local GrandOhioConfig = {
             level = "Loot_MedLevel",
         },
         -- book shelves
-        {
+        { -- E22
             type = 'container',
             coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+16,z=-4},
             dist = {"BookstoreNonFiction"},
@@ -284,7 +291,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+15,z=-4},
             dist = {"BookstoreMilitaryHistory"},
@@ -293,25 +300,25 @@ local GrandOhioConfig = {
             level = 1,
         },
         -- media storage
-        {
+        { -- E24
             type = 'container',
             coords = {x=generatorStartCoords.x+26,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks1',
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks2',
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillmags',
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateTVWide", "CrateVHSTapes"},
@@ -319,7 +326,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateVHSTapes"},
@@ -327,7 +334,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+17,z=-4},
             dist = {"MovieRentalShelves"},
@@ -335,7 +342,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -343,7 +350,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -351,7 +358,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -359,7 +366,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+20,z=-4},
             dist = {"MusicStoreCDs"},
@@ -368,7 +375,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         -- cleaning
-        {
+        { -- E34
             type = 'container',
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+17,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -376,7 +383,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+17,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -385,13 +392,13 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         -- seed/farm library
-        {
+        { -- E36
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+15,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+16,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -399,7 +406,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+15,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -407,7 +414,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+16,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -415,7 +422,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+15,z=-4},
             sandboxEnable = 'SeedLibrary',
@@ -425,7 +432,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+16,z=-4},
             sandboxEnable = 'SeedLibrary',
@@ -436,7 +443,7 @@ local GrandOhioConfig = {
             level = "Loot_FarmLevel",
         },
         -- fishing
-        {
+        { -- E42
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateFishing", "FishermanTools"},
@@ -444,7 +451,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- hunting
+        { -- E43 hunting
             type = 'container',
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+12,z=-4},
             dist = {"HuntingLockers", "RangerTools"},
@@ -452,7 +459,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateInstruments"},
@@ -460,7 +467,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateLiquor"},
@@ -468,7 +475,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -476,7 +483,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y+12,z=-4},
             dist = {"DishCabinetLiquor"},
@@ -485,7 +492,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         -- tailoring
-        {
+        { -- E48
             type = 'container',
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+21,z=-4},
             dist = {"SewingStoreTools"},
@@ -493,7 +500,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+21,z=-4},
             dist = {"SewingStoreFabric"},
@@ -501,7 +508,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+22,z=-4},
             dist = {"CrateLeather"},
@@ -509,7 +516,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+21,z=-4},
             dist = {"CrateToiletPaper"},
@@ -517,7 +524,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+22,z=-4},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
@@ -525,7 +532,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+24,z=-4},
             dist = {"ArmyStorageOutfit"},
@@ -534,7 +541,7 @@ local GrandOhioConfig = {
             level = "Loot_TailorLevel",
         },
         -- laundry room
-        {
+        { -- E54
             type = 'container',
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+27,z=-4},
             slot = "upper",
@@ -543,7 +550,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-9,z=-4},
             slot = "upper",
@@ -558,7 +565,7 @@ local GrandOhioConfig = {
         -- ArmyStorageOutfit
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
-        {
+        { -- E56
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-7,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -566,7 +573,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-6,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -574,7 +581,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-5,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -582,7 +589,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-4,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -590,7 +597,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-3,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -599,7 +606,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         -- mens
-        {
+        { -- E61
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+21,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -607,7 +614,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+22,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -615,7 +622,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+23,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -623,7 +630,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+24,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -631,7 +638,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+25,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -640,7 +647,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         -- entry storage 1
-        {
+        { -- E66
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+11,z=-4},
             dist = {"CampingLockers"},
@@ -648,7 +655,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+12,z=-4},
             dist = {"CampingStoreBackpacks"},
@@ -656,7 +663,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+13,z=-4},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -664,7 +671,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+14,z=-4},
             dist = {"SafehouseTraps", },
@@ -672,7 +679,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+15,z=-4},
             dist = {"ArmyStorageAmmunition", },
@@ -680,7 +687,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+16,z=-4},
             dist = {"ArmyStorageAmmunition", },
@@ -689,7 +696,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         -- tools
-        {
+        { -- E72
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+14,z=-4},
             dist = {"CarSupplyTools","GasStorageMechanics",},
@@ -697,7 +704,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+15,z=-4},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -705,12 +712,12 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+16,z=-4},
             special = "essentials",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -718,7 +725,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+18,z=-4},
             dist = {"GigamartTools", "JanitorTools" },
@@ -726,7 +733,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+19,z=-4},
             dist = {"LoggingFactoryTools" },
@@ -735,7 +742,7 @@ local GrandOhioConfig = {
             level = "Loot_ToolsLevel",
         },
         -- random junk
-        {
+        { -- E78
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
@@ -743,7 +750,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
@@ -751,7 +758,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E80
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+14,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller" },
@@ -759,7 +766,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E81
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+15,z=-4},
             dist = {"CrateCannedFood", "RandomFiller" },
@@ -768,7 +775,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         -- mats
-        {
+        { -- E82
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+16,z=-4},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -776,7 +783,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+17,z=-4},
             dist = {"ToolFactoryHandles" },
@@ -784,7 +791,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+19,z=-4},
             dist = {"ToolFactoryIngots" },
@@ -792,7 +799,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E85
             type = 'container',
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+18,z=-4},
             dist = {"CrateSheetMetal" },
@@ -801,7 +808,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         -- entry storage 2
-        {
+        { -- E86
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+13,z=-4},
             dist = {"ToolFactoryBarStock"},
@@ -809,7 +816,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber"},
@@ -817,7 +824,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber"},
@@ -825,7 +832,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -833,7 +840,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E90
             type = 'container',
             coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+13,z=-4},
             dist = {"WeldingWorkshopMetal"},
@@ -841,7 +848,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+13,z=-4},
             dist = {"WeldingWorkshopMetal"},
@@ -849,7 +856,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E92
             type = 'container',
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+16,z=-4},
             items = {
@@ -858,7 +865,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E93
             type = 'container',
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+16,z=-4},
             items = {
@@ -868,7 +875,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E94
             type = 'container',
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+16,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -876,7 +883,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E95
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
             dist = {"StoreCounterTobacco"},
@@ -884,7 +891,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E96
             type = 'container',
             coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+19,z=-4},
             dist = {"GasStoreEmergency"},
@@ -892,7 +899,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = 2,
         },
-        {
+        { -- E97
             type = 'container',
             coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+19,z=-4},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -900,7 +907,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E98
             type = 'container',
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+19,z=-4},
             dist = {"CandyStoreSnacks"},
@@ -908,7 +915,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E99
             type = 'container',
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+19,z=-4},
             dist = {"CrateTortillaChips"},
@@ -916,7 +923,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E100
             type = 'container',
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+19,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -924,7 +931,7 @@ local GrandOhioConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E101
             type = 'container',
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+19,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},

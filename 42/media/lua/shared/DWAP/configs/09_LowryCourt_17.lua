@@ -1,3 +1,11 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entries 1,2,21: square holds no container at all - coords are stale or
+--     the object was removed
+--   * systems: 1 component at 12982,1912 z=0 names a sprite that is not on
+--     the square, though the square itself loads - config drifted from the
+--     map
+--   * 506 unclaimed containers against 43 entries - baseBuildings almost
+--     certainly anchors the whole complex rather than our units
 local wtc = {x = 12980, y = 1920, z = 0} -- waterTankCoords
 local pb1 = { x = 12981, y = 1922, z = -1 }
 local bunkerTopLeft = {x = 12981, y = 1907, z = -1}
@@ -45,91 +53,6 @@ local LowryCourt = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 12982, y = 1912, z = 0, },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 12984, y= 1920, z= 0, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z, spawn = false, },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12984,
-                        y = 1905,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12984,
-                        y = 1904,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12984,
-                        y = 1903,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12984,
-                        y = 1902,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12986,
-                        y = 1905,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12986,
-                        y = 1904,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12986,
-                        y = 1903,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 12986,
-                        y = 1902,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 -- { x = 12983, y = 1920, z = -1, createTile = true },
                 -- { x = 12984, y = 1916, z = -1, createTile = true },
@@ -150,7 +73,7 @@ local LowryCourt = {
         { sprite = "appliances_cooking_01_16", x = 12989, y = 1915, z = 2, isFireplace = true, },
     },
     loot = {
-        {
+        { -- E1
             type = 'container',
             coords = {x = 12983, y = 1919, z = 0},
             dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
@@ -158,7 +81,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x = 12984, y = 1919, z = 0},
             items = {
@@ -168,13 +91,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- cabinet next to bunk beds (9365)
+        { -- E3 cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        { -- E4 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
@@ -184,13 +107,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        { -- E5 lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        { -- E6 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -200,7 +123,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        { -- E7 lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -209,7 +132,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        { -- E8 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -219,7 +142,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        { -- E9 lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -228,7 +151,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- metal shelves (70)
+        { -- E10 metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
@@ -237,36 +160,36 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        { -- E11 metal shelves (71)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        { -- E12 next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        { -- E13 (73)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        { -- E14 (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        { -- E15 far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- metal wall shelves
+        { -- E16 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -274,13 +197,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        { -- E17 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- metal wall shelves
+        { -- E18 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -290,7 +213,7 @@ local LowryCourt = {
         },
 
         -- extra spawns
-        {
+        { -- E19
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -298,7 +221,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
@@ -306,7 +229,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x = 12984, y = 1920, z = 0},
             dist = {"GasStoreEmergency"},
@@ -316,7 +239,7 @@ local LowryCourt = {
         },
 
         -- 2nd floor
-        {
+        { -- E22
             type = 'container',
             coords = {x=12995,y=1911,z=2},
             slot = "upper",
@@ -325,7 +248,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=12991,y=1911,z=2},
             dist = {"GigamartTools", "JanitorTools", "WeldingWorkshopTools", },
@@ -333,17 +256,16 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=12992,y=1911,z=2},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_ToolsLevel",
         },
 
-        {
+        { -- E25
             type = 'container',
             coords = {x=12993,y=1922,z=2},
             dist = {"CrateVHSTapes"},
@@ -351,7 +273,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=12992,y=1916,z=2},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -359,7 +281,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=12996,y=1923,z=2},
             items = {
@@ -371,7 +293,7 @@ local LowryCourt = {
                 { name = 'Base.VHS_Retail', chance = 1, count = {30,30} },
             },
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=12989,y=1919,z=2},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -379,7 +301,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=12990,y=1919,z=2},
             dist = {"HuntingLockers", "RangerTools"},
@@ -387,7 +309,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=12989,y=1922,z=2},
             dist = { "GunStoreKnives",  "PawnShopKnives","CampingStoreBackpacks" },
@@ -395,7 +317,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=12992,y=1923,z=2},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -403,7 +325,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=12990,y=1911,z=2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -411,7 +333,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=12989,y=1911,z=2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -419,13 +341,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=12989,y=1912,z=2},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=12989,y=1913,z=2},
             dist = {"StoreKitchenBaking",},
@@ -433,7 +355,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=13002,y=1911,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -441,7 +363,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=13003,y=1911,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -449,7 +371,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=12996,y=1913,z=2},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -457,19 +379,19 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=13002,y=1919,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=13000,y=1920,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=13000,y=1923,z=2},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -477,7 +399,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=12996,y=1912,z=2},
             dist = {"CrateLeather", "SewingStoreFabric", "SewingStoreTools", "BathroomCounter",},
@@ -501,7 +423,7 @@ local LowryCourt = {
         --     randUntilFull = true,
         --     level = "Loot_MediaLevel",
         -- },
-        {
+        { -- E43
             type = 'container',
             coords = {x=13003,y=1919,z=2},
             dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },

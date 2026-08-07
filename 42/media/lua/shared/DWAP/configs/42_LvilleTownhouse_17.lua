@@ -1,3 +1,11 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entry 26: square holds no container at all - coords are stale or the
+--     object was removed
+--   * entries 57,59: square not found (bad z or the area never spawns)
+--   * systems: generator controls declare industry_02_67 but no such object
+--     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
+--     configs use dwap_tiles_01_22 - the maps look to have moved on and these
+--     configs did not. Confirm what is actually there before editing
 local bunkerTopLeft = {x = 12828, y = 1604, z = -1}
 local wtc = {x = 12835, y = 1614, z = 1}
 local pb1 = { x = 12836, y = 1611, z = 1 }
@@ -22,111 +30,6 @@ local LouisvilleTownhouse = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12834,
-                        y = 1613,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12835,
-                        y = 1613,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12836,
-                        y = 1613,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12837,
-                        y = 1613,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12838,
-                        y = 1613,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12834,
-                        y = 1615,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12835,
-                        y = 1615,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12836,
-                        y = 1615,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12837,
-                        y = 1615,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12838,
-                        y = 1615,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                }
-            },
             fakeGenerators = {
                 { x = 12835, y = 1615, z = -1, },
             },
@@ -150,13 +53,13 @@ local LouisvilleTownhouse = {
 
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        { -- E1 cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        { -- E2 upper
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -165,13 +68,13 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        { -- E3 lower (66)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        { -- E4 upper
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
@@ -180,7 +83,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        { -- E5 lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
@@ -189,7 +92,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        { -- E6 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -199,7 +102,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        { -- E7 lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
@@ -208,7 +111,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- metal shelves (70)
+        { -- E8 metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
@@ -217,36 +120,36 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        { -- E9 metal shelves (71)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        { -- E10 next to inner door (9372)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        { -- E11 (73)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        { -- E12 (9374)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        { -- E13 far end next to stairs (9375)
             type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- metal wall shelves
+        { -- E14 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -254,13 +157,13 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        { -- E15 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- metal wall shelves
+        { -- E16 metal wall shelves
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -268,7 +171,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -276,7 +179,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
@@ -287,25 +190,23 @@ local LouisvilleTownhouse = {
 
         -- rest of the building
         -- kitchen 1st floor
-        { -- freezer
+        { -- E19 freezer
             type = 'container',
             coords = {x=12830,y=1611,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- freezer
+        { -- E20 freezer
             type = 'container',
             coords = {x=12830,y=1610,z=0},
             dist = {"FreezerIceCream", "PizzaKitchenFreezer", "PizzaKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=12833,y=1610,z=0},
             dist = {"GigamartBreakfast"},
@@ -313,7 +214,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=12835,y=1610,z=0},
             dist = {"JanitorCleaning", "CrateFlour", "CrateOilVegetable" },
@@ -321,7 +222,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=12836,y=1610,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -330,7 +231,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         -- living room
-        {
+        { -- E24
             type = 'container',
             coords = {x=12836,y=1617,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -338,7 +239,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=12836,y=1618,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -346,7 +247,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=12830,y=1617,z=0},
             dist = {"MusicStoreCDs"},
@@ -354,7 +255,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=12830,y=1618,z=0},
             dist = {"LivingRoomShelfClassy"},
@@ -363,7 +264,7 @@ local LouisvilleTownhouse = {
             level = "Loot_MediaLevel",
         },
         -- bathroom
-        {
+        { -- E28
             type = 'container',
             coords = {x=12832,y=1614,z=0},
             dist = {"BathroomCounter", "GasStoreToiletries"},
@@ -373,7 +274,7 @@ local LouisvilleTownhouse = {
         },
         -- 2nd floor
         -- bedroom
-        {
+        { -- E29
             type = 'container',
             coords = {x=12830,y=1620,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -381,7 +282,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=12830,y=1617,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -390,7 +291,7 @@ local LouisvilleTownhouse = {
             level = "Loot_LockersLevel",
         },
         -- warehouse/utilities
-        { -- crate
+        { -- E31 crate
             type = 'container',
             coords = {x=12831,y=1614,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -398,7 +299,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- crate
+        { -- E32 crate
             type = 'container',
             coords = {x=12831,y=1613,z=1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -406,7 +307,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- crate
+        { -- E33 crate
             type = 'container',
             coords = {x=12834,y=1617,z=1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
@@ -415,19 +316,19 @@ local LouisvilleTownhouse = {
             level = "Loot_GunLevel",
         },
         -- shelving
-        {
+        { -- E34
             type = 'container',
             coords = {x=12837,y=1612,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=12837,y=1613,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=12837,y=1614,z=1},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
@@ -435,7 +336,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=12837,y=1615,z=1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
@@ -443,7 +344,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=12837,y=1616,z=1},
             dist = {"GigamartCrisps","ControlRoomCounter" },
@@ -451,7 +352,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=12837,y=1617,z=1},
             dist = {"CrateLongStick"},
@@ -462,7 +363,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=12840,y=1612,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -470,7 +371,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=12840,y=1613,z=1},
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -478,7 +379,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=12840,y=1614,z=1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -486,7 +387,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=12840,y=1615,z=1},
             dist = {"TheatrePopcorn", "FridgeSoda",},
@@ -494,7 +395,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=12840,y=1616,z=1},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -502,7 +403,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=12840,y=1617,z=1},
             dist = {"CrateToiletPaper", "CrateLinens"},
@@ -510,7 +411,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=12843,y=1612,z=1},
             items = {
@@ -519,7 +420,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=12843,y=1613,z=1},
             items = {
@@ -528,7 +429,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=12843,y=1614,z=1},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -536,7 +437,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=12843,y=1615,z=1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -544,7 +445,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=12843,y=1616,z=1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -552,7 +453,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=12843,y=1617,z=1},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
@@ -561,7 +462,7 @@ local LouisvilleTownhouse = {
             level = "Loot_ToolsLevel",
         },
         -- back wall crates
-        {
+        { -- E52
             type = 'container',
             coords = {x=12840,y=1610,z=1},
             dist = {"CrateTools", "GarageTools", "BarnTools",  },
@@ -569,7 +470,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=12841,y=1610,z=1},
             dist = {"LiquorStoreBeer","ArmyStorageElectronics" },
@@ -577,7 +478,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=12842,y=1610,z=1},
             dist = {"ArmyBunkerMedical", "JanitorCleaning", "MedicalStorageDrugs"},
@@ -585,7 +486,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=12843,y=1610,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -594,7 +495,7 @@ local LouisvilleTownhouse = {
             level = "Loot_LockersLevel",
         },
         -- library/sitting area
-        {
+        { -- E56
             type = 'container',
             coords = {x=12840,y=1619,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -602,7 +503,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=12840,y=1602,z=1},
             dist = {"CrateVHSTapes"},
@@ -610,7 +511,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=12843,y=1619,z=1},
             dist = {"MusicStoreCDs", "LiquorStoreWhiskey"},
@@ -618,7 +519,7 @@ local LouisvilleTownhouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=12843,y=1602,z=1},
             dist = {"GunStoreKnives", "LivingRoomShelfClassy", "LiquorStoreWhiskey"},

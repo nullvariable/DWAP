@@ -12,191 +12,6 @@ local MRSecret = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 9848, y = 13117, z = -4 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 9846, y = 13117, z = -4, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13122,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13121,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13120,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13119,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13118,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13117,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13110,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13109,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13108,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13107,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13106,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13105,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13098,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13097,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13096,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13095,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13094,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 9852,
-                        y = 13093,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 9849, y = 13128, z = -1, createTile = true },
                 { x = 9849, y = 13103, z = -1, createTile = true },
@@ -312,7 +127,7 @@ local MRSecret = {
         -- spawn apartment
         -- 2nd floor
         -- bedroom
-        {
+        { -- E1
             type = 'container',
             coords = {x=9852,y=13110,z=1},
             slot = "upper",
@@ -321,7 +136,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=9853,y=13113,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -329,7 +144,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=9849,y=13112,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -338,7 +153,7 @@ local MRSecret = {
             level = "Loot_LockersLevel",
         },
         -- office
-        {
+        { -- E4
             type = 'container',
             coords = {x=9847,y=13108,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -347,7 +162,7 @@ local MRSecret = {
             level = "Loot_LockersLevel",
         },
         -- closet
-        {
+        { -- E5
             type = 'container',
             coords = {x=9849,y=13108,z=1},
             slot = "upper",
@@ -357,7 +172,7 @@ local MRSecret = {
             level = "Loot_LockersLevel",
         },
         -- bathroom
-        {
+        { -- E6
             type = 'container',
             coords = {x=9850,y=13108,z=1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
@@ -365,7 +180,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=9851,y=13108,z=1},
             dist = {"BathroomCounter"},
@@ -375,7 +190,7 @@ local MRSecret = {
         },
         -- first floor
         -- bathroom
-        {
+        { -- E8
             type = 'container',
             coords = {x=9851,y=13108,z=0},
             dist = {"CrateFishing", "FishermanTools"},
@@ -384,13 +199,13 @@ local MRSecret = {
             level = "Loot_FishLevel",
         },
         -- kitchen
-        {
+        { -- E9
             type = 'container',
             coords = {x=9846,y=13108,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=9844,y=13108,z=0},
             dist = {"ButcherSpices","GigamartSpices", "GigamartDryGoods",},
@@ -398,7 +213,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=9844,y=13109,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -406,7 +221,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=9844,y=13110,z=0},
             dist = {"GigamartBreakfast","GigamartCandy"},
@@ -414,16 +229,15 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=9844,y=13113,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=9845,y=13113,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -431,26 +245,24 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x = 9848, y = 13108, z = 0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x = 9849, y = 13108, z = 0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- apt 1 extras
-        {
+        { -- E17
             type = 'container',
             coords = {x=9844,y=13120,z=0},
             items = {
@@ -459,7 +271,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=9844,y=13121,z=0},
             dist = {"CrateVHSTapes"},
@@ -467,7 +279,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=9844,y=13122,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -475,16 +287,15 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=9844,y=13125,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=9845,y=13125,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -492,7 +303,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=9844,y=13098,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -500,16 +311,15 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=9844,y=13101,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=9845,y=13101,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -518,7 +328,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- entrance shed
-        {
+        { -- E25
             type = 'container',
             coords = {x=9831,y=13126,z=0},
             sandboxEnable = 'SeedLibrary',
@@ -531,7 +341,7 @@ local MRSecret = {
 
         -- complex, -1
         -- guard station
-        {
+        { -- E26
             type = 'container',
             coords = {x=9831,y=13124,z=-1},
             dist = {"ArmyStorageGuns","FirearmWeapons_Late"},
@@ -539,7 +349,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=9832,y=13124,z=-1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -547,7 +357,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=9833,y=13124,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -555,7 +365,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=9833,y=13125,z=-1},
             dist = {"CampingStoreBackpacks"},
@@ -564,7 +374,7 @@ local MRSecret = {
             level = "Loot_LockersLevel",
         },
         -- -1 stairwell
-        {
+        { -- E30
             type = 'container',
             coords = {x=9830,y=13116,z=-1},
             dist = {"ArtStorePottery",},
@@ -572,7 +382,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=9831,y=13127,z=-1},
             dist = {"ToolFactoryHandles" },
@@ -582,7 +392,7 @@ local MRSecret = {
         },
         -- complex, -4
         -- stairwell
-        {
+        { -- E32
             type = 'container',
             coords = {x=9830,y=13116,z=-4},
             dist = {"CrateLumber"},
@@ -590,7 +400,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=9831,y=13116,z=-4},
             dist = {"CrateSheetMetal" },
@@ -598,7 +408,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=9830,y=13118,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -606,7 +416,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=9831,y=13118,z=-4},
             items = {
@@ -616,7 +426,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=9832,y=13118,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -625,7 +435,7 @@ local MRSecret = {
             level = "Loot_BuildMatsLevel",
         },
         -- guard desk
-        {
+        { -- E37
             type = 'container',
             coords = {x=9838,y=13124,z=-4},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
@@ -634,7 +444,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- armory
-        {
+        { -- E38
             type = 'container',
             coords = {x=9837,y=13122,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -642,7 +452,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=9837,y=13121,z=-4},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -650,7 +460,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=9837,y=13120,z=-4},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
@@ -658,13 +468,13 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=9837,y=13119,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=9839,y=13122,z=-4},
             dist = {"DrugLabGuns"},
@@ -672,13 +482,13 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=9839,y=13121,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=9839,y=13120,z=-4},
             dist = {"ArmyStorageAmmunition", },
@@ -686,7 +496,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=9839,y=13119,z=-4},
             dist = {"ArmyStorageAmmunition", },
@@ -695,13 +505,13 @@ local MRSecret = {
             level = "Loot_GunLevel",
         },
         -- workroom
-        {
+        { -- E46
             type = 'container',
             coords = {x=9840,y=13122,z=-4},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=9840,y=13120,z=-4},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -709,19 +519,19 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=9842,y=13119,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         -- bunk room
-        {
+        { -- E49
             type = 'container',
             coords = {x=9845,y=13126,z=-4},
             special = "essentials",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=9847,y=13126,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -729,20 +539,20 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=9850,y=13126,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=9851,y=13126,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- bunk room kitchen
-        {
+        { -- E53
             type = 'container',
             coords = {x=9851,y=13124,z=-4},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -750,7 +560,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=9851,y=13124,z=-4},
             slot = "upper",
@@ -759,7 +569,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=9849,y=13124,z=-4},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -767,7 +577,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=9849,y=13124,z=-4},
             slot = "upper",
@@ -776,16 +586,15 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=9848,y=13124,z=-4},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=9848,y=13124,z=-4},
             slot = "upper",
@@ -795,7 +604,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- infirmary
-        {
+        { -- E59
             type = 'container',
             coords = {x=9845,y=13123,z=-4},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -803,7 +612,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=9845,y=13121,z=-4},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -811,7 +620,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=9845,y=13121,z=-4},
             slot = "upper",
@@ -820,7 +629,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=9850,y=13121,z=-4},
             dist = {"LaboratoryLockers", },
@@ -828,7 +637,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=9851,y=13121,z=-4},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
@@ -836,7 +645,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=9851,y=13123,z=-4},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -845,7 +654,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- machine room
-        {
+        { -- E65
             type = 'container',
             coords = {x=9845,y=13120,z=-4},
             dist = {"GasStoreEmergency", },
@@ -853,7 +662,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=9845,y=13118,z=-4},
             dist = { "ArmyHangarTools", "GasStorageMechanics", "GarageTools", },
@@ -861,7 +670,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=9846,y=13120,z=-4},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -869,7 +678,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=9847,y=13120,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -877,7 +686,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=9848,y=13120,z=-4},
             dist = { "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "LoggingFactoryTools" },
@@ -885,7 +694,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=9849,y=13120,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -893,7 +702,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=9850,y=13120,z=-4},
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -901,7 +710,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=9851,y=13120,z=-4},
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -910,7 +719,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- office
-        {
+        { -- E73
             type = 'container',
             coords = {x=9839,y=13117,z=-4},
             dist = {"MusicStoreCDs"},
@@ -918,7 +727,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=9837,y=13118,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -926,13 +735,13 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=9837,y=13117,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=9837,y=13116,z=-4},
             dist = {"CrateLiquor"},
@@ -941,7 +750,7 @@ local MRSecret = {
             level = "Loot_FoodLevel",
         },
         -- bathrooms
-        {
+        { -- E77
             type = 'container',
             coords = {x=9842,y=13114,z=-4},
             dist = {"BookstoreBiography", "BathroomCounter", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -949,7 +758,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x=9840,y=13115,z=-4},
             dist = {"BathroomCounter", "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -957,7 +766,7 @@ local MRSecret = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=9845,y=13114,z=-4},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},

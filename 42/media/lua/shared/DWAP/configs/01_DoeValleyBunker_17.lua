@@ -1,3 +1,14 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * solar is UNVERIFIED - every systems run so far skipped it ("ISA mod
+--     inactive or EnableGenSystemSolar off"). Definitions now live in
+--     configs/ISA/01_DoeValleyBunker_17.lua and only load when ISA is active;
+-- solar should be fine when we get it patched, no map changes to adjust for.
+--     a run with ISA loaded is still owed. Applies to all 38 solar configs
+--   * the only config with an empty objectSpawns table, yet it has a surface
+--     door at 5576,9375,z=0 - confirm with FindUnbarricaded() that no
+--     barricades are wanted here
+-- no barricades, the location is fully underground and we don't want to block the only entrance/exit
+
 --- Notes:
 --- Lives in the woods, remote with poor car access
 --- fairly small but low local zombies and plenty of room to
@@ -22,51 +33,6 @@ local DoeValleyBunker = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 5583, y = 9372, z = -1 },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 5581, y= 9372, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = 5584, y = 9371, z = -1 },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 5577,
-                        y = 9374,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 5577,
-                        y = 9373,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 5577,
-                        y = 9372,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 5577,
-                        y = 9371,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                }
-            },
             fakeGenerators = {
                 { x = 5579, y = 9370, z = -1, },
             },
@@ -84,13 +50,13 @@ local DoeValleyBunker = {
 
     },
     loot = {
-        { -- cabinet next to bunk beds (9365)
+        { -- E1 cabinet next to bunk beds (9365)
             type = 'container',
             coords = {x=5575,y=9365,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- upper
+        { -- E2 upper
             type = 'container',
             coords = {x=5575,y=9366,z=-1},
             slot = "upper",
@@ -99,13 +65,13 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (66)
+        { -- E3 lower (66)
             type = 'container',
             coords = {x=5575,y=9366,z=-1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- upper
+        { -- E4 upper
             type = 'container',
             coords = {x=5575,y=9367,z=-1},
             slot = "upper",
@@ -114,7 +80,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- lower (67)
+        { -- E5 lower (67)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=5575,y=9367,z=-1},
@@ -123,7 +89,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- upper
+        { -- E6 upper
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=5575,y=9368,z=-1},
@@ -133,7 +99,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- lower (68)
+        { -- E7 lower (68)
             type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=5575,y=9368,z=-1},
@@ -142,26 +108,24 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- index 8, fridge/freezer
+        { -- E8 index 8, fridge/freezer
             type = 'container',
             coords = {x=5575,y=9369,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- index 9, fridge/freezer
+        { -- E9 index 9, fridge/freezer
             type = 'container',
             slot = "freezer",
-            frozen = true,
             coords = {x=5575,y=9369,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- metal shelves (70)
+        { -- E10 metal shelves (70)
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=5575,y=9370,z=-1},
@@ -170,104 +134,137 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves (71)
+        { -- E11 metal shelves (71)
             type = 'container',
             coords = {x=5575,y=9371,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- next to inner door (9372)
+        { -- E12 next to inner door (9372)
             type = 'container',
             coords = {x=5575,y=9372,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- (73)
+        { -- E13 (73)
             type = 'container',
             coords = {x=5575,y=9373,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- (9374)
+        { -- E14 (9374)
             type = 'container',
             coords = {x=5575,y=9374,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- far end next to stairs (9375)
+        { -- E15 far end next to stairs (9375)
             type = 'container',
             coords = {x=5575,y=9375,z=-1},
             special = "essentials",
         },
-        { -- metal wall shelves
+        { -- E16
             type = 'container',
+            stack = 1,
             coords = {x=5577,y=9368,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- metal wall shelves
+        { -- E17
             type = 'container',
+            stack = 2,
+            coords = {x=5577,y=9368,z=-1},
+            dist = {"MeleeWeapons", "MeleeWeapons_Mid", "SafehouseTraps","CampingLockers"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E18
+            type = 'container',
+            stack = 1,
             coords = {x=5577,y=9369,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- metal wall shelves
+        { -- E19
             type = 'container',
+            stack = 2,
+            coords = {x=5577,y=9369,z=-1},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        { -- E20
+            type = 'container',
+            stack = 1,
             coords = {x=5577,y=9370,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
+        { -- E21
+            type = 'container',
+            stack = 2,
+            coords = {x=5577,y=9370,z=-1},
+            dist = {"CrateCannedFood", "KitchenCannedFood"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
 
-        -- extra spawns
-        {
+        -- extra spawns. Both crate stacks used to repeat the lower crate's dist
+        -- list verbatim on the upper one, so a stack of two read as one big
+        -- container. Each ordinal now takes a different half of its theme:
+        -- more to find, same categories present in the base overall.
+        { -- E22 9363 lower: hand tools and safehouse hardware
             type = 'container',
             coords = {x=5577,y=9363,z=-1},
             stack = 1,
-            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- @TODO doubled lower loot for the top crate; review later
+        { -- E23 9363 upper: the base's only build-materials source - every other
+          -- level appears somewhere in this config, Loot_BuildMatsLevel did
+          -- not, and stockpiled lumber suits a prepper bunker
             type = 'container',
             coords = {x=5577,y=9363,z=-1},
             stack = 2,
-            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            dist = {"CrateLumber", "CrateSheetMetal", "CrateMasonry", "ArtStorePottery"},
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E24 9364 lower: defence and vehicle gear
             type = 'container',
             coords = {x=5577,y=9364,z=-1},
             stack = 1,
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            dist = {"SafehouseTraps","GunStoreKnives","CarSupplyTools"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- @TODO doubled lower loot for the top crate; review later
+        { -- E25 9364 upper: camping, comfort and outfits
             type = 'container',
             coords = {x=5577,y=9364,z=-1},
             stack = 2,
-            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
+            dist = {"CampingStoreBackpacks","CrateLiquor","DrugLabOutfit","GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
 
         -- addon room
-        {
+        { -- E26
             type = 'container',
             coords = {x = 5578, y = 9373, z = -1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- [20]
+        { -- E27 [20]
             type = 'container',
             coords = {x = 5581, y = 9376, z = -1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -275,7 +272,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x = 5582, y = 9376, z = -1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -283,7 +280,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x = 5583, y = 9376, z = -1},
             dist = {"CarSupplyTools", "GasStorageMechanics", "CampingLockers"},
@@ -291,7 +288,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- @TODO this entry and the next two (5584x9374-9376) confirmed red in ShowContainers(1): no containers there - remap onto orange (unclaimed) squares or delete
+        { -- E30
             type = 'container',
             coords = {x = 5584, y = 9376, z = -1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
@@ -299,7 +296,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x = 5584, y = 9375, z = -1},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
@@ -307,7 +304,7 @@ local DoeValleyBunker = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x = 5584, y = 9374, z = -1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},

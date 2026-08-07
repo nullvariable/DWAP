@@ -1,3 +1,7 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: 1 component at 3585,10898 z=-1 names a sprite that is not on
+--     the square, though the square itself loads - config drifted from the
+--     map
 local wtc = {x = 3563, y = 10904, z = -1}
 local pb1 = { x = 3586, y = 10898, z = -1 }
 local EchoCreek = {
@@ -16,101 +20,6 @@ local EchoCreek = {
                 { x = 3569, y = 10907, z = -1 }, -- dummy
                 { x = 3588, y = 10898, z = -1 },
                 { x = 3612, y = 10903, z = -1 },
-            },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3577,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3578,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3579,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3580,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3581,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3582,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3583,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3584,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 3585,
-                        y = 10903,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                }
             },
         },
     },
@@ -166,30 +75,30 @@ local EchoCreek = {
     },
     loot = {
         -- addon basement room
-        {
+        { -- E1
             type = 'container',
             coords = {x=3581, y=10897,z=-1},
             special = "essentials",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=3584, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=3585, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=3586, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=3587, y=10901,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
@@ -197,16 +106,15 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=3587, y=10900,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             stack = 1,
             coords = {x=3587, y=10897,z=-1},
@@ -215,7 +123,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E8
             type = 'container',
             stack = 2,
             coords = {x=3587, y=10897,z=-1},
@@ -224,13 +132,13 @@ local EchoCreek = {
         },
 
 
-        { -- house next to couch
+        { -- E9 house next to couch
             type = 'container',
             coords = {x=3566, y=10901,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- tv stand
+        { -- E10 tv stand
             type = 'container',
             coords = {x=3564,y=10905,z=1},
             items = {
@@ -239,7 +147,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- bunkbed bedroom
+        { -- E11 bunkbed bedroom
             type = 'container',
             coords = {x=3572,y=10903,z=1},
             dist = {"MusicStoreCDs"},
@@ -247,7 +155,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- twin bedroom
+        { -- E12 twin bedroom
             type = 'container',
             coords = {x=3573,y=10905,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -255,7 +163,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- twin bedroom
+        { -- E13 twin bedroom
             type = 'container',
             coords = {x=3575,y=10905,z=1},
             dist = {"BookstoreNonFiction"},
@@ -263,7 +171,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = 1,
         },
-        { -- twin bedroom
+        { -- E14 twin bedroom
             type = 'container',
             coords = {x=3573,y=10904,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -271,7 +179,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- twin bedroom
+        { -- E15 twin bedroom
             type = 'container',
             coords = {x=3573,y=10903,z=1},
             dist = {"GymLaundry", "GymLockers","ArmyStorageOutfit", "DrugLabOutfit"},
@@ -279,7 +187,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- twin bedroom closet
+        { -- E16 twin bedroom closet
             type = 'container',
             coords = {x=3576,y=10900,z=1},
             slot = "upper",
@@ -288,7 +196,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- master bedroom closet
+        { -- E17 master bedroom closet
             type = 'container',
             coords = {x=3576,y=10899,z=1},
             slot = "upper",
@@ -297,19 +205,19 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- master bedroom wardrobe
+        { -- E18 master bedroom wardrobe
             type = 'container',
             coords = {x=3576,y=10898,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- master bedroom wardrobe
+        { -- E19 master bedroom wardrobe
             type = 'container',
             coords = {x=3576,y=10897,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- master bedroom nightstand
+        { -- E20 master bedroom nightstand
             type = 'container',
             coords = {x=3575,y=10894,z=1},
             dist = {"DrugLabGuns", "FirearmWeapons_Late"},
@@ -317,7 +225,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- master bedroom nightstand
+        { -- E21 master bedroom nightstand
             type = 'container',
             coords = {x=3572,y=10894,z=1},
             dist = {"ArmyStorageGuns",},
@@ -325,7 +233,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- master bedroom
+        { -- E22 master bedroom
             type = 'container',
             coords = {x=3571,y=10896,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -333,7 +241,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-         { -- bathroom
+         { -- E23 bathroom
             type = 'container',
             coords = {x=3569,y=10899,z=1},
             slot = "upper",
@@ -342,7 +250,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- bathroom
+        { -- E24 bathroom
             type = 'container',
             coords = {x=3571,y=10899,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning", "MedicalStorageDrugs"},
@@ -351,32 +259,30 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         -- kitchen
-        {
+        { -- E25
             type = 'container',
             coords = {x=3569,y=10900,z=1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E26
             type = 'container',
             slot = "freezer",
             coords = {x=3569,y=10900,z=1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=3566,y=10898,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=3566,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -384,7 +290,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=3567,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -392,7 +298,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=3568,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -400,7 +306,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=3568,y=10898,z=1},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
@@ -409,7 +315,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         -- mechanic's storage
-        {
+        { -- E32
             type = 'container',
             coords = {x=3581,y=10894,z=0},
             slot = "upper",
@@ -418,12 +324,12 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=3581,y=10891,z=0},
             special = 'SeedLibrary',
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=3583,y=10891,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -431,7 +337,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=3583,y=10892,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -439,7 +345,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=3585,y=10891,z=0},
             dist = {"CarSupplyTools", "GasStoreEmergency"},
@@ -447,7 +353,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=3585,y=10892,z=0},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -455,7 +361,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=3584,y=10894,z=0},
             dist = {"CrateFishing", "FishermanTools"},
@@ -463,16 +369,24 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E39
             type = 'container',
+            stack = 1,
             coords = {x=3585,y=10894,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
+        { -- E40
+            type = 'container',
+            stack = 2,
+            coords = {x=3585,y=10894,z=0},
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
         -- lift area
-        {
+        { -- E41
             type = 'container',
             coords = {x=3581,y=10895,z=0},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -480,7 +394,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=3582,y=10895,z=0},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -488,7 +402,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=3583,y=10895,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -496,7 +410,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=3584,y=10895,z=0},
             dist = {"GigamartTools", "JanitorTools" },
@@ -504,7 +418,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=3585,y=10895,z=0},
             dist = {"LoggingFactoryTools" },
@@ -512,16 +426,8 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- bin
-            type = 'container',
-            coords = {x=3585,y=10903,z=0},
-            dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = 3,
-        },
         -- servo storage area
-        {
+        { -- E46
             type = 'container',
             coords = {x=3571,y=10895,z=0},
             dist = {"ArmyStorageAmmunition", },
@@ -529,7 +435,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=3572,y=10895,z=0},
             dist = {"ArmyStorageAmmunition", },
@@ -537,7 +443,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=3573,y=10895,z=0},
             dist = {"SafehouseTraps","CampingLockers"},
@@ -545,7 +451,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=3574,y=10895,z=0},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
@@ -553,7 +459,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- box
+        { -- E50 box
             type = 'container',
             coords = {x=3574,y=10893,z=0},
             dist = {"CafeteriaSnacks"},
@@ -562,7 +468,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         -- basement
-        { -- by water tank
+        { -- E51 by water tank
             type = 'container',
             coords = {x=3562,y=10902,z=-1},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -570,7 +476,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=3562,y=10901,z=-1},
             dist = {"CrateToiletPaper"},
@@ -578,7 +484,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- by generator
+        { -- E53 by generator
             type = 'container',
             coords = {x=3566,y=10897,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -586,7 +492,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=3567,y=10897,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -594,7 +500,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=3568,y=10897,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "BurglarTools", "CarpenterTools", "BarnTools","CampingStoreTools", "ArmyHangarTools", },
@@ -603,7 +509,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         -- back corner room
-        {
+        { -- E56
             type = 'container',
             coords = {x=3570,y=10891,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -611,7 +517,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=3571,y=10891,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -619,7 +525,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=3570,y=10893,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -627,7 +533,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=3571,y=10893,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -635,7 +541,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=3576,y=10896,z=-1},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -643,7 +549,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=3572,y=10894,z=-1},
             items = {
@@ -652,7 +558,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=3571,y=10894,z=-1},
             items = {
@@ -662,7 +568,7 @@ local EchoCreek = {
             level = "Loot_FarmLevel",
         },
         -- crates
-        {
+        { -- E63
             type = 'container',
             coords = {x=3572,y=10902,z=-1},
             items = {
@@ -672,7 +578,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=3574,y=10905,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -680,7 +586,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=3575,y=10905,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -688,7 +594,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=3576,y=10905,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -696,7 +602,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=3576,y=10904,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -704,7 +610,7 @@ local EchoCreek = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- metal shelves by sink
+        { -- E68 metal shelves by sink
             type = 'container',
             coords = {x=3567,y=10905,z=-1},
             slot = "upper",

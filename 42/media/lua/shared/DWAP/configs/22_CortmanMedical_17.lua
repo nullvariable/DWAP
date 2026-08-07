@@ -12,91 +12,6 @@ local CortmanMedical = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 10884, y = 10028, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 10886, y= 10028, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10886,
-                        y = 10021,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10887,
-                        y = 10021,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10888,
-                        y = 10021,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10889,
-                        y = 10021,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10886,
-                        y = 10023,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10887,
-                        y = 10023,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10888,
-                        y = 10023,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 10889,
-                        y = 10023,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 10873, y = 10028, z = -1, createTile = true },
             },
@@ -153,42 +68,42 @@ local CortmanMedical = {
     },
     loot = {
         -- upstairs office
-        {
+        { -- E1
             type = 'container',
             coords = {x=10880,y=10027,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=10880,y=10026,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=10880,y=10025,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=10880,y=10024,z=1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=10880,y=10023,z=1},
             special = "essentials",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=10882,y=10026,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=10881,y=10020,z=1},
             dist = {"LaboratoryLockers", },
@@ -196,7 +111,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=10882,y=10020,z=1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -204,7 +119,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=10883,y=10020,z=1},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
@@ -212,7 +127,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=10884,y=10020,z=1},
             dist = {"CrateVHSTapes"},
@@ -220,7 +135,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=10885,y=10022,z=1},
             dist = {"MusicStoreCDs"},
@@ -229,7 +144,7 @@ local CortmanMedical = {
             level = "Loot_MediaLevel",
         },
         -- bigger upstairs bedroom
-        {
+        { -- E12
             type = 'container',
             coords = {x=10872,y=10026,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -237,7 +152,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=10872,y=10023,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit",},
@@ -245,7 +160,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=10875,y=10027,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -253,13 +168,13 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=10875,y=10026,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=10875,y=10023,z=1},
             dist = {"CrateLiquor"},
@@ -267,7 +182,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=10875,y=10023,z=1},
             slot = "upper",
@@ -276,7 +191,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=10874,y=10023,z=1},
             slot = "upper",
@@ -286,7 +201,7 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         -- 2nd bedroom
-        {
+        { -- E19
             type = 'container',
             coords = {x=10875,y=10022,z=1},
             dist = {"CrateTVWide", "CrateVHSTapes"},
@@ -294,7 +209,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=10874,y=10020,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -302,7 +217,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=10875,y=10020,z=1},
             dist = {"ToolFactoryHandles","ToolFactoryIngots" },
@@ -311,7 +226,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         -- hallway
-        {
+        { -- E22
             type = 'container',
             coords = {x=10877,y=10020,z=1},
             dist = {"GigamartTools", "JanitorTools" },
@@ -319,7 +234,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=10878,y=10020,z=1},
             dist = {"CampingStoreBackpacks"},
@@ -328,7 +243,7 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         -- bathroom
-        {
+        { -- E24
             type = 'container',
             coords = {x=10876,y=10026,z=1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
@@ -336,7 +251,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=10876,y=10027,z=1},
             dist = {"BathroomCounter"},
@@ -345,7 +260,7 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         -- first floor, sitting room
-        {
+        { -- E26
             type = 'container',
             coords = {x=10876,y=10022,z=0},
             dist = {"CrateBlacksmithing", "CrateMechanics", "CrateMetalwork" },
@@ -353,7 +268,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=10872,y=10022,z=0},
             dist = {"SewingStoreTools"},
@@ -361,7 +276,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=10872,y=10023,z=0},
             dist = {"SewingStoreFabric", "CrateLeather"},
@@ -369,7 +284,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=10872,y=10024,z=0},
             dist = {"CrateToiletPaper"},
@@ -377,7 +292,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=10872,y=10025,z=0},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -385,7 +300,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=10872,y=10026,z=0},
             dist = {"ArmyStorageAmmunition", },
@@ -393,7 +308,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=10872,y=10027,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -402,7 +317,7 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         -- dining room
-        {
+        { -- E33
             type = 'container',
             coords = {x=10880,y=10024,z=0},
             dist = {"CrateFishing", "FishermanTools"},
@@ -410,7 +325,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=10880,y=10023,z=0},
             dist = {"HuntingLockers", "RangerTools"},
@@ -418,7 +333,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=10880,y=10022,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -426,7 +341,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=10882,y=10022,z=0},
             items = {
@@ -435,7 +350,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=10884,y=10022,z=0},
             dist = {"ArtStorePottery",},
@@ -444,7 +359,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         -- exam room
-        {
+        { -- E38
             type = 'container',
             coords = {x=10885,y=10022,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -452,7 +367,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=10885,y=10021,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -461,7 +376,7 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         -- hallway
-        {
+        { -- E40
             type = 'container',
             coords = {x=10881,y=10020,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -469,7 +384,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=10882,y=10020,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -478,16 +393,15 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         -- kitchen
-        {
+        { -- E42
             type = 'container',
             coords = {x=10872,y=10019,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=10872,y=10018,z=0},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -495,20 +409,20 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=10872,y=10018,z=0},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=10872,y=10017,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=10872,y=10017,z=0},
             slot = "upper",
@@ -517,7 +431,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=10873,y=10017,z=0},
             dist = {"ButcherSpices","GigamartSpices", "GigamartDryGoods",},
@@ -525,7 +439,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=10877,y=10017,z=0},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -533,7 +447,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=10877,y=10017,z=0},
             slot = "upper",
@@ -542,7 +456,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=10878,y=10017,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -550,7 +464,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=10878,y=10017,z=0},
             slot = "upper",
@@ -559,7 +473,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=10879,y=10017,z=0},
             dist = {"GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
@@ -567,7 +481,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=10879,y=10017,z=0},
             slot = "upper",
@@ -577,7 +491,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         -- pantry
-        {
+        { -- E54
             type = 'container',
             coords = {x=10880,y=10017,z=0},
             slot = "upper",
@@ -586,7 +500,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=10881,y=10017,z=0},
             slot = "upper",
@@ -595,7 +509,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=10882,y=10017,z=0},
             slot = "upper",
@@ -604,35 +518,32 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=10880,y=10019,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=10881,y=10019,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=10882,y=10019,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- outside pantry crate
-        {
+        { -- E60
             type = 'container',
             coords = {x=10883,y=10018,z=0},
             items = {
@@ -642,34 +553,31 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         -- basement
-        {
+        { -- E61
             type = 'container',
             coords = {x=10862,y=10042,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=10862,y=10041,z=-1},
             dist = {"UniversityFridge"},
-            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=10862,y=10040,z=-1},
             dist = {"SafehouseFridge"},
-            frozen = true,
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=10863,y=10039,z=-1},
             dist = {"CrateSheetMetal" },
@@ -677,7 +585,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=10863,y=10038,z=-1},
             dist = {"CrateLumber"},
@@ -685,7 +593,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=10864,y=10034,z=-1},
             items = {
@@ -695,7 +603,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=10865,y=10034,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
@@ -703,7 +611,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=10864,y=10032,z=-1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
@@ -711,7 +619,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=10865,y=10032,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics","BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -719,7 +627,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=10867,y=10032,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -727,7 +635,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=10860,y=10031,z=-1},
             items = {
@@ -736,7 +644,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=10860,y=10028,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -744,7 +652,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=10860,y=10027,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -752,7 +660,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=10861,y=10027,z=-1},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
@@ -760,19 +668,19 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=10868,y=10027,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=10869,y=10027,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=10870,y=10027,z=-1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
@@ -780,7 +688,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x=10871,y=10027,z=-1},
             dist = {"ArmyStorageGuns","FirearmWeapons_Late"},
@@ -788,7 +696,7 @@ local CortmanMedical = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=10871,y=10029,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },

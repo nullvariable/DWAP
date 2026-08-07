@@ -1,3 +1,16 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entries 1,2,3,4,5,6,7,8,9,10,11: square holds no container at all -
+--     coords are stale or the object was removed
+--   * systems: generator controls declare industry_02_67 but no such object
+--     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
+--     configs use dwap_tiles_01_22 - the maps look to have moved on and these
+--     configs did not. Confirm what is actually there before editing
+--   * systems: 4 components at 8136-8139,11510-11513 z=0 name a sprite that
+--     is not on the square, though the square itself loads - config drifted
+--     from the map
+--   * every loot entry fails with "no containers on square" - the whole table
+--     addresses squares that hold no container, so this is a re-pick, not a
+--     per-entry fix
 local wtc1 = {x = 8146, y = 11509, z = -2,}
 local pb1  = {x = 8145, y = 11509, z = -2,}
 local SecretMausoleum = {
@@ -10,91 +23,6 @@ local SecretMausoleum = {
     generators = {
         {
             controls = { sprite = "industry_02_67", x = pb1.x-1, y = pb1.y, z = pb1.z, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
-                        x = 8135,
-                        y = 11517,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
-                        x = 8136,
-                        y = 11517,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
-                        x = 8137,
-                        y = 11517,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_7",
-                        x = 8138,
-                        y = 11517,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 8135,
-                        y = 11516,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 8136,
-                        y = 11516,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 8137,
-                        y = 11516,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 8138,
-                        y = 11516,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 8131, y = 11519, z = -1 },
             },
@@ -129,13 +57,13 @@ local SecretMausoleum = {
     loot = {
         -- main house
         -- kitchen
-        {
+        { -- E1
             type = 'container',
             coords = {x=8135,y=11513,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=8135,y=11510,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -143,7 +71,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=8136,y=11510,z=0},
             dist = {"CrateFishing","MusicStoreCDs"},
@@ -151,7 +79,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=8137,y=11510,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood", "CrateLiquor", "StoreCounterTobacco"},
@@ -159,26 +87,24 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- fridge
+        { -- E5 fridge
             type = 'container',
             coords = {x=8137,y=11511,z=0},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- mini fridge
+        { -- E6 mini fridge
             type = 'container',
             coords = {x=8137,y=11512,z=0},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- bathroom
-        {
+        { -- E7
             type = 'container',
             coords = {x=8138,y=11513,z=0},
             slot = "upper",
@@ -188,7 +114,7 @@ local SecretMausoleum = {
             level = "Loot_MedLevel",
         },
         -- living room
-        {
+        { -- E8
             type = 'container',
             coords = {x=8140,y=11511,z=0},
             dist = {"SafehouseFireplace", "SafehouseLighting", "LivingRoomShelfClassy" },
@@ -197,13 +123,13 @@ local SecretMausoleum = {
             level = "Loot_FarmLevel",
         },
         -- bedrooms
-        {
+        { -- E9
             type = 'container',
             coords = {x=8143,y=11514,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=8144,y=11513,z=0},
             dist = {"GunStoreKnives","ClothingStorageWinter",},
@@ -212,7 +138,7 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         -- entrance hall
-        {
+        { -- E11
             type = 'container',
             coords = {x=8138,y=11510,z=0},
             special = "gunlocker",
@@ -221,7 +147,7 @@ local SecretMausoleum = {
 
         -- below crypts
         -- crates by stairs
-        {
+        { -- E12
             type = 'container',
             coords = {x=8128,y=11520,z=-2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateBootsArmy", "CampingStoreBackpacks"},
@@ -229,7 +155,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=8129,y=11520,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -238,13 +164,13 @@ local SecretMausoleum = {
             level = "Loot_MedLevel",
         },
         -- chests by cots
-        {
+        { -- E14
             type = 'container',
             coords = {x=8128,y=11515,z=-2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=8128,y=11512,z=-2},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
@@ -252,7 +178,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=8128,y=11509,z=-2},
             dist = { "SafehouseTraps", },
@@ -260,7 +186,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=8132,y=11512,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
@@ -268,7 +194,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=8132,y=11509,z=-2},
             items = {
@@ -281,7 +207,7 @@ local SecretMausoleum = {
             level = "Loot_BuildMatsLevel",
         },
         -- crates by cots
-        {
+        { -- E19
             type = 'container',
             coords = {x=8131,y=11513,z=-2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -289,7 +215,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=8132,y=11513,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", "BurglarTools", "CarpenterTools", "BarnTools" },
@@ -298,7 +224,7 @@ local SecretMausoleum = {
             level = "Loot_ToolsLevel",
         },
         -- shelving
-        {
+        { -- E21
             type = 'container',
             coords = {x=8135,y=11508,z=-2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
@@ -306,7 +232,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=8135,y=11509,z=-2},
             dist = {"CrateBlacksmithing" },
@@ -314,7 +240,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=8135,y=11510,z=-2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -322,25 +248,25 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=8135,y=11511,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=8135,y=11512,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=8135,y=11513,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=8137,y=11512,z=-2},
             dist = {"SafehouseMedical" },
@@ -348,13 +274,13 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=8137,y=11513,z=-2},
             special = "essentials",
         },
         -- kitchen cabinets
-        {
+        { -- E29
             type = 'container',
             coords = {x=8137,y=11508,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood", "JanitorCleaning"},
@@ -362,7 +288,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=8137,y=11509,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -370,17 +296,16 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- fridge
+        { -- E31 fridge
             type = 'container',
             coords = {x=8137,y=11511,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- crates
-        {
+        { -- E32
             type = 'container',
             coords = {x=8144,y=11513,z=-2},
             dist = {"CrateToiletPaper", "CrateLinens", "BathroomCounter", "GasStoreToiletries",},
@@ -388,7 +313,7 @@ local SecretMausoleum = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=8145,y=11513,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal", "CrateClayBags", "CrateMasonry"},

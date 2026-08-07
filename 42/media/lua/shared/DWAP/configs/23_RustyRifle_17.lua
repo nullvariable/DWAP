@@ -14,111 +14,6 @@ local RustyRifle = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 10770, y = 10551, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 10768, y= 10551, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10554,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10553,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10552,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10551,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10550,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10549,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10548,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10547,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10546,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10767,
-                        y = 10545,
-                        z = 2,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 10759, y = 10549, z = -1, createTile = true },
                 { x = 10775, y = 10566, z = -1, createTile = true },
@@ -193,13 +88,13 @@ local RustyRifle = {
     loot = {
         -- owner suite
         -- bedroom
-        {
+        { -- E1
             type = 'container',
             coords = {x=10747,y=10543,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=10750,y=10542,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -207,13 +102,13 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=10749,y=10544,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=10750,y=10544,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -222,13 +117,13 @@ local RustyRifle = {
             level = "Loot_LockersLevel",
         },
         -- hallway
-        {
+        { -- E5
             type = 'container',
             coords = {x=10751,y=10542,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=10752,y=10542,z=1},
             dist = {"CrateToiletPaper"},
@@ -236,7 +131,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=10753,y=10542,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -244,12 +139,12 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=10754,y=10542,z=1},
             special = "essentials",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=10755,y=10542,z=1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
@@ -258,7 +153,7 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         -- living room
-        {
+        { -- E10
             type = 'container',
             coords = {x=10750,y=10545,z=1},
             dist = {"MusicStoreCDs"},
@@ -267,13 +162,13 @@ local RustyRifle = {
             level = "Loot_MediaLevel",
         },
         -- kitchen
-        {
+        { -- E11
             type = 'container',
             coords = {x=10753,y=10546,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=10755,y=10546,z=1},
             slot = "upper",
@@ -283,7 +178,7 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         -- bathroom
-        {
+        { -- E13
             type = 'container',
             coords = {x=10754,y=10544,z=1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical","BathroomCounter" },
@@ -292,7 +187,7 @@ local RustyRifle = {
             level = "Loot_MedLevel",
         },
         -- storage closet
-        {
+        { -- E14
             type = 'container',
             coords = {x=10766,y=10543,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -300,7 +195,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=10766,y=10542,z=1},
             dist = {"CrateFishing", "FishermanTools"},
@@ -308,7 +203,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=10767,y=10542,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -318,7 +213,7 @@ local RustyRifle = {
         },
         -- main floor
         -- bar area
-        {
+        { -- E17
             type = 'container',
             coords = {x=10756,y=10544,z=0},
             dist = {"CrateLiquor"},
@@ -326,7 +221,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=10756,y=10543,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -334,7 +229,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=10756,y=10542,z=0},
             dist = {"StoreKitchenCafe"},
@@ -342,7 +237,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=10758,y=10542,z=0},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
@@ -350,7 +245,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=10760,y=10542,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "DishCabinetLiquor"},
@@ -358,7 +253,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=10762,y=10542,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -366,7 +261,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=10759,y=10544,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -374,7 +269,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=10762,y=10544,z=0},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -383,16 +278,15 @@ local RustyRifle = {
             level = "Loot_LockersLevel",
         },
         -- main kitchen
-        {
+        { -- E25
             type = 'container',
             coords = {x=10755,y=10545,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=10755,y=10544,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -400,7 +294,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=10755,y=10543,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -408,7 +302,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=10755,y=10542,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -416,7 +310,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=10753,y=10542,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -424,7 +318,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=10752,y=10542,z=0},
             dist = {"GigamartBreakfast","GigamartCandy"},
@@ -432,26 +326,24 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=10753,y=10547,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=10754,y=10547,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- garage
-        {
+        { -- E33
             type = 'container',
             coords = {x=10747,y=10546,z=0},
             items = {
@@ -461,7 +353,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=10747,y=10545,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -469,7 +361,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=10747,y=10544,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -477,7 +369,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=10747,y=10542,z=0},
             slot = "upper",
@@ -486,7 +378,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=10751,y=10542,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -496,19 +388,19 @@ local RustyRifle = {
         },
         -- basement
         -- first room
-        {
+        { -- E38
             type = 'container',
             coords = {x = 10764, y = 10542, z = -1,},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x = 10765, y = 10542, z = -1,},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x = 10766, y = 10542, z = -1,},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
@@ -516,62 +408,58 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=10767,y=10547,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=10766,y=10547,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=10766,y=10550,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=10766,y=10551,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=10766,y=10552,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- shelter room
-        {
+        { -- E46
             type = 'container',
             coords = {x=10763,y=10557,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=10762,y=10557,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=10760,y=10557,z=-1},
             dist = {"BakeryKitchenFreezer"},
@@ -579,7 +467,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=10760,y=10557,z=-1},
             slot = "upper",
@@ -588,7 +476,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=10760,y=10556,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -596,7 +484,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=10760,y=10556,z=-1},
             slot = "upper",
@@ -605,7 +493,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=10760,y=10555,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -613,7 +501,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=10760,y=10555,z=-1},
             slot = "upper",
@@ -623,7 +511,7 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         -- gambling room
-        {
+        { -- E54
             type = 'container',
             coords = {x=10761,y=10562,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
@@ -631,7 +519,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=10762,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -639,7 +527,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=10763,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -647,7 +535,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=10764,y=10562,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -656,7 +544,7 @@ local RustyRifle = {
             level = "Loot_GunLevel",
         },
         -- workshop area
-        {
+        { -- E58
             type = 'container',
             coords = {x=10782,y=10575,z=0},
             slot = "upper",
@@ -665,7 +553,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=10782,y=10573,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
@@ -673,7 +561,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=10782,y=10572,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
@@ -681,7 +569,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=10782,y=10570,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
@@ -689,7 +577,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=10781,y=10570,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -697,7 +585,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=10780,y=10570,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -705,7 +593,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=10779,y=10570,z=0},
             items = {
@@ -714,7 +602,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=10782,y=10568,z=0},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
@@ -722,7 +610,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=10781,y=10568,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -730,7 +618,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=10780,y=10568,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -738,7 +626,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=10779,y=10568,z=0},
             sandboxEnable = 'SeedLibrary',
@@ -748,7 +636,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=10782,y=10566,z=0},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -756,7 +644,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=10781,y=10566,z=0},
             dist = {"ArmyStorageGuns",},
@@ -764,7 +652,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=10780,y=10566,z=0},
             dist = {"ArmyStorageElectronics", "ToolFactoryIngots" },
@@ -772,7 +660,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=10779,y=10566,z=0},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
@@ -781,7 +669,7 @@ local RustyRifle = {
             level = "Loot_MedLevel",
         },
         -- shed out back
-        {
+        { -- E73
             type = 'container',
             coords = {x=10761,y=10531,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -789,7 +677,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=10761,y=10530,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -797,7 +685,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=10761,y=10528,z=0},
             slot = "upper",
@@ -806,7 +694,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=10762,y=10528,z=0},
             slot = "upper",
@@ -815,7 +703,7 @@ local RustyRifle = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=10763,y=10528,z=0},
             dist = {"HuntingLockers", "RangerTools"},

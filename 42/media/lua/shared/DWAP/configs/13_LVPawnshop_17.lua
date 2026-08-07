@@ -1,3 +1,6 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entry 68: square holds no container at all - coords are stale or the
+--     object was removed
 local wtc = {x = 12327, y = 1326, z = -1} -- waterTankCoords
 local pb1 = { x = 12325, y = 1325, z = -1 }
 local LVPawnshop = {
@@ -60,91 +63,6 @@ local LVPawnshop = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 12331, y = 1326, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 12329, y= 1326, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12320,
-                        y = 1334,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12321,
-                        y = 1334,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12322,
-                        y = 1334,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12323,
-                        y = 1334,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12320,
-                        y = 1332,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12321,
-                        y = 1332,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12322,
-                        y = 1332,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 12323,
-                        y = 1332,
-                        z = 2,
-                        pb = 1,
-                        spawn = true,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 12326, y = 1337, z = -1, createTile = false },
             },
@@ -166,13 +84,13 @@ local LVPawnshop = {
     loot = {
         -- basement
         -- kitchen/rec room
-        { -- trash box by entry
+        { -- E1 trash box by entry
             type = 'container',
             coords = {x=12330,y=1329,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=12328,y=1329,z=-1},
             dist = {"CrateVHSTapes"},
@@ -180,7 +98,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=12327,y=1329,z=-1},
             items = {
@@ -189,7 +107,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=12324,y=1331,z=-1},
             dist = {"Homesteading",},
@@ -197,7 +115,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=12324,y=1331,z=-1},
             slot = "upper",
@@ -206,7 +124,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=12324,y=1332,z=-1},
             dist = {"CrateCannedFood", },
@@ -214,7 +132,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=12324,y=1332,z=-1},
             slot = "upper",
@@ -223,7 +141,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=12324,y=1333,z=-1},
             dist = {"GigamartDryGoods"},
@@ -231,7 +149,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=12324,y=1333,z=-1},
             slot = "upper",
@@ -240,7 +158,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=12324,y=1334,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -248,54 +166,53 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=12324,y=1334,z=-1},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- fridge
+        { -- E12 fridge
             type = 'container',
             coords = {x=12324,y=1336,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- bookcases
+        { -- E13 bookcases
             type = 'container',
             coords = {x=12331,y=1335,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=12331,y=1334,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=12331,y=1333,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- armory
-        {
+        { -- E16
             type = 'container',
             coords = {x=12323,y=1334,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=12323,y=1335,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=12323,y=1336,z=-1},
             dist = {"GunStoreGuns","GunStoreMagsAmmo", "GunStoreAmmunition", },
@@ -304,7 +221,7 @@ local LVPawnshop = {
             level = "Loot_GunLevel",
         },
         -- bunk room 1
-        {
+        { -- E19
             type = 'container',
             coords = {x=12320,y=1336,z=-1},
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
@@ -312,7 +229,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=12319,y=1336,z=-1},
             dist = {"FishermanTools"},
@@ -320,7 +237,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=12318,y=1334,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -329,7 +246,7 @@ local LVPawnshop = {
             level = "Loot_MediaLevel",
         },
         -- bathroom
-        {
+        { -- E22
             type = 'container',
             coords = {x=12315,y=1334,z=-1},
             dist = {"TestingLab","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -337,7 +254,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=12315,y=1334,z=-1},
             slot = "upper",
@@ -347,7 +264,7 @@ local LVPawnshop = {
             level = "Loot_MedLevel",
         },
         -- bunk room
-        {
+        { -- E24
             type = 'container',
             coords = {x=12312,y=1334,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -355,7 +272,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=12314,y=1334,z=-1},
             slot = "upper",
@@ -364,7 +281,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=12314,y=1336,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -373,7 +290,7 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         -- laundry room
-        {
+        { -- E27
             type = 'container',
             coords = {x=12310,y=1335,z=-1},
             dist = {"SewingStoreTools", "LaundryCleaning", "GymLaundry", "GymLockers"},
@@ -382,45 +299,42 @@ local LVPawnshop = {
             level = "Loot_TailorLevel",
         },
         -- warehouse
-        {
+        { -- E28
             type = 'container',
             coords = {x=12323,y=1328,z=-1},
             special = "essentials",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=12323,y=1327,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- freezer
+        { -- E30 freezer
             type = 'container',
             coords = {x=12323,y=1325,z=-1},
             dist = {"WesternKitchenFreezer", "WesternKitchenFridge", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- freezer
+        { -- E31 freezer
             type = 'container',
             coords = {x=12322,y=1325,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        { -- freezer
+        { -- E32 freezer
             type = 'container',
             coords = {x=12321,y=1325,z=-1},
             dist = {"ArenaKitchenFreezer", "SushiKitchenFreezer",},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=12320,y=1325,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -428,7 +342,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=12319,y=1325,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -436,7 +350,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- metal shelves
+        { -- E35 metal shelves
             type = 'container',
             coords = {x=12317,y=1326,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -444,7 +358,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=12316,y=1326,z=-1},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -452,7 +366,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=12314,y=1326,z=-1},
             dist = {"GigamartTools", "JanitorTools" },
@@ -460,7 +374,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=12313,y=1326,z=-1},
             dist = {"MetalShopTools", "MetalWorkerTools" },
@@ -468,7 +382,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- wood crates
+        { -- E39 wood crates
             type = 'container',
             coords = {x=12320,y=1327,z=-1},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -476,7 +390,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=12319,y=1327,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -484,7 +398,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- metal shelves
+        { -- E41 metal shelves
             type = 'container',
             coords = {x=12317,y=1328,z=-1},
             items = {
@@ -493,7 +407,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=12316,y=1328,z=-1},
             items = {
@@ -502,7 +416,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=12314,y=1328,z=-1},
             items = {
@@ -511,7 +425,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=12313,y=1328,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
@@ -519,7 +433,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- cardboardboxes
+        { -- E45 cardboardboxes
             type = 'container',
             coords = {x=12320,y=1329,z=-1},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
@@ -527,7 +441,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=12319,y=1329,z=-1},
             dist = {"ToolFactoryHandles" },
@@ -535,7 +449,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- cardboardboxes
+        { -- E47 cardboardboxes
             type = 'container',
             coords = {x=12320,y=1330,z=-1},
             dist = {"GigamartCrisps","GasStoreEmergency"},
@@ -543,7 +457,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=12319,y=1330,z=-1},
             dist = {"CrateToiletPaper" },
@@ -551,7 +465,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- metal shelves
+        { -- E49 metal shelves
             type = 'container',
             coords = {x=12317,y=1330,z=-1},
             dist = {"CrateLumber"},
@@ -559,7 +473,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=12316,y=1330,z=-1},
             dist = {"CrateSheetMetal", },
@@ -567,7 +481,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=12314,y=1330,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -575,7 +489,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=12313,y=1330,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -583,7 +497,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- metal shelves
+        { -- E53 metal shelves
             type = 'container',
             coords = {x=12320,y=1332,z=-1},
             dist = {"StoreShelfDrinks", "CrateCannedFood", "CrateSodaBottles", "CandyStoreSnacks", "CrateTortillaChips"},
@@ -591,7 +505,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=12319,y=1332,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -599,7 +513,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=12317,y=1332,z=-1},
             dist = { "CrateOilOlive", "CrateOilVegetable", "BakeryKitchenFreezer", },
@@ -607,7 +521,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=12316,y=1332,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -615,7 +529,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=12314,y=1332,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -623,7 +537,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=12313,y=1332,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -632,7 +546,7 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         -- Pawnshop
-        {
+        { -- E59
             type = 'container',
             coords = {x=12321,y=1327,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -640,7 +554,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=12319,y=1327,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -648,7 +562,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- closet
+        { -- E61 closet
             type = 'container',
             coords = {x=12330,y=1329,z=0},
             slot = "upper",
@@ -658,26 +572,26 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         -- pawnshop gun room
-        {
+        { -- E62
             type = 'container',
             coords = {x=12328,y=1329,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=12329,y=1329,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- pawnshop proper
-        {
+        { -- E64
             type = 'container',
             coords = {x=12333,y=1332,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x=12321,y=1331,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -685,7 +599,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=12332,y=1332,z=0},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -693,7 +607,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=12331,y=1332,z=0},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
@@ -701,7 +615,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=12330,y=1332,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -709,7 +623,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=12310,y=1325,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -717,7 +631,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=12311,y=1325,z=0},
             dist = {"CrateLeather", "SewingStoreFabric", "SewingStoreTools"},
@@ -725,7 +639,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=12312,y=1325,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -733,7 +647,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=12313,y=1325,z=0},
             items = {
@@ -742,7 +656,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=12329,y=1336,z=0},
             dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
@@ -750,7 +664,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=12316,y=1325,z=0},
             slot = "upper",
@@ -759,7 +673,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = 2,
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=12317,y=1325,z=0},
             slot = "upper",
@@ -768,7 +682,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=12318,y=1325,z=0},
             slot = "upper",
@@ -777,7 +691,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=12315,y=1325,z=0},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition", },
@@ -786,7 +700,7 @@ local LVPawnshop = {
             level = "Loot_GunLevel",
         },
         -- storage room
-        {
+        { -- E78
             type = 'container',
             coords = {x=12322,y=1327,z=0},
             items = {
@@ -796,7 +710,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=12322,y=1328,z=0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -804,7 +718,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E80
             type = 'container',
             coords = {x=12322,y=1330,z=0},
             dist = {"WeldingWorkshopMetal", },
@@ -812,7 +726,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E81
             type = 'container',
             coords = {x=12322,y=1331,z=0},
             dist = {"CrateLumber"},
@@ -820,7 +734,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E82
             type = 'container',
             coords = {x=12324,y=1327,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -828,7 +742,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x=12324,y=1328,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -836,7 +750,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x=12324,y=1330,z=0},
             dist = {"ToolFactoryIngots" },
@@ -844,7 +758,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E85
             type = 'container',
             coords = {x=12324,y=1331,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller", "ToolFactoryHandles" },
@@ -854,7 +768,7 @@ local LVPawnshop = {
         },
 
         -- apts
-        {
+        { -- E86
             type = 'container',
             coords = {x=12330,y=1329,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -862,7 +776,7 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x=12329,y=1332,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -870,31 +784,29 @@ local LVPawnshop = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x=12328,y=1331,z=1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x=12322,y=1331,z=1},
             dist = {"FreezerRich", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E90
             type = 'container',
             coords = {x=12322,y=1336,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x=12324,y=1329,z=1},
             dist = {"CrateFlour", "CrateOilVegetable"},

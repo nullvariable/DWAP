@@ -1,3 +1,9 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * entries 18,36,37,56,57: duplicate coordinates with an earlier entry -
+--     one of each pair needs slot or stack addressing, or is redundant
+--   * systems: 1 component at 14190,2635 z=1 names a sprite that is not on
+--     the square, though the square itself loads - config drifted from the
+--     map
 local wtc0 = {x = 14152, y = 2635, z = -1,} -- tank for the core area
 local wtc1 = {x = 14148, y = 2658, z = -1,} -- tank for the southern house
 local wtc2 = {x = 14178, y = 2629, z = -1,} -- tank for the eastern house
@@ -21,131 +27,6 @@ local LVilleComplex = {
         { -- southern house
             controls = { sprite = "dwap_tiles_01_22", x = 14154, y = 2632, z = -4 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 14156, y = 2632, z = -4, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2637,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2638,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2639,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2640,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2641,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14145,
-                        y = 2642,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2637,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2638,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2639,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2640,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2641,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 14147,
-                        y = 2642,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 14147, y = 2663, z = -1, createTile = true },
                 { x = 14152, y = 2636, z = -4, createTile = true },
@@ -308,7 +189,7 @@ local LVilleComplex = {
         --     sandboxEnable = 'Loot_EnableMaps',
         --     special = "maps",
         -- },
-        {
+        { -- E1
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z},
@@ -318,13 +199,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E2
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z},
             slot = "upper",
@@ -333,7 +214,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -341,7 +222,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E5
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
@@ -351,7 +232,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
@@ -359,7 +240,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E7
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+7,z=bunker1TopLeft.z},
@@ -368,7 +249,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+8,z=bunker1TopLeft.z},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -376,7 +257,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+9,z=bunker1TopLeft.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -384,7 +265,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+10,z=bunker1TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -392,7 +273,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+11,z=bunker1TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -400,13 +281,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+12,z=bunker1TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -414,13 +295,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+6,z=bunker1TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+7,z=bunker1TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -428,7 +309,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y,z=bunker1TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -436,7 +317,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+1,z=bunker1TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
@@ -444,7 +325,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+1,z=bunker1TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
@@ -452,7 +333,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E19
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z},
@@ -462,13 +343,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z},
             slot = "upper",
@@ -477,7 +358,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -485,7 +366,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E23
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
@@ -495,7 +376,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
@@ -503,7 +384,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E25
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+7,z=bunker2TopLeft.z},
@@ -512,7 +393,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+8,z=bunker2TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -520,7 +401,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+9,z=bunker2TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -528,7 +409,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+10,z=bunker2TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives",},
@@ -536,7 +417,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+11,z=bunker2TopLeft.z},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -544,7 +425,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+12,z=bunker2TopLeft.z},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -552,7 +433,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -560,13 +441,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+6,z=bunker2TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+7,z=bunker2TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -574,7 +455,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y,z=bunker2TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -582,7 +463,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+1,z=bunker2TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
@@ -590,7 +471,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y,z=bunker2TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -598,7 +479,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+1,z=bunker2TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
@@ -606,13 +487,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+2,z=bunker3TopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E39
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z},
@@ -622,13 +503,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z},
             slot = "upper",
@@ -637,7 +518,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -645,7 +526,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E43
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
@@ -655,7 +536,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
@@ -663,7 +544,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E45
             type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+7,z=bunker3TopLeft.z},
@@ -672,7 +553,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+8,z=bunker3TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -680,7 +561,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+9,z=bunker3TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -688,7 +569,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+10,z=bunker3TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives",},
@@ -696,7 +577,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+11,z=bunker3TopLeft.z},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -704,7 +585,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+12,z=bunker3TopLeft.z},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -712,7 +593,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -720,13 +601,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+6,z=bunker3TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+7,z=bunker3TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -734,7 +615,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y,z=bunker3TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -742,7 +623,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+1,z=bunker3TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
@@ -750,7 +631,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y,z=bunker3TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -758,7 +639,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+1,z=bunker3TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
@@ -769,7 +650,7 @@ local LVilleComplex = {
         ------------------------
         --- Core Bunker Area ---
         ------------------------
-        { -- decon locker
+        { -- E58 decon locker
             type = 'container',
             coords = {x = 14149, y = 2628, z = -1},
             items = {
@@ -778,7 +659,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- decon locker
+        { -- E59 decon locker
             type = 'container',
             coords = {x = 14149, y = 2629, z = -1},
             items = {
@@ -794,13 +675,13 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- decon locker
+        { -- E60 decon locker
             type = 'container',
             coords = {x = 14149, y = 2630, z = -1},
             special = "essentials",
         },
         -- infirmary
-        {
+        { -- E61
             type = 'container',
             coords = {x = 14149, y = 2627, z = -1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -808,7 +689,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x = 14149, y = 2626, z = -1},
             dist = {"MedicalClinicDrugs" },
@@ -816,7 +697,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x = 14149, y = 2625, z = -1},
             dist = {"MedicalCabinet" },
@@ -824,7 +705,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x = 14149, y = 2623, z = -1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -832,7 +713,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E65
             type = 'container',
             coords = {x = 14153, y = 2623, z = -1},
             dist = {"MedicalClinicDrugs" },
@@ -840,7 +721,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x = 14153, y = 2627, z = -1},
             dist = {"LaboratoryLockers", },
@@ -848,7 +729,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- fridge
+        { -- E67 fridge
             type = 'container',
             coords = {x = 14152, y = 2627, z = -1},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
@@ -857,7 +738,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         -- gym
-        {
+        { -- E68
             type = 'container',
             coords = {x = 14144, y = 2625, z = -1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -865,7 +746,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x = 14148, y = 2626, z = -1},
             slot = "upper",
@@ -874,7 +755,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x = 14148, y = 2625, z = -1},
             slot = "upper",
@@ -884,7 +765,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         -- pantry
-        {
+        { -- E71
             type = 'container',
             coords = {x = 14144, y = 2626, z = -2},
             dist = {"CrateTortillaChips", "CandyStoreSnacks","FridgeSoda",},
@@ -892,7 +773,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x = 14144, y = 2625, z = -2},
             dist = {"WesternKitchenSauce", "WhiskeyBottlingFull", "WesternKitchenBaking"},
@@ -900,7 +781,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x = 14144, y = 2624, z = -2},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
@@ -908,7 +789,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x = 14144, y = 2623, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
@@ -916,34 +797,31 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x = 14145, y = 2623, z = -2},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x = 14146, y = 2623, z = -2},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x = 14147, y = 2623, z = -2},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x = 14147, y = 2625, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -951,7 +829,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x = 14147, y = 2626, z = -2},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
@@ -959,7 +837,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E80
             type = 'container',
             coords = {x = 14146, y = 2626, z = -2},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -967,7 +845,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E81
             type = 'container',
             coords = {x = 14145, y = 2626, z = -2},
             dist = {"CrateToiletPaper"},
@@ -976,7 +854,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         -- dining/bar area
-        {
+        { -- E82
             type = 'container', -- drinks under sink
             coords = {x = 14148, y = 2625, z = -2},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -984,31 +862,29 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x = 14148, y = 2623, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x = 14149, y = 2623, z = -2},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E85
             type = 'container',
             coords = {x = 14154, y = 2623, z = -2},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E86
             type = 'container',
             coords = {x = 14156, y = 2623, z = -2},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
@@ -1016,7 +892,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x = 14156, y = 2624, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -1024,7 +900,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x = 14156, y = 2625, z = -2},
             dist = {"KitchenCannedFood"},
@@ -1032,7 +908,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x = 14156, y = 2626, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
@@ -1040,7 +916,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E90
             type = 'container',
             coords = {x = 14156, y = 2627, z = -2},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
@@ -1048,7 +924,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x = 14156, y = 2628, z = -2},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -1056,7 +932,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E92
             type = 'container',
             coords = {x = 14156, y = 2629, z = -2},
             dist = {"LiquorStoreBrandy", "LiquorStoreGin"},
@@ -1064,7 +940,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E93
             type = 'container', -- media center
             coords = {x = 14156, y = 2630, z = -2},
             dist = {"CrateVHSTapes"},
@@ -1072,7 +948,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E94
             type = 'container', -- theater stand
             coords = {x = 14156, y = 2633, z = -2},
             dist = {"TheatreDrinks", "TheatreSnacks"},
@@ -1080,7 +956,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E95
             type = 'container', -- theater stand
             coords = {x = 14156, y = 2634, z = -2},
             dist = {"TheatrePopcorn", "TheatreSnacks"},
@@ -1089,7 +965,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         -- bunk rooms
-        {
+        { -- E96
             type = 'container',
             coords = {x = 14146, y = 2642, z = -2},
             dist = {"ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -1097,7 +973,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E97
             type = 'container',
             coords = {x = 14144, y = 2641, z = -2},
             slot = "upper",
@@ -1106,7 +982,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E98
             type = 'container',
             coords = {x = 14145, y = 2641, z = -2},
             slot = "upper",
@@ -1115,7 +991,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E99
             type = 'container',
             coords = {x = 14146, y = 2636, z = -2},
             dist = {"DrugLabOutfit", "MechanicOutfit", "WildWestClothing"},
@@ -1123,7 +999,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E100
             type = 'container',
             coords = {x = 14149, y = 2638, z = -2},
             dist = {"BackstageClothingRack", "ArmySurplusOutfit"},
@@ -1131,7 +1007,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E101
             type = 'container',
             coords = {x = 14150, y = 2638, z = -2},
             dist = {"ClothingStorageWinter", "GymLaundry"},
@@ -1139,7 +1015,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E102
             type = 'container',
             coords = {x = 14150, y = 2637, z = -2},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -1147,7 +1023,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E103
             type = 'container',
             coords = {x = 14148, y = 2644, z = -2},
             dist = {"SafehouseArmor", "ArmySurplusOutfit"},
@@ -1156,7 +1032,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         -- reading lounge
-        {
+        { -- E104
             type = 'container',
             coords = {x = 14145, y = 2630, z = -3},
             dist = {"CrateVHSTapes","BookstoreNonFiction"},
@@ -1164,7 +1040,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E105
             type = 'container',
             coords = {x = 14145, y = 2629, z = -3},
             dist = {"MusicStoreCDs"},
@@ -1172,7 +1048,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E106
             type = 'container',
             coords = {x = 14145, y = 2628, z = -3},
             dist = {"BookstoreMilitaryHistory"},
@@ -1180,7 +1056,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E107
             type = 'container',
             coords = {x = 14149, y = 2627, z = -3},
             dist = {"LivingRoomShelf"},
@@ -1188,7 +1064,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E108
             type = 'container',
             coords = {x = 14149, y = 2628, z = -3},
             dist = {"LivingRoomShelfClassy"},
@@ -1196,25 +1072,25 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E109
             type = 'container',
             coords = {x = 14149, y = 2629, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E110
             type = 'container',
             coords = {x = 14149, y = 2630, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E111
             type = 'container',
             coords = {x = 14149, y = 2631, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E112
             type = 'container',
             coords = {x = 14149, y = 2634, z = -3},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -1222,7 +1098,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E113
             type = 'container',
             coords = {x = 14149, y = 2635, z = -3},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -1231,13 +1107,13 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         -- security office
-        {
+        { -- E114
             type = 'container',
             coords = {x = 14144, y = 2626, z = -3},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E115
             type = 'container',
             coords = {x = 14147, y = 2626, z = -3},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
@@ -1245,19 +1121,19 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E116
             type = 'container',
             coords = {x = 14147, y = 2623, z = -3},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E117
             type = 'container',
             coords = {x = 14148, y = 2623, z = -3},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E118
             type = 'container',
             coords = {x = 14149, y = 2623, z = -3},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid" },
@@ -1266,7 +1142,7 @@ local LVilleComplex = {
             level = "Loot_GunLevel",
         },
         -- gun range
-        {
+        { -- E119
             type = 'container',
             coords = {x = 14152, y = 2623, z = -3},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -1274,7 +1150,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E120
             type = 'container',
             coords = {x = 14154, y = 2623, z = -3},
             dist = {"GunStoreKnives", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "MeleeWeapons", "MeleeWeapons_Mid" },
@@ -1282,7 +1158,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E121
             type = 'container',
             coords = {x = 14156, y = 2623, z = -3},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -1292,13 +1168,13 @@ local LVilleComplex = {
         },
         -- -4
         -- stairway shelves
-        {
+        { -- E122
             type = 'container',
             coords = {x = 14146, y = 2628, z = -4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E123
             type = 'container',
             coords = {x = 14146, y = 2627, z = -4},
             items = {
@@ -1308,7 +1184,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E124
             type = 'container',
             coords = {x = 14148, y = 2628, z = -4},
             items = {
@@ -1318,7 +1194,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E125
             type = 'container',
             coords = {x = 14148, y = 2627, z = -4},
             items = {
@@ -1329,7 +1205,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         -- warehouse/utility
-        {
+        { -- E126
             type = 'container',
             coords = {x = 14144, y = 2625, z = -4},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1337,7 +1213,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E127
             type = 'container',
             coords = {x = 14144, y = 2624, z = -4},
             dist = {"ArtStorePottery","CrateMasonry" },
@@ -1345,7 +1221,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E128
             type = 'container',
             coords = {x = 14144, y = 2623, z = -4},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
@@ -1353,7 +1229,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E129
             type = 'container',
             coords = {x = 14146, y = 2625, z = -4},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1361,7 +1237,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E130
             type = 'container',
             coords = {x = 14146, y = 2624, z = -4},
             dist = {"RailYardTools","Homesteading","SurvivalGear"},
@@ -1369,7 +1245,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E131
             type = 'container',
             coords = {x = 14146, y = 2623, z = -4},
             dist = {"WireFactoryBarbed", "CrateLongStick", "WireFactoryBasic"},
@@ -1377,7 +1253,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E132
             type = 'container',
             coords = {x = 14148, y = 2625, z = -4},
             dist = {"GasStoreEmergency","StoreCounterTobacco", },
@@ -1385,7 +1261,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E133
             type = 'container',
             coords = {x = 14148, y = 2624, z = -4},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
@@ -1393,7 +1269,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E134
             type = 'container',
             coords = {x = 14148, y = 2623, z = -4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -1401,7 +1277,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E135
             type = 'container',
             coords = {x = 14156, y = 2634, z = -4},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
@@ -1409,7 +1285,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E136
             type = 'container',
             coords = {x = 14156, y = 2635, z = -4},
             dist = {"RailYardSpikes", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -1417,7 +1293,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E137
             type = 'container',
             coords = {x = 14154, y = 2635, z = -4},
             dist = {"CrateCarpentry","LoggingFactoryTools"},
@@ -1425,7 +1301,7 @@ local LVilleComplex = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E138
             type = 'container',
             coords = {x = 14152, y = 2635, z = -4},
             items = {

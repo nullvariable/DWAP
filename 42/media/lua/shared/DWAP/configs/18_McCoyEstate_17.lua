@@ -1,3 +1,7 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: waterTank 1 at 10094,8259,3 present but carrying no fluid
+--     container - the conversion started and did not finish, so this one is a
+--     bug rather than bad coords
 local wtc = {x = 10094, y = 8259, z = 3}
 local pb1 = {x = 10112, y = 8240, z = -1}
 local McCoyEstate = {
@@ -61,171 +65,6 @@ local McCoyEstate = {
         {
             controls = { sprite = "dwap_tiles_01_22", x = 10120, y = 8239, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 10118, y= 8239, z= -1, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10092,
-                        y = 8243,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10092,
-                        y = 8244,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10092,
-                        y = 8245,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10092,
-                        y = 8246,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10094,
-                        y = 8243,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10094,
-                        y = 8244,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10094,
-                        y = 8245,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10094,
-                        y = 8246,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10096,
-                        y = 8243,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10096,
-                        y = 8244,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10096,
-                        y = 8245,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10096,
-                        y = 8246,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10098,
-                        y = 8243,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10098,
-                        y = 8244,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10098,
-                        y = 8245,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_9",
-                        x = 10098,
-                        y = 8246,
-                        z = 0,
-                        pb = 1,
-                        spawn = false,
-                    },
-                },
-            },
             fakeGenerators = {
                 { x = 10095, y = 8282, z = -1, },
                 { x = 10087, y = 8268, z = -1, },
@@ -246,7 +85,7 @@ local McCoyEstate = {
         { barricade = "metalbar", enabled = "Barricade", target="walls_logs_8", x = 10101, y = 8260, z = 0, },
     },
     loot = {
-        {
+        { -- E1
             type = 'container',
             coords = {x = 10095, y = 8262, z = 0},
             special = "essentials",
@@ -254,32 +93,32 @@ local McCoyEstate = {
 
         -- first floor
         -- office
-        {
+        { -- E2
             type = 'container',
             coords = {x=10093,y=8256,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=10097,y=8254,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=10098,y=8254,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=10093,y=8257,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         -- sitting area
-        {
+        { -- E6
             type = 'container',
             coords = {x=10095,y=8257,z=1},
             slot = "upper",
@@ -288,7 +127,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=10099,y=8257,z=1},
             slot = "upper",
@@ -297,7 +136,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=10100,y=8261,z=1},
             items = {
@@ -308,7 +147,7 @@ local McCoyEstate = {
             },
             randUntilFull = true,
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=10099,y=8261,z=2},
             dist = {"CrateVHSTapes"},
@@ -316,7 +155,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=10100,y=8260,z=1},
             dist = {"MovieRentalShelves"},
@@ -324,13 +163,13 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E11
             type = 'container',
             coords = {x=10093,y=8260,z=1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=10093,y=8261,z=1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -338,7 +177,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=10092,y=8262,z=1},
             dist = {"CrateInstruments"},
@@ -346,7 +185,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=10091,y=8262,z=1},
             dist = {"CrateLiquor"},
@@ -354,7 +193,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=10088,y=8254,z=1},
             dist = {"CrateLiquor"},
@@ -362,7 +201,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=10089,y=8254,z=1},
             dist = {"CrateLiquor"},
@@ -371,7 +210,7 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         -- near stairs
-        {
+        { -- E17
             type = 'container',
             coords = {x=10092,y=8254,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -379,13 +218,13 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=10092,y=8255,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=10089,y=8258,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -393,7 +232,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=10089,y=8259,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -401,7 +240,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=10089,y=8260,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -410,7 +249,7 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         -- kitchen
-        {
+        { -- E22
             type = 'container',
             coords = {x=10088,y=8260,z=1},
             dist = {"StoreKitchenButcher", "CrateFlour", "CrateOilVegetable", "StoreKitchenSauce", },
@@ -418,7 +257,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=10085,y=8260,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -426,7 +265,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=10084,y=8260,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -434,13 +273,13 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=10084,y=8261,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=10084,y=8262,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -448,7 +287,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=10084,y=8262,z=1},
             slot = "upper",
@@ -457,16 +296,15 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=10084,y=8263,z=1},
             dist = {"CatfishKitchenFridge", "ChineseKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=10084,y=8263,z=1},
             slot = "upper",
@@ -475,17 +313,16 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=10084,y=8264,z=1},
             dist = {"WesternKitchenFreezer",},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- master bedroom
-        {
+        { -- E31
             type = 'container',
             coords = {x=10080,y=8263,z=1},
             dist = {"FirearmWeapons_Late"},
@@ -493,13 +330,13 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=10080,y=8260,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=10080,y=8257,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -507,7 +344,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=10081,y=8257,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -516,7 +353,7 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         -- mb closet
-        {
+        { -- E35
             type = 'container',
             coords = {x=10088,y=8257,z=1},
             dist = {"SewingStoreTools"},
@@ -524,7 +361,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=10087,y=8257,z=1},
             dist = {"CrateLeather"},
@@ -532,7 +369,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=10086,y=8257,z=1},
             dist = {"SewingStoreFabric"},
@@ -540,7 +377,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=10085,y=8257,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -548,7 +385,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=10084,y=8257,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -556,7 +393,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=10088,y=8259,z=1},
             dist = {"CampingStoreBackpacks"},
@@ -564,7 +401,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=10087,y=8259,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -572,7 +409,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=10086,y=8259,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -580,7 +417,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=10085,y=8259,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -589,7 +426,7 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         -- mb bath
-        {
+        { -- E44
             type = 'container',
             coords = {x=10080,y=8254,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -598,19 +435,19 @@ local McCoyEstate = {
             level = "Loot_MedLevel",
         },
         -- top floor
-        {
+        { -- E45
             type = 'container',
             coords = {x=10083,y=8258,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=10083,y=8259,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E47
             type = 'container',
             coords = {x=10083,y=8261,z=2},
             dist = {"HuntingLockers", "RangerTools"},
@@ -618,7 +455,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=10087,y=8262,z=2},
             items = {
@@ -629,7 +466,7 @@ local McCoyEstate = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=10084,y=8260,z=2},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -637,7 +474,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=10084,y=8263,z=2},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -645,7 +482,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=10090,y=8257,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -653,7 +490,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=10091,y=8257,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -661,7 +498,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E53
             type = 'container',
             coords = {x=10090,y=8260,z=2},
             slot = "upper",
@@ -670,7 +507,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=10093,y=8255,z=2},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -678,7 +515,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E55
             type = 'container',
             coords = {x=10092,y=8255,z=2},
             dist = {"BathroomCounter", "MedicalStorageDrugs"},
@@ -688,7 +525,7 @@ local McCoyEstate = {
         },
         -- first floor
         -- butcher room
-        {
+        { -- E56
             type = 'container',
             coords = {x=10090,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -696,7 +533,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=10091,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "SeafoodKitchenSauce"},
@@ -704,7 +541,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=10093,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "StoreKitchenCutlery"},
@@ -712,26 +549,24 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=10090,y=8254,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "FreezerRich"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=10090,y=8255,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
         -- hallway
-        {
+        { -- E61
             type = 'container',
             coords = {x=10092,y=8256,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -739,7 +574,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=10093,y=8256,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -747,7 +582,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=10091,y=8258,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -755,7 +590,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=10090,y=8258,z=0},
             dist = {"CrateToiletPaper"},
@@ -764,7 +599,7 @@ local McCoyEstate = {
             level = 1,
         },
         -- storage room with generator
-        {
+        { -- E65
             type = 'container',
             coords = {x=10089,y=8261,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -772,7 +607,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=10089,y=8262,z=0},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -780,7 +615,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=10085,y=8258,z=0},
             dist = {"GigamartTools", "JanitorTools" },
@@ -788,7 +623,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=10085,y=8259,z=0},
             dist = {"LoggingFactoryTools" },
@@ -796,7 +631,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=10085,y=8263,z=0},
             dist = {"StoreCounterTobacco"},
@@ -804,7 +639,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=10085,y=8264,z=0},
             dist = {"CandyStoreSnacks"},
@@ -812,7 +647,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=10086,y=8264,z=0},
             dist = {"CrateTortillaChips"},
@@ -821,7 +656,7 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         -- garage area
-        {
+        { -- E72
             type = 'container',
             coords = {x=10082,y=8257,z=0},
             dist = {"GasStoreEmergency"},
@@ -829,7 +664,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=10081,y=8257,z=0},
             slot = "upper",
@@ -838,7 +673,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=10084,y=8257,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -846,7 +681,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=10084,y=8258,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -855,7 +690,7 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         -- more hallway
-        {
+        { -- E76
             type = 'container',
             coords = {x=10078,y=8255,z=0},
             dist = {"ToolFactoryHandles" },
@@ -863,7 +698,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E77
             type = 'container',
             coords = {x=10078,y=8256,z=0},
             dist = {"ToolFactoryIngots" },
@@ -871,7 +706,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x=10081,y=8254,z=0},
             dist = {"WeldingWorkshopMetal"},
@@ -879,7 +714,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=10082,y=8254,z=0},
             dist = {"WeldingWorkshopMetal"},
@@ -888,13 +723,13 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         -- more hallway other side of stairs
-        {
+        { -- E80
             type = 'container',
             coords = {x=10099,y=8263,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E81
             type = 'container',
             coords = {x=10099,y=8264,z=0},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -902,7 +737,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E82
             type = 'container',
             coords = {x=10099,y=8265,z=0},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition"},
@@ -911,7 +746,7 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
 
-        {
+        { -- E83
             type = 'container',
             coords = {x=10095,y=8261,z=0},
             items = {
@@ -920,7 +755,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x=10095,y=8260,z=0},
             items = {
@@ -929,7 +764,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E85
             type = 'container',
             coords = {x=10095,y=8258,z=0},
             items = {
@@ -939,7 +774,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E86
             type = 'container',
             coords = {x=10095,y=8257,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -947,7 +782,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x=10100,y=8262,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -955,7 +790,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x=10098,y=8257,z=0},
             dist = {"ToolFactoryBarStock"},
@@ -963,7 +798,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x=10099,y=8257,z=0},
             dist = {"CrateSheetMetal" },
@@ -972,25 +807,23 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         -- food storage area
-        {
+        { -- E90
             type = 'container',
             coords = {x=10099,y=8254,z=0},
             dist = {"FreezerGarage" },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x=10098,y=8254,z=0},
             dist = {"FreezerGarage" },
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E92
             type = 'container',
             coords = {x=10097,y=8256,z=0},
             dist = {"GigamartDryGoods" },
@@ -998,7 +831,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E93
             type = 'container',
             coords = {x=10098,y=8256,z=0},
             dist = {"GigamartDryGoods" },
@@ -1008,7 +841,7 @@ local McCoyEstate = {
         },
 
         -- shop building
-        {
+        { -- E94
             type = 'container',
             coords = {x=10108,y=8248,z=0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -1016,7 +849,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E95
             type = 'container',
             coords = {x=10117,y=8243,z=0},
             sandboxEnable = 'SeedLibrary',
@@ -1026,7 +859,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E96
             type = 'container',
             coords = {x=10117,y=8242,z=0},
             sandboxEnable = 'SeedLibrary',
@@ -1036,7 +869,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E97
             type = 'container',
             coords = {x=10117,y=8239,z=0},
             dist = {"CrateBlacksmithing", "MetalShopTools", "MetalWorkerTools" },
@@ -1044,7 +877,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E98
             type = 'container',
             coords = {x=10114,y=8239,z=0},
             slot = "upper",
@@ -1054,7 +887,7 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         -- fishing building
-        {
+        { -- E99
             type = 'container',
             coords = {x=10092,y=8282,z=0},
             dist = {"CrateFishing", "FishermanTools"},
@@ -1062,7 +895,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E100
             type = 'container',
             coords = {x=10093,y=8282,z=0},
             dist = {"HuntingLockers", "RangerTools"},
@@ -1070,7 +903,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E101
             type = 'container',
             coords = {x=10093,y=8279,z=0},
             dist = {"FishingStoreGear", "FishermanTools"},
@@ -1078,7 +911,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E102
             type = 'container',
             coords = {x=10094,y=8279,z=0},
             dist = {"SurvivalGear",},
@@ -1086,7 +919,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E103
             type = 'container',
             coords = {x=10095,y=8279,z=0},
             dist = { "SushiKitchenBaking"},
@@ -1094,16 +927,15 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E104
             type = 'container',
             coords = {x=10090,y=8280,z=0},
             dist = {"SushiKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E105
             type = 'container',
             coords = {x=10099,y=8279,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
@@ -1111,7 +943,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E106
             type = 'container',
             coords = {x=10099,y=8280,z=0},
             dist = {"ArtStorePottery"},
@@ -1119,7 +951,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E107
             type = 'container',
             coords = {x=10099,y=8282,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "ToolStoreAccessories", "ArtStorePottery", "ArtSupplies"},
@@ -1129,7 +961,7 @@ local McCoyEstate = {
         },
 
         -- crate near chicken pen
-        {
+        { -- E108
             type = 'container',
             coords = {x=10056,y=8236,z=0},
             dist = {"BarnTools", "CrateAnimalFeed", },
@@ -1137,7 +969,7 @@ local McCoyEstate = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E109
             type = 'container',
             coords = {x=10058,y=8236,z=0},
             dist = {"CrateGravelBags", },
@@ -1146,7 +978,7 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         -- woodpile
-        {
+        { -- E110
             type = 'container',
             coords = {x=10115,y=8260,z=0},
             items = {

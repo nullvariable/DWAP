@@ -1,3 +1,6 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * stash has no buildingX/buildingY (DWAPStashDesc.lua "March Ridge Bunker
+--     Map") - the map item will not highlight a building
 local wtc = { x = 9955, y = 12620, z = -4, }
 local MarchRidgeConfig = {
     group = "March Ridge",
@@ -106,7 +109,7 @@ local MarchRidgeConfig = {
         { sprite = "fixtures_bathroom_01_30", x = 9949, y = 12622, z = -4, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     loot = {
-        {
+        { -- E1
             -- filingcabinet next to spawn in operations room
             type = 'container',
             coords = {x=9959,y=12627,z=-4},
@@ -118,7 +121,7 @@ local MarchRidgeConfig = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E2
             -- 2nd filingcabinet next to spawn in operations room
             type = 'container',
             coords = {x=9959,y=12628,z=-4},
@@ -126,13 +129,13 @@ local MarchRidgeConfig = {
             special = "maps",
         },
         -- kitchen
-        {
+        { -- E3
             type = 'container',
             coords = {x=9967,y=12610,z=-4},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=9966,y=12610,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -140,7 +143,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=9963,y=12610,z=-4},
             dist = {"CrateCannedFood",},
@@ -148,7 +151,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=9963,y=12612,z=-4},
             dist = {"GroceryBagGourmet",},
@@ -156,7 +159,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=9962,y=12610,z=-4},
             dist = {"CrateCannedFood",},
@@ -164,7 +167,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=9964,y=12612,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -172,7 +175,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=9965,y=12612,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -180,7 +183,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=9966,y=12612,z=-4},
             dist = {"StoreKitchenBaking",},
@@ -189,13 +192,13 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         -- Armory
-        {
+        { -- E11
             type = 'container',
             coords = {x=9974,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=9975,y=12614,z=-4},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -203,19 +206,19 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=9976,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E14
             type = 'container',
             coords = {x=9977,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E15
             type = 'container',
             coords = {x=9974,y=12617,z=-4},
             dist = {"FirearmWeapons_Late",},
@@ -223,7 +226,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E16
             type = 'container',
             coords = {x=9975,y=12617,z=-4},
             dist = {"DrugLabGuns"},
@@ -231,7 +234,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=9976,y=12617,z=-4},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
@@ -239,7 +242,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=9977,y=12617,z=-4},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
@@ -248,7 +251,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         -- medical
-        {
+        { -- E19
             type = 'container',
             coords = {x=9969,y=12625,z=-4},
             slot = "upper",
@@ -257,7 +260,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E20
             type = 'container',
             coords = {x=9969,y=12626,z=-4},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -265,7 +268,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=9970,y=12626,z=-4},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -274,7 +277,7 @@ local MarchRidgeConfig = {
             level = "Loot_MedLevel",
         },
         -- book shelves
-        {
+        { -- E22
             type = 'container',
             coords = {x=9980,y=12632,z=-4},
             dist = {"BookstoreNonFiction", "BookstoreMilitaryHistory"},
@@ -283,7 +286,7 @@ local MarchRidgeConfig = {
             level = 1,
         },
         -- media storage
-        {
+        { -- E23
             type = 'container',
             coords = {x=9973,y=12633,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
@@ -302,7 +305,7 @@ local MarchRidgeConfig = {
                 { name = 'Base.BookGlassmakingSet', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=9974,y=12633,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
@@ -320,13 +323,13 @@ local MarchRidgeConfig = {
                 { name = 'Base.BookMetalWeldingSet', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=9975,y=12633,z=-4},
             special = 'skillmags',
             sandboxEnable = 'Loot_EnableBooks',
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=9976,y=12633,z=-4},
             dist = {"CrateTVWide", "CrateVHSTapes"},
@@ -334,7 +337,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=9977,y=12633,z=-4},
             dist = {"CrateVHSTapes"},
@@ -342,7 +345,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E28
             type = 'container',
             coords = {x=9978,y=12633,z=-4},
             dist = {"MovieRentalShelves"},
@@ -350,7 +353,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=9975,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -358,7 +361,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=9976,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -366,7 +369,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=9977,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -374,7 +377,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=9978,y=12636,z=-4},
             dist = {"MusicStoreCDs"},
@@ -383,7 +386,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         -- cleaning
-        {
+        { -- E33
             type = 'container',
             coords = {x=9969,y=12633,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -391,7 +394,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=9970,y=12633,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -400,13 +403,13 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         -- seed/farm library
-        {
+        { -- E35
             type = 'container',
             coords = {x=9970,y=12631,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=9970,y=12632,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -414,7 +417,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=9968,y=12631,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -422,7 +425,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=9968,y=12632,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -430,7 +433,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E39
             type = 'container',
             coords = {x=9966,y=12631,z=-4},
             sandboxEnable = 'SeedLibrary',
@@ -440,7 +443,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=9966,y=12632,z=-4},
             sandboxEnable = 'SeedLibrary',
@@ -451,7 +454,7 @@ local MarchRidgeConfig = {
             level = "Loot_FarmLevel",
         },
         -- fishing
-        {
+        { -- E41
             type = 'container',
             coords = {x=9970,y=12628,z=-4},
             dist = {"CrateFishing", "FishermanTools"},
@@ -459,7 +462,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- hunting
+        { -- E42 hunting
             type = 'container',
             coords = {x=9969,y=12628,z=-4},
             dist = {"HuntingLockers", "RangerTools"},
@@ -467,7 +470,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=9968,y=12628,z=-4},
             dist = {"CrateInstruments"},
@@ -475,7 +478,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E44
             type = 'container',
             coords = {x=9967,y=12628,z=-4},
             dist = {"CrateLiquor"},
@@ -483,7 +486,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=9966,y=12628,z=-4},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -491,7 +494,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=9965,y=12628,z=-4},
             dist = {"DishCabinetLiquor"},
@@ -500,7 +503,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         -- tailoring
-        {
+        { -- E47
             type = 'container',
             coords = {x=9969,y=12637,z=-4},
             dist = {"SewingStoreTools"},
@@ -508,7 +511,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=9970,y=12637,z=-4},
             dist = {"SewingStoreFabric"},
@@ -516,7 +519,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=9970,y=12638,z=-4},
             dist = {"CrateLeather"},
@@ -524,7 +527,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=9966,y=12637,z=-4},
             dist = {"CrateToiletPaper"},
@@ -532,7 +535,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=9966,y=12638,z=-4},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
@@ -540,7 +543,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E52
             type = 'container',
             coords = {x=9970,y=12640,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit"},
@@ -549,7 +552,7 @@ local MarchRidgeConfig = {
             level = "Loot_TailorLevel",
         },
         -- laundry room
-        {
+        { -- E53
             type = 'container',
             coords = {x=9959,y=12643,z=-4},
             slot = "upper",
@@ -558,7 +561,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=9959,y=12607,z=-4},
             slot = "upper",
@@ -573,7 +576,7 @@ local MarchRidgeConfig = {
         -- ArmyStorageOutfit
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
-        {
+        { -- E55
             type = 'container',
             coords = {x=9944,y=12609,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -581,7 +584,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=9944,y=12610,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -589,7 +592,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=9944,y=12611,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -597,7 +600,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=9944,y=12612,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -605,7 +608,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=9944,y=12613,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -614,7 +617,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         -- mens
-        {
+        { -- E60
             type = 'container',
             coords = {x=9944,y=12637,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -622,7 +625,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=9944,y=12638,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -630,7 +633,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=9944,y=12639,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -638,7 +641,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=9944,y=12640,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
@@ -646,7 +649,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=9944,y=12641,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -655,7 +658,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         -- entry storage 1
-        {
+        { -- E65
             type = 'container',
             coords = {x=9950,y=12627,z=-4},
             dist = {"CampingLockers"},
@@ -663,7 +666,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=9950,y=12628,z=-4},
             dist = {"CampingStoreBackpacks"},
@@ -671,7 +674,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E67
             type = 'container',
             coords = {x=9950,y=12629,z=-4},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -679,7 +682,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=9950,y=12630,z=-4},
             dist = {"SafehouseTraps", },
@@ -687,12 +690,12 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=9950,y=12631,z=-4},
             special = "essentials",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=9950,y=12632,z=-4},
             dist = {"ArmyStorageAmmunition", },
@@ -701,7 +704,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         -- tools
-        {
+        { -- E71
             type = 'container',
             coords = {x=9953,y=12630,z=-4},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -709,7 +712,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=9953,y=12631,z=-4},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -717,7 +720,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=9953,y=12632,z=-4},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -725,7 +728,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=9953,y=12633,z=-4},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -733,7 +736,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E75
             type = 'container',
             coords = {x=9953,y=12634,z=-4},
             dist = {"GigamartTools", "JanitorTools" },
@@ -741,7 +744,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=9953,y=12635,z=-4},
             dist = {"LoggingFactoryTools" },
@@ -750,7 +753,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         -- random junk
-        {
+        { -- E77
             type = 'container',
             coords = {x=9956,y=12628,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
@@ -758,7 +761,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x=9956,y=12629,z=-4},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
@@ -766,7 +769,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=9956,y=12630,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller" },
@@ -774,7 +777,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = 3,
         },
-        {
+        { -- E80
             type = 'container',
             coords = {x=9956,y=12631,z=-4},
             dist = {"CrateCannedFood", "RandomFiller" },
@@ -783,7 +786,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         -- mats
-        {
+        { -- E81
             type = 'container',
             coords = {x=9956,y=12632,z=-4},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -791,7 +794,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E82
             type = 'container',
             coords = {x=9956,y=12633,z=-4},
             dist = {"ToolFactoryHandles" },
@@ -799,7 +802,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x=9956,y=12635,z=-4},
             dist = {"ToolFactoryIngots" },
@@ -807,7 +810,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x=9956,y=12634,z=-4},
             dist = {"CrateSheetMetal" },
@@ -816,7 +819,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         -- entry storage 2
-        {
+        { -- E85
             type = 'container',
             coords = {x=9944,y=12629,z=-4},
             dist = {"ToolFactoryBarStock"},
@@ -824,7 +827,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E86
             type = 'container',
             coords = {x=9945,y=12629,z=-4},
             dist = {"CrateLumber"},
@@ -832,7 +835,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E87
             type = 'container',
             coords = {x=9946,y=12629,z=-4},
             dist = {"CrateLumber"},
@@ -840,7 +843,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E88
             type = 'container',
             coords = {x=9947,y=12629,z=-4},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -848,7 +851,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E89
             type = 'container',
             coords = {x=9948,y=12629,z=-4},
             dist = {"WeldingWorkshopMetal"},
@@ -856,7 +859,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E90
             type = 'container',
             coords = {x=9949,y=12629,z=-4},
             dist = {"WeldingWorkshopMetal"},
@@ -864,7 +867,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E91
             type = 'container',
             coords = {x=9947,y=12632,z=-4},
             items = {
@@ -873,7 +876,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E92
             type = 'container',
             coords = {x=9946,y=12632,z=-4},
             items = {
@@ -883,7 +886,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E93
             type = 'container',
             coords = {x=9945,y=12632,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -891,7 +894,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E94
             type = 'container',
             coords = {x=9944,y=12632,z=-4},
             dist = {"StoreCounterTobacco"},
@@ -899,7 +902,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = 1,
         },
-        {
+        { -- E95
             type = 'container',
             coords = {x=9949,y=12635,z=-4},
             dist = {"GasStoreEmergency"},
@@ -907,7 +910,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = 2,
         },
-        {
+        { -- E96
             type = 'container',
             coords = {x=9948,y=12635,z=-4},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -915,7 +918,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E97
             type = 'container',
             coords = {x=9947,y=12635,z=-4},
             dist = {"CandyStoreSnacks"},
@@ -923,7 +926,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E98
             type = 'container',
             coords = {x=9946,y=12635,z=-4},
             dist = {"CrateTortillaChips"},
@@ -931,7 +934,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E99
             type = 'container',
             coords = {x=9945,y=12635,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -939,7 +942,7 @@ local MarchRidgeConfig = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E100
             type = 'container',
             coords = {x=9944,y=12635,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},

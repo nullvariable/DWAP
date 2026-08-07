@@ -1,3 +1,7 @@
+-- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
+--   * systems: waterTank 1 at 2938,12520,2, waterTank 2 at 2937,12562,2
+--     present but carrying no fluid container - the conversion started and
+--     did not finish, so this one is a bug rather than bad coords
 local wtc1 = {x = 2938, y = 12520, z = 2,}
 local wtc2 = {x = 2937, y = 12562, z = 2,}
 local pb1 = { x = 2947, y = 12558, z = -1 }
@@ -16,92 +20,6 @@ local ScrapYard = {
         {
             controls = { sprite = "dwap_tiles_01_18", x = 2962, y = 12560, z = 0 },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 2964, y= 12560, z= 0, },
-            solar = {
-                powerbank = { sprite = "dwap_tiles_01_0", x = pb1.x, y = pb1.y, z = pb1.z },
-                panels = {
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2961,
-                        y = 12559,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2962,
-                        y = 12559,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2963,
-                        y = 12559,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2964,
-                        y = 12559,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2961,
-                        y = 12561,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2962,
-                        y = 12561,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2963,
-                        y = 12561,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-                    {
-                        type = "panel",
-                        isSpecial = true,
-                        sprite = "solarmod_tileset_01_10",
-                        x = 2964,
-                        y = 12561,
-                        z = 1,
-                        pb = 1,
-                        spawn = false,
-                    },
-
-                },
-            },
             fakeGenerators = {
                 { x = 2949, y = 12561, z = -1, createTile = true },
                 { x = 2947, y = 12527, z = -1, createTile = true },
@@ -178,19 +96,19 @@ local ScrapYard = {
         { barricade = "woodhalf", enabled = "Barricade", target="walls_exterior_house_01_57", x = 2938, y = 12566, z = 0, },
     },
     loot = {
-        {
+        { -- E1
             type = 'container',
             coords = {x=2947, y=12522,z=-1},
             special = "essentials",
         },
         -- house 1
-        {
+        { -- E2
             type = 'container',
             coords = {x=2940,y=12519,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        {
+        { -- E3
             type = 'container',
             coords = {x=2943,y=12517,z=1},
             items = {
@@ -201,7 +119,7 @@ local ScrapYard = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        {
+        { -- E4
             type = 'container',
             coords = {x=2933,y=12519,z=1},
             dist = {"MedicalCabinet"},
@@ -209,7 +127,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E5
             type = 'container',
             coords = {x=2937,y=12525,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -217,7 +135,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E6
             type = 'container',
             coords = {x=2938,y=12525,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
@@ -225,7 +143,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E7
             type = 'container',
             coords = {x=2938,y=12522,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -233,7 +151,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E8
             type = 'container',
             coords = {x=2942,y=12523,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -241,7 +159,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E9
             type = 'container',
             coords = {x=2942,y=12524,z=1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -249,7 +167,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E10
             type = 'container',
             coords = {x=2943,y=12524,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -258,19 +176,19 @@ local ScrapYard = {
             level = "Loot_FishLevel",
         },
         -- 1st floor bookcases
-        {
+        { -- E11
             type = 'container',
             coords = {x=2941,y=12518,z=0},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        {
+        { -- E12
             type = 'container',
             coords = {x=2936,y=12525,z=0},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        {
+        { -- E13
             type = 'container',
             coords = {x=2942,y=12518,z=0},
             dist = {"CrateVHSTapes"},
@@ -279,7 +197,7 @@ local ScrapYard = {
             level = "Loot_MediaLevel",
         },
         -- laundry
-        {
+        { -- E14
             type = 'container',
             coords = {x=2941,y=12525,z=0},
             slot = "upper",
@@ -289,7 +207,7 @@ local ScrapYard = {
             level = "Loot_TailorLevel",
         },
         -- closet
-        {
+        { -- E15
             type = 'container',
             coords = {x=2940,y=12525,z=0},
             dist = {"MusicStoreCDs"},
@@ -298,16 +216,15 @@ local ScrapYard = {
             level = "Loot_MediaLevel",
         },
         -- kitchen
-        {
+        { -- E16
             type = 'container',
             coords = {x=2937,y=12517,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E17
             type = 'container',
             coords = {x=2936,y=12517,z=0},
             dist = {"KitchenDryFood",},
@@ -315,13 +232,13 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E18
             type = 'container',
             coords = {x=2934,y=12517,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E19
             type = 'container',
             coords = {x=2933,y=12517,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -330,7 +247,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         -- shed/garage
-        {
+        { -- E20
             type = 'container',
             coords = {x=2940,y=12493,z=0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -338,7 +255,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E21
             type = 'container',
             coords = {x=2939,y=12493,z=0},
             dist = {"GasStoreEmergency"},
@@ -346,7 +263,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E22
             type = 'container',
             coords = {x=2941,y=12496,z=0},
             sandboxEnable = 'SeedLibrary',
@@ -356,13 +273,13 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E23
             type = 'container',
             coords = {x=2937,y=12494,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        {
+        { -- E24
             type = 'container',
             coords = {x=2937,y=12493,z=0},
             slot = "upper",
@@ -371,7 +288,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E25
             type = 'container',
             coords = {x=2936,y=12493,z=0},
             slot = "upper",
@@ -380,7 +297,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E26
             type = 'container',
             coords = {x=2930,y=12494,z=0},
             slot = "upper",
@@ -389,7 +306,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E27
             type = 'container',
             coords = {x=2929,y=12494,z=0},
             dist = {"WeldingWorkshopMetal"},
@@ -398,7 +315,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         -- basement 1
-        {
+        { -- E28
             type = 'container',
             coords = {x=2945,y=12517,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
@@ -406,7 +323,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E29
             type = 'container',
             coords = {x=2944,y=12522,z=-1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -414,13 +331,13 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        {
+        { -- E30
             type = 'container',
             coords = {x=2945,y=12522,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E31
             type = 'container',
             coords = {x=2944,y=12524,z=-1},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition","ArmyStorageGuns",},
@@ -428,7 +345,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E32
             type = 'container',
             coords = {x=2945,y=12524,z=-1},
             dist = {"FirearmWeapons_Late"},
@@ -436,7 +353,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E33
             type = 'container',
             coords = {x=2944,y=12526,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -444,7 +361,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E34
             type = 'container',
             coords = {x=2945,y=12526,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
@@ -452,7 +369,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E35
             type = 'container',
             coords = {x=2947,y=12524,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -460,7 +377,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E36
             type = 'container',
             coords = {x=2948,y=12524,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -468,7 +385,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E37
             type = 'container',
             coords = {x=2947,y=12526,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -476,7 +393,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E38
             type = 'container',
             coords = {x=2948,y=12526,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -486,7 +403,7 @@ local ScrapYard = {
         },
         -- house 2
         -- exterior crates
-        {
+        { -- E39
             type = 'container',
             coords = {x=2948,y=12568,z=0},
             items = {
@@ -496,7 +413,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E40
             type = 'container',
             coords = {x=2950,y=12568,z=0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -504,7 +421,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E41
             type = 'container',
             coords = {x=2948,y=12567,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -512,7 +429,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E42
             type = 'container',
             coords = {x=2949,y=12567,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -520,7 +437,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E43
             type = 'container',
             coords = {x=2948,y=12566,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -529,7 +446,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         -- living area
-        {
+        { -- E44
             type = 'container',
             coords = {x=2934,y=12565,z=0},
             slot = "upper",
@@ -538,7 +455,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E45
             type = 'container',
             coords = {x=2933,y=12564,z=0},
             dist = {"MovieRentalShelves"},
@@ -546,29 +463,28 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        {
+        { -- E46
             type = 'container',
             coords = {x=2945,y=12561,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- kitchen
-        {
+        { -- E47
             type = 'container',
             coords = {x=2934,y=12560,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E48
             type = 'container',
             coords = {x=2934,y=12559,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E49
             type = 'container',
             coords = {x=2935,y=12559,z=0},
             dist = {"StoreKitchenBaking",},
@@ -576,7 +492,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E50
             type = 'container',
             coords = {x=2936,y=12559,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -584,7 +500,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E51
             type = 'container',
             coords = {x=2937,y=12559,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -593,7 +509,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         -- bathroom
-        {
+        { -- E52
             type = 'container',
             coords = {x=2939,y=12559,z=0},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "JanitorCleaning"},
@@ -602,7 +518,7 @@ local ScrapYard = {
             level = "Loot_MedLevel",
         },
         -- bedroom
-        {
+        { -- E53
             type = 'container',
             coords = {x=2939,y=12564,z=0},
             dist = {"DrugLabGuns"},
@@ -610,7 +526,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E54
             type = 'container',
             coords = {x=2939,y=12565,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -619,7 +535,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         -- basement 2
-        {
+        { -- E55
             type = 'container',
             coords = {x=2939,y=12566,z=-1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -627,7 +543,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E56
             type = 'container',
             coords = {x=2938,y=12566,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -635,19 +551,19 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        {
+        { -- E57
             type = 'container',
             coords = {x=2937,y=12566,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E58
             type = 'container',
             coords = {x=2937,y=12567,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        {
+        { -- E59
             type = 'container',
             coords = {x=2935,y=12566,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood"},
@@ -655,7 +571,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E60
             type = 'container',
             coords = {x=2935,y=12567,z=-1},
             dist = {"GigamartDryGoods", "GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
@@ -663,7 +579,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E61
             type = 'container',
             coords = {x=2935,y=12569,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -671,7 +587,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E62
             type = 'container',
             coords = {x=2935,y=12570,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable", "SeafoodKitchenSauce"},
@@ -679,7 +595,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E63
             type = 'container',
             coords = {x=2937,y=12569,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -687,7 +603,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E64
             type = 'container',
             coords = {x=2937,y=12570,z=-1},
             dist = {"CampingStoreBackpacks"},
@@ -696,7 +612,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         -- lockers
-        {
+        { -- E65
             type = 'container',
             coords = {x=2939,y=12570,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -704,7 +620,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E66
             type = 'container',
             coords = {x=2940,y=12570,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -713,7 +629,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         -- crate room
-        {
+        { -- E67
             type = 'container',
             coords = {x=2943,y=12571,z=-1},
             dist = {"ToolFactoryBarStock", "CrateLumber", "CrateSheetMetal", "WeldingWorkshopMetal", },
@@ -721,7 +637,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        {
+        { -- E68
             type = 'container',
             coords = {x=2943,y=12572,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -729,7 +645,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E69
             type = 'container',
             coords = {x=2943,y=12573,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -737,7 +653,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        {
+        { -- E70
             type = 'container',
             coords = {x=2943,y=12574,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -745,7 +661,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {
+        { -- E71
             type = 'container',
             coords = {x=2939,y=12571,z=-1},
             dist = {"GigamartDryGoods","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles", "ArtStorePottery", "ArtSupplies" },
@@ -753,7 +669,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E72
             type = 'container',
             coords = {x=2939,y=12572,z=-1},
             dist = {"GigamartDryGoods","KitchenDryFood", "FridgeSoda", "CrateSodaBottles", },
@@ -761,7 +677,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E73
             type = 'container',
             coords = {x=2939,y=12573,z=-1},
             dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
@@ -769,7 +685,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        {
+        { -- E74
             type = 'container',
             coords = {x=2939,y=12574,z=-1},
             dist = {"ArmyStorageAmmunition", },
@@ -778,7 +694,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         -- bunkrooms
-        {
+        { -- E75
             type = 'container',
             coords = {x=2948,y=12570,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -786,7 +702,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        {
+        { -- E76
             type = 'container',
             coords = {x=2948,y=12567,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -795,7 +711,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         -- medical room
-        {
+        { -- E77
             type = 'container',
             coords = {x=2943,y=12560,z=-1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
@@ -803,7 +719,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E78
             type = 'container',
             coords = {x=2943,y=12559,z=-1},
             dist = {"LaboratoryLockers", },
@@ -811,7 +727,7 @@ local ScrapYard = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {
+        { -- E79
             type = 'container',
             coords = {x=2944,y=12556,z=-1},
             dist = {"BathroomCounter", "BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
@@ -820,7 +736,7 @@ local ScrapYard = {
             level = "Loot_MediaLevel",
         },
         -- tool chest
-        {
+        { -- E80
             type = 'container',
             coords = {x=2941,y=12565,z=-1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
@@ -829,40 +745,36 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         -- freezers
-        {
+        { -- E81
             type = 'container',
             coords = {x=2941,y=12563,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E82
             type = 'container',
             coords = {x=2941,y=12564,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E83
             type = 'container',
             coords = {x=2941,y=12561,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
-        {
+        { -- E84
             type = 'container',
             coords = {x=2942,y=12561,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
             randUntilFull = true,
-            frozen = true,
             level = "Loot_FoodLevel",
         },
     },
