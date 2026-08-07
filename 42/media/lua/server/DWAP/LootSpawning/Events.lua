@@ -131,15 +131,58 @@ local function handleEmptyItem(item)
     return ii
 end
 
---- add an item to a container
+--- Spawned food gets its age from Food.setAutoAge, which never looks at local
+--- power: it only credits a fridge when the sandbox ElecShutModifier is > -1,
+--- and ours is -1, so the whole fridge/freezer branch is skipped and stock ages
+--- as if it had sat on a counter since the apocalypse. A base with an auto-on
+--- generator handed out spoiled food regardless.
+---
+--- The old `frozen` config flag treated the symptom and could not actually fix
+--- it: isRotten() is `age >= offAgeMax` and takes no notice of freezing, so an
+--- item already stamped past its limit stayed rotten - freezing only stops the
+--- clock from that point on. Resetting the age is the real fix, and Food.updateAge
+--- DOES respect haveElectricity(), so from then on the generator keeps it fresh
+--- the way it should have all along.
+---
+--- Gated on the CONTAINER rather than the item, on two counts. Cost: only cold
+--- containers are affected, so type-checking every spawned item would put a
+--- Lua->Java instanceof across the entire loot table when nearly all of it is
+--- tools, books and clothing - this is two calls per addItem instead. And
+--- correctness: a standalone freezer unit satisfies a plain base entry under
+--- resolveLootContainer, so it carries no slot = "freezer" and a config-driven
+--- test would miss it. ItemContainer.isFreezer is what the game's own
+--- isInFreezer calls, and a fridge/freezer combo is one object with two
+--- containers of differing type, so the pair on a shared tile sorts itself out.
+---
+--- Operates on the ArrayList that ItemContainer.AddItems returns - AddItems is
+--- itself a loop over AddItem that collects its results, so reusing that list
+--- costs nothing over calling AddItem ourselves.
+--- @param items ArrayList|nil
+--- @param container ItemContainer
+local function freshenAll(items, container)
+    if not items then return end
+    local freeze = container:isFreezer()
+    -- isFridge() is explicitly false for freezers, so this covers both
+    if not freeze and not container:isFridge() then return end
+    for i = 0, items:size() - 1 do
+        local food = items:get(i)
+        if instanceof(food, "Food") then
+            food:setAge(0)
+            if freeze and not food:isSpice() and food:canBeFrozen() then
+                food:setFreezingTime(100)
+            end
+        end
+    end
+end
+
+--- add an item to a container, freshening any food it produces
 --- @param container ItemContainer
 --- @param item string
 --- @param count? number
---- @param frozen? boolean
 --- @return InventoryItem|nil item
-local function addItem(container, item, count, frozen)
+local function addItem(container, item, count)
     -- DWAPUtils.dprint("addItem")
-    -- DWAPUtils.dprint({item = item, count = count, frozen = frozen})
+    -- DWAPUtils.dprint({item = item, count = count})
     local _count = count or 1
     if not item or not container then
         DWAPUtils.dprint("WARN addItem: item or container is nil")
@@ -155,17 +198,9 @@ local function addItem(container, item, count, frozen)
     elseif type(item) == "string" and item:match("Empty") then
         local ii = handleEmptyItem(item)
         if not ii then return end
-        container:AddItems(ii, _count)
+        freshenAll(container:AddItems(ii, _count), container)
     else
-        if frozen then
-            for i = 1, _count do
-                --- @type Food|InventoryItem
-                local result = container:AddItem(item)
-                if instanceof(result, "Food") and not result:isSpice() and result:canBeFrozen() then
-                    result:setFreezingTime(100)
-                end
-            end
-        elseif item == "Essential_Bag_ALICE_BeltSus_Camo" then
+        if item == "Essential_Bag_ALICE_BeltSus_Camo" then
             DWAPUtils.dprint("Adding Alice Pack to container")
             local result = container:AddItem("Bag_ALICE_BeltSus_Camo")
             if not result then
@@ -193,7 +228,7 @@ local function addItem(container, item, count, frozen)
                 end
             end
         else
-            container:AddItems(item, _count)
+            freshenAll(container:AddItems(item, _count), container)
         end
     end
 end
@@ -361,16 +396,16 @@ local function fillContainer(container, config, index, coordsKey)
                         if config.items[i].chance then
                             if config.items[i].chance == 1 or config.items[i].chance >= (random:random(1, 100) / 100) then
                                 items[#items + 1] = config.items[i].name
-                                addItem(container, config.items[i].name, 1, config.frozen)
+                                addItem(container, config.items[i].name, 1)
                             end
                         else
                             items[#items + 1] = config.items[i].name
-                            addItem(container, config.items[i].name, 1, config.frozen)
+                            addItem(container, config.items[i].name, 1)
                         end
                     end
                 else
                     items[#items + 1] = config.items[i].name
-                    addItem(container, config.items[i].name, 1, config.frozen)
+                    addItem(container, config.items[i].name, 1)
                 end
             end
         end
@@ -392,7 +427,7 @@ local function fillContainer(container, config, index, coordsKey)
             item = items[randindex]
             hasRoom = checkHasRoom(container, level)
             if hasRoom and item then
-                addItem(container, item, 1, config.frozen)
+                addItem(container, item, 1)
                 if type(item) == "string" then
                     local ii = instanceItem(item)
                     if ii and ii:getCategory() == "Container" then
@@ -427,10 +462,10 @@ local function fillContainer(container, config, index, coordsKey)
                 if item.chance then
                     if item.chance == 1 or item.chance >= (random:random(1, 100) / 100) then
                         local count = random:random(item.count[1], item.count[2])
-                        addItem(container, item.name, count, config.frozen)
+                        addItem(container, item.name, count)
                     end
                 else
-                    addItem(container, item.name, 1, config.frozen)
+                    addItem(container, item.name, 1)
                 end
             end
         end
@@ -500,6 +535,40 @@ local function loadConfigs()
         end
         DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
+end
+
+--- Fill a fridge/freezer combo's freezer compartment, which the game never
+--- offers us.
+---
+--- Vanilla's loot pass is LoadGridsquarePerformanceWorkaround.ItemPicker
+--- .checkObject, and it reads object:getContainer() - the PRIMARY container
+--- only. Freezer compartments live in IsoObject.secondaryContainers and are
+--- reachable solely through getContainerByIndex, so they are never passed to
+--- ItemPickerJava.fillContainer and OnFillContainer never fires for them.
+--- That is why every slot = "freezer" entry in the mod (17 of them, across 13
+--- configs) failed the audit with "Not filled" - it was never settle timing.
+---
+--- The fridge half of the same object DOES fire, so ride that event and fill
+--- the compartment directly. Standalone freezer units are unaffected: their
+--- freezer container IS the primary, so they already fill as base entries.
+--- @param square IsoGridSquare
+--- @param container ItemContainer the container OnFillContainer just fired for
+local function fillFreezerCompartment(square, x, y, z, container)
+    local parent = container:getParent()
+    -- only combos have a secondary; a lone container can't hide one
+    if not parent or not parent.getContainerCount or parent:getContainerCount() < 2 then
+        return
+    end
+    local fLoot, fIndex, fKey = getLootForCoords(x, y, z, "freezer")
+    if not fLoot then return end
+    local freezer = DWAPUtils.resolveLootContainer(square, { freezer = true })
+    -- same-container guard: if OnFillContainer ever does fire for a secondary,
+    -- the block above already handled it and the entry is gone
+    if not freezer or freezer == container then return end
+    DWAPUtils.DeferThrottled(function()
+        fillContainer(freezer, fLoot, fIndex, fKey)
+        ItemPickerJava.updateOverlaySprite(parent)
+    end)
 end
 
 --- Handle Custom Loot Spawns
@@ -582,6 +651,8 @@ local function onFillContainer(roomType, containerType, container)
                 end
             end)
         end
+
+        fillFreezerCompartment(square, x, y, z, container)
     end
 end
 
