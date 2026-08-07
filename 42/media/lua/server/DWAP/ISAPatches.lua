@@ -343,33 +343,16 @@ local function setupISAIntegration()
     patchPowerBankUpdateSprite()
 end
 
+-- Without ISA there is nothing to integrate, and nothing to undo either.
+--
+-- This used to swap our powerbank tile (dwap_tiles_01_0) out for the vanilla
+-- industry_02_175 on every load. The two are visually identical and the custom
+-- tile only means anything to the ISA patch, so with the patch inactive the
+-- swap changed nothing a player could see - it just removed and re-added an
+-- object on every chunk load, and dwap_tiles_01_0 carries a SpriteGrid, so each
+-- one of those removals went down the multi-tile path.
 local function noIntegration()
-    local function LoadDWAPPowerbank(isoObject)
-        -- industry_02_175
-        -- Replace the custom powerbank tile with a standard one
-        DWAPUtils.dprint("DWAP_ISA: Loading DWAP powerbank without ISA integration")
-        local x, y, z = isoObject:getX(), isoObject:getY(), isoObject:getZ()
-        local square = isoObject:getSquare()
-        if not square then
-            DWAPUtils.dprint("DWAP_ISA: LoadDWAPPowerbank no square")
-            return
-        end
-        local index = -1
-        if isoObject then
-            isoObject:getObjectIndex()
-            square:RemoveTileObject(isoObject)
-            square:transmitRemoveItemFromSquare(isoObject)
-        end
-
-        local newObject = IsoObject.getNew(square, "industry_02_175", "industry_02_175", false)
-        if newObject == nil then
-            DWAPUtils.dprint("DWAP_ISA: Failed to create new IsoObject for powerbank replacement")
-            return
-        end
-        square:transmitAddObjectToSquare(newObject, index)
-
-    end
-    MapObjects.OnLoadWithSprite("dwap_tiles_01_0", LoadDWAPPowerbank, 6)
+    DWAPUtils.dprint("DWAP_ISA: ISA inactive - leaving DWAP powerbank tiles as they are")
 end
 
 if (getActivatedMods():contains("\\ISA") and SandboxVars.DWAP.EnableGenSystemSolar) then

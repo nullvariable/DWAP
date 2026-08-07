@@ -203,6 +203,104 @@ end
 -- (SP/debug) flag: a client toggle cannot reach a remote server's copy.
 DWAPUtils.verbosePower = false
 
+-- IsoGridSquare:RemoveTileObject routes through
+-- IsoObjectUtils.safelyRemoveTileObjectFromSquare, which returns -1 and removes
+-- NOTHING when it cannot find every part of a multi-tile object. In -debug it
+-- also warns per attempt, so a caller that keeps retrying such an object buries
+-- the log - 375k lines in a single frame on 2026-08-06 - and takes the evidence
+-- with it. Every DWAP removal goes through here so a refusal names its caller
+-- once, instead of the flood naming nobody.
+local removeRefusals = {}
+
+--- Remove via the unsafe overload, which takes the object out by index and
+--- skips the multi-tile bookkeeping. It returns the index it removed from, or
+--- -1 when the object is on neither the square's objects nor its
+--- specialObjects list - so unlike the pcall this replaces, the return value
+--- actually tells us whether anything happened. That matters: a caller polling
+--- "is it converted yet" will retry forever against a removal that silently
+--- did nothing, which is how one frame reached five figures of log lines.
+--- @return boolean removed
+local function removeByIndex(square, object, tag)
+    local index = square:RemoveTileObject(object, false)
+    if index and index >= 0 then return true end
+    -- -1 also means "already gone", which is the common case rather than a
+    -- fault: in singleplayer square:transmitRemoveItemFromSquare falls through
+    -- to RemoveTileObject itself (!GameServer.server), so a caller that
+    -- transmits before removing has already removed the object by the time it
+    -- gets here. Treat an absent object as removed - it is - and only report
+    -- when it is still sitting on the square.
+    local objects = square:getObjects()
+    local stillThere = false
+    for i = 0, (objects and objects:size() or 0) - 1 do
+        if objects:get(i) == object then
+            stillThere = true
+            break
+        end
+    end
+    if not stillThere then return true end
+    local sprite = object.getSpriteName and object:getSpriteName() or "?"
+    local key = ("%s|%d,%d,%d|%s"):format(tag or "?", square:getX(), square:getY(),
+        square:getZ(), tostring(sprite))
+    if not removeRefusals[key] then
+        removeRefusals[key] = true
+        print(("DWAP: removal failed for %s - still on the square after an index removal"):format(key))
+    end
+    return false
+end
+
+--- @param square IsoGridSquare
+--- @param object IsoObject
+--- @param tag string caller name, for the log line
+--- @param safeOnly boolean never fall back to the unsafe overload - a refusal
+---        leaves the object in place. Prop swaps need this: they clear whole
+---        squares, and forcing those removals destroys converted water
+---        fixtures sharing the tile, which is what left plumbing disconnected
+---        on every base entry/exit (2026-08-07). Conversions pass false, since
+---        they replace the object they remove.
+--- @return boolean removed
+function DWAPUtils.tryRemoveTileObject(square, object, tag, safeOnly)
+    if not square or not object then return false end
+    if safeOnly then
+        local sprite = object.getSpriteName and object:getSpriteName() or "?"
+        local key = ("%s|%d,%d,%d|%s"):format(tag or "?", square:getX(), square:getY(),
+            square:getZ(), tostring(sprite))
+        -- A refusal is stable for a given tile, so record it and stop asking.
+        -- The safe path warns on EVERY attempt, and callers that retry per
+        -- chunk load are what produced 14,466 warnings in a single frame.
+        if removeRefusals[key] then return false end
+        if square:RemoveTileObject(object) ~= -1 then return true end
+        removeRefusals[key] = true
+        DWAPUtils.dprint(("DWAP: multi-tile removal refused for %s - leaving it in place"):format(key))
+        return false
+    end
+    -- Skip the safe path entirely for sprite-grid objects instead of trying it
+    -- and handling the refusal. isObjectMultiSquare is true for anything with a
+    -- SpriteGrid, and safelyRemoveTileObjectFromSquare warns BEFORE it returns
+    -- -1, so "try safe, then fall back" still emits one warning per call. That
+    -- is the flood: 14,466 identical warnings in a single frame (f:2043) on
+    -- 2026-08-07, every one of them from an attempt we already knew would fail.
+    -- Going straight to the unsafe overload is both quieter and correct - see
+    -- the note below on why orphaned siblings are not a risk here.
+    if object.hasSpriteGrid and object:hasSpriteGrid() then
+        return removeByIndex(square, object, tag)
+    end
+    local result = square:RemoveTileObject(object)
+    if result ~= -1 then return true end
+
+    -- Refused. Our own tiles (dwap_tiles_01_1/8/9/24) and several vanilla
+    -- industry sprites carry a SpriteGrid, so isObjectMultiSquare calls them
+    -- multi-square and getAllMultiTileObjects hunts for sibling parts that
+    -- were never placed - the map has a single tile, not the grid. The safe
+    -- path then removes NOTHING and the original survives the conversion,
+    -- leaving a duplicate that gets converted again on every chunk reload.
+    --
+    -- The unsafe overload removes by index and skips that bookkeeping, which
+    -- is exactly right here: there are no siblings to orphan. If there ever
+    -- were, getAllMultiTileObjects would have found them and we would not be
+    -- on this path.
+    return removeByIndex(square, object, tag)
+end
+
 --- Test if a set of coords are in a given table/list
 --- @param coords table{ x = number, y = number, z = number }
 --- @param list table
@@ -228,6 +326,57 @@ function DWAPUtils.areCoordsInList(coords, list)
         end
     end
     return false
+end
+
+--- Whether the per-config solar definitions should be pulled in at all.
+--- Deliberately not cached: it is a handful of calls per load, and a cached
+--- answer would be wrong for anything that reloads configs after the sandbox
+--- is populated.
+local function solarConfigsEnabled()
+    if not getActivatedMods():contains("\\ISA") then return false end
+    return SandboxVars.DWAP and SandboxVars.DWAP.EnableGenSystemSolar and true or false
+end
+
+--- Re-attach a config's solar blocks from DWAP/configs/ISA/<same file name>.
+--- Solar lives in its own file so a session without ISA never require()s it -
+--- no missing-sprite definitions, no dead config data, and the mod's absence
+--- shows up as generators[n].solar simply being nil, which every consumer
+--- already tests for.
+---
+--- Copies down to the generator being touched rather than writing through:
+--- require() caches config tables, so setting .solar on one would leak into
+--- every other consumer for the rest of the session.
+--- @param config table|false
+--- @param file string the main config's require path
+--- @return table|false
+local function withSolar(config, file)
+    if not config or not config.generators or not solarConfigsEnabled() then
+        return config
+    end
+    local ok, solar = pcall(require, (file:gsub("DWAP/configs/", "DWAP/configs/ISA/")))
+    if not ok or type(solar) ~= "table" then
+        DWAPUtils.dprint("No ISA solar config for " .. tostring(file))
+        return config
+    end
+    local generators = {}
+    local attached = 0
+    for i = 1, #config.generators do
+        local gen = config.generators[i]
+        if gen and solar[i] then
+            local copy = {}
+            for k, v in pairs(gen) do copy[k] = v end
+            copy.solar = solar[i]
+            generators[i] = copy
+            attached = attached + 1
+        else
+            generators[i] = gen
+        end
+    end
+    if attached == 0 then return config end
+    local out = {}
+    for k, v in pairs(config) do out[k] = v end
+    out.generators = generators
+    return out
 end
 
 function DWAPUtils.loadConfigs(noCache)
@@ -262,6 +411,7 @@ function DWAPUtils.loadConfigs(noCache)
                     stripped.loot = nil
                     config = stripped
                 end
+                config = withSolar(config, file)
                 DWAPUtils.dprint("Loaded config: " .. file)
             end
             -- false placeholders keep configs[i] aligned with safehouse numbering
@@ -272,6 +422,7 @@ function DWAPUtils.loadConfigs(noCache)
         local file = configFilesToUse[index]
         local config = file and require(file)
         if config then
+            config = withSolar(config, file)
             table.insert(configs, config)
             DWAPUtils.dprint("Loaded config: " .. configFilesToUse[index])
         else
@@ -687,7 +838,27 @@ end
 --- wall containers via ordering fallbacks (see resolveLootContainer)
 local function isHighContainer(object, container)
     if container:getType() == "overhead" then return true end
-    if container:getContainerPosition() == "High" then return true end
+    local pos = container:getContainerPosition()
+    if not pos then
+        -- getContainerPosition is NOT save-persistent: ItemContainer never
+        -- serialises containerPosition, and IsoObject.addToWorld ->
+        -- createContainersFromSpriteProperties early-returns once container
+        -- is non-nil, so an object restored from a saved chunk keeps its
+        -- items but loses its position. Same square reads High on a freshly
+        -- generated chunk and nil on a revisit, which is how identical
+        -- entries passed in one session and failed in the next (config 39's
+        -- picked shelves). The tile property comes from the tile defs, not
+        -- the save, so it is stable - only trust it for single-container
+        -- objects, since a fridge's ContainerPosition says nothing about its
+        -- secondary freezer compartment.
+        local count = object.getContainerCount and object:getContainerCount() or 1
+        if count <= 1 then
+            local sprite = object.getSprite and object:getSprite()
+            local props = sprite and sprite:getProperties()
+            pos = props and props:get("ContainerPosition")
+        end
+    end
+    if pos == "High" then return true end
     local yoff = object.getRenderYOffset and object:getRenderYOffset()
     if yoff and yoff > 32 then return true end
     return false
@@ -773,7 +944,16 @@ function DWAPUtils.resolveLootContainer(square, opts)
             fallback = fallback or list[i].container
         end
     end
-    return fallback
+    if fallback then return fallback end
+    -- Nothing but wall-mounted containers here. A base entry on such a
+    -- square has exactly one thing it can mean, so take the lone high
+    -- container rather than failing: hand-authored entries predate the
+    -- slot convention, and isHighContainer can legitimately flip between
+    -- sessions (see the save-persistence note there). An upper entry
+    -- sharing the square already claimed its container above, so this
+    -- cannot steal one out from under a base+upper pair.
+    if #list == 1 then return list[1].container end
+    return nil
 end
 
 function DWAPUtils.tableSize(tbl)

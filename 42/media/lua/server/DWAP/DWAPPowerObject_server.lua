@@ -49,7 +49,7 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
 
     local removeSuccess = pcall(function()
         square:transmitRemoveItemFromSquare(isoObject)
-        square:RemoveTileObject(isoObject)
+        DWAPUtils.tryRemoveTileObject(square, isoObject, "generator convert")
     end)
     if not removeSuccess then
         -- the sprite is invisible anyway, so doesn't break anything, just a hygiene thing.

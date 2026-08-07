@@ -197,7 +197,7 @@ function DWAPPowerSystem:maybeConfigureFuelTank(isoObject)
 
     square:AddTileObject(thumpable)
     square:transmitRemoveItemFromSquare(isoObject)
-    square:RemoveTileObject(isoObject)
+    DWAPUtils.tryRemoveTileObject(square, isoObject, "fuel tank convert")
     square:transmitAddObjectToSquare(thumpable, index)
 
     self:chatter("Fuel tank for generator " .. genIndex .. " configured at " .. x .. "," .. y .. "," .. z)
