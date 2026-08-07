@@ -5,7 +5,7 @@ local configs = {
     [1] = {
         name = "Doe Valley Bunker Map",
         stamps = {
-            {"Asterisk", nil, 5577, 9376, 255, 0, 0},
+            {"Asterisk", nil, 5577, 9376, 1, 0, 0},
         },
         buildingX = 5577,
         buildingY = 9372,
@@ -31,11 +31,13 @@ local configs = {
         stamps = {
             {"Asterisk", nil, 9947, 12616, 0, 0, 0},
         },
+        buildingX = 9925,
+        buildingY = 12625,
     },
     [5] = {
         name = "Muldraugh Safehouse Map",
         stamps = {
-            {"Asterisk", nil, 10660, 9567, 0, 0, 0},
+            {"Asterisk", nil, 10709, 9551, 0.50, 0.50, 0.0, 0.000, 0.000, 0.000},
         },
         buildingX = 10669,
         buildingY = 9562,
@@ -43,7 +45,7 @@ local configs = {
     [6] = {
         name = "Riverside Safehouse Map",
         stamps = {
-            {"Asterisk", nil, 6953, 5565, 0, 0, 0},
+            {"Asterisk", nil, 6964, 5583, 0.50, 0.50, 0.0, 0.000, 0.000, 0.000},
         },
         buildingX = 6962,
         buildingY = 5564,
@@ -172,7 +174,7 @@ local configs = {
     [21] = {
         name = "Ekron Factory Map",
         stamps = {
-            {"Asterisk", nil, 565, 9374, 255, 255, 255},
+            {"Asterisk", nil, 565, 9374, 1, 1, 1},
         },
         buildingX = 565,
         buildingY = 9374,
@@ -343,7 +345,7 @@ local configs = {
         name = "Louisville Townhouse Map",
         stamps = {
             {"Asterisk", nil, 12832, 1619, 0, 0, 0},
-            -- {nil, "Stash_DWAP_42_text1", 12688, 1496, 255, 255, 255},
+            -- {nil, "Stash_DWAP_42_text1", 12688, 1496, 1, 1, 1},
         },
         buildingX = 12832,
         buildingY = 1619,
@@ -381,13 +383,31 @@ end
 for i = 1, #configs do
     local config = configs[i]
     local DWAPStashMap = StashUtil.newStash("DWAPStashMap" .. i, "Map", "Base.RosewoodMap", "Stash_AnnotedMap");
+    -- hoisted out of the stamp loop: it does not vary per stamp, and a config
+    -- with a building but no stamps would otherwise never get one
+    if config.buildingX and config.buildingY then
+        DWAPStashMap.buildingX = config.buildingX
+        DWAPStashMap.buildingY = config.buildingY
+    end
     for j = 1, #config.stamps do
         local stamp = config.stamps[j]
-        if config.buildingX and config.buildingY then
-            DWAPStashMap.buildingX = config.buildingX
-            DWAPStashMap.buildingY = config.buildingY
+        -- addStampV2 inserts anchorX, anchorY and rotation BEFORE the colours,
+        -- so a 7-element row cannot simply be extended - the values would land
+        -- in the wrong parameters. Switch on length instead, which lets a new
+        -- stamp opt into V2 without rewriting the 72 that do not need it.
+        -- Colours are 0..1 floats in both: StashSystem passes r/g/b straight
+        -- into addTexture alongside a literal 1.0 alpha.
+        if #stamp >= 10 then
+            -- called through StashUtil rather than as a method: newStash only
+            -- attaches addStamp and addContainer to the instance, so
+            -- DWAPStashMap:addStampV2 is nil even though StashUtil defines it.
+            -- Passing the stash as self does the same job without depending on
+            -- vanilla wiring it up later.
+            StashUtil.addStampV2(DWAPStashMap, stamp[1], stamp[2], stamp[3], stamp[4],
+                stamp[5], stamp[6], stamp[7], stamp[8], stamp[9], stamp[10])
+        else
+            DWAPStashMap:addStamp(stamp[1], stamp[2], stamp[3], stamp[4], stamp[5], stamp[6], stamp[7])
         end
-        DWAPStashMap:addStamp(stamp[1], stamp[2], stamp[3], stamp[4], stamp[5], stamp[6], stamp[7])
     end
     DWAPStashMap.customName = config.name
     DWAPStashMap.minDayToSpawn = 100
