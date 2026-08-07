@@ -1739,7 +1739,13 @@ local function allLootStop(summary)
     if summary then allLootWrite(summary) end
     if allLootState.writer then allLootState.writer:close() end
     Events.OnTick.Remove(allLootTick)
+    -- hand auto-lights back exactly as we found it (see DWAPAudit)
+    local restore = allLootState.autoLightsWasOn
     allLootState = nil
+    if restore and DoAutoLights and not DWAP_AutoLightsEnabled then
+        DoAutoLights()
+        DWAPUtils.dprint("Loot audit: auto-lights restored")
+    end
     DWAPUtils.dprint("Loot audit report: Zomboid/Lua/DWAP_loot_audit.txt")
 end
 
@@ -2096,7 +2102,25 @@ function DWAPAudit(startIndex, fillThreshold, checkSystems)
     end
     -- resuming mid-list appends to the existing report instead of truncating it
     local resuming = (startIndex or 1) > 1
+    -- Auto-lights is a travel convenience and actively hostile to an audit.
+    -- Its watcher runs every tick, walks the WHOLE cell room list, and
+    -- re-asserts lights on any switch-count change - and the per-building
+    -- pass budget resets on every teleport, so each config hands it a fresh
+    -- one while chunks are still streaming in. On a big base that is a full
+    -- room walk plus a switch sweep per tick, competing with the audit's own
+    -- settle loop for the same streaming window (it flooded config 04 on
+    -- 2026-08-07). The one clean 42-config run so far was a session with it
+    -- off. Own it for the duration and restore it in allLootStop.
+    -- Toggle through DoAutoLights rather than clearing the flag: the flag only
+    -- gates the settle watcher, while the building-change tick that STARTS it
+    -- lives in _test.lua and is removed by the toggle alone.
+    local autoLightsWasOn = DWAP_AutoLightsEnabled and true or false
+    if autoLightsWasOn and DoAutoLights then
+        DoAutoLights()
+        DWAPUtils.dprint("Loot audit: auto-lights suspended for the run")
+    end
     allLootState = {
+        autoLightsWasOn = autoLightsWasOn,
         configs = configs,
         index = startIndex or 1,
         phase = "teleport",
