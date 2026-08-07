@@ -44,6 +44,28 @@ local function onLoadWithSprite(isoObject)
     pcall(function()
         DWAPWaterSystem.instance:loadIsoObject(isoObject)
     end)
+    -- Re-attaching is not re-connecting. IsoObject.externalWaterSource is a
+    -- runtime field with no mod data behind it, so a converted fixture comes
+    -- back from a chunk reload piped to nothing: leaving a base and walking in
+    -- again left every fixture dry (config 03 on 2026-08-07, after arriving
+    -- from config 01 where they had connected fine). ensureFixtureConnected
+    -- no-ops when the source is already live, so this is cheap on the common
+    -- path and handles the tank-not-back-yet case the same way a fresh
+    -- conversion does.
+    local hashed = hashCoords(isoObject:getX(), isoObject:getY(), isoObject:getZ())
+    local objectData = hashedObjects[hashed]
+    if not objectData then return end
+    if objectData.type == "fixture" and objectData.source then
+        local modData = isoObject:getModData()
+        DWAPWaterObject.ensureFixtureConnected(isoObject,
+            modData.connection or objectData.source, objectData,
+            DWAPWaterSystem.instance, "reconnected on chunk reload")
+    elseif objectData.type == "tank" then
+        -- the reloaded tank releases anything that parked against it; without
+        -- this a fixture that loads first waits on a tank that never announces
+        -- itself, because only onNewTankObject flushes
+        DWAPWaterObject.onLoadTankObject(isoObject, objectData, DWAPWaterSystem.instance)
+    end
 end
 
 Events.OnInitGlobalModData.Add(function()
