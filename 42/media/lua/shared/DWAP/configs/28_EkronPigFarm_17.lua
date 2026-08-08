@@ -71,13 +71,11 @@ local EkronPigFarm = {
     },
     loot = {
         { -- E1
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -87,13 +85,11 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -102,7 +98,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -110,7 +105,6 @@ local EkronPigFarm = {
             level = "Loot_MedLevel",
         },
         { -- E6
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
@@ -120,7 +114,6 @@ local EkronPigFarm = {
             level = "Loot_FishLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -128,7 +121,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -136,42 +128,35 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -179,7 +164,6 @@ local EkronPigFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -187,7 +171,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -195,7 +178,6 @@ local EkronPigFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -203,7 +185,6 @@ local EkronPigFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -211,7 +192,6 @@ local EkronPigFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=105,y=8953,z=-1},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -219,7 +199,6 @@ local EkronPigFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=105,y=8954,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -227,7 +206,6 @@ local EkronPigFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=105,y=8955,z=-1},
             dist = {"GigamartBreakfast","GigamartCandy","Homesteading","CrateLiquor",},
             distIncludeJunk = false,
@@ -235,7 +213,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=105,y=8956,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -244,7 +221,6 @@ local EkronPigFarm = {
         },
         -- warehouse room
         { -- E24
-            type = 'container',
             coords = {x=107,y=8954,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -252,7 +228,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=107,y=8953,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -260,7 +235,6 @@ local EkronPigFarm = {
             level = "Loot_GunLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=107,y=8952,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -269,7 +243,7 @@ local EkronPigFarm = {
         },
         -- E27
         { --cardboard box
-            type = 'container',
+            
             coords = {x=109,y=8955,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -278,7 +252,7 @@ local EkronPigFarm = {
         },
         -- E28
         { --cardboard box
-            type = 'container',
+            
             coords = {x=109,y=8954,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -287,7 +261,7 @@ local EkronPigFarm = {
         },
         -- E29
         { --cardboard box
-            type = 'container',
+            
             coords = {x=110,y=8954,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -295,7 +269,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=109,y=8951,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -305,7 +278,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=109,y=8950,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -315,7 +287,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=109,y=8949,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -325,7 +296,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=109,y=8948,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -336,7 +306,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=111,y=8951,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -344,7 +313,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=111,y=8950,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -352,7 +320,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=111,y=8949,z=-1},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -360,7 +327,6 @@ local EkronPigFarm = {
             level = "Loot_FishLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=111,y=8948,z=-1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -368,7 +334,6 @@ local EkronPigFarm = {
             level = "Loot_GunLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=113,y=8951,z=-1},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -376,7 +341,6 @@ local EkronPigFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=113,y=8950,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -384,7 +348,6 @@ local EkronPigFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=113,y=8949,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -392,7 +355,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=113,y=8948,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -400,7 +362,6 @@ local EkronPigFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=115,y=8953,z=-1},
             dist = {"MedicalStorageDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -408,7 +369,6 @@ local EkronPigFarm = {
             level = "Loot_MedLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=115,y=8952,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -416,7 +376,6 @@ local EkronPigFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=115,y=8951,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -424,7 +383,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=115,y=8950,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -432,7 +390,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=115,y=8949,z=-1},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
             distIncludeJunk = true,
@@ -440,7 +397,6 @@ local EkronPigFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=115,y=8948,z=-1},
             dist = {"CrateCarpentry","LoggingFactoryTools"},
             distIncludeJunk = true,
@@ -449,7 +405,6 @@ local EkronPigFarm = {
         },
         -- crates in the corner
         { -- E48
-            type = 'container',
             coords = {x=114,y=8956,z=-1},
             dist = {"SafehouseBooze"},
             distIncludeJunk = false,
@@ -457,7 +412,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=115,y=8956,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -465,7 +419,6 @@ local EkronPigFarm = {
             level = "Loot_GunLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=116,y=8956,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -473,7 +426,6 @@ local EkronPigFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=116,y=8955,z=-1},
             dist = {"SafehouseFireplace", "SafehouseLighting", },
             distIncludeJunk = false,
@@ -482,7 +434,6 @@ local EkronPigFarm = {
         },
         -- freezer
         { -- E52
-            type = 'container',
             coords = {x=115,y=8944,z=-1},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
@@ -490,7 +441,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=116,y=8944,z=-1},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
@@ -502,13 +452,11 @@ local EkronPigFarm = {
         ------------------
         -- kitchen
         { -- E54
-            type = 'container',
             coords = {x=97,y=8959,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=96,y=8962,z=0},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {30,30} },
@@ -517,7 +465,6 @@ local EkronPigFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=99,y=8959,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -526,7 +473,6 @@ local EkronPigFarm = {
         },
         -- office
         { -- E57
-            type = 'container',
             coords = {x=103,y=8962,z=0},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -534,7 +480,6 @@ local EkronPigFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=103,y=8960,z=0},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -542,7 +487,6 @@ local EkronPigFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E59
-            type = 'container',
             coords = {x=103,y=8959,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -550,7 +494,6 @@ local EkronPigFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=103,y=8957,z=0},
             dist = {"ArmyStorageElectronics" },
             distIncludeJunk = false,
@@ -559,7 +502,6 @@ local EkronPigFarm = {
         },
         -- hallway
         { -- E61
-            type = 'container',
             coords = {x=98,y=8952,z=0},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
@@ -567,7 +509,6 @@ local EkronPigFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E62
-            type = 'container',
             coords = {x=99,y=8952,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -577,7 +518,6 @@ local EkronPigFarm = {
         -- 2nd floor
         -- bathroom
         { -- E63
-            type = 'container',
             coords = {x=103,y=8955,z=1},
             dist = {"CrateToiletPaper", "CrateLinens","GasStoreToiletries"},
             distIncludeJunk = true,
@@ -586,7 +526,6 @@ local EkronPigFarm = {
         },
         -- master bedroom
         { -- E64
-            type = 'container',
             coords = {x=102,y=8962,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", },
             distIncludeJunk = true,
@@ -594,7 +533,6 @@ local EkronPigFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E65
-            type = 'container',
             coords = {x=99,y=8962,z=1},
             dist = { "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -602,7 +540,6 @@ local EkronPigFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=99,y=8959,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",

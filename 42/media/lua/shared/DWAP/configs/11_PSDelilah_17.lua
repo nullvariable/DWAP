@@ -73,12 +73,10 @@ local PSDelilah = {
     loot = {
         -- command deck
         { -- E1
-            type = 'container',
             coords = {x = 2040, y = 5684, z = 2},
             special = "essentials",
         },
         { -- E2
-            type = 'container',
             coords = {x=2035,y=5684,z=2},
             dist = {"KitchenDryFood"},
             distIncludeJunk = false,
@@ -86,7 +84,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=2037,y=5684,z=2},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
@@ -94,7 +91,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=2037,y=5684,z=2},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -103,7 +99,6 @@ local PSDelilah = {
             level = "Loot_FishLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=2036,y=5684,z=2},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
@@ -111,21 +106,18 @@ local PSDelilah = {
             level = "Loot_GunLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=2035,y=5687,z=2},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E7
-            type = 'container',
             coords = {x=2035,y=5689,z=2},
             dist = {"MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        {-- E8 change this to a firewood and starters container and put the tools elsewhere
-            type = 'container',
+        { -- E8 change this to a firewood and starters container and put the tools elsewhere
             coords = {x=2038,y=5684,z=2},
             slot = "upper",
             items = {
@@ -135,7 +127,6 @@ local PSDelilah = {
             level = "Loot_FarmLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=2035,y=5692,z=2},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -143,7 +134,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=2039,y=5684,z=2},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -151,7 +141,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=2040,y=5687,z=2},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -159,7 +148,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=2039,y=5684,z=2},
             slot = "upper",
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -168,7 +156,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=2039,y=5685,z=2},
             dist = {"CampingStoreLighting"},
             distIncludeJunk = false,
@@ -176,7 +163,6 @@ local PSDelilah = {
             level = "Loot_FarmLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=2040,y=5685,z=2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -184,7 +170,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=2039,y=5687,z=2},
             dist = {"CrateVHSTapes", "MusicStoreCDs", "StoreCounterTobacco"},
             distIncludeJunk = false,
@@ -192,7 +177,6 @@ local PSDelilah = {
             level = "Loot_MediaLevel",
         },
         { -- E16 @TODO change
-            type = 'container',
             coords = {x=2041,y=5687,z=2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateFishing"},
             distIncludeJunk = true,
@@ -200,7 +184,6 @@ local PSDelilah = {
             level = "Loot_GunLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x = 2035, y = 5688, z = 2},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -208,31 +191,26 @@ local PSDelilah = {
             level = "Loot_GunLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=2039,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E19
-            type = 'container',
             coords = {x=2040,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E20
-            type = 'container',
             coords = {x=2041,y=5689,z=2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E21
-            type = 'container',
             coords = {x = 2035, y = 5686, z = 2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E22
-            type = 'container',
             coords = {x = 2035, y = 5685, z = 2},
             dist = {"SurvivalGear", "LaundryCleaning", "LaundryLoad1", "CrateLeather", "SewingStoreFabric",},
             distIncludeJunk = false,
@@ -242,7 +220,6 @@ local PSDelilah = {
 
         -- middle deck bar area (z=1)
         { -- E23
-            type = 'container',
             coords = {x=2044,y=5689,z=1},
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
             distIncludeJunk = true,
@@ -250,7 +227,6 @@ local PSDelilah = {
             level = "Loot_GunLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=2044,y=5690,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -258,7 +234,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=2044,y=5691,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -266,7 +241,6 @@ local PSDelilah = {
             level = "Loot_LockersLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=2044,y=5693,z=1},
             dist = {"CrateTortillaChips", "StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = false,
@@ -274,7 +248,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=2042,y=5690,z=1},
             dist = {"CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
@@ -282,7 +255,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=2042,y=5691,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -290,7 +262,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=2042,y=5692,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -298,7 +269,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=2044,y=5692,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
@@ -306,7 +276,6 @@ local PSDelilah = {
 
         -- main deck (mostly kitchen) (z=0)
         { -- E31
-            type = 'container',
             coords = {x=2061,y=5684,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -314,13 +283,11 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=2061,y=5685,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=2061,y=5686,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -328,7 +295,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=2061,y=5687,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -336,7 +302,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=2046,y=5692,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -350,7 +315,6 @@ local PSDelilah = {
 
         -- ticket office
         { -- E36
-            type = 'container',
             coords = {x=2043,y=5710,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -358,7 +322,6 @@ local PSDelilah = {
             level = "Loot_MediaLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=2044,y=5710,z=0},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -366,7 +329,6 @@ local PSDelilah = {
             level = 2,
         },
         { -- E38
-            type = 'container',
             coords = {x=2044,y=5709,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -376,7 +338,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=2044,y=5708,z=0},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -384,7 +345,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=2044,y=5707,z=0},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -394,7 +354,6 @@ local PSDelilah = {
 
         -- below decks (z=-1)
         { -- E41
-            type = 'container',
             coords = {x=2036,y=5689,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -402,7 +361,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=2036,y=5688,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -410,7 +368,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=2036,y=5687,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -418,7 +375,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=2042,y=5692,z=-1},
             slot = "upper",
             dist = {"SewingStoreTools"},
@@ -427,7 +383,6 @@ local PSDelilah = {
             level = "Loot_TailorLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=2042,y=5684,z=-1},
             slot = "upper",
             dist = {"CrateToiletPaper", "CrateLinens", "GasStoreToiletries"},
@@ -436,7 +391,6 @@ local PSDelilah = {
             level = "Loot_LockersLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=2037,y=5685,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
@@ -444,7 +398,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=2038,y=5685,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = false,
@@ -452,7 +405,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=2039,y=5685,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -460,7 +412,6 @@ local PSDelilah = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=2044,y=5692,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -468,7 +419,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=2043,y=5692,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -476,7 +426,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=2032,y=5686,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -484,15 +433,13 @@ local PSDelilah = {
             level = "Loot_LockersLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=2033,y=5686,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        {-- E53 two stack now, move guns to mil locker
-            type = 'container',
+        { -- E53 two stack now, move guns to mil locker
             coords = {x=2034,y=5686,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -500,13 +447,11 @@ local PSDelilah = {
             level = "Loot_GunLevel",
         },
         { -- E54 mil locker
-            type = 'container',
             coords = {x=2033,y=5690,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=2034,y=5690,z=-1},
             dist = {"CrateBlacksmithing", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = true,
@@ -514,7 +459,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=2034,y=5689,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -522,7 +466,6 @@ local PSDelilah = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=2036,y=5690,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "BurglarTools", "CarpenterTools", "BarnTools","CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -530,7 +473,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E58 @TODO duplicate coords with entry 41
-            type = 'container',
             coords = {x=2036,y=5689,z=-1},
             dist = {"CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
@@ -538,7 +480,6 @@ local PSDelilah = {
             level = "Loot_ToolsLevel",
         },
         { -- E59 medicine cabinet
-            type = 'container',
             coords = {x=2036,y=5686,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter"},

@@ -53,13 +53,11 @@ local HuntingCabin = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -69,13 +67,11 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
@@ -85,7 +81,6 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E5 lower (67)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -94,7 +89,6 @@ local HuntingCabin = {
             level = "Loot_MedLevel",
         },
         { -- E6 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
@@ -104,7 +98,6 @@ local HuntingCabin = {
             level = "Loot_FishLevel",
         },
         { -- E7 lower (68)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools"},
@@ -113,7 +106,6 @@ local HuntingCabin = {
             level = "Loot_TailorLevel",
         },
         { -- E8 metal shelves (70)
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -122,36 +114,30 @@ local HuntingCabin = {
             level = "Loot_FarmLevel",
         },
         { -- E9 metal shelves (71)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10 next to inner door (9372)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11 (73)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12 (9374)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13 far end next to stairs (9375)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -159,13 +145,11 @@ local HuntingCabin = {
             level = "Loot_MediaLevel",
         },
         { -- E15 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -173,7 +157,6 @@ local HuntingCabin = {
             level = "Loot_FarmLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -181,7 +164,6 @@ local HuntingCabin = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -189,7 +171,6 @@ local HuntingCabin = {
             level = "Loot_LockersLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=12716,y=8742,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -197,7 +178,6 @@ local HuntingCabin = {
             level = "Loot_FarmLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=12719,y=8742,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -208,7 +188,6 @@ local HuntingCabin = {
         --- Main Floor ---
         ------------------
         { -- E21 wood pile
-            type = 'container',
             coords = {x=12718,y=8754,z=0},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {30,30} },
@@ -218,7 +197,6 @@ local HuntingCabin = {
         },
         -- kitchen
         { -- E22
-            type = 'container',
             coords = {x=12716,y=8749,z=0},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -226,7 +204,6 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=12713,y=8746,z=0},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
@@ -234,7 +211,6 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=12713,y=8745,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -242,13 +218,11 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=12715,y=8745,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=12716,y=8745,z=0},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -257,7 +231,6 @@ local HuntingCabin = {
         },
         -- living room
         { -- E27
-            type = 'container',
             coords = {x=12723,y=8753,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -265,7 +238,6 @@ local HuntingCabin = {
             level = "Loot_MediaLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=12720,y=8753,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "LivingRoomShelfClassy", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -273,7 +245,6 @@ local HuntingCabin = {
             level = "Loot_MediaLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=12718,y=8750,z=0},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -281,7 +252,6 @@ local HuntingCabin = {
             level = "Loot_LockersLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=12718,y=8749,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -290,7 +260,6 @@ local HuntingCabin = {
         },
         -- office/workroom
         { -- E31
-            type = 'container',
             coords = {x=12714,y=8753,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -299,7 +268,6 @@ local HuntingCabin = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=12713,y=8753,z=0},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -307,7 +275,6 @@ local HuntingCabin = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=12713,y=8752,z=0},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -315,7 +282,6 @@ local HuntingCabin = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=12713,y=8750,z=0},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -323,7 +289,6 @@ local HuntingCabin = {
             level = "Loot_GunLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=12714,y=8750,z=0},
             dist = {"MeleeWeapons", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -335,7 +300,6 @@ local HuntingCabin = {
         -----------------
         -- bathroom
         { -- E36
-            type = 'container',
             coords = {x=12717,y=8751,z=1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -343,7 +307,6 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=12717,y=8751,z=1},
             slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter", "GasStoreToiletries"},
@@ -352,7 +315,6 @@ local HuntingCabin = {
             level = "Loot_LockersLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=12716,y=8751,z=1},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
@@ -361,7 +323,6 @@ local HuntingCabin = {
         },
         -- bunk bed bedroom
         { -- E39
-            type = 'container',
             coords = {x=12713,y=8749,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -369,7 +330,6 @@ local HuntingCabin = {
             level = "Loot_LockersLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=12713,y=8748,z=1},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -378,7 +338,6 @@ local HuntingCabin = {
         },
         -- main bedroom
         { -- E41
-            type = 'container',
             coords = {x=12720,y=8751,z=1},
             dist = {"TheatrePopcorn", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -386,7 +345,6 @@ local HuntingCabin = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=12722,y=8747,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -394,13 +352,11 @@ local HuntingCabin = {
             level = "Loot_LockersLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=12723,y=8747,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=12723,y=8751,z=1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,

@@ -92,7 +92,6 @@ local LVilleMansion = {
     loot = {
         -- garage
         { -- E1
-            type = 'container',
             coords = { x = 12026, y = 2596, z = 0 },
             slot = "upper",
             dist = { "GasStoreEmergency", "StoreCounterTobacco" },
@@ -102,13 +101,11 @@ local LVilleMansion = {
         },
         -- office
         { -- E2
-            type = 'container',
             coords = { x = 12018, y = 2587, z = 0 },
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E3
-            type = 'container',
             coords = { x = 12021, y = 2587, z = 0 },
             dist = { "CafeteriaSnacks" },
             distIncludeJunk = true,
@@ -117,7 +114,6 @@ local LVilleMansion = {
         },
         -- living room
         { -- E4
-            type = 'container',
             coords = { x = 12023, y = 2600, z = 0 },
             dist = { "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
             distIncludeJunk = false,
@@ -125,7 +121,6 @@ local LVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E5
-            type = 'container',
             coords = { x = 12019, y = 2597, z = 0 },
             items = {
                 { name = 'Base.Remote',     chance = 1,   count = { 1, 3 } },
@@ -139,7 +134,6 @@ local LVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E6
-            type = 'container',
             coords = { x = 12018, y = 2593, z = 0 },
             dist = { "LaundryCleaning", "JanitorCleaning", "CrateLinens" },
             distIncludeJunk = false,
@@ -147,7 +141,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = { x = 12019, y = 2593, z = 0 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -155,7 +148,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E8 front door closet
-            type = 'container',
             coords = { x = 12029, y = 2591, z = 0 },
             slot = "upper",
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
@@ -165,7 +157,6 @@ local LVilleMansion = {
         },
         -- kitchen
         { -- E9
-            type = 'container',
             slot = "freezer",
             coords = { x = 12028, y = 2590, z = 0 },
             dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
@@ -174,7 +165,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E10
-            type = 'container',
             coords = { x = 12028, y = 2590, z = 0 },
             dist = { "BakeryKitchenFridge", "BurgerKitchenFridge", "CafeteriaKitchenFridge" },
             distIncludeJunk = true,
@@ -182,13 +172,11 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E11
-            type = 'container',
             coords = { x = 12027, y = 2587, z = 0 },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E12
-            type = 'container',
             coords = { x = 12029, y = 2587, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -196,7 +184,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E13
-            type = 'container',
             coords = { x = 12029, y = 2588, z = 0 },
             dist = { "GroceryBagGourmet", },
             distIncludeJunk = false,
@@ -204,7 +191,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E14
-            type = 'container',
             coords = { x = 12029, y = 2589, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -212,7 +198,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E15
-            type = 'container',
             coords = { x = 12029, y = 2590, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -221,7 +206,6 @@ local LVilleMansion = {
         },
         -- 2nd floor
         { -- E16 mb
-            type = 'container',
             coords = { x = 12018, y = 2588, z = 1 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -229,7 +213,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E17 mb
-            type = 'container',
             coords = { x = 12018, y = 2587, z = 1 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -237,7 +220,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E18 mb bath
-            type = 'container',
             coords = { x = 12028, y = 2590, z = 1 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
@@ -245,7 +227,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E19 mb bath
-            type = 'container',
             coords = { x = 12029, y = 2590, z = 1 },
             dist = { "BathroomCounter", "MedicalStorageDrugs" },
             distIncludeJunk = true,
@@ -253,7 +234,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E20
-            type = 'container',
             coords = { x = 12024, y = 2591, z = 1 },
             slot = "upper",
             dist = { "ArmyStorageAmmunition", },
@@ -262,7 +242,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E21 w bed
-            type = 'container',
             coords = { x = 12018, y = 2597, z = 1 },
             dist = { "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
             distIncludeJunk = false,
@@ -270,7 +249,6 @@ local LVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E22
-            type = 'container',
             coords = { x = 12018, y = 2595, z = 1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -278,7 +256,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E23
-            type = 'container',
             coords = { x = 12019, y = 2595, z = 1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -286,7 +263,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E24
-            type = 'container',
             coords = { x = 12023, y = 2600, z = 1 },
             slot = "upper",
             dist = { "ArmyStorageAmmunition", },
@@ -295,7 +271,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E25
-            type = 'container',
             coords = { x = 12023, y = 2597, z = 1 },
             dist = { "SafehouseMedical_Late", },
             distIncludeJunk = true,
@@ -303,7 +278,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E26
-            type = 'container',
             coords = { x = 12023, y = 2596, z = 1 },
             dist = { "DerelictHouseCrime", },
             distIncludeJunk = true,
@@ -311,7 +285,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E27
-            type = 'container',
             coords = { x = 12026, y = 2595, z = 1 },
             slot = "upper",
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -320,7 +293,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E28
-            type = 'container',
             coords = { x = 12024, y = 2599, z = 1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -328,7 +300,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E29
-            type = 'container',
             coords = { x = 12029, y = 2591, z = 1 },
             slot = "upper",
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
@@ -339,7 +310,6 @@ local LVilleMansion = {
 
         -- garage
         { -- E30
-            type = 'container',
             coords = { x = 12039, y = 2580, z = 0 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
@@ -347,7 +317,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E31
-            type = 'container',
             coords = { x = 12040, y = 2580, z = 0 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
@@ -355,7 +324,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E32
-            type = 'container',
             coords = { x = 12041, y = 2580, z = 0 },
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -365,7 +333,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E33
-            type = 'container',
             coords = { x = 12042, y = 2580, z = 0 },
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -375,7 +342,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E34
-            type = 'container',
             coords = { x = 12037, y = 2577, z = 0 },
             items = {
                 { name = 'Base.NailsBox', },
@@ -385,7 +351,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E35
-            type = 'container',
             coords = { x = 12038, y = 2577, z = 0 },
             dist = { "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
             distIncludeJunk = true,
@@ -393,7 +358,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E36
-            type = 'container',
             coords = { x = 12039, y = 2577, z = 0 },
             dist = { "GasStoreEmergency" },
             distIncludeJunk = true,
@@ -401,7 +365,6 @@ local LVilleMansion = {
             level = 2,
         },
         { -- E37
-            type = 'container',
             coords = { x = 12040, y = 2577, z = 0 },
             dist = { "StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles", "CandyStoreSnacks", "CrateTortillaChips" },
             distIncludeJunk = true,
@@ -409,7 +372,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E38
-            type = 'container',
             coords = { x = 12041, y = 2577, z = 0 },
             dist = { "CrateLumber", "CrateSheetMetal" },
             distIncludeJunk = true,
@@ -417,7 +379,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E39
-            type = 'container',
             coords = { x = 12042, y = 2577, z = 0 },
             dist = { "WeldingWorkshopMetal" },
             distIncludeJunk = true,
@@ -425,7 +386,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E40
-            type = 'container',
             coords = { x = 12047, y = 2580, z = 0 },
             dist = { "CarSupplyTools", "GasStorageMechanics", },
             distIncludeJunk = true,
@@ -433,7 +393,6 @@ local LVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E41
-            type = 'container',
             coords = { x = 12048, y = 2580, z = 0 },
             dist = { "CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -441,7 +400,6 @@ local LVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E42
-            type = 'container',
             coords = { x = 12049, y = 2580, z = 0 },
             dist = { "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -449,7 +407,6 @@ local LVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E43
-            type = 'container',
             coords = { x = 12050, y = 2580, z = 0 },
             dist = { "CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -457,7 +414,6 @@ local LVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E44
-            type = 'container',
             coords = { x = 12044, y = 2577, z = 0 },
             dist = { "CrateCannedFood", "ArmySurplusTools", "CrateToiletPaper" },
             distIncludeJunk = true,
@@ -466,7 +422,6 @@ local LVilleMansion = {
         },
         -- storage room south west
         { -- E45
-            type = 'container',
             stack = 1,
             coords = { x = 12026, y = 2599, z = -1 },
             dist = { "CrateTortillaChips", "CrateCannedFood", "KitchenCannedFood" },
@@ -475,7 +430,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             stack = 2,
             coords = { x = 12026, y = 2599, z = -1 },
             dist = { "CrateTortillaChips", "CrateCannedFood", "KitchenCannedFood" },
@@ -484,7 +438,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E47
-            type = 'container',
             stack = 1,
             coords = { x = 12026, y = 2598, z = -1 },
             dist = { "GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -493,7 +446,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E48
-            type = 'container',
             stack = 2,
             coords = { x = 12026, y = 2598, z = -1 },
             dist = { "GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -502,7 +454,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             stack = 1,
             coords = { x = 12026, y = 2597, z = -1 },
             dist = { "ButcherSpices", "GigamartSpices", "GigamartDryGoods", },
@@ -511,7 +462,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E50
-            type = 'container',
             stack = 2,
             coords = { x = 12026, y = 2597, z = -1 },
             dist = { "ButcherSpices", "GigamartSpices", "GigamartDryGoods", },
@@ -520,7 +470,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E51
-            type = 'container',
             stack = 1,
             coords = { x = 12026, y = 2596, z = -1 },
             dist = { "GigamartBreakfast", "GigamartCandy", "Homesteading", "CrateLiquor", },
@@ -529,7 +478,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             stack = 2,
             coords = { x = 12026, y = 2596, z = -1 },
             dist = { "GigamartBreakfast", "GigamartCandy", "Homesteading", "CrateLiquor", },
@@ -538,7 +486,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             stack = 1,
             coords = { x = 12026, y = 2595, z = -1 },
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -547,7 +494,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E54
-            type = 'container',
             stack = 2,
             coords = { x = 12026, y = 2595, z = -1 },
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -556,7 +502,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E55
-            type = 'container',
             coords = { x = 12027, y = 2595, z = -1 },
             dist = { "FreezerIceCream", },
             distIncludeJunk = false,
@@ -564,7 +509,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E56
-            type = 'container',
             coords = { x = 12028, y = 2595, z = -1 },
             dist = { "FreezerIceCream", },
             distIncludeJunk = false,
@@ -572,7 +516,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = { x = 12028, y = 2598, z = -1 },
             dist = { "FridgeFarmStorage", "FridgeGeneric" },
             distIncludeJunk = false,
@@ -580,7 +523,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E58
-            type = 'container',
             coords = { x = 12028, y = 2597, z = -1 },
             dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
             distIncludeJunk = false,
@@ -588,7 +530,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E59
-            type = 'container',
             coords = { x = 12029, y = 2595, z = -1 },
             dist = { "CatfishKitchenFreezer" },
             distIncludeJunk = false,
@@ -596,7 +537,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E60
-            type = 'container',
             slot = "freezer",
             coords = { x = 12030, y = 2595, z = -1 },
             dist = { "FreezerIceCream" },
@@ -605,7 +545,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E61
-            type = 'container',
             coords = { x = 12030, y = 2595, z = -1 },
             dist = { "FridgeFarmStorage", "FridgeGeneric" },
             distIncludeJunk = false,
@@ -613,7 +552,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E62
-            type = 'container',
             stack = 1,
             coords = { x = 12030, y = 2599, z = -1 },
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -622,7 +560,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E63
-            type = 'container',
             stack = 2,
             coords = { x = 12030, y = 2599, z = -1 },
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -631,7 +568,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E64
-            type = 'container',
             stack = 1,
             coords = { x = 12030, y = 2598, z = -1 },
             dist = { "CrateFlour", "GigamartBakingMisc", },
@@ -640,7 +576,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E65
-            type = 'container',
             stack = 2,
             coords = { x = 12030, y = 2598, z = -1 },
             dist = { "CrateFlour", "GigamartBakingMisc", },
@@ -650,12 +585,10 @@ local LVilleMansion = {
         },
         -- workshop
         { -- E66
-            type = 'container',
             coords = { x = 12033, y = 2595, z = -1 },
             special = "essentials",
         },
         { -- E67
-            type = 'container',
             coords = { x = 12035, y = 2599, z = -1 },
             dist = { "ArtStorePottery", },
             distIncludeJunk = true,
@@ -664,25 +597,21 @@ local LVilleMansion = {
         },
         -- armory
         { -- E68
-            type = 'container',
             coords = { x = 12031, y = 2590, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E69
-            type = 'container',
             coords = { x = 12032, y = 2590, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E70
-            type = 'container',
             coords = { x = 12033, y = 2590, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E71
-            type = 'container',
             coords = { x = 12034, y = 2590, z = -1 },
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -690,7 +619,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E72
-            type = 'container',
             coords = { x = 12035, y = 2590, z = -1 },
             dist = { "GunStoreKnives", "PawnShopKnives", },
             distIncludeJunk = true,
@@ -698,7 +626,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E73
-            type = 'container',
             coords = { x = 12032, y = 2592, z = -1 },
             dist = { "DrugLabGuns", "PoliceStorageGuns", "PoliceStorageAmmunition" },
             distIncludeJunk = false,
@@ -706,7 +633,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E74
-            type = 'container',
             coords = { x = 12033, y = 2592, z = -1 },
             dist = { "ArmyStorageGuns", "FirearmWeapons_Late" },
             distIncludeJunk = false,
@@ -714,7 +640,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E75
-            type = 'container',
             coords = { x = 12034, y = 2592, z = -1 },
             dist = { "HuntingLockers", "RangerTools" },
             distIncludeJunk = false,
@@ -722,7 +647,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E76
-            type = 'container',
             coords = { x = 12031, y = 2594, z = -1 },
             dist = { "ArmyStorageAmmunition", },
             distIncludeJunk = false,
@@ -730,7 +654,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E77
-            type = 'container',
             stack = 1,
             coords = { x = 12032, y = 2594, z = -1 },
             dist = { "ArmyStorageAmmunition", },
@@ -739,7 +662,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E78
-            type = 'container',
             stack = 2,
             coords = { x = 12032, y = 2594, z = -1 },
             dist = { "ArmyStorageAmmunition", },
@@ -748,7 +670,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E79
-            type = 'container',
             coords = { x = 12033, y = 2594, z = -1 },
             dist = { "SafehouseTraps", "ArmyStorageAmmunition" },
             distIncludeJunk = false,
@@ -756,7 +677,6 @@ local LVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E80
-            type = 'container',
             coords = { x = 12034, y = 2594, z = -1 },
             items = {
                 { name = 'Base.Firewood', chance = 1, count = { 30, 30 } },
@@ -765,7 +685,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E81
-            type = 'container',
             coords = {x=12035,y=2594,z=-1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid",},
             distIncludeJunk = true,
@@ -774,7 +693,6 @@ local LVilleMansion = {
         },
         -- office
         { -- E82
-            type = 'container',
             coords = { x = 12026, y = 2591, z = -1 },
             dist = { "MusicStoreCDs" },
             distIncludeJunk = false,
@@ -782,25 +700,21 @@ local LVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E83
-            type = 'container',
             coords = { x = 12028, y = 2590, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E84
-            type = 'container',
             coords = { x = 12029, y = 2590, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E85
-            type = 'container',
             coords = { x = 12030, y = 2590, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E86
-            type = 'container',
             coords = { x = 12030, y = 2591, z = -1 },
             dist = { "BookstoreBiography", "BookstoreArt", "BookstoreGeneralReference", "BookstoreChilds", "BookstoreHistory", },
             distIncludeJunk = false,
@@ -808,7 +722,6 @@ local LVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E87
-            type = 'container',
             coords = { x = 12029, y = 2594, z = -1 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
@@ -816,7 +729,6 @@ local LVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E88
-            type = 'container',
             coords = { x = 12030, y = 2594, z = -1 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
@@ -825,7 +737,6 @@ local LVilleMansion = {
         },
         -- infirmary
         { -- E89
-            type = 'container',
             coords = { x = 12031, y = 2589, z = -1 },
             dist = { "LaboratoryLockers", },
             distIncludeJunk = true,
@@ -833,7 +744,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E90
-            type = 'container',
             coords = { x = 12031, y = 2588, z = -1 },
             dist = { "MorgueTools", "MedicalCabinet", },
             distIncludeJunk = true,
@@ -841,7 +751,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E91
-            type = 'container',
             coords = { x = 12031, y = 2585, z = -1 },
             dist = { "ArmyStorageMedical", },
             distIncludeJunk = true,
@@ -849,7 +758,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E92
-            type = 'container',
             coords = { x = 12033, y = 2585, z = -1 },
             dist = { "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -857,7 +765,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E93
-            type = 'container',
             slot = "upper",
             coords = { x = 12034, y = 2585, z = -1 },
             dist = { "MedicalCabinet" },
@@ -866,7 +773,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E94
-            type = 'container',
             coords = { x = 12035, y = 2589, z = -1 },
             dist = { "MedicalClinicDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -874,7 +780,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E95
-            type = 'container',
             coords = { x = 12034, y = 2589, z = -1 },
             dist = { "FridgeMedical" },
             distIncludeJunk = true,
@@ -882,7 +787,6 @@ local LVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E96
-            type = 'container',
             slot = 'freezer',
             coords = { x = 12034, y = 2589, z = -1 },
             dist = { "SafehouseFreezer_Mid" },
@@ -892,7 +796,6 @@ local LVilleMansion = {
         },
         -- north west storage room
         { -- E97
-            type = 'container',
             coords = { x = 12026, y = 2589, z = -1 },
             dist = { "SewingStoreTools" },
             distIncludeJunk = true,
@@ -900,7 +803,6 @@ local LVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E98
-            type = 'container',
             coords = { x = 12026, y = 2588, z = -1 },
             dist = { "SewingStoreFabric", "CrateLeather" },
             distIncludeJunk = true,
@@ -908,7 +810,6 @@ local LVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E99
-            type = 'container',
             coords = { x = 12026, y = 2587, z = -1 },
             dist = { "CrateBootsArmy" },
             distIncludeJunk = true,
@@ -916,7 +817,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E100
-            type = 'container',
             coords = { x = 12026, y = 2586, z = -1 },
             dist = { "ArmyStorageOutfit", },
             distIncludeJunk = true,
@@ -924,7 +824,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E101
-            type = 'container',
             coords = { x = 12026, y = 2585, z = -1 },
             dist = { "ArmySurplusOutfit", },
             distIncludeJunk = true,
@@ -932,13 +831,11 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E102
-            type = 'container',
             coords = { x = 12028, y = 2589, z = -1 },
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E103
-            type = 'container',
             coords = { x = 12028, y = 2588, z = -1 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
@@ -946,7 +843,6 @@ local LVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E104
-            type = 'container',
             coords = { x = 12028, y = 2587, z = -1 },
             dist = { "SafehouseArmor", "SafehouseLighting" },
             distIncludeJunk = true,
@@ -954,7 +850,6 @@ local LVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E105
-            type = 'container',
             coords = { x = 12028, y = 2586, z = -1 },
             dist = { "CrateFishing", "FishermanTools" },
             distIncludeJunk = false,
@@ -962,7 +857,6 @@ local LVilleMansion = {
             level = "Loot_FishLevel",
         },
         { -- E106
-            type = 'container',
             coords = { x = 12030, y = 2589, z = -1 },
             dist = { "CrateSheetMetal" },
             distIncludeJunk = false,
@@ -970,7 +864,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E107
-            type = 'container',
             coords = { x = 12030, y = 2588, z = -1 },
             dist = { "ArmyStorageElectronics", "ToolFactoryIngots" },
             distIncludeJunk = true,
@@ -978,7 +871,6 @@ local LVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E108
-            type = 'container',
             coords = { x = 12030, y = 2587, z = -1 },
             dist = { "CrateLumber" },
             distIncludeJunk = true,
@@ -994,7 +886,6 @@ local LVilleMansion = {
         --     level = "Loot_FishLevel",
         -- },
         { -- E109
-            type = 'container',
             coords = { x = 12030, y = 2585, z = -1 },
             dist = { "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal" },
             distIncludeJunk = true,

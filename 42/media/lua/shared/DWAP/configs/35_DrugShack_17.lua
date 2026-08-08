@@ -63,7 +63,6 @@ local DrugShack = {
     loot = {
         -- lab room under trailer lab
         { -- E1
-            type = 'container',
             coords = {x=11619,y=9292,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -71,7 +70,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E2
-            type = 'container',
             coords = {x=11620,y=9292,z=-1},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -79,20 +77,17 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=11623,y=9292,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=11624,y=9292,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- warehouse room
         { -- E5
-            type = 'container',
             coords = {x=11623,y=9296,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools", "GigamartTools", "JanitorTools", "LoggingFactoryTools", },
             distIncludeJunk = true,
@@ -100,7 +95,6 @@ local DrugShack = {
             level = "Loot_ToolsLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=11624,y=9296,z=-1},
             dist = {"GigamartLightbulb", "LivingRoomShelfClassy", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -108,7 +102,6 @@ local DrugShack = {
             level = "Loot_MediaLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=11623,y=9298,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -116,7 +109,6 @@ local DrugShack = {
             level = "Loot_GunLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=11624,y=9298,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -124,7 +116,6 @@ local DrugShack = {
             level = "Loot_GunLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=11623,y=9300,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -132,7 +123,6 @@ local DrugShack = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=11624,y=9300,z=-1},
             dist = {"DerelictHouseDrugs", "FridgeSoda", "CrateSodaBottles", "CandyStoreSnacks", "CrateTortillaChips"},
             distIncludeJunk = true,
@@ -140,7 +130,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=11619,y=9298,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -148,7 +137,6 @@ local DrugShack = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=11620,y=9298,z=-1},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -156,7 +144,6 @@ local DrugShack = {
             level = "Loot_ToolsLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=11621,y=9298,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -164,7 +151,6 @@ local DrugShack = {
             level = "Loot_ToolsLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=11619,y=9300,z=-1},
             dist = {"CarSupplyTools","GasStorageMechanics", },
             distIncludeJunk = true,
@@ -172,7 +158,6 @@ local DrugShack = {
             level = "Loot_ToolsLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=11620,y=9300,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -180,7 +165,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=11621,y=9300,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -189,7 +173,6 @@ local DrugShack = {
         },
 
         { -- E17
-            type = 'container',
             coords = {x=11617,y=9300,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -197,7 +180,6 @@ local DrugShack = {
             level = "Loot_FarmLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=11616,y=9300,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -205,7 +187,6 @@ local DrugShack = {
             level = "Loot_FarmLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=11615,y=9300,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "DerelictHouseDrugs","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -213,7 +194,6 @@ local DrugShack = {
             level = "Loot_LockersLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=11615,y=9299,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -221,7 +201,6 @@ local DrugShack = {
             level = "Loot_ToolsLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=11616,y=9299,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -229,7 +208,6 @@ local DrugShack = {
             level = "Loot_MediaLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=11617,y=9298,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -237,7 +215,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=11616,y=9298,z=-1},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -245,7 +222,6 @@ local DrugShack = {
             level = "Loot_TailorLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=11615,y=9298,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -254,7 +230,6 @@ local DrugShack = {
         },
 
         { -- E25
-            type = 'container',
             coords = {x=11610,y=9301,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -263,7 +238,6 @@ local DrugShack = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=11609,y=9301,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -271,7 +245,6 @@ local DrugShack = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=11610,y=9300,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -279,7 +252,6 @@ local DrugShack = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=11609,y=9300,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -288,7 +260,6 @@ local DrugShack = {
         },
 
         { -- E29
-            type = 'container',
             coords = {x=11608,y=9296,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {30,30} },
@@ -297,7 +268,6 @@ local DrugShack = {
             level = "Loot_FarmLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=11608,y=9295,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {30,30} },
@@ -307,7 +277,6 @@ local DrugShack = {
         },
         -- medical room
         { -- E31
-            type = 'container',
             coords = {x=11591,y=9298,z=-1},
             dist = {"SafehouseFreezer_Mid", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -315,7 +284,6 @@ local DrugShack = {
             level = "Loot_MedLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=11591,y=9298,z=-1},
             slot = "upper",
             dist = {"ArmyStorageMedical", "DrugLabSupplies"},
@@ -324,7 +292,6 @@ local DrugShack = {
             level = "Loot_MedLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=11592,y=9298,z=-1},
             dist = {"TestingLab","MedicalCabinet","DrugShackDrugs", "DrugLabSupplies"},
             distIncludeJunk = false,
@@ -332,7 +299,6 @@ local DrugShack = {
             level = "Loot_MedLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=11592,y=9298,z=-1},
             slot = "upper",
             dist = {"MedicalClinicDrugs","MedicalCabinet","ArmyStorageMedical", "DerelictHouseDrugs"},
@@ -342,37 +308,31 @@ local DrugShack = {
         },
         -- "bedroom"
         { -- E35
-            type = 'container',
             coords = {x=11587,y=9295,z=-1},
             special = "essentials",
         },
         -- living area
         { -- E36
-            type = 'container',
             coords = {x=11595,y=9298,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E37
-            type = 'container',
             coords = {x=11596,y=9298,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E38
-            type = 'container',
             coords = {x=11597,y=9298,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E39
-            type = 'container',
             coords = {x=11598,y=9298,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E40
-            type = 'container',
             coords = {x=11599,y=9298,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -380,7 +340,6 @@ local DrugShack = {
             level = "Loot_MediaLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=11604,y=9296,z=-1},
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -388,7 +347,6 @@ local DrugShack = {
             level = "Loot_LockersLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=11604,y=9293,z=-1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -397,7 +355,6 @@ local DrugShack = {
         },
         -- kitchen
         { -- E43
-            type = 'container',
             coords = {x=11599,y=9297,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -405,7 +362,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=11598,y=9297,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -413,7 +369,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=11597,y=9297,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -421,7 +376,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=11596,y=9297,z=-1},
             dist = {"SafehouseFireplace", "StoreKitchenPots", "StoreKitchenDishes", "StoreKitchenCutlery", "JanitorCleaning" },
             distIncludeJunk = true,
@@ -429,7 +383,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=11595,y=9296,z=-1},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
@@ -437,7 +390,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=11595,y=9295,z=-1},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -445,7 +397,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=11595,y=9294,z=-1},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -453,7 +404,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=11595,y=9292,z=-1},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -461,7 +411,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=11595,y=9291,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -469,7 +418,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=11595,y=9290,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -477,7 +425,6 @@ local DrugShack = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=11596,y=9290,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,

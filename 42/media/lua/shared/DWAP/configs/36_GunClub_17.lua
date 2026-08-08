@@ -95,7 +95,6 @@ local GunClub = {
         ---- Crafting room ----
         -----------------------
         { -- E1
-            type = 'container',
             coords = {x=1829,y=14135,z=-2},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -104,7 +103,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E2
-            type = 'container',
             coords = {x=1834,y=14141,z=-2},
             dist = {"SafehouseFireplace", "SafehouseLighting", },
             distIncludeJunk = false,
@@ -112,7 +110,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=1835,y=14141,z=-2},
             dist = {"CrateLongStick"},
             items = {
@@ -123,7 +120,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=1833,y=14131,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -131,7 +127,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=1833,y=14130,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -139,7 +134,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=1833,y=14129,z=-2},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -148,7 +142,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=1833,y=14128,z=-2},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -157,7 +150,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=1835,y=14131,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -165,7 +157,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=1835,y=14130,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -173,7 +164,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=1835,y=14129,z=-2},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -181,7 +171,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=1835,y=14128,z=-2},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -189,7 +178,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=1838,y=14131,z=-2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -197,7 +185,6 @@ local GunClub = {
             level = "Loot_TailorLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=1838,y=14130,z=-2},
             dist = {"CrateToiletPaper", "CrateLinens"},
             distIncludeJunk = true,
@@ -205,7 +192,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=1838,y=14129,z=-2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -213,7 +199,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=1838,y=14128,z=-2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -221,7 +206,6 @@ local GunClub = {
             level = "Loot_FarmLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=1838,y=14136,z=-2},
             dist = {"CrateTools", "GarageTools", "BarnTools",  },
             distIncludeJunk = true,
@@ -229,7 +213,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E17 @TODO duplicate coords with entry 16
-            type = 'container',
             coords = {x=1838,y=14136,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
             distIncludeJunk = true,
@@ -240,7 +223,6 @@ local GunClub = {
         ---- Bar/Kitchen/Lounge ----
         ----------------------------
         { -- E18
-            type = 'container',
             coords = {x=1840,y=14134,z=-1},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -248,7 +230,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=1840,y=14133,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
@@ -256,7 +237,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=1842,y=14134,z=-1},
             dist = {"GigamartCrisps","ArmyStorageElectronics" },
             distIncludeJunk = false,
@@ -264,7 +244,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=1840,y=14130,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -272,13 +251,11 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=1840,y=14128,z=-1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=1841,y=14128,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -286,7 +263,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=1842,y=14128,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -294,7 +270,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=1843,y=14128,z=-1},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -302,7 +277,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=1847,y=14128,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -313,19 +287,16 @@ local GunClub = {
         ---- Bunk Rooms/Bathroom ----
         -----------------------------
         { -- E27
-            type = 'container',
             coords = {x=1852,y=14141,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E28
-            type = 'container',
             coords = {x=1855,y=14141,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E29
-            type = 'container',
             coords = {x=1854,y=14139,z=-1},
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -333,19 +304,16 @@ local GunClub = {
             level = "Loot_MedLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=1824,y=14138,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=1852,y=14136,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=1852,y=14135,z=-1},
             dist = {"ArmyStorageOutfit",},
             distIncludeJunk = true,
@@ -353,7 +321,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=1854,y=14134,z=-1},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -361,13 +328,11 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=1852,y=14133,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=1852,y=14131,z=-1},
             dist = {"ClothingStorageWinter",},
             distIncludeJunk = true,
@@ -375,7 +340,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=1854,y=14130,z=-1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -383,13 +347,11 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=1860,y=14133,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=1861,y=14131,z=-1},
             dist = {"DrugLabOutfit",},
             distIncludeJunk = true,
@@ -397,7 +359,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=1858,y=14130,z=-1},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -405,7 +366,6 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=1859,y=14137,z=-1},
             dist = {"BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
@@ -413,7 +373,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=1860,y=14137,z=-1},
             dist = {"LaundryCleaning", "JanitorCleaning", "MedicalStorageDrugs"},
             distIncludeJunk = false,
@@ -421,13 +380,11 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=1860,y=14141,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=1861,y=14139,z=-1},
             dist = {"CrateBootsArmy",},
             distIncludeJunk = true,
@@ -435,7 +392,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=1858,y=14138,z=-1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -443,7 +399,6 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=1861,y=14141,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -454,7 +409,6 @@ local GunClub = {
         --- Medical ---
         ---------------
         { -- E46
-            type = 'container',
             coords = {x=1862,y=14150,z=-1},
             slot = "upper",
             dist = {"SafehouseMedical" },
@@ -463,7 +417,6 @@ local GunClub = {
             level = "Loot_MedLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=1867,y=14149,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet" },
@@ -472,7 +425,6 @@ local GunClub = {
             level = "Loot_MedLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=1868,y=14149,z=-1},
             slot = "upper",
             dist = {"MedicalClinicDrugs" },
@@ -481,7 +433,6 @@ local GunClub = {
             level = "Loot_MedLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=1868,y=14152,z=-1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -489,7 +440,6 @@ local GunClub = {
             level = "Loot_MedLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=1866,y=14152,z=-1},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
             distIncludeJunk = true,
@@ -498,7 +448,6 @@ local GunClub = {
         },
         -- entry lockers
         { -- E51
-            type = 'container',
             coords = {x=1859,y=14157,z=-1},
             items = {
                 { name = 'Base.Bag_ProtectiveCaseBulkyHazard', },
@@ -514,7 +463,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=1863,y=14157,z=-1},
             items = {
                 { name = 'Base.Oxygen_Tank', },
@@ -527,7 +475,6 @@ local GunClub = {
         --------------------------
         -- cold stuff
         { -- E53
-            type = 'container',
             coords = {x=1842,y=14151,z=-1},
             dist = {"SushiKitchenFreezer", },
             distIncludeJunk = true,
@@ -535,7 +482,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=1843,y=14151,z=-1},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = true,
@@ -543,7 +489,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=1841,y=14145,z=-1},
             dist = { "FreezerRich"},
             distIncludeJunk = true,
@@ -551,7 +496,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=1842,y=14145,z=-1},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -559,7 +503,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=1843,y=14145,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
@@ -567,7 +510,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=1844,y=14145,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -576,7 +518,6 @@ local GunClub = {
         },
         -- end cold stuff
         { -- E59
-            type = 'container',
             coords = {x=1846,y=14147,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -584,36 +525,30 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=1845,y=14145,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E61
-            type = 'container',
             coords = {x=1846,y=14145,z=-1},
             special = "essentials",
         },
         { -- E62
-            type = 'container',
             coords = {x=1847,y=14145,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E63
-            type = 'container',
             coords = {x=1848,y=14145,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E64
-            type = 'container',
             coords = {x=1849,y=14145,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E65
-            type = 'container',
             coords = {x=1850,y=14145,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -621,7 +556,6 @@ local GunClub = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=1851,y=14145,z=-1},
             dist = {"GasStoreEmergency","CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
@@ -629,7 +563,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E67
-            type = 'container',
             coords = {x=1852,y=14145,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -637,7 +570,6 @@ local GunClub = {
             level = "Loot_GunLevel",
         },
         { -- E68
-            type = 'container',
             coords = {x=1853,y=14145,z=-1},
             dist = {"SafehouseTraps",},
             distIncludeJunk = true,
@@ -645,7 +577,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E69
-            type = 'container',
             coords = {x=1855,y=14145,z=-1},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
@@ -653,7 +584,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E70
-            type = 'container',
             coords = {x=1856,y=14145,z=-1},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
@@ -661,7 +591,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E71
-            type = 'container',
             coords = {x=1857,y=14145,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -669,7 +598,6 @@ local GunClub = {
             level = "Loot_ToolsLevel",
         },
         { -- E72
-            type = 'container',
             coords = {x=1858,y=14145,z=-1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -677,7 +605,6 @@ local GunClub = {
             level = "Loot_GunLevel",
         },
         { -- E73
-            type = 'container',
             coords = {x=1859,y=14145,z=-1},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -686,7 +613,6 @@ local GunClub = {
         },
 
         { -- E74
-            type = 'container',
             coords = {x=1850,y=14150,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -694,7 +620,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E75
-            type = 'container',
             coords = {x=1851,y=14150,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -702,7 +627,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E76
-            type = 'container',
             coords = {x=1850,y=14149,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -710,7 +634,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E77
-            type = 'container',
             coords = {x=1851,y=14149,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -718,7 +641,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E78
-            type = 'container',
             coords = {x=1850,y=14148,z=-1},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -726,7 +648,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E79
-            type = 'container',
             coords = {x=1851,y=14148,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
@@ -734,7 +655,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E80
-            type = 'container',
             coords = {x=1850,y=14147,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -743,7 +663,6 @@ local GunClub = {
         },
 
         { -- E81
-            type = 'container',
             coords = {x=1854,y=14150,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -751,7 +670,6 @@ local GunClub = {
             level = "Loot_FishLevel",
         },
         { -- E82
-            type = 'container',
             coords = {x=1855,y=14150,z=-1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -759,7 +677,6 @@ local GunClub = {
             level = "Loot_FishLevel",
         },
         { -- E83
-            type = 'container',
             coords = {x=1854,y=14149,z=-1},
             dist = {"TheatrePopcorn", "FridgeSoda",},
             distIncludeJunk = true,
@@ -767,13 +684,11 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E84
-            type = 'container',
             coords = {x=1855,y=14149,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E85
-            type = 'container',
             coords = {x=1854,y=14148,z=-1},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -781,7 +696,6 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E86
-            type = 'container',
             coords = {x=1855,y=14148,z=-1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -789,7 +703,6 @@ local GunClub = {
             level = "Loot_MediaLevel",
         },
         { -- E87
-            type = 'container',
             coords = {x=1854,y=14147,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -797,7 +710,6 @@ local GunClub = {
             level = "Loot_FoodLevel",
         },
         { -- E88
-            type = 'container',
             coords = {x=1855,y=14147,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -806,7 +718,6 @@ local GunClub = {
         },
 
         { -- E89
-            type = 'container',
             coords = {x=1858,y=14151,z=-1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -814,7 +725,6 @@ local GunClub = {
             level = "Loot_LockersLevel",
         },
         { -- E90
-            type = 'container',
             coords = {x=1859,y=14151,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,

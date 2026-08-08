@@ -69,13 +69,11 @@ local EkronLakeHouse = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -85,13 +83,11 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
@@ -101,7 +97,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E5 lower (67)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -110,7 +105,6 @@ local EkronLakeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E6 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
@@ -120,7 +114,6 @@ local EkronLakeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E7 lower (68)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools"},
@@ -129,7 +122,6 @@ local EkronLakeHouse = {
             level = "Loot_TailorLevel",
         },
         { -- E8 metal shelves (70)
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -138,36 +130,30 @@ local EkronLakeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E9 metal shelves (71)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10 next to inner door (9372)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11 (73)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12 (9374)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13 far end next to stairs (9375)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -175,13 +161,11 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E15 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -191,7 +175,6 @@ local EkronLakeHouse = {
 
         -- extra spawns
         { -- E17
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -199,7 +182,6 @@ local EkronLakeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -209,7 +191,6 @@ local EkronLakeHouse = {
 
         -- first basement
         { -- E19
-            type = 'container',
             coords = {x=1906,y=9957,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
@@ -217,7 +198,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=1906,y=9954,z=-1},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -225,7 +205,6 @@ local EkronLakeHouse = {
             level = 2,
         },
         { -- E21
-            type = 'container',
             coords = {x=1906,y=9953,z=-1},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -233,7 +212,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=1906,y=9951,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -241,7 +219,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=1902,y=9952,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -251,7 +228,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=1902,y=9953,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -259,7 +235,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=1898,y=9949,z=-1},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -267,7 +242,6 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=1897,y=9949,z=-1},
             items = {
                 { name = 'Base.CigaretteCarton', chance = 1, count = {5,15} },
@@ -276,7 +250,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=1897,y=9962,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
@@ -285,7 +258,6 @@ local EkronLakeHouse = {
         },
         -- first floor
         { -- E28
-            type = 'container',
             coords = {x=1900,y=9952,z=0},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -293,7 +265,6 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=1902,y=9955,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
@@ -301,7 +272,6 @@ local EkronLakeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=1897,y=9959,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -309,7 +279,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=1897,y=9958,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -317,7 +286,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=1897,y=9955,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -326,7 +294,6 @@ local EkronLakeHouse = {
         },
         -- laundry room
         { -- E33
-            type = 'container',
             coords = {x=1900,y=9955,z=0},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = false,
@@ -334,7 +301,6 @@ local EkronLakeHouse = {
             level = 1,
         },
         { -- E34
-            type = 'container',
             coords = {x=1900,y=9956,z=0},
             dist = {"SewingStoreFabric", "SewingStoreTools", "GymLaundry", "GymLockers"},
             distIncludeJunk = true,
@@ -343,7 +309,6 @@ local EkronLakeHouse = {
         },
         -- office
         { -- E35
-            type = 'container',
             coords = {x=1904,y=9958,z=0},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -354,7 +319,6 @@ local EkronLakeHouse = {
             },
         },
         { -- E36
-            type = 'container',
             coords = {x=1904,y=9960,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -362,7 +326,6 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=1904,y=9961,z=0},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -370,7 +333,6 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=1904,y=9963,z=0},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -379,7 +341,6 @@ local EkronLakeHouse = {
         },
         -- kitchen
         { -- E39
-            type = 'container',
             coords = {x=1897,y=9960,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
@@ -387,7 +348,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=1897,y=9965,z=0},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -396,7 +356,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=1897,y=9964,z=0},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -405,7 +364,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=1897,y=9964,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -413,7 +371,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=1897,y=9963,z=0},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -422,13 +379,11 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=1897,y=9963,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=1898,y=9960,z=0},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -436,7 +391,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=1899,y=9960,z=0},
             dist = {"CandyStoreSnacks","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -445,7 +399,6 @@ local EkronLakeHouse = {
         },
         -- living room
         { -- E47
-            type = 'container',
             coords = {x=1905,y=9949,z=0},
             dist = {"CandyStoreSnacks","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -453,7 +406,6 @@ local EkronLakeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=1906,y=9949,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -461,7 +413,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=1906,y=9950,z=0},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -469,7 +420,6 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=1906,y=9951,z=0},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -478,7 +428,6 @@ local EkronLakeHouse = {
         },
         -- 2nd floor
         { -- E51
-            type = 'container',
             coords = {x=1906,y=9953,z=1},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -486,7 +435,6 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=1903,y=9963,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -494,7 +442,6 @@ local EkronLakeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=1900,y=9963,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -502,19 +449,16 @@ local EkronLakeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=1902,y=9953,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=1903,y=9953,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=1902,y=9949,z=1},
             dist = {"SafehouseArmor","LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -522,7 +466,6 @@ local EkronLakeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=1903,y=9949,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "SafehouseLighting", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -530,7 +473,6 @@ local EkronLakeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=1904,y=9956,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,

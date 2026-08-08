@@ -121,7 +121,7 @@ local EkronCC = {
     loot = {
         { -- E1
             -- filingcabinet next to spawn in operations room
-            type = 'container',
+            
             coords = {x=genCoords.x+12,y=genCoords.y+11,z=genCoords.z},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -133,20 +133,18 @@ local EkronCC = {
         },
         { -- E2
             -- 2nd filingcabinet next to spawn in operations room
-            type = 'container',
+            
             coords = {x=genCoords.x+12,y=genCoords.y+12,z=genCoords.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- kitchen
         { -- E3
-            type = 'container',
             coords = {x=genCoords.x+20,y=genCoords.y-6,z=genCoords.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -154,7 +152,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=genCoords.x+16,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -162,7 +159,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=genCoords.x+16,y=genCoords.y-4,z=genCoords.z},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -170,7 +166,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=genCoords.x+15,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -178,7 +173,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=genCoords.x+17,y=genCoords.y-4,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -186,7 +180,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=genCoords.x+18,y=genCoords.y-4,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -194,7 +187,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y-4,z=genCoords.z},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -203,13 +195,11 @@ local EkronCC = {
         },
         -- Armory
         { -- E11
-            type = 'container',
             coords = {x=genCoords.x+27,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=genCoords.x+28,y=genCoords.y-2,z=genCoords.z},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -217,19 +207,16 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=genCoords.x+27,y=genCoords.y+1,z=genCoords.z},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
@@ -237,7 +224,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=genCoords.x+28,y=genCoords.y+1,z=genCoords.z},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
@@ -245,7 +231,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y+1,z=genCoords.z},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -253,7 +238,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y+1,z=genCoords.z},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
@@ -262,7 +246,6 @@ local EkronCC = {
         },
         -- medical
         { -- E19
-            type = 'container',
             coords = {x=genCoords.x+22,y=genCoords.y+9,z=genCoords.z},
             slot = "upper",
             dist = {"MedicalCabinet"},
@@ -271,7 +254,6 @@ local EkronCC = {
             level = "Loot_MedLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=genCoords.x+22,y=genCoords.y+10,z=genCoords.z},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -279,7 +261,6 @@ local EkronCC = {
             level = "Loot_MedLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+10,z=genCoords.z},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -288,7 +269,6 @@ local EkronCC = {
         },
         -- book shelves
         { -- E22
-            type = 'container',
             coords = {x=genCoords.x+33,y=genCoords.y+16,z=genCoords.z},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -296,7 +276,6 @@ local EkronCC = {
             level = 1,
         },
         { -- E23
-            type = 'container',
             coords = {x=genCoords.x+33,y=genCoords.y+15,z=genCoords.z},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -305,25 +284,21 @@ local EkronCC = {
         },
         -- media storage
         { -- E24
-            type = 'container',
             coords = {x=genCoords.x+26,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks1',
         },
         { -- E25
-            type = 'container',
             coords = {x=genCoords.x+27,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks2',
         },
         { -- E26
-            type = 'container',
             coords = {x=genCoords.x+28,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillmags',
         },
         { -- E27
-            type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -331,7 +306,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -339,7 +313,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=genCoords.x+31,y=genCoords.y+17,z=genCoords.z},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -347,7 +320,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=genCoords.x+28,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -355,7 +327,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=genCoords.x+29,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -363,7 +334,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=genCoords.x+30,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -371,7 +341,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=genCoords.x+31,y=genCoords.y+20,z=genCoords.z},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -380,7 +349,6 @@ local EkronCC = {
         },
         -- cleaning
         { -- E34
-            type = 'container',
             coords = {x=genCoords.x+22,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -388,7 +356,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -397,13 +364,11 @@ local EkronCC = {
         },
         -- seed/farm library
         { -- E36
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E37
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -411,7 +376,6 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=genCoords.x+21,y=genCoords.y+15,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -419,7 +383,6 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=genCoords.x+21,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -427,7 +390,6 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -437,7 +399,6 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+16,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -448,7 +409,6 @@ local EkronCC = {
         },
         -- fishing
         { -- E42
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -456,7 +416,6 @@ local EkronCC = {
             level = "Loot_FishLevel",
         },
         { -- E43 hunting
-            type = 'container',
             coords = {x=genCoords.x+22,y=genCoords.y+12,z=genCoords.z},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -464,7 +423,6 @@ local EkronCC = {
             level = "Loot_FishLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=genCoords.x+21,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
@@ -472,7 +430,6 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=genCoords.x+20,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -480,7 +437,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -488,7 +444,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=genCoords.x+18,y=genCoords.y+12,z=genCoords.z},
             dist = {"DishCabinetLiquor"},
             distIncludeJunk = true,
@@ -497,7 +452,6 @@ local EkronCC = {
         },
         -- tailoring
         { -- E48
-            type = 'container',
             coords = {x=genCoords.x+22,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -505,7 +459,6 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -513,7 +466,6 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+22,z=genCoords.z},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -521,7 +473,6 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+21,z=genCoords.z},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -529,7 +480,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=genCoords.x+19,y=genCoords.y+22,z=genCoords.z},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -537,7 +487,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+23,z=genCoords.z},
             dist = {"GymLaundry", "GymLockers"},
             distIncludeJunk = true,
@@ -545,7 +494,6 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=genCoords.x+23,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit"},
             distIncludeJunk = true,
@@ -554,7 +502,6 @@ local EkronCC = {
         },
         -- laundry room
         { -- E55
-            type = 'container',
             coords = {x=genCoords.x+12,y=genCoords.y+27,z=genCoords.z},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -563,7 +510,6 @@ local EkronCC = {
             level = 1,
         },
         { -- E56
-            type = 'container',
             coords = {x=genCoords.x+12,y=genCoords.y-9,z=genCoords.z},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -578,7 +524,6 @@ local EkronCC = {
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
         { -- E57
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-7,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -586,7 +531,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-6,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -594,7 +538,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E59
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-5,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -602,7 +545,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-4,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -610,7 +552,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E61
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y-3,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -619,7 +560,6 @@ local EkronCC = {
         },
         -- mens
         { -- E62
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+21,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -627,7 +567,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+22,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -635,7 +574,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E64
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+23,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -643,7 +581,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E65
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -651,7 +588,6 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+25,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -660,7 +596,6 @@ local EkronCC = {
         },
         -- entry storage 1
         { -- E67
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+11,z=genCoords.z},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
@@ -668,7 +603,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E68
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+12,z=genCoords.z},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -676,7 +610,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E69
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+13,z=genCoords.z},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -684,7 +617,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E70
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+14,z=genCoords.z},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
@@ -692,7 +624,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E71
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+15,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -700,7 +631,6 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E72
-            type = 'container',
             coords = {x=genCoords.x+3,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -709,7 +639,6 @@ local EkronCC = {
         },
         -- tools
         { -- E73
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+14,z=genCoords.z},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -717,7 +646,6 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+15,z=genCoords.z},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -725,12 +653,10 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E75
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+16,z=genCoords.z},
             special = "essentials",
         },
         { -- E76
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -738,7 +664,6 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E77
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+18,z=genCoords.z},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -746,7 +671,6 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E78
-            type = 'container',
             coords = {x=genCoords.x+6,y=genCoords.y+19,z=genCoords.z},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -755,7 +679,6 @@ local EkronCC = {
         },
         -- random junk
         { -- E79
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -763,7 +686,6 @@ local EkronCC = {
             level = 3,
         },
         { -- E80
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -771,7 +693,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E81
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+14,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller" },
             distIncludeJunk = true,
@@ -779,7 +700,6 @@ local EkronCC = {
             level = 3,
         },
         { -- E82
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+15,z=genCoords.z},
             dist = {"CrateCannedFood", "RandomFiller" },
             distIncludeJunk = true,
@@ -788,7 +708,6 @@ local EkronCC = {
         },
         -- mats
         { -- E83
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -796,7 +715,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+17,z=genCoords.z},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -804,7 +722,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+19,z=genCoords.z},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -812,7 +729,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
-            type = 'container',
             coords = {x= genCoords.x+9,y=genCoords.y+18,z=genCoords.z},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -821,7 +737,6 @@ local EkronCC = {
         },
         -- entry storage 2
         { -- E87
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+13,z=genCoords.z},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
@@ -829,7 +744,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E88
-            type = 'container',
             coords = {x=genCoords.x-2,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -837,7 +751,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
-            type = 'container',
             coords = {x=genCoords.x-1,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -845,7 +758,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E90
-            type = 'container',
             coords = {x=genCoords.x,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -853,7 +765,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E91
-            type = 'container',
             coords = {x=genCoords.x+1,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -861,7 +772,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E92
-            type = 'container',
             coords = {x=genCoords.x+2,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -869,7 +779,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E93
-            type = 'container',
             coords = {x=genCoords.x,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsCarton', },
@@ -878,7 +787,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E94
-            type = 'container',
             coords = {x=genCoords.x-1,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsBox', },
@@ -888,7 +796,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E95
-            type = 'container',
             coords = {x=genCoords.x-2,y=genCoords.y+16,z=genCoords.z},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -896,7 +803,6 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E96
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -904,7 +810,6 @@ local EkronCC = {
             level = 1,
         },
         { -- E97
-            type = 'container',
             coords = {x=genCoords.x+2,y=genCoords.y+19,z=genCoords.z},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -912,7 +817,6 @@ local EkronCC = {
             level = 2,
         },
         { -- E98
-            type = 'container',
             coords = {x=genCoords.x+1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -920,7 +824,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E99
-            type = 'container',
             coords = {x=genCoords.x,y=genCoords.y+19,z=genCoords.z},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -928,7 +831,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E100
-            type = 'container',
             coords = {x=genCoords.x-1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
@@ -936,7 +838,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E101
-            type = 'container',
             coords = {x=genCoords.x-2,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -944,7 +845,6 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E102
-            type = 'container',
             coords = {x=genCoords.x-3,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,

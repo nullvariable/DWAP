@@ -89,13 +89,11 @@ local RustyRifle = {
         -- owner suite
         -- bedroom
         { -- E1
-            type = 'container',
             coords = {x=10747,y=10543,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2
-            type = 'container',
             coords = {x=10750,y=10542,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -103,13 +101,11 @@ local RustyRifle = {
             level = "Loot_LockersLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=10749,y=10544,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=10750,y=10544,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -118,13 +114,11 @@ local RustyRifle = {
         },
         -- hallway
         { -- E5
-            type = 'container',
             coords = {x=10751,y=10542,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E6
-            type = 'container',
             coords = {x=10752,y=10542,z=1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -132,7 +126,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=10753,y=10542,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -140,12 +133,10 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=10754,y=10542,z=1},
             special = "essentials",
         },
         { -- E9
-            type = 'container',
             coords = {x=10755,y=10542,z=1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -154,7 +145,6 @@ local RustyRifle = {
         },
         -- living room
         { -- E10
-            type = 'container',
             coords = {x=10750,y=10545,z=1},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -163,13 +153,11 @@ local RustyRifle = {
         },
         -- kitchen
         { -- E11
-            type = 'container',
             coords = {x=10753,y=10546,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=10755,y=10546,z=1},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -179,7 +167,6 @@ local RustyRifle = {
         },
         -- bathroom
         { -- E13
-            type = 'container',
             coords = {x=10754,y=10544,z=1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical","BathroomCounter" },
             distIncludeJunk = true,
@@ -188,7 +175,6 @@ local RustyRifle = {
         },
         -- storage closet
         { -- E14
-            type = 'container',
             coords = {x=10766,y=10543,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -196,7 +182,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=10766,y=10542,z=1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -204,7 +189,6 @@ local RustyRifle = {
             level = "Loot_FishLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=10767,y=10542,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -214,7 +198,6 @@ local RustyRifle = {
         -- main floor
         -- bar area
         { -- E17
-            type = 'container',
             coords = {x=10756,y=10544,z=0},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -222,7 +205,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=10756,y=10543,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -230,7 +212,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=10756,y=10542,z=0},
             dist = {"StoreKitchenCafe"},
             distIncludeJunk = false,
@@ -238,7 +219,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=10758,y=10542,z=0},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
@@ -246,7 +226,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=10760,y=10542,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "DishCabinetLiquor"},
             distIncludeJunk = true,
@@ -254,7 +233,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=10762,y=10542,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -262,7 +240,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=10759,y=10544,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -270,7 +247,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=10762,y=10544,z=0},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -279,7 +255,6 @@ local RustyRifle = {
         },
         -- main kitchen
         { -- E25
-            type = 'container',
             coords = {x=10755,y=10545,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -287,7 +262,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=10755,y=10544,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -295,7 +269,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=10755,y=10543,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -303,7 +276,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=10755,y=10542,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -311,7 +283,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=10753,y=10542,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -319,7 +290,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=10752,y=10542,z=0},
             dist = {"GigamartBreakfast","GigamartCandy"},
             distIncludeJunk = false,
@@ -327,7 +297,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=10753,y=10547,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -335,7 +304,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=10754,y=10547,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
@@ -344,7 +312,6 @@ local RustyRifle = {
         },
         -- garage
         { -- E33
-            type = 'container',
             coords = {x=10747,y=10546,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -354,7 +321,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=10747,y=10545,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -362,7 +328,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=10747,y=10544,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -370,7 +335,6 @@ local RustyRifle = {
             level = "Loot_ToolsLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=10747,y=10542,z=0},
             slot = "upper",
             dist = {"CampingStoreBackpacks","CrateLinens"},
@@ -379,7 +343,6 @@ local RustyRifle = {
             level = "Loot_LockersLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=10751,y=10542,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -389,19 +352,16 @@ local RustyRifle = {
         -- basement
         -- first room
         { -- E38
-            type = 'container',
             coords = {x = 10764, y = 10542, z = -1,},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E39
-            type = 'container',
             coords = {x = 10765, y = 10542, z = -1,},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E40
-            type = 'container',
             coords = {x = 10766, y = 10542, z = -1,},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -409,7 +369,6 @@ local RustyRifle = {
             level = "Loot_MediaLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=10767,y=10547,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
@@ -417,13 +376,11 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=10766,y=10547,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E43
-            type = 'container',
             coords = {x=10766,y=10550,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
@@ -431,7 +388,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=10766,y=10551,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -439,7 +395,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=10766,y=10552,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -448,19 +403,16 @@ local RustyRifle = {
         },
         -- shelter room
         { -- E46
-            type = 'container',
             coords = {x=10763,y=10557,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=10762,y=10557,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=10760,y=10557,z=-1},
             dist = {"BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -468,7 +420,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=10760,y=10557,z=-1},
             slot = "upper",
             dist = {"ArmyStorageAmmunition", },
@@ -477,7 +428,6 @@ local RustyRifle = {
             level = "Loot_GunLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=10760,y=10556,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -485,7 +435,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=10760,y=10556,z=-1},
             slot = "upper",
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -494,7 +443,6 @@ local RustyRifle = {
             level = "Loot_ToolsLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=10760,y=10555,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -502,7 +450,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=10760,y=10555,z=-1},
             slot = "upper",
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -512,7 +459,6 @@ local RustyRifle = {
         },
         -- gambling room
         { -- E54
-            type = 'container',
             coords = {x=10761,y=10562,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -520,7 +466,6 @@ local RustyRifle = {
             level = "Loot_GunLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=10762,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -528,7 +473,6 @@ local RustyRifle = {
             level = 3,
         },
         { -- E56
-            type = 'container',
             coords = {x=10763,y=10562,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = true,
@@ -536,7 +480,6 @@ local RustyRifle = {
             level = 3,
         },
         { -- E57
-            type = 'container',
             coords = {x=10764,y=10562,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -545,7 +488,6 @@ local RustyRifle = {
         },
         -- workshop area
         { -- E58
-            type = 'container',
             coords = {x=10782,y=10575,z=0},
             slot = "upper",
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
@@ -554,7 +496,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E59
-            type = 'container',
             coords = {x=10782,y=10573,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
             distIncludeJunk = true,
@@ -562,7 +503,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=10782,y=10572,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
             distIncludeJunk = true,
@@ -570,7 +510,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E61
-            type = 'container',
             coords = {x=10782,y=10570,z=0},
             dist = {"CrateSheetMetal","CrateLumber" },
             distIncludeJunk = true,
@@ -578,7 +517,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E62
-            type = 'container',
             coords = {x=10781,y=10570,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -586,7 +524,6 @@ local RustyRifle = {
             level = "Loot_ToolsLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=10780,y=10570,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -594,7 +531,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E64
-            type = 'container',
             coords = {x=10779,y=10570,z=0},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -603,7 +539,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E65
-            type = 'container',
             coords = {x=10782,y=10568,z=0},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -611,7 +546,6 @@ local RustyRifle = {
             level = "Loot_TailorLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=10781,y=10568,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -619,7 +553,6 @@ local RustyRifle = {
             level = "Loot_ToolsLevel",
         },
         { -- E67
-            type = 'container',
             coords = {x=10780,y=10568,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -627,7 +560,6 @@ local RustyRifle = {
             level = "Loot_FoodLevel",
         },
         { -- E68
-            type = 'container',
             coords = {x=10779,y=10568,z=0},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -637,7 +569,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E69
-            type = 'container',
             coords = {x=10782,y=10566,z=0},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -645,7 +576,6 @@ local RustyRifle = {
             level = "Loot_GunLevel",
         },
         { -- E70
-            type = 'container',
             coords = {x=10781,y=10566,z=0},
             dist = {"ArmyStorageGuns",},
             distIncludeJunk = false,
@@ -653,7 +583,6 @@ local RustyRifle = {
             level = "Loot_GunLevel",
         },
         { -- E71
-            type = 'container',
             coords = {x=10780,y=10566,z=0},
             dist = {"ArmyStorageElectronics", "ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -661,7 +590,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E72
-            type = 'container',
             coords = {x=10779,y=10566,z=0},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -670,7 +598,6 @@ local RustyRifle = {
         },
         -- shed out back
         { -- E73
-            type = 'container',
             coords = {x=10761,y=10531,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -678,7 +605,6 @@ local RustyRifle = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
-            type = 'container',
             coords = {x=10761,y=10530,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -686,7 +612,6 @@ local RustyRifle = {
             level = "Loot_FarmLevel",
         },
         { -- E75
-            type = 'container',
             coords = {x=10761,y=10528,z=0},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -695,7 +620,6 @@ local RustyRifle = {
             level = "Loot_FishLevel",
         },
         { -- E76
-            type = 'container',
             coords = {x=10762,y=10528,z=0},
             slot = "upper",
             dist = {"ArtStorePottery",},
@@ -704,7 +628,6 @@ local RustyRifle = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E77
-            type = 'container',
             coords = {x=10763,y=10528,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,

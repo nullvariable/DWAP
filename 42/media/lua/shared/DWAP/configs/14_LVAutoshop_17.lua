@@ -62,13 +62,11 @@ local LVAutoshop = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -78,13 +76,11 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
@@ -94,7 +90,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E5 lower (67)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -103,7 +98,6 @@ local LVAutoshop = {
             level = "Loot_MedLevel",
         },
         { -- E6 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
@@ -113,7 +107,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E7 lower (68)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
@@ -122,7 +115,6 @@ local LVAutoshop = {
             level = "Loot_TailorLevel",
         },
         { -- E8 metal shelves (70)
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -131,36 +123,30 @@ local LVAutoshop = {
             level = "Loot_FarmLevel",
         },
         { -- E9 metal shelves (71)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10 next to inner door (9372)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11 (73)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12 (9374)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13 far end next to stairs (9375)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -168,13 +154,11 @@ local LVAutoshop = {
             level = "Loot_MediaLevel",
         },
         { -- E15 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -184,7 +168,6 @@ local LVAutoshop = {
 
         -- extra spawns
         { -- E17
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -192,7 +175,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -202,7 +184,6 @@ local LVAutoshop = {
 
         -- generator room
         { -- E19
-            type = 'container',
             coords = {x=13140,y=3033,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -210,7 +191,6 @@ local LVAutoshop = {
             level = "Loot_LockersLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=13140,y=3034,z=-1},
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "SafehouseArmor", "DerelictHouseCrime", "CrateBootsArmy", "SafehouseLighting" },
             distIncludeJunk = true,
@@ -218,7 +198,6 @@ local LVAutoshop = {
             level = "Loot_LockersLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=13140,y=3035,z=-1},
             dist = { "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = true,
@@ -226,7 +205,6 @@ local LVAutoshop = {
             level = "Loot_GunLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=13140,y=3036,z=-1},
             dist = { "ArmyStorageAmmunition","GunStoreKnives", },
             distIncludeJunk = true,
@@ -234,7 +212,6 @@ local LVAutoshop = {
             level = "Loot_GunLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=13142,y=3033,z=-1},
             items = {
                 { name = 'TvWideScreen', chance = 1, count = {1,1} },
@@ -243,7 +220,6 @@ local LVAutoshop = {
             },
         },
         { -- E24
-            type = 'container',
             coords = {x=13142,y=3034,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods"},
             distIncludeJunk = false,
@@ -251,17 +227,14 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=13142,y=3035,z=-1},
         },
         { -- E26
-            type = 'container',
             coords = {x=13142,y=3036,z=-1},
         },
 
         -- auto shop
         { -- E27
-            type = 'container',
             coords = {x=13150,y=3018,z=0},
             slot = "upper",
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -270,7 +243,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=13143,y=3024,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -278,7 +250,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=13143,y=3025,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -288,7 +259,6 @@ local LVAutoshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=13143,y=3026,z=0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -297,7 +267,6 @@ local LVAutoshop = {
         },
         -- north office
         { -- E31
-            type = 'container',
             coords = {x=13139,y=3020,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -305,7 +274,6 @@ local LVAutoshop = {
             level = "Loot_MediaLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=13140,y=3020,z=0},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -315,13 +283,11 @@ local LVAutoshop = {
 
         -- office converted to shelter room
         { -- E33
-            type = 'container',
             coords = {x = 13139, y = 3024, z = 0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x = 13140, y = 3024, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -329,7 +295,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x = 13142, y = 3025, z = 0},
             dist = {"BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
@@ -337,7 +302,6 @@ local LVAutoshop = {
             level = "Loot_LockersLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=13142,y=3026,z=0},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -345,7 +309,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=13141,y=3026,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -353,7 +316,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x = 13140, y = 3026, z = 0},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -361,20 +323,17 @@ local LVAutoshop = {
             level = "Loot_FishLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x = 13139, y = 3026, z = 0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x = 13138, y = 3026, z = 0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- lobby
         { -- E41
-            type = 'container',
             coords = {x=13138,y=3016,z=0},
             dist = {"WeldingWorkshopMetal", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
@@ -382,7 +341,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=13138,y=3015,z=0},
             dist = {"CrateBlacksmithing", "CrateSheetMetal", "CrateMetalwork" },
             distIncludeJunk = true,
@@ -390,7 +348,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=13138,y=3014,z=0},
             dist = {"CrateLumber", "ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -398,7 +355,6 @@ local LVAutoshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=13138,y=3013,z=0},
             dist = {"ToolFactoryHandles", "ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -407,7 +363,6 @@ local LVAutoshop = {
         },
         -- back storage room
         { -- E45
-            type = 'container',
             coords = {x=13139,y=3027,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -415,7 +370,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=13140,y=3027,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -423,7 +377,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=13141,y=3027,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -431,7 +384,6 @@ local LVAutoshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=13142,y=3027,z=0},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = false,
@@ -439,7 +391,6 @@ local LVAutoshop = {
             level = 1,
         },
         { -- E49
-            type = 'container',
             coords = {x=13140,y=3030,z=0},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -447,7 +398,6 @@ local LVAutoshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=13139,y=3030,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -455,7 +405,6 @@ local LVAutoshop = {
             level = "Loot_MediaLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x = 13138, y = 3030, z = 0},
             dist = {"CandyStoreSnacks","CrateTortillaChips"},
             distIncludeJunk = true,
@@ -463,7 +412,6 @@ local LVAutoshop = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x = 13138, y = 3029, z = 0},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,

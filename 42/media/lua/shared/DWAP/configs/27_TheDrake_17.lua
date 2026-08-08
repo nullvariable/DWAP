@@ -85,7 +85,6 @@ local TheDrake = {
         -- basement
         -- shelter area
         { -- E1
-            type = 'container',
             coords = {x=11896,y=6843,z=-1},
             slot = "upper",
             dist = {"SafehouseMedical", "BathroomCounter", },
@@ -94,7 +93,6 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E2
-            type = 'container',
             coords = {x=11900,y=6841,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet" },
@@ -103,12 +101,10 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=11901,y=6839,z=-1},
             special = "essentials",
         },
         { -- E4
-            type = 'container',
             coords = {x=11902,y=6839,z=-1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -116,7 +112,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=11902,y=6841,z=-1},
             slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning", "Homesteading"},
@@ -125,7 +120,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=11903,y=6839,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -133,7 +127,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=11903,y=6841,z=-1},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -142,7 +135,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=11904,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -150,7 +142,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=11904,y=6841,z=-1},
             slot = "upper",
             dist = {"SafehouseFireplace", "SafehouseLighting", },
@@ -159,7 +150,6 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=11906,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -167,19 +157,16 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=11907,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
-            type = 'container',
             coords = {x=11908,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=11909,y=6839,z=-1},
             dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
             distIncludeJunk = true,
@@ -187,7 +174,6 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=11910,y=6839,z=-1},
             dist = {"GunStoreAmmunition", "GunStoreKnives", "GunStoreBodyArmor", "GunStoreMagsAmmo", "GunStoreGuns", },
             distIncludeJunk = true,
@@ -195,7 +181,6 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=11911,y=6839,z=-1},
             dist = {"CrateFishing", "FishermanTools", "Trapper"},
             distIncludeJunk = false,
@@ -203,7 +188,6 @@ local TheDrake = {
             level = "Loot_FishLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=11912,y=6839,z=-1},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -211,7 +195,6 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=11913,y=6839,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -219,7 +202,6 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=11914,y=6839,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
             distIncludeJunk = true,
@@ -227,7 +209,6 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=11914,y=6841,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -235,7 +216,6 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=11913,y=6841,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -245,13 +225,11 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=11912,y=6841,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E22
-            type = 'container',
             coords = {x=11911,y=6841,z=-1},
             dist = {"CrateBooks", "MusicStoreCDs", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -259,7 +237,6 @@ local TheDrake = {
             level = "Loot_MediaLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=11910,y=6841,z=-1},
             dist = {"ArmySurplusBackpacks", "ArmySurplusOutfit", "ArmyStorageOutfit", "ArmySurplusFootwear", "ArmySurplusHeadwear", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -267,7 +244,6 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=11909,y=6841,z=-1},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -275,13 +251,11 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=11908,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E26
-            type = 'container',
             coords = {x=11907,y=6841,z=-1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -289,13 +263,11 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=11906,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E28
-            type = 'container',
             coords = {x=11904,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -303,7 +275,6 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=11903,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit",},
             distIncludeJunk = true,
@@ -311,20 +282,17 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=11900,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E31
-            type = 'container',
             coords = {x=11899,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- rest of basement
         { -- E32
-            type = 'container',
             coords = {x=11907,y=6846,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -332,7 +300,6 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=11907,y=6847,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -342,7 +309,6 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=11913,y=6857,z=-1},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -350,7 +316,6 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=11913,y=6869,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -358,7 +323,6 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=11907,y=6865,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -367,7 +331,6 @@ local TheDrake = {
         },
         -- storage rooms, south to north
         { -- E37
-            type = 'container',
             coords = {x=11904,y=6858,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -375,7 +338,6 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=11904,y=6854,z=-1},
             dist = {"SafehouseTraps",},
             distIncludeJunk = true,
@@ -383,7 +345,6 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=11902,y=6854,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -391,7 +352,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=11902,y=6853,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -399,7 +359,6 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=11902,y=6852,z=-1},
             dist = {"StoreShelfMechanics",},
             distIncludeJunk = true,
@@ -407,7 +366,6 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=11904,y=6850,z=-1},
             dist = { "CrateLeather", },
             distIncludeJunk = true,
@@ -415,7 +373,6 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=11902,y=6848,z=-1},
             dist = {"SewingStoreTools", },
             distIncludeJunk = true,
@@ -423,7 +380,6 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=11902,y=6847,z=-1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -431,7 +387,6 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=11903,y=6847,z=-1},
             dist = { "SewingStoreFabric"},
             distIncludeJunk = true,
@@ -439,7 +394,6 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=11904,y=6846,z=-1},
             dist = {"ArtStorePottery",},
             distIncludeJunk = true,
@@ -449,7 +403,6 @@ local TheDrake = {
         -- first floor
         -- bar area
         { -- E47
-            type = 'container',
             coords = {x=11902,y=6853,z=0},
             dist = {"CrateBeer",},
             distIncludeJunk = true,
@@ -457,7 +410,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=11902,y=6852,z=0},
             dist = {"CrateWine",},
             distIncludeJunk = true,
@@ -465,7 +417,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=11902,y=6851,z=0},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -473,7 +424,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=11902,y=6850,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = true,
@@ -481,7 +431,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=11902,y=6849,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = true,
@@ -489,7 +438,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=11902,y=6848,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -497,7 +445,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=11904,y=6849,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -505,7 +452,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=11904,y=6848,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -514,7 +460,6 @@ local TheDrake = {
         },
         -- bar kitchen
         { -- E55
-            type = 'container',
             coords = {x=11902,y=6846,z=0},
             dist = {"BurgerKitchenFridge","BurgerKitchenFreezer"},
             distIncludeJunk = false,
@@ -522,7 +467,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=11902,y=6845,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -530,7 +474,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=11904,y=6845,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -538,7 +481,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=11902,y=6859,z=0},
             slot = "upper",
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -548,7 +490,6 @@ local TheDrake = {
         },
         -- 2nd floor apt
         { -- E59
-            type = 'container',
             coords = {x=11909,y=6851,z=1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -556,13 +497,11 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=11908,y=6851,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E61
-            type = 'container',
             coords = {x=11907,y=6851,z=1},
             dist = {"BurgerKitchenFridge","BurgerKitchenFreezer"},
             distIncludeJunk = false,
@@ -570,7 +509,6 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E62
-            type = 'container',
             coords = {x=11913,y=6851,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -578,7 +516,6 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=11905,y=6851,z=1},
             slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter",},

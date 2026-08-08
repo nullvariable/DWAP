@@ -69,13 +69,11 @@ local DarkWallow = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
@@ -85,13 +83,11 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
@@ -101,7 +97,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E5 lower (67)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -110,7 +105,6 @@ local DarkWallow = {
             level = "Loot_MedLevel",
         },
         { -- E6 upper
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
@@ -120,7 +114,6 @@ local DarkWallow = {
             level = "Loot_FishLevel",
         },
         { -- E7 lower (68)
-            type = 'container',
             sprite = 'location_trailer_02_19',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools"},
@@ -129,7 +122,6 @@ local DarkWallow = {
             level = "Loot_TailorLevel",
         },
         { -- E8 metal shelves (70)
-            type = 'container',
             sprite = 'location_trailer_02_23',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
@@ -138,36 +130,30 @@ local DarkWallow = {
             level = "Loot_FarmLevel",
         },
         { -- E9 metal shelves (71)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10 next to inner door (9372)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11 (73)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12 (9374)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13 far end next to stairs (9375)
-            type = 'container',
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -175,13 +161,11 @@ local DarkWallow = {
             level = "Loot_MediaLevel",
         },
         { -- E15 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16 metal wall shelves
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -189,7 +173,6 @@ local DarkWallow = {
             level = "Loot_FarmLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -197,7 +180,6 @@ local DarkWallow = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -205,7 +187,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=8711,y=15310,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {30,30} },
@@ -214,7 +195,6 @@ local DarkWallow = {
             level = "Loot_FarmLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=8711,y=15305,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -222,7 +202,6 @@ local DarkWallow = {
             level = "Loot_GunLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=8712,y=15305,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -233,7 +212,6 @@ local DarkWallow = {
         ---- First Floor ----
         ---------------------
         { -- E22
-            type = 'container',
             coords = {x=8707,y=15311,z=0},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -241,7 +219,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=8707,y=15310,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -249,7 +226,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=8707,y=15305,z=0},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -257,7 +233,6 @@ local DarkWallow = {
             level = "Loot_FarmLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=8708,y=15305,z=0},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -265,7 +240,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=8704,y=15305,z=0},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -273,7 +247,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=8704,y=15310,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -281,7 +254,6 @@ local DarkWallow = {
             level = "Loot_MediaLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=8710,y=15305,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -289,7 +261,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=8710,y=15305,z=0},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -298,7 +269,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=8712,y=15305,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -306,14 +276,12 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=8712,y=15305,z=0},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=8713,y=15305,z=0},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
@@ -321,7 +289,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=8713,y=15305,z=0},
             slot = "upper",
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
@@ -330,7 +297,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=8714,y=15305,z=0},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -338,7 +304,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=8714,y=15305,z=0},
             slot = "upper",
             dist = {"TheatrePopcorn", "TheatreSnacks"},
@@ -347,7 +312,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=8716,y=15307,z=0},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -355,7 +319,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=8716,y=15308,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -363,7 +326,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=8716,y=15309,z=0},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -371,7 +333,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=8717,y=15308,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -379,7 +340,6 @@ local DarkWallow = {
             level = "Loot_MediaLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=8719,y=15305,z=0},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -387,7 +347,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=8720,y=15305,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -395,7 +354,6 @@ local DarkWallow = {
             level = "Loot_MediaLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=8721,y=15305,z=0},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -403,7 +361,6 @@ local DarkWallow = {
             level = "Loot_FoodLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=8717,y=15307,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -414,7 +371,6 @@ local DarkWallow = {
         ---- Second Floor -----
         -----------------------
         { -- E44
-            type = 'container',
             coords = {x=8704,y=15310,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -422,13 +378,11 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E45
-            type = 'container',
             coords = {x=8704,y=15307,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=8704,y=15306,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -436,7 +390,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=8704,y=15305,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -444,7 +397,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=8708,y=15309,z=1},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -452,7 +404,6 @@ local DarkWallow = {
             level = "Loot_TailorLevel",
         },
         { -- E49
-            type = 'container',
             coords = {x=8709,y=15309,z=1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -460,7 +411,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=8709,y=15305,z=1},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
@@ -468,7 +418,6 @@ local DarkWallow = {
             level = "Loot_MedLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=8710,y=15305,z=1},
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -476,7 +425,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=8719,y=15305,z=1},
             dist = {"MedicalCabinet","BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -484,7 +432,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=8721,y=15308,z=1},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -492,7 +439,6 @@ local DarkWallow = {
             level = "Loot_LockersLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=8721,y=15310,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -500,7 +446,6 @@ local DarkWallow = {
             level = "Loot_FishLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=8721,y=15313,z=1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -508,7 +453,6 @@ local DarkWallow = {
             level = "Loot_MediaLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=8709,y=15312,z=1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -516,7 +460,6 @@ local DarkWallow = {
             level = "Loot_GunLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=8709,y=15311,z=1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -524,7 +467,6 @@ local DarkWallow = {
             level = "Loot_GunLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=8715,y=15308,z=1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -532,7 +474,6 @@ local DarkWallow = {
             level = "Loot_ToolsLevel",
         },
         { -- E59
-            type = 'container',
             coords = {x=8716,y=15308,z=1},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
             distIncludeJunk = true,
@@ -543,7 +484,6 @@ local DarkWallow = {
         ---- Attic -----
         ----------------
         { -- E60
-            type = 'container',
             coords = {x=8704,y=15309,z=2},
             items = {
                 { name = 'Base.NailsBox', },
@@ -552,7 +492,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E61
-            type = 'container',
             coords = {x=8704,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -560,7 +499,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E62
-            type = 'container',
             coords = {x=8717,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -568,7 +506,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=8718,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -576,7 +513,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E64
-            type = 'container',
             coords = {x=8719,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -584,7 +520,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E65
-            type = 'container',
             coords = {x=8720,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -592,7 +527,6 @@ local DarkWallow = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=8721,y=15308,z=2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,

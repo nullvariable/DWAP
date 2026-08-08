@@ -78,7 +78,6 @@ local WestPointHome = {
         -- basement
         -- rec room
         { -- E1
-            type = 'container',
             coords = {x=11770,y=6672,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
@@ -86,7 +85,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E2
-            type = 'container',
             coords = {x=11770,y=6671,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -94,13 +92,11 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=11770,y=6663,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E4
-            type = 'container',
             coords = {x=11765,y=6663,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
@@ -108,7 +104,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=11764,y=6663,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -116,7 +111,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=11763,y=6663,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
@@ -124,7 +118,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=11767,y=6667,z=-1},
             dist = {"TheatreSnacks", "CrateSodaBottles", "CrateSodaCans"},
             distIncludeJunk = false,
@@ -132,7 +125,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=11764,y=6666,z=-1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -140,7 +132,6 @@ local WestPointHome = {
             level = "Loot_MediaLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=11764,y=6667,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -148,7 +139,6 @@ local WestPointHome = {
             level = "Loot_MediaLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=11764,y=6668,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -157,24 +147,20 @@ local WestPointHome = {
         },
         -- shelter room
         { -- E11
-            type = 'container',
             coords = {x=11761,y=6662,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E12
-            type = 'container',
             coords = {x=11759,y=6660,z=-1},
             special = "essentials",
         },
         { -- E13
-            type = 'container',
             coords = {x=11759,y=6659,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E14
-            type = 'container',
             coords = {x=11759,y=6658,z=-1},
             dist = {"BathroomCounter", "SafehouseMedical"},
             distIncludeJunk = true,
@@ -182,7 +168,6 @@ local WestPointHome = {
             level = "Loot_MedLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=11759,y=6658,z=-1},
             slot = "upper",
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
@@ -192,19 +177,16 @@ local WestPointHome = {
         },
         -- main storage room
         { -- E16
-            type = 'container',
             coords = {x=11762,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=11761,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=11759,y=6663,z=-1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "PawnShopKnives",},
             distIncludeJunk = false,
@@ -212,7 +194,6 @@ local WestPointHome = {
             level = "Loot_GunLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=11758,y=6663,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -220,19 +201,16 @@ local WestPointHome = {
             level = "Loot_GunLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=11762,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E21
-            type = 'container',
             coords = {x=11761,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E22
-            type = 'container',
             coords = {x=11759,y=6666,z=-1},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -240,7 +218,6 @@ local WestPointHome = {
             level = "Loot_TailorLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=11758,y=6666,z=-1},
             dist = {"JewelerTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -248,7 +225,6 @@ local WestPointHome = {
             level = "Loot_TailorLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=11757,y=6666,z=-1},
             dist = {"CrateLongStick"},
             items = {
@@ -259,7 +235,6 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=11762,y=6667,z=-1},
             dist = {"CrateAntiqueStove", "CampingStoreLighting"},
             distIncludeJunk = false,
@@ -267,7 +242,6 @@ local WestPointHome = {
             level = 1,
         },
         { -- E26
-            type = 'container',
             coords = {x=11761,y=6667,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -276,7 +250,6 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=11759,y=6668,z=-1},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -284,7 +257,6 @@ local WestPointHome = {
             level = "Loot_FishLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=11758,y=6668,z=-1},
             dist = {"Trapper", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -292,7 +264,6 @@ local WestPointHome = {
             level = "Loot_FishLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=11757,y=6668,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -300,7 +271,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=11754,y=6668,z=-1},
             dist = { "CarSupplyTools", "GasStoreEmergency"},
             distIncludeJunk = true,
@@ -308,7 +278,6 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E31
-            type = 'container',
             coords = {x=11762,y=6669,z=-1},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
@@ -316,7 +285,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=11761,y=6669,z=-1},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -324,7 +292,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=11759,y=6670,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -332,7 +299,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=11758,y=6670,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -340,7 +306,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E35
-            type = 'container',
             coords = {x=11757,y=6670,z=-1},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = false,
@@ -348,7 +313,6 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=11762,y=6671,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -358,7 +322,6 @@ local WestPointHome = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=11761,y=6671,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -366,7 +329,6 @@ local WestPointHome = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=11759,y=6672,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -374,7 +336,6 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=11758,y=6672,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
             distIncludeJunk = true,
@@ -382,7 +343,6 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=11757,y=6672,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -390,7 +350,6 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=11756,y=6672,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -399,69 +358,140 @@ local WestPointHome = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        -- E42
-        { type = 'container', coords = {x=11770,y=6671,z=0}, }, -- counter @ kitchen
-        -- E43
-        { type = 'container', coords = {x=11770,y=6671,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E44
-        { type = 'container', coords = {x=11772,y=6671,z=0}, }, -- counter @ kitchen
-        -- E45
-        { type = 'container', coords = {x=11772,y=6671,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E46
-        { type = 'container', coords = {x=11770,y=6672,z=0}, }, -- counter @ kitchen
-        -- E47
-        { type = 'container', coords = {x=11770,y=6672,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E48
-        { type = 'container', coords = {x=11772,y=6673,z=0}, }, -- counter @ kitchen
-        -- E49
-        { type = 'container', coords = {x=11772,y=6673,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E50
-        { type = 'container', coords = {x=11772,y=6674,z=0}, }, -- counter @ kitchen
-        -- E51
-        { type = 'container', coords = {x=11772,y=6674,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E52
-        { type = 'container', coords = {x=11770,y=6675,z=0}, }, -- fridge @ kitchen
-        -- E53
-        { type = 'container', coords = {x=11770,y=6675,z=0}, slot = "freezer", }, -- freezer @ kitchen
-        -- E54
-        { type = 'container', coords = {x=11771,y=6675,z=0}, }, -- dishwasher @ kitchen
-        -- E55
-        { type = 'container', coords = {x=11772,y=6675,z=0}, }, -- counter @ kitchen
-        -- E56
-        { type = 'container', coords = {x=11772,y=6675,z=0}, slot = "upper", }, -- counter @ kitchen
-        -- E57
-        { type = 'container', coords = {x=11769,y=6677,z=0}, slot = "upper", }, -- metal_shelves @ closet
-        -- E58
-        { type = 'container', coords = {x=11764,y=6673,z=0}, }, -- dresser @ livingroom
-        -- E59
-        { type = 'container', coords = {x=11764,y=6677,z=0}, }, -- shelves @ livingroom
-        -- E60
-        { type = 'container', coords = {x=11765,y=6677,z=0}, }, -- dresser @ livingroom
-        -- E61
-        { type = 'container', coords = {x=11766,y=6677,z=0}, }, -- sidetable @ livingroom
-        -- E62
-        { type = 'container', coords = {x=11767,y=6665,z=0}, }, -- dresser @ bedroom
-        -- E63
-        { type = 'container', coords = {x=11764,y=6669,z=0}, }, -- dresser @ livingroom
-        -- E64
-        { type = 'container', coords = {x=11772,y=6668,z=0}, }, -- shelves @ livingroom
-        -- E65
-        { type = 'container', coords = {x=11772,y=6669,z=0}, }, -- shelves @ livingroom
-        -- E66
-        { type = 'container', coords = {x=11772,y=6670,z=0}, }, -- shelves @ livingroom
-        -- E67
-        { type = 'container', coords = {x=11768,y=6667,z=0}, slot = "upper", }, -- medicine @ bathroom
-        -- E68
-        { type = 'container', coords = {x=11772,y=6665,z=0}, }, -- dresser @ bedroom
-        -- E69
-        { type = 'container', coords = {x=11765,y=6637,z=0}, }, -- counter @ greenhouse
-        -- E70
-        { type = 'container', coords = {x=11773,y=6640,z=0}, slot = "upper", }, -- metal_shelves @ garagestorage
-        -- E71
-        { type = 'container', coords = {x=11773,y=6638,z=0}, }, -- counter @ garagestorage
-        -- E72
-        { type = 'container', coords = {x=11773,y=6639,z=0}, }, -- counter @ garagestorage
-    },
+        { -- E42
+            note = "counter @ kitchen",
+            coords = {x=11770,y=6671,z=0},
+        },
+        { -- E43
+            note = "counter @ kitchen",
+            coords = {x=11770,y=6671,z=0},
+            slot = "upper",
+        },
+        { -- E44
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6671,z=0},
+        },
+        { -- E45
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6671,z=0},
+            slot = "upper",
+        },
+        { -- E46
+            note = "counter @ kitchen",
+            coords = {x=11770,y=6672,z=0},
+        },
+        { -- E47
+            note = "counter @ kitchen",
+            coords = {x=11770,y=6672,z=0},
+            slot = "upper",
+        },
+        { -- E48
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6673,z=0},
+        },
+        { -- E49
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6673,z=0},
+            slot = "upper",
+        },
+        { -- E50
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6674,z=0},
+        },
+        { -- E51
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6674,z=0},
+            slot = "upper",
+        },
+        { -- E52
+            note = "fridge @ kitchen",
+            coords = {x=11770,y=6675,z=0},
+        },
+        { -- E53
+            note = "freezer @ kitchen",
+            coords = {x=11770,y=6675,z=0},
+            slot = "freezer",
+        },
+        { -- E54
+            note = "dishwasher @ kitchen",
+            coords = {x=11771,y=6675,z=0},
+        },
+        { -- E55
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6675,z=0},
+        },
+        { -- E56
+            note = "counter @ kitchen",
+            coords = {x=11772,y=6675,z=0},
+            slot = "upper",
+        },
+        { -- E57
+            note = "metal_shelves @ closet",
+            coords = {x=11769,y=6677,z=0},
+            slot = "upper",
+        },
+        { -- E58
+            note = "dresser @ livingroom",
+            coords = {x=11764,y=6673,z=0},
+        },
+        { -- E59
+            note = "shelves @ livingroom",
+            coords = {x=11764,y=6677,z=0},
+        },
+        { -- E60
+            note = "dresser @ livingroom",
+            coords = {x=11765,y=6677,z=0},
+        },
+        { -- E61
+            note = "sidetable @ livingroom",
+            coords = {x=11766,y=6677,z=0},
+        },
+        { -- E62
+            note = "dresser @ bedroom",
+            coords = {x=11767,y=6665,z=0},
+        },
+        { -- E63
+            note = "dresser @ livingroom",
+            coords = {x=11764,y=6669,z=0},
+        },
+        { -- E64
+            note = "shelves @ livingroom",
+            coords = {x=11772,y=6668,z=0},
+        },
+        { -- E65
+            note = "shelves @ livingroom",
+            coords = {x=11772,y=6669,z=0},
+        },
+        { -- E66
+            note = "shelves @ livingroom",
+            coords = {x=11772,y=6670,z=0},
+        },
+        { -- E67
+            note = "medicine @ bathroom",
+            coords = {x=11768,y=6667,z=0},
+            slot = "upper",
+        },
+        { -- E68
+            note = "dresser @ bedroom",
+            coords = {x=11772,y=6665,z=0},
+        },
+        { -- E69
+            note = "counter @ greenhouse",
+            coords = {x=11765,y=6637,z=0},
+        },
+        { -- E70
+            note = "metal_shelves @ garagestorage",
+            coords = {x=11773,y=6640,z=0},
+            slot = "upper",
+        },
+        { -- E71
+            note = "counter @ garagestorage",
+            coords = {x=11773,y=6638,z=0},
+        },
+        { -- E72
+            note = "counter @ garagestorage",
+            coords = {x=11773,y=6639,z=0},
+        },    },
 }
 
 return WestPointHome

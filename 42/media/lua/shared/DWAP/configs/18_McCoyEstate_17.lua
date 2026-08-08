@@ -86,7 +86,6 @@ local McCoyEstate = {
     },
     loot = {
         { -- E1
-            type = 'container',
             coords = {x = 10095, y = 8262, z = 0},
             special = "essentials",
         },
@@ -94,32 +93,27 @@ local McCoyEstate = {
         -- first floor
         -- office
         { -- E2
-            type = 'container',
             coords = {x=10093,y=8256,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E3
-            type = 'container',
             coords = {x=10097,y=8254,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E4
-            type = 'container',
             coords = {x=10098,y=8254,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E5
-            type = 'container',
             coords = {x=10093,y=8257,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         -- sitting area
         { -- E6
-            type = 'container',
             coords = {x=10095,y=8257,z=1},
             slot = "upper",
             dist = {"MusicStoreCDs"},
@@ -128,7 +122,6 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=10099,y=8257,z=1},
             slot = "upper",
             dist = {"BookstoreMilitaryHistory"},
@@ -137,7 +130,6 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=10100,y=8261,z=1},
             items = {
                 { name = 'TvWideScreen', chance = 1, count = {1,1} },
@@ -148,7 +140,6 @@ local McCoyEstate = {
             randUntilFull = true,
         },
         { -- E9
-            type = 'container',
             coords = {x=10099,y=8261,z=2},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -156,7 +147,6 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=10100,y=8260,z=1},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -164,13 +154,11 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=10093,y=8260,z=1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E12
-            type = 'container',
             coords = {x=10093,y=8261,z=1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -178,7 +166,6 @@ local McCoyEstate = {
             level = "Loot_FarmLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=10092,y=8262,z=1},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
@@ -186,7 +173,6 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E14
-            type = 'container',
             coords = {x=10091,y=8262,z=1},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -194,7 +180,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E15
-            type = 'container',
             coords = {x=10088,y=8254,z=1},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -202,7 +187,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=10089,y=8254,z=1},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -211,7 +195,6 @@ local McCoyEstate = {
         },
         -- near stairs
         { -- E17
-            type = 'container',
             coords = {x=10092,y=8254,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -219,13 +202,11 @@ local McCoyEstate = {
             level = "Loot_MediaLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=10092,y=8255,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E19
-            type = 'container',
             coords = {x=10089,y=8258,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -233,7 +214,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=10089,y=8259,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -241,7 +221,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=10089,y=8260,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -250,7 +229,6 @@ local McCoyEstate = {
         },
         -- kitchen
         { -- E22
-            type = 'container',
             coords = {x=10088,y=8260,z=1},
             dist = {"StoreKitchenButcher", "CrateFlour", "CrateOilVegetable", "StoreKitchenSauce", },
             distIncludeJunk = false,
@@ -258,7 +236,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=10085,y=8260,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -266,7 +243,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=10084,y=8260,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -274,13 +250,11 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=10084,y=8261,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=10084,y=8262,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -288,7 +262,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E27
-            type = 'container',
             coords = {x=10084,y=8262,z=1},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -297,7 +270,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=10084,y=8263,z=1},
             dist = {"CatfishKitchenFridge", "ChineseKitchenFridge"},
             distIncludeJunk = false,
@@ -305,7 +277,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E29
-            type = 'container',
             coords = {x=10084,y=8263,z=1},
             slot = "upper",
             dist = {"StoreKitchenBaking",},
@@ -314,7 +285,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=10084,y=8264,z=1},
             dist = {"WesternKitchenFreezer",},
             distIncludeJunk = false,
@@ -323,7 +293,6 @@ local McCoyEstate = {
         },
         -- master bedroom
         { -- E31
-            type = 'container',
             coords = {x=10080,y=8263,z=1},
             dist = {"FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -331,13 +300,11 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
         { -- E32
-            type = 'container',
             coords = {x=10080,y=8260,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=10080,y=8257,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -345,7 +312,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=10081,y=8257,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -354,7 +320,6 @@ local McCoyEstate = {
         },
         -- mb closet
         { -- E35
-            type = 'container',
             coords = {x=10088,y=8257,z=1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -362,7 +327,6 @@ local McCoyEstate = {
             level = "Loot_TailorLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=10087,y=8257,z=1},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -370,7 +334,6 @@ local McCoyEstate = {
             level = "Loot_TailorLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=10086,y=8257,z=1},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -378,7 +341,6 @@ local McCoyEstate = {
             level = "Loot_TailorLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=10085,y=8257,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -386,7 +348,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E39
-            type = 'container',
             coords = {x=10084,y=8257,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -394,7 +355,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=10088,y=8259,z=1},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -402,7 +362,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E41
-            type = 'container',
             coords = {x=10087,y=8259,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -410,7 +369,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=10086,y=8259,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -418,7 +376,6 @@ local McCoyEstate = {
             level = "Loot_LockersLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=10085,y=8259,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -427,7 +384,6 @@ local McCoyEstate = {
         },
         -- mb bath
         { -- E44
-            type = 'container',
             coords = {x=10080,y=8254,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -436,19 +392,16 @@ local McCoyEstate = {
         },
         -- top floor
         { -- E45
-            type = 'container',
             coords = {x=10083,y=8258,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=10083,y=8259,z=2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E47
-            type = 'container',
             coords = {x=10083,y=8261,z=2},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -456,7 +409,6 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=10087,y=8262,z=2},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -467,7 +419,6 @@ local McCoyEstate = {
             },
         },
         { -- E49
-            type = 'container',
             coords = {x=10084,y=8260,z=2},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -475,7 +426,6 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=10084,y=8263,z=2},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -483,7 +433,6 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=10090,y=8257,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -491,7 +440,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=10091,y=8257,z=2},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -499,7 +447,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E53
-            type = 'container',
             coords = {x=10090,y=8260,z=2},
             slot = "upper",
             dist = {"MedicalCabinet"},
@@ -508,7 +455,6 @@ local McCoyEstate = {
             level = "Loot_MedLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=10093,y=8255,z=2},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -516,7 +462,6 @@ local McCoyEstate = {
             level = "Loot_MedLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=10092,y=8255,z=2},
             dist = {"BathroomCounter", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -526,7 +471,6 @@ local McCoyEstate = {
         -- first floor
         -- butcher room
         { -- E56
-            type = 'container',
             coords = {x=10090,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -534,7 +478,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=10091,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "SeafoodKitchenSauce"},
             distIncludeJunk = true,
@@ -542,7 +485,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=10093,y=8252,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "StoreKitchenCutlery"},
             distIncludeJunk = true,
@@ -550,7 +492,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E59
-            type = 'container',
             coords = {x=10090,y=8254,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "FreezerRich"},
             distIncludeJunk = true,
@@ -558,7 +499,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=10090,y=8255,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -567,7 +507,6 @@ local McCoyEstate = {
         },
         -- hallway
         { -- E61
-            type = 'container',
             coords = {x=10092,y=8256,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -575,7 +514,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E62
-            type = 'container',
             coords = {x=10093,y=8256,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -583,7 +521,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=10091,y=8258,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -591,7 +528,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E64
-            type = 'container',
             coords = {x=10090,y=8258,z=0},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -600,7 +536,6 @@ local McCoyEstate = {
         },
         -- storage room with generator
         { -- E65
-            type = 'container',
             coords = {x=10089,y=8261,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -608,7 +543,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=10089,y=8262,z=0},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -616,7 +550,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E67
-            type = 'container',
             coords = {x=10085,y=8258,z=0},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -624,7 +557,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E68
-            type = 'container',
             coords = {x=10085,y=8259,z=0},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -632,7 +564,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E69
-            type = 'container',
             coords = {x=10085,y=8263,z=0},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -640,7 +571,6 @@ local McCoyEstate = {
             level = 1,
         },
         { -- E70
-            type = 'container',
             coords = {x=10085,y=8264,z=0},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -648,7 +578,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E71
-            type = 'container',
             coords = {x=10086,y=8264,z=0},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
@@ -657,7 +586,6 @@ local McCoyEstate = {
         },
         -- garage area
         { -- E72
-            type = 'container',
             coords = {x=10082,y=8257,z=0},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -665,7 +593,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E73
-            type = 'container',
             coords = {x=10081,y=8257,z=0},
             slot = "upper",
             dist = {"CarSupplyTools", "GasStorageMechanics",},
@@ -674,7 +601,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
-            type = 'container',
             coords = {x=10084,y=8257,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -682,7 +608,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E75
-            type = 'container',
             coords = {x=10084,y=8258,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -691,7 +616,6 @@ local McCoyEstate = {
         },
         -- more hallway
         { -- E76
-            type = 'container',
             coords = {x=10078,y=8255,z=0},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -699,7 +623,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E77
-            type = 'container',
             coords = {x=10078,y=8256,z=0},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -707,7 +630,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E78
-            type = 'container',
             coords = {x=10081,y=8254,z=0},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -715,7 +637,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E79
-            type = 'container',
             coords = {x=10082,y=8254,z=0},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -724,13 +645,11 @@ local McCoyEstate = {
         },
         -- more hallway other side of stairs
         { -- E80
-            type = 'container',
             coords = {x=10099,y=8263,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E81
-            type = 'container',
             coords = {x=10099,y=8264,z=0},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -738,7 +657,6 @@ local McCoyEstate = {
             level = "Loot_GunLevel",
         },
         { -- E82
-            type = 'container',
             coords = {x=10099,y=8265,z=0},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -747,7 +665,6 @@ local McCoyEstate = {
         },
 
         { -- E83
-            type = 'container',
             coords = {x=10095,y=8261,z=0},
             items = {
                 { name = 'Base.NailsCarton', },
@@ -756,7 +673,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
-            type = 'container',
             coords = {x=10095,y=8260,z=0},
             items = {
                 { name = 'Base.ScrewsCarton', chance = 1, count = {2,5} },
@@ -765,7 +681,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
-            type = 'container',
             coords = {x=10095,y=8258,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -775,7 +690,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
-            type = 'container',
             coords = {x=10095,y=8257,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -783,7 +697,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E87
-            type = 'container',
             coords = {x=10100,y=8262,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -791,7 +704,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E88
-            type = 'container',
             coords = {x=10098,y=8257,z=0},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
@@ -799,7 +711,6 @@ local McCoyEstate = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
-            type = 'container',
             coords = {x=10099,y=8257,z=0},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -808,7 +719,6 @@ local McCoyEstate = {
         },
         -- food storage area
         { -- E90
-            type = 'container',
             coords = {x=10099,y=8254,z=0},
             dist = {"FreezerGarage" },
             distIncludeJunk = false,
@@ -816,7 +726,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E91
-            type = 'container',
             coords = {x=10098,y=8254,z=0},
             dist = {"FreezerGarage" },
             distIncludeJunk = false,
@@ -824,7 +733,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E92
-            type = 'container',
             coords = {x=10097,y=8256,z=0},
             dist = {"GigamartDryGoods" },
             distIncludeJunk = false,
@@ -832,7 +740,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E93
-            type = 'container',
             coords = {x=10098,y=8256,z=0},
             dist = {"GigamartDryGoods" },
             distIncludeJunk = false,
@@ -842,7 +749,6 @@ local McCoyEstate = {
 
         -- shop building
         { -- E94
-            type = 'container',
             coords = {x=10108,y=8248,z=0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -850,7 +756,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E95
-            type = 'container',
             coords = {x=10117,y=8243,z=0},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -860,7 +765,6 @@ local McCoyEstate = {
             level = "Loot_FarmLevel",
         },
         { -- E96
-            type = 'container',
             coords = {x=10117,y=8242,z=0},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -870,7 +774,6 @@ local McCoyEstate = {
             level = "Loot_FarmLevel",
         },
         { -- E97
-            type = 'container',
             coords = {x=10117,y=8239,z=0},
             dist = {"CrateBlacksmithing", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = false,
@@ -878,7 +781,6 @@ local McCoyEstate = {
             level = "Loot_ToolsLevel",
         },
         { -- E98
-            type = 'container',
             coords = {x=10114,y=8239,z=0},
             slot = "upper",
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -888,7 +790,6 @@ local McCoyEstate = {
         },
         -- fishing building
         { -- E99
-            type = 'container',
             coords = {x=10092,y=8282,z=0},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -896,7 +797,6 @@ local McCoyEstate = {
             level = "Loot_FishLevel",
         },
         { -- E100
-            type = 'container',
             coords = {x=10093,y=8282,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -904,7 +804,6 @@ local McCoyEstate = {
             level = "Loot_FishLevel",
         },
         { -- E101
-            type = 'container',
             coords = {x=10093,y=8279,z=0},
             dist = {"FishingStoreGear", "FishermanTools"},
             distIncludeJunk = false,
@@ -912,7 +811,6 @@ local McCoyEstate = {
             level = "Loot_FishLevel",
         },
         { -- E102
-            type = 'container',
             coords = {x=10094,y=8279,z=0},
             dist = {"SurvivalGear",},
             distIncludeJunk = false,
@@ -920,7 +818,6 @@ local McCoyEstate = {
             level = "Loot_FishLevel",
         },
         { -- E103
-            type = 'container',
             coords = {x=10095,y=8279,z=0},
             dist = { "SushiKitchenBaking"},
             distIncludeJunk = false,
@@ -928,7 +825,6 @@ local McCoyEstate = {
             level = "Loot_FishLevel",
         },
         { -- E104
-            type = 'container',
             coords = {x=10090,y=8280,z=0},
             dist = {"SushiKitchenFreezer"},
             distIncludeJunk = true,
@@ -936,7 +832,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E105
-            type = 'container',
             coords = {x=10099,y=8279,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -944,7 +839,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E106
-            type = 'container',
             coords = {x=10099,y=8280,z=0},
             dist = {"ArtStorePottery"},
             distIncludeJunk = true,
@@ -952,7 +846,6 @@ local McCoyEstate = {
             level = "Loot_FoodLevel",
         },
         { -- E107
-            type = 'container',
             coords = {x=10099,y=8282,z=0},
             dist = {"TestingLab", "TobaccoStoreAccessories", "ToolStoreAccessories", "ArtStorePottery", "ArtSupplies"},
             distIncludeJunk = true,
@@ -962,7 +855,6 @@ local McCoyEstate = {
 
         -- crate near chicken pen
         { -- E108
-            type = 'container',
             coords = {x=10056,y=8236,z=0},
             dist = {"BarnTools", "CrateAnimalFeed", },
             distIncludeJunk = true,
@@ -970,7 +862,6 @@ local McCoyEstate = {
             level = "Loot_FarmLevel",
         },
         { -- E109
-            type = 'container',
             coords = {x=10058,y=8236,z=0},
             dist = {"CrateGravelBags", },
             distIncludeJunk = true,
@@ -979,7 +870,6 @@ local McCoyEstate = {
         },
         -- woodpile
         { -- E110
-            type = 'container',
             coords = {x=10115,y=8260,z=0},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },

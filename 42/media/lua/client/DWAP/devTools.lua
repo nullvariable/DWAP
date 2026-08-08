@@ -1806,10 +1806,21 @@ local function allLootFinishConfig(unloaded, badZ)
         -- landed: "containers:" and "dist:" above are separate histograms, so
         -- the pairing exists nowhere else. Only resolved entries appear -
         -- an entry whose container was not found proves nothing about which
-        -- loot suits which room. Format is fixed and greppable on purpose:
-        --   <containerType>@<room> | <level|-> | <dist,dist|special:name|->
+        -- loot suits which room.
+        --
+        -- The leading E<n> and coords are what make this file usable as a data
+        -- source rather than just something to read. Because unresolved entries
+        -- are skipped, row N is NOT entry N: every failure shifts everything
+        -- after it, and a config with 86 entries can print 77 rows. Without a
+        -- key, anything mapping these rows back onto the config by position
+        -- silently mis-assigns after the first gap. Coords are the durable key
+        -- (they survive reordering); the index is the convenient one.
+        --
+        -- Format is fixed and greppable on purpose:
+        --   E<n> | <x,y,z> | <containerType>@<room> | <level|-> | <dist,dist|special:name|->
         if #result.containerDetails > 0 then
-            allLootWrite(("  entry-map (%d):"):format(#result.containerDetails))
+            allLootWrite(("  entry-map (%d of %d entries resolved):"):format(
+                #result.containerDetails, result.totalEntries or #result.containerDetails))
             for i = 1, #result.containerDetails do
                 local d = result.containerDetails[i]
                 local tags = "-"
@@ -1818,7 +1829,8 @@ local function allLootFinishConfig(unloaded, badZ)
                 elseif d.dist and #d.dist > 0 then
                     tags = table.concat(d.dist, ",")
                 end
-                allLootWrite(("    %s@%s | %s | %s"):format(
+                allLootWrite(("    E%d | %d,%d,%d | %s@%s | %s | %s"):format(
+                    d.entry, d.x, d.y, d.z,
                     d.containerType, d.room, tostring(d.level or "-"), tags))
             end
         end
@@ -4198,6 +4210,114 @@ end
 --- addresses the square. `claimed` is the work already done, `free` is what a
 --- generator would have to fill. Pass a config index to compare against, or
 --- omit it to just list what is there.
+--- Why did a square not reach the room export?
+---
+--- The overlay, the pink pick highlight and the export each enumerate
+--- differently, so "it lit up but did not export" has several possible causes
+--- and no way to tell them apart from the output. This walks the same path the
+--- export takes and reports where the square drops out:
+---   * square/room resolves at all
+---   * the room's key, and whether that exact key is picked (two rooms can both
+---     be called "bedroom" - the key carries the def coords precisely because
+---     the name does not identify a room)
+---   * whether room:getSquares() actually contains this square
+---   * every object on the square, its container count and types
+---   * the skip-list / slot / stack decision roomContainers would make
+---   * whether the nearest config already claims it
+---
+--- DWAPExplainSquare(8082, 11560, 2)
+function DWAPExplainSquare(x, y, z)
+    local square = getCell():getGridSquare(x, y, z)
+    if not square then
+        print(("DWAPExplain %d,%d,%d: square not loaded"):format(x, y, z))
+        return
+    end
+    print(("=== DWAPExplain %d,%d,%d ==="):format(x, y, z))
+
+    local room = square:getRoom()
+    local key = room and roomKey(room)
+    print(("  room: %s   key: %s"):format(
+        room and (room:getName() or "?") or "NONE", tostring(key)))
+    if key then
+        print(("  this room picked: %s"):format(tostring(roomPickedKeys[key] and true or false)))
+    end
+
+    -- Is the square actually in the picked room's square list? The highlight
+    -- and the export both read this, so a mismatch here is the whole answer.
+    local inPicked = false
+    local picked = pickedRoomObjects()
+    for i = 1, #picked do
+        local squares = picked[i]:getSquares()
+        for j = 0, (squares and squares:size() or 0) - 1 do
+            if squares:get(j) == square then inPicked = true break end
+        end
+        if inPicked then break end
+    end
+    print(("  in a PICKED room's getSquares(): %s   (%d room(s) picked)"):format(
+        tostring(inPicked), #picked))
+
+    local objects = square:getObjects()
+    print(("  objects on square: %d"):format(objects and objects:size() or 0))
+    for i = 0, (objects and objects:size() or 0) - 1 do
+        local obj = objects:get(i)
+        local n = obj.getContainerCount and obj:getContainerCount() or 0
+        print(("    [%d] %s  containerCount=%d  getContainer=%s"):format(
+            i, tostring(obj:getSpriteName()), n,
+            obj:getContainer() and tostring(obj:getContainer():getType()) or "nil"))
+    end
+    -- specialObjects are NOT in getObjects(), and getSquareContainers only walks
+    -- getObjects() - so a container living here is invisible to the whole chain.
+    local specials = square.getSpecialObjects and square:getSpecialObjects()
+    if specials and specials:size() > 0 then
+        print(("  specialObjects: %d (NOT scanned by getSquareContainers)"):format(specials:size()))
+        for i = 0, specials:size() - 1 do
+            local o = specials:get(i)
+            print(("    [s%d] %s  container=%s"):format(i, tostring(o:getSpriteName()),
+                o.getContainer and o:getContainer() and tostring(o:getContainer():getType()) or "nil"))
+        end
+    end
+
+    local list = DWAPUtils.getSquareContainers(square)
+    print(("  getSquareContainers: %d"):format(#list))
+    for i = 1, #list do
+        local cont = list[i].container
+        local ctype = cont:getType()
+        local skipped = ROOM_SKIP_TYPES[ctype] == true or ctype == "microwave"
+            or cont:isStove()
+        -- Say WHY it reads high. "upper" is not about stacking height - it is
+        -- the raised/wall-mounted slot versus the floor-level one - and a
+        -- cardboardbox sitting on a counter qualifies via renderYOffset, which
+        -- is not obvious from the exported entry alone.
+        local why = "-"
+        if ctype == "overhead" then
+            why = "type=overhead"
+        elseif cont:getContainerPosition() == "High" then
+            why = "ContainerPosition=High (runtime)"
+        else
+            local sprite = list[i].object.getSprite and list[i].object:getSprite()
+            local props = sprite and sprite:getProperties()
+            local yoff = list[i].object.getRenderYOffset and list[i].object:getRenderYOffset()
+            if props and props:get("ContainerPosition") == "High" then
+                why = "ContainerPosition=High (tile def)"
+            elseif yoff and yoff > 32 then
+                why = ("renderYOffset=%s (>32, drawn raised)"):format(tostring(yoff))
+            end
+        end
+        print(("    %d. %s  isHigh=%s [%s]  %s"):format(i, ctype, tostring(list[i].isHigh), why,
+            skipped and "SKIPPED by the export filter" or "exportable"))
+    end
+
+    local index = DWAPNearestConfig(true)
+    if index then
+        local configs = DWAPUtils.loadConfigs(true)
+        local config = configs and configs[index]
+        local lookup = config and buildContainerLookup(config)
+        local rec = lookup and lookup[DWAPUtils.hashCoords(x, y, z)]
+        print(("  nearest config %02d: %s"):format(index,
+            rec and "already has an entry at these coords" or "no entry at these coords"))
+    end
+end
+
 function DWAPRoomExport(index)
     if #roomPicked == 0 then
         DWAPUtils.dprint("Room pick: nothing picked")
@@ -4219,18 +4339,49 @@ function DWAPRoomExport(index)
         exportHeader("PICKED ROOMS", " | no config compared")
     end
 
+    -- A key can map to SEVERAL IsoRoom objects. The cell's room list holds
+    -- duplicates - the same duplication the "duplicate RoomDef.metaID" errors
+    -- report at world load - and each duplicate carries only part of the room's
+    -- squares. Overwriting into byKey kept whichever came last and silently lost
+    -- the rest: a bedroom of 15 squares exported as 2 containers, while the
+    -- highlight looked complete because roomPickTick iterates every match.
+    -- Collect them all and union below.
     local rooms = pickedRoomObjects()
     local byKey = {}
-    for i = 1, #rooms do byKey[roomKey(rooms[i])] = rooms[i] end
+    for i = 1, #rooms do
+        local k = roomKey(rooms[i])
+        if k then
+            byKey[k] = byKey[k] or {}
+            byKey[k][#byKey[k] + 1] = rooms[i]
+        end
+    end
 
     local totalFree, totalClaimed = 0, 0
     for i = 1, #roomPicked do
         local r = roomPicked[i]
-        local room = byKey[r.key]
-        if not room then
+        local matches = byKey[r.key]
+        if not matches then
             print(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
         else
-            local containers = roomContainers(room)
+            -- Union across every room object sharing this key, deduped on the
+            -- addressing a loot entry would actually use (coords plus slot or
+            -- stack) - two duplicates can list the same square.
+            local containers, seen = {}, {}
+            for m = 1, #matches do
+                local part = roomContainers(matches[m])
+                for n = 1, #part do
+                    local c = part[n]
+                    local sig = ("%d,%d,%d|%s|%s"):format(
+                        c.x, c.y, c.z, tostring(c.slot), tostring(c.stack))
+                    if not seen[sig] then
+                        seen[sig] = true
+                        containers[#containers + 1] = c
+                    end
+                end
+            end
+            if #matches > 1 then
+                print(("     (%d duplicate room objects share this key - unioned)"):format(#matches))
+            end
             local free, claimed, tally = {}, 0, {}
             for j = 1, #containers do
                 local c = containers[j]
@@ -4253,16 +4404,22 @@ function DWAPRoomExport(index)
                 i, r.key, #containers, #free, claimed))
             if #free > 0 then
                 print("     " .. allLootTallyString(tally))
+                -- Emitted in the config's own shape: multiline, one field per
+                -- line, and the descriptor as a note FIELD rather than a
+                -- trailing comment - `type` was never read and the note is what
+                -- the tools can actually see at runtime. No E-marker here; paste
+                -- it in and the stamper numbers the whole table.
                 for j = 1, #free do
                     local c = free[j]
-                    local qualifier = ""
+                    print("        {")
+                    print(('            note = "%s @ %s",'):format(c.ctype, r.name))
+                    print(("            coords = { x = %d, y = %d, z = %d },"):format(c.x, c.y, c.z))
                     if c.slot then
-                        qualifier = (' slot = "%s",'):format(c.slot)
+                        print(('            slot = "%s",'):format(c.slot))
                     elseif c.stack then
-                        qualifier = (' stack = %d,'):format(c.stack)
+                        print(("            stack = %d,"):format(c.stack))
                     end
-                    print(("        { type = 'container', coords = {x=%d,y=%d,z=%d},%s }, -- %s @ %s")
-                        :format(c.x, c.y, c.z, qualifier, c.ctype, r.name))
+                    print("        },")
                 end
             end
         end
@@ -4439,11 +4596,16 @@ function copyConfig()
         print("    loot = {")
         for i = 1, #copiedContainers do
             local container = copiedContainers[i]
-            local coordsStr = "coords = {x=" ..
-            container.coords.x .. ", y=" .. container.coords.y .. ", z=" .. container.coords.z .. "},"
+            local coordsStr = ("coords = { x = %d, y = %d, z = %d },"):format(
+                container.coords.x, container.coords.y, container.coords.z)
 
             print("        {")
-            print("            type = 'container',")
+            -- `type` was never read and is gone from the configs; the copied
+            -- entry carries the source entry's note, which is the part worth
+            -- keeping.
+            if container.note then
+                print(('            note = "%s",'):format(tostring(container.note)))
+            end
             if container.sprite then
                 print("            sprite = '" .. container.sprite .. "',")
             end
@@ -4522,7 +4684,3 @@ function copyConfig()
         offset = { x = offsetX, y = offsetY, z = offsetZ }
     }
 end
-
--- Old name kept as an alias: it is in CLAUDE.md, the handoff notes and a lot
--- of muscle memory. Drop it once those have caught up.
-TestAllLootConfigs = DWAPAudit

@@ -70,295 +70,612 @@ local FallasHotel = {
         { barricade = "metal",    enabled = "Barricade", target = "location_restaurant_pileocrepe_01_48", x = 7244, y = 8203, z = 0, },
     },
     loot = {
-        -- E1
-        { type = 'container', coords = {x=7248,y=8260,z=2}, }, -- locker @ janitor
-        -- E2
-        { type = 'container', coords = {x=7250,y=8260,z=2}, }, -- locker @ janitor
-        -- E3
-        { type = 'container', coords = {x=7248,y=8261,z=2}, }, -- cardboardbox @ janitor
-        -- E4
-        { type = 'container', coords = {x=7248,y=8262,z=2}, }, -- cardboardbox @ janitor
-        -- E5
-        { type = 'container', coords = {x=7248,y=8262,z=2}, slot = "upper", }, -- cardboardbox @ janitor
-        -- E6
-        { type = 'container', coords = {x=7248,y=8259,z=1}, }, -- cardboardbox @ janitor
-        -- E7
-        { type = 'container', coords = {x=7250,y=8259,z=1}, }, -- smallbox @ janitor
-        -- E8
-        { type = 'container', coords = {x=7248,y=8260,z=1}, }, -- cardboardbox @ janitor
-        -- E9
-        { type = 'container', coords = {x=7248,y=8260,z=1}, slot = "upper", }, -- cardboardbox @ janitor
-        -- E10
-        { type = 'container', coords = {x=7250,y=8260,z=1}, }, -- metal_shelves @ janitor
-        -- E11
-        { type = 'container', coords = {x=7249,y=8261,z=1}, slot = "upper", }, -- medicine @ bathroom
-        -- E12
-        { type = 'container', coords = {x=7249,y=8261,z=1}, }, -- counter @ bathroom
-        -- E13
-        { type = 'container', coords = {x=7243,y=8259,z=1}, }, -- wardrobe @ motelroom
-        -- E14
-        { type = 'container', coords = {x=7244,y=8259,z=1}, }, -- wardrobe @ motelroom
-        -- E15
-        { type = 'container', coords = {x=7246,y=8259,z=1}, }, -- dresser @ motelroom
-        -- E16
-        { type = 'container', coords = {x=7246,y=8256,z=1}, }, -- dresser @ motelroom
-        -- E17
-        { type = 'container', coords = {x=7248,y=8259,z=-1}, }, -- metal_shelves @ grocerystorage
-        -- E18
-        { type = 'container', coords = {x=7248,y=8260,z=-1}, }, -- metal_shelves @ grocerystorage
-        -- E19
-        { type = 'container', coords = {x=7248,y=8261,z=-1}, }, -- metal_shelves @ grocerystorage
-        -- E20
-        { type = 'container', coords = {x=7251,y=8261,z=-1}, }, -- cardboardbox @ grocerystorage
-        -- E21
-        { type = 'container', coords = {x=7248,y=8262,z=-1}, }, -- metal_shelves @ grocerystorage
-        -- E22
-        { type = 'container', coords = {x=7250,y=8262,z=-1}, }, -- smallbox @ grocerystorage
-        -- E23
-        { type = 'container', coords = {x=7251,y=8262,z=-1}, }, -- cardboardbox @ grocerystorage
-        -- E24
-        { type = 'container', coords = {x=7256,y=8256,z=-1}, }, -- counter @ janitor
-        -- E25
-        { type = 'container', coords = {x=7257,y=8256,z=-1}, }, -- metal_shelves @ janitor
-        -- E26
-        { type = 'container', coords = {x=7258,y=8253,z=-1}, }, -- cardboardbox @ storage
-        -- E27
-        { type = 'container', coords = {x=7259,y=8253,z=-1}, }, -- cardboardbox @ storage
-        -- E28
-        { type = 'container', coords = {x=7259,y=8253,z=-1}, slot = "upper", }, -- cardboardbox @ storage
-        -- E29
-        { type = 'container', coords = {x=7254,y=8256,z=-2}, }, -- locker @ laundry
-        -- E30
-        { type = 'container', coords = {x=7255,y=8253,z=-2}, slot = "upper", }, -- medicine @ laundry
-        -- E31
-        { type = 'container', coords = {x=7258,y=8249,z=-2}, }, -- militarylocker @ storage
-        -- E32
-        { type = 'container', coords = {x=7262,y=8249,z=-2}, }, -- militarylocker @ storage
-        -- E33
-        { type = 'container', coords = {x=7256,y=8253,z=-2}, }, -- woodstove @ storage
-        -- E34
-        { type = 'container', coords = {x=7260,y=8254,z=-2}, }, -- crate @ storage
-        -- E35
-        { type = 'container', coords = {x=7261,y=8254,z=-2}, }, -- crate @ storage
-        -- E36
-        { type = 'container', coords = {x=7261,y=8254,z=-2}, stack = 2, }, -- crate @ storage
-        -- E37
-        { type = 'container', coords = {x=7262,y=8254,z=-2}, }, -- crate @ storage
-        -- E38
-        { type = 'container', coords = {x=7262,y=8254,z=-2}, stack = 2, }, -- crate @ storage
-        -- E39
-        { type = 'container', coords = {x=7263,y=8254,z=-2}, }, -- crate @ storage
-        -- E40
-        { type = 'container', coords = {x=7256,y=8255,z=-2}, }, -- crate @ storage
-        -- E41
-        { type = 'container', coords = {x=7260,y=8255,z=-2}, }, -- crate @ storage
-        -- E42
-        { type = 'container', coords = {x=7261,y=8255,z=-2}, }, -- crate @ storage
-        -- E43
-        { type = 'container', coords = {x=7261,y=8255,z=-2}, stack = 2, }, -- crate @ storage
-        -- E44
-        { type = 'container', coords = {x=7262,y=8255,z=-2}, }, -- crate @ storage
-        -- E45
-        { type = 'container', coords = {x=7262,y=8255,z=-2}, stack = 2, }, -- crate @ storage
-        -- E46
-        { type = 'container', coords = {x=7263,y=8255,z=-2}, }, -- crate @ storage
-        -- E47
-        { type = 'container', coords = {x=7263,y=8255,z=-2}, stack = 2, }, -- crate @ storage
-        -- E48
-        { type = 'container', coords = {x=7267,y=8256,z=-2}, }, -- militarycrate @ storage
-        -- E49
-        { type = 'container', coords = {x=7268,y=8256,z=-2}, }, -- militarycrate @ storage
-        -- E50
-        { type = 'container', coords = {x=7266,y=8249,z=-2}, }, -- militarylocker @ storage
-        -- E51
-        { type = 'container', coords = {x=7264,y=8254,z=-2}, }, -- crate @ storage
-        -- E52
-        { type = 'container', coords = {x=7264,y=8255,z=-2}, }, -- crate @ storage
-        -- E53
-        { type = 'container', coords = {x=7264,y=8255,z=-2}, stack = 2, }, -- crate @ storage
-        -- E54
-        { type = 'container', coords = {x=7268,y=8255,z=-2}, }, -- militarycrate @ storage
-        -- The four bunkers below (z=-3, 4 + 18 containers each) are copies of
+        { -- E1
+            note = "locker @ janitor",
+            coords = {x=7248,y=8260,z=2},
+        },
+        { -- E2
+            note = "locker @ janitor",
+            coords = {x=7250,y=8260,z=2},
+        },
+        { -- E3
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8261,z=2},
+        },
+        { -- E4
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8262,z=2},
+        },
+        { -- E5
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8262,z=2},
+            slot = "upper",
+        },
+        { -- E6
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8259,z=1},
+        },
+        { -- E7
+            note = "smallbox @ janitor",
+            coords = {x=7250,y=8259,z=1},
+        },
+        { -- E8
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8260,z=1},
+        },
+        { -- E9
+            note = "cardboardbox @ janitor",
+            coords = {x=7248,y=8260,z=1},
+            slot = "upper",
+        },
+        { -- E10
+            note = "metal_shelves @ janitor",
+            coords = {x=7250,y=8260,z=1},
+        },
+        { -- E11
+            note = "medicine @ bathroom",
+            coords = {x=7249,y=8261,z=1},
+            slot = "upper",
+        },
+        { -- E12
+            note = "counter @ bathroom",
+            coords = {x=7249,y=8261,z=1},
+        },
+        { -- E13
+            note = "wardrobe @ motelroom",
+            coords = {x=7243,y=8259,z=1},
+        },
+        { -- E14
+            note = "wardrobe @ motelroom",
+            coords = {x=7244,y=8259,z=1},
+        },
+        { -- E15
+            note = "dresser @ motelroom",
+            coords = {x=7246,y=8259,z=1},
+        },
+        { -- E16
+            note = "dresser @ motelroom",
+            coords = {x=7246,y=8256,z=1},
+        },
+        { -- E17
+            note = "metal_shelves @ grocerystorage",
+            coords = {x=7248,y=8259,z=-1},
+        },
+        { -- E18
+            note = "metal_shelves @ grocerystorage",
+            coords = {x=7248,y=8260,z=-1},
+        },
+        { -- E19
+            note = "metal_shelves @ grocerystorage",
+            coords = {x=7248,y=8261,z=-1},
+        },
+        { -- E20
+            note = "cardboardbox @ grocerystorage",
+            coords = {x=7251,y=8261,z=-1},
+        },
+        { -- E21
+            note = "metal_shelves @ grocerystorage",
+            coords = {x=7248,y=8262,z=-1},
+        },
+        { -- E22
+            note = "smallbox @ grocerystorage",
+            coords = {x=7250,y=8262,z=-1},
+        },
+        { -- E23
+            note = "cardboardbox @ grocerystorage",
+            coords = {x=7251,y=8262,z=-1},
+        },
+        { -- E24
+            note = "counter @ janitor",
+            coords = {x=7256,y=8256,z=-1},
+        },
+        { -- E25
+            note = "metal_shelves @ janitor",
+            coords = {x=7257,y=8256,z=-1},
+        },
+        { -- E26
+            note = "cardboardbox @ storage",
+            coords = {x=7258,y=8253,z=-1},
+        },
+        { -- E27
+            note = "cardboardbox @ storage",
+            coords = {x=7259,y=8253,z=-1},
+        },
+        { -- E28
+            note = "cardboardbox @ storage",
+            coords = {x=7259,y=8253,z=-1},
+            slot = "upper",
+        },
+        { -- E29
+            note = "locker @ laundry",
+            coords = {x=7254,y=8256,z=-2},
+        },
+        { -- E30
+            note = "medicine @ laundry",
+            coords = {x=7255,y=8253,z=-2},
+            slot = "upper",
+        },
+        { -- E31
+            note = "militarylocker @ storage",
+            coords = {x=7258,y=8249,z=-2},
+        },
+        { -- E32
+            note = "militarylocker @ storage",
+            coords = {x=7262,y=8249,z=-2},
+        },
+        { -- E33
+            note = "woodstove @ storage",
+            coords = {x=7256,y=8253,z=-2},
+        },
+        { -- E34
+            note = "crate @ storage",
+            coords = {x=7260,y=8254,z=-2},
+        },
+        { -- E35
+            note = "crate @ storage",
+            coords = {x=7261,y=8254,z=-2},
+        },
+        { -- E36
+            note = "crate @ storage",
+            coords = {x=7261,y=8254,z=-2},
+            stack = 2,
+        },
+        { -- E37
+            note = "crate @ storage",
+            coords = {x=7262,y=8254,z=-2},
+        },
+        { -- E38
+            note = "crate @ storage",
+            coords = {x=7262,y=8254,z=-2},
+            stack = 2,
+        },
+        { -- E39
+            note = "crate @ storage",
+            coords = {x=7263,y=8254,z=-2},
+        },
+        { -- E40
+            note = "crate @ storage",
+            coords = {x=7256,y=8255,z=-2},
+        },
+        { -- E41
+            note = "crate @ storage",
+            coords = {x=7260,y=8255,z=-2},
+        },
+        { -- E42
+            note = "crate @ storage",
+            coords = {x=7261,y=8255,z=-2},
+        },
+        { -- E43
+            note = "crate @ storage",
+            coords = {x=7261,y=8255,z=-2},
+            stack = 2,
+        },
+        { -- E44
+            note = "crate @ storage",
+            coords = {x=7262,y=8255,z=-2},
+        },
+        { -- E45
+            note = "crate @ storage",
+            coords = {x=7262,y=8255,z=-2},
+            stack = 2,
+        },
+        { -- E46
+            note = "crate @ storage",
+            coords = {x=7263,y=8255,z=-2},
+        },
+        { -- E47
+            note = "crate @ storage",
+            coords = {x=7263,y=8255,z=-2},
+            stack = 2,
+        },
+        { -- E48
+            note = "militarycrate @ storage",
+            coords = {x=7267,y=8256,z=-2},
+        },
+        { -- E49
+            note = "militarycrate @ storage",
+            coords = {x=7268,y=8256,z=-2},
+        },
+        { -- E50
+            note = "militarylocker @ storage",
+            coords = {x=7266,y=8249,z=-2},
+        },
+        { -- E51
+            note = "crate @ storage",
+            coords = {x=7264,y=8254,z=-2},
+        },
+        { -- E52
+            note = "crate @ storage",
+            coords = {x=7264,y=8255,z=-2},
+        },
+        { -- E53
+            note = "crate @ storage",
+            coords = {x=7264,y=8255,z=-2},
+            stack = 2,
+        },
+        { -- E54
+            note = "militarycrate @ storage",
+            coords = {x=7268,y=8255,z=-2},
+        },        -- The four bunkers below (z=-3, 4 + 18 containers each) are copies of
         -- config 01 Doe Valley's floor plan and are identical to one another.
         -- They carry their own overlay, so their loot should be varied from 01
         -- rather than mirroring it, and ideally varied between the four.
-        -- E55
-        { type = 'container', coords = {x=7254,y=8250,z=-3}, }, -- metal_shelves @ bunker
-        -- E56
-        { type = 'container', coords = {x=7254,y=8251,z=-3}, }, -- metal_shelves @ bunker
-        -- E57
-        { type = 'container', coords = {x=7254,y=8252,z=-3}, }, -- metal_shelves @ bunker
-        -- E58
-        { type = 'container', coords = {x=7254,y=8253,z=-3}, }, -- metal_shelves @ bunker
-        -- E59
-        { type = 'container', coords = {x=7254,y=8248,z=-3}, }, -- metal_shelves @ bunker
-        -- E60
-        { type = 'container', coords = {x=7254,y=8249,z=-3}, }, -- metal_shelves @ bunker
-        -- E61
-        { type = 'container', coords = {x=7254,y=8243,z=-3}, }, -- dresser @ bunker
-        -- E62
-        { type = 'container', coords = {x=7254,y=8244,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E63
-        { type = 'container', coords = {x=7254,y=8244,z=-3}, }, -- counter @ bunker
-        -- E64
-        { type = 'container', coords = {x=7254,y=8245,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E65
-        { type = 'container', coords = {x=7254,y=8245,z=-3}, }, -- counter @ bunker
-        -- E66
-        { type = 'container', coords = {x=7254,y=8246,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E67
-        { type = 'container', coords = {x=7254,y=8246,z=-3}, }, -- counter @ bunker
-        -- E68
-        { type = 'container', coords = {x=7254,y=8247,z=-3}, }, -- fridge @ bunker
-        -- E69
-        { type = 'container', coords = {x=7254,y=8247,z=-3}, slot = "freezer", }, -- freezer @ bunker
-        -- E70
-        { type = 'container', coords = {x=7256,y=8248,z=-3}, }, -- militarylocker @ bunker
-        -- E71
-        { type = 'container', coords = {x=7256,y=8241,z=-3}, }, -- crate @ bunker
-        -- E72
-        { type = 'container', coords = {x=7256,y=8241,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E73
-        { type = 'container', coords = {x=7256,y=8242,z=-3}, }, -- crate @ bunker
-        -- E74
-        { type = 'container', coords = {x=7256,y=8242,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E75
-        { type = 'container', coords = {x=7256,y=8246,z=-3}, }, -- locker @ bunker
-        -- E76
-        { type = 'container', coords = {x=7256,y=8247,z=-3}, }, -- militarylocker @ bunker
-        -- E77
-        { type = 'container', coords = {x=7258,y=8250,z=-3}, }, -- metal_shelves @ bunker
-        -- E78
-        { type = 'container', coords = {x=7258,y=8251,z=-3}, }, -- metal_shelves @ bunker
-        -- E79
-        { type = 'container', coords = {x=7258,y=8252,z=-3}, }, -- metal_shelves @ bunker
-        -- E80
-        { type = 'container', coords = {x=7258,y=8253,z=-3}, }, -- metal_shelves @ bunker
-        -- E81
-        { type = 'container', coords = {x=7258,y=8248,z=-3}, }, -- metal_shelves @ bunker
-        -- E82
-        { type = 'container', coords = {x=7260,y=8248,z=-3}, }, -- militarylocker @ bunker
-        -- E83
-        { type = 'container', coords = {x=7258,y=8249,z=-3}, }, -- metal_shelves @ bunker
-        -- E84
-        { type = 'container', coords = {x=7260,y=8241,z=-3}, }, -- crate @ bunker
-        -- E85
-        { type = 'container', coords = {x=7260,y=8241,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E86
-        { type = 'container', coords = {x=7260,y=8242,z=-3}, }, -- crate @ bunker
-        -- E87
-        { type = 'container', coords = {x=7260,y=8242,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E88
-        { type = 'container', coords = {x=7258,y=8243,z=-3}, }, -- dresser @ bunker
-        -- E89
-        { type = 'container', coords = {x=7258,y=8244,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E90
-        { type = 'container', coords = {x=7258,y=8244,z=-3}, }, -- counter @ bunker
-        -- E91
-        { type = 'container', coords = {x=7258,y=8245,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E92
-        { type = 'container', coords = {x=7258,y=8245,z=-3}, }, -- counter @ bunker
-        -- E93
-        { type = 'container', coords = {x=7258,y=8246,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E94
-        { type = 'container', coords = {x=7258,y=8246,z=-3}, }, -- counter @ bunker
-        -- E95
-        { type = 'container', coords = {x=7260,y=8246,z=-3}, }, -- locker @ bunker
-        -- E96
-        { type = 'container', coords = {x=7258,y=8247,z=-3}, }, -- fridge @ bunker
-        -- E97
-        { type = 'container', coords = {x=7258,y=8247,z=-3}, slot = "freezer", }, -- freezer @ bunker
-        -- E98
-        { type = 'container', coords = {x=7260,y=8247,z=-3}, }, -- militarylocker @ bunker
-        -- E99
-        { type = 'container', coords = {x=7262,y=8250,z=-3}, }, -- metal_shelves @ bunker
-        -- E100
-        { type = 'container', coords = {x=7262,y=8251,z=-3}, }, -- metal_shelves @ bunker
-        -- E101
-        { type = 'container', coords = {x=7262,y=8252,z=-3}, }, -- metal_shelves @ bunker
-        -- E102
-        { type = 'container', coords = {x=7262,y=8253,z=-3}, }, -- metal_shelves @ bunker
-        -- E103
-        { type = 'container', coords = {x=7262,y=8248,z=-3}, }, -- metal_shelves @ bunker
-        -- E104
-        { type = 'container', coords = {x=7262,y=8249,z=-3}, }, -- metal_shelves @ bunker
-        -- E105
-        { type = 'container', coords = {x=7262,y=8243,z=-3}, }, -- dresser @ bunker
-        -- E106
-        { type = 'container', coords = {x=7262,y=8244,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E107
-        { type = 'container', coords = {x=7262,y=8244,z=-3}, }, -- counter @ bunker
-        -- E108
-        { type = 'container', coords = {x=7262,y=8245,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E109
-        { type = 'container', coords = {x=7262,y=8245,z=-3}, }, -- counter @ bunker
-        -- E110
-        { type = 'container', coords = {x=7262,y=8246,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E111
-        { type = 'container', coords = {x=7262,y=8246,z=-3}, }, -- counter @ bunker
-        -- E112
-        { type = 'container', coords = {x=7262,y=8247,z=-3}, }, -- fridge @ bunker
-        -- E113
-        { type = 'container', coords = {x=7262,y=8247,z=-3}, slot = "freezer", }, -- freezer @ bunker
-        -- E114
-        { type = 'container', coords = {x=7264,y=8248,z=-3}, }, -- militarylocker @ bunker
-        -- E115
-        { type = 'container', coords = {x=7264,y=8241,z=-3}, }, -- crate @ bunker
-        -- E116
-        { type = 'container', coords = {x=7264,y=8241,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E117
-        { type = 'container', coords = {x=7264,y=8242,z=-3}, }, -- crate @ bunker
-        -- E118
-        { type = 'container', coords = {x=7264,y=8242,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E119
-        { type = 'container', coords = {x=7264,y=8246,z=-3}, }, -- locker @ bunker
-        -- E120
-        { type = 'container', coords = {x=7264,y=8247,z=-3}, }, -- militarylocker @ bunker
-        -- E121
-        { type = 'container', coords = {x=7266,y=8250,z=-3}, }, -- metal_shelves @ bunker
-        -- E122
-        { type = 'container', coords = {x=7266,y=8251,z=-3}, }, -- metal_shelves @ bunker
-        -- E123
-        { type = 'container', coords = {x=7266,y=8252,z=-3}, }, -- metal_shelves @ bunker
-        -- E124
-        { type = 'container', coords = {x=7266,y=8253,z=-3}, }, -- metal_shelves @ bunker
-        -- E125
-        { type = 'container', coords = {x=7266,y=8248,z=-3}, }, -- metal_shelves @ bunker
-        -- E126
-        { type = 'container', coords = {x=7268,y=8248,z=-3}, }, -- militarylocker @ bunker
-        -- E127
-        { type = 'container', coords = {x=7266,y=8249,z=-3}, }, -- metal_shelves @ bunker
-        -- E128
-        { type = 'container', coords = {x=7268,y=8241,z=-3}, }, -- crate @ bunker
-        -- E129
-        { type = 'container', coords = {x=7268,y=8241,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E130
-        { type = 'container', coords = {x=7268,y=8242,z=-3}, }, -- crate @ bunker
-        -- E131
-        { type = 'container', coords = {x=7268,y=8242,z=-3}, stack = 2, }, -- crate @ bunker
-        -- E132
-        { type = 'container', coords = {x=7266,y=8243,z=-3}, }, -- dresser @ bunker
-        -- E133
-        { type = 'container', coords = {x=7266,y=8244,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E134
-        { type = 'container', coords = {x=7266,y=8244,z=-3}, }, -- counter @ bunker
-        -- E135
-        { type = 'container', coords = {x=7266,y=8245,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E136
-        { type = 'container', coords = {x=7266,y=8245,z=-3}, }, -- counter @ bunker
-        -- E137
-        { type = 'container', coords = {x=7266,y=8246,z=-3}, slot = "upper", }, -- overhead @ bunker
-        -- E138
-        { type = 'container', coords = {x=7266,y=8246,z=-3}, }, -- counter @ bunker
-        -- E139
-        { type = 'container', coords = {x=7268,y=8246,z=-3}, }, -- locker @ bunker
-        -- E140
-        { type = 'container', coords = {x=7266,y=8247,z=-3}, }, -- fridge @ bunker
-        -- E141
-        { type = 'container', coords = {x=7266,y=8247,z=-3}, slot = "freezer", }, -- freezer @ bunker
-        -- E142
-        { type = 'container', coords = {x=7268,y=8247,z=-3}, }, -- militarylocker @ bunker
-    },
+        { -- E55
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8250,z=-3},
+        },
+        { -- E56
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8251,z=-3},
+        },
+        { -- E57
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8252,z=-3},
+        },
+        { -- E58
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8253,z=-3},
+        },
+        { -- E59
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8248,z=-3},
+        },
+        { -- E60
+            note = "metal_shelves @ bunker",
+            coords = {x=7254,y=8249,z=-3},
+        },
+        { -- E61
+            note = "dresser @ bunker",
+            coords = {x=7254,y=8243,z=-3},
+        },
+        { -- E62
+            note = "overhead @ bunker",
+            coords = {x=7254,y=8244,z=-3},
+            slot = "upper",
+        },
+        { -- E63
+            note = "counter @ bunker",
+            coords = {x=7254,y=8244,z=-3},
+        },
+        { -- E64
+            note = "overhead @ bunker",
+            coords = {x=7254,y=8245,z=-3},
+            slot = "upper",
+        },
+        { -- E65
+            note = "counter @ bunker",
+            coords = {x=7254,y=8245,z=-3},
+        },
+        { -- E66
+            note = "overhead @ bunker",
+            coords = {x=7254,y=8246,z=-3},
+            slot = "upper",
+        },
+        { -- E67
+            note = "counter @ bunker",
+            coords = {x=7254,y=8246,z=-3},
+        },
+        { -- E68
+            note = "fridge @ bunker",
+            coords = {x=7254,y=8247,z=-3},
+        },
+        { -- E69
+            note = "freezer @ bunker",
+            coords = {x=7254,y=8247,z=-3},
+            slot = "freezer",
+        },
+        { -- E70
+            note = "militarylocker @ bunker",
+            coords = {x=7256,y=8248,z=-3},
+        },
+        { -- E71
+            note = "crate @ bunker",
+            coords = {x=7256,y=8241,z=-3},
+        },
+        { -- E72
+            note = "crate @ bunker",
+            coords = {x=7256,y=8241,z=-3},
+            stack = 2,
+        },
+        { -- E73
+            note = "crate @ bunker",
+            coords = {x=7256,y=8242,z=-3},
+        },
+        { -- E74
+            note = "crate @ bunker",
+            coords = {x=7256,y=8242,z=-3},
+            stack = 2,
+        },
+        { -- E75
+            note = "locker @ bunker",
+            coords = {x=7256,y=8246,z=-3},
+        },
+        { -- E76
+            note = "militarylocker @ bunker",
+            coords = {x=7256,y=8247,z=-3},
+        },
+        { -- E77
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8250,z=-3},
+        },
+        { -- E78
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8251,z=-3},
+        },
+        { -- E79
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8252,z=-3},
+        },
+        { -- E80
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8253,z=-3},
+        },
+        { -- E81
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8248,z=-3},
+        },
+        { -- E82
+            note = "militarylocker @ bunker",
+            coords = {x=7260,y=8248,z=-3},
+        },
+        { -- E83
+            note = "metal_shelves @ bunker",
+            coords = {x=7258,y=8249,z=-3},
+        },
+        { -- E84
+            note = "crate @ bunker",
+            coords = {x=7260,y=8241,z=-3},
+        },
+        { -- E85
+            note = "crate @ bunker",
+            coords = {x=7260,y=8241,z=-3},
+            stack = 2,
+        },
+        { -- E86
+            note = "crate @ bunker",
+            coords = {x=7260,y=8242,z=-3},
+        },
+        { -- E87
+            note = "crate @ bunker",
+            coords = {x=7260,y=8242,z=-3},
+            stack = 2,
+        },
+        { -- E88
+            note = "dresser @ bunker",
+            coords = {x=7258,y=8243,z=-3},
+        },
+        { -- E89
+            note = "overhead @ bunker",
+            coords = {x=7258,y=8244,z=-3},
+            slot = "upper",
+        },
+        { -- E90
+            note = "counter @ bunker",
+            coords = {x=7258,y=8244,z=-3},
+        },
+        { -- E91
+            note = "overhead @ bunker",
+            coords = {x=7258,y=8245,z=-3},
+            slot = "upper",
+        },
+        { -- E92
+            note = "counter @ bunker",
+            coords = {x=7258,y=8245,z=-3},
+        },
+        { -- E93
+            note = "overhead @ bunker",
+            coords = {x=7258,y=8246,z=-3},
+            slot = "upper",
+        },
+        { -- E94
+            note = "counter @ bunker",
+            coords = {x=7258,y=8246,z=-3},
+        },
+        { -- E95
+            note = "locker @ bunker",
+            coords = {x=7260,y=8246,z=-3},
+        },
+        { -- E96
+            note = "fridge @ bunker",
+            coords = {x=7258,y=8247,z=-3},
+        },
+        { -- E97
+            note = "freezer @ bunker",
+            coords = {x=7258,y=8247,z=-3},
+            slot = "freezer",
+        },
+        { -- E98
+            note = "militarylocker @ bunker",
+            coords = {x=7260,y=8247,z=-3},
+        },
+        { -- E99
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8250,z=-3},
+        },
+        { -- E100
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8251,z=-3},
+        },
+        { -- E101
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8252,z=-3},
+        },
+        { -- E102
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8253,z=-3},
+        },
+        { -- E103
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8248,z=-3},
+        },
+        { -- E104
+            note = "metal_shelves @ bunker",
+            coords = {x=7262,y=8249,z=-3},
+        },
+        { -- E105
+            note = "dresser @ bunker",
+            coords = {x=7262,y=8243,z=-3},
+        },
+        { -- E106
+            note = "overhead @ bunker",
+            coords = {x=7262,y=8244,z=-3},
+            slot = "upper",
+        },
+        { -- E107
+            note = "counter @ bunker",
+            coords = {x=7262,y=8244,z=-3},
+        },
+        { -- E108
+            note = "overhead @ bunker",
+            coords = {x=7262,y=8245,z=-3},
+            slot = "upper",
+        },
+        { -- E109
+            note = "counter @ bunker",
+            coords = {x=7262,y=8245,z=-3},
+        },
+        { -- E110
+            note = "overhead @ bunker",
+            coords = {x=7262,y=8246,z=-3},
+            slot = "upper",
+        },
+        { -- E111
+            note = "counter @ bunker",
+            coords = {x=7262,y=8246,z=-3},
+        },
+        { -- E112
+            note = "fridge @ bunker",
+            coords = {x=7262,y=8247,z=-3},
+        },
+        { -- E113
+            note = "freezer @ bunker",
+            coords = {x=7262,y=8247,z=-3},
+            slot = "freezer",
+        },
+        { -- E114
+            note = "militarylocker @ bunker",
+            coords = {x=7264,y=8248,z=-3},
+        },
+        { -- E115
+            note = "crate @ bunker",
+            coords = {x=7264,y=8241,z=-3},
+        },
+        { -- E116
+            note = "crate @ bunker",
+            coords = {x=7264,y=8241,z=-3},
+            stack = 2,
+        },
+        { -- E117
+            note = "crate @ bunker",
+            coords = {x=7264,y=8242,z=-3},
+        },
+        { -- E118
+            note = "crate @ bunker",
+            coords = {x=7264,y=8242,z=-3},
+            stack = 2,
+        },
+        { -- E119
+            note = "locker @ bunker",
+            coords = {x=7264,y=8246,z=-3},
+        },
+        { -- E120
+            note = "militarylocker @ bunker",
+            coords = {x=7264,y=8247,z=-3},
+        },
+        { -- E121
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8250,z=-3},
+        },
+        { -- E122
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8251,z=-3},
+        },
+        { -- E123
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8252,z=-3},
+        },
+        { -- E124
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8253,z=-3},
+        },
+        { -- E125
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8248,z=-3},
+        },
+        { -- E126
+            note = "militarylocker @ bunker",
+            coords = {x=7268,y=8248,z=-3},
+        },
+        { -- E127
+            note = "metal_shelves @ bunker",
+            coords = {x=7266,y=8249,z=-3},
+        },
+        { -- E128
+            note = "crate @ bunker",
+            coords = {x=7268,y=8241,z=-3},
+        },
+        { -- E129
+            note = "crate @ bunker",
+            coords = {x=7268,y=8241,z=-3},
+            stack = 2,
+        },
+        { -- E130
+            note = "crate @ bunker",
+            coords = {x=7268,y=8242,z=-3},
+        },
+        { -- E131
+            note = "crate @ bunker",
+            coords = {x=7268,y=8242,z=-3},
+            stack = 2,
+        },
+        { -- E132
+            note = "dresser @ bunker",
+            coords = {x=7266,y=8243,z=-3},
+        },
+        { -- E133
+            note = "overhead @ bunker",
+            coords = {x=7266,y=8244,z=-3},
+            slot = "upper",
+        },
+        { -- E134
+            note = "counter @ bunker",
+            coords = {x=7266,y=8244,z=-3},
+        },
+        { -- E135
+            note = "overhead @ bunker",
+            coords = {x=7266,y=8245,z=-3},
+            slot = "upper",
+        },
+        { -- E136
+            note = "counter @ bunker",
+            coords = {x=7266,y=8245,z=-3},
+        },
+        { -- E137
+            note = "overhead @ bunker",
+            coords = {x=7266,y=8246,z=-3},
+            slot = "upper",
+        },
+        { -- E138
+            note = "counter @ bunker",
+            coords = {x=7266,y=8246,z=-3},
+        },
+        { -- E139
+            note = "locker @ bunker",
+            coords = {x=7268,y=8246,z=-3},
+        },
+        { -- E140
+            note = "fridge @ bunker",
+            coords = {x=7266,y=8247,z=-3},
+        },
+        { -- E141
+            note = "freezer @ bunker",
+            coords = {x=7266,y=8247,z=-3},
+            slot = "freezer",
+        },
+        { -- E142
+            note = "militarylocker @ bunker",
+            coords = {x=7268,y=8247,z=-3},
+        },    },
 }
 
 -- if getActivatedMods():contains("\\Ladders") then

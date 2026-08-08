@@ -58,13 +58,11 @@ local SecretMausoleum = {
         -- main house
         -- kitchen
         { -- E1
-            type = 'container',
             coords = {x=8135,y=11513,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E2
-            type = 'container',
             coords = {x=8135,y=11510,z=0},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -72,7 +70,6 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=8136,y=11510,z=0},
             dist = {"CrateFishing","MusicStoreCDs"},
             distIncludeJunk = false,
@@ -80,7 +77,6 @@ local SecretMausoleum = {
             level = "Loot_FishLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=8137,y=11510,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood", "CrateLiquor", "StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -88,7 +84,6 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E5 fridge
-            type = 'container',
             coords = {x=8137,y=11511,z=0},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
@@ -96,7 +91,6 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E6 mini fridge
-            type = 'container',
             coords = {x=8137,y=11512,z=0},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -105,7 +99,6 @@ local SecretMausoleum = {
         },
         -- bathroom
         { -- E7
-            type = 'container',
             coords = {x=8138,y=11513,z=0},
             slot = "upper",
             dist = {"MedicalCabinet", "GasStoreToiletries"},
@@ -115,7 +108,6 @@ local SecretMausoleum = {
         },
         -- living room
         { -- E8
-            type = 'container',
             coords = {x=8140,y=11511,z=0},
             dist = {"SafehouseFireplace", "SafehouseLighting", "LivingRoomShelfClassy" },
             distIncludeJunk = false,
@@ -124,13 +116,11 @@ local SecretMausoleum = {
         },
         -- bedrooms
         { -- E9
-            type = 'container',
             coords = {x=8143,y=11514,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10
-            type = 'container',
             coords = {x=8144,y=11513,z=0},
             dist = {"GunStoreKnives","ClothingStorageWinter",},
             distIncludeJunk = true,
@@ -139,7 +129,6 @@ local SecretMausoleum = {
         },
         -- entrance hall
         { -- E11
-            type = 'container',
             coords = {x=8138,y=11510,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
@@ -148,7 +137,6 @@ local SecretMausoleum = {
         -- below crypts
         -- crates by stairs
         { -- E12
-            type = 'container',
             coords = {x=8128,y=11520,z=-2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateBootsArmy", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -156,7 +144,6 @@ local SecretMausoleum = {
             level = "Loot_GunLevel",
         },
         { -- E13
-            type = 'container',
             coords = {x=8129,y=11520,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -165,13 +152,11 @@ local SecretMausoleum = {
         },
         -- chests by cots
         { -- E14
-            type = 'container',
             coords = {x=8128,y=11515,z=-2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E15
-            type = 'container',
             coords = {x=8128,y=11512,z=-2},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
@@ -179,7 +164,6 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E16
-            type = 'container',
             coords = {x=8128,y=11509,z=-2},
             dist = { "SafehouseTraps", },
             distIncludeJunk = true,
@@ -187,7 +171,6 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=8132,y=11512,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -195,7 +178,6 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=8132,y=11509,z=-2},
             items = {
                 { name = 'Base.NailsBox', },
@@ -208,7 +190,6 @@ local SecretMausoleum = {
         },
         -- crates by cots
         { -- E19
-            type = 'container',
             coords = {x=8131,y=11513,z=-2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -216,7 +197,6 @@ local SecretMausoleum = {
             level = "Loot_FarmLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=8132,y=11513,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -225,7 +205,6 @@ local SecretMausoleum = {
         },
         -- shelving
         { -- E21
-            type = 'container',
             coords = {x=8135,y=11508,z=-2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -233,7 +212,6 @@ local SecretMausoleum = {
             level = "Loot_TailorLevel",
         },
         { -- E22
-            type = 'container',
             coords = {x=8135,y=11509,z=-2},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
@@ -241,7 +219,6 @@ local SecretMausoleum = {
             level = "Loot_ToolsLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=8135,y=11510,z=-2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -249,25 +226,21 @@ local SecretMausoleum = {
             level = "Loot_ToolsLevel",
         },
         { -- E24
-            type = 'container',
             coords = {x=8135,y=11511,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E25
-            type = 'container',
             coords = {x=8135,y=11512,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E26
-            type = 'container',
             coords = {x=8135,y=11513,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E27
-            type = 'container',
             coords = {x=8137,y=11512,z=-2},
             dist = {"SafehouseMedical" },
             distIncludeJunk = true,
@@ -275,13 +248,11 @@ local SecretMausoleum = {
             level = "Loot_MedLevel",
         },
         { -- E28
-            type = 'container',
             coords = {x=8137,y=11513,z=-2},
             special = "essentials",
         },
         -- kitchen cabinets
         { -- E29
-            type = 'container',
             coords = {x=8137,y=11508,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -289,7 +260,6 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E30
-            type = 'container',
             coords = {x=8137,y=11509,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -297,7 +267,6 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E31 fridge
-            type = 'container',
             coords = {x=8137,y=11511,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
@@ -306,7 +275,6 @@ local SecretMausoleum = {
         },
         -- crates
         { -- E32
-            type = 'container',
             coords = {x=8144,y=11513,z=-2},
             dist = {"CrateToiletPaper", "CrateLinens", "BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
@@ -314,7 +282,6 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=8145,y=11513,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal", "CrateClayBags", "CrateMasonry"},
             distIncludeJunk = true,

@@ -64,20 +64,17 @@ local MuldSafeHouse = {
     loot = {
         -- new spawned bookshelves from ba_dwap_05_books map
         { -- E1
-            type = 'container',
             coords = { x = 10707, y = 9552, z = 1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E2
-            type = 'container',
             coords = { x = 10707, y = 9552, z = 1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         -- main floor
         { -- E3
-            type = 'container',
             coords = { x = 10710, y = 9551, z = 0 },
             dist = { "GasStoreEmergency" },
             distIncludeJunk = true,
@@ -85,7 +82,6 @@ local MuldSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E4
-            type = 'container',
             coords = { x = 10711, y = 9551, z = 0 },
             dist = { "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
             distIncludeJunk = true,
@@ -93,7 +89,6 @@ local MuldSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E5
-            type = 'container',
             coords = { x = 10712, y = 9547, z = 0 },
             dist = { "LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -102,7 +97,6 @@ local MuldSafeHouse = {
         },
         -- kitchen
         { -- E6
-            type = 'container',
             slot = 'freezer',
             coords = { x = 10707, y = 9546, z = 0 },
             dist = { "FreezerRich", },
@@ -111,7 +105,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = { x = 10707, y = 9546, z = 0 },
             dist = { "MotelFridge", },
             distIncludeJunk = true,
@@ -119,13 +112,11 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = { x = 10709, y = 9546, z = 0 },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E9
-            type = 'container',
             coords = { x = 10709, y = 9546, z = 0 },
             slot = "upper",
             dist = { "CrateToiletPaper", "KitchenDryFood" },
@@ -134,7 +125,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E10
-            type = 'container',
             coords = { x = 10711, y = 9546, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -142,7 +132,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E11
-            type = 'container',
             coords = { x = 10711, y = 9546, z = 0 },
             slot = "upper",
             dist = { "CrateCannedFood", "KitchenCannedFood" },
@@ -152,7 +141,6 @@ local MuldSafeHouse = {
         },
         -- tv stand
         { -- E12
-            type = 'container',
             coords = { x = 10704, y = 9549, z = 0 },
             items = {
                 { name = 'Base.Remote',     chance = 1, count = { 1, 3 } },
@@ -163,7 +151,6 @@ local MuldSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E13
-            type = 'container',
             coords = { x = 10703, y = 9551, z = 0 },
             slot = "upper",
             dist = { "MedicalClinicTools", "MedicalStorageDrugs" },
@@ -173,7 +160,6 @@ local MuldSafeHouse = {
         },
         -- 2nd floor
         { -- E14
-            type = 'container',
             coords = { x = 10703, y = 9549, z = 1 },
             dist = { "GymLaundry", "GymLockers" },
             distIncludeJunk = true,
@@ -181,7 +167,6 @@ local MuldSafeHouse = {
             level = "Loot_TailorLevel",
         },
         { -- E15
-            type = 'container',
             coords = { x = 10705, y = 9552, z = 1 },
             dist = { "SafehouseLighting", "SewingStoreTools" },
             distIncludeJunk = true,
@@ -189,7 +174,6 @@ local MuldSafeHouse = {
             level = "Loot_TailorLevel",
         },
         { -- E16
-            type = 'container',
             coords = { x = 10709, y = 9548, z = 1 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
@@ -197,7 +181,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E17
-            type = 'container',
             coords = { x = 10711, y = 9550, z = 1 },
             dist = { "SafehouseArmor", },
             distIncludeJunk = true,
@@ -205,7 +188,6 @@ local MuldSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E18
-            type = 'container',
             coords = { x = 10703, y = 9550, z = 1 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens" },
             distIncludeJunk = true,
@@ -213,7 +195,6 @@ local MuldSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E19
-            type = 'container',
             coords = { x = 10703, y = 9552, z = 0 },
             dist = { "BathroomCounter", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -221,7 +202,6 @@ local MuldSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E20
-            type = 'container',
             coords = { x = 10711, y = 9551, z = 1 },
             dist = { "CampingLockers" },
             distIncludeJunk = true,
@@ -229,7 +209,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E21
-            type = 'container',
             coords = { x = 10709, y = 9547, z = 1 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit" },
             distIncludeJunk = true,
@@ -237,7 +216,6 @@ local MuldSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E22
-            type = 'container',
             coords = { x = 10705, y = 9546, z = 1 },
             dist = { "SafehouseMedical", "CampingStoreBackpacks", "MeleeWeapons", "SafehouseBooze" },
             distIncludeJunk = true,
@@ -246,19 +224,16 @@ local MuldSafeHouse = {
         },
         -- entry way
         { -- E23
-            type = 'container',
             coords = { x = 10703, y = 9546, z = 0 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E24
-            type = 'container',
             coords = { x = 10705, y = 9547, z = 1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E25
-            type = 'container',
             coords = { x = 10706, y = 9553, z = 0 },
             dist = { "CrateFishing", "FishermanTools", "HuntingLockers", "RangerTools" },
             distIncludeJunk = false,
@@ -266,7 +241,6 @@ local MuldSafeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E26
-            type = 'container',
             coords = { x = 10709, y = 9546, z = 1 },
             dist = { "GasStoreToiletries" },
             distIncludeJunk = true,
@@ -274,24 +248,20 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E27 south west corner
-            type = 'container',
             coords = { x = 10702, y = 9560, z = -1 },
             special = "essentials",
         },
         { -- E28
-            type = 'container',
             coords = { x = 10702, y = 9559, z = -1 },
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E29
-            type = 'container',
             coords = { x = 10702, y = 9558, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E30
-            type = 'container',
             coords = { x = 10702, y = 9557, z = -1 },
             dist = { "SewingStoreTools" },
             distIncludeJunk = true,
@@ -299,7 +269,6 @@ local MuldSafeHouse = {
             level = "Loot_TailorLevel",
         },
         { -- E31
-            type = 'container',
             coords = { x = 10702, y = 9556, z = -1 },
             dist = { "CrateFishing", "FishermanTools" },
             distIncludeJunk = false,
@@ -307,7 +276,6 @@ local MuldSafeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E32
-            type = 'container',
             coords = { x = 10702, y = 9555, z = -1 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
@@ -315,19 +283,16 @@ local MuldSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E33
-            type = 'container',
             coords = { x = 10702, y = 9554, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E34
-            type = 'container',
             coords = { x = 10702, y = 9553, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E35
-            type = 'container',
             coords = { x = 10703, y = 9551, z = -1 },
             dist = { "WesternKitchenFreezer", "FreezerIceCream", },
             distIncludeJunk = false,
@@ -335,7 +300,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E36
-            type = 'container',
             stack = 1,
             coords = { x = 10703, y = 9550, z = -1 },
             dist = { "GroceryBagGourmet", "GigamartDryGoods" },
@@ -344,7 +308,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E37
-            type = 'container',
             stack = 2,
             coords = { x = 10703, y = 9550, z = -1 },
             dist = { "StoreShelfDrinks", "CrateCannedFood", "CrateSodaBottles", "CandyStoreSnacks", "CrateTortillaChips" },
@@ -353,7 +316,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E38
-            type = 'container',
             coords = { x = 10705, y = 9550, z = -1 },
             dist = { "FridgeFarmStorage", "FridgeGeneric" },
             distIncludeJunk = false,
@@ -361,7 +323,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E39
-            type = 'container',
             slot = 'freezer',
             coords = { x = 10705, y = 9550, z = -1 },
             dist = { "FreezerRich", "FreezerGeneric" },
@@ -370,7 +331,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E40
-            type = 'container',
             coords = { x = 10705, y = 9550, z = -1 },
             slot = "upper",
             dist = { "ButcherSpices", "GigamartSpices", "GroceryBagGourmet", },
@@ -379,7 +339,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E41
-            type = 'container',
             coords = { x = 10706, y = 9550, z = -1 },
             dist = { "GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -387,7 +346,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E42
-            type = 'container',
             coords = { x = 10706, y = 9550, z = -1 },
             slot = "upper",
             dist = { "ButcherSpices", "GigamartSpices", "GroceryBagGourmet", },
@@ -396,7 +354,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E43
-            type = 'container',
             coords = { x = 10707, y = 9550, z = -1 },
             dist = { "GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -404,7 +361,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E44
-            type = 'container',
             coords = { x = 10707, y = 9550, z = -1 },
             slot = "upper",
             dist = { "BakeryKitchenFreezer", "CrateCannedFood", "CafeKitchenCoffee" },
@@ -413,7 +369,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E45
-            type = 'container',
             coords = { x = 10708, y = 9550, z = -1 },
             slot = "upper",
             dist = { "GigamartCrisps", "SafehouseFireplace" },
@@ -422,7 +377,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E46
-            type = 'container',
             coords = { x = 10706, y = 9557, z = -1 },
             dist = { "RangerTools", "CrateFishing", "FishermanTools" },
             distIncludeJunk = false,
@@ -430,7 +384,6 @@ local MuldSafeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E47
-            type = 'container',
             coords = { x = 10706, y = 9559, z = -1 },
             slot = "upper",
             dist = { "SafehouseMedical", "CrateLinens" },
@@ -439,7 +392,6 @@ local MuldSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E48
-            type = 'container',
             coords = { x = 10708, y = 9559, z = -1 },
             dist = { "BathroomCounter", "GasStoreToiletries", },
             distIncludeJunk = true,
@@ -447,7 +399,6 @@ local MuldSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E49
-            type = 'container',
             coords = { x = 10706, y = 9556, z = -1 },
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = { 8, 10 } },
@@ -456,7 +407,6 @@ local MuldSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E50
-            type = 'container',
             coords = { x = 10706, y = 9555, z = -1 },
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = { 9, 12 } },
@@ -465,7 +415,6 @@ local MuldSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E51
-            type = 'container',
             stack = 1,
             coords = { x = 10706, y = 9554, z = -1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "SafehouseArmor", "DerelictHouseCrime", "CrateBootsArmy", "SafehouseLighting" },
@@ -474,7 +423,6 @@ local MuldSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E52
-            type = 'container',
             stack = 2,
             coords = { x = 10706, y = 9554, z = -1 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
@@ -483,7 +431,6 @@ local MuldSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E53
-            type = 'container',
             stack = 1,
             coords = { x = 10706, y = 9553, z = -1 },
             items = {
@@ -494,7 +441,6 @@ local MuldSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E54
-            type = 'container',
             stack = 2,
             coords = { x = 10706, y = 9553, z = -1 },
             dist = { "MorgueTools", "ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicDrugs", },
@@ -503,7 +449,6 @@ local MuldSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E55
-            type = 'container',
             stack = 1,
             coords = { x = 10706, y = 9552, z = -1 },
             dist = { "CrateLiquor", "LiquorStoreWhiskey" },
@@ -512,7 +457,6 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E56
-            type = 'container',
             stack = 1,
             coords = { x = 10706, y = 9552, z = -1 },
             dist = { "CrateLiquor", "LiquorStoreWhiskey" },
@@ -521,19 +465,16 @@ local MuldSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = { x = 10708, y = 9556, z = -1 },
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E58
-            type = 'container',
             coords = { x = 10704, y = 9560, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E59
-            type = 'container',
             stack = 1,
             coords = { x = 10704, y = 9559, z = -1 },
             dist = { "LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
@@ -542,7 +483,6 @@ local MuldSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E60
-            type = 'container',
             stack = 2,
             coords = { x = 10704, y = 9559, z = -1 },
             dist = { "ArmyStorageAmmunition", "GunStoreKnives", "DerelictHouseCrime" },
@@ -551,7 +491,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E61
-            type = 'container',
             stack = 1,
             coords = { x = 10704, y = 9558, z = -1 },
             dist = { "PoliceStorageGuns", "PoliceStorageAmmunition", },
@@ -560,7 +499,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E62
-            type = 'container',
             stack = 2,
             coords = { x = 10704, y = 9558, z = -1 },
             dist = { "PoliceStorageGuns", "PoliceStorageAmmunition", },
@@ -569,7 +507,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E63
-            type = 'container',
             stack = 1,
             coords = { x = 10704, y = 9557, z = -1 },
             dist = { "ArmyStorageAmmunition", "GunStoreAmmunition", "RangerTools", },
@@ -578,7 +515,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E64
-            type = 'container',
             stack = 2,
             coords = { x = 10704, y = 9557, z = -1 },
             dist = { "ArmyStorageAmmunition", "GunStoreAmmunition", "RangerTools", },
@@ -587,7 +523,6 @@ local MuldSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E65
-            type = 'container',
             stack = 1,
             coords = { x = 10704, y = 9556, z = -1 },
             dist = { "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction", "MusicStoreCDs" },
@@ -596,7 +531,6 @@ local MuldSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E66
-            type = 'container',
             stack = 2,
             coords = { x = 10704, y = 9556, z = -1 },
             dist = { "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction", "MusicStoreCDs" },
@@ -605,7 +539,6 @@ local MuldSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E67
-            type = 'container',
             coords = { x = 10705, y = 9554, z = -1 },
             items = {
                 { name = 'Base.Firewood', chance = 1, count = { 10, 10 } },
@@ -614,7 +547,6 @@ local MuldSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E68
-            type = 'container',
             coords = { x = 10705, y = 9553, z = -1 },
             items = {
                 { name = 'Base.Firewood', chance = 1, count = { 10, 10 } },

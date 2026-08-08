@@ -85,13 +85,11 @@ local LVPawnshop = {
         -- basement
         -- kitchen/rec room
         { -- E1 trash box by entry
-            type = 'container',
             coords = {x=12330,y=1329,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2
-            type = 'container',
             coords = {x=12328,y=1329,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -99,7 +97,6 @@ local LVPawnshop = {
             level = "Loot_MediaLevel",
         },
         { -- E3
-            type = 'container',
             coords = {x=12327,y=1329,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -108,7 +105,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E4
-            type = 'container',
             coords = {x=12324,y=1331,z=-1},
             dist = {"Homesteading",},
             distIncludeJunk = false,
@@ -116,7 +112,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E5
-            type = 'container',
             coords = {x=12324,y=1331,z=-1},
             slot = "upper",
             dist = {"GigamartCrisps", "SafehouseFireplace"},
@@ -125,7 +120,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E6
-            type = 'container',
             coords = {x=12324,y=1332,z=-1},
             dist = {"CrateCannedFood", },
             distIncludeJunk = false,
@@ -133,7 +127,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            type = 'container',
             coords = {x=12324,y=1332,z=-1},
             slot = "upper",
             dist = {"GigamartBakingMisc","CrateFlour", },
@@ -142,7 +135,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E8
-            type = 'container',
             coords = {x=12324,y=1333,z=-1},
             dist = {"GigamartDryGoods"},
             distIncludeJunk = false,
@@ -150,7 +142,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E9
-            type = 'container',
             coords = {x=12324,y=1333,z=-1},
             slot = "upper",
             dist = { "KitchenCannedFood"},
@@ -159,7 +150,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E10
-            type = 'container',
             coords = {x=12324,y=1334,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -167,14 +157,12 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E11
-            type = 'container',
             coords = {x=12324,y=1334,z=-1},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E12 fridge
-            type = 'container',
             coords = {x=12324,y=1336,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
@@ -182,38 +170,32 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E13 bookcases
-            type = 'container',
             coords = {x=12331,y=1335,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E14
-            type = 'container',
             coords = {x=12331,y=1334,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E15
-            type = 'container',
             coords = {x=12331,y=1333,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- armory
         { -- E16
-            type = 'container',
             coords = {x=12323,y=1334,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E17
-            type = 'container',
             coords = {x=12323,y=1335,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E18
-            type = 'container',
             coords = {x=12323,y=1336,z=-1},
             dist = {"GunStoreGuns","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -222,7 +204,6 @@ local LVPawnshop = {
         },
         -- bunk room 1
         { -- E19
-            type = 'container',
             coords = {x=12320,y=1336,z=-1},
             dist = { "GunStoreKnives", "CampingStoreBackpacks" },
             distIncludeJunk = true,
@@ -230,7 +211,6 @@ local LVPawnshop = {
             level = "Loot_GunLevel",
         },
         { -- E20
-            type = 'container',
             coords = {x=12319,y=1336,z=-1},
             dist = {"FishermanTools"},
             distIncludeJunk = false,
@@ -238,7 +218,6 @@ local LVPawnshop = {
             level = "Loot_FishLevel",
         },
         { -- E21
-            type = 'container',
             coords = {x=12318,y=1334,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -247,7 +226,6 @@ local LVPawnshop = {
         },
         -- bathroom
         { -- E22
-            type = 'container',
             coords = {x=12315,y=1334,z=-1},
             dist = {"TestingLab","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -255,7 +233,6 @@ local LVPawnshop = {
             level = "Loot_MedLevel",
         },
         { -- E23
-            type = 'container',
             coords = {x=12315,y=1334,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet","BathroomCounter"},
@@ -265,7 +242,6 @@ local LVPawnshop = {
         },
         -- bunk room
         { -- E24
-            type = 'container',
             coords = {x=12312,y=1334,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -273,7 +249,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E25
-            type = 'container',
             coords = {x=12314,y=1334,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet", "SafehouseMedical" },
@@ -282,7 +257,6 @@ local LVPawnshop = {
             level = "Loot_MedLevel",
         },
         { -- E26
-            type = 'container',
             coords = {x=12314,y=1336,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -291,7 +265,6 @@ local LVPawnshop = {
         },
         -- laundry room
         { -- E27
-            type = 'container',
             coords = {x=12310,y=1335,z=-1},
             dist = {"SewingStoreTools", "LaundryCleaning", "GymLaundry", "GymLockers"},
             distIncludeJunk = true,
@@ -300,18 +273,15 @@ local LVPawnshop = {
         },
         -- warehouse
         { -- E28
-            type = 'container',
             coords = {x=12323,y=1328,z=-1},
             special = "essentials",
         },
         { -- E29
-            type = 'container',
             coords = {x=12323,y=1327,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E30 freezer
-            type = 'container',
             coords = {x=12323,y=1325,z=-1},
             dist = {"WesternKitchenFreezer", "WesternKitchenFridge", },
             distIncludeJunk = false,
@@ -319,7 +289,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E31 freezer
-            type = 'container',
             coords = {x=12322,y=1325,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -327,7 +296,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E32 freezer
-            type = 'container',
             coords = {x=12321,y=1325,z=-1},
             dist = {"ArenaKitchenFreezer", "SushiKitchenFreezer",},
             distIncludeJunk = false,
@@ -335,7 +303,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E33
-            type = 'container',
             coords = {x=12320,y=1325,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -343,7 +310,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E34
-            type = 'container',
             coords = {x=12319,y=1325,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -351,7 +317,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E35 metal shelves
-            type = 'container',
             coords = {x=12317,y=1326,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -359,7 +324,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E36
-            type = 'container',
             coords = {x=12316,y=1326,z=-1},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -367,7 +331,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E37
-            type = 'container',
             coords = {x=12314,y=1326,z=-1},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -375,7 +338,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E38
-            type = 'container',
             coords = {x=12313,y=1326,z=-1},
             dist = {"MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
@@ -383,7 +345,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E39 wood crates
-            type = 'container',
             coords = {x=12320,y=1327,z=-1},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -391,7 +352,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E40
-            type = 'container',
             coords = {x=12319,y=1327,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -399,7 +359,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E41 metal shelves
-            type = 'container',
             coords = {x=12317,y=1328,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -408,7 +367,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E42
-            type = 'container',
             coords = {x=12316,y=1328,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -417,7 +375,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E43
-            type = 'container',
             coords = {x=12314,y=1328,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -426,7 +383,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E44
-            type = 'container',
             coords = {x=12313,y=1328,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -434,7 +390,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E45 cardboardboxes
-            type = 'container',
             coords = {x=12320,y=1329,z=-1},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -442,7 +397,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E46
-            type = 'container',
             coords = {x=12319,y=1329,z=-1},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -450,7 +404,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E47 cardboardboxes
-            type = 'container',
             coords = {x=12320,y=1330,z=-1},
             dist = {"GigamartCrisps","GasStoreEmergency"},
             distIncludeJunk = true,
@@ -458,7 +411,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E48
-            type = 'container',
             coords = {x=12319,y=1330,z=-1},
             dist = {"CrateToiletPaper" },
             distIncludeJunk = false,
@@ -466,7 +418,6 @@ local LVPawnshop = {
             level = "Loot_ToolsLevel",
         },
         { -- E49 metal shelves
-            type = 'container',
             coords = {x=12317,y=1330,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -474,7 +425,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
-            type = 'container',
             coords = {x=12316,y=1330,z=-1},
             dist = {"CrateSheetMetal", },
             distIncludeJunk = false,
@@ -482,7 +432,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E51
-            type = 'container',
             coords = {x=12314,y=1330,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -490,7 +439,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E52
-            type = 'container',
             coords = {x=12313,y=1330,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -498,7 +446,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E53 metal shelves
-            type = 'container',
             coords = {x=12320,y=1332,z=-1},
             dist = {"StoreShelfDrinks", "CrateCannedFood", "CrateSodaBottles", "CandyStoreSnacks", "CrateTortillaChips"},
             distIncludeJunk = true,
@@ -506,7 +453,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E54
-            type = 'container',
             coords = {x=12319,y=1332,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -514,7 +460,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E55
-            type = 'container',
             coords = {x=12317,y=1332,z=-1},
             dist = { "CrateOilOlive", "CrateOilVegetable", "BakeryKitchenFreezer", },
             distIncludeJunk = false,
@@ -522,7 +467,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E56
-            type = 'container',
             coords = {x=12316,y=1332,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -530,7 +474,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E57
-            type = 'container',
             coords = {x=12314,y=1332,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -538,7 +481,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E58
-            type = 'container',
             coords = {x=12313,y=1332,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -547,7 +489,6 @@ local LVPawnshop = {
         },
         -- Pawnshop
         { -- E59
-            type = 'container',
             coords = {x=12321,y=1327,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -555,7 +496,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E60
-            type = 'container',
             coords = {x=12319,y=1327,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -563,7 +503,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E61 closet
-            type = 'container',
             coords = {x=12330,y=1329,z=0},
             slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -573,26 +512,22 @@ local LVPawnshop = {
         },
         -- pawnshop gun room
         { -- E62
-            type = 'container',
             coords = {x=12328,y=1329,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E63
-            type = 'container',
             coords = {x=12329,y=1329,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- pawnshop proper
         { -- E64
-            type = 'container',
             coords = {x=12333,y=1332,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E65
-            type = 'container',
             coords = {x=12321,y=1331,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -600,7 +535,6 @@ local LVPawnshop = {
             level = "Loot_MediaLevel",
         },
         { -- E66
-            type = 'container',
             coords = {x=12332,y=1332,z=0},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -608,7 +542,6 @@ local LVPawnshop = {
             level = "Loot_MedLevel",
         },
         { -- E67
-            type = 'container',
             coords = {x=12331,y=1332,z=0},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -616,7 +549,6 @@ local LVPawnshop = {
             level = "Loot_GunLevel",
         },
         { -- E68
-            type = 'container',
             coords = {x=12330,y=1332,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -624,7 +556,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E69
-            type = 'container',
             coords = {x=12310,y=1325,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -632,7 +563,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E70
-            type = 'container',
             coords = {x=12311,y=1325,z=0},
             dist = {"CrateLeather", "SewingStoreFabric", "SewingStoreTools"},
             distIncludeJunk = true,
@@ -640,7 +570,6 @@ local LVPawnshop = {
             level = "Loot_TailorLevel",
         },
         { -- E71
-            type = 'container',
             coords = {x=12312,y=1325,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -648,7 +577,6 @@ local LVPawnshop = {
             level = "Loot_LockersLevel",
         },
         { -- E72
-            type = 'container',
             coords = {x=12313,y=1325,z=0},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -657,7 +585,6 @@ local LVPawnshop = {
             level = "Loot_FarmLevel",
         },
         { -- E73
-            type = 'container',
             coords = {x=12329,y=1336,z=0},
             dist = {"FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -665,7 +592,6 @@ local LVPawnshop = {
             level = "Loot_GunLevel",
         },
         { -- E74
-            type = 'container',
             coords = {x=12316,y=1325,z=0},
             slot = "upper",
             dist = {"GasStoreEmergency"},
@@ -674,7 +600,6 @@ local LVPawnshop = {
             level = 2,
         },
         { -- E75
-            type = 'container',
             coords = {x=12317,y=1325,z=0},
             slot = "upper",
             dist = {"StoreCounterTobacco"},
@@ -683,7 +608,6 @@ local LVPawnshop = {
             level = 1,
         },
         { -- E76
-            type = 'container',
             coords = {x=12318,y=1325,z=0},
             slot = "upper",
             dist = {"CandyStoreSnacks"},
@@ -692,7 +616,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E77
-            type = 'container',
             coords = {x=12315,y=1325,z=0},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -701,7 +624,6 @@ local LVPawnshop = {
         },
         -- storage room
         { -- E78
-            type = 'container',
             coords = {x=12322,y=1327,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -711,7 +633,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E79
-            type = 'container',
             coords = {x=12322,y=1328,z=0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -719,7 +640,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E80
-            type = 'container',
             coords = {x=12322,y=1330,z=0},
             dist = {"WeldingWorkshopMetal", },
             distIncludeJunk = true,
@@ -727,7 +647,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E81
-            type = 'container',
             coords = {x=12322,y=1331,z=0},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -735,7 +654,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E82
-            type = 'container',
             coords = {x=12324,y=1327,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -743,7 +661,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E83
-            type = 'container',
             coords = {x=12324,y=1328,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -751,7 +668,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
-            type = 'container',
             coords = {x=12324,y=1330,z=0},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -759,7 +675,6 @@ local LVPawnshop = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
-            type = 'container',
             coords = {x=12324,y=1331,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller", "ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -769,7 +684,6 @@ local LVPawnshop = {
 
         -- apts
         { -- E86
-            type = 'container',
             coords = {x=12330,y=1329,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -777,7 +691,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E87
-            type = 'container',
             coords = {x=12329,y=1332,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -785,7 +698,6 @@ local LVPawnshop = {
             level = "Loot_FishLevel",
         },
         { -- E88
-            type = 'container',
             coords = {x=12328,y=1331,z=1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -793,7 +705,6 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E89
-            type = 'container',
             coords = {x=12322,y=1331,z=1},
             dist = {"FreezerRich", },
             distIncludeJunk = false,
@@ -801,13 +712,11 @@ local LVPawnshop = {
             level = "Loot_FoodLevel",
         },
         { -- E90
-            type = 'container',
             coords = {x=12322,y=1336,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E91
-            type = 'container',
             coords = {x=12324,y=1329,z=1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
