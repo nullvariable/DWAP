@@ -35,7 +35,7 @@ LootMaps.Init.DWAPStashMap5 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(10640, 9504, 10743, 9591)
+    mapAPI:setBoundsInSquares(10648, 9504, 10759, 9591)
 end
 
 -- Riverside Safehouse
@@ -43,7 +43,7 @@ LootMaps.Init.DWAPStashMap6 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(6792, 5448, 7095, 5703)
+    mapAPI:setBoundsInSquares(6920, 5528, 7031, 5631)
 end
 
 -- Rosewood Safehouse

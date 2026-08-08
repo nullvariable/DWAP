@@ -60,6 +60,7 @@ local basement_access = {
     ba_dwap_04_tunnel = { width=2, height=2, stairx=0, stairy=5, stairDir="N" },
     ba_dwap_04_water = { width=3, height=3, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_05_water = { width=1, height=3, stairx=0, stairy=0, stairDir="N" },
+    ba_dwap_05_books = { width=1, height=1, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_05_water_solar = { width=5, height=10, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_06 = { width=1, height=4, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_06_solar = { width=8, height=11, stairx=-1, stairy=5, stairDir="N" },
@@ -205,6 +206,7 @@ fullConfig[5] = { -- MuldSafeHouse
     locations = {
         {x=10702, y=9548, stairDir="N", choices={"dwap_05_muldsafehouse"}, access="ba_exterior_north_westside_18"},
         {x=10703, y=9542, stairDir="N", choices={"dummy"}, access="ba_dwap_05_water"},
+        {x=10707, y=9552, z=-1, stairDir="N", choices={"dummy"}, access="ba_dwap_05_books"},
     },
 }
 if doSolar then
@@ -213,7 +215,7 @@ end
 
 fullConfig[6] = { -- Riverside
     locations = {
-        {x=7003, y = 5596, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
+        -- {x=7003, y = 5596, z = -1, stairDir="N", choices={"dummy"}, access="ba_dwap_generator"},
         {x=6961, y=5575, stairDir="N", choices={"dwap_06_riverside_farm"}, access="ba_dwap_06"},
     },
 }

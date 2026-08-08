@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<building version="4" width="69" height="40" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="14" Curtains="0" Shutters="12" Stairs="13" RoofCap="9" RoofSlope="10" RoofTop="11" GrimeWall="8">
+<building version="4" width="69" height="40" ExteriorWall="4" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="16" Curtains="0" Shutters="14" Stairs="15" RoofCap="11" RoofSlope="12" RoofTop="13" GrimeWall="8">
  <properties>
   <property name="BasementAccess" value="9 11 N"/>
  </properties>
@@ -142,6 +142,72 @@
   <tile enum="WestDoubleRight" tile="overlay_grime_wall_01_037"/>
   <tile enum="NorthDoubleLeft" tile="overlay_grime_wall_01_038"/>
   <tile enum="NorthDoubleRight" tile="overlay_grime_wall_01_039"/>
+ </tile_entry>
+ <tile_entry category="grime_wall">
+  <tile enum="West" tile="overlay_grime_wall_01_016"/>
+  <tile enum="North" tile="overlay_grime_wall_01_017"/>
+  <tile enum="NorthWest" tile="overlay_grime_wall_01_018"/>
+  <tile enum="SouthEast" tile="overlay_grime_wall_01_019"/>
+  <tile enum="WestWindow" tile="overlay_grime_wall_01_024"/>
+  <tile enum="NorthWindow" tile="overlay_grime_wall_01_025"/>
+  <tile enum="WestDoor" tile="overlay_grime_wall_01_026"/>
+  <tile enum="NorthDoor" tile="overlay_grime_wall_01_027"/>
+  <tile enum="WestTrim" tile="overlay_grime_wall_01_040"/>
+  <tile enum="NorthTrim" tile="overlay_grime_wall_01_041"/>
+  <tile enum="NorthWestTrim" tile="overlay_grime_wall_01_042"/>
+  <tile enum="SouthEastTrim" tile="overlay_grime_wall_01_043"/>
+  <tile enum="WestDoubleLeft" tile="overlay_grime_wall_01_044"/>
+  <tile enum="WestDoubleRight" tile="overlay_grime_wall_01_045"/>
+  <tile enum="NorthDoubleLeft" tile="overlay_grime_wall_01_046"/>
+  <tile enum="NorthDoubleRight" tile="overlay_grime_wall_01_047"/>
+ </tile_entry>
+ <tile_entry category="interior_walls">
+  <tile enum="West" tile="walls_logs_096"/>
+  <tile enum="North" tile="walls_logs_097"/>
+  <tile enum="NorthWest" tile="walls_logs_098"/>
+  <tile enum="SouthEast" tile="walls_logs_099"/>
+  <tile enum="WestWindow" tile="walls_logs_104"/>
+  <tile enum="NorthWindow" tile="walls_logs_105"/>
+  <tile enum="WestDoor" tile="walls_logs_106"/>
+  <tile enum="NorthDoor" tile="walls_logs_107"/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="roof_caps">
   <tile enum="CapRiseE1" tile="walls_exterior_roofs_05_000"/>
@@ -582,16 +648,16 @@
   <tile tile="walls_logs_098"/>
   <tile tile="walls_logs_099"/>
  </user_tiles>
- <used_tiles>3 6 7 13 5 4</used_tiles>
+ <used_tiles>3 6 7 15 5 4 10 9</used_tiles>
  <used_furniture></used_furniture>
  <room Name="workshop" InternalName="workshop" Color="87 43 65" InteriorWall="0" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="0" Ceiling="0"/>
  <room Name="warehouse" InternalName="warehouse" Color="128 128 128" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="medical" InternalName="medical" Color="255 0 0" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="security" InternalName="security" Color="228 102 97" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
  <room Name="bar" InternalName="bar" Color="166 30 246" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
- <room Name="hallway" InternalName="hallway" Color="0 255 255" InteriorWall="0" InteriorWallTrim="0" Floor="5" GrimeFloor="0" GrimeWall="0" Ceiling="0"/>
+ <room Name="hallway" InternalName="hallway" Color="0 255 255" InteriorWall="10" InteriorWallTrim="0" Floor="5" GrimeFloor="7" GrimeWall="9" Ceiling="0"/>
  <floor>
-  <object type="stairs" x="9" y="10" dir="N" Tile="13"/>
+  <object type="stairs" x="9" y="10" dir="N" Tile="15"/>
   <object type="wall" length="23" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="49" y="17" dir="N" Tile="0"/>
   <object type="wall" length="20" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="49" y="40" dir="W" Tile="0"/>
   <object type="wall" length="23" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="50" y="16" dir="N" Tile="0"/>
@@ -735,7 +801,7 @@
 82,82,82,82,82,82,54,54,54,52,52,52,53,53,53,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 82,82,82,82,82,82,54,54,54,52,52,52,53,53,53,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 82,82,82,82,82,82,54,54,54,52,52,52,53,53,53,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,55,55,55,55,55,55,55,55,55,55,55,55,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,55,55,55,55,55,55,55,55,55,55,55,55,55,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,55,55,55,55,55,55,55,55,55,55,55,55,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,55,55,55,55,55,55,55,55,55,55,55,55,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,55,55,55,55,55,55,55,55,55,55,55,55,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1000,7 +1066,7 @@
 0,0,0,0,63,0,0,0,8,49,20,21,0,0,0,69,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,8,48,70,0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,72,0,0,0,0,0,0,0,0,0,0,0,0,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,72,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,71,0,18,11,0,0,0,0,16,17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1516,9 +1582,9 @@
 0,0,0,191,0,0,0,0,0,191,191,0,0,0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,191,0,0,0,0,0,191,191,0,0,0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,210,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,192,192,192,192,192,192,192,192,192,192,192,192,192,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,208,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,192,192,192,192,192,192,192,192,192,192,192,192,192,0,0,0,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,209,208,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

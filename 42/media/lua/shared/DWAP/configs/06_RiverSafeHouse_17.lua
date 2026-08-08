@@ -1,7 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: gen 1 ghost 1 at 6968,5579,-1 never converted - object is
---     there, the conversion did not run on it
---   * systems: gen 1 ghost 2 at 7003,5596,-1 - nothing on that square at all
 local wtc = {x = 6957, y = 5565, z = -1} -- waterTankCoords
 local pb1 = { x = 6952, y = 5566, z = -1 }
 local RiverSafeHouse = {
@@ -35,10 +31,8 @@ local RiverSafeHouse = {
         { sprite = "fixtures_bathroom_01_33", x = 6958, y = 5564, z = -1, sourceType="tank", source = {x = wtc.x, y = wtc.y, z = wtc.z} },
     },
     doorKeys = {
-        name = "Riverside Safe House",
+        name = "Riverside Ivan Rd House",
         doors = {
-            { sprite = "fixtures_doors_02_5", x = 6952, y = 5573, z = 0, },
-            { sprite = "fixtures_doors_02_5", x = 6952, y = 5562, z = 0, },
         },
     },
     map = { name = "DWAPStashMap6", },
@@ -47,8 +41,9 @@ local RiverSafeHouse = {
             controls = { sprite = "dwap_tiles_01_22", x = 6953, y = 5565, z = pb1.z },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 6955, y= 5565, z= -1, },
             fakeGenerators = {
-                { x = 6968, y = 5579, z = -1, createTile = false },
-                { x = 7003, y = 5596, z = -1, createTile = false },
+                -- { x = 6968, y = 5579, z = -1, createTile = false },
+                { x = 6968, y = 5572, z = -1, createTile = false },
+                { x = 7000, y = 5581, z = -1, createTile = false },
             },
         },
     },
@@ -104,6 +99,16 @@ local RiverSafeHouse = {
         -- crates by stairs
         { -- E5
             type = 'container',
+            stack = 1,
+            coords = {x=6960,y=5577,z=-1},
+            dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E5
+            type = 'container',
+            stack = 2,
             coords = {x=6960,y=5577,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -112,6 +117,16 @@ local RiverSafeHouse = {
         },
         { -- E6
             type = 'container',
+            stack = 1,
+            coords = {x=6960,y=5576,z=-1},
+            dist = {"CrateLumber"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E6
+            type = 'container',
+            stack = 2,
             coords = {x=6960,y=5576,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -120,6 +135,16 @@ local RiverSafeHouse = {
         },
         { -- E7
             type = 'container',
+            stack = 1,
+            coords = {x=6960,y=5575,z=-1},
+            dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E7
+            type = 'container',
+            stack = 2,
             coords = {x=6960,y=5575,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -206,6 +231,16 @@ local RiverSafeHouse = {
         },
         { -- E18
             type = 'container',
+            stack = 1,
+            coords = {x=6963,y=5569,z=-1},
+            dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E18
+            type = 'container',
+            stack = 2,
             coords = {x=6963,y=5569,z=-1},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -262,6 +297,16 @@ local RiverSafeHouse = {
         },
         { -- E26
             type = 'container',
+            stack = 1,
+            coords = {x=6961,y=5569,z=-1},
+            dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E26
+            type = 'container',
+            stack = 2,
             coords = {x=6961,y=5569,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -343,6 +388,16 @@ local RiverSafeHouse = {
         -- basement utility room/warehouse
         { -- E36
             type = 'container',
+            stack = 1,
+            coords = {x=6956,y=5571,z=-1},
+            dist = {"GigamartCrisps","GigamartDryGoods"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E36
+            type = 'container',
+            stack = 2,
             coords = {x=6956,y=5571,z=-1},
             dist = {"GigamartCrisps","GigamartDryGoods"},
             distIncludeJunk = false,
@@ -383,6 +438,16 @@ local RiverSafeHouse = {
         },
         { -- E41
             type = 'container',
+            stack = 1,
+            coords = {x=6956,y=5569,z=-1},
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        { -- E41
+            type = 'container',
+            stack = 2,
             coords = {x=6956,y=5569,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
