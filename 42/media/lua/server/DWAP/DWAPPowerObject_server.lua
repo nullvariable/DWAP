@@ -48,7 +48,6 @@ function DWAPPowerObject.convertToIsoGenerator(isoObject)
     end
 
     local removeSuccess = pcall(function()
-        square:transmitRemoveItemFromSquare(isoObject)
         DWAPUtils.tryRemoveTileObject(square, isoObject, "generator convert")
     end)
     if not removeSuccess then

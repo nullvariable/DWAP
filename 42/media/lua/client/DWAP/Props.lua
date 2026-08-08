@@ -126,7 +126,6 @@ local function clearObjectsExcluding(objects, square, sprite)
         local sqObject = objects:get(j)
         if sqObject and canDestroy(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
-            square:transmitRemoveItemFromSquare(sqObject)
             if tryRemoveTileObject(square, sqObject) then
                 sledgeDestroy(sqObject)
             end
@@ -156,7 +155,6 @@ local function clearWalls(objects, square, sprite)
         local sqObject = objects:get(j)
         if sqObject and isWall(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
-            square:transmitRemoveItemFromSquare(sqObject)
             if tryRemoveTileObject(square, sqObject) then
                 sledgeDestroy(sqObject)
             end
@@ -242,7 +240,6 @@ function DWAP_Props.maybeSpawnObject(params)
                 local sqObject = existingObjects:get(i)
                 if sqObject and sqObject:getSpriteName() == params.sprite then
                     DWAPUtils.dprint(("DWAP_Props: Deleting object %s %s %s"):format(params.sprite, params.x, params.y))
-                    square:transmitRemoveItemFromSquare(sqObject)
                     if tryRemoveTileObject(square, sqObject) then
                         sledgeDestroy(sqObject)
                     end

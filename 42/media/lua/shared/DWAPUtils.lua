@@ -186,10 +186,25 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     end
 end)
 
+-- println, NOT log(DebugType.Lua, ...).
+--
+-- The log() global routes to DebugType.debugln (LuaManager GlobalObject), which
+-- writes at LogSeverity.Debug. A -debug launch sets the channel threshold to
+-- LogSeverity.General (DebugLog.getDefaultLogSeverity), and the gate is
+-- severity.ordinal() >= threshold.ordinal() - Debug is 2, General is 3. So every
+-- dprint in this mod was being dropped before it reached the file, and the whole
+-- diagnostic layer has been dark in -debug: on 2026-08-08 that cost a session
+-- chasing "PreventStories never ran" when its handlers were running fine and
+-- only their logging was missing.
+--
+-- println writes at General, which clears the threshold. Output still goes to
+-- Zomboid/Logs rather than console.txt, so the split this mod relies on is
+-- unchanged. Lowering DebugType.Lua's threshold instead would work too, but that
+-- channel is shared with vanilla and would unmute its debug stream as well.
 function DWAPUtils.dprint(var)
     if not debugEnabled then return end
     if type(var) == "string" then
-        log(DebugType.Lua, var)
+        DebugType.Lua:println(var)
         return
     end
     debugLuaTable(var)
@@ -268,7 +283,13 @@ function DWAPUtils.tryRemoveTileObject(square, object, tag, safeOnly)
         -- The safe path warns on EVERY attempt, and callers that retry per
         -- chunk load are what produced 14,466 warnings in a single frame.
         if removeRefusals[key] then return false end
-        if square:RemoveTileObject(object) ~= -1 then return true end
+        -- transmitRemoveItemFromSquare rather than RemoveTileObject: identical
+        -- in singleplayer (it falls straight through to RemoveTileObject when
+        -- !GameServer.server) but it also sends the MP packet. Callers used to
+        -- do this themselves on the line above their tryRemoveTileObject call,
+        -- which is what kept the flood alive - see the note on the unsafe
+        -- branch below.
+        if square:transmitRemoveItemFromSquare(object) ~= -1 then return true end
         removeRefusals[key] = true
         DWAPUtils.dprint(("DWAP: multi-tile removal refused for %s - leaving it in place"):format(key))
         return false
@@ -284,8 +305,13 @@ function DWAPUtils.tryRemoveTileObject(square, object, tag, safeOnly)
     if object.hasSpriteGrid and object:hasSpriteGrid() then
         return removeByIndex(square, object, tag)
     end
-    local result = square:RemoveTileObject(object)
-    if result ~= -1 then return true end
+    -- safelyRemove = false explicitly. hasSpriteGrid above is only ONE of the
+    -- four things IsoObjectUtils.isObjectMultiSquare counts as multi-square -
+    -- double doors, garage doors and a valid multi-square SpriteConfig also
+    -- qualify (IsoObjectUtils.java:21-31), and every one of those still warned
+    -- on the safe overload. Since this branch is already allowed to force the
+    -- removal, taking the safe path first only bought a warning and a -1.
+    if square:transmitRemoveItemFromSquare(object, false) ~= -1 then return true end
 
     -- Refused. Our own tiles (dwap_tiles_01_1/8/9/24) and several vanilla
     -- industry sprites carry a SpriteGrid, so isObjectMultiSquare calls them
@@ -311,12 +337,12 @@ function DWAPUtils.areCoordsInList(coords, list)
     end
     if not coords or type(coords) ~= "table" then
         error("areCoordsInList: coords is nil or not a table")
-        log(DebugType.Lua, "areCoordsInList: coords is nil or not a table")
+        DebugType.Lua:println("areCoordsInList: coords is nil or not a table")
         return false
     end
     if not list or type(list) ~= "table" then
         error("areCoordsInList: list is nil or not a table")
-        log(DebugType.Lua, "areCoordsInList: list is nil or not a table")
+        DebugType.Lua:println("areCoordsInList: list is nil or not a table")
         return false
     end
     for i = 1, #list do
@@ -589,7 +615,7 @@ local function runDeferredFunctions(_functions, maxPerTick)
             runsThisTick = runsThisTick + 1
             local success, err = pcall(functionsToRun[i])
             if not success then
-                log(DebugType.Lua, "Error running deferred function: " .. tostring(err))
+                DebugType.Lua:println("Error running deferred function: " .. tostring(err))
             elseif debugEnabled then
                 DWAPUtils.dprint("Ran deferred function " .. tostring(i))
             end
@@ -654,7 +680,7 @@ Events.OnTick.Add(function()
         if repeatFunction.times > 0 then
             local success, err = pcall(repeatFunction.f, repeatFunction.args)
             if not success then
-                log(DebugType.Lua, "Error running repeat function: " .. tostring(err))
+                DebugType.Lua:println("Error running repeat function: " .. tostring(err))
             end
             repeatFunction.times = repeatFunction.times - 1
         else
@@ -986,7 +1012,14 @@ function DWAPUtils.connectWaterTank(isoObject, coords)
         DWAPUtils.dprint(tostring(isoObject:hasExternalWaterSource()))
         isoObject:setSquare(originalSquare)
         DWAPUtils.dprint('square updated back')
-        originalSquare:setSquareChanged()
+        -- Only when the chunk is still under it. A square remains reachable
+        -- through the cache after its chunk streams out, and setSquareChanged
+        -- reads square.chunk.loadedBits with no nil check
+        -- (PathfindNative.squareChanged:181). Callers that defer - the tank
+        -- flush especially - can arrive here well after that point.
+        if originalSquare and originalSquare:getChunk() then
+            originalSquare:setSquareChanged()
+        end
         isoObject:transmitModData()
         DWAPUtils.dprint(originalSquare:getX() .. "," .. originalSquare:getY() .. "," .. originalSquare:getZ() .. " connected to tank")
     end

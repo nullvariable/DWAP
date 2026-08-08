@@ -148,7 +148,15 @@ end
 local function doConnect(isoObject, connection, data, waterSystem, note)
     -- fixture streamed back out while it waited: connectWaterTank would restore
     -- a nil square
-    if not isoObject:getSquare() then return end
+    local square = isoObject:getSquare()
+    if not square then return end
+    -- A square outlives its chunk. It stays reachable through the cache while
+    -- square.chunk is already nil, and setSquareChanged then dereferences
+    -- square.chunk.loadedBits and throws (PathfindNative.squareChanged). The
+    -- deferred tank flush fires long after the fixture's chunk may have gone,
+    -- so this is reachable in normal travel. Leave the fixture pending - the
+    -- onLoad path reconnects it when its chunk streams back in.
+    if not square:getChunk() then return end
     DWAPUtils.connectWaterTank(isoObject, connection)
     if waterSystem then
         waterSystem:noise(("fixture at %d,%d,%d %s - source %s"):format(
@@ -346,7 +354,6 @@ function DWAPWaterObject.onNewTankObject(isoObject, data, waterSystem)
     end
 
     square:AddTileObject(thumpable)
-    square:transmitRemoveItemFromSquare(isoObject)
     DWAPUtils.tryRemoveTileObject(square, isoObject, "water fixture convert")
     square:transmitAddObjectToSquare(thumpable, index)
 

@@ -196,7 +196,6 @@ function DWAPPowerSystem:maybeConfigureFuelTank(isoObject)
     end
 
     square:AddTileObject(thumpable)
-    square:transmitRemoveItemFromSquare(isoObject)
     DWAPUtils.tryRemoveTileObject(square, isoObject, "fuel tank convert")
     square:transmitAddObjectToSquare(thumpable, index)
 
