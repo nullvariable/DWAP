@@ -1133,6 +1133,49 @@ function DWAPGoto(index)
     end
 end
 
+-- Stable identity for a room, shared by the audit's coverage pass and the room
+-- picker further down. Keyed on the RoomDef rect rather than the live IsoRoom,
+-- which churns with streaming, and rather than the name, which is not unique:
+-- an apartment complex has one "kitchen" per unit (config 09 reports 101).
+-- Defined up here because TestLootConfig closes over it.
+local function roomDefKey(room)
+    local def = room and room.getRoomDef and room:getRoomDef()
+    if not def then return nil end
+    return ("%s@%d,%d,%d"):format(room:getName() or "?", def:getX(), def:getY(), def:getZ())
+end
+
+-- Resolve a config's baseRooms anchors to the set of room keys they name.
+-- Anchors are squares, matching the baseBuildings convention: session IDs are
+-- ephemeral and def indexes churn on re-export, but a square inside the room
+-- survives both, and survives the room being renamed.
+-- Returns nil when the config declares no baseRooms, which means "no room
+-- filter" - every building in the config keeps its whole-footprint behaviour.
+local function baseRoomKeys(config, problems)
+    if not config.baseRooms or #config.baseRooms == 0 then return nil end
+    local keys, n = {}, 0
+    for i = 1, #config.baseRooms do
+        local a = config.baseRooms[i]
+        local sq = a and a.x and getSquare(a.x, a.y, math.floor(a.z or 0))
+        local room = sq and sq:getRoom()
+        local key = room and roomDefKey(room)
+        if key then
+            if not keys[key] then
+                keys[key] = true
+                n = n + 1
+            end
+        elseif problems then
+            problems[#problems + 1] = ("baseRooms anchor %d at %s,%s,%s: %s"):format(
+                i, tostring(a and a.x), tostring(a and a.y), tostring(a and a.z),
+                not sq and "square not loaded" or
+                    (not room and "square is not in a room" or "room has no def"))
+        end
+    end
+    -- Every anchor failing to resolve would silently widen the pass back to the
+    -- whole building, which is exactly the noise baseRooms exists to remove.
+    -- Report an empty set instead so the caller can say so.
+    return keys, n
+end
+
 local tlc
 function TestLootConfig(index, startFrom, retainedConfig)
     if not retainedConfig then
@@ -1410,6 +1453,25 @@ function TestLootConfig(index, startFrom, retainedConfig)
     -- and dedups buildings in case two anchors resolve to the same one
     local unclaimedContainers = {}
     local anchorProblems = {}
+    -- Optional room filter. A safehouse that occupies part of a larger
+    -- structure - an apartment in a complex, a unit in a mixed-use block -
+    -- has an anchor whose building def covers the whole thing, so the
+    -- unclaimed list fills with other people's rooms (config 07 reported
+    -- 478 unclaimed including a store, a medical suite and an office).
+    -- Declaring baseRooms narrows the pass to the rooms we actually own.
+    local roomFilter, roomFilterCount = baseRoomKeys(config, anchorProblems)
+    -- Which filter keys actually matched a room in a declared building. A key
+    -- that never matches is a room anchored outside baseBuildings, or one whose
+    -- def rect moved in a re-export - either way its containers vanish from the
+    -- unclaimed list without a word, which is the failure this whole field is
+    -- meant to avoid causing.
+    local roomFilterHit = {}
+    if roomFilter and roomFilterCount == 0 then
+        -- Not filtering at all here would quietly restore the whole-building
+        -- sweep and read as "your config is missing 500 entries"
+        anchorProblems[#anchorProblems + 1] =
+            "baseRooms declared but NO anchor resolved - unclaimed list suppressed"
+    end
     local trashTypes = {
         bin = true,
         dumpster = true,
@@ -1446,7 +1508,17 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     local rooms = getCell():getRoomList()
                     for i = 1, rooms:size() do
                         local room = rooms:get(i - 1)
-                        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
+                        -- The cell's room list holds duplicate IsoRoom objects
+                        -- sharing one key, each carrying part of the squares,
+                        -- so match on the key and let every duplicate through
+                        -- rather than trying to pick one.
+                        local inScope = DWAPUtils.sameBuilding(room:getBuilding(), building)
+                        if inScope and roomFilter then
+                            local k = roomDefKey(room)
+                            inScope = k ~= nil and roomFilter[k] == true
+                            if inScope then roomFilterHit[k] = true end
+                        end
+                        if inScope then
                             local squares = room:getSquares()
                             for s = 0, squares:size() - 1 do
                                 local rsq = squares:get(s)
@@ -1479,6 +1551,13 @@ function TestLootConfig(index, startFrom, retainedConfig)
                             end
                         end
                     end
+                end
+            end
+        end
+        if roomFilter then
+            for key in pairs(roomFilter) do
+                if not roomFilterHit[key] then
+                    anchorProblems[#anchorProblems + 1] = ("baseRooms %s matched no room in any declared building - anchor outside baseBuildings, or the def rect moved"):format(key)
                 end
             end
         end
@@ -1542,6 +1621,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
         containerDetails = containerDetails,
         unclaimedContainers = unclaimedContainers,
         anchorProblems = anchorProblems,
+        roomFilterCount = roomFilterCount,
         legacyHalfZ = legacyHalfZ,
     }
 end
@@ -1856,6 +1936,13 @@ local function allLootFinishConfig(unloaded, badZ)
         end
         if config and config.baseBuildings and #config.baseBuildings > 0 and result.unclaimedContainers then
             local list = result.unclaimedContainers
+            -- Say so when the pass was narrowed: "all containers claimed" over
+            -- 6 rooms means something very different from the same line over a
+            -- whole apartment complex, and the report is read months later
+            if result.roomFilterCount and result.roomFilterCount > 0 then
+                allLootWrite(("  scope: %d baseRooms (unclaimed counts rooms we own, not the whole building)"):format(
+                    result.roomFilterCount))
+            end
             if #list == 0 then
                 allLootWrite("  baseBuildings: all containers claimed")
             else
@@ -2010,10 +2097,13 @@ allLootTick = function()
             end
         end
         -- baseBuildings anchors need their areas streamed too, so their
-        -- buildings' rooms are in the cell list for the coverage pass
-        if config.baseBuildings then
-            for i = 1, #config.baseBuildings do
-                local a = config.baseBuildings[i]
+        -- buildings' rooms are in the cell list for the coverage pass.
+        -- baseRooms anchors are held to the same bar: one that has not
+        -- streamed resolves to no room, which would silently drop that room
+        -- from the filter and read as "already claimed" in the report.
+        for _, anchors in ipairs({ config.baseBuildings or {}, config.baseRooms or {} }) do
+            for i = 1, #anchors do
+                local a = anchors[i]
                 if a and a.x and not getSquare(a.x, a.y, math.floor(a.z or 0)) then
                     if getSquare(a.x, a.y, 0) then
                         badZ = badZ + 1
@@ -2045,9 +2135,9 @@ allLootTick = function()
                     end
                 end
             end
-            if config.baseBuildings then
-                for i = 1, #config.baseBuildings do
-                    local a = config.baseBuildings[i]
+            for _, anchors in ipairs({ config.baseBuildings or {}, config.baseRooms or {} }) do
+                for i = 1, #anchors do
+                    local a = anchors[i]
                     if a and a.x
                         and not getSquare(a.x, a.y, math.floor(a.z or 0))
                         and not getSquare(a.x, a.y, 0) then
@@ -3998,11 +4088,9 @@ end
 local roomPicked = {}     -- ordered: { key, name, dx, dy, dz, dw, dh }
 local roomPickedKeys = {} -- key -> true
 
-local function roomKey(room)
-    local def = room and room.getRoomDef and room:getRoomDef()
-    if not def then return nil end
-    return ("%s@%d,%d,%d"):format(room:getName() or "?", def:getX(), def:getY(), def:getZ())
-end
+-- Same identity the audit's coverage pass uses, so a room picked here and a
+-- room matched by baseRooms can never disagree
+local roomKey = roomDefKey
 
 -- Every container in a room, through the shared resolver so the picker counts
 -- exactly what the loot fill and the audit would see. Trash and appliances the
@@ -4424,6 +4512,38 @@ function DWAPRoomExport(index)
             end
         end
     end
+    -- Paste-ready baseRooms block. Anchors are real squares taken from the
+    -- rooms themselves rather than the def rect's centre, which can land in a
+    -- wall or a courtyard on an L-shaped room. Only streamed rooms can supply
+    -- one, so a room that was not walked is called out instead of skipped.
+    print("")
+    print("=== baseRooms (paste into the config next to baseBuildings) ===")
+    print("    baseRooms = {")
+    local missing = 0
+    for i = 1, #roomPicked do
+        local r = roomPicked[i]
+        local matches = byKey[r.key]
+        local anchor = nil
+        for m = 1, matches and #matches or 0 do
+            local squares = matches[m]:getSquares()
+            if squares and squares:size() > 0 then
+                anchor = squares:get(0)
+                break
+            end
+        end
+        if anchor then
+            print(("        { x = %d, y = %d, z = %d }, -- %s"):format(
+                anchor:getX(), anchor:getY(), anchor:getZ(), r.name))
+        else
+            missing = missing + 1
+            print(("        -- %s: not streamed, walk it and export again"):format(r.key))
+        end
+    end
+    print("    },")
+    if missing > 0 then
+        print(("  %d room(s) had no streamed square - those lines are comments, not anchors"):format(missing))
+    end
+
     print(("=== TOTAL: %d listed, %d already in config, across %d rooms ==="):format(
         totalFree, totalClaimed, #roomPicked))
 end
