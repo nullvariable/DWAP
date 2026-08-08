@@ -60,6 +60,7 @@ local AnimalRehab = {
     loot = {
         -- basement bar
         { -- E1
+            note = "counter @ bar",
             coords = {x=3111,y=12050,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
@@ -67,6 +68,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E2
+            note = "shelves @ bar",
             coords = {x=3109,y=12056,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -74,6 +76,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E3
+            note = "counter @ bar",
             coords = {x=3109,y=12057,z=-1},
             dist = {"SafehouseBooze"},
             distIncludeJunk = false,
@@ -81,6 +84,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "shelves @ bar",
             coords = {x=3109,y=12058,z=-1},
             dist = {"LiquorStoreWine"},
             distIncludeJunk = false,
@@ -88,6 +92,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "shelves @ bar",
             coords = {x=3112,y=12061,z=-1},
             dist = {"CrateLiquor", "CrateVHSTapes",},
             distIncludeJunk = false,
@@ -95,6 +100,7 @@ local AnimalRehab = {
             level = "Loot_MediaLevel",
         },
         { -- E6 tv stand
+            note = "sidetable @ bar",
             coords = {x=3112,y=12060,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
@@ -102,6 +108,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "shelves @ bar",
             coords = {x=3112,y=12059,z=-1},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -109,6 +116,7 @@ local AnimalRehab = {
             level = "Loot_MediaLevel",
         },
         { -- E8
+            note = "shelves @ bar",
             coords = {x=3112,y=12058,z=-1},
             dist = {"CrateLiquor", "MusicStoreCDs", "ComicStoreDisplayDice", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -117,12 +125,14 @@ local AnimalRehab = {
         },
         ----- Bunker area ------
         { -- E9 cabinet next to bunk beds (9365)
+            note = "filingcabinet @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E10 upper
             sprite = 'location_trailer_02_23',
+            note = "overhead @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -131,12 +141,14 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E11 lower (66)
+            note = "counter @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E12 upper
             sprite = 'location_trailer_02_23',
+            note = "overhead @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -146,6 +158,7 @@ local AnimalRehab = {
         },
         { -- E13 lower (67)
             sprite = 'location_trailer_02_19',
+            note = "counter @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -154,6 +167,7 @@ local AnimalRehab = {
         },
         { -- E14 upper
             sprite = 'location_trailer_02_23',
+            note = "overhead @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -163,6 +177,7 @@ local AnimalRehab = {
         },
         { -- E15 lower (68)
             sprite = 'location_trailer_02_19',
+            note = "counter @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -171,6 +186,7 @@ local AnimalRehab = {
         },
         { -- E16 metal shelves (70)
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -178,30 +194,36 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E17 metal shelves (71)
+            note = "metal_shelves @ storageunit",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E18 next to inner door (9372)
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E19 (73)
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E20 (9374)
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E21 far end next to stairs (9375)
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E22
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -209,6 +231,7 @@ local AnimalRehab = {
             level = "Loot_ToolsLevel",
         },
         { -- E23
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -216,6 +239,7 @@ local AnimalRehab = {
             level = "Loot_FishLevel",
         },
         { -- E24
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -223,6 +247,7 @@ local AnimalRehab = {
             level = "Loot_GunLevel",
         },
         { -- E25
+            note = "metal_shelves @ security",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugLabOutfit" },
             distIncludeJunk = false,
@@ -230,6 +255,7 @@ local AnimalRehab = {
             level = "Loot_GunLevel",
         },
         { -- E26 metal wall shelves
+            note = "militarycrate @ storageunit",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -237,11 +263,13 @@ local AnimalRehab = {
             level = "Loot_MediaLevel",
         },
         { -- E27 metal wall shelves
+            note = "militarycrate @ storageunit",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E28 metal wall shelves
+            note = "militarycrate @ storageunit",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -249,6 +277,7 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E29
+            note = "militarycrate @ storageunit",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -256,6 +285,7 @@ local AnimalRehab = {
             level = "Loot_ToolsLevel",
         },
         { -- E30
+            note = "militarycrate @ storageunit",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "DrugLabOutfit"},
             distIncludeJunk = true,
@@ -265,6 +295,7 @@ local AnimalRehab = {
         ----- End Bunker area ------
         -- warehouse/utility room
         { -- E31
+            note = "metal_shelves @ warehouse",
             coords = {x=3114,y=12070,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -272,6 +303,7 @@ local AnimalRehab = {
             level = "Loot_ToolsLevel",
         },
         { -- E32
+            note = "metal_shelves @ warehouse",
             coords = {x=3114,y=12069,z=-1},
             dist = {"ArmyStorageElectronics", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = false,
@@ -279,6 +311,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33
+            note = "metal_shelves @ warehouse",
             coords = {x=3116,y=12070,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -286,6 +319,7 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E34
+            note = "metal_shelves @ warehouse",
             coords = {x=3116,y=12069,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -295,6 +329,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E35
+            note = "metal_shelves @ warehouse",
             coords = {x=3118,y=12070,z=-1},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -302,6 +337,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E36
+            note = "metal_shelves @ warehouse",
             coords = {x=3118,y=12069,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -309,6 +345,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E37
+            note = "metal_shelves @ warehouse",
             coords = {x=3120,y=12070,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -316,6 +353,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E38
+            note = "metal_shelves @ warehouse",
             coords = {x=3120,y=12069,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -324,6 +362,7 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E39
+            note = "metal_shelves @ warehouse",
             coords = {x=3122,y=12070,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -332,6 +371,7 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E40
+            note = "metal_shelves @ warehouse",
             coords = {x=3122,y=12069,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -340,6 +380,7 @@ local AnimalRehab = {
             level = "Loot_FarmLevel",
         },
         { -- E41
+            note = "metal_shelves @ warehouse",
             coords = {x=3122,y=12068,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -347,6 +388,7 @@ local AnimalRehab = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E42
+            note = "metal_shelves @ warehouse",
             coords = {x=3122,y=12067,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -354,6 +396,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "metal_shelves @ warehouse",
             coords = {x=3124,y=12070,z=-1},
             dist = {"CrateCannedFood"},
             distIncludeJunk = false,
@@ -361,6 +404,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E44
+            note = "metal_shelves @ warehouse",
             coords = {x=3124,y=12069,z=-1},
             dist = {"GigamartCrisps","GigamartDryGoods"},
             distIncludeJunk = false,
@@ -368,6 +412,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "metal_shelves @ warehouse",
             coords = {x=3124,y=12068,z=-1},
             dist = {"BathroomCounter","CrateToiletPaper", "GasStoreToiletries", },
             distIncludeJunk = false,
@@ -375,6 +420,7 @@ local AnimalRehab = {
             level = "Loot_ToolsLevel",
         },
         { -- E46
+            note = "metal_shelves @ warehouse",
             coords = {x=3124,y=12067,z=-1},
             dist = {"StoreCounterTobacco", "SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -382,6 +428,7 @@ local AnimalRehab = {
             level = "Loot_ToolsLevel",
         },
         { -- E47
+            note = "freezer @ warehouse",
             coords = {x=3123,y=12064,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
@@ -389,6 +436,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E48
+            note = "freezer @ warehouse",
             coords = {x=3124,y=12064,z=-1},
             dist = {"FreezerIceCream", "WesternKitchenFreezer"},
             distIncludeJunk = true,
@@ -396,11 +444,13 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E49
+            note = "militarylocker @ warehouse",
             coords = {x=3125,y=12064,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E50
+            note = "militarycrate @ warehouse",
             coords = {x=3126,y=12064,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreBodyArmor" },
             distIncludeJunk = false,
@@ -410,6 +460,7 @@ local AnimalRehab = {
         -- first floor
         -- kitchen
         { -- E51
+            note = "fridge @ kitchen",
             coords = {x=3113,y=12055,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -417,11 +468,13 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "counter @ kitchen",
             coords = {x=3115,y=12051,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E53
+            note = "counter @ kitchen",
             coords = {x=3115,y=12052,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -429,6 +482,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E54
+            note = "counter @ kitchen",
             coords = {x=3115,y=12054,z=0},
             dist = {"KitchenDryFood",},
             distIncludeJunk = false,
@@ -436,6 +490,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E55
+            note = "wardrobe @ hall",
             coords = {x=3107,y=12055,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -443,6 +498,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E56
+            note = "wardrobe @ hall",
             coords = {x=3107,y=12054,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -450,6 +506,7 @@ local AnimalRehab = {
             level = "Loot_FoodLevel",
         },
         { -- E57
+            note = "metal_shelves @ closet",
             coords = {x=3104,y=12052,z=0},
             slot = "upper",
             special = "gunlocker",
@@ -469,6 +526,7 @@ local AnimalRehab = {
         --     randUntilFull = true,
         -- },
         { -- E58
+            note = "shelves @ bedroom",
             coords = {x=3105,y=12049,z=0},
             dist = {"MovieRentalShelves", "MusicStoreCDs"},
             distIncludeJunk = false,
@@ -476,6 +534,7 @@ local AnimalRehab = {
             level = "Loot_MediaLevel",
         },
         { -- E59
+            note = "shelves @ bedroom",
             coords = {x=3104,y=12049,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -484,6 +543,7 @@ local AnimalRehab = {
         },
         -- 2nd floor
         { -- E60
+            note = "counter @ bathroom",
             coords = {x=3107,y=12051,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -491,6 +551,7 @@ local AnimalRehab = {
             level = "Loot_LockersLevel",
         },
         { -- E61
+            note = "counter @ bathroom",
             coords = {x=3107,y=12050,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -498,6 +559,7 @@ local AnimalRehab = {
             level = "Loot_MedLevel",
         },
         { -- E62 @TODO duplicate coords with entry 56
+            note = "wardrobe @ bedroom",
             coords = {x=3107,y=12054,z=1},
             dist = {"GunStoreKnives", "SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -505,6 +567,7 @@ local AnimalRehab = {
             level = "Loot_GunLevel",
         },
         { -- E63
+            note = "wardrobe @ bedroom",
             coords = {x=3107,y=12053,z=1},
             dist = {"CampingLockers", "CampingStoreBackpacks",},
             distIncludeJunk = true,
@@ -512,6 +575,7 @@ local AnimalRehab = {
             level = "Loot_LockersLevel",
         },
         { -- E64
+            note = "dresser @ bedroom",
             coords = {x=3111,y=12052,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -519,6 +583,7 @@ local AnimalRehab = {
             level = "Loot_LockersLevel",
         },
         { -- E65
+            note = "sidetable @ bedroom",
             coords = {x=3111,y=12054,z=1},
             dist = {"SewingStoreTools", "SewingStoreFabric", "CrateLeather",},
             distIncludeJunk = true,

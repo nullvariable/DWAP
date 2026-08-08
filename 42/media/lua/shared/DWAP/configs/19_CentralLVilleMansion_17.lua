@@ -115,6 +115,7 @@ local CentralLVilleMansion = {
     loot = {
         --- Basement ---
         { -- E1 decon locker
+            note = "locker @ laboratory",
             coords = {x = 13438, y = 1902, z = -2},
             items = {
                 { name = 'Base.Bag_ProtectiveCaseBulkyHazard', },
@@ -130,6 +131,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E2 decon locker
+            note = "locker @ laboratory",
             coords = {x = 13438, y = 1904, z = -2},
             items = {
                 { name = 'Base.Oxygen_Tank', },
@@ -138,6 +140,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E3 short locker
+            note = "locker @ gunstore",
             coords = {x = 13442, y = 1901, z = -2},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -145,6 +148,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E4 short locker
+            note = "locker @ gunstore",
             coords = {x = 13441, y = 1901, z = -2},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -152,6 +156,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E5 desk
+            note = "desk @ gunstore",
             coords = {x = 13438, y = 1899, z = -2},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -159,10 +164,12 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E6 locker
+            note = "locker @ bedroom",
             coords = {x = 13435, y = 1899, z = -2},
             special = "essentials",
         },
         { -- E7 locker
+            note = "locker @ bedroom",
             coords = {x = 13435, y = 1902, z = -2},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
             distIncludeJunk = true,
@@ -170,16 +177,19 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E8 mil locker
+            note = "militarylocker @ bedroom",
             coords = {x = 13432, y = 1899, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E9 mil locker
+            note = "militarylocker @ bedroom",
             coords = {x = 13432, y = 1902, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E10 bathroom
+            note = "counter @ bathroom",
             coords = {x = 13431, y = 1901, z = -2},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
@@ -187,6 +197,7 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E11
+            note = "medicine @ bathroom",
             coords = {x = 13431, y = 1901, z = -2},
             slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
@@ -198,6 +209,7 @@ local CentralLVilleMansion = {
         ----- Recreation Area ----
         --------------------------
         { -- E12 bar
+            note = "counter @ bar",
             coords = {x = 13442, y = 1897, z = -2},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -205,6 +217,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E13 bar
+            note = "counter @ bar",
             coords = {x = 13442, y = 1896, z = -2},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -212,6 +225,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E14 bar
+            note = "counter @ bar",
             coords = {x = 13442, y = 1895, z = -2},
             dist = {"LiquorStoreBrandy", "LiquorStoreGin"},
             distIncludeJunk = false,
@@ -219,6 +233,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E15 movie snack stand
+            note = "counter @ bar",
             coords = {x = 13438, y = 1890, z = -2},
             dist = {"TheatreDrinks", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -226,6 +241,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E16 movie snack stand
+            note = "counter @ bar",
             coords = {x = 13437, y = 1890, z = -2},
             dist = {"TheatrePopcorn", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -236,6 +252,7 @@ local CentralLVilleMansion = {
         ----- Kitchen/Dining Area ----
         ------------------------------
         { -- E17 under drink machine
+            note = "counter @ bar",
             coords = {x = 13434, y = 1882, z = -2},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -243,6 +260,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E18 under toaster
+            note = "counter @ bar",
             coords = {x = 13434, y = 1878, z = -2},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -250,11 +268,13 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E19
+            note = "counter @ bar",
             coords = {x = 13434, y = 1877, z = -2},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E20
+            note = "counter @ bar",
             coords = {x = 13434, y = 1875, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -262,6 +282,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E21 under microwave
+            note = "counter @ bar",
             coords = {x = 13438, y = 1877, z = -2},
             dist = {"KitchenCannedFood"},
             distIncludeJunk = false,
@@ -269,6 +290,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E22
+            note = "counter @ bar",
             coords = {x = 13438, y = 1876, z = -2},
             dist = {"KitchenDryFood"},
             distIncludeJunk = false,
@@ -276,6 +298,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E23
+            note = "counter @ bar",
             coords = {x = 13438, y = 1875, z = -2},
             dist = {"SafehouseFood"},
             distIncludeJunk = false,
@@ -283,6 +306,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E24 drink stand
+            note = "shelves @ bar",
             coords = {x = 13441, y = 1877, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -290,6 +314,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E25 drink stand
+            note = "shelves @ bar",
             coords = {x = 13443, y = 1877, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -297,6 +322,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E26 ice freezer
+            note = "freezer @ bar",
             coords = {x = 13444, y = 1875, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -304,6 +330,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E27 ice freezer
+            note = "freezer @ bar",
             coords = {x = 13443, y = 1875, z = -2},
             dist = {"PizzaKitchenFreezer", "PizzaKitchenFridge"},
             distIncludeJunk = false,
@@ -311,6 +338,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E28 coolers
+            note = "fridge @ bar",
             coords = {x = 13442, y = 1875, z = -2},
             dist = {"SafehouseFridge"},
             distIncludeJunk = true,
@@ -318,6 +346,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E29
+            note = "fridge @ bar",
             coords = {x = 13441, y = 1875, z = -2},
             dist = {"UniversityFridge"},
             distIncludeJunk = true,
@@ -325,6 +354,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "fridge @ bar",
             coords = {x = 13440, y = 1875, z = -2},
             dist = {"WesternKitchenFridge"},
             distIncludeJunk = true,
@@ -335,6 +365,7 @@ local CentralLVilleMansion = {
         --- Library and School Area --
         ------------------------------
         { -- E31
+            note = "shelves @ library",
             coords = {x = 13425, y = 1897, z = -2},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -342,6 +373,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E32
+            note = "shelves @ library",
             coords = {x = 13425, y = 1896, z = -2},
             dist = {"CrateBooks", "BookstoreChilds", "CrateMagazines"},
             distIncludeJunk = false,
@@ -349,21 +381,25 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E33
+            note = "shelves @ library",
             coords = {x = 13428, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E34
+            note = "shelves @ library",
             coords = {x = 13429, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E35
+            note = "shelves @ library",
             coords = {x = 13430, y = 1897, z = -2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E36
+            note = "shelves @ library",
             coords = {x = 13431, y = 1897, z = -2},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -371,6 +407,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E37 desk
+            note = "desk @ library",
             coords = {x = 13430, y = 1893, z = -2},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -378,6 +415,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E38 desk
+            note = "desk @ library",
             coords = {x = 13432, y = 1893, z = -2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
@@ -386,6 +424,7 @@ local CentralLVilleMansion = {
         --- Infirmary ---
         -----------------
         { -- E39
+            note = "metal_shelves @ medicalstorage",
             coords = {x = 13419, y = 1897, z = -2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
             distIncludeJunk = true,
@@ -393,6 +432,7 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E40
+            note = "medicine @ medicalstorage",
             coords = {x = 13419, y = 1896, z = -2},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -400,6 +440,7 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E41
+            note = "medicine @ medicalstorage",
             coords = {x = 13419, y = 1895, z = -2},
             dist = {"MedicalClinicDrugs" },
             distIncludeJunk = true,
@@ -407,6 +448,7 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E42
+            note = "desk @ medicalstorage",
             coords = {x = 13419, y = 1893, z = -2},
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
@@ -417,11 +459,13 @@ local CentralLVilleMansion = {
         ----- Gun Range ----
         --------------------
         { -- E43
+            note = "locker @ hunting",
             coords = {x = 13433, y = 1872, z = -2},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E44
+            note = "counter @ hunting",
             coords = {x = 13430, y = 1869, z = -2},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = false,
@@ -429,6 +473,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E45
+            note = "counter @ hunting",
             coords = {x = 13430, y = 1873, z = -2},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = false,
@@ -439,6 +484,7 @@ local CentralLVilleMansion = {
         ----- Workroom / Power ----
         ---------------------------
         { -- E46
+            note = "counter @ warehouse",
             coords = {x = 13445, y = 1886, z = -2},
             dist = {"CrateCarpentry","LoggingFactoryTools"},
             distIncludeJunk = true,
@@ -446,6 +492,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E47
+            note = "counter @ warehouse",
             coords = {x = 13445, y = 1884, z = -2},
             dist = {"RadioFactoryComponents", "CrateElectronics", "ArmyStorageElectronics"},
             distIncludeJunk = true,
@@ -453,6 +500,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E48
+            note = "counter @ warehouse",
             coords = {x = 13445, y = 1883, z = -2},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
             distIncludeJunk = true,
@@ -460,6 +508,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E49
+            note = "counter @ warehouse",
             coords = {x = 13447, y = 1883, z = -2},
             dist = {"RailYardSpikes", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -467,6 +516,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
+            note = "counter @ warehouse",
             coords = {x = 13449, y = 1883, z = -2},
             dist = {"ToolStoreMetalwork","ToolStoreMisc", "ToolStoreTools", },
             distIncludeJunk = true,
@@ -474,6 +524,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E51
+            note = "counter @ warehouse",
             coords = {x = 13450, y = 1883, z = -2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -481,6 +532,7 @@ local CentralLVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E52
+            note = "counter @ warehouse",
             coords = {x = 13450, y = 1885, z = -2},
             dist = {"GolfFactoryTools","KnifeFactoryTools"},
             distIncludeJunk = true,
@@ -488,6 +540,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E53
+            note = "metal_shelves @ warehouse",
             coords = {x = 13451, y = 1883, z = -2},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -495,6 +548,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E54
+            note = "metal_shelves @ warehouse",
             coords = {x = 13451, y = 1884, z = -2},
             dist = {"CrateCarpentry","MannequinFactoryTools"},
             distIncludeJunk = true,
@@ -502,6 +556,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E55
+            note = "metal_shelves @ warehouse",
             coords = {x = 13451, y = 1885, z = -2},
             dist = {"WireFactoryBarbed", "CrateLongStick", "WireFactoryBasic"},
             distIncludeJunk = true,
@@ -509,6 +564,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E56
+            note = "metal_shelves @ warehouse",
             coords = {x = 13451, y = 1886, z = -2},
             dist = {"RailYardTools","Homesteading","SurvivalGear"},
             distIncludeJunk = true,
@@ -519,6 +575,7 @@ local CentralLVilleMansion = {
         ----- Laundry Room ----
         -----------------------
         { -- E57
+            note = "clothingrack @ laundry",
             coords = {x = 13445, y = 1882, z = -2},
             dist = {"ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -526,6 +583,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E58
+            note = "clothingrack @ laundry",
             coords = {x = 13446, y = 1882, z = -2},
             dist = {"CrateClothesRandom"},
             distIncludeJunk = true,
@@ -533,6 +591,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E59
+            note = "clothingrack @ laundry",
             coords = {x = 13447, y = 1882, z = -2},
             dist = {"DrugLabOutfit", "MechanicOutfit", "WildWestClothing"},
             distIncludeJunk = true,
@@ -540,6 +599,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E60
+            note = "clothingrack @ laundry",
             coords = {x = 13448, y = 1882, z = -2},
             dist = {"BackstageClothingRack", "ArmySurplusOutfit"},
             distIncludeJunk = true,
@@ -547,6 +607,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E61
+            note = "clothingrack @ laundry",
             coords = {x = 13449, y = 1882, z = -2},
             dist = {"ClothingStorageWinter", "GymLaundry"},
             distIncludeJunk = true,
@@ -554,6 +615,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E62
+            note = "clothingdryerbasic @ laundry",
             coords = {x = 13450, y = 1882, z = -2},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -561,6 +623,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E63 counter under sink
+            note = "counter @ laundry",
             coords = {x = 13451, y = 1878, z = -2},
             dist = {"LaundryCleaning"},
             distIncludeJunk = true,
@@ -571,6 +634,7 @@ local CentralLVilleMansion = {
         ----- Shower Room ----
         ----------------------
         { -- E64 counter under sink
+            note = "counter @ bathroom",
             coords = {x = 13455, y = 1881, z = -2},
             dist = {"BathroomCabinet", "BathroomCounter","BathroomShelf"},
             distIncludeJunk = true,
@@ -578,6 +642,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E65 counter under sink
+            note = "counter @ bathroom",
             coords = {x = 13452, y = 1881, z = -2},
             dist = {"CrateToiletPaper", "CrateLinens","GasStoreToiletries"},
             distIncludeJunk = true,
@@ -588,6 +653,7 @@ local CentralLVilleMansion = {
         ----- Gym ----
         --------------
         { -- E66
+            note = "counter @ gym",
             coords = {x = 13429, y = 1882, z = -2},
             dist = {"FitnessTrainer"},
             distIncludeJunk = true,
@@ -595,6 +661,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E67
+            note = "counter @ gym",
             coords = {x = 13430, y = 1882, z = -2},
             dist = {"CrateFitnessWeights"},
             distIncludeJunk = true,
@@ -605,6 +672,7 @@ local CentralLVilleMansion = {
         ----- Warehouse Freezers ----
         -----------------------------
         { -- E68
+            note = "freezer @ warehouse",
             coords = {x = 13437, y = 1870, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -612,6 +680,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E69
+            note = "freezer @ warehouse",
             coords = {x = 13438, y = 1870, z = -2},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -619,6 +688,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E70
+            note = "freezer @ warehouse",
             coords = {x = 13440, y = 1870, z = -2},
             dist = {"ArenaKitchenFreezer", },
             distIncludeJunk = false,
@@ -626,6 +696,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E71
+            note = "freezer @ warehouse",
             coords = {x = 13441, y = 1870, z = -2},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
@@ -633,6 +704,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E72
+            note = "freezer @ warehouse",
             coords = {x = 13437, y = 1872, z = -2},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
@@ -640,6 +712,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "freezer @ warehouse",
             coords = {x = 13438, y = 1872, z = -2},
             dist = {"CafeteriaKitchenFreezer", },
             distIncludeJunk = false,
@@ -647,6 +720,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "freezer @ warehouse",
             coords = {x = 13440, y = 1872, z = -2},
             dist = {"DeepFryKitchenFreezer", },
             distIncludeJunk = false,
@@ -654,6 +728,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E75
+            note = "freezer @ warehouse",
             coords = {x = 13441, y = 1872, z = -2},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -664,6 +739,7 @@ local CentralLVilleMansion = {
         ----- Warehouse ----
         --------------------
         { -- E76
+            note = "metal_shelves @ warehouse",
             coords = {x = 13434, y = 1869, z = -2},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools",},
             distIncludeJunk = true,
@@ -671,6 +747,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E77
+            note = "metal_shelves @ warehouse",
             coords = {x = 13435, y = 1869, z = -2},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -678,6 +755,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E78
+            note = "metal_shelves @ warehouse",
             coords = {x = 13436, y = 1869, z = -2},
             items = {
                 { name = 'Base.NailsBox', },
@@ -687,6 +765,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E79
+            note = "crate @ warehouse",
             coords = {x = 13437, y = 1869, z = -2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -694,6 +773,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E80
+            note = "crate @ warehouse",
             coords = {x = 13438, y = 1869, z = -2},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -703,6 +783,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E81
+            note = "metal_shelves @ warehouse",
             coords = {x = 13434, y = 1873, z = -2},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -712,6 +793,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E82
+            note = "metal_shelves @ warehouse",
             coords = {x = 13435, y = 1873, z = -2},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -721,6 +803,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E83
+            note = "metal_shelves @ warehouse",
             coords = {x = 13436, y = 1873, z = -2},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -730,6 +813,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E84
+            note = "cardboardbox @ warehouse",
             coords = {x = 13437, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -737,6 +821,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
+            note = "smallbox @ warehouse",
             coords = {x = 13438, y = 1873, z = -2},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = false,
@@ -745,6 +830,7 @@ local CentralLVilleMansion = {
         },
         -- ⬆ West of door way ⬇ East of door way
         { -- E86
+            note = "crate @ warehouse",
             coords = {x = 13440, y = 1869, z = -2},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
@@ -752,6 +838,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E87
+            note = "crate @ warehouse",
             coords = {x = 13441, y = 1869, z = -2},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -759,6 +846,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E88
+            note = "crate @ warehouse",
             coords = {x = 13440, y = 1873, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -766,6 +854,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E89
+            note = "crate @ warehouse",
             coords = {x = 13441, y = 1873, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -773,6 +862,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E90
+            note = "metal_shelves @ warehouse",
             coords = {x = 13443, y = 1869, z = -2},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -780,6 +870,7 @@ local CentralLVilleMansion = {
             level = "Loot_FishLevel",
         },
         { -- E91
+            note = "metal_shelves @ warehouse",
             coords = {x = 13443, y = 1870, z = -2},
             dist = {"Trapper", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -787,6 +878,7 @@ local CentralLVilleMansion = {
             level = "Loot_FishLevel",
         },
         { -- E92
+            note = "metal_shelves @ warehouse",
             coords = {x = 13447, y = 1869, z = -2},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -795,6 +887,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E93
+            note = "metal_shelves @ warehouse",
             coords = {x = 13447, y = 1870, z = -2},
             dist = {"CrateAntiqueStove", "CampingStoreLighting"},
             distIncludeJunk = false,
@@ -817,6 +910,7 @@ local CentralLVilleMansion = {
         },
         -- south side crates
         { -- E96
+            note = "crate @ warehouse",
             coords = {x = 13444, y = 1873, z = -2},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -824,6 +918,7 @@ local CentralLVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E97
+            note = "crate @ warehouse",
             coords = {x = 13445, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -831,6 +926,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E98
+            note = "crate @ warehouse",
             coords = {x = 13446, y = 1873, z = -2},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -838,6 +934,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E99
+            note = "crate @ warehouse",
             coords = {x = 13447, y = 1873, z = -2},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = false,
@@ -852,6 +949,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E101
+            note = "crate @ warehouse",
             coords = {x = 13449, y = 1873, z = -2},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -875,6 +973,7 @@ local CentralLVilleMansion = {
 
         -- garage
         { -- E104
+            note = "metal_shelves @ workshop",
             coords = {x=13433,y=1910,z=0},
             dist = {"GigamartDryGoods" },
             distIncludeJunk = false,
@@ -882,6 +981,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E105
+            note = "metal_shelves @ workshop",
             coords = {x=13434,y=1910,z=0},
             dist = {"GigamartDryGoods" },
             distIncludeJunk = false,
@@ -889,6 +989,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E106
+            note = "metal_shelves @ workshop",
             coords = {x = 13435, y = 1910, z = 0},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -896,6 +997,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E107
+            note = "metal_shelves @ workshop",
             coords = {x = 13436, y = 1910, z = 0},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -903,6 +1005,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E108
+            note = "metal_shelves @ workshop",
             coords = {x = 13434, y = 1908, z = 0},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -910,6 +1013,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E109
+            note = "metal_shelves @ workshop",
             coords = {x = 13433, y = 1908, z = 0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -917,6 +1021,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E110
+            note = "metal_shelves @ workshop",
             coords = {x = 13432, y = 1908, z = 0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -924,6 +1029,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E111
+            note = "metal_shelves @ workshop",
             coords = {x = 13431, y = 1908, z = 0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -932,6 +1038,7 @@ local CentralLVilleMansion = {
         },
         -- kitchen
         { -- E112 fridge
+            note = "fridge @ kitchen",
             coords = {x = 13440, y = 1904, z = 0},
             dist = {"WesternKitchenFridge"},
             distIncludeJunk = false,
@@ -939,6 +1046,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E113
+            note = "counter @ kitchen",
             coords = {x = 13439, y = 1904, z = 0},
             dist = {"KitchenDryFood",},
             distIncludeJunk = false,
@@ -946,11 +1054,13 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E114
+            note = "counter @ kitchen",
             coords = {x = 13438, y = 1904, z = 0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E115
+            note = "counter @ kitchen",
             coords = {x = 13437, y = 1904, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -958,6 +1068,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E116
+            note = "overhead @ kitchen",
             coords = {x = 13437, y = 1904, z = 0},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -966,6 +1077,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E117
+            note = "counter @ kitchen",
             coords = {x = 13437, y = 1903, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -973,6 +1085,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E118
+            note = "overhead @ kitchen",
             coords = {x = 13437, y = 1903, z = 0},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -981,6 +1094,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E119
+            note = "counter @ kitchen",
             coords = {x = 13437, y = 1901, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -988,6 +1102,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E120
+            note = "overhead @ kitchen",
             coords = {x = 13437, y = 1901, z = 0},
             slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -996,6 +1111,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E121
+            note = "counter @ kitchen",
             coords = {x = 13437, y = 1900, z = 0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -1003,6 +1119,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E122
+            note = "overhead @ kitchen",
             coords = {x = 13437, y = 1900, z = 0},
             slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -1011,6 +1128,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E123
+            note = "counter @ kitchen",
             coords = {x = 13437, y = 1899, z = 0},
             dist = {"CrateTortillaChips", "CandyStoreSnacks","FridgeSoda",},
             distIncludeJunk = true,
@@ -1018,6 +1136,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E124
+            note = "overhead @ kitchen",
             coords = {x = 13437, y = 1899, z = 0},
             slot = "upper",
             dist = {"CrateFlour", "CrateOilVegetable"},
@@ -1026,6 +1145,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E125
+            note = "counter @ kitchen",
             coords = {x = 13438, y = 1899, z = 0},
             dist = {"WesternKitchenSauce", "WhiskeyBottlingFull", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -1034,6 +1154,7 @@ local CentralLVilleMansion = {
         },
         -- laundry
         { -- E126
+            note = "metal_shelves @ laundry",
             coords = {x=13444,y=1897,z=0},
             slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -1042,6 +1163,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E127
+            note = "clothingdryerbasic @ laundry",
             coords = {x=13444,y=1898,z=0},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -1050,6 +1172,7 @@ local CentralLVilleMansion = {
         },
         -- office
         { -- E128
+            note = "desk @ library",
             coords = {x=13441,y=1891,z=0},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -1060,6 +1183,7 @@ local CentralLVilleMansion = {
             },
         },
         { -- E129
+            note = "shelves @ library",
             coords = {x=13440,y=1891,z=0},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -1067,6 +1191,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E130
+            note = "shelves @ library",
             coords = {x=13440,y=1892,z=0},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -1074,6 +1199,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E131
+            note = "shelves @ library",
             coords = {x=13440,y=1893,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -1081,6 +1207,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E132
+            note = "shelves @ library",
             coords = {x=13444,y=1894,z=0},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
@@ -1088,6 +1215,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E133
+            note = "dresser @ library",
             coords = {x=13444,y=1893,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -1095,6 +1223,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E134
+            note = "dresser @ library",
             coords = {x=13444,y=1892,z=0},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -1102,12 +1231,14 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E135
+            note = "shelves @ library",
             coords = {x=13444,y=1891,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- piano room
         { -- E136
+            note = "dresser @ livingroom",
             coords = {x=13436,y=1891,z=0},
             dist = {"FirearmWeapons_Late","ArmyStorageAmmunition",},
             distIncludeJunk = false,
@@ -1115,6 +1246,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E137
+            note = "dresser @ livingroom",
             coords = {x=13431,y=1894,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -1123,6 +1255,7 @@ local CentralLVilleMansion = {
         },
         -- dining room
         { -- E138
+            note = "dresser @ diningroom",
             coords = {x=13431,y=1899,z=0},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -1130,6 +1263,7 @@ local CentralLVilleMansion = {
             level = "Loot_MedLevel",
         },
         { -- E139
+            note = "dresser @ diningroom",
             coords = {x=13434,y=1899,z=0},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs","MedicalCabinet"},
             distIncludeJunk = true,
@@ -1138,11 +1272,13 @@ local CentralLVilleMansion = {
         },
         -- 2nd floor
         { -- E140
+            note = "wardrobe @ bedroom",
             coords = {x=13431,y=1897,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E141
+            note = "wardrobe @ bedroom",
             coords = {x=13431,y=1896,z=1},
             dist = {"FirearmWeapons_Late", "ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -1150,6 +1286,7 @@ local CentralLVilleMansion = {
             level = "Loot_GunLevel",
         },
         { -- E142
+            note = "dresser @ bedroom",
             coords = {x=13431,y=1895,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -1157,6 +1294,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E143
+            note = "dresser @ bedroom",
             coords = {x=13431,y=1891,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -1164,6 +1302,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E144
+            note = "dresser @ bedroom",
             coords = {x=13434,y=1891,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -1171,6 +1310,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E145
+            note = "dresser @ bedroom",
             coords = {x=13431,y=1904,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -1178,6 +1318,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E146
+            note = "dresser @ bedroom",
             coords = {x=13431,y=1903,z=1},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -1185,6 +1326,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E147
+            note = "wardrobe @ bedroom",
             coords = {x=13434,y=1902,z=1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -1192,6 +1334,7 @@ local CentralLVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E148
+            note = "wardrobe @ bedroom",
             coords = {x=13435,y=1902,z=1},
             dist = {"SewingStoreFabric","CrateLeather"},
             distIncludeJunk = true,
@@ -1199,6 +1342,7 @@ local CentralLVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E149
+            note = "dresser @ bedroom",
             coords = {x=13438,y=1902,z=1},
             dist = {"SewingStoreFabric","CrateLeather", "ArtSupplies"},
             distIncludeJunk = true,
@@ -1206,6 +1350,7 @@ local CentralLVilleMansion = {
             level = "Loot_TailorLevel",
         },
         { -- E150
+            note = "wardrobe @ bedroom",
             coords = {x=13439,y=1894,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -1213,6 +1358,7 @@ local CentralLVilleMansion = {
             level = "Loot_FishLevel",
         },
         { -- E151
+            note = "shelves @ bedroom",
             coords = {x=13441,y=1893,z=1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -1220,6 +1366,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E152
+            note = "shelves @ bedroom",
             coords = {x=13441,y=1892,z=1},
             dist = {"CrateVHSTapes","BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -1227,6 +1374,7 @@ local CentralLVilleMansion = {
             level = "Loot_MediaLevel",
         },
         { -- E153
+            note = "wardrobe @ bedroom",
             coords = {x=13440,y=1894,z=1},
             dist = {"SurvivalGear",},
             distIncludeJunk = false,
@@ -1234,6 +1382,7 @@ local CentralLVilleMansion = {
             level = "Loot_FishLevel",
         },
         { -- E154
+            note = "dresser @ bedroom",
             coords = {x=13444,y=1896,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -1241,6 +1390,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E155
+            note = "dresser @ bedroom",
             coords = {x=13444,y=1893,z=1},
             dist = {"SurvivalGear",},
             distIncludeJunk = false,
@@ -1248,6 +1398,7 @@ local CentralLVilleMansion = {
             level = "Loot_LockersLevel",
         },
         { -- E156
+            note = "clothingrack @ clothesstore",
             coords = {x=13439,y=1893,z=1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -1255,11 +1406,13 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E157
+            note = "clothingrack @ clothesstore",
             coords = {x=13439,y=1892,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E158
+            note = "clothingrack @ clothesstore",
             coords = {x=13439,y=1891,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -1268,6 +1421,7 @@ local CentralLVilleMansion = {
         },
         -- attic
         { -- E159
+            note = "crate @ attic",
             coords = {x=13432,y=1896,z=2},
             dist = {"BarnTools", "CrateAnimalFeed", },
             distIncludeJunk = true,
@@ -1275,6 +1429,7 @@ local CentralLVilleMansion = {
             level = "Loot_FarmLevel",
         },
         { -- E160
+            note = "crate @ attic",
             coords = {x=13432,y=1901,z=2},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -1282,6 +1437,7 @@ local CentralLVilleMansion = {
             level = "Loot_FoodLevel",
         },
         { -- E161
+            note = "crate @ attic",
             coords = {x=13437,y=1901,z=2},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -1289,6 +1445,7 @@ local CentralLVilleMansion = {
             level = "Loot_ToolsLevel",
         },
         { -- E162
+            note = "cardboardbox @ attic",
             coords = {x=13434,y=1895,z=2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -1296,6 +1453,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E163
+            note = "cardboardbox @ attic",
             coords = {x=13434,y=1894,z=2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -1303,6 +1461,7 @@ local CentralLVilleMansion = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E164
+            note = "cardboardbox @ attic",
             coords = {x=13435,y=1894,z=2},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "ArtStorePottery",},
             distIncludeJunk = true,

@@ -67,6 +67,7 @@ local RiverSafeHouse = {
     loot = {
         -- basement
         { -- E1 liquor cabinet
+            note = "dishescabinet @ workshop",
             coords = {x=6955,y=5580,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
@@ -74,6 +75,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E2
+            note = "dishescabinet @ workshop",
             coords = {x=6955,y=5579,z=-1},
             dist = {"LiquorStoreWine"},
             distIncludeJunk = false,
@@ -81,6 +83,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E3 liquor cabinet
+            note = "dishescabinet @ workshop",
             coords = {x=6958,y=5572,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -88,6 +91,7 @@ local RiverSafeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E4
+            note = "dishescabinet @ workshop",
             coords = {x=6959,y=5572,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
@@ -95,6 +99,7 @@ local RiverSafeHouse = {
         -- crates by stairs
         { -- E5
             stack = 1,
+            note = "crate @ workshop",
             coords = {x=6960,y=5577,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -103,6 +108,7 @@ local RiverSafeHouse = {
         },
         { -- E6
             stack = 2,
+            note = "crate @ workshop",
             coords = {x=6960,y=5577,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -111,6 +117,7 @@ local RiverSafeHouse = {
         },
         { -- E7
             stack = 1,
+            note = "crate @ workshop",
             coords = {x=6960,y=5576,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -119,6 +126,7 @@ local RiverSafeHouse = {
         },
         { -- E8
             stack = 2,
+            note = "crate @ workshop",
             coords = {x=6960,y=5576,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -127,6 +135,7 @@ local RiverSafeHouse = {
         },
         { -- E9
             stack = 1,
+            note = "crate @ workshop",
             coords = {x=6960,y=5575,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -135,6 +144,7 @@ local RiverSafeHouse = {
         },
         { -- E10
             stack = 2,
+            note = "crate @ workshop",
             coords = {x=6960,y=5575,z=-1},
             dist = {"ToolFactoryBarStock", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -142,6 +152,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E11 foot locker
+            note = "locker @ workshop",
             coords = {x=6962,y=5577,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives",},
             distIncludeJunk = true,
@@ -149,6 +160,7 @@ local RiverSafeHouse = {
             level = "Loot_LockersLevel",
         },
         { -- E12 cardboardbox
+            note = "cardboardbox @ workshop",
             coords = {x=6967,y=5576,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -158,6 +170,7 @@ local RiverSafeHouse = {
         },
         -- basement rec room
         { -- E13
+            note = "counter @ bar",
             coords = {x=6964,y=5568,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -165,6 +178,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E14
+            note = "counter @ bar",
             coords = {x=6964,y=5567,z=-1},
             dist = {"SafehouseBooze"},
             distIncludeJunk = false,
@@ -172,6 +186,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E15 popcorn machine
+            note = "counter @ bar",
             coords = {x=6964,y=5566,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
@@ -181,16 +196,19 @@ local RiverSafeHouse = {
         -- E16
         { --bookcase
             
+            note = "shelves @ bar",
             coords = {x=6964,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E17 bookcase
+            note = "shelves @ bar",
             coords = {x=6965,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E18 media stand
+            note = "sidetable @ bar",
             coords = {x=6966,y=5564,z=-1},
             dist = {"CrateLiquor", "CrateVHSTapes",},
             distIncludeJunk = false,
@@ -198,12 +216,14 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E19 bookcase
+            note = "shelves @ bar",
             coords = {x=6967,y=5564,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         -- basement armory
         { -- E20
+            note = "freezer @ security",
             coords = {x=6963,y=5570,z=-1},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -212,6 +232,7 @@ local RiverSafeHouse = {
         },
         { -- E21
             stack = 1,
+            note = "militarycrate @ security",
             coords = {x=6963,y=5569,z=-1},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -220,6 +241,7 @@ local RiverSafeHouse = {
         },
         { -- E22
             stack = 2,
+            note = "militarycrate @ security",
             coords = {x=6963,y=5569,z=-1},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -227,11 +249,13 @@ local RiverSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E23
+            note = "metal_shelves @ security",
             coords = {x=6963,y=5568,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E24
+            note = "metal_shelves @ security",
             coords = {x=6963,y=5567,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -239,6 +263,7 @@ local RiverSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E25
+            note = "freezer @ security",
             coords = {x=6963,y=5566,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "FreezerRich"},
             distIncludeJunk = true,
@@ -246,21 +271,25 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E26 mil locker
+            note = "militarylocker @ security",
             coords = {x=6961,y=5565,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E27 mil locker
+            note = "militarylocker @ security",
             coords = {x=6961,y=5566,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E28 mil locker
+            note = "militarylocker @ security",
             coords = {x=6961,y=5567,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E29 mil locker
+            note = "militarylocker @ security",
             coords = {x=6961,y=5568,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "GasStorageMechanics", "DrugLabOutfit"},
             distIncludeJunk = true,
@@ -269,6 +298,7 @@ local RiverSafeHouse = {
         },
         { -- E30
             stack = 1,
+            note = "militarycrate @ security",
             coords = {x=6961,y=5569,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -277,6 +307,7 @@ local RiverSafeHouse = {
         },
         { -- E31
             stack = 2,
+            note = "militarycrate @ security",
             coords = {x=6961,y=5569,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -284,6 +315,7 @@ local RiverSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E32
+            note = "metal_shelves @ security",
             coords = {x=6961,y=5570,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -291,11 +323,13 @@ local RiverSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E33
+            note = "metal_shelves @ security",
             coords = {x=6961,y=5571,z=-1},
             special = "essentials",
         },
         -- infirmary/bathroom
         { -- E34
+            note = "medicine @ medical",
             coords = {x=6958,y=5571,z=-1},
             dist = {"LaboratoryLockers", "TestingLab","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -303,6 +337,7 @@ local RiverSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E35
+            note = "medicine @ medical",
             coords = {x=6958,y=5570,z=-1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -310,6 +345,7 @@ local RiverSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E36
+            note = "counter @ medical",
             coords = {x=6958,y=5569,z=-1},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -317,6 +353,7 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E37
+            note = "medicine @ medical",
             coords = {x=6958,y=5568,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet", "SafehouseMedical" },
@@ -325,6 +362,7 @@ local RiverSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E38
+            note = "sidetable @ medical",
             coords = {x=6960,y=5566,z=-1},
             dist = {"CrateToiletPaper" },
             distIncludeJunk = false,
@@ -332,6 +370,7 @@ local RiverSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E39
+            note = "counter @ medical",
             coords = {x=6958,y=5565,z=-1},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -339,6 +378,7 @@ local RiverSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E40
+            note = "medicine @ medical",
             coords = {x=6958,y=5565,z=-1},
             slot = "upper",
             dist = {"BathroomCounter","CrateToiletPaper", "GasStoreToiletries", },
@@ -349,6 +389,7 @@ local RiverSafeHouse = {
         -- basement utility room/warehouse
         { -- E41
             stack = 1,
+            note = "crate @ warehouse",
             coords = {x=6956,y=5571,z=-1},
             dist = {"GigamartCrisps","GigamartDryGoods"},
             distIncludeJunk = false,
@@ -357,6 +398,7 @@ local RiverSafeHouse = {
         },
         { -- E42
             stack = 2,
+            note = "crate @ warehouse",
             coords = {x=6956,y=5571,z=-1},
             dist = {"GigamartCrisps","GigamartDryGoods"},
             distIncludeJunk = false,
@@ -364,6 +406,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "metal_shelves @ warehouse",
             coords = {x=6955,y=5571,z=-1},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -371,6 +414,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E44
+            note = "metal_shelves @ warehouse",
             coords = {x=6954,y=5571,z=-1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -378,6 +422,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "metal_shelves @ warehouse",
             coords = {x=6953,y=5571,z=-1},
             dist = {"CrateCannedFood"},
             distIncludeJunk = false,
@@ -385,6 +430,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "metal_shelves @ warehouse",
             coords = {x=6952,y=5571,z=-1},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -393,6 +439,7 @@ local RiverSafeHouse = {
         },
         { -- E47
             stack = 1,
+            note = "crate @ warehouse",
             coords = {x=6956,y=5569,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -401,6 +448,7 @@ local RiverSafeHouse = {
         },
         { -- E48
             stack = 2,
+            note = "crate @ warehouse",
             coords = {x=6956,y=5569,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -408,6 +456,7 @@ local RiverSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E49
+            note = "metal_shelves @ warehouse",
             coords = {x=6955,y=5569,z=-1},
             dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
             distIncludeJunk = true,
@@ -415,6 +464,7 @@ local RiverSafeHouse = {
             level = "Loot_TailorLevel",
         },
         { -- E50
+            note = "metal_shelves @ warehouse",
             coords = {x=6954,y=5569,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -422,6 +472,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E51
+            note = "metal_shelves @ warehouse",
             coords = {x=6953,y=5569,z=-1},
             dist = {"CrateLiquor", "MusicStoreCDs", "ComicStoreDisplayDice", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -429,6 +480,7 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E52
+            note = "metal_shelves @ warehouse",
             coords = {x=6952,y=5569,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -436,6 +488,7 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E53
+            note = "crate @ warehouse",
             coords = {x=6956,y=5567,z=-1},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -443,6 +496,7 @@ local RiverSafeHouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E54
+            note = "metal_shelves @ warehouse",
             coords = {x=6955,y=5567,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -450,6 +504,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E55
+            note = "metal_shelves @ warehouse",
             coords = {x=6954,y=5567,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -458,6 +513,7 @@ local RiverSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E56
+            note = "metal_shelves @ warehouse",
             coords = {x=6953,y=5567,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -466,6 +522,7 @@ local RiverSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E57
+            note = "metal_shelves @ warehouse",
             coords = {x=6952,y=5567,z=-1},
             dist = {"GigamartCrisps","GasStoreEmergency"},
             distIncludeJunk = true,
@@ -474,6 +531,7 @@ local RiverSafeHouse = {
         },
         -- first floor
         { -- E58
+            note = "wardrobe @ hall",
             coords = {x=6961,y=5579,z=1},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
@@ -481,6 +539,7 @@ local RiverSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E59
+            note = "smallcrate @ garagestorage",
             coords = {x=6965,y=5580,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -488,6 +547,7 @@ local RiverSafeHouse = {
             level = "Loot_GunLevel",
         },
         { -- E60
+            note = "smallcrate @ garagestorage",
             coords = {x=6964,y=5580,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -510,6 +570,7 @@ local RiverSafeHouse = {
         },
         { -- E63
             
+            note = "metal_shelves @ barn",
             coords = {x=6963,y=5555,z=0},
             slot = "upper", -- square carries only a High metal_shelves
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -518,6 +579,7 @@ local RiverSafeHouse = {
             level = "Loot_FarmLevel",
         },
         { -- E64
+            note = "metal_shelves @ barn",
             coords = {x=6963,y=5556,z=0},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -525,6 +587,7 @@ local RiverSafeHouse = {
             level = "Loot_FishLevel",
         },
         { -- E65
+            note = "dishescabinet @ kitchen",
             coords = {x=6963,y=5583,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -534,6 +597,7 @@ local RiverSafeHouse = {
         -- kitchen
         { -- E66
             slot = 'freezer',
+            note = "freezer @ kitchen",
             coords = {x=6957,y=5582,z=0},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
@@ -541,6 +605,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E67
+            note = "fridge @ kitchen",
             coords = {x=6957,y=5582,z=0},
             dist = { "MotelFridge", },
             distIncludeJunk = true,
@@ -549,6 +614,7 @@ local RiverSafeHouse = {
         },
         { -- E68
             slot = 'upper',
+            note = "counter @ kitchen",
             coords = {x=6957,y=5582,z=0},
             dist = {"ButcherSpices","GigamartSpices",},
             distIncludeJunk = false,
@@ -556,11 +622,13 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E69
+            note = "counter @ kitchen",
             coords = {x=6957,y=5581,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E70
+            note = "overhead @ kitchen",
             coords = {x=6957,y=5581,z=0},
             slot = "upper",
             dist = {"GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
@@ -569,6 +637,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E71
+            note = "counter @ kitchen",
             coords = {x=6958,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -577,6 +646,7 @@ local RiverSafeHouse = {
         },
         { -- E72
             slot = 'upper',
+            note = "counter @ kitchen",
             coords = {x=6958,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -584,6 +654,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "counter @ kitchen",
             coords = {x=6959,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -591,6 +662,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "counter @ kitchen",
             coords = {x=6961,y=5581,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -599,6 +671,7 @@ local RiverSafeHouse = {
         },
         { -- E75
             slot = 'upper',
+            note = "counter @ kitchen",
             coords = {x=6961,y=5581,z=0},
             dist = {"KitchenBottles", "KitchenBreakfast", "KitchenRandom"},
             distIncludeJunk = false,
@@ -606,12 +679,14 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E76
+            note = "wardrobe @ hall",
             coords = {x=6961,y=5578,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- living area
         { -- E77
+            note = "shelves @ livingroom",
             coords = {x=6957,y=5586,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -619,6 +694,7 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E78
+            note = "shelves @ livingroom",
             coords = {x=6964,y=5576,z=1},
             slot = "upper",
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -627,6 +703,7 @@ local RiverSafeHouse = {
             level = "Loot_MediaLevel",
         },
         { -- E79
+            note = "shelves @ office",
             coords = {x=6964,y=5581,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -634,6 +711,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E80
+            note = "metal_shelves @ garagestorage",
             coords = {x=7002,y=5590,z=0},
             dist = {"ToolFactoryHandles", "ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -642,6 +720,7 @@ local RiverSafeHouse = {
         },
         -- other bathrom/sink area
         { -- E81
+            note = "dresser @ bathroom",
             coords = {x=6966,y=5591,z=0},
             dist = {"BathroomCounter","ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -649,6 +728,7 @@ local RiverSafeHouse = {
             level = "Loot_MedLevel",
         },
         { -- E82
+            note = "dishescabinet @ kitchen",
             coords = {x=6963,y=5584,z=0},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -656,6 +736,7 @@ local RiverSafeHouse = {
             level = "Loot_FoodLevel",
         },
         { -- E83
+            note = "metal_shelves @ garagestorage",
             coords = {x=7002,y=5591,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -664,6 +745,7 @@ local RiverSafeHouse = {
         },
         -- nearby shed
         { -- E84
+            note = "toolcabinet @ garagestorage",
             coords = {x=7007,y=5590,z=0},
             dist = {"CarSupplyTools", },
             distIncludeJunk = true,
@@ -672,6 +754,7 @@ local RiverSafeHouse = {
         },
         { -- E85
             
+            note = "metal_shelves @ garagestorage",
             coords = {x=7004,y=5590,z=0},
             slot = "upper", -- square carries only a High metal_shelves
             items = {
@@ -682,6 +765,7 @@ local RiverSafeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
+            note = "counter @ laundry",
             coords = {x=6964,y=5589,z=0},
             dist = {"GigamartHousewares", "GigamartBedding" },
             distIncludeJunk = true,

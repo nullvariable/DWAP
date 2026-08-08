@@ -78,6 +78,7 @@ local WestPointHome = {
         -- basement
         -- rec room
         { -- E1
+            note = "dishescabinet @ livingroom",
             coords = {x=11770,y=6672,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
@@ -85,6 +86,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E2
+            note = "dishescabinet @ livingroom",
             coords = {x=11770,y=6671,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -92,11 +94,13 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E3
+            note = "shelves @ livingroom",
             coords = {x=11770,y=6663,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E4
+            note = "shelves @ livingroom",
             coords = {x=11765,y=6663,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
             distIncludeJunk = false,
@@ -104,6 +108,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "shelves @ livingroom",
             coords = {x=11764,y=6663,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
             distIncludeJunk = false,
@@ -111,6 +116,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E6
+            note = "counter @ livingroom",
             coords = {x=11763,y=6663,z=-1},
             dist = {"TheatreSnacks", "TheatrePopcorn"},
             distIncludeJunk = false,
@@ -118,6 +124,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "counter @ livingroom",
             coords = {x=11767,y=6667,z=-1},
             dist = {"TheatreSnacks", "CrateSodaBottles", "CrateSodaCans"},
             distIncludeJunk = false,
@@ -125,6 +132,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "shelves @ livingroom",
             coords = {x=11764,y=6666,z=-1},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -132,6 +140,7 @@ local WestPointHome = {
             level = "Loot_MediaLevel",
         },
         { -- E9
+            note = "shelves @ livingroom",
             coords = {x=11764,y=6667,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -139,6 +148,7 @@ local WestPointHome = {
             level = "Loot_MediaLevel",
         },
         { -- E10
+            note = "shelves @ livingroom",
             coords = {x=11764,y=6668,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -147,20 +157,24 @@ local WestPointHome = {
         },
         -- shelter room
         { -- E11
+            note = "cardboardbox @ bedroom",
             coords = {x=11761,y=6662,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E12
+            note = "locker @ bedroom",
             coords = {x=11759,y=6660,z=-1},
             special = "essentials",
         },
         { -- E13
+            note = "locker @ bedroom",
             coords = {x=11759,y=6659,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E14
+            note = "counter @ bedroom",
             coords = {x=11759,y=6658,z=-1},
             dist = {"BathroomCounter", "SafehouseMedical"},
             distIncludeJunk = true,
@@ -168,6 +182,7 @@ local WestPointHome = {
             level = "Loot_MedLevel",
         },
         { -- E15
+            note = "medicine @ bedroom",
             coords = {x=11759,y=6658,z=-1},
             slot = "upper",
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
@@ -177,16 +192,19 @@ local WestPointHome = {
         },
         -- main storage room
         { -- E16
+            note = "militarylocker @ storage",
             coords = {x=11762,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E17
+            note = "militarylocker @ storage",
             coords = {x=11761,y=6663,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E18
+            note = "militarycrate @ storage",
             coords = {x=11759,y=6663,z=-1},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives", "PawnShopKnives",},
             distIncludeJunk = false,
@@ -194,6 +212,7 @@ local WestPointHome = {
             level = "Loot_GunLevel",
         },
         { -- E19
+            note = "militarycrate @ storage",
             coords = {x=11758,y=6663,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -201,16 +220,19 @@ local WestPointHome = {
             level = "Loot_GunLevel",
         },
         { -- E20
+            note = "metal_shelves @ storage",
             coords = {x=11762,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E21
+            note = "metal_shelves @ storage",
             coords = {x=11761,y=6665,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E22
+            note = "metal_shelves @ storage",
             coords = {x=11759,y=6666,z=-1},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -218,6 +240,7 @@ local WestPointHome = {
             level = "Loot_TailorLevel",
         },
         { -- E23
+            note = "metal_shelves @ storage",
             coords = {x=11758,y=6666,z=-1},
             dist = {"JewelerTools","SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -225,6 +248,7 @@ local WestPointHome = {
             level = "Loot_TailorLevel",
         },
         { -- E24
+            note = "crate @ storage",
             coords = {x=11757,y=6666,z=-1},
             dist = {"CrateLongStick"},
             items = {
@@ -235,6 +259,7 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E25
+            note = "metal_shelves @ storage",
             coords = {x=11762,y=6667,z=-1},
             dist = {"CrateAntiqueStove", "CampingStoreLighting"},
             distIncludeJunk = false,
@@ -242,6 +267,7 @@ local WestPointHome = {
             level = 1,
         },
         { -- E26
+            note = "metal_shelves @ storage",
             coords = {x=11761,y=6667,z=-1},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -250,6 +276,7 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E27
+            note = "metal_shelves @ storage",
             coords = {x=11759,y=6668,z=-1},
             dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -257,6 +284,7 @@ local WestPointHome = {
             level = "Loot_FishLevel",
         },
         { -- E28
+            note = "metal_shelves @ storage",
             coords = {x=11758,y=6668,z=-1},
             dist = {"Trapper", "CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -264,6 +292,7 @@ local WestPointHome = {
             level = "Loot_FishLevel",
         },
         { -- E29
+            note = "crate @ storage",
             coords = {x=11757,y=6668,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -271,6 +300,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "metal_shelves @ storage",
             coords = {x=11754,y=6668,z=-1},
             dist = { "CarSupplyTools", "GasStoreEmergency"},
             distIncludeJunk = true,
@@ -278,6 +308,7 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E31
+            note = "metal_shelves @ storage",
             coords = {x=11762,y=6669,z=-1},
             dist = {"GigamartDryGoods", "CafeKitchenCoffee"},
             distIncludeJunk = false,
@@ -285,6 +316,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E32
+            note = "metal_shelves @ storage",
             coords = {x=11761,y=6669,z=-1},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -292,6 +324,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E33
+            note = "metal_shelves @ storage",
             coords = {x=11759,y=6670,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -299,6 +332,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E34
+            note = "metal_shelves @ storage",
             coords = {x=11758,y=6670,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -306,6 +340,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E35
+            note = "crate @ storage",
             coords = {x=11757,y=6670,z=-1},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = false,
@@ -313,6 +348,7 @@ local WestPointHome = {
             level = "Loot_FoodLevel",
         },
         { -- E36
+            note = "metal_shelves @ storage",
             coords = {x=11762,y=6671,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -322,6 +358,7 @@ local WestPointHome = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E37
+            note = "metal_shelves @ storage",
             coords = {x=11761,y=6671,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -329,6 +366,7 @@ local WestPointHome = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E38
+            note = "metal_shelves @ storage",
             coords = {x=11759,y=6672,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -336,6 +374,7 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E39
+            note = "metal_shelves @ storage",
             coords = {x=11758,y=6672,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
             distIncludeJunk = true,
@@ -343,6 +382,7 @@ local WestPointHome = {
             level = "Loot_ToolsLevel",
         },
         { -- E40
+            note = "metal_shelves @ storage",
             coords = {x=11757,y=6672,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -350,6 +390,7 @@ local WestPointHome = {
             level = "Loot_FarmLevel",
         },
         { -- E41
+            note = "metal_shelves @ storage",
             coords = {x=11756,y=6672,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },

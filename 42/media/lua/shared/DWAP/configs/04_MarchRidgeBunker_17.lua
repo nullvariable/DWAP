@@ -112,6 +112,7 @@ local MarchRidgeConfig = {
         { -- E1
             -- filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=9959,y=12627,z=-4},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -124,17 +125,20 @@ local MarchRidgeConfig = {
         { -- E2
             -- 2nd filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=9959,y=12628,z=-4},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- kitchen
         { -- E3
+            note = "counter @ oldarmy",
             coords = {x=9967,y=12610,z=-4},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "counter @ oldarmy",
             coords = {x=9966,y=12610,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -142,6 +146,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "counter @ oldarmy",
             coords = {x=9963,y=12610,z=-4},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -149,6 +154,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E6
+            note = "counter @ oldarmy",
             coords = {x=9963,y=12612,z=-4},
             dist = {"GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -156,6 +162,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "counter @ oldarmy",
             coords = {x=9962,y=12610,z=-4},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -163,6 +170,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "counter @ oldarmy",
             coords = {x=9964,y=12612,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -170,6 +178,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E9
+            note = "counter @ oldarmy",
             coords = {x=9965,y=12612,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -177,6 +186,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E10
+            note = "counter @ oldarmy",
             coords = {x=9966,y=12612,z=-4},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -185,11 +195,13 @@ local MarchRidgeConfig = {
         },
         -- Armory
         { -- E11
+            note = "locker @ empty",
             coords = {x=9974,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
+            note = "locker @ empty",
             coords = {x=9975,y=12614,z=-4},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -197,16 +209,19 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "locker @ empty",
             coords = {x=9976,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E14
+            note = "locker @ empty",
             coords = {x=9977,y=12614,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "locker @ empty",
             coords = {x=9974,y=12617,z=-4},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
@@ -214,6 +229,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "locker @ empty",
             coords = {x=9975,y=12617,z=-4},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
@@ -221,6 +237,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E17
+            note = "locker @ empty",
             coords = {x=9976,y=12617,z=-4},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -228,6 +245,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E18
+            note = "locker @ empty",
             coords = {x=9977,y=12617,z=-4},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
@@ -236,6 +254,7 @@ local MarchRidgeConfig = {
         },
         -- medical
         { -- E19
+            note = "medicine @ oldmedical",
             coords = {x=9969,y=12625,z=-4},
             slot = "upper",
             dist = {"MedicalCabinet"},
@@ -244,6 +263,7 @@ local MarchRidgeConfig = {
             level = "Loot_MedLevel",
         },
         { -- E20
+            note = "metal_shelves @ oldmedical",
             coords = {x=9969,y=12626,z=-4},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -251,6 +271,7 @@ local MarchRidgeConfig = {
             level = "Loot_MedLevel",
         },
         { -- E21
+            note = "metal_shelves @ oldmedical",
             coords = {x=9970,y=12626,z=-4},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -259,6 +280,7 @@ local MarchRidgeConfig = {
         },
         -- book shelves
         { -- E22
+            note = "shelves @ empty",
             coords = {x=9980,y=12632,z=-4},
             dist = {"BookstoreNonFiction", "BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -267,6 +289,7 @@ local MarchRidgeConfig = {
         },
         -- media storage
         { -- E23
+            note = "metal_shelves @ empty",
             coords = {x=9973,y=12633,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             items = {
@@ -285,6 +308,7 @@ local MarchRidgeConfig = {
             },
         },
         { -- E24
+            note = "metal_shelves @ empty",
             coords = {x=9974,y=12633,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             items = {
@@ -302,11 +326,13 @@ local MarchRidgeConfig = {
             },
         },
         { -- E25
+            note = "metal_shelves @ empty",
             coords = {x=9975,y=12633,z=-4},
             special = 'skillmags',
             sandboxEnable = 'Loot_EnableBooks',
         },
         { -- E26
+            note = "metal_shelves @ empty",
             coords = {x=9976,y=12633,z=-4},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -314,6 +340,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E27
+            note = "metal_shelves @ empty",
             coords = {x=9977,y=12633,z=-4},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -321,6 +348,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E28
+            note = "metal_shelves @ empty",
             coords = {x=9978,y=12633,z=-4},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -328,6 +356,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E29
+            note = "metal_shelves @ empty",
             coords = {x=9975,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -335,6 +364,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E30
+            note = "metal_shelves @ empty",
             coords = {x=9976,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -342,6 +372,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E31
+            note = "metal_shelves @ empty",
             coords = {x=9977,y=12636,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -349,6 +380,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E32
+            note = "metal_shelves @ empty",
             coords = {x=9978,y=12636,z=-4},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -357,6 +389,7 @@ local MarchRidgeConfig = {
         },
         -- cleaning
         { -- E33
+            note = "metal_shelves @ empty",
             coords = {x=9969,y=12633,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -364,6 +397,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E34
+            note = "metal_shelves @ empty",
             coords = {x=9970,y=12633,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -372,11 +406,13 @@ local MarchRidgeConfig = {
         },
         -- seed/farm library
         { -- E35
+            note = "metal_shelves @ oldarmy",
             coords = {x=9970,y=12631,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E36
+            note = "metal_shelves @ oldarmy",
             coords = {x=9970,y=12632,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -384,6 +420,7 @@ local MarchRidgeConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E37
+            note = "metal_shelves @ oldarmy",
             coords = {x=9968,y=12631,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -391,6 +428,7 @@ local MarchRidgeConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E38
+            note = "metal_shelves @ oldarmy",
             coords = {x=9968,y=12632,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -398,6 +436,7 @@ local MarchRidgeConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E39
+            note = "metal_shelves @ oldarmy",
             coords = {x=9966,y=12631,z=-4},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -407,6 +446,7 @@ local MarchRidgeConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E40
+            note = "metal_shelves @ oldarmy",
             coords = {x=9966,y=12632,z=-4},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -417,6 +457,7 @@ local MarchRidgeConfig = {
         },
         -- fishing
         { -- E41
+            note = "metal_shelves @ oldarmy",
             coords = {x=9970,y=12628,z=-4},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -424,6 +465,7 @@ local MarchRidgeConfig = {
             level = "Loot_FishLevel",
         },
         { -- E42 hunting
+            note = "metal_shelves @ oldarmy",
             coords = {x=9969,y=12628,z=-4},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -431,6 +473,7 @@ local MarchRidgeConfig = {
             level = "Loot_FishLevel",
         },
         { -- E43
+            note = "metal_shelves @ oldarmy",
             coords = {x=9968,y=12628,z=-4},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
@@ -438,6 +481,7 @@ local MarchRidgeConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E44
+            note = "metal_shelves @ oldarmy",
             coords = {x=9967,y=12628,z=-4},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -445,6 +489,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "metal_shelves @ oldarmy",
             coords = {x=9966,y=12628,z=-4},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -452,6 +497,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "metal_shelves @ oldarmy",
             coords = {x=9965,y=12628,z=-4},
             dist = {"DishCabinetLiquor"},
             distIncludeJunk = true,
@@ -460,6 +506,7 @@ local MarchRidgeConfig = {
         },
         -- tailoring
         { -- E47
+            note = "counter @ empty",
             coords = {x=9969,y=12637,z=-4},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -467,6 +514,7 @@ local MarchRidgeConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E48
+            note = "counter @ empty",
             coords = {x=9970,y=12637,z=-4},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -474,6 +522,7 @@ local MarchRidgeConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E49
+            note = "counter @ empty",
             coords = {x=9970,y=12638,z=-4},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -481,6 +530,7 @@ local MarchRidgeConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E50
+            note = "metal_shelves @ empty",
             coords = {x=9966,y=12637,z=-4},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -488,6 +538,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "metal_shelves @ empty",
             coords = {x=9966,y=12638,z=-4},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -495,6 +546,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "bin @ empty",
             coords = {x=9970,y=12640,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
@@ -503,6 +555,7 @@ local MarchRidgeConfig = {
         },
         -- laundry room
         { -- E53
+            note = "metal_shelves @ empty",
             coords = {x=9959,y=12643,z=-4},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -511,6 +564,7 @@ local MarchRidgeConfig = {
             level = 1,
         },
         { -- E54
+            note = "metal_shelves @ empty",
             coords = {x=9959,y=12607,z=-4},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -525,6 +579,7 @@ local MarchRidgeConfig = {
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
         { -- E55
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12609,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -532,6 +587,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E56
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12610,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -539,6 +595,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E57
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12611,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -546,6 +603,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E58
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12612,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -553,6 +611,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E59
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12613,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -561,6 +620,7 @@ local MarchRidgeConfig = {
         },
         -- mens
         { -- E60
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12637,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -568,6 +628,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E61
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12638,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -575,6 +636,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E62
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12639,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -582,6 +644,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E63
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12640,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -589,6 +652,7 @@ local MarchRidgeConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E64
+            note = "locker @ oldarmy",
             coords = {x=9944,y=12641,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -597,6 +661,7 @@ local MarchRidgeConfig = {
         },
         -- entry storage 1
         { -- E65
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12627,z=-4},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
@@ -604,6 +669,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E66
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12628,z=-4},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -611,6 +677,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E67
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12629,z=-4},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -618,6 +685,7 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E68
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12630,z=-4},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
@@ -625,10 +693,12 @@ local MarchRidgeConfig = {
             level = "Loot_GunLevel",
         },
         { -- E69
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12631,z=-4},
             special = "essentials",
         },
         { -- E70
+            note = "metal_shelves @ oldarmy",
             coords = {x=9950,y=12632,z=-4},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -637,6 +707,7 @@ local MarchRidgeConfig = {
         },
         -- tools
         { -- E71
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12630,z=-4},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -644,6 +715,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E72
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12631,z=-4},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -651,6 +723,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E73
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12632,z=-4},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -658,6 +731,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12633,z=-4},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -665,6 +739,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E75
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12634,z=-4},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -672,6 +747,7 @@ local MarchRidgeConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E76
+            note = "metal_shelves @ oldarmy",
             coords = {x=9953,y=12635,z=-4},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -680,6 +756,7 @@ local MarchRidgeConfig = {
         },
         -- random junk
         { -- E77
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12628,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -687,6 +764,7 @@ local MarchRidgeConfig = {
             level = 3,
         },
         { -- E78
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12629,z=-4},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -694,6 +772,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E79
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12630,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller" },
             distIncludeJunk = true,
@@ -701,6 +780,7 @@ local MarchRidgeConfig = {
             level = 3,
         },
         { -- E80
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12631,z=-4},
             dist = {"CrateCannedFood", "RandomFiller" },
             distIncludeJunk = true,
@@ -709,6 +789,7 @@ local MarchRidgeConfig = {
         },
         -- mats
         { -- E81
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12632,z=-4},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -716,6 +797,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E82
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12633,z=-4},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -723,6 +805,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E83
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12635,z=-4},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -730,6 +813,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
+            note = "metal_shelves @ oldarmy",
             coords = {x=9956,y=12634,z=-4},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -738,6 +822,7 @@ local MarchRidgeConfig = {
         },
         -- entry storage 2
         { -- E85
+            note = "metal_shelves @ oldmedical",
             coords = {x=9944,y=12629,z=-4},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
@@ -745,6 +830,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
+            note = "metal_shelves @ oldmedical",
             coords = {x=9945,y=12629,z=-4},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -752,6 +838,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E87
+            note = "metal_shelves @ oldmedical",
             coords = {x=9946,y=12629,z=-4},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -759,6 +846,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E88
+            note = "metal_shelves @ oldmedical",
             coords = {x=9947,y=12629,z=-4},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -766,6 +854,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
+            note = "metal_shelves @ oldmedical",
             coords = {x=9948,y=12629,z=-4},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -773,6 +862,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E90
+            note = "metal_shelves @ oldmedical",
             coords = {x=9949,y=12629,z=-4},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -780,6 +870,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E91
+            note = "metal_shelves @ oldmedical",
             coords = {x=9947,y=12632,z=-4},
             items = {
                 { name = 'Base.NailsCarton', },
@@ -788,6 +879,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E92
+            note = "metal_shelves @ oldmedical",
             coords = {x=9946,y=12632,z=-4},
             items = {
                 { name = 'Base.NailsBox', },
@@ -797,6 +889,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E93
+            note = "metal_shelves @ oldmedical",
             coords = {x=9945,y=12632,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -804,6 +897,7 @@ local MarchRidgeConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E94
+            note = "metal_shelves @ oldmedical",
             coords = {x=9944,y=12632,z=-4},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -811,6 +905,7 @@ local MarchRidgeConfig = {
             level = 1,
         },
         { -- E95
+            note = "metal_shelves @ oldmedical",
             coords = {x=9949,y=12635,z=-4},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -818,6 +913,7 @@ local MarchRidgeConfig = {
             level = 2,
         },
         { -- E96
+            note = "metal_shelves @ oldmedical",
             coords = {x=9948,y=12635,z=-4},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -825,6 +921,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E97
+            note = "metal_shelves @ oldmedical",
             coords = {x=9947,y=12635,z=-4},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -832,6 +929,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E98
+            note = "metal_shelves @ oldmedical",
             coords = {x=9946,y=12635,z=-4},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
@@ -839,6 +937,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E99
+            note = "metal_shelves @ oldmedical",
             coords = {x=9945,y=12635,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -846,6 +945,7 @@ local MarchRidgeConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E100
+            note = "metal_shelves @ oldmedical",
             coords = {x=9944,y=12635,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,

@@ -122,6 +122,7 @@ local EkronCC = {
         { -- E1
             -- filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=genCoords.x+12,y=genCoords.y+11,z=genCoords.z},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -134,17 +135,20 @@ local EkronCC = {
         { -- E2
             -- 2nd filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=genCoords.x+12,y=genCoords.y+12,z=genCoords.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- kitchen
         { -- E3
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+20,y=genCoords.y-6,z=genCoords.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+19,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -152,6 +156,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+16,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -159,6 +164,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E6
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+16,y=genCoords.y-4,z=genCoords.z},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -166,6 +172,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+15,y=genCoords.y-6,z=genCoords.z},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -173,6 +180,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+17,y=genCoords.y-4,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -180,6 +188,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E9
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+18,y=genCoords.y-4,z=genCoords.z},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -187,6 +196,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E10
+            note = "counter @ oldarmy",
             coords = {x=genCoords.x+19,y=genCoords.y-4,z=genCoords.z},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -195,11 +205,13 @@ local EkronCC = {
         },
         -- Armory
         { -- E11
+            note = "locker @ empty",
             coords = {x=genCoords.x+27,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
+            note = "locker @ empty",
             coords = {x=genCoords.x+28,y=genCoords.y-2,z=genCoords.z},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -207,16 +219,19 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "locker @ empty",
             coords = {x=genCoords.x+29,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E14
+            note = "locker @ empty",
             coords = {x=genCoords.x+30,y=genCoords.y-2,z=genCoords.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "locker @ empty",
             coords = {x=genCoords.x+27,y=genCoords.y+1,z=genCoords.z},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
@@ -224,6 +239,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "locker @ empty",
             coords = {x=genCoords.x+28,y=genCoords.y+1,z=genCoords.z},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
@@ -231,6 +247,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E17
+            note = "locker @ empty",
             coords = {x=genCoords.x+29,y=genCoords.y+1,z=genCoords.z},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -238,6 +255,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E18
+            note = "locker @ empty",
             coords = {x=genCoords.x+30,y=genCoords.y+1,z=genCoords.z},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
@@ -246,6 +264,7 @@ local EkronCC = {
         },
         -- medical
         { -- E19
+            note = "medicine @ oldmedical",
             coords = {x=genCoords.x+22,y=genCoords.y+9,z=genCoords.z},
             slot = "upper",
             dist = {"MedicalCabinet"},
@@ -254,6 +273,7 @@ local EkronCC = {
             level = "Loot_MedLevel",
         },
         { -- E20
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+22,y=genCoords.y+10,z=genCoords.z},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -261,6 +281,7 @@ local EkronCC = {
             level = "Loot_MedLevel",
         },
         { -- E21
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+23,y=genCoords.y+10,z=genCoords.z},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -269,6 +290,7 @@ local EkronCC = {
         },
         -- book shelves
         { -- E22
+            note = "shelves @ empty",
             coords = {x=genCoords.x+33,y=genCoords.y+16,z=genCoords.z},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -276,6 +298,7 @@ local EkronCC = {
             level = 1,
         },
         { -- E23
+            note = "shelves @ empty",
             coords = {x=genCoords.x+33,y=genCoords.y+15,z=genCoords.z},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -284,21 +307,25 @@ local EkronCC = {
         },
         -- media storage
         { -- E24
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+26,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks1',
         },
         { -- E25
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+27,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks2',
         },
         { -- E26
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+28,y=genCoords.y+17,z=genCoords.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillmags',
         },
         { -- E27
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+29,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -306,6 +333,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E28
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+30,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -313,6 +341,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E29
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+31,y=genCoords.y+17,z=genCoords.z},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -320,6 +349,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E30
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+28,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -327,6 +357,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E31
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+29,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -334,6 +365,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E32
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+30,y=genCoords.y+20,z=genCoords.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -341,6 +373,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E33
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+31,y=genCoords.y+20,z=genCoords.z},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -349,6 +382,7 @@ local EkronCC = {
         },
         -- cleaning
         { -- E34
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+22,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -356,6 +390,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E35
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+23,y=genCoords.y+17,z=genCoords.z},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -364,11 +399,13 @@ local EkronCC = {
         },
         -- seed/farm library
         { -- E36
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+23,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E37
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+23,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -376,6 +413,7 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E38
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+21,y=genCoords.y+15,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -383,6 +421,7 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E39
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+21,y=genCoords.y+16,z=genCoords.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -390,6 +429,7 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E40
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+19,y=genCoords.y+15,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -399,6 +439,7 @@ local EkronCC = {
             level = "Loot_FarmLevel",
         },
         { -- E41
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+19,y=genCoords.y+16,z=genCoords.z},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -409,6 +450,7 @@ local EkronCC = {
         },
         -- fishing
         { -- E42
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+23,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -416,6 +458,7 @@ local EkronCC = {
             level = "Loot_FishLevel",
         },
         { -- E43 hunting
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+22,y=genCoords.y+12,z=genCoords.z},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -423,6 +466,7 @@ local EkronCC = {
             level = "Loot_FishLevel",
         },
         { -- E44
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+21,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
@@ -430,6 +474,7 @@ local EkronCC = {
             level = "Loot_MediaLevel",
         },
         { -- E45
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+20,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -437,6 +482,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+19,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -444,6 +490,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E47
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+18,y=genCoords.y+12,z=genCoords.z},
             dist = {"DishCabinetLiquor"},
             distIncludeJunk = true,
@@ -452,6 +499,7 @@ local EkronCC = {
         },
         -- tailoring
         { -- E48
+            note = "counter @ empty",
             coords = {x=genCoords.x+22,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -459,6 +507,7 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E49
+            note = "counter @ empty",
             coords = {x=genCoords.x+23,y=genCoords.y+21,z=genCoords.z},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -466,6 +515,7 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E50
+            note = "counter @ empty",
             coords = {x=genCoords.x+23,y=genCoords.y+22,z=genCoords.z},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -473,6 +523,7 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E51
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+19,y=genCoords.y+21,z=genCoords.z},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -480,6 +531,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+19,y=genCoords.y+22,z=genCoords.z},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -494,6 +546,7 @@ local EkronCC = {
             level = "Loot_TailorLevel",
         },
         { -- E54
+            note = "bin @ empty",
             coords = {x=genCoords.x+23,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit"},
             distIncludeJunk = true,
@@ -502,6 +555,7 @@ local EkronCC = {
         },
         -- laundry room
         { -- E55
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+12,y=genCoords.y+27,z=genCoords.z},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -510,6 +564,7 @@ local EkronCC = {
             level = 1,
         },
         { -- E56
+            note = "metal_shelves @ empty",
             coords = {x=genCoords.x+12,y=genCoords.y-9,z=genCoords.z},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -524,6 +579,7 @@ local EkronCC = {
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
         { -- E57
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y-7,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -531,6 +587,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E58
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y-6,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -538,6 +595,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E59
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y-5,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -545,6 +603,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E60
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y-4,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -552,6 +611,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E61
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y-3,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -560,6 +620,7 @@ local EkronCC = {
         },
         -- mens
         { -- E62
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y+21,z=genCoords.z},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -567,6 +628,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E63
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y+22,z=genCoords.z},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -574,6 +636,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E64
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y+23,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -581,6 +644,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E65
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y+24,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -588,6 +652,7 @@ local EkronCC = {
             level = "Loot_LockersLevel",
         },
         { -- E66
+            note = "locker @ oldarmy",
             coords = {x=genCoords.x-3,y=genCoords.y+25,z=genCoords.z},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -596,6 +661,7 @@ local EkronCC = {
         },
         -- entry storage 1
         { -- E67
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+11,z=genCoords.z},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
@@ -603,6 +669,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E68
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+12,z=genCoords.z},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -610,6 +677,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E69
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+13,z=genCoords.z},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -617,6 +685,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E70
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+14,z=genCoords.z},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
@@ -624,6 +693,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E71
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+15,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -631,6 +701,7 @@ local EkronCC = {
             level = "Loot_GunLevel",
         },
         { -- E72
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+3,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -639,6 +710,7 @@ local EkronCC = {
         },
         -- tools
         { -- E73
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+14,z=genCoords.z},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -646,6 +718,7 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+15,z=genCoords.z},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -653,10 +726,12 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E75
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+16,z=genCoords.z},
             special = "essentials",
         },
         { -- E76
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+17,z=genCoords.z},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -664,6 +739,7 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E77
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+18,z=genCoords.z},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -671,6 +747,7 @@ local EkronCC = {
             level = "Loot_ToolsLevel",
         },
         { -- E78
+            note = "metal_shelves @ oldarmy",
             coords = {x=genCoords.x+6,y=genCoords.y+19,z=genCoords.z},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -679,6 +756,7 @@ local EkronCC = {
         },
         -- random junk
         { -- E79
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+12,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -686,6 +764,7 @@ local EkronCC = {
             level = 3,
         },
         { -- E80
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -693,6 +772,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E81
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+14,z=genCoords.z},
             dist = {"CrateRandomJunk", "RandomFiller" },
             distIncludeJunk = true,
@@ -700,6 +780,7 @@ local EkronCC = {
             level = 3,
         },
         { -- E82
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+15,z=genCoords.z},
             dist = {"CrateCannedFood", "RandomFiller" },
             distIncludeJunk = true,
@@ -708,6 +789,7 @@ local EkronCC = {
         },
         -- mats
         { -- E83
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+16,z=genCoords.z},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -715,6 +797,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+17,z=genCoords.z},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -722,6 +805,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+19,z=genCoords.z},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -729,6 +813,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
+            note = "metal_shelves @ oldarmy",
             coords = {x= genCoords.x+9,y=genCoords.y+18,z=genCoords.z},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -737,6 +822,7 @@ local EkronCC = {
         },
         -- entry storage 2
         { -- E87
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-3,y=genCoords.y+13,z=genCoords.z},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
@@ -744,6 +830,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E88
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-2,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -751,6 +838,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-1,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -758,6 +846,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E90
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x,y=genCoords.y+13,z=genCoords.z},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -765,6 +854,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E91
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+1,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -772,6 +862,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E92
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+2,y=genCoords.y+13,z=genCoords.z},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -779,6 +870,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E93
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsCarton', },
@@ -787,6 +879,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E94
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-1,y=genCoords.y+16,z=genCoords.z},
             items = {
                 { name = 'Base.NailsBox', },
@@ -796,6 +889,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E95
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-2,y=genCoords.y+16,z=genCoords.z},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -803,6 +897,7 @@ local EkronCC = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E96
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-3,y=genCoords.y+16,z=genCoords.z},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -810,6 +905,7 @@ local EkronCC = {
             level = 1,
         },
         { -- E97
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+2,y=genCoords.y+19,z=genCoords.z},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -817,6 +913,7 @@ local EkronCC = {
             level = 2,
         },
         { -- E98
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x+1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -824,6 +921,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E99
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x,y=genCoords.y+19,z=genCoords.z},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -831,6 +929,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E100
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-1,y=genCoords.y+19,z=genCoords.z},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
@@ -838,6 +937,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E101
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-2,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -845,6 +945,7 @@ local EkronCC = {
             level = "Loot_FoodLevel",
         },
         { -- E102
+            note = "metal_shelves @ oldmedical",
             coords = {x=genCoords.x-3,y=genCoords.y+19,z=genCoords.z},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,

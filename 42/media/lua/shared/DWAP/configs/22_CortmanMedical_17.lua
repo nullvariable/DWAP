@@ -69,35 +69,42 @@ local CortmanMedical = {
     loot = {
         -- upstairs office
         { -- E1
+            note = "shelves @ medicaloffice",
             coords = {x=10880,y=10027,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E2
+            note = "shelves @ medicaloffice",
             coords = {x=10880,y=10026,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E3
+            note = "shelves @ medicaloffice",
             coords = {x=10880,y=10025,z=1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E4
+            note = "counter @ medicaloffice",
             coords = {x=10880,y=10024,z=1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E5
+            note = "counter @ medicaloffice",
             coords = {x=10880,y=10023,z=1},
             special = "essentials",
         },
         { -- E6
+            note = "desk @ medicaloffice",
             coords = {x=10882,y=10026,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E7
+            note = "medicine @ medicaloffice",
             coords = {x=10881,y=10020,z=1},
             dist = {"LaboratoryLockers", },
             distIncludeJunk = true,
@@ -105,6 +112,7 @@ local CortmanMedical = {
             level = "Loot_MedLevel",
         },
         { -- E8
+            note = "medicine @ medicaloffice",
             coords = {x=10882,y=10020,z=1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -112,6 +120,7 @@ local CortmanMedical = {
             level = "Loot_MedLevel",
         },
         { -- E9
+            note = "shelves @ medicaloffice",
             coords = {x=10883,y=10020,z=1},
             dist = {"BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -119,6 +128,7 @@ local CortmanMedical = {
             level = "Loot_MediaLevel",
         },
         { -- E10
+            note = "shelves @ medicaloffice",
             coords = {x=10884,y=10020,z=1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -126,6 +136,7 @@ local CortmanMedical = {
             level = "Loot_MediaLevel",
         },
         { -- E11
+            note = "desk @ medicaloffice",
             coords = {x=10885,y=10022,z=1},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -134,6 +145,7 @@ local CortmanMedical = {
         },
         -- bigger upstairs bedroom
         { -- E12
+            note = "dresser @ bedroom",
             coords = {x=10872,y=10026,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -141,6 +153,7 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         { -- E13
+            note = "dresser @ bedroom",
             coords = {x=10872,y=10023,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit",},
             distIncludeJunk = true,
@@ -148,6 +161,7 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         { -- E14
+            note = "wardrobe @ bedroom",
             coords = {x=10875,y=10027,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -155,11 +169,13 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "wardrobe @ bedroom",
             coords = {x=10875,y=10026,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "dresser @ bedroom",
             coords = {x=10875,y=10023,z=1},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -167,6 +183,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E17
+            note = "shelves @ bedroom",
             coords = {x=10875,y=10023,z=1},
             slot = "upper",
             dist = {"CrateLiquor"},
@@ -175,6 +192,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E18
+            note = "shelves @ bedroom",
             coords = {x=10874,y=10023,z=1},
             slot = "upper",
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
@@ -184,6 +202,7 @@ local CortmanMedical = {
         },
         -- 2nd bedroom
         { -- E19
+            note = "cardboardbox @ bedroom",
             coords = {x=10875,y=10022,z=1},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -191,6 +210,7 @@ local CortmanMedical = {
             level = "Loot_MediaLevel",
         },
         { -- E20
+            note = "cardboardbox @ bedroom",
             coords = {x=10874,y=10020,z=1},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -198,6 +218,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E21
+            note = "shelves @ bedroom",
             coords = {x=10875,y=10020,z=1},
             dist = {"ToolFactoryHandles","ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -206,6 +227,7 @@ local CortmanMedical = {
         },
         -- hallway
         { -- E22
+            note = "dresser @ lobby",
             coords = {x=10877,y=10020,z=1},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -213,6 +235,7 @@ local CortmanMedical = {
             level = "Loot_ToolsLevel",
         },
         { -- E23
+            note = "dresser @ lobby",
             coords = {x=10878,y=10020,z=1},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -221,6 +244,7 @@ local CortmanMedical = {
         },
         -- bathroom
         { -- E24
+            note = "counter @ bathroom",
             coords = {x=10876,y=10026,z=1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -228,6 +252,7 @@ local CortmanMedical = {
             level = "Loot_MedLevel",
         },
         { -- E25
+            note = "counter @ bathroom",
             coords = {x=10876,y=10027,z=1},
             dist = {"BathroomCounter"},
             distIncludeJunk = true,
@@ -236,6 +261,7 @@ local CortmanMedical = {
         },
         -- first floor, sitting room
         { -- E26
+            note = "dresser @ livingroom",
             coords = {x=10876,y=10022,z=0},
             dist = {"CrateBlacksmithing", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = true,
@@ -243,6 +269,7 @@ local CortmanMedical = {
             level = "Loot_ToolsLevel",
         },
         { -- E27
+            note = "wardrobe @ livingroom",
             coords = {x=10872,y=10022,z=0},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -250,6 +277,7 @@ local CortmanMedical = {
             level = "Loot_TailorLevel",
         },
         { -- E28
+            note = "wardrobe @ livingroom",
             coords = {x=10872,y=10023,z=0},
             dist = {"SewingStoreFabric", "CrateLeather"},
             distIncludeJunk = true,
@@ -257,6 +285,7 @@ local CortmanMedical = {
             level = "Loot_TailorLevel",
         },
         { -- E29
+            note = "dresser @ livingroom",
             coords = {x=10872,y=10024,z=0},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -264,6 +293,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "dresser @ livingroom",
             coords = {x=10872,y=10025,z=0},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -271,6 +301,7 @@ local CortmanMedical = {
             level = 1,
         },
         { -- E31
+            note = "wardrobe @ livingroom",
             coords = {x=10872,y=10026,z=0},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -278,6 +309,7 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         { -- E32
+            note = "wardrobe @ livingroom",
             coords = {x=10872,y=10027,z=0},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -286,6 +318,7 @@ local CortmanMedical = {
         },
         -- dining room
         { -- E33
+            note = "dishescabinet @ diningroom",
             coords = {x=10880,y=10024,z=0},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -293,6 +326,7 @@ local CortmanMedical = {
             level = "Loot_FishLevel",
         },
         { -- E34
+            note = "dishescabinet @ diningroom",
             coords = {x=10880,y=10023,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -300,6 +334,7 @@ local CortmanMedical = {
             level = "Loot_FishLevel",
         },
         { -- E35
+            note = "dresser @ diningroom",
             coords = {x=10880,y=10022,z=0},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -307,6 +342,7 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         { -- E36
+            note = "fireplace @ diningroom",
             coords = {x=10882,y=10022,z=0},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -315,6 +351,7 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         { -- E37
+            note = "dresser @ diningroom",
             coords = {x=10884,y=10022,z=0},
             dist = {"ArtStorePottery",},
             distIncludeJunk = true,
@@ -323,6 +360,7 @@ local CortmanMedical = {
         },
         -- exam room
         { -- E38
+            note = "counter @ medical",
             coords = {x=10885,y=10022,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -330,6 +368,7 @@ local CortmanMedical = {
             level = "Loot_ToolsLevel",
         },
         { -- E39
+            note = "counter @ medical",
             coords = {x=10885,y=10021,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -338,6 +377,7 @@ local CortmanMedical = {
         },
         -- hallway
         { -- E40
+            note = "dresser @ lobby",
             coords = {x=10881,y=10020,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -345,6 +385,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E41
+            note = "dresser @ lobby",
             coords = {x=10882,y=10020,z=0},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -353,6 +394,7 @@ local CortmanMedical = {
         },
         -- kitchen
         { -- E42
+            note = "fridge @ kitchen",
             coords = {x=10872,y=10019,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -360,6 +402,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "counter @ kitchen",
             coords = {x=10872,y=10018,z=0},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -367,17 +410,20 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E44
+            note = "counter @ kitchen",
             coords = {x=10872,y=10018,z=0},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "counter @ kitchen",
             coords = {x=10872,y=10017,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "overhead @ kitchen",
             coords = {x=10872,y=10017,z=0},
             slot = "upper",
             dist = {"KitchenDryFood",},
@@ -386,6 +432,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E47
+            note = "counter @ kitchen",
             coords = {x=10873,y=10017,z=0},
             dist = {"ButcherSpices","GigamartSpices", "GigamartDryGoods",},
             distIncludeJunk = false,
@@ -393,6 +440,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E48
+            note = "counter @ kitchen",
             coords = {x=10877,y=10017,z=0},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -400,6 +448,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E49
+            note = "counter @ kitchen",
             coords = {x=10877,y=10017,z=0},
             slot = "upper",
             dist = {"GigamartBreakfast","GigamartCandy"},
@@ -408,6 +457,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E50
+            note = "counter @ kitchen",
             coords = {x=10878,y=10017,z=0},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -415,6 +465,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "counter @ kitchen",
             coords = {x=10878,y=10017,z=0},
             slot = "upper",
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -423,6 +474,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "counter @ kitchen",
             coords = {x=10879,y=10017,z=0},
             dist = {"GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -430,6 +482,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E53
+            note = "counter @ kitchen",
             coords = {x=10879,y=10017,z=0},
             slot = "upper",
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -439,6 +492,7 @@ local CortmanMedical = {
         },
         -- pantry
         { -- E54
+            note = "shelves @ kitchen",
             coords = {x=10880,y=10017,z=0},
             slot = "upper",
             dist = {"GroceryStorageCrate1", "CrateCannedFood", "KitchenCannedFood" },
@@ -447,6 +501,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E55
+            note = "shelves @ kitchen",
             coords = {x=10881,y=10017,z=0},
             slot = "upper",
             dist = {"CrateTortillaChips", "KitchenDryFood"},
@@ -455,6 +510,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E56
+            note = "shelves @ kitchen",
             coords = {x=10882,y=10017,z=0},
             slot = "upper",
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -463,6 +519,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E57
+            note = "fridge @ kitchen",
             coords = {x=10880,y=10019,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
@@ -470,6 +527,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E58
+            note = "freezer @ kitchen",
             coords = {x=10881,y=10019,z=0},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
@@ -477,6 +535,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E59
+            note = "freezer @ kitchen",
             coords = {x=10882,y=10019,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -485,6 +544,7 @@ local CortmanMedical = {
         },
         -- outside pantry crate
         { -- E60
+            note = "crate @ outside",
             coords = {x=10883,y=10018,z=0},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -494,6 +554,7 @@ local CortmanMedical = {
         },
         -- basement
         { -- E61
+            note = "fridge @ morgue",
             coords = {x=10862,y=10042,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -501,6 +562,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E62
+            note = "fridge @ morgue",
             coords = {x=10862,y=10041,z=-1},
             dist = {"UniversityFridge"},
             distIncludeJunk = true,
@@ -508,6 +570,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E63
+            note = "fridge @ morgue",
             coords = {x=10862,y=10040,z=-1},
             dist = {"SafehouseFridge"},
             distIncludeJunk = true,
@@ -515,6 +578,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E64
+            note = "medicine @ morgue",
             coords = {x=10863,y=10039,z=-1},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -522,6 +586,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E65
+            note = "medicine @ morgue",
             coords = {x=10863,y=10038,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -529,6 +594,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E66
+            note = "metal_shelves @ morgue",
             coords = {x=10864,y=10034,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -538,6 +604,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E67
+            note = "metal_shelves @ morgue",
             coords = {x=10865,y=10034,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -545,6 +612,7 @@ local CortmanMedical = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E68
+            note = "crate @ morgue",
             coords = {x=10864,y=10032,z=-1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -552,6 +620,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E69
+            note = "crate @ morgue",
             coords = {x=10865,y=10032,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics","BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -559,6 +628,7 @@ local CortmanMedical = {
             level = "Loot_ToolsLevel",
         },
         { -- E70
+            note = "crate @ morgue",
             coords = {x=10867,y=10032,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -566,6 +636,7 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         { -- E71
+            note = "metal_shelves @ morgue",
             coords = {x=10860,y=10031,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -574,6 +645,7 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         { -- E72
+            note = "crate @ morgue",
             coords = {x=10860,y=10028,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -581,6 +653,7 @@ local CortmanMedical = {
             level = "Loot_FarmLevel",
         },
         { -- E73
+            note = "crate @ morgue",
             coords = {x=10860,y=10027,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -588,6 +661,7 @@ local CortmanMedical = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "crate @ morgue",
             coords = {x=10861,y=10027,z=-1},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -595,16 +669,19 @@ local CortmanMedical = {
             level = "Loot_LockersLevel",
         },
         { -- E75
+            note = "militarylocker @ gunstore",
             coords = {x=10868,y=10027,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E76
+            note = "militarylocker @ gunstore",
             coords = {x=10869,y=10027,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E77
+            note = "militarylocker @ gunstore",
             coords = {x=10870,y=10027,z=-1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -612,6 +689,7 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         { -- E78
+            note = "militarylocker @ gunstore",
             coords = {x=10871,y=10027,z=-1},
             dist = {"ArmyStorageGuns","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -619,6 +697,7 @@ local CortmanMedical = {
             level = "Loot_GunLevel",
         },
         { -- E79
+            note = "militarycrate @ gunstore",
             coords = {x=10871,y=10029,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,

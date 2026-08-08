@@ -54,11 +54,13 @@ local LouisvilleTownhouse = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
+            note = "dresser @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+2,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
+            note = "overhead @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -67,11 +69,13 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
+            note = "counter @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+3,z=bunkerTopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
+            note = "overhead @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -81,6 +85,7 @@ local LouisvilleTownhouse = {
         },
         { -- E5 lower (67)
             sprite = 'location_trailer_02_19',
+            note = "counter @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+4,z=bunkerTopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -89,6 +94,7 @@ local LouisvilleTownhouse = {
         },
         { -- E6 upper
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -98,6 +104,7 @@ local LouisvilleTownhouse = {
         },
         { -- E7 lower (68)
             sprite = 'location_trailer_02_19',
+            note = "counter @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -106,6 +113,7 @@ local LouisvilleTownhouse = {
         },
         { -- E8 metal shelves (70)
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -113,30 +121,36 @@ local LouisvilleTownhouse = {
             level = "Loot_FarmLevel",
         },
         { -- E9 metal shelves (71)
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+8,z=bunkerTopLeft.z},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10 next to inner door (9372)
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+9,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E11 (73)
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+10,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E12 (9374)
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+11,z=bunkerTopLeft.z},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13 far end next to stairs (9375)
+            note = "metal_shelves @ bunker",
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
         { -- E14 metal wall shelves
+            note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -144,11 +158,13 @@ local LouisvilleTownhouse = {
             level = "Loot_MediaLevel",
         },
         { -- E15 metal wall shelves
+            note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16 metal wall shelves
+            note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -156,6 +172,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FarmLevel",
         },
         { -- E17
+            note = "crate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -163,6 +180,7 @@ local LouisvilleTownhouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
+            note = "crate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -173,6 +191,7 @@ local LouisvilleTownhouse = {
         -- rest of the building
         -- kitchen 1st floor
         { -- E19 freezer
+            note = "freezer @ kitchen",
             coords = {x=12830,y=1611,z=0},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = false,
@@ -180,6 +199,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E20 freezer
+            note = "freezer @ kitchen",
             coords = {x=12830,y=1610,z=0},
             dist = {"FreezerIceCream", "PizzaKitchenFreezer", "PizzaKitchenFridge"},
             distIncludeJunk = false,
@@ -187,6 +207,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E21
+            note = "counter @ kitchen",
             coords = {x=12833,y=1610,z=0},
             dist = {"GigamartBreakfast"},
             distIncludeJunk = false,
@@ -194,6 +215,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E22
+            note = "counter @ kitchen",
             coords = {x=12835,y=1610,z=0},
             dist = {"JanitorCleaning", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -201,6 +223,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E23
+            note = "counter @ kitchen",
             coords = {x=12836,y=1610,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -209,6 +232,7 @@ local LouisvilleTownhouse = {
         },
         -- living room
         { -- E24
+            note = "dishescabinet @ livingroom",
             coords = {x=12836,y=1617,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -216,6 +240,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E25
+            note = "dishescabinet @ livingroom",
             coords = {x=12836,y=1618,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -230,6 +255,7 @@ local LouisvilleTownhouse = {
             level = "Loot_MediaLevel",
         },
         { -- E27
+            note = "shelves @ livingroom",
             coords = {x=12830,y=1618,z=0},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -238,6 +264,7 @@ local LouisvilleTownhouse = {
         },
         -- bathroom
         { -- E28
+            note = "counter @ bathroom",
             coords = {x=12832,y=1614,z=0},
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -247,6 +274,7 @@ local LouisvilleTownhouse = {
         -- 2nd floor
         -- bedroom
         { -- E29
+            note = "dresser @ bedroom",
             coords = {x=12830,y=1620,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -254,6 +282,7 @@ local LouisvilleTownhouse = {
             level = "Loot_LockersLevel",
         },
         { -- E30
+            note = "dresser @ bedroom",
             coords = {x=12830,y=1617,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -262,6 +291,7 @@ local LouisvilleTownhouse = {
         },
         -- warehouse/utilities
         { -- E31 crate
+            note = "crate @ warehouse",
             coords = {x=12831,y=1614,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -269,6 +299,7 @@ local LouisvilleTownhouse = {
             level = "Loot_LockersLevel",
         },
         { -- E32 crate
+            note = "crate @ warehouse",
             coords = {x=12831,y=1613,z=1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -276,6 +307,7 @@ local LouisvilleTownhouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33 crate
+            note = "crate @ warehouse",
             coords = {x=12834,y=1617,z=1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -284,16 +316,19 @@ local LouisvilleTownhouse = {
         },
         -- shelving
         { -- E34
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1612,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E35
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1613,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E36
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1614,z=1},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -301,6 +336,7 @@ local LouisvilleTownhouse = {
             level = "Loot_GunLevel",
         },
         { -- E37
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1615,z=1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -308,6 +344,7 @@ local LouisvilleTownhouse = {
             level = "Loot_GunLevel",
         },
         { -- E38
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1616,z=1},
             dist = {"GigamartCrisps","ControlRoomCounter" },
             distIncludeJunk = false,
@@ -315,6 +352,7 @@ local LouisvilleTownhouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E39
+            note = "metal_shelves @ warehouse",
             coords = {x=12837,y=1617,z=1},
             dist = {"CrateLongStick"},
             items = {
@@ -325,6 +363,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FarmLevel",
         },
         { -- E40
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1612,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -332,6 +371,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E41
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1613,z=1},
             dist = { "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -339,6 +379,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E42
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1614,z=1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
@@ -346,6 +387,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1615,z=1},
             dist = {"TheatrePopcorn", "FridgeSoda",},
             distIncludeJunk = true,
@@ -353,6 +395,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E44
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1616,z=1},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -360,6 +403,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "metal_shelves @ warehouse",
             coords = {x=12840,y=1617,z=1},
             dist = {"CrateToiletPaper", "CrateLinens"},
             distIncludeJunk = true,
@@ -367,6 +411,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1612,z=1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -375,6 +420,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FarmLevel",
         },
         { -- E47
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1613,z=1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -383,6 +429,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FarmLevel",
         },
         { -- E48
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1614,z=1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -390,6 +437,7 @@ local LouisvilleTownhouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E49
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1615,z=1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -397,6 +445,7 @@ local LouisvilleTownhouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1616,z=1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -404,6 +453,7 @@ local LouisvilleTownhouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E51
+            note = "metal_shelves @ gunstore",
             coords = {x=12843,y=1617,z=1},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
             distIncludeJunk = true,
@@ -412,6 +462,7 @@ local LouisvilleTownhouse = {
         },
         -- back wall crates
         { -- E52
+            note = "crate @ warehouse",
             coords = {x=12840,y=1610,z=1},
             dist = {"CrateTools", "GarageTools", "BarnTools",  },
             distIncludeJunk = true,
@@ -419,6 +470,7 @@ local LouisvilleTownhouse = {
             level = "Loot_ToolsLevel",
         },
         { -- E53
+            note = "crate @ gunstore",
             coords = {x=12841,y=1610,z=1},
             dist = {"LiquorStoreBeer","ArmyStorageElectronics" },
             distIncludeJunk = false,
@@ -426,6 +478,7 @@ local LouisvilleTownhouse = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E54
+            note = "crate @ gunstore",
             coords = {x=12842,y=1610,z=1},
             dist = {"ArmyBunkerMedical", "JanitorCleaning", "MedicalStorageDrugs"},
             distIncludeJunk = false,
@@ -433,6 +486,7 @@ local LouisvilleTownhouse = {
             level = "Loot_FoodLevel",
         },
         { -- E55
+            note = "crate @ gunstore",
             coords = {x=12843,y=1610,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -441,6 +495,7 @@ local LouisvilleTownhouse = {
         },
         -- library/sitting area
         { -- E56
+            note = "shelves @ library",
             coords = {x=12840,y=1619,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -455,6 +510,7 @@ local LouisvilleTownhouse = {
             level = "Loot_MediaLevel",
         },
         { -- E58
+            note = "shelves @ library",
             coords = {x=12843,y=1619,z=1},
             dist = {"MusicStoreCDs", "LiquorStoreWhiskey"},
             distIncludeJunk = false,

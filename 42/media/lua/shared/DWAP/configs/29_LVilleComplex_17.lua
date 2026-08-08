@@ -191,6 +191,7 @@ local LVilleComplex = {
         -- },
         { -- E1
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -199,11 +200,13 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E2
+            note = "counter @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+3,z=bunker1TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E3
+            note = "overhead @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -212,6 +215,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "counter @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+4,z=bunker1TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -220,6 +224,7 @@ local LVilleComplex = {
         },
         { -- E5
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -228,6 +233,7 @@ local LVilleComplex = {
             level = "Loot_FishLevel",
         },
         { -- E6
+            note = "counter @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -236,6 +242,7 @@ local LVilleComplex = {
         },
         { -- E7
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+7,z=bunker1TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -243,6 +250,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E8
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+8,z=bunker1TopLeft.z},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -250,6 +258,7 @@ local LVilleComplex = {
             level = "Loot_GunLevel",
         },
         { -- E9
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+9,z=bunker1TopLeft.z},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -257,6 +266,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E10
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+10,z=bunker1TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -264,6 +274,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E11
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+11,z=bunker1TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -271,11 +282,13 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E12
+            note = "metal_shelves @ bunker",
             coords = {x=bunker1TopLeft.x,y=bunker1TopLeft.y+12,z=bunker1TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "militarycrate @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+5,z=bunker1TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -283,11 +296,13 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E14
+            note = "militarylocker @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+6,z=bunker1TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "militarylocker @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+7,z=bunker1TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -295,6 +310,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E16
+            note = "militarycrate @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y,z=bunker1TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -302,6 +318,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E17
+            note = "militarycrate @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+1,z=bunker1TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -309,6 +326,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E18
+            note = "militarycrate @ bunker",
             coords = {x=bunker1TopLeft.x+2,y=bunker1TopLeft.y+1,z=bunker1TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -317,6 +335,7 @@ local LVilleComplex = {
         },
         { -- E19
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -325,11 +344,13 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E20
+            note = "counter @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+3,z=bunker2TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E21
+            note = "overhead @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -338,6 +359,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E22
+            note = "counter @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+4,z=bunker2TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -346,6 +368,7 @@ local LVilleComplex = {
         },
         { -- E23
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -354,6 +377,7 @@ local LVilleComplex = {
             level = "Loot_FishLevel",
         },
         { -- E24
+            note = "counter @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -362,6 +386,7 @@ local LVilleComplex = {
         },
         { -- E25
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+7,z=bunker2TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -369,6 +394,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E26
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+8,z=bunker2TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -376,6 +402,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E27
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+9,z=bunker2TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -383,6 +410,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E28
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+10,z=bunker2TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives",},
             distIncludeJunk = true,
@@ -390,6 +418,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E29
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+11,z=bunker2TopLeft.z},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -397,6 +426,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "metal_shelves @ bunker",
             coords = {x=bunker2TopLeft.x,y=bunker2TopLeft.y+12,z=bunker2TopLeft.z},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -404,6 +434,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E31
+            note = "militarycrate @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+5,z=bunker2TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -411,11 +442,13 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E32
+            note = "militarylocker @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+6,z=bunker2TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E33
+            note = "militarylocker @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+7,z=bunker2TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -423,6 +456,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E34
+            note = "militarycrate @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y,z=bunker2TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -430,6 +464,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E35
+            note = "militarycrate @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+1,z=bunker2TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -437,6 +472,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E36
+            note = "militarycrate @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y,z=bunker2TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -444,6 +480,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E37
+            note = "militarycrate @ bunker",
             coords = {x=bunker2TopLeft.x+2,y=bunker2TopLeft.y+1,z=bunker2TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -451,12 +488,14 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E38
+            note = "filingcabinet @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+2,z=bunker3TopLeft.z},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E39
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -465,11 +504,13 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E40
+            note = "counter @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+3,z=bunker3TopLeft.z},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E41
+            note = "overhead @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -478,6 +519,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E42
+            note = "counter @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+4,z=bunker3TopLeft.z},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -486,6 +528,7 @@ local LVilleComplex = {
         },
         { -- E43
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -494,6 +537,7 @@ local LVilleComplex = {
             level = "Loot_FishLevel",
         },
         { -- E44
+            note = "counter @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
             dist = {"GigamartCrisps","ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -502,6 +546,7 @@ local LVilleComplex = {
         },
         { -- E45
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+7,z=bunker3TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -509,6 +554,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E46
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+8,z=bunker3TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -516,6 +562,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E47
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+9,z=bunker3TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -523,6 +570,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E48
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+10,z=bunker3TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives",},
             distIncludeJunk = true,
@@ -530,6 +578,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E49
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+11,z=bunker3TopLeft.z},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -537,6 +586,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E50
+            note = "metal_shelves @ bunker",
             coords = {x=bunker3TopLeft.x,y=bunker3TopLeft.y+12,z=bunker3TopLeft.z},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -544,6 +594,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "militarycrate @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+5,z=bunker3TopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -551,11 +602,13 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E52
+            note = "militarylocker @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+6,z=bunker3TopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E53
+            note = "militarylocker @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+7,z=bunker3TopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -563,6 +616,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E54
+            note = "militarycrate @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y,z=bunker3TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -570,6 +624,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E55
+            note = "militarycrate @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+1,z=bunker3TopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -577,6 +632,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E56
+            note = "militarycrate @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y,z=bunker3TopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -584,6 +640,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E57
+            note = "militarycrate @ bunker",
             coords = {x=bunker3TopLeft.x+2,y=bunker3TopLeft.y+1,z=bunker3TopLeft.z},
             dist = {"GunStoreKnives","CrateLiquor", "GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -594,6 +651,7 @@ local LVilleComplex = {
         --- Core Bunker Area ---
         ------------------------
         { -- E58 decon locker
+            note = "locker @ lockers",
             coords = {x = 14149, y = 2628, z = -1},
             items = {
                 { name = 'Base.Oxygen_Tank', },
@@ -602,6 +660,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E59 decon locker
+            note = "locker @ lockers",
             coords = {x = 14149, y = 2629, z = -1},
             items = {
                 { name = 'Base.Bag_ProtectiveCaseBulkyHazard', },
@@ -617,11 +676,13 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E60 decon locker
+            note = "locker @ lockers",
             coords = {x = 14149, y = 2630, z = -1},
             special = "essentials",
         },
         -- infirmary
         { -- E61
+            note = "medicine @ infirmary",
             coords = {x = 14149, y = 2627, z = -1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -629,6 +690,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E62
+            note = "medicine @ infirmary",
             coords = {x = 14149, y = 2626, z = -1},
             dist = {"MedicalClinicDrugs" },
             distIncludeJunk = true,
@@ -636,6 +698,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E63
+            note = "counter @ infirmary",
             coords = {x = 14149, y = 2625, z = -1},
             dist = {"MedicalCabinet" },
             distIncludeJunk = true,
@@ -643,6 +706,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E64
+            note = "desk @ infirmary",
             coords = {x = 14149, y = 2623, z = -1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -650,6 +714,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E65
+            note = "sidetable @ infirmary",
             coords = {x = 14153, y = 2623, z = -1},
             dist = {"MedicalClinicDrugs" },
             distIncludeJunk = true,
@@ -657,6 +722,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E66
+            note = "metal_shelves @ infirmary",
             coords = {x = 14153, y = 2627, z = -1},
             dist = {"LaboratoryLockers", },
             distIncludeJunk = true,
@@ -664,6 +730,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E67 fridge
+            note = "fridge @ infirmary",
             coords = {x = 14152, y = 2627, z = -1},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", },
             distIncludeJunk = true,
@@ -672,6 +739,7 @@ local LVilleComplex = {
         },
         -- gym
         { -- E68
+            note = "clothingdryer @ gym",
             coords = {x = 14144, y = 2625, z = -1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -679,6 +747,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E69
+            note = "metal_shelves @ gym",
             coords = {x = 14148, y = 2626, z = -1},
             slot = "upper",
             dist = {"FitnessTrainer"},
@@ -687,6 +756,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E70
+            note = "metal_shelves @ gym",
             coords = {x = 14148, y = 2625, z = -1},
             slot = "upper",
             dist = {"CrateFitnessWeights"},
@@ -696,6 +766,7 @@ local LVilleComplex = {
         },
         -- pantry
         { -- E71
+            note = "metal_shelves @ storage",
             coords = {x = 14144, y = 2626, z = -2},
             dist = {"CrateTortillaChips", "CandyStoreSnacks","FridgeSoda",},
             distIncludeJunk = true,
@@ -703,6 +774,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E72
+            note = "metal_shelves @ storage",
             coords = {x = 14144, y = 2625, z = -2},
             dist = {"WesternKitchenSauce", "WhiskeyBottlingFull", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -710,6 +782,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "metal_shelves @ storage",
             coords = {x = 14144, y = 2624, z = -2},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -717,6 +790,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "metal_shelves @ storage",
             coords = {x = 14144, y = 2623, z = -2},
             dist = {"GigamartDryGoods", "GigamartBreakfast"},
             distIncludeJunk = false,
@@ -724,6 +798,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E75
+            note = "freezer @ storage",
             coords = {x = 14145, y = 2623, z = -2},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
@@ -731,6 +806,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E76
+            note = "freezer @ storage",
             coords = {x = 14146, y = 2623, z = -2},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -738,6 +814,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E77
+            note = "fridge @ storage",
             coords = {x = 14147, y = 2623, z = -2},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
@@ -745,6 +822,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E78
+            note = "cardboardbox @ storage",
             coords = {x = 14147, y = 2625, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -752,6 +830,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E79
+            note = "crate @ storage",
             coords = {x = 14147, y = 2626, z = -2},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -759,6 +838,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E80
+            note = "crate @ storage",
             coords = {x = 14146, y = 2626, z = -2},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -766,6 +846,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E81
+            note = "crate @ storage",
             coords = {x = 14145, y = 2626, z = -2},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -775,6 +856,7 @@ local LVilleComplex = {
         -- dining/bar area
         { -- E82
             -- drinks under sink
+            note = "counter @ bar",
             coords = {x = 14148, y = 2625, z = -2},
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -782,6 +864,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E83
+            note = "freezer @ bar",
             coords = {x = 14148, y = 2623, z = -2},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -789,6 +872,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E84
+            note = "freezer @ bar",
             coords = {x = 14149, y = 2623, z = -2},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -796,11 +880,13 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E85
+            note = "counter @ bar",
             coords = {x = 14154, y = 2623, z = -2},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E86
+            note = "counter @ bar",
             coords = {x = 14156, y = 2623, z = -2},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -808,6 +894,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E87
+            note = "counter @ bar",
             coords = {x = 14156, y = 2624, z = -2},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -815,6 +902,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E88
+            note = "counter @ bar",
             coords = {x = 14156, y = 2625, z = -2},
             dist = {"KitchenCannedFood"},
             distIncludeJunk = false,
@@ -822,6 +910,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E89
+            note = "dishescabinet @ bar",
             coords = {x = 14156, y = 2626, z = -2},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -829,6 +918,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E90
+            note = "dishescabinet @ bar",
             coords = {x = 14156, y = 2627, z = -2},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -836,6 +926,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E91
+            note = "dishescabinet @ bar",
             coords = {x = 14156, y = 2628, z = -2},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -843,6 +934,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E92
+            note = "dishescabinet @ bar",
             coords = {x = 14156, y = 2629, z = -2},
             dist = {"LiquorStoreBrandy", "LiquorStoreGin"},
             distIncludeJunk = false,
@@ -851,6 +943,7 @@ local LVilleComplex = {
         },
         { -- E93
             -- media center
+            note = "sidetable @ bar",
             coords = {x = 14156, y = 2630, z = -2},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -859,6 +952,7 @@ local LVilleComplex = {
         },
         { -- E94
             -- theater stand
+            note = "counter @ bar",
             coords = {x = 14156, y = 2633, z = -2},
             dist = {"TheatreDrinks", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -867,6 +961,7 @@ local LVilleComplex = {
         },
         { -- E95
             -- theater stand
+            note = "counter @ bar",
             coords = {x = 14156, y = 2634, z = -2},
             dist = {"TheatrePopcorn", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -875,6 +970,7 @@ local LVilleComplex = {
         },
         -- bunk rooms
         { -- E96
+            note = "locker @ bedroom",
             coords = {x = 14146, y = 2642, z = -2},
             dist = {"ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -882,6 +978,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E97
+            note = "medicine @ bathroom",
             coords = {x = 14144, y = 2641, z = -2},
             slot = "upper",
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
@@ -890,6 +987,7 @@ local LVilleComplex = {
             level = "Loot_MedLevel",
         },
         { -- E98
+            note = "medicine @ bathroom",
             coords = {x = 14145, y = 2641, z = -2},
             slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
@@ -898,6 +996,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E99
+            note = "locker @ bedroom",
             coords = {x = 14146, y = 2636, z = -2},
             dist = {"DrugLabOutfit", "MechanicOutfit", "WildWestClothing"},
             distIncludeJunk = true,
@@ -905,6 +1004,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E100
+            note = "clothingrack @ bedroom",
             coords = {x = 14149, y = 2638, z = -2},
             dist = {"BackstageClothingRack", "ArmySurplusOutfit"},
             distIncludeJunk = true,
@@ -912,6 +1012,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E101
+            note = "clothingrack @ bedroom",
             coords = {x = 14150, y = 2638, z = -2},
             dist = {"ClothingStorageWinter", "GymLaundry"},
             distIncludeJunk = true,
@@ -919,6 +1020,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E102
+            note = "locker @ bedroom",
             coords = {x = 14150, y = 2637, z = -2},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -926,6 +1028,7 @@ local LVilleComplex = {
             level = "Loot_LockersLevel",
         },
         { -- E103
+            note = "locker @ bedroom",
             coords = {x = 14148, y = 2644, z = -2},
             dist = {"SafehouseArmor", "ArmySurplusOutfit"},
             distIncludeJunk = true,
@@ -934,6 +1037,7 @@ local LVilleComplex = {
         },
         -- reading lounge
         { -- E104
+            note = "shelves @ hallway",
             coords = {x = 14145, y = 2630, z = -3},
             dist = {"CrateVHSTapes","BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -941,6 +1045,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E105
+            note = "shelves @ hallway",
             coords = {x = 14145, y = 2629, z = -3},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -948,6 +1053,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E106
+            note = "shelves @ hallway",
             coords = {x = 14145, y = 2628, z = -3},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -955,6 +1061,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E107
+            note = "shelves @ hallway",
             coords = {x = 14149, y = 2627, z = -3},
             dist = {"LivingRoomShelf"},
             distIncludeJunk = false,
@@ -962,6 +1069,7 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E108
+            note = "shelves @ hallway",
             coords = {x = 14149, y = 2628, z = -3},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -969,21 +1077,25 @@ local LVilleComplex = {
             level = "Loot_MediaLevel",
         },
         { -- E109
+            note = "shelves @ hallway",
             coords = {x = 14149, y = 2629, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E110
+            note = "shelves @ hallway",
             coords = {x = 14149, y = 2630, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E111
+            note = "shelves @ hallway",
             coords = {x = 14149, y = 2631, z = -3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E112
+            note = "metal_shelves @ hallway",
             coords = {x = 14149, y = 2634, z = -3},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -991,6 +1103,7 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E113
+            note = "metal_shelves @ hallway",
             coords = {x = 14149, y = 2635, z = -3},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -999,11 +1112,13 @@ local LVilleComplex = {
         },
         -- security office
         { -- E114
+            note = "desk @ security",
             coords = {x = 14144, y = 2626, z = -3},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E115
+            note = "desk @ security",
             coords = {x = 14147, y = 2626, z = -3},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -1011,16 +1126,19 @@ local LVilleComplex = {
             level = "Loot_FoodLevel",
         },
         { -- E116
+            note = "militarylocker @ security",
             coords = {x = 14147, y = 2623, z = -3},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E117
+            note = "militarylocker @ security",
             coords = {x = 14148, y = 2623, z = -3},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E118
+            note = "militarylocker @ security",
             coords = {x = 14149, y = 2623, z = -3},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid" },
             distIncludeJunk = false,
@@ -1029,6 +1147,7 @@ local LVilleComplex = {
         },
         -- gun range
         { -- E119
+            note = "locker @ gunrange",
             coords = {x = 14152, y = 2623, z = -3},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -1036,6 +1155,7 @@ local LVilleComplex = {
             level = "Loot_GunLevel",
         },
         { -- E120
+            note = "locker @ gunrange",
             coords = {x = 14154, y = 2623, z = -3},
             dist = {"GunStoreKnives", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "MeleeWeapons", "MeleeWeapons_Mid" },
             distIncludeJunk = false,
@@ -1043,6 +1163,7 @@ local LVilleComplex = {
             level = "Loot_GunLevel",
         },
         { -- E121
+            note = "locker @ gunrange",
             coords = {x = 14156, y = 2623, z = -3},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -1052,11 +1173,13 @@ local LVilleComplex = {
         -- -4
         -- stairway shelves
         { -- E122
+            note = "metal_shelves @ hallway",
             coords = {x = 14146, y = 2628, z = -4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E123
+            note = "metal_shelves @ hallway",
             coords = {x = 14146, y = 2627, z = -4},
             items = {
                 { name = 'Base.AnimalFeedBag', },
@@ -1066,6 +1189,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E124
+            note = "metal_shelves @ hallway",
             coords = {x = 14148, y = 2628, z = -4},
             items = {
                 { name = 'Base.AnimalFeedBag', },
@@ -1075,6 +1199,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E125
+            note = "metal_shelves @ hallway",
             coords = {x = 14148, y = 2627, z = -4},
             items = {
                 { name = 'Base.AnimalFeedBag', },
@@ -1085,6 +1210,7 @@ local LVilleComplex = {
         },
         -- warehouse/utility
         { -- E126
+            note = "crate @ warehouse",
             coords = {x = 14144, y = 2625, z = -4},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -1092,6 +1218,7 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E127
+            note = "metal_shelves @ warehouse",
             coords = {x = 14144, y = 2624, z = -4},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -1099,6 +1226,7 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E128
+            note = "metal_shelves @ warehouse",
             coords = {x = 14144, y = 2623, z = -4},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -1106,6 +1234,7 @@ local LVilleComplex = {
             level = "Loot_TailorLevel",
         },
         { -- E129
+            note = "crate @ warehouse",
             coords = {x = 14146, y = 2625, z = -4},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -1113,6 +1242,7 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E130
+            note = "metal_shelves @ warehouse",
             coords = {x = 14146, y = 2624, z = -4},
             dist = {"RailYardTools","Homesteading","SurvivalGear"},
             distIncludeJunk = true,
@@ -1120,6 +1250,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E131
+            note = "metal_shelves @ warehouse",
             coords = {x = 14146, y = 2623, z = -4},
             dist = {"WireFactoryBarbed", "CrateLongStick", "WireFactoryBasic"},
             distIncludeJunk = true,
@@ -1127,6 +1258,7 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E132
+            note = "toolcabinet @ warehouse",
             coords = {x = 14148, y = 2625, z = -4},
             dist = {"GasStoreEmergency","StoreCounterTobacco", },
             distIncludeJunk = true,
@@ -1134,6 +1266,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E133
+            note = "metal_shelves @ warehouse",
             coords = {x = 14148, y = 2624, z = -4},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
             distIncludeJunk = true,
@@ -1141,6 +1274,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E134
+            note = "metal_shelves @ warehouse",
             coords = {x = 14148, y = 2623, z = -4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -1148,6 +1282,7 @@ local LVilleComplex = {
             level = "Loot_FarmLevel",
         },
         { -- E135
+            note = "cardboardbox @ warehouse",
             coords = {x = 14156, y = 2634, z = -4},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
             distIncludeJunk = true,
@@ -1155,6 +1290,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E136
+            note = "cardboardbox @ warehouse",
             coords = {x = 14156, y = 2635, z = -4},
             dist = {"RailYardSpikes", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -1162,6 +1298,7 @@ local LVilleComplex = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E137
+            note = "counter @ warehouse",
             coords = {x = 14154, y = 2635, z = -4},
             dist = {"CrateCarpentry","LoggingFactoryTools"},
             distIncludeJunk = true,
@@ -1169,6 +1306,7 @@ local LVilleComplex = {
             level = "Loot_ToolsLevel",
         },
         { -- E138
+            note = "counter @ warehouse",
             coords = {x = 14152, y = 2635, z = -4},
             items = {
                 { name = 'Base.NailsBox', },

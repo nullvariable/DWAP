@@ -51,11 +51,13 @@ local DoeValleyBunker = {
     },
     loot = {
         { -- E1 cabinet next to bunk beds (9365)
+            note = "dresser @ bunker",
             coords = {x=5575,y=9365,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 upper
+            note = "overhead @ bunker",
             coords = {x=5575,y=9366,z=-1},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -64,11 +66,13 @@ local DoeValleyBunker = {
             level = "Loot_FoodLevel",
         },
         { -- E3 lower (66)
+            note = "counter @ bunker",
             coords = {x=5575,y=9366,z=-1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4 upper
+            note = "overhead @ bunker",
             coords = {x=5575,y=9367,z=-1},
             slot = "upper",
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -78,6 +82,7 @@ local DoeValleyBunker = {
         },
         { -- E5 lower (67)
             sprite = 'location_trailer_02_19',
+            note = "counter @ bunker",
             coords = {x=5575,y=9367,z=-1},
             dist = {"TestingLab","MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = false,
@@ -86,6 +91,7 @@ local DoeValleyBunker = {
         },
         { -- E6 upper
             sprite = 'location_trailer_02_23',
+            note = "overhead @ bunker",
             coords = {x=5575,y=9368,z=-1},
             slot = "upper",
             dist = {"CrateFishing", "FishermanTools"},
@@ -95,6 +101,7 @@ local DoeValleyBunker = {
         },
         { -- E7 lower (68)
             sprite = 'location_trailer_02_19',
+            note = "counter @ bunker",
             coords = {x=5575,y=9368,z=-1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -102,6 +109,7 @@ local DoeValleyBunker = {
             level = "Loot_TailorLevel",
         },
         { -- E8 index 8, fridge/freezer
+            note = "fridge @ bunker",
             coords = {x=5575,y=9369,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -110,6 +118,7 @@ local DoeValleyBunker = {
         },
         { -- E9 index 9, fridge/freezer
             slot = "freezer",
+            note = "freezer @ bunker",
             coords = {x=5575,y=9369,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
@@ -118,6 +127,7 @@ local DoeValleyBunker = {
         },
         { -- E10 metal shelves (70)
             sprite = 'location_trailer_02_23',
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9370,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -125,31 +135,37 @@ local DoeValleyBunker = {
             level = "Loot_FarmLevel",
         },
         { -- E11 metal shelves (71)
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9371,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E12 next to inner door (9372)
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9372,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E13 (73)
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9373,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E14 (9374)
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9374,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E15 far end next to stairs (9375)
+            note = "metal_shelves @ bunker",
             coords = {x=5575,y=9375,z=-1},
             special = "essentials",
         },
         { -- E16
             stack = 1,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9368,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -158,6 +174,7 @@ local DoeValleyBunker = {
         },
         { -- E17
             stack = 2,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9368,z=-1},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "SafehouseTraps","CampingLockers"},
             distIncludeJunk = true,
@@ -166,18 +183,21 @@ local DoeValleyBunker = {
         },
         { -- E18
             stack = 1,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9369,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E19
             stack = 2,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9369,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E20
             stack = 1,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9370,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -186,6 +206,7 @@ local DoeValleyBunker = {
         },
         { -- E21
             stack = 2,
+            note = "militarycrate @ bunker",
             coords = {x=5577,y=9370,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -198,6 +219,7 @@ local DoeValleyBunker = {
         -- container. Each ordinal now takes a different half of its theme:
         -- more to find, same categories present in the base overall.
         { -- E22 9363 lower: hand tools and safehouse hardware
+            note = "crate @ bunker",
             coords = {x=5577,y=9363,z=-1},
             stack = 1,
             dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -209,6 +231,7 @@ local DoeValleyBunker = {
           -- level appears somewhere in this config, Loot_BuildMatsLevel did
           -- not, and stockpiled lumber suits a prepper bunker
             
+            note = "crate @ bunker",
             coords = {x=5577,y=9363,z=-1},
             stack = 2,
             dist = {"CrateLumber", "CrateSheetMetal", "CrateMasonry", "ArtStorePottery"},
@@ -217,6 +240,7 @@ local DoeValleyBunker = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E24 9364 lower: defence and vehicle gear
+            note = "crate @ bunker",
             coords = {x=5577,y=9364,z=-1},
             stack = 1,
             dist = {"SafehouseTraps","GunStoreKnives","CarSupplyTools"},
@@ -225,6 +249,7 @@ local DoeValleyBunker = {
             level = "Loot_LockersLevel",
         },
         { -- E25 9364 upper: camping, comfort and outfits
+            note = "crate @ bunker",
             coords = {x=5577,y=9364,z=-1},
             stack = 2,
             dist = {"CampingStoreBackpacks","CrateLiquor","DrugLabOutfit","GasStoreEmergency","StoreCounterTobacco"},
@@ -235,11 +260,13 @@ local DoeValleyBunker = {
 
         -- addon room
         { -- E26
+            note = "clothingwasher @ warehouse",
             coords = {x = 5578, y = 9373, z = -1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E27 [20]
+            note = "counter @ warehouse",
             coords = {x = 5581, y = 9376, z = -1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -247,6 +274,7 @@ local DoeValleyBunker = {
             level = "Loot_FishLevel",
         },
         { -- E28
+            note = "counter @ warehouse",
             coords = {x = 5582, y = 9376, z = -1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -254,6 +282,7 @@ local DoeValleyBunker = {
             level = "Loot_LockersLevel",
         },
         { -- E29
+            note = "counter @ warehouse",
             coords = {x = 5583, y = 9376, z = -1},
             dist = {"CarSupplyTools", "GasStorageMechanics", "CampingLockers"},
             distIncludeJunk = true,
@@ -261,6 +290,7 @@ local DoeValleyBunker = {
             level = "Loot_GunLevel",
         },
         { -- E30
+            note = "counter @ warehouse",
             coords = {x = 5584, y = 9376, z = -1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
             distIncludeJunk = true,
@@ -268,6 +298,7 @@ local DoeValleyBunker = {
             level = "Loot_GunLevel",
         },
         { -- E31
+            note = "counter @ warehouse",
             coords = {x = 5584, y = 9375, z = -1},
             dist = {"GasStoreEmergency","StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -275,6 +306,7 @@ local DoeValleyBunker = {
             level = "Loot_ToolsLevel",
         },
         { -- E32
+            note = "counter @ warehouse",
             coords = {x = 5584, y = 9374, z = -1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,

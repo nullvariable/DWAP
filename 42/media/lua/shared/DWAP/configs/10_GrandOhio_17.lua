@@ -118,6 +118,7 @@ local GrandOhioConfig = {
         { -- E1
             -- filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+11,z=-4},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -130,17 +131,20 @@ local GrandOhioConfig = {
         { -- E2
             -- 2nd filingcabinet next to spawn in operations room
             
+            note = "filingcabinet @ empty",
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+12,z=-4},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         -- kitchen
         { -- E3
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y-6,z=-4},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -148,6 +152,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -155,6 +160,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E6
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+16,y=generatorStartCoords.y-4,z=-4},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -162,6 +168,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+15,y=generatorStartCoords.y-6,z=-4},
             dist = {"CrateCannedFood",},
             distIncludeJunk = false,
@@ -169,6 +176,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+17,y=generatorStartCoords.y-4,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -176,6 +184,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E9
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y-4,z=-4},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -183,6 +192,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E10
+            note = "counter @ oldarmy",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y-4,z=-4},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -191,11 +201,13 @@ local GrandOhioConfig = {
         },
         -- Armory
         { -- E11
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y-2,z=-4},
             dist = {"GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -203,16 +215,19 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E14
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y-2,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+1,z=-4},
             dist = {"FirearmWeapons_Late",},
             distIncludeJunk = false,
@@ -220,6 +235,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+1,z=-4},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
@@ -227,6 +243,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E17
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+1,z=-4},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition"},
             distIncludeJunk = false,
@@ -234,6 +251,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E18
+            note = "locker @ empty",
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+1,z=-4},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition"},
             distIncludeJunk = true,
@@ -242,6 +260,7 @@ local GrandOhioConfig = {
         },
         -- medical
         { -- E19
+            note = "medicine @ oldmedical",
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+9,z=-4},
             slot = "upper",
             dist = {"MedicalCabinet"},
@@ -250,6 +269,7 @@ local GrandOhioConfig = {
             level = "Loot_MedLevel",
         },
         { -- E20
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+10,z=-4},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -257,6 +277,7 @@ local GrandOhioConfig = {
             level = "Loot_MedLevel",
         },
         { -- E21
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+10,z=-4},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -265,6 +286,7 @@ local GrandOhioConfig = {
         },
         -- book shelves
         { -- E22
+            note = "shelves @ empty",
             coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+16,z=-4},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -272,6 +294,7 @@ local GrandOhioConfig = {
             level = 1,
         },
         { -- E23
+            note = "shelves @ empty",
             coords = {x=generatorStartCoords.x+33,y=generatorStartCoords.y+15,z=-4},
             dist = {"BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -280,21 +303,25 @@ local GrandOhioConfig = {
         },
         -- media storage
         { -- E24
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+26,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks1',
         },
         { -- E25
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+27,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillbooks2',
         },
         { -- E26
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+17,z=-4},
             sandboxEnable = 'Loot_EnableBooks',
             special = 'skillmags',
         },
         { -- E27
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateTVWide", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -302,6 +329,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E28
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -309,6 +337,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E29
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+17,z=-4},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -316,6 +345,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E30
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+28,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -323,6 +353,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E31
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+29,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -330,6 +361,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E32
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+30,y=generatorStartCoords.y+20,z=-4},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -337,6 +369,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E33
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+31,y=generatorStartCoords.y+20,z=-4},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -345,6 +378,7 @@ local GrandOhioConfig = {
         },
         -- cleaning
         { -- E34
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+17,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -352,6 +386,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E35
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+17,z=-4},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -360,11 +395,13 @@ local GrandOhioConfig = {
         },
         -- seed/farm library
         { -- E36
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+15,z=-4},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E37
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+16,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -372,6 +409,7 @@ local GrandOhioConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E38
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+15,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -379,6 +417,7 @@ local GrandOhioConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E39
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+16,z=-4},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -386,6 +425,7 @@ local GrandOhioConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E40
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+15,z=-4},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -395,6 +435,7 @@ local GrandOhioConfig = {
             level = "Loot_FarmLevel",
         },
         { -- E41
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+16,z=-4},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -405,6 +446,7 @@ local GrandOhioConfig = {
         },
         -- fishing
         { -- E42
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -412,6 +454,7 @@ local GrandOhioConfig = {
             level = "Loot_FishLevel",
         },
         { -- E43 hunting
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+12,z=-4},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -419,6 +462,7 @@ local GrandOhioConfig = {
             level = "Loot_FishLevel",
         },
         { -- E44
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+21,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateInstruments"},
             distIncludeJunk = false,
@@ -426,6 +470,7 @@ local GrandOhioConfig = {
             level = "Loot_MediaLevel",
         },
         { -- E45
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+20,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateLiquor"},
             distIncludeJunk = false,
@@ -433,6 +478,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -440,6 +486,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E47
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+18,y=generatorStartCoords.y+12,z=-4},
             dist = {"DishCabinetLiquor"},
             distIncludeJunk = true,
@@ -448,6 +495,7 @@ local GrandOhioConfig = {
         },
         -- tailoring
         { -- E48
+            note = "counter @ empty",
             coords = {x=generatorStartCoords.x+22,y=generatorStartCoords.y+21,z=-4},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -455,6 +503,7 @@ local GrandOhioConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E49
+            note = "counter @ empty",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+21,z=-4},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -462,6 +511,7 @@ local GrandOhioConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E50
+            note = "counter @ empty",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+22,z=-4},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -469,6 +519,7 @@ local GrandOhioConfig = {
             level = "Loot_TailorLevel",
         },
         { -- E51
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+21,z=-4},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -476,6 +527,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+19,y=generatorStartCoords.y+22,z=-4},
             dist = {"BathroomCounter","LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -483,6 +535,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E53
+            note = "bin @ empty",
             coords = {x=generatorStartCoords.x+23,y=generatorStartCoords.y+24,z=-4},
             dist = {"ArmyStorageOutfit"},
             distIncludeJunk = true,
@@ -491,6 +544,7 @@ local GrandOhioConfig = {
         },
         -- laundry room
         { -- E54
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y+27,z=-4},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -499,6 +553,7 @@ local GrandOhioConfig = {
             level = 1,
         },
         { -- E55
+            note = "metal_shelves @ empty",
             coords = {x=generatorStartCoords.x+12,y=generatorStartCoords.y-9,z=-4},
             slot = "upper",
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -513,6 +568,7 @@ local GrandOhioConfig = {
         -- LockerArmyBedroom, LockerArmyBedroomHome, ArmySurplusOutfit, ToolStoreOutfit
         -- womens
         { -- E56
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-7,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -520,6 +576,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E57
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-6,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -527,6 +584,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E58
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-5,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -534,6 +592,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E59
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-4,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -541,6 +600,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E60
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y-3,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -549,6 +609,7 @@ local GrandOhioConfig = {
         },
         -- mens
         { -- E61
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+21,z=-4},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -556,6 +617,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E62
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+22,z=-4},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -563,6 +625,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E63
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+23,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -570,6 +633,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E64
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+24,z=-4},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -577,6 +641,7 @@ local GrandOhioConfig = {
             level = "Loot_LockersLevel",
         },
         { -- E65
+            note = "locker @ oldarmy",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+25,z=-4},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -585,6 +650,7 @@ local GrandOhioConfig = {
         },
         -- entry storage 1
         { -- E66
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+11,z=-4},
             dist = {"CampingLockers"},
             distIncludeJunk = true,
@@ -592,6 +658,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E67
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+12,z=-4},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -599,6 +666,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E68
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+13,z=-4},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -606,6 +674,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E69
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+14,z=-4},
             dist = {"SafehouseTraps", },
             distIncludeJunk = true,
@@ -613,6 +682,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E70
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+15,z=-4},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -620,6 +690,7 @@ local GrandOhioConfig = {
             level = "Loot_GunLevel",
         },
         { -- E71
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+3,y=generatorStartCoords.y+16,z=-4},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -628,6 +699,7 @@ local GrandOhioConfig = {
         },
         -- tools
         { -- E72
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+14,z=-4},
             dist = {"CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
@@ -635,6 +707,7 @@ local GrandOhioConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E73
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+15,z=-4},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -642,10 +715,12 @@ local GrandOhioConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E74
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+16,z=-4},
             special = "essentials",
         },
         { -- E75
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+17,z=-4},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -653,6 +728,7 @@ local GrandOhioConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E76
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+18,z=-4},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -660,6 +736,7 @@ local GrandOhioConfig = {
             level = "Loot_ToolsLevel",
         },
         { -- E77
+            note = "metal_shelves @ oldarmy",
             coords = {x=generatorStartCoords.x+6,y=generatorStartCoords.y+19,z=-4},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -668,6 +745,7 @@ local GrandOhioConfig = {
         },
         -- random junk
         { -- E78
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+12,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -675,6 +753,7 @@ local GrandOhioConfig = {
             level = 3,
         },
         { -- E79
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -682,6 +761,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E80
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+14,z=-4},
             dist = {"CrateRandomJunk", "RandomFiller" },
             distIncludeJunk = true,
@@ -689,6 +769,7 @@ local GrandOhioConfig = {
             level = 3,
         },
         { -- E81
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+15,z=-4},
             dist = {"CrateCannedFood", "RandomFiller" },
             distIncludeJunk = true,
@@ -697,6 +778,7 @@ local GrandOhioConfig = {
         },
         -- mats
         { -- E82
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+16,z=-4},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -704,6 +786,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E83
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+17,z=-4},
             dist = {"ToolFactoryHandles" },
             distIncludeJunk = false,
@@ -711,6 +794,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E84
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+19,z=-4},
             dist = {"ToolFactoryIngots" },
             distIncludeJunk = false,
@@ -718,6 +802,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E85
+            note = "metal_shelves @ oldarmy",
             coords = {x= generatorStartCoords.x+9,y=generatorStartCoords.y+18,z=-4},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -726,6 +811,7 @@ local GrandOhioConfig = {
         },
         -- entry storage 2
         { -- E86
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+13,z=-4},
             dist = {"ToolFactoryBarStock"},
             distIncludeJunk = true,
@@ -733,6 +819,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E87
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -740,6 +827,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E88
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -747,6 +835,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+13,z=-4},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -754,6 +843,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E90
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+13,z=-4},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -761,6 +851,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E91
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+13,z=-4},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -768,6 +859,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E92
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+16,z=-4},
             items = {
                 { name = 'Base.NailsCarton', },
@@ -776,6 +868,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E93
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+16,z=-4},
             items = {
                 { name = 'Base.NailsBox', },
@@ -785,6 +878,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E94
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+16,z=-4},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -792,6 +886,7 @@ local GrandOhioConfig = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E95
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+16,z=-4},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -799,6 +894,7 @@ local GrandOhioConfig = {
             level = 1,
         },
         { -- E96
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+2,y=generatorStartCoords.y+19,z=-4},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -806,6 +902,7 @@ local GrandOhioConfig = {
             level = 2,
         },
         { -- E97
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x+1,y=generatorStartCoords.y+19,z=-4},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -813,6 +910,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E98
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x,y=generatorStartCoords.y+19,z=-4},
             dist = {"CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -820,6 +918,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E99
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-1,y=generatorStartCoords.y+19,z=-4},
             dist = {"CrateTortillaChips"},
             distIncludeJunk = true,
@@ -827,6 +926,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E100
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-2,y=generatorStartCoords.y+19,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -834,6 +934,7 @@ local GrandOhioConfig = {
             level = "Loot_FoodLevel",
         },
         { -- E101
+            note = "metal_shelves @ oldmedical",
             coords = {x=generatorStartCoords.x-3,y=generatorStartCoords.y+19,z=-4},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,

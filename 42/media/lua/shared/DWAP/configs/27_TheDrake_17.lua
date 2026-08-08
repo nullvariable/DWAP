@@ -101,10 +101,12 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E3
+            note = "metal_shelves @ warehouse",
             coords = {x=11901,y=6839,z=-1},
             special = "essentials",
         },
         { -- E4
+            note = "counter @ warehouse",
             coords = {x=11902,y=6839,z=-1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -112,6 +114,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E5
+            note = "clothingwasher @ warehouse",
             coords = {x=11902,y=6841,z=-1},
             slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning", "Homesteading"},
@@ -120,6 +123,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E6
+            note = "counter @ warehouse",
             coords = {x=11903,y=6839,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -135,6 +139,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "counter @ warehouse",
             coords = {x=11904,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -150,6 +155,7 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E10
+            note = "crate @ warehouse",
             coords = {x=11906,y=6839,z=-1},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -157,16 +163,19 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E11
+            note = "militarylocker @ warehouse",
             coords = {x=11907,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
+            note = "militarylocker @ warehouse",
             coords = {x=11908,y=6839,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "militarycrate @ warehouse",
             coords = {x=11909,y=6839,z=-1},
             dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
             distIncludeJunk = true,
@@ -174,6 +183,7 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E14
+            note = "militarycrate @ warehouse",
             coords = {x=11910,y=6839,z=-1},
             dist = {"GunStoreAmmunition", "GunStoreKnives", "GunStoreBodyArmor", "GunStoreMagsAmmo", "GunStoreGuns", },
             distIncludeJunk = true,
@@ -181,6 +191,7 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E15
+            note = "metal_shelves @ warehouse",
             coords = {x=11911,y=6839,z=-1},
             dist = {"CrateFishing", "FishermanTools", "Trapper"},
             distIncludeJunk = false,
@@ -188,6 +199,7 @@ local TheDrake = {
             level = "Loot_FishLevel",
         },
         { -- E16
+            note = "metal_shelves @ warehouse",
             coords = {x=11912,y=6839,z=-1},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -195,6 +207,7 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E17
+            note = "metal_shelves @ warehouse",
             coords = {x=11913,y=6839,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -202,6 +215,7 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E18
+            note = "metal_shelves @ warehouse",
             coords = {x=11914,y=6839,z=-1},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
             distIncludeJunk = true,
@@ -209,6 +223,7 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E19
+            note = "metal_shelves @ warehouse",
             coords = {x=11914,y=6841,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -216,6 +231,7 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E20
+            note = "metal_shelves @ warehouse",
             coords = {x=11913,y=6841,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -225,11 +241,13 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E21
+            note = "crate @ warehouse",
             coords = {x=11912,y=6841,z=-1},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E22
+            note = "crate @ warehouse",
             coords = {x=11911,y=6841,z=-1},
             dist = {"CrateBooks", "MusicStoreCDs", "CrateVHSTapes"},
             distIncludeJunk = false,
@@ -237,6 +255,7 @@ local TheDrake = {
             level = "Loot_MediaLevel",
         },
         { -- E23
+            note = "crate @ warehouse",
             coords = {x=11910,y=6841,z=-1},
             dist = {"ArmySurplusBackpacks", "ArmySurplusOutfit", "ArmyStorageOutfit", "ArmySurplusFootwear", "ArmySurplusHeadwear", "ArmySurplusMisc" },
             distIncludeJunk = true,
@@ -244,6 +263,7 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E24
+            note = "crate @ warehouse",
             coords = {x=11909,y=6841,z=-1},
             dist = {"GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
@@ -251,11 +271,13 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E25
+            note = "crate @ warehouse",
             coords = {x=11908,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E26
+            note = "crate @ warehouse",
             coords = {x=11907,y=6841,z=-1},
             dist = {"MorgueTools", "MedicalCabinet","ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -263,11 +285,13 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E27
+            note = "locker @ warehouse",
             coords = {x=11906,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E28
+            note = "clothingrack @ warehouse",
             coords = {x=11904,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -275,6 +299,7 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E29
+            note = "clothingrack @ warehouse",
             coords = {x=11903,y=6841,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit",},
             distIncludeJunk = true,
@@ -282,17 +307,20 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E30
+            note = "shelves @ warehouse",
             coords = {x=11900,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E31
+            note = "shelves @ warehouse",
             coords = {x=11899,y=6841,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- rest of basement
         { -- E32
+            note = "crate @ storage",
             coords = {x=11907,y=6846,z=-1},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -300,6 +328,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E33
+            note = "crate @ storage",
             coords = {x=11907,y=6847,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -309,6 +338,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
+            note = "crate @ storage",
             coords = {x=11913,y=6857,z=-1},
             dist = {"CrateSheetMetal" },
             distIncludeJunk = false,
@@ -316,6 +346,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E35
+            note = "crate @ storage",
             coords = {x=11913,y=6869,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -323,6 +354,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E36
+            note = "crate @ storage",
             coords = {x=11907,y=6865,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -331,6 +363,7 @@ local TheDrake = {
         },
         -- storage rooms, south to north
         { -- E37
+            note = "metal_shelves @ storageunit",
             coords = {x=11904,y=6858,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -338,6 +371,7 @@ local TheDrake = {
             level = "Loot_FarmLevel",
         },
         { -- E38
+            note = "locker @ storageunit",
             coords = {x=11904,y=6854,z=-1},
             dist = {"SafehouseTraps",},
             distIncludeJunk = true,
@@ -345,6 +379,7 @@ local TheDrake = {
             level = "Loot_GunLevel",
         },
         { -- E39
+            note = "metal_shelves @ storageunit",
             coords = {x=11902,y=6854,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -352,6 +387,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E40
+            note = "metal_shelves @ storageunit",
             coords = {x=11902,y=6853,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -359,6 +395,7 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E41
+            note = "toolcabinet @ storageunit",
             coords = {x=11902,y=6852,z=-1},
             dist = {"StoreShelfMechanics",},
             distIncludeJunk = true,
@@ -366,6 +403,7 @@ local TheDrake = {
             level = "Loot_ToolsLevel",
         },
         { -- E42
+            note = "cardboardbox @ storageunit",
             coords = {x=11904,y=6850,z=-1},
             dist = { "CrateLeather", },
             distIncludeJunk = true,
@@ -373,6 +411,7 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E43
+            note = "cardboardbox @ storageunit",
             coords = {x=11902,y=6848,z=-1},
             dist = {"SewingStoreTools", },
             distIncludeJunk = true,
@@ -380,6 +419,7 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E44
+            note = "cardboardbox @ storageunit",
             coords = {x=11902,y=6847,z=-1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -387,6 +427,7 @@ local TheDrake = {
             level = "Loot_LockersLevel",
         },
         { -- E45
+            note = "cardboardbox @ storageunit",
             coords = {x=11903,y=6847,z=-1},
             dist = { "SewingStoreFabric"},
             distIncludeJunk = true,
@@ -394,6 +435,7 @@ local TheDrake = {
             level = "Loot_TailorLevel",
         },
         { -- E46
+            note = "crate @ storageunit",
             coords = {x=11904,y=6846,z=-1},
             dist = {"ArtStorePottery",},
             distIncludeJunk = true,
@@ -403,6 +445,7 @@ local TheDrake = {
         -- first floor
         -- bar area
         { -- E47
+            note = "fridge @ bar",
             coords = {x=11902,y=6853,z=0},
             dist = {"CrateBeer",},
             distIncludeJunk = true,
@@ -410,6 +453,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E48
+            note = "fridge @ bar",
             coords = {x=11902,y=6852,z=0},
             dist = {"CrateWine",},
             distIncludeJunk = true,
@@ -417,6 +461,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E49
+            note = "shelves @ bar",
             coords = {x=11902,y=6851,z=0},
             dist = {"StoreCounterTobacco"},
             distIncludeJunk = true,
@@ -424,6 +469,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E50
+            note = "shelves @ bar",
             coords = {x=11902,y=6850,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = true,
@@ -431,6 +477,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "shelves @ bar",
             coords = {x=11902,y=6849,z=0},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = true,
@@ -438,6 +485,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "shelves @ bar",
             coords = {x=11902,y=6848,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -460,6 +508,7 @@ local TheDrake = {
         },
         -- bar kitchen
         { -- E55
+            note = "shelves @ bar",
             coords = {x=11902,y=6846,z=0},
             dist = {"BurgerKitchenFridge","BurgerKitchenFreezer"},
             distIncludeJunk = false,
@@ -481,6 +530,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E58
+            note = "freezer @ bakerykitchen",
             coords = {x=11902,y=6859,z=0},
             slot = "upper",
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
@@ -509,6 +559,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E62
+            note = "stove @ kitchen",
             coords = {x=11913,y=6851,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,

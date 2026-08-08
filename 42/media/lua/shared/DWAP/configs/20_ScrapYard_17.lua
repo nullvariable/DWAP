@@ -97,16 +97,19 @@ local ScrapYard = {
     },
     loot = {
         { -- E1
+            note = "crate @ storage",
             coords = {x=2947, y=12522,z=-1},
             special = "essentials",
         },
         -- house 1
         { -- E2
+            note = "desk @ bedroom",
             coords = {x=2940,y=12519,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E3
+            note = "filingcabinet @ bedroom",
             coords = {x=2943,y=12517,z=1},
             items = {
                 { name = 'Base.Pencil', chance = 1, count = {2,5} },
@@ -117,6 +120,7 @@ local ScrapYard = {
             },
         },
         { -- E4
+            note = "counter @ bathroom",
             coords = {x=2933,y=12519,z=1},
             dist = {"MedicalCabinet"},
             distIncludeJunk = false,
@@ -124,6 +128,7 @@ local ScrapYard = {
             level = "Loot_MedLevel",
         },
         { -- E5
+            note = "wardrobe @ bedroom",
             coords = {x=2937,y=12525,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -131,6 +136,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         { -- E6
+            note = "wardrobe @ bedroom",
             coords = {x=2938,y=12525,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -138,6 +144,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         { -- E7
+            note = "dresser @ bedroom",
             coords = {x=2938,y=12522,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -145,6 +152,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         { -- E8
+            note = "counter @ bathroom",
             coords = {x=2942,y=12523,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -152,6 +160,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E9
+            note = "counter @ bathroom",
             coords = {x=2942,y=12524,z=1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -159,6 +168,7 @@ local ScrapYard = {
             level = "Loot_MedLevel",
         },
         { -- E10
+            note = "dresser @ bedroom",
             coords = {x=2943,y=12524,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -167,16 +177,19 @@ local ScrapYard = {
         },
         -- 1st floor bookcases
         { -- E11
+            note = "shelves @ livingroom",
             coords = {x=2941,y=12518,z=0},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E12
+            note = "shelves @ hall",
             coords = {x=2936,y=12525,z=0},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E13
+            note = "shelves @ livingroom",
             coords = {x=2942,y=12518,z=0},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -185,6 +198,7 @@ local ScrapYard = {
         },
         -- laundry
         { -- E14
+            note = "metal_shelves @ laundry",
             coords = {x=2941,y=12525,z=0},
             slot = "upper",
             dist = {"SewingStoreTools"},
@@ -194,6 +208,7 @@ local ScrapYard = {
         },
         -- closet
         { -- E15
+            note = "smallbox @ closet",
             coords = {x=2940,y=12525,z=0},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -202,6 +217,7 @@ local ScrapYard = {
         },
         -- kitchen
         { -- E16
+            note = "fridge @ kitchen",
             coords = {x=2937,y=12517,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
@@ -209,6 +225,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E17
+            note = "counter @ kitchen",
             coords = {x=2936,y=12517,z=0},
             dist = {"KitchenDryFood",},
             distIncludeJunk = false,
@@ -216,11 +233,13 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E18
+            note = "counter @ kitchen",
             coords = {x=2934,y=12517,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E19
+            note = "counter @ kitchen",
             coords = {x=2933,y=12517,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -229,6 +248,7 @@ local ScrapYard = {
         },
         -- shed/garage
         { -- E20
+            note = "metal_shelves @ garagestorage",
             coords = {x=2940,y=12493,z=0},
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
             distIncludeJunk = false,
@@ -236,6 +256,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E21
+            note = "toolcabinet @ garagestorage",
             coords = {x=2939,y=12493,z=0},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -243,6 +264,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E22
+            note = "crate @ garagestorage",
             coords = {x=2941,y=12496,z=0},
             sandboxEnable = 'SeedLibrary',
             items = {
@@ -252,11 +274,13 @@ local ScrapYard = {
             level = "Loot_FarmLevel",
         },
         { -- E23
+            note = "crate @ garagestorage",
             coords = {x=2937,y=12494,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E24
+            note = "metal_shelves @ garagestorage",
             coords = {x=2937,y=12493,z=0},
             slot = "upper",
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -265,6 +289,7 @@ local ScrapYard = {
             level = "Loot_FarmLevel",
         },
         { -- E25
+            note = "metal_shelves @ garagestorage",
             coords = {x=2936,y=12493,z=0},
             slot = "upper",
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -273,6 +298,7 @@ local ScrapYard = {
             level = "Loot_FarmLevel",
         },
         { -- E26
+            note = "metal_shelves @ garagestorage",
             coords = {x=2930,y=12494,z=0},
             slot = "upper",
             dist = {"CrateBlacksmithing", "CrateCarpentry", "CrateMechanics", "CrateMetalwork" },
@@ -281,6 +307,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E27
+            note = "metal_shelves @ garagestorage",
             coords = {x=2929,y=12494,z=0},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -289,6 +316,7 @@ local ScrapYard = {
         },
         -- basement 1
         { -- E28
+            note = "toolcabinet @ storage",
             coords = {x=2945,y=12517,z=-1},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -296,6 +324,7 @@ local ScrapYard = {
             level = "Loot_FishLevel",
         },
         { -- E29
+            note = "metal_shelves @ storage",
             coords = {x=2944,y=12522,z=-1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -303,11 +332,13 @@ local ScrapYard = {
             level = "Loot_FishLevel",
         },
         { -- E30
+            note = "metal_shelves @ storage",
             coords = {x=2945,y=12522,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E31
+            note = "metal_shelves @ storage",
             coords = {x=2944,y=12524,z=-1},
             dist = {"PoliceStorageGuns", "PoliceStorageAmmunition","ArmyStorageGuns",},
             distIncludeJunk = false,
@@ -315,6 +346,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E32
+            note = "metal_shelves @ storage",
             coords = {x=2945,y=12524,z=-1},
             dist = {"FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -322,6 +354,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E33
+            note = "metal_shelves @ storage",
             coords = {x=2944,y=12526,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -329,6 +362,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E34
+            note = "metal_shelves @ storage",
             coords = {x=2945,y=12526,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -336,6 +370,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E35
+            note = "metal_shelves @ storage",
             coords = {x=2947,y=12524,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -343,6 +378,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E36
+            note = "metal_shelves @ storage",
             coords = {x=2948,y=12524,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -350,6 +386,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E37
+            note = "metal_shelves @ storage",
             coords = {x=2947,y=12526,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -357,6 +394,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E38
+            note = "metal_shelves @ storage",
             coords = {x=2948,y=12526,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -366,6 +404,7 @@ local ScrapYard = {
         -- house 2
         -- exterior crates
         { -- E39
+            note = "crate @ outside",
             coords = {x=2948,y=12568,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -375,6 +414,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E40
+            note = "crate @ outside",
             coords = {x=2950,y=12568,z=0},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -382,6 +422,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E41
+            note = "crate @ outside",
             coords = {x=2948,y=12567,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -389,6 +430,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E42
+            note = "crate @ outside",
             coords = {x=2949,y=12567,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -396,6 +438,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E43
+            note = "crate @ outside",
             coords = {x=2948,y=12566,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -404,6 +447,7 @@ local ScrapYard = {
         },
         -- living area
         { -- E44
+            note = "shelves @ hall",
             coords = {x=2934,y=12565,z=0},
             slot = "upper",
             dist = {"BookstoreMilitaryHistory"},
@@ -412,6 +456,7 @@ local ScrapYard = {
             level = "Loot_MediaLevel",
         },
         { -- E45
+            note = "cardboardbox @ hall",
             coords = {x=2933,y=12564,z=0},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
@@ -419,12 +464,14 @@ local ScrapYard = {
             level = "Loot_MediaLevel",
         },
         { -- E46
+            note = "shelves @ warehouse",
             coords = {x=2945,y=12561,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- kitchen
         { -- E47
+            note = "fridge @ kitchen",
             coords = {x=2934,y=12560,z=0},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = false,
@@ -432,11 +479,13 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E48
+            note = "counter @ kitchen",
             coords = {x=2934,y=12559,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E49
+            note = "counter @ kitchen",
             coords = {x=2935,y=12559,z=0},
             dist = {"StoreKitchenBaking",},
             distIncludeJunk = false,
@@ -444,6 +493,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E50
+            note = "counter @ kitchen",
             coords = {x=2936,y=12559,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -451,6 +501,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "counter @ kitchen",
             coords = {x=2937,y=12559,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -459,6 +510,7 @@ local ScrapYard = {
         },
         -- bathroom
         { -- E52
+            note = "counter @ bathroom",
             coords = {x=2939,y=12559,z=0},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -467,6 +519,7 @@ local ScrapYard = {
         },
         -- bedroom
         { -- E53
+            note = "wardrobe @ bedroom",
             coords = {x=2939,y=12564,z=0},
             dist = {"DrugLabGuns"},
             distIncludeJunk = false,
@@ -474,6 +527,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E54
+            note = "wardrobe @ bedroom",
             coords = {x=2939,y=12565,z=0},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -482,6 +536,7 @@ local ScrapYard = {
         },
         -- basement 2
         { -- E55
+            note = "locker @ warehouse",
             coords = {x=2939,y=12566,z=-1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -489,6 +544,7 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E56
+            note = "locker @ warehouse",
             coords = {x=2938,y=12566,z=-1},
             dist = {"SafehouseTraps", "ArmyStorageAmmunition"},
             distIncludeJunk = true,
@@ -496,16 +552,19 @@ local ScrapYard = {
             level = "Loot_GunLevel",
         },
         { -- E57
+            note = "metal_shelves @ warehouse",
             coords = {x=2937,y=12566,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E58
+            note = "metal_shelves @ warehouse",
             coords = {x=2937,y=12567,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E59
+            note = "metal_shelves @ warehouse",
             coords = {x=2935,y=12566,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = true,
@@ -513,6 +572,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E60
+            note = "metal_shelves @ warehouse",
             coords = {x=2935,y=12567,z=-1},
             dist = {"GigamartDryGoods", "GigamartCrisps", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
@@ -520,6 +580,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E61
+            note = "metal_shelves @ warehouse",
             coords = {x=2935,y=12569,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -527,6 +588,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E62
+            note = "metal_shelves @ warehouse",
             coords = {x=2935,y=12570,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable", "SeafoodKitchenSauce"},
             distIncludeJunk = true,
@@ -534,6 +596,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E63
+            note = "metal_shelves @ warehouse",
             coords = {x=2937,y=12569,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -541,6 +604,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E64
+            note = "metal_shelves @ warehouse",
             coords = {x=2937,y=12570,z=-1},
             dist = {"CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -549,6 +613,7 @@ local ScrapYard = {
         },
         -- lockers
         { -- E65
+            note = "locker @ warehouse",
             coords = {x=2939,y=12570,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -556,6 +621,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E66
+            note = "locker @ warehouse",
             coords = {x=2940,y=12570,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -564,6 +630,7 @@ local ScrapYard = {
         },
         -- crate room
         { -- E67
+            note = "militarycrate @ security",
             coords = {x=2943,y=12571,z=-1},
             dist = {"ToolFactoryBarStock", "CrateLumber", "CrateSheetMetal", "WeldingWorkshopMetal", },
             distIncludeJunk = true,
@@ -571,6 +638,7 @@ local ScrapYard = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E68
+            note = "militarycrate @ security",
             coords = {x=2943,y=12572,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -578,6 +646,7 @@ local ScrapYard = {
             level = "Loot_FarmLevel",
         },
         { -- E69
+            note = "militarycrate @ security",
             coords = {x=2943,y=12573,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools","GasStorageMechanics", "BurglarTools", "CarpenterTools", "BarnTools", "CrateTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -585,6 +654,7 @@ local ScrapYard = {
             level = "Loot_ToolsLevel",
         },
         { -- E70
+            note = "militarycrate @ security",
             coords = {x=2943,y=12574,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -592,6 +662,7 @@ local ScrapYard = {
             level = "Loot_FarmLevel",
         },
         { -- E71
+            note = "militarycrate @ security",
             coords = {x=2939,y=12571,z=-1},
             dist = {"GigamartDryGoods","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles", "ArtStorePottery", "ArtSupplies" },
             distIncludeJunk = false,
@@ -599,6 +670,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E72
+            note = "militarycrate @ security",
             coords = {x=2939,y=12572,z=-1},
             dist = {"GigamartDryGoods","KitchenDryFood", "FridgeSoda", "CrateSodaBottles", },
             distIncludeJunk = true,
@@ -606,6 +678,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "militarylocker @ security",
             coords = {x=2939,y=12573,z=-1},
             dist = {"SewingStoreTools", "CrateLeather", "SewingStoreFabric"},
             distIncludeJunk = true,
@@ -613,6 +686,7 @@ local ScrapYard = {
             level = "Loot_TailorLevel",
         },
         { -- E74
+            note = "militarylocker @ security",
             coords = {x=2939,y=12574,z=-1},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -621,6 +695,7 @@ local ScrapYard = {
         },
         -- bunkrooms
         { -- E75
+            note = "locker @ bedroom",
             coords = {x=2948,y=12570,z=-1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -628,6 +703,7 @@ local ScrapYard = {
             level = "Loot_LockersLevel",
         },
         { -- E76
+            note = "locker @ bedroom",
             coords = {x=2948,y=12567,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -636,6 +712,7 @@ local ScrapYard = {
         },
         -- medical room
         { -- E77
+            note = "medicine @ medclinic",
             coords = {x=2943,y=12560,z=-1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -643,6 +720,7 @@ local ScrapYard = {
             level = "Loot_MedLevel",
         },
         { -- E78
+            note = "medicine @ medclinic",
             coords = {x=2943,y=12559,z=-1},
             dist = {"LaboratoryLockers", },
             distIncludeJunk = true,
@@ -650,6 +728,7 @@ local ScrapYard = {
             level = "Loot_MedLevel",
         },
         { -- E79
+            note = "counter @ medclinic",
             coords = {x=2944,y=12556,z=-1},
             dist = {"BathroomCounter", "BookstoreBiography", "MedicalOfficeBooks", "LibraryMedical", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -658,6 +737,7 @@ local ScrapYard = {
         },
         -- tool chest
         { -- E80
+            note = "toolcabinet @ warehouse",
             coords = {x=2941,y=12565,z=-1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -666,6 +746,7 @@ local ScrapYard = {
         },
         -- freezers
         { -- E81
+            note = "freezer @ warehouse",
             coords = {x=2941,y=12563,z=-1},
             dist = {"FreezerRich", },
             distIncludeJunk = true,
@@ -673,6 +754,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E82
+            note = "freezer @ warehouse",
             coords = {x=2941,y=12564,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = true,
@@ -680,6 +762,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E83
+            note = "fridge @ warehouse",
             coords = {x=2941,y=12561,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -687,6 +770,7 @@ local ScrapYard = {
             level = "Loot_FoodLevel",
         },
         { -- E84
+            note = "fridge @ warehouse",
             coords = {x=2942,y=12561,z=-1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,

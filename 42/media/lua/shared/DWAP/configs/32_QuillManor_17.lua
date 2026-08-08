@@ -102,6 +102,7 @@ local QuillManor = {
         -- only basement for now.
         -- security room
         { -- E1 desk1
+            note = "desk @ security",
             coords = {x=1221,y=7376,z=-10},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -109,6 +110,7 @@ local QuillManor = {
             level = "Loot_GunLevel",
         },
         { -- E2 desk2
+            note = "desk @ security",
             coords = {x=1218,y=7377,z=-10},
             dist = {"TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -116,6 +118,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E3
+            note = "counter @ security",
             coords = {x=1222,y=7376,z=-10},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools",},
             distIncludeJunk = true,
@@ -123,6 +126,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E4
+            note = "counter @ security",
             coords = {x=1222,y=7375,z=-10},
             dist = {"ArmyStorageAmmunition", "SafehouseTraps", "GunStoreKnives",},
             distIncludeJunk = false,
@@ -130,6 +134,7 @@ local QuillManor = {
             level = "Loot_GunLevel",
         },
         { -- E5
+            note = "counter @ security",
             coords = {x=1222,y=7374,z=-10},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
@@ -138,6 +143,7 @@ local QuillManor = {
         },
         -- security bunkroom
         { -- E6
+            note = "militarylocker @ security",
             coords = {x=1217,y=7373,z=-10},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid" },
             distIncludeJunk = false,
@@ -145,11 +151,13 @@ local QuillManor = {
             level = "Loot_GunLevel",
         },
         { -- E7
+            note = "militarylocker @ security",
             coords = {x=1217,y=7372,z=-10},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E8
+            note = "counter @ security",
             coords = {x=1217,y=7370,z=-10},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
@@ -157,6 +165,7 @@ local QuillManor = {
             level = "Loot_MedLevel",
         },
         { -- E9
+            note = "medicine @ security",
             coords = {x=1217,y=7370,z=-10},
             slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries"},
@@ -165,6 +174,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E10
+            note = "locker @ security",
             coords = {x=1220,y=7370,z=-10},
             dist = {"DrugLabOutfit", "MechanicOutfit", "ArmySurplusOutfit"},
             distIncludeJunk = true,
@@ -172,6 +182,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E11
+            note = "metal_shelves @ security",
             coords = {x=1222,y=7370,z=-10},
             dist = {"ClothingStorageWinter", "GymLaundry"},
             distIncludeJunk = true,
@@ -179,6 +190,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E12
+            note = "metal_shelves @ security",
             coords = {x=1222,y=7371,z=-10},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -186,10 +198,12 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E13
+            note = "metal_shelves @ security",
             coords = {x=1222,y=7372,z=-10},
             special = "essentials",
         },
         { -- E14
+            note = "metal_shelves @ security",
             coords = {x=1222,y=7373,z=-10},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -197,17 +211,20 @@ local QuillManor = {
             level = "Loot_FishLevel",
         },
         { -- E15
+            note = "militarylocker @ security",
             coords = {x=1220,y=7373,z=-10},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "militarylocker @ security",
             coords = {x=1219,y=7373,z=-10},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- living room
         { -- E17
+            note = "sidetable @ livingroom",
             coords = {x=1217,y=7363,z=-10},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -215,6 +232,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E18
+            note = "dishescabinet @ livingroom",
             coords = {x=1222,y=7358,z=-10},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -222,6 +240,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E19
+            note = "dishescabinet @ livingroom",
             coords = {x=1223,y=7358,z=-10},
             dist = {"TheatreDrinks", "TheatreSnacks"},
             distIncludeJunk = false,
@@ -230,6 +249,7 @@ local QuillManor = {
         },
         -- dining
         { -- E20
+            note = "counter @ kitchen",
             coords = {x=1225,y=7361,z=-10},
             dist = {"StoreCounterTobacco", "CandyStoreSnacks"},
             distIncludeJunk = true,
@@ -237,6 +257,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E21
+            note = "counter @ kitchen",
             coords = {x=1225,y=7360,z=-10},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -244,11 +265,13 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E22
+            note = "counter @ kitchen",
             coords = {x=1225,y=7359,z=-10},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E23
+            note = "counter @ kitchen",
             coords = {x=1225,y=7358,z=-10},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -256,6 +279,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E24
+            note = "counter @ kitchen",
             coords = {x=1226,y=7358,z=-10},
             dist = {"CrateTortillaChips", "CandyStoreSnacks","FridgeSoda",},
             distIncludeJunk = true,
@@ -263,6 +287,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E25
+            note = "fridge @ kitchen",
             coords = {x=1230,y=7358,z=-10},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
@@ -270,6 +295,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E26
+            note = "counter @ kitchen",
             coords = {x=1231,y=7358,z=-10},
             dist = {"WesternKitchenSauce", "WhiskeyBottlingFull", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -277,6 +303,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E27
+            note = "counter @ kitchen",
             coords = {x=1232,y=7358,z=-10},
             dist = {"KitchenCannedFood"},
             distIncludeJunk = false,
@@ -284,6 +311,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E28
+            note = "counter @ kitchen",
             coords = {x=1232,y=7359,z=-10},
             dist = {"StoreKitchenBaking", "WesternKitchenBaking"},
             distIncludeJunk = true,
@@ -292,6 +320,7 @@ local QuillManor = {
         },
         -- pantry
         { -- E29
+            note = "freezer @ pantry",
             coords = {x=1233,y=7358,z=-10},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -299,6 +328,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "freezer @ pantry",
             coords = {x=1234,y=7358,z=-10},
             dist = {"CatfishKitchenFreezer", },
             distIncludeJunk = false,
@@ -306,6 +336,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E31
+            note = "freezer @ pantry",
             coords = {x=1235,y=7358,z=-10},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -313,6 +344,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E32
+            note = "freezer @ pantry",
             coords = {x=1236,y=7358,z=-10},
             dist = {"ButcherFreezer", },
             distIncludeJunk = false,
@@ -320,6 +352,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E33
+            note = "freezer @ pantry",
             coords = {x=1236,y=7360,z=-10},
             dist = {"WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -327,6 +360,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E34
+            note = "fridge @ pantry",
             coords = {x=1236,y=7361,z=-10},
             dist = {"BurgerKitchenFreezer", },
             distIncludeJunk = false,
@@ -334,6 +368,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E35
+            note = "metal_shelves @ pantry",
             coords = {x=1236,y=7362,z=-10},
             dist = {"KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
@@ -341,6 +376,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E36
+            note = "metal_shelves @ pantry",
             coords = {x=1236,y=7363,z=-10},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -348,6 +384,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E37
+            note = "crate @ pantry",
             coords = {x=1234,y=7363,z=-10},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -355,6 +392,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E38
+            note = "crate @ pantry",
             coords = {x=1233,y=7363,z=-10},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -362,6 +400,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E39
+            note = "metal_shelves @ pantry",
             coords = {x=1234,y=7361,z=-10},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -369,6 +408,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E40
+            note = "metal_shelves @ pantry",
             coords = {x=1233,y=7361,z=-10},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -377,6 +417,7 @@ local QuillManor = {
         },
         -- rec area/hallway
         { -- E41
+            note = "shelves @ recreation",
             coords = {x=1228,y=7370,z=-10},
             dist = {"LiquorStoreMix", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -384,6 +425,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E42
+            note = "shelves @ recreation",
             coords = {x=1228,y=7369,z=-10},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -391,6 +433,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "dishescabinet @ recreation",
             coords = {x=1233,y=7364,z=-10},
             dist = {"LivingRoomShelfClassy","BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -398,6 +441,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E44
+            note = "dishescabinet @ recreation",
             coords = {x=1234,y=7364,z=-10},
             dist = {"KitchenBottles", "CrateSodaCans", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -405,6 +449,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "dishescabinet @ recreation",
             coords = {x=1241,y=7365,z=-10},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -412,6 +457,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E46
+            note = "dishescabinet @ recreation",
             coords = {x=1242,y=7365,z=-10},
             dist = {"LiquorStoreBrandy", "LiquorStoreGin"},
             distIncludeJunk = false,
@@ -420,6 +466,7 @@ local QuillManor = {
         },
         -- north bedroom
         { -- E47
+            note = "dresser @ bedroom",
             coords = {x=1242,y=7358,z=-10},
             dist = {"ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -427,6 +474,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E48
+            note = "counter @ bedroom",
             coords = {x=1239,y=7358,z=-10},
             dist = {"JanitorCleaning","MedicalCabinet","MedicalClinicDrugs", "CrateLinens"},
             distIncludeJunk = false,
@@ -434,6 +482,7 @@ local QuillManor = {
             level = "Loot_MedLevel",
         },
         { -- E49
+            note = "wardrobe @ bedroom",
             coords = {x=1244,y=7364,z=-10},
             dist = {"ClothingStorageWinter", "GymLaundry"},
             distIncludeJunk = true,
@@ -441,6 +490,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E50
+            note = "wardrobe @ bedroom",
             coords = {x=1243,y=7364,z=-10},
             dist = {"SafehouseArmor", "ArmySurplusOutfit"},
             distIncludeJunk = true,
@@ -449,6 +499,7 @@ local QuillManor = {
         },
         -- generator room/warehouse
         { -- E51
+            note = "crate @ warehouse",
             coords = {x=1250,y=7365,z=-10},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -456,6 +507,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E52
+            note = "crate @ warehouse",
             coords = {x=1251,y=7365,z=-10},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -463,6 +515,7 @@ local QuillManor = {
             level = "Loot_FarmLevel",
         },
         { -- E53
+            note = "counter @ warehouse",
             coords = {x=1252,y=7365,z=-10},
             dist = {"ToolCabinetMechanics","CrateMechanics"},
             distIncludeJunk = true,
@@ -470,6 +523,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E54
+            note = "counter @ warehouse",
             coords = {x=1254,y=7365,z=-10},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
             distIncludeJunk = true,
@@ -477,6 +531,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E55
+            note = "counter @ warehouse",
             coords = {x=1256,y=7365,z=-10},
             dist = {"CrateCarpentry","LoggingFactoryTools", "WoodcraftDudeCounter"},
             distIncludeJunk = true,
@@ -484,6 +539,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E56
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7370,z=-10},
             dist = { "CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -491,6 +547,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E57
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7371,z=-10},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -498,6 +555,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E58
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7373,z=-10},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -506,6 +564,7 @@ local QuillManor = {
             level = "Loot_FarmLevel",
         },
         { -- E59
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7374,z=-10},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -514,6 +573,7 @@ local QuillManor = {
             level = "Loot_FarmLevel",
         },
         { -- E60
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7376,z=-10},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -521,6 +581,7 @@ local QuillManor = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E61
+            note = "metal_shelves @ warehouse",
             coords = {x=1256,y=7377,z=-10},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -528,6 +589,7 @@ local QuillManor = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E62
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7370,z=-10},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -535,6 +597,7 @@ local QuillManor = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E63
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7371,z=-10},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -542,6 +605,7 @@ local QuillManor = {
             level = "Loot_TailorLevel",
         },
         { -- E64
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7373,z=-10},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -549,6 +613,7 @@ local QuillManor = {
             level = "Loot_ToolsLevel",
         },
         { -- E65
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7374,z=-10},
             dist = {"GigamartBreakfast","GigamartCandy","Homesteading","CrateLiquor",},
             distIncludeJunk = false,
@@ -556,6 +621,7 @@ local QuillManor = {
             level = "Loot_FoodLevel",
         },
         { -- E66
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7376,z=-10},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -563,6 +629,7 @@ local QuillManor = {
             level = "Loot_GunLevel",
         },
         { -- E67
+            note = "metal_shelves @ warehouse",
             coords = {x=1254,y=7377,z=-10},
             dist = {"GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = false,
@@ -570,6 +637,7 @@ local QuillManor = {
             level = "Loot_GunLevel",
         },
         { -- E68
+            note = "metal_shelves @ warehouse",
             coords = {x=1252,y=7370,z=-10},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -577,6 +645,7 @@ local QuillManor = {
             level = "Loot_FarmLevel",
         },
         { -- E69
+            note = "metal_shelves @ warehouse",
             coords = {x=1252,y=7371,z=-10},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -584,27 +653,32 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E70
+            note = "metal_shelves @ warehouse",
             coords = {x=1250,y=7370,z=-10},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E71
+            note = "metal_shelves @ warehouse",
             coords = {x=1250,y=7371,z=-10},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E72
+            note = "metal_shelves @ warehouse",
             coords = {x=1248,y=7370,z=-10},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E73
+            note = "metal_shelves @ warehouse",
             coords = {x=1248,y=7371,z=-10},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         -- gym
         { -- E74
+            note = "metal_shelves @ gym",
             coords = {x=1240,y=7377,z=-10},
             dist = {"FitnessTrainer"},
             distIncludeJunk = true,
@@ -612,6 +686,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E75
+            note = "clothingdryer @ gym",
             coords = {x=1238,y=7371,z=-10},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -620,11 +695,13 @@ local QuillManor = {
         },
         -- south bedroom
         { -- E76
+            note = "filingcabinet @ bedroom",
             coords = {x=1231,y=7371,z=-10},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E77
+            note = "desk @ bedroom",
             coords = {x=1232,y=7371,z=-10},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -632,6 +709,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E78
+            note = "wardrobe @ bedroom",
             coords = {x=1233,y=7376,z=-10},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
             distIncludeJunk = true,
@@ -639,6 +717,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E79
+            note = "wardrobe @ bedroom",
             coords = {x=1233,y=7377,z=-10},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -646,6 +725,7 @@ local QuillManor = {
             level = "Loot_MediaLevel",
         },
         { -- E80
+            note = "dresser @ bedroom",
             coords = {x=1228,y=7377,z=-10},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks",},
             distIncludeJunk = true,
@@ -653,6 +733,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E81
+            note = "counter @ bedroom",
             coords = {x=1228,y=7373,z=-10},
             dist = {"BathroomCounter", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -660,6 +741,7 @@ local QuillManor = {
             level = "Loot_LockersLevel",
         },
         { -- E82
+            note = "medicine @ bedroom",
             coords = {x=1228,y=7373,z=-10},
             slot = "upper",
             dist = {"BathroomCounter", "SafehouseMedical"},

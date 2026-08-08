@@ -137,6 +137,7 @@ local SecretMausoleum = {
         -- below crypts
         -- crates by stairs
         { -- E12
+            note = "crate @ hall",
             coords = {x=8128,y=11520,z=-2},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CrateBootsArmy", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -144,6 +145,7 @@ local SecretMausoleum = {
             level = "Loot_GunLevel",
         },
         { -- E13
+            note = "crate @ hall",
             coords = {x=8129,y=11520,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -152,11 +154,13 @@ local SecretMausoleum = {
         },
         -- chests by cots
         { -- E14
+            note = "locker @ bedroom",
             coords = {x=8128,y=11515,z=-2},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E15
+            note = "locker @ bedroom",
             coords = {x=8128,y=11512,z=-2},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
@@ -164,6 +168,7 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E16
+            note = "locker @ bedroom",
             coords = {x=8128,y=11509,z=-2},
             dist = { "SafehouseTraps", },
             distIncludeJunk = true,
@@ -171,6 +176,7 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E17
+            note = "locker @ bedroom",
             coords = {x=8132,y=11512,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -178,6 +184,7 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E18
+            note = "locker @ bedroom",
             coords = {x=8132,y=11509,z=-2},
             items = {
                 { name = 'Base.NailsBox', },
@@ -190,6 +197,7 @@ local SecretMausoleum = {
         },
         -- crates by cots
         { -- E19
+            note = "crate @ bedroom",
             coords = {x=8131,y=11513,z=-2},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -197,6 +205,7 @@ local SecretMausoleum = {
             level = "Loot_FarmLevel",
         },
         { -- E20
+            note = "crate @ bedroom",
             coords = {x=8132,y=11513,z=-2},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", "BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -205,6 +214,7 @@ local SecretMausoleum = {
         },
         -- shelving
         { -- E21
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11508,z=-2},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -212,6 +222,7 @@ local SecretMausoleum = {
             level = "Loot_TailorLevel",
         },
         { -- E22
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11509,z=-2},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
@@ -219,6 +230,7 @@ local SecretMausoleum = {
             level = "Loot_ToolsLevel",
         },
         { -- E23
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11510,z=-2},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -226,21 +238,25 @@ local SecretMausoleum = {
             level = "Loot_ToolsLevel",
         },
         { -- E24
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11511,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E25
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11512,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E26
+            note = "metal_shelves @ kitchen",
             coords = {x=8135,y=11513,z=-2},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E27
+            note = "metal_shelves @ kitchen",
             coords = {x=8137,y=11512,z=-2},
             dist = {"SafehouseMedical" },
             distIncludeJunk = true,
@@ -248,11 +264,13 @@ local SecretMausoleum = {
             level = "Loot_MedLevel",
         },
         { -- E28
+            note = "metal_shelves @ kitchen",
             coords = {x=8137,y=11513,z=-2},
             special = "essentials",
         },
         -- kitchen cabinets
         { -- E29
+            note = "counter @ kitchen",
             coords = {x=8137,y=11508,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood", "JanitorCleaning"},
             distIncludeJunk = true,
@@ -260,6 +278,7 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "counter @ kitchen",
             coords = {x=8137,y=11509,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -267,6 +286,7 @@ local SecretMausoleum = {
             level = "Loot_FoodLevel",
         },
         { -- E31 fridge
+            note = "fridge @ kitchen",
             coords = {x=8137,y=11511,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
@@ -275,6 +295,7 @@ local SecretMausoleum = {
         },
         -- crates
         { -- E32
+            note = "crate @ kitchen",
             coords = {x=8144,y=11513,z=-2},
             dist = {"CrateToiletPaper", "CrateLinens", "BathroomCounter", "GasStoreToiletries",},
             distIncludeJunk = true,
@@ -282,6 +303,7 @@ local SecretMausoleum = {
             level = "Loot_LockersLevel",
         },
         { -- E33
+            note = "crate @ kitchen",
             coords = {x=8145,y=11513,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal", "CrateClayBags", "CrateMasonry"},
             distIncludeJunk = true,

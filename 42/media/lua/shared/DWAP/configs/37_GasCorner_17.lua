@@ -67,6 +67,7 @@ local GasCorner = {
     loot = {
         -- lowest level
         { -- E1
+            note = "counter @ bunker",
             coords = {x=1664,y=5749,z=-4},
             dist = { "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
@@ -74,12 +75,14 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E2
+            note = "overhead @ bunker",
             coords = {x=1664,y=5749,z=-4},
             slot = "upper",
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E3
+            note = "counter @ bunker",
             coords = {x=1663,y=5749,z=-4},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -87,6 +90,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E4
+            note = "overhead @ bunker",
             coords = {x=1663,y=5749,z=-4},
             slot = "upper",
             dist = {"GigamartCrisps","ControlRoomCounter" },
@@ -95,6 +99,7 @@ local GasCorner = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E5
+            note = "medicine @ bunker",
             coords = {x=1661,y=5749,z=-4},
             slot = "upper",
             dist = {"BathroomCounter", "GasStoreToiletries",},
@@ -103,6 +108,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E6
+            note = "shelves @ bunker",
             coords = {x=1660,y=5750,z=-4},
             slot = "upper",
             items = {
@@ -113,6 +119,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E7
+            note = "medicine @ bunker",
             coords = {x=1659,y=5750,z=-4},
             slot = "upper",
             dist = {"SafehouseMedical" },
@@ -121,6 +128,7 @@ local GasCorner = {
             level = "Loot_MedLevel",
         },
         { -- E8
+            note = "locker @ gunstore",
             coords = {x=1658,y=5749,z=-4},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -128,6 +136,7 @@ local GasCorner = {
             level = "Loot_GunLevel",
         },
         { -- E9
+            note = "militarycrate @ gunstore",
             coords = {x=1660,y=5745,z=-4},
             dist = { "SafehouseTraps", "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
@@ -135,16 +144,19 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E10
+            note = "militarylocker @ gunstore",
             coords = {x=1661,y=5745,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E11
+            note = "militarylocker @ gunstore",
             coords = {x=1662,y=5745,z=-4},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E12
+            note = "cardboardbox @ gunstore",
             coords = {x=1667,y=5745,z=-4},
             dist = {"CrateOilVegetable","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -153,21 +165,25 @@ local GasCorner = {
         },
         -- -3, books and crafting room
         { -- E13
+            note = "shelves @ lobby",
             coords = {x=1659,y=5744,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E14
+            note = "shelves @ lobby",
             coords = {x=1659,y=5745,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E15
+            note = "shelves @ lobby",
             coords = {x=1659,y=5746,z=-3},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E16
+            note = "shelves @ lobby",
             coords = {x=1659,y=5747,z=-3},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -176,11 +192,13 @@ local GasCorner = {
         },
         -- small back room
         { -- E17
+            note = "metal_shelves @ warehouse",
             coords = {x=1665,y=5750,z=-3},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E18
+            note = "metal_shelves @ warehouse",
             coords = {x=1665,y=5748,z=-3},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -188,11 +206,13 @@ local GasCorner = {
             level = "Loot_FarmLevel",
         },
         { -- E19
+            note = "crate @ warehouse",
             coords = {x=1667,y=5750,z=-3},
             special = "essentials",
         },
         -- main work room
         { -- E20
+            note = "metal_shelves @ farmstorage",
             coords = {x=1661,y=5750,z=-3},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -201,6 +221,7 @@ local GasCorner = {
             level = "Loot_FarmLevel",
         },
         { -- E21
+            note = "metal_shelves @ farmstorage",
             coords = {x=1661,y=5749,z=-3},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -209,6 +230,7 @@ local GasCorner = {
             level = "Loot_FarmLevel",
         },
         { -- E22
+            note = "counter @ farmstorage",
             coords = {x=1661,y=5747,z=-3},
             dist = {"GasStoreEmergency","CarSupplyTools","GasStorageMechanics",},
             distIncludeJunk = true,
@@ -216,6 +238,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E23
+            note = "counter @ farmstorage",
             coords = {x=1661,y=5746,z=-3},
             dist = {"ToolStoreMetalwork","CrateBlacksmithing", },
             distIncludeJunk = true,
@@ -223,6 +246,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E24
+            note = "counter @ farmstorage",
             coords = {x=1661,y=5745,z=-3},
             dist = {"CrateTools", "GarageTools", "BarnTools",  },
             distIncludeJunk = true,
@@ -230,6 +254,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E25
+            note = "counter @ farmstorage",
             coords = {x=1663,y=5745,z=-3},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -237,12 +262,15 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E26
+            note = "metal_shelves @ farmstorage",
             coords = {x=1665,y=5745,z=-3},
         },
         { -- E27
+            note = "metal_shelves @ farmstorage",
             coords = {x=1665,y=5746,z=-3},
         },
         { -- E28
+            note = "metal_shelves @ farmstorage",
             coords = {x=1667,y=5745,z=-3},
             dist = {"CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather","SewingStoreFabric"},
             distIncludeJunk = true,
@@ -250,6 +278,7 @@ local GasCorner = {
             level = "Loot_TailorLevel",
         },
         { -- E29
+            note = "metal_shelves @ farmstorage",
             coords = {x=1667,y=5746,z=-3},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -258,6 +287,7 @@ local GasCorner = {
         },
         -- -2 level, laundry, main storage
         { -- E30
+            note = "clothingdryerbasic @ lobby",
             coords = {x=1659,y=5744,z=-2},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "CrateBootsArmy"},
             distIncludeJunk = true,
@@ -265,6 +295,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E31
+            note = "shelves @ lobby",
             coords = {x=1659,y=5744,z=-2},
             slot = "upper",
             dist = {"LaundryCleaning", "JanitorCleaning"},
@@ -273,6 +304,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E32
+            note = "freezer @ warehouse",
             coords = {x=1661,y=5750,z=-2},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", },
             distIncludeJunk = false,
@@ -280,6 +312,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E33
+            note = "freezer @ warehouse",
             coords = {x=1661,y=5749,z=-2},
             dist = {"FridgeFarmStorage", "FreezerIceCream"},
             distIncludeJunk = false,
@@ -287,6 +320,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E34
+            note = "woodstove @ warehouse",
             coords = {x=1662,y=5750,z=-2},
             items = {
                 { name = 'Base.Firewood', chance = 1, count = {10,10} },
@@ -295,6 +329,7 @@ local GasCorner = {
             level = "Loot_FarmLevel",
         },
         { -- E35
+            note = "metal_shelves @ warehouse",
             coords = {x=1663,y=5750,z=-2},
             dist = {"SafehouseFireplace", "SafehouseLighting", },
             distIncludeJunk = false,
@@ -302,6 +337,7 @@ local GasCorner = {
             level = "Loot_FarmLevel",
         },
         { -- E36
+            note = "shelves @ warehouse",
             coords = {x=1664,y=5750,z=-2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -309,6 +345,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E37
+            note = "shelves @ warehouse",
             coords = {x=1665,y=5750,z=-2},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -316,6 +353,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E38
+            note = "shelves @ warehouse",
             coords = {x=1666,y=5750,z=-2},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
@@ -323,6 +361,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E39
+            note = "shelves @ warehouse",
             coords = {x=1667,y=5750,z=-2},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -330,6 +369,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E40
+            note = "crate @ warehouse",
             coords = {x=1663,y=5747,z=-2},
             dist = {"SafehouseMedical_Late", "StoreShelfMedical", "ArmyStorageMedical", "ArmyBunkerMedical" },
             distIncludeJunk = true,
@@ -337,6 +377,7 @@ local GasCorner = {
             level = "Loot_MedLevel",
         },
         { -- E41
+            note = "crate @ warehouse",
             coords = {x=1663,y=5746,z=-2},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -344,6 +385,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E42
+            note = "crate @ warehouse",
             coords = {x=1663,y=5745,z=-2},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -351,6 +393,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E43
+            note = "smallbox @ warehouse",
             coords = {x=1665,y=5748,z=-2},
             items = {
                 { name = 'Base.NailsBox', },
@@ -362,6 +405,7 @@ local GasCorner = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E44
+            note = "clothingrack @ warehouse",
             coords = {x=1665,y=5747,z=-2},
             dist = {"ClothingStorageWinter",},
             distIncludeJunk = true,
@@ -369,6 +413,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E45
+            note = "clothingrack @ warehouse",
             coords = {x=1665,y=5746,z=-2},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -376,6 +421,7 @@ local GasCorner = {
             level = "Loot_FishLevel",
         },
         { -- E46
+            note = "clothingrack @ warehouse",
             coords = {x=1665,y=5745,z=-2},
             dist = {"TheatrePopcorn", "FridgeSoda",},
             distIncludeJunk = true,
@@ -383,6 +429,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E47
+            note = "cardboardbox @ warehouse",
             coords = {x=1667,y=5748,z=-2},
             dist = {"CrateFishing",},
             distIncludeJunk = false,
@@ -390,6 +437,7 @@ local GasCorner = {
             level = "Loot_FishLevel",
         },
         { -- E48
+            note = "crate @ warehouse",
             coords = {x=1667,y=5747,z=-2},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -397,6 +445,7 @@ local GasCorner = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E49
+            note = "crate @ warehouse",
             coords = {x=1667,y=5746,z=-2},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -404,6 +453,7 @@ local GasCorner = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E50
+            note = "crate @ warehouse",
             coords = {x=1667,y=5745,z=-2},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -412,6 +462,7 @@ local GasCorner = {
         },
         -- store basement
         { -- E51
+            note = "metal_shelves @ hall",
             coords = {x=1658,y=5747,z=-1},
             slot = "upper",
             dist = {"CrateToiletPaper", "CrateLinens"},
@@ -420,6 +471,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "metal_shelves @ janitor",
             coords = {x=1658,y=5746,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -427,6 +479,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E53
+            note = "metal_shelves @ janitor",
             coords = {x=1658,y=5745,z=-1},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
@@ -434,6 +487,7 @@ local GasCorner = {
             level = "Loot_ToolsLevel",
         },
         { -- E54
+            note = "metal_shelves @ storageunit",
             coords = {x=1664,y=5744,z=-1},
             slot = "upper",
             dist = {"ArmyStorageOutfit",},
@@ -442,6 +496,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E55
+            note = "metal_shelves @ storageunit",
             coords = {x=1665,y=5744,z=-1},
             slot = "upper",
             dist = {"DrugLabOutfit",},
@@ -450,6 +505,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E56
+            note = "crate @ storageunit",
             coords = {x=1662,y=5746,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -457,6 +513,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E57
+            note = "crate @ storageunit",
             coords = {x=1663,y=5746,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -464,6 +521,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E58
+            note = "crate @ storageunit",
             coords = {x=1664,y=5746,z=-1},
             dist = {"SafehouseMedical", "LiquorStoreWhiskey" },
             distIncludeJunk = true,
@@ -471,6 +529,7 @@ local GasCorner = {
             level = "Loot_MedLevel",
         },
         { -- E59
+            note = "crate @ storageunit",
             coords = {x=1663,y=5747,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy"},
             distIncludeJunk = false,
@@ -478,6 +537,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E60
+            note = "crate @ storageunit",
             coords = {x=1664,y=5747,z=-1},
             dist = {"CrateVHSTapes"},
             distIncludeJunk = false,
@@ -485,11 +545,13 @@ local GasCorner = {
             level = "Loot_MediaLevel",
         },
         { -- E61
+            note = "locker @ storageunit",
             coords = {x=1664,y=5748,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E62
+            note = "crate @ storageunit",
             coords = {x=1663,y=5751,z=-1},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -498,6 +560,7 @@ local GasCorner = {
         },
         -- store area
         { -- E63
+            note = "shelves @ gasstore",
             coords = {x=1661,y=5746,z=0},
             dist = {"CrateToiletPaper", "GasStoreToiletries"},
             distIncludeJunk = true,
@@ -505,6 +568,7 @@ local GasCorner = {
             level = "Loot_MedLevel",
         },
         { -- E64
+            note = "shelves @ gasstore",
             coords = {x=1662,y=5746,z=0},
             dist = {"CrateBootsArmy",},
             distIncludeJunk = true,
@@ -512,6 +576,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E65
+            note = "shelves @ gasstore",
             coords = {x=1663,y=5746,z=0},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
             distIncludeJunk = true,
@@ -519,6 +584,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E66
+            note = "shelves @ gasstore",
             coords = {x=1664,y=5746,z=0},
             dist = {"SafehouseTraps","GunStoreKnives","CrateLiquor", "CarSupplyTools",},
             distIncludeJunk = true,
@@ -526,6 +592,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E67
+            note = "shelvesmag @ gasstore",
             coords = {x=1660,y=5751,z=0},
             dist = {"LivingRoomShelfClassy"},
             distIncludeJunk = false,
@@ -533,6 +600,7 @@ local GasCorner = {
             level = "Loot_MediaLevel",
         },
         { -- E68
+            note = "shelvesmag @ gasstore",
             coords = {x=1660,y=5752,z=0},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -540,6 +608,7 @@ local GasCorner = {
             level = "Loot_MediaLevel",
         },
         { -- E69
+            note = "counter @ gasstore",
             coords = {x=1664,y=5750,z=0},
             dist = { "GasStoreEmergency", "StoreCounterTobacco" },
             distIncludeJunk = false,
@@ -548,6 +617,7 @@ local GasCorner = {
         },
         -- upper house level
         { -- E70
+            note = "fridge @ kitchen",
             coords = {x=1659,y=5744,z=1},
             dist = {"SushiKitchenFreezer", },
             distIncludeJunk = true,
@@ -555,11 +625,13 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E71
+            note = "counter @ kitchen",
             coords = {x=1660,y=5744,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E72
+            note = "counter @ kitchen",
             coords = {x=1661,y=5744,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning", "MedicalStorageDrugs"},
             distIncludeJunk = false,
@@ -567,6 +639,7 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "counter @ kitchen",
             coords = {x=1662,y=5744,z=1},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
             distIncludeJunk = false,
@@ -574,11 +647,13 @@ local GasCorner = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "sidetable @ bedroom",
             coords = {x=1664,y=5744,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E75
+            note = "dresser @ bedroom",
             coords = {x=1665,y=5747,z=1},
             dist = {"LaundryLoad1", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -586,6 +661,7 @@ local GasCorner = {
             level = "Loot_LockersLevel",
         },
         { -- E76
+            note = "counter @ bathroom",
             coords = {x=1659,y=5747,z=1},
             dist = {"MedicalClinicDrugs", "MedicalCabinet" },
             distIncludeJunk = true,
@@ -593,6 +669,7 @@ local GasCorner = {
             level = "Loot_MedLevel",
         },
         { -- E77
+            note = "sidetable @ livingroom",
             coords = {x=1665,y=5749,z=1},
             items = {
                 { name = 'Base.Sledgehammer', chance = 1, count = {1,1}, },

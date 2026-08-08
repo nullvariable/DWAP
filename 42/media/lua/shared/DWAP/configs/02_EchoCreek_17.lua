@@ -76,25 +76,30 @@ local EchoCreek = {
     loot = {
         -- addon basement room
         { -- E1
+            note = "militarylocker @ warehouse",
             coords = {x=3581, y=10897,z=-1},
             special = "essentials",
         },
         { -- E2
+            note = "crate @ warehouse",
             coords = {x=3584, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E3
+            note = "crate @ warehouse",
             coords = {x=3585, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         { -- E4
+            note = "crate @ warehouse",
             coords = {x=3586, y=10901,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E5
+            note = "crate @ warehouse",
             coords = {x=3587, y=10901,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal","ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -102,6 +107,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E6
+            note = "freezer @ warehouse",
             coords = {x=3587, y=10900,z=-1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -110,6 +116,7 @@ local EchoCreek = {
         },
         { -- E7
             stack = 1,
+            note = "militarycrate @ warehouse",
             coords = {x=3587, y=10897,z=-1},
             dist = {"ArmyStorageGuns","ArmyStorageAmmunition","FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -118,6 +125,7 @@ local EchoCreek = {
         },
         { -- E8
             stack = 2,
+            note = "militarycrate @ warehouse",
             coords = {x=3587, y=10897,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
@@ -125,11 +133,13 @@ local EchoCreek = {
 
 
         { -- E9 house next to couch
+            note = "sidetable @ livingroom",
             coords = {x=3566, y=10901,z=1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E10 tv stand
+            note = "sidetable @ livingroom",
             coords = {x=3564,y=10905,z=1},
             items = {
                 { name = 'Base.VHS_Retail', chance = 1, count = {30,30} },
@@ -138,6 +148,7 @@ local EchoCreek = {
             level = "Loot_MediaLevel",
         },
         { -- E11 bunkbed bedroom
+            note = "dresser @ kidsbedroom",
             coords = {x=3572,y=10903,z=1},
             dist = {"MusicStoreCDs"},
             distIncludeJunk = false,
@@ -145,6 +156,7 @@ local EchoCreek = {
             level = "Loot_MediaLevel",
         },
         { -- E12 twin bedroom
+            note = "sidetable @ bedroom",
             coords = {x=3573,y=10905,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -152,6 +164,7 @@ local EchoCreek = {
             level = "Loot_MediaLevel",
         },
         { -- E13 twin bedroom
+            note = "sidetable @ bedroom",
             coords = {x=3575,y=10905,z=1},
             dist = {"BookstoreNonFiction"},
             distIncludeJunk = false,
@@ -159,6 +172,7 @@ local EchoCreek = {
             level = 1,
         },
         { -- E14 twin bedroom
+            note = "wardrobe @ bedroom",
             coords = {x=3573,y=10904,z=1},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -166,6 +180,7 @@ local EchoCreek = {
             level = "Loot_FishLevel",
         },
         { -- E15 twin bedroom
+            note = "wardrobe @ bedroom",
             coords = {x=3573,y=10903,z=1},
             dist = {"GymLaundry", "GymLockers","ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
@@ -173,6 +188,7 @@ local EchoCreek = {
             level = "Loot_LockersLevel",
         },
         { -- E16 twin bedroom closet
+            note = "metal_shelves @ closet",
             coords = {x=3576,y=10900,z=1},
             slot = "upper",
             dist = {"SewingStoreTools","SewingStoreFabric","CrateLeather"},
@@ -181,6 +197,7 @@ local EchoCreek = {
             level = "Loot_TailorLevel",
         },
         { -- E17 master bedroom closet
+            note = "metal_shelves @ closet",
             coords = {x=3576,y=10899,z=1},
             slot = "upper",
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -189,16 +206,19 @@ local EchoCreek = {
             level = "Loot_LockersLevel",
         },
         { -- E18 master bedroom wardrobe
+            note = "wardrobe @ bedroom",
             coords = {x=3576,y=10898,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E19 master bedroom wardrobe
+            note = "wardrobe @ bedroom",
             coords = {x=3576,y=10897,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E20 master bedroom nightstand
+            note = "sidetable @ bedroom",
             coords = {x=3575,y=10894,z=1},
             dist = {"DrugLabGuns", "FirearmWeapons_Late"},
             distIncludeJunk = false,
@@ -206,6 +226,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E21 master bedroom nightstand
+            note = "sidetable @ bedroom",
             coords = {x=3572,y=10894,z=1},
             dist = {"ArmyStorageGuns",},
             distIncludeJunk = false,
@@ -213,6 +234,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E22 master bedroom
+            note = "dresser @ bedroom",
             coords = {x=3571,y=10896,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -220,6 +242,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E23 bathroom
+            note = "metal_shelves @ bathroom",
             coords = {x=3569,y=10899,z=1},
             slot = "upper",
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical", "MedicalClinicTools", "BathroomCounter"},
@@ -228,6 +251,7 @@ local EchoCreek = {
             level = "Loot_MedLevel",
         },
         { -- E24 bathroom
+            note = "counter @ bathroom",
             coords = {x=3571,y=10899,z=1},
             dist = {"LaundryCleaning", "JanitorCleaning", "MedicalStorageDrugs"},
             distIncludeJunk = false,
@@ -236,6 +260,7 @@ local EchoCreek = {
         },
         -- kitchen
         { -- E25
+            note = "fridge @ kitchen",
             coords = {x=3569,y=10900,z=1},
             dist = {"FridgeFarmStorage", "FridgeGeneric"},
             distIncludeJunk = true,
@@ -244,6 +269,7 @@ local EchoCreek = {
         },
         { -- E26
             slot = "freezer",
+            note = "freezer @ kitchen",
             coords = {x=3569,y=10900,z=1},
             dist = {"FreezerIceCream", },
             distIncludeJunk = false,
@@ -251,11 +277,13 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E27
+            note = "counter @ kitchen",
             coords = {x=3566,y=10898,z=1},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E28
+            note = "counter @ kitchen",
             coords = {x=3566,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -263,6 +291,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E29
+            note = "counter @ kitchen",
             coords = {x=3567,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -270,6 +299,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E30
+            note = "counter @ kitchen",
             coords = {x=3568,y=10897,z=1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -277,6 +307,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E31
+            note = "counter @ kitchen",
             coords = {x=3568,y=10898,z=1},
             dist = {"GroceryBagGourmet","CrateFlour","CrateOilVegetable",},
             distIncludeJunk = false,
@@ -285,6 +316,7 @@ local EchoCreek = {
         },
         -- mechanic's storage
         { -- E32
+            note = "metal_shelves @ mechanic",
             coords = {x=3581,y=10894,z=0},
             slot = "upper",
             dist = {"FirearmWeapons_Late"},
@@ -293,10 +325,12 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E33
+            note = "crate @ mechanic",
             coords = {x=3581,y=10891,z=0},
             special = 'SeedLibrary',
         },
         { -- E34
+            note = "metal_shelves @ mechanic",
             coords = {x=3583,y=10891,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -304,6 +338,7 @@ local EchoCreek = {
             level = "Loot_FarmLevel",
         },
         { -- E35
+            note = "metal_shelves @ mechanic",
             coords = {x=3583,y=10892,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -311,6 +346,7 @@ local EchoCreek = {
             level = "Loot_FarmLevel",
         },
         { -- E36
+            note = "metal_shelves @ mechanic",
             coords = {x=3585,y=10891,z=0},
             dist = {"CarSupplyTools", "GasStoreEmergency"},
             distIncludeJunk = true,
@@ -318,6 +354,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E37
+            note = "metal_shelves @ mechanic",
             coords = {x=3585,y=10892,z=0},
             dist = {"CarSupplyTools", "GasStorageMechanics",},
             distIncludeJunk = true,
@@ -325,6 +362,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E38
+            note = "crate @ mechanic",
             coords = {x=3584,y=10894,z=0},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -333,6 +371,7 @@ local EchoCreek = {
         },
         { -- E39
             stack = 1,
+            note = "crate @ mechanic",
             coords = {x=3585,y=10894,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -341,12 +380,14 @@ local EchoCreek = {
         },
         { -- E40
             stack = 2,
+            note = "crate @ mechanic",
             coords = {x=3585,y=10894,z=0},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         -- lift area
         { -- E41
+            note = "toolcabinet @ mechanic",
             coords = {x=3581,y=10895,z=0},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
             distIncludeJunk = true,
@@ -354,6 +395,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E42
+            note = "metal_shelves @ mechanic",
             coords = {x=3582,y=10895,z=0},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -361,6 +403,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E43
+            note = "metal_shelves @ mechanic",
             coords = {x=3583,y=10895,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -368,6 +411,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E44
+            note = "counter @ mechanic",
             coords = {x=3584,y=10895,z=0},
             dist = {"GigamartTools", "JanitorTools" },
             distIncludeJunk = true,
@@ -375,6 +419,7 @@ local EchoCreek = {
             level = "Loot_ToolsLevel",
         },
         { -- E45
+            note = "counter @ mechanic",
             coords = {x=3585,y=10895,z=0},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -383,6 +428,7 @@ local EchoCreek = {
         },
         -- servo storage area
         { -- E46
+            note = "metal_shelves @ gasstorage",
             coords = {x=3571,y=10895,z=0},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -390,6 +436,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E47
+            note = "metal_shelves @ gasstorage",
             coords = {x=3572,y=10895,z=0},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -397,6 +444,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E48
+            note = "metal_shelves @ gasstorage",
             coords = {x=3573,y=10895,z=0},
             dist = {"SafehouseTraps","CampingLockers"},
             distIncludeJunk = true,
@@ -404,6 +452,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E49
+            note = "metal_shelves @ gasstorage",
             coords = {x=3574,y=10895,z=0},
             dist = {"MeleeWeapons", "MeleeWeapons_Mid", "CampingStoreBackpacks"},
             distIncludeJunk = true,
@@ -411,6 +460,7 @@ local EchoCreek = {
             level = "Loot_GunLevel",
         },
         { -- E50 box
+            note = "cardboardbox @ gasstorage",
             coords = {x=3574,y=10893,z=0},
             dist = {"CafeteriaSnacks"},
             distIncludeJunk = true,
@@ -419,6 +469,7 @@ local EchoCreek = {
         },
         -- basement
         { -- E51 by water tank
+            note = "metal_shelves @ storage",
             coords = {x=3562,y=10902,z=-1},
             dist = {"LaundryCleaning", "JanitorCleaning"},
             distIncludeJunk = false,
@@ -426,6 +477,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E52
+            note = "metal_shelves @ storage",
             coords = {x=3562,y=10901,z=-1},
             dist = {"CrateToiletPaper"},
             distIncludeJunk = true,
@@ -433,6 +485,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E53 by generator
+            note = "counter @ storage",
             coords = {x=3566,y=10897,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -440,6 +493,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E54
+            note = "counter @ storage",
             coords = {x=3567,y=10897,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -447,6 +501,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E55
+            note = "metal_shelves @ storage",
             coords = {x=3568,y=10897,z=-1},
             dist = {"LoggingFactoryTools", "CrateTools", "BurglarTools", "CarpenterTools", "BarnTools","CampingStoreTools", "ArmyHangarTools", },
             distIncludeJunk = true,
@@ -455,6 +510,7 @@ local EchoCreek = {
         },
         -- back corner room
         { -- E56
+            note = "metal_shelves @ cannedstorage",
             coords = {x=3570,y=10891,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -462,6 +518,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E57
+            note = "metal_shelves @ cannedstorage",
             coords = {x=3571,y=10891,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -469,6 +526,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E58
+            note = "metal_shelves @ cannedstorage",
             coords = {x=3570,y=10893,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -476,6 +534,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E59
+            note = "metal_shelves @ cannedstorage",
             coords = {x=3571,y=10893,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -483,6 +542,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E60
+            note = "cardboardbox @ storage",
             coords = {x=3576,y=10896,z=-1},
             dist = {"StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
             distIncludeJunk = true,
@@ -490,6 +550,7 @@ local EchoCreek = {
             level = "Loot_FoodLevel",
         },
         { -- E61
+            note = "metal_shelves @ storage",
             coords = {x=3572,y=10894,z=-1},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -498,6 +559,7 @@ local EchoCreek = {
             level = "Loot_FarmLevel",
         },
         { -- E62
+            note = "metal_shelves @ storage",
             coords = {x=3571,y=10894,z=-1},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
@@ -507,6 +569,7 @@ local EchoCreek = {
         },
         -- crates
         { -- E63
+            note = "crate @ storage",
             coords = {x=3572,y=10902,z=-1},
             items = {
                 { name = 'Base.NailsBox', },
@@ -516,6 +579,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E64
+            note = "crate @ storage",
             coords = {x=3574,y=10905,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -523,6 +587,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E65
+            note = "crate @ storage",
             coords = {x=3575,y=10905,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -530,6 +595,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E66
+            note = "crate @ storage",
             coords = {x=3576,y=10905,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -537,6 +603,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E67
+            note = "crate @ storage",
             coords = {x=3576,y=10904,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -544,6 +611,7 @@ local EchoCreek = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E68 metal shelves by sink
+            note = "metal_shelves @ storage",
             coords = {x=3567,y=10905,z=-1},
             slot = "upper",
             dist = {"CrateVHSTapes"},

@@ -93,31 +93,37 @@ local ELVilleFarm = {
     },
     loot = {
         { -- E1 cardboardbox in orange bunk room
+            note = "cardboardbox @ bedroom",
             coords = {x=14572,y=3031,z=-1},
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
         { -- E2 east bluish bunk room
+            note = "locker @ bedroom",
             coords = {x=14577,y=3039,z=-1},
             special = "essentials",
         },
         { -- E3 center hallway crates
+            note = "militarycrate @ storage",
             coords = {x=14576,y=3035,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
         { -- E4
+            note = "militarycrate @ storage",
             coords = {x=14573,y=3035,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
         { -- E5
+            note = "militarycrate @ storage",
             coords = {x=14570,y=3035,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- crates by stairs
         { -- E6
+            note = "crate @ storage",
             coords = {x=14584,y=3034,z=-1},
             dist = {"CrateRandomJunk", "RandomFiller", "CrateLiquor", "LiquorStoreWhiskey"},
             distIncludeJunk = false,
@@ -125,6 +131,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E7
+            note = "crate @ storage",
             coords = {x=14584,y=3035,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -132,6 +139,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E8
+            note = "crate @ storage",
             coords = {x=14584,y=3036,z=-1},
             dist = {"CrateGravelBags", "CrateSandBags", "CrateClayBags"},
             distIncludeJunk = false,
@@ -139,6 +147,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E9 north gray bunk room
+            note = "locker @ armytent",
             coords = {x=14575,y=3033,z=-1},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -146,6 +155,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E10 north gray bunk room
+            note = "locker @ armytent",
             coords = {x=14577,y=3031,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -153,6 +163,7 @@ local ELVilleFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E11 north orange bunk room
+            note = "locker @ bedroom",
             coords = {x=14574,y=3031,z=-1},
             dist = {"CrateLiquor", "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -160,6 +171,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E12 south gray bunk room (foot locker)
+            note = "locker @ bedroom",
             coords = {x=14572,y=3037,z=-1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -167,6 +179,7 @@ local ELVilleFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E13 south gray bunk room (lockers)
+            note = "locker @ bedroom",
             coords = {x=14574,y=3039,z=-1},
             dist = {"CrateLiquor", "MusicStoreCDs", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "CrateLinens"},
             distIncludeJunk = true,
@@ -175,6 +188,7 @@ local ELVilleFarm = {
         },
         -- security/armory
         { -- E14
+            note = "militarylocker @ security",
             coords = {x=14569,y=3033,z=-1},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
             distIncludeJunk = true,
@@ -182,16 +196,19 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E15
+            note = "militarylocker @ security",
             coords = {x=14569,y=3032,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E16
+            note = "militarylocker @ security",
             coords = {x=14569,y=3031,z=-1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
         { -- E17
+            note = "militarycrate @ security",
             coords = {x=14571,y=3033,z=-1},
             dist = {"ArmySurplusMisc", "GunStoreGuns", "GunStoreMagsAmmo", "GunStoreAmmunition", "GunStoreAccessories", "DrugShackWeapons" },
             distIncludeJunk = false,
@@ -200,6 +217,7 @@ local ELVilleFarm = {
         },
         -- infirmary
         { -- E18
+            note = "metal_shelves @ medical",
             coords = {x=14571,y=3038,z=-1},
             dist = {"TestingLab","MedicalCabinet",},
             distIncludeJunk = false,
@@ -207,6 +225,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E19
+            note = "metal_shelves @ medical",
             coords = {x=14571,y=3039,z=-1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},
             distIncludeJunk = true,
@@ -214,6 +233,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E20
+            note = "counter @ medical",
             coords = {x=14567,y=3037,z=-1},
             dist = {"MedicalClinicDrugs", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -221,6 +241,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E21
+            note = "sidetable @ medical",
             coords = {x=14567,y=3039,z=-1},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc", "MedicalOfficeBooks" },
             distIncludeJunk = true,
@@ -228,6 +249,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E22
+            note = "medicine @ medical",
             coords = {x=14569,y=3037,z=-1},
             slot = "upper",
             dist = {"MedicalCabinet" },
@@ -237,6 +259,7 @@ local ELVilleFarm = {
         },
         -- shooting range
         { -- E23
+            note = "desk @ gunstore",
             coords = {x=14563,y=3031,z=-1},
             dist = {"SafehouseTraps",},
             distIncludeJunk = true,
@@ -244,6 +267,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E24
+            note = "counter @ gunstore",
             coords = {x=14562,y=3031,z=-1},
             dist = {"ArmySurplusMisc","ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -251,6 +275,7 @@ local ELVilleFarm = {
             level = "Loot_GunLevel",
         },
         { -- E25
+            note = "desk @ gunstore",
             coords = {x=14561,y=3031,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -258,6 +283,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E26
+            note = "counter @ gunstore",
             coords = {x=14560,y=3031,z=-1},
             dist = { "SafehouseArmor", "SafehouseArmor_Late", },
             distIncludeJunk = true,
@@ -265,6 +291,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E27
+            note = "desk @ gunstore",
             coords = {x=14559,y=3031,z=-1},
             dist = { "SafehouseLighting"},
             distIncludeJunk = true,
@@ -272,6 +299,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E28
+            note = "counter @ gunstore",
             coords = {x=14558,y=3031,z=-1},
             dist = {"CrateRandomJunk","GunStoreMagsAmmo", "GunStoreAmmunition", },
             distIncludeJunk = true,
@@ -279,6 +307,7 @@ local ELVilleFarm = {
             level = "Loot_GunLevel",
         },
         { -- E29
+            note = "desk @ gunstore",
             coords = {x=14557,y=3031,z=-1},
             dist = { "GunStoreKnives", "PawnShopKnives",  },
             distIncludeJunk = true,
@@ -286,6 +315,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E30
+            note = "counter @ gunstore",
             coords = {x=14556,y=3031,z=-1},
             dist = {"LiquorStoreBeer", "JanitorCleaning", "DrugLabGuns", },
             distIncludeJunk = true,
@@ -294,6 +324,7 @@ local ELVilleFarm = {
         },
         -- bathroom
         { -- E31
+            note = "medicine @ bathroom",
             coords = {x=14561,y=3037,z=-1},
             slot = "upper",
             dist = {"SafehouseMedical", "BathroomCounter", },
@@ -302,6 +333,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E32
+            note = "counter @ bathroom",
             coords = {x=14561,y=3037,z=-1},
             dist = {"LaundryCleaning", "JanitorCleaning", "BathroomCounter", },
             distIncludeJunk = true,
@@ -310,6 +342,7 @@ local ELVilleFarm = {
         },
         -- workroom/ utility room
         { -- E33
+            note = "counter @ weldingworkshop",
             coords = {x=14555,y=3037,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "CrateLinens", "CrateFarming"},
             distIncludeJunk = false,
@@ -317,6 +350,7 @@ local ELVilleFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E34
+            note = "counter @ weldingworkshop",
             coords = {x=14555,y=3038,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = true,
@@ -324,6 +358,7 @@ local ELVilleFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E35
+            note = "militarylocker @ weldingworkshop",
             coords = {x=14560,y=3040,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
             distIncludeJunk = true,
@@ -331,6 +366,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E36
+            note = "counter @ weldingworkshop",
             coords = {x=14560,y=3042,z=-1},
             dist = {"LoggingFactoryTools" },
             distIncludeJunk = true,
@@ -338,6 +374,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E37 double crate
+            note = "crate @ weldingworkshop",
             coords = {x=14560,y=3046,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
             distIncludeJunk = true,
@@ -345,6 +382,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E38
+            note = "crate @ weldingworkshop",
             coords = {x=14559,y=3046,z=-1},
             dist = {"CrateBlacksmithing" },
             distIncludeJunk = true,
@@ -352,6 +390,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E39
+            note = "crate @ weldingworkshop",
             coords = {x=14558,y=3046,z=-1},
             dist = {"ArtStorePottery","CrateMasonry" },
             distIncludeJunk = true,
@@ -361,6 +400,7 @@ local ELVilleFarm = {
 
         -- kitchen
         { -- E40
+            note = "freezer @ kitchen",
             coords = {x=14568,y=3033,z=-1},
             dist = {"FreezerIceCream", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -368,6 +408,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E41
+            note = "freezer @ kitchen",
             coords = {x=14568,y=3032,z=-1},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "FreezerRich"},
             distIncludeJunk = true,
@@ -375,6 +416,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E42
+            note = "fridge @ kitchen",
             coords = {x=14568,y=3031,z=-1},
             dist = {"ArenaKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
             distIncludeJunk = true,
@@ -382,6 +424,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E43
+            note = "counter @ kitchen",
             coords = {x=14566,y=3031,z=-1},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -389,6 +432,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E44
+            note = "overhead @ kitchen",
             coords = {x=14566,y=3031,z=-1},
             slot = "upper",
             dist = {"CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles"},
@@ -397,6 +441,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E45
+            note = "overhead @ kitchen",
             coords = {x=14566,y=3032,z=-1},
             slot = "upper",
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet",},
@@ -405,6 +450,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E46
+            note = "counter @ kitchen",
             coords = {x=14566,y=3033,z=-1},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -412,6 +458,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E47
+            note = "overhead @ kitchen",
             coords = {x=14566,y=3033,z=-1},
             slot = "upper",
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -422,6 +469,7 @@ local ELVilleFarm = {
 
         -- first floor
         { -- E48
+            note = "counter @ bathroom",
             coords = {x=14576,y=3035,z=0},
             dist = {"MedicalCabinet", "SafehouseMedical" },
             distIncludeJunk = true,
@@ -429,6 +477,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E49
+            note = "metal_shelves @ miscstorage",
             coords = {x=14573,y=3035,z=0},
             dist = {"CrateTortillaChips", "KitchenDryFood"},
             distIncludeJunk = true,
@@ -436,6 +485,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E50
+            note = "metal_shelves @ miscstorage",
             coords = {x=14574,y=3035,z=0},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = true,
@@ -443,6 +493,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E51
+            note = "crate @ miscstorage",
             coords = {x=14575,y=3035,z=0},
             dist = {"CrateFishing", "FishermanTools"},
             distIncludeJunk = false,
@@ -450,6 +501,7 @@ local ELVilleFarm = {
             level = "Loot_FishLevel",
         },
         { -- E52
+            note = "crate @ miscstorage",
             coords = {x=14575,y=3036,z=0},
             dist = {"HuntingLockers", "RangerTools"},
             distIncludeJunk = false,
@@ -457,6 +509,7 @@ local ELVilleFarm = {
             level = "Loot_FishLevel",
         },
         { -- E53
+            note = "crate @ miscstorage",
             coords = {x=14573,y=3037,z=0},
             dist = {"CrateToiletPaper", "CrateLinens"},
             distIncludeJunk = true,
@@ -464,6 +517,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E54
+            note = "crate @ miscstorage",
             coords = {x=14573,y=3038,z=0},
             dist = {"CrateLumber", "CrateSheetMetal"},
             distIncludeJunk = true,
@@ -471,6 +525,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E55
+            note = "crate @ miscstorage",
             coords = {x=14574,y=3038,z=0},
             dist = {"WeldingWorkshopMetal"},
             distIncludeJunk = true,
@@ -479,6 +534,7 @@ local ELVilleFarm = {
         },
         -- living room
         { -- E56
+            note = "shelves @ livingroom",
             coords = {x=14573,y=3039,z=0},
             dist = {"LockerArmyBedroomHome", "BookstoreMilitaryHistory"},
             distIncludeJunk = false,
@@ -486,6 +542,7 @@ local ELVilleFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E57
+            note = "shelves @ livingroom",
             coords = {x=14573,y=3044,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -493,6 +550,7 @@ local ELVilleFarm = {
             level = "Loot_MediaLevel",
         },
         { -- E58
+            note = "shelves @ livingroom",
             coords = {x=14573,y=3045,z=0},
             dist = {"BookstoreBiography", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -501,6 +559,7 @@ local ELVilleFarm = {
         },
         -- kitchen
         { -- E59
+            note = "shelves @ kitchen",
             coords = {x=14584,y=3039,z=0},
             slot = "upper",
             dist = {"TheatrePopcorn", "FridgeSoda",},
@@ -509,6 +568,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E60
+            note = "fridge @ kitchen",
             coords = {x=14589,y=3036,z=0},
             dist = {"FreezerRich", "ArenaKitchenFreezer",},
             distIncludeJunk = true,
@@ -516,6 +576,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E61
+            note = "counter @ kitchen",
             coords = {x=14584,y=3035,z=0},
             dist = {"CrateFlour", "CrateOilVegetable"},
             distIncludeJunk = true,
@@ -523,11 +584,13 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E62
+            note = "counter @ kitchen",
             coords = {x=14585,y=3035,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E63
+            note = "counter @ kitchen",
             coords = {x=14586,y=3035,z=0},
             dist = {"ButcherSpices","GigamartSpices","GroceryBagGourmet","CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -535,6 +598,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E64
+            note = "counter @ kitchen",
             coords = {x=14587,y=3035,z=0},
             dist = {"KitchenDryFood",},
             distIncludeJunk = false,
@@ -542,6 +606,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E65
+            note = "counter @ kitchen",
             coords = {x=14588,y=3039,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
             distIncludeJunk = false,
@@ -561,6 +626,7 @@ local ELVilleFarm = {
             level = "Loot_GunLevel",
         },
         { -- E68
+            note = "clothingwasher @ laundry",
             coords = {x=14592,y=3039,z=0},
             items = {
                 { name = 'TvWideScreen', chance = 1, count = {1,1} },
@@ -580,6 +646,7 @@ local ELVilleFarm = {
         },
         -- 2nd floor
         { -- E70
+            note = "wardrobe @ kidsbedroom",
             coords = {x=14573,y=3037,z=1},
             dist = {"SewingStoreTools"},
             distIncludeJunk = true,
@@ -587,6 +654,7 @@ local ELVilleFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E71
+            note = "wardrobe @ kidsbedroom",
             coords = {x=14573,y=3037,z=1},
             dist = {"SewingStoreFabric"},
             distIncludeJunk = true,
@@ -594,6 +662,7 @@ local ELVilleFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E72
+            note = "cardboardbox @ closet",
             coords = {x=14577,y=3039,z=1},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -601,6 +670,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E73
+            note = "cardboardbox @ closet",
             coords = {x=14577,y=3038,z=1},
             dist = {"CrateCannedFood", "ArmySurplusTools" },
             distIncludeJunk = true,
@@ -608,6 +678,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E74
+            note = "wardrobe @ hall",
             coords = {x=14579,y=3040,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -615,6 +686,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E75
+            note = "wardrobe @ hall",
             coords = {x=14579,y=3041,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
             distIncludeJunk = true,
@@ -622,6 +694,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E76
+            note = "counter @ bathroom",
             coords = {x=14581,y=3042,z=1},
             dist = {"MedicalClinicTools", "MedicalStorageDrugs"},
             distIncludeJunk = true,
@@ -629,6 +702,7 @@ local ELVilleFarm = {
             level = "Loot_MedLevel",
         },
         { -- E77
+            note = "dresser @ bedroom",
             coords = {x=14573,y=3040,z=1},
             dist = {"CrateLeather"},
             distIncludeJunk = true,
@@ -636,6 +710,7 @@ local ELVilleFarm = {
             level = "Loot_TailorLevel",
         },
         { -- E78
+            note = "clothingrack @ bedroom",
             coords = {x=14575,y=3043,z=1},
             dist = {"LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
             distIncludeJunk = true,
@@ -643,6 +718,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E79
+            note = "clothingrack @ bedroom",
             coords = {x=14576,y=3043,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit"},
             distIncludeJunk = true,
@@ -650,6 +726,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E80
+            note = "wardrobe @ hall",
             coords = {x=14585,y=3038,z=1},
             dist = {"SafehouseArmor", "SafehouseLighting"},
             distIncludeJunk = true,
@@ -657,6 +734,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E81
+            note = "wardrobe @ hall",
             coords = {x=14586,y=3038,z=1},
             dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
             distIncludeJunk = true,
@@ -664,6 +742,7 @@ local ELVilleFarm = {
             level = "Loot_LockersLevel",
         },
         { -- E82
+            note = "sidetable @ hall",
             coords = {x=14584,y=3035,z=1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
             distIncludeJunk = false,
@@ -671,6 +750,7 @@ local ELVilleFarm = {
             level = "Loot_FoodLevel",
         },
         { -- E83
+            note = "counter @ bathroom",
             coords = {x=14581,y=3036,z=1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
             distIncludeJunk = false,
@@ -678,6 +758,7 @@ local ELVilleFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E84
+            note = "sidetable @ hall",
             coords = {x=14584,y=3041,z=1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "MusicStoreCDs", "BookstoreComputer", "BookstoreCrimeFiction"},
             distIncludeJunk = false,
@@ -687,6 +768,7 @@ local ELVilleFarm = {
 
         -- shed
         { -- E85
+            note = "metal_shelves @ garagestorage",
             coords = {x=14573,y=3069,z=0},
             slot = "upper",
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -695,6 +777,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E86
+            note = "metal_shelves @ garagestorage",
             coords = {x=14573,y=3068,z=0},
             slot = "upper",
             dist = {"ToolFactoryHandles" },
@@ -703,6 +786,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E87
+            note = "metal_shelves @ garagestorage",
             coords = {x=14573,y=3065,z=0},
             dist = {"GasStoreEmergency"},
             distIncludeJunk = true,
@@ -711,6 +795,7 @@ local ELVilleFarm = {
         },
         -- barn
         { -- E88
+            note = "crate @ farmstorage",
             coords = {x=14557,y=3040,z=0},
             items = {
                 { name = 'Base.NailsBox', },
@@ -720,6 +805,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E89
+            note = "crate @ farmstorage",
             coords = {x=14558,y=3040,z=0},
             dist = {"CrateLumber"},
             distIncludeJunk = true,
@@ -727,6 +813,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E90
+            note = "metal_shelves @ farmstorage",
             coords = {x=14563,y=3040,z=0},
             dist = {"CrateTools", "GarageTools", "BarnTools", "MetalShopTools", "MetalWorkerTools" },
             distIncludeJunk = true,
@@ -734,6 +821,7 @@ local ELVilleFarm = {
             level = "Loot_ToolsLevel",
         },
         { -- E91
+            note = "metal_shelves @ farmstorage",
             coords = {x=14563,y=3041,z=0},
             dist = {"ArmyStorageAmmunition", },
             distIncludeJunk = true,
@@ -741,6 +829,7 @@ local ELVilleFarm = {
             level = "Loot_GunLevel",
         },
         { -- E92
+            note = "crate @ farmstorage",
             coords = {x=14562,y=3043,z=0},
             dist = {"CrateSheetMetal", "CrateLumber", },
             distIncludeJunk = false,
@@ -748,6 +837,7 @@ local ELVilleFarm = {
             level = "Loot_BuildMatsLevel",
         },
         { -- E93
+            note = "metal_shelves @ farmstorage",
             coords = {x=14562,y=3044,z=0},
             items = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = {9,12} },
@@ -756,11 +846,13 @@ local ELVilleFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E94
+            note = "metal_shelves @ farmstorage",
             coords = {x=14562,y=3045,z=0},
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E95
+            note = "metal_shelves @ farmstorage",
             coords = {x=14552,y=3040,z=0},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming", "MetalShopTools", "MetalWorkerTools"},
             distIncludeJunk = false,
@@ -768,6 +860,7 @@ local ELVilleFarm = {
             level = "Loot_FarmLevel",
         },
         { -- E96
+            note = "metal_shelves @ farmstorage",
             coords = {x=14549,y=3040,z=0},
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = {8,10} },
