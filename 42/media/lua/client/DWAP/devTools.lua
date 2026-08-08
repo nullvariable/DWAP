@@ -107,34 +107,20 @@ local function describeNullSpriteObject(obj)
         container and (" HAS CONTAINER type=" .. tostring(container:getType())) or "")
 end
 
---- Walks every streamed room in the cell, across every floor, rather than a
---- box around the player. That is not just cheaper - it is the correct scope.
---- The vanilla loop only ever runs for a container in a room, and only ever
---- scans that room's RoomDef RECT at the container's z, so an object outside
---- every room rect can never trigger it and a box misses the other floors.
+--- Squares to scan, shared by the null-sprite and broken-multi-tile scanners.
+--- Returns (entries, scope, probed, unstreamed) where each entry is
+--- { sq = IsoGridSquare, room = string }.
 ---
---- Scanning the rect rather than room:getSquares() matters too: on an L-shaped
---- room the rect covers squares the room does not own, and vanilla reads those
---- anyway.
----
---- @param radius number optional; scan a box around the player instead, across
----        all floors. Only useful for chasing something outside a room.
-function DWAPFindNullSprites(radius)
+--- Default scope is every streamed room RECT in the cell, across all floors.
+--- The rect rather than room:getSquares(): on an L-shaped room the rect covers
+--- squares the room does not own, and the vanilla code reads those anyway.
+local function collectScanSquares(radius)
     local player = getPlayer()
     local pSquare = player and player:getCurrentSquare()
-    if not pSquare then
-        print("FindNullSprites: no player square")
-        return
-    end
-
-    -- Collect the squares to scan, pairing each with the room it came from so
-    -- the poisoned-room summary can name them. Parallel entries rather than a
-    -- square-keyed table: streamed objects must never be used as identities.
-    local squares, scope = {}, nil
+    if not pSquare then return nil end
+    local out, scope = {}, nil
     local probed, unstreamed = 0, 0
     if radius then
-        -- Every floor, not just the player's: this mod runs z=-5 to 3, so a
-        -- single-z box was checking one level in seventeen.
         scope = ("%d-tile box around the player, z %d..%d"):format(radius, -10, 10)
         local px, py = pSquare:getX(), pSquare:getY()
         for z = -10, 10 do
@@ -144,8 +130,7 @@ function DWAPFindNullSprites(radius)
                     local sq = getSquare(x, y, z)
                     if sq then
                         local r = sq:getRoom()
-                        squares[#squares + 1] = {
-                            sq = sq, room = r and (r:getName() or "?") or "(outside)" }
+                        out[#out + 1] = { sq = sq, room = r and (r:getName() or "?") or "(outside)" }
                     else
                         unstreamed = unstreamed + 1
                     end
@@ -167,7 +152,7 @@ function DWAPFindNullSprites(radius)
                         probed = probed + 1
                         local sq = getSquare(x, y, z)
                         if sq then
-                            squares[#squares + 1] = { sq = sq, room = name }
+                            out[#out + 1] = { sq = sq, room = name }
                         else
                             unstreamed = unstreamed + 1
                         end
@@ -176,13 +161,39 @@ function DWAPFindNullSprites(radius)
             end
         end
     end
+    return out, scope, probed, unstreamed
+end
+
+local function printScanCoverage(scope, entries, probed, unstreamed)
+    print(("=== scope: %s ==="):format(scope))
+    print(("    %d squares probed, %d streamed, %d not loaded (%d%% covered)"):format(
+        probed, #entries, unstreamed,
+        probed > 0 and math.floor(#entries * 100 / probed) or 0))
+end
+
+--- Walks every streamed room in the cell, across every floor, rather than a
+--- box around the player. That is not just cheaper - it is the correct scope.
+--- The vanilla loop only ever runs for a container in a room, and only ever
+--- scans that room's RoomDef RECT at the container's z, so an object outside
+--- every room rect can never trigger it and a box misses the other floors.
+---
+--- Scanning the rect rather than room:getSquares() matters too: on an L-shaped
+--- room the rect covers squares the room does not own, and vanilla reads those
+--- anyway.
+---
+--- @param radius number optional; scan a box around the player instead, across
+---        all floors. Only useful for chasing something outside a room.
+function DWAPFindNullSprites(radius)
+    local squares, scope, probed, unstreamed = collectScanSquares(radius)
+    if not squares then
+        print("FindNullSprites: no player square")
+        return
+    end
 
     -- "none found" over a mostly-unstreamed area is not a clean bill of health,
     -- so the coverage is stated every time rather than left to be inferred
-    print(("=== FindNullSprites: %s ==="):format(scope))
-    print(("    %d squares probed, %d streamed, %d not loaded (%d%% covered)"):format(
-        probed, #squares, unstreamed,
-        probed > 0 and math.floor(#squares * 100 / probed) or 0))
+    print("=== FindNullSprites ===")
+    printScanCoverage(scope, squares, probed, unstreamed)
     local hits, poisoned, poisonedCount = 0, {}, 0
     for i = 1, #squares do
         local sq, room = squares[i].sq, squares[i].room
@@ -215,6 +226,198 @@ function DWAPFindNullSprites(radius)
             hits, poisonedCount, table.concat(names, ", ")))
         print("    Every container in those rooms fails base-game fill, on every chunk load.")
     end
+end
+
+-- Find objects that CLAIM to be multi-square but whose sibling parts cannot be
+-- resolved - the condition behind "Failed to find all parts of a multi-tile
+-- object!" and, more importantly, behind a silent removal failure.
+--
+-- Why this matters beyond the log noise: IsoGridSquare.BurnWalls does
+--     this.RemoveTileObject(obj);
+--     n--;
+--     continue;
+-- at four sites, decrementing its loop index on the assumption the removal
+-- happened. safelyRemoveTileObjectFromSquare returns -1 without removing
+-- anything when the sibling lookup fails, so the object survives AND the
+-- bookkeeping is wrong. That part is not debug-gated: players get it silently.
+--
+-- The verdict this tool exists to produce is WHICH failure it is:
+--   * a sibling square that is not loaded  -> vanilla chunk-boundary timing,
+--     unavoidable, and nothing to do with our content
+--   * a sibling square that IS loaded but holds no matching sprite -> the map
+--     placed part of a grid, which is a content bug we can actually fix
+--   * a grid cell with no sprite at all -> the object can NEVER resolve, on
+--     any square, because vanilla's verifyObject compares against a null
+--     sprite and always fails
+--
+-- IsoObjectUtils is not Lua-exposed, so this replicates getAllMultiTileObjects
+-- (IsoObjectUtils.java) rather than calling it. One deliberate deviation:
+-- vanilla's verifyObject compares sprites by REFERENCE; this compares by name,
+-- because identity comparison on streamed objects is not safe from Lua. Sprites
+-- are interned by name, so the two agree in practice.
+
+local function probeSpriteGrid(obj)
+    local sprite = obj:getSprite()
+    local grid = obj.getSpriteGrid and obj:getSpriteGrid()
+    local sq0 = obj:getSquare()
+    if not sprite or not grid or not sq0 then
+        return false, "no sprite/grid/square"
+    end
+    local ox = grid:getSpriteGridPosX(sprite)
+    local oy = grid:getSpriteGridPosY(sprite)
+    local oz = grid:getSpriteGridPosZ(sprite)
+    local unloaded, loadedNoMatch, emptyCell = 0, 0, 0
+    local firstMiss = nil
+    for z = 0, grid:getLevels() - 1 do
+        for x = 0, grid:getWidth() - 1 do
+            for y = 0, grid:getHeight() - 1 do
+                local tx = sq0:getX() + (x - ox)
+                local ty = sq0:getY() + (y - oy)
+                local tz = sq0:getZ() + (z - oz)
+                local sq = getSquare(tx, ty, tz)
+                local testSprite = grid:getSprite(x, y, z)
+                local found = false
+                -- A nil grid cell can never be satisfied: vanilla's
+                -- verifyObject requires getSprite() == testSprite, and no
+                -- object's sprite is ever null-equal. Counted separately
+                -- because it means the object is permanently unremovable.
+                if testSprite and sq then
+                    local want = testSprite.getName and testSprite:getName()
+                    local objs = sq:getObjects()
+                    for i = 0, objs:size() - 1 do
+                        local s = objs:get(i):getSprite()
+                        if s and want and s:getName() == want then
+                            found = true
+                            break
+                        end
+                    end
+                end
+                if not found then
+                    local why
+                    if not testSprite then
+                        emptyCell = emptyCell + 1
+                        why = "grid cell has no sprite"
+                    elseif not sq then
+                        unloaded = unloaded + 1
+                        why = "sibling square not loaded"
+                    else
+                        loadedNoMatch = loadedNoMatch + 1
+                        why = "square loaded, sprite missing: " ..
+                            tostring(testSprite.getName and testSprite:getName())
+                    end
+                    if not firstMiss then
+                        firstMiss = ("%d,%d,%d %s"):format(tx, ty, tz, why)
+                    end
+                end
+            end
+        end
+    end
+    if not firstMiss then return true end
+    local kind
+    if emptyCell > 0 then
+        kind = "GRID-INCOMPLETE"
+    elseif loadedNoMatch > 0 then
+        kind = "PARTIAL-PLACEMENT"
+    else
+        kind = "not-streamed"
+    end
+    return false, ("%s (%d unloaded, %d loaded-no-match, %d empty cells) first: %s"):format(
+        kind, unloaded, loadedNoMatch, emptyCell, firstMiss)
+end
+
+--- @return string|nil category, boolean ok, string|nil detail
+local function probeMultiTile(obj)
+    if IsoDoor and IsoDoor.getDoubleDoorIndex then
+        local dd = IsoDoor.getDoubleDoorIndex(obj)
+        if dd and dd ~= -1 then
+            local a = IsoDoor.getDoubleDoorObject(obj, dd)
+            local b = IsoDoor.getDoubleDoorObject(obj, IsoDoor.getDoubleDoorPartnerIndex(dd))
+            if a or b then return "doubledoor", true end
+            return "doubledoor", false, "neither half resolved"
+        end
+        local gd = IsoDoor.getGarageDoorIndex(obj)
+        if gd and gd ~= -1 then
+            local n, o = 0, IsoDoor.getGarageDoorFirst(obj)
+            while o and n < 16 do
+                n = n + 1
+                o = IsoDoor.getGarageDoorNext(o)
+            end
+            if n > 0 then return "garagedoor", true end
+            return "garagedoor", false, "no segments resolved"
+        end
+    end
+    local sc = obj.getSpriteConfig and obj:getSpriteConfig()
+    if sc and sc.isValidMultiSquare and sc:isValidMultiSquare() then
+        -- getAllMultiSquareObjects needs a Java ArrayList out-param we cannot
+        -- build from Lua, so this path is reported, not verified
+        return "spriteconfig", true, "multi-square SpriteConfig - NOT probed"
+    end
+    if obj.hasSpriteGrid and obj:hasSpriteGrid() then
+        local ok, detail = probeSpriteGrid(obj)
+        return "spritegrid", ok, detail
+    end
+    return nil
+end
+
+--- @param radius number optional box scope; default is every room rect in cell
+function DWAPFindBrokenMultiTile(radius)
+    local squares, scope, probed, unstreamed = collectScanSquares(radius)
+    if not squares then
+        print("FindBrokenMultiTile: no player square")
+        return
+    end
+    print("=== FindBrokenMultiTile ===")
+    printScanCoverage(scope, squares, probed, unstreamed)
+
+    local multi, broken = 0, 0
+    local byKind, bySprite, examples = {}, {}, {}
+    local unprobed = 0
+    for i = 1, #squares do
+        local sq, room = squares[i].sq, squares[i].room
+        local objects = sq:getObjects()
+        for j = 0, objects:size() - 1 do
+            local obj = objects:get(j)
+            local category, ok, detail = probeMultiTile(obj)
+            if category then
+                multi = multi + 1
+                if detail and detail:find("NOT probed") then unprobed = unprobed + 1 end
+                if not ok then
+                    broken = broken + 1
+                    local s = obj:getSprite()
+                    local name = (s and s.getName and s:getName()) or "(no sprite)"
+                    local kind = detail and detail:match("^([A-Za-z-]+)") or category
+                    byKind[kind] = (byKind[kind] or 0) + 1
+                    bySprite[name] = (bySprite[name] or 0) + 1
+                    if #examples < 15 then
+                        examples[#examples + 1] = ("  %d,%d,%d [%s] %s | %s | %s"):format(
+                            sq:getX(), sq:getY(), sq:getZ(), room, name, category,
+                            detail or "?")
+                    end
+                end
+            end
+        end
+    end
+
+    print(("    %d multi-square object(s) seen, %d could not resolve their parts"):format(
+        multi, broken))
+    if unprobed > 0 then
+        print(("    %d had a multi-square SpriteConfig and were NOT verified"):format(unprobed))
+    end
+    for i = 1, #examples do print(examples[i]) end
+    if broken == 0 then
+        print("    nothing broken in what was streamed")
+        return
+    end
+    local kinds = {}
+    for k, v in pairs(byKind) do kinds[#kinds + 1] = ("%s=%d"):format(k, v) end
+    table.sort(kinds)
+    print("    by failure: " .. table.concat(kinds, ", "))
+    local sprites = {}
+    for k, v in pairs(bySprite) do sprites[#sprites + 1] = ("%s=%d"):format(k, v) end
+    table.sort(sprites)
+    print("    by sprite: " .. table.concat(sprites, ", "))
+    print("    PARTIAL-PLACEMENT or GRID-INCOMPLETE = a content bug we can fix.")
+    print("    not-streamed = vanilla chunk-boundary timing, not ours.")
 end
 
 -- Simple utilities for the new fakeGenerators system
