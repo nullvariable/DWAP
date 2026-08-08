@@ -261,13 +261,28 @@ local function probeSpriteGrid(obj)
     local grid = obj.getSpriteGrid and obj:getSpriteGrid()
     local sq0 = obj:getSquare()
     if not sprite or not grid or not sq0 then
-        return false, "no sprite/grid/square"
+        return false, "NO-SPRITE-OR-GRID", "object has no sprite, grid or square"
     end
     local ox = grid:getSpriteGridPosX(sprite)
     local oy = grid:getSpriteGridPosY(sprite)
     local oz = grid:getSpriteGridPosZ(sprite)
+    -- getSpriteGridPosX/Y/Z search the grid for this exact sprite INSTANCE and
+    -- return -1 when it is not there (IsoSpriteGrid). Vanilla feeds that -1
+    -- straight into its offset arithmetic unguarded; doing the same here would
+    -- shift every probed coordinate by one and invent a confident wrong
+    -- verdict, and this tool touches far more objects than vanilla's few
+    -- removal call sites ever do.
+    if ox == -1 or oy == -1 or oz == -1 then
+        return false, "GRID-POS-UNRESOLVED",
+            ("sprite %s is not in its own grid (pos %d,%d,%d)"):format(
+                tostring(sprite.getName and sprite:getName()), ox, oy, oz)
+    end
     local unloaded, loadedNoMatch, emptyCell = 0, 0, 0
-    local firstMiss = nil
+    -- One example per failure KIND. A single example captured at the first
+    -- miss would routinely be printed next to a different kind's label, since
+    -- the label is chosen by priority across the whole grid rather than by
+    -- scan order.
+    local missOf = {}
     for z = 0, grid:getLevels() - 1 do
         for x = 0, grid:getWidth() - 1 do
             for y = 0, grid:getHeight() - 1 do
@@ -293,26 +308,29 @@ local function probeSpriteGrid(obj)
                     end
                 end
                 if not found then
-                    local why
+                    local kind, why
                     if not testSprite then
                         emptyCell = emptyCell + 1
-                        why = "grid cell has no sprite"
+                        kind, why = "GRID-INCOMPLETE", "grid cell has no sprite"
                     elseif not sq then
                         unloaded = unloaded + 1
-                        why = "sibling square not loaded"
+                        kind, why = "not-streamed", "sibling square not loaded"
                     else
                         loadedNoMatch = loadedNoMatch + 1
+                        kind = "PARTIAL-PLACEMENT"
                         why = "square loaded, sprite missing: " ..
                             tostring(testSprite.getName and testSprite:getName())
                     end
-                    if not firstMiss then
-                        firstMiss = ("%d,%d,%d %s"):format(tx, ty, tz, why)
+                    if not missOf[kind] then
+                        missOf[kind] = ("%d,%d,%d %s"):format(tx, ty, tz, why)
                     end
                 end
             end
         end
     end
-    if not firstMiss then return true end
+    if emptyCell == 0 and loadedNoMatch == 0 and unloaded == 0 then return true end
+    -- Worst-first: a permanently unresolvable grid outranks a mis-placed
+    -- sibling, which outranks a merely unloaded one.
     local kind
     if emptyCell > 0 then
         kind = "GRID-INCOMPLETE"
@@ -321,11 +339,16 @@ local function probeSpriteGrid(obj)
     else
         kind = "not-streamed"
     end
-    return false, ("%s (%d unloaded, %d loaded-no-match, %d empty cells) first: %s"):format(
-        kind, unloaded, loadedNoMatch, emptyCell, firstMiss)
+    return false, kind, ("%d unloaded, %d loaded-no-match, %d empty cells | e.g. %s"):format(
+        unloaded, loadedNoMatch, emptyCell, missOf[kind])
 end
 
---- @return string|nil category, boolean ok, string|nil detail
+--- Kinds are returned explicitly rather than parsed back out of the detail
+--- prose. Deriving them from the message text collapsed "neither half
+--- resolved" to "neither" and both "no segments resolved" and the grid's own
+--- "no sprite" case to "no", which dropped every door failure out of the
+--- vanilla-vs-our-content split this tool exists to make.
+--- @return string|nil category, boolean ok, string|nil kind, string|nil detail
 local function probeMultiTile(obj)
     if IsoDoor and IsoDoor.getDoubleDoorIndex then
         local dd = IsoDoor.getDoubleDoorIndex(obj)
@@ -333,28 +356,30 @@ local function probeMultiTile(obj)
             local a = IsoDoor.getDoubleDoorObject(obj, dd)
             local b = IsoDoor.getDoubleDoorObject(obj, IsoDoor.getDoubleDoorPartnerIndex(dd))
             if a or b then return "doubledoor", true end
-            return "doubledoor", false, "neither half resolved"
+            return "doubledoor", false, "DOOR-UNPAIRED", "neither half resolved"
         end
         local gd = IsoDoor.getGarageDoorIndex(obj)
         if gd and gd ~= -1 then
+            -- getGarageDoorNext stops once the normalised index reaches 3, so
+            -- this cannot cycle; the cap is belt-and-braces for a malformed set
             local n, o = 0, IsoDoor.getGarageDoorFirst(obj)
             while o and n < 16 do
                 n = n + 1
                 o = IsoDoor.getGarageDoorNext(o)
             end
             if n > 0 then return "garagedoor", true end
-            return "garagedoor", false, "no segments resolved"
+            return "garagedoor", false, "DOOR-UNPAIRED", "no segments resolved"
         end
     end
     local sc = obj.getSpriteConfig and obj:getSpriteConfig()
     if sc and sc.isValidMultiSquare and sc:isValidMultiSquare() then
         -- getAllMultiSquareObjects needs a Java ArrayList out-param we cannot
         -- build from Lua, so this path is reported, not verified
-        return "spriteconfig", true, "multi-square SpriteConfig - NOT probed"
+        return "spriteconfig", true, "UNVERIFIED", "multi-square SpriteConfig - NOT probed"
     end
     if obj.hasSpriteGrid and obj:hasSpriteGrid() then
-        local ok, detail = probeSpriteGrid(obj)
-        return "spritegrid", ok, detail
+        local ok, kind, detail = probeSpriteGrid(obj)
+        return "spritegrid", ok, kind, detail
     end
     return nil
 end
@@ -377,29 +402,34 @@ function DWAPFindBrokenMultiTile(radius)
         local objects = sq:getObjects()
         for j = 0, objects:size() - 1 do
             local obj = objects:get(j)
-            local category, ok, detail = probeMultiTile(obj)
+            local category, ok, kind, detail = probeMultiTile(obj)
             if category then
                 multi = multi + 1
-                if detail and detail:find("NOT probed") then unprobed = unprobed + 1 end
+                if kind == "UNVERIFIED" then unprobed = unprobed + 1 end
                 if not ok then
                     broken = broken + 1
                     local s = obj:getSprite()
                     local name = (s and s.getName and s:getName()) or "(no sprite)"
-                    local kind = detail and detail:match("^([A-Za-z-]+)") or category
+                    kind = kind or category
                     byKind[kind] = (byKind[kind] or 0) + 1
                     bySprite[name] = (bySprite[name] or 0) + 1
                     if #examples < 15 then
-                        examples[#examples + 1] = ("  %d,%d,%d [%s] %s | %s | %s"):format(
+                        examples[#examples + 1] = ("  %d,%d,%d [%s] %s | %s | %s: %s"):format(
                             sq:getX(), sq:getY(), sq:getZ(), room, name, category,
-                            detail or "?")
+                            kind, detail or "?")
                     end
                 end
             end
         end
     end
 
+    -- Counts are per IsoObject, and every square of an NxM grid holds its own
+    -- IsoObject that probes the whole grid from its own position. One broken
+    -- 2x2 fixture therefore reports as up to four - say so rather than let the
+    -- number read as a structure count.
     print(("    %d multi-square object(s) seen, %d could not resolve their parts"):format(
         multi, broken))
+    print("    (counted per square: an NxM structure contributes up to NxM)")
     if unprobed > 0 then
         print(("    %d had a multi-square SpriteConfig and were NOT verified"):format(unprobed))
     end
@@ -416,7 +446,11 @@ function DWAPFindBrokenMultiTile(radius)
     for k, v in pairs(bySprite) do sprites[#sprites + 1] = ("%s=%d"):format(k, v) end
     table.sort(sprites)
     print("    by sprite: " .. table.concat(sprites, ", "))
-    print("    PARTIAL-PLACEMENT or GRID-INCOMPLETE = a content bug we can fix.")
+    print("    PARTIAL-PLACEMENT / GRID-INCOMPLETE = a map placed part of a grid: fixable content.")
+    print("    DOOR-UNPAIRED = a double or garage door missing its partner, almost")
+    print("      always vanilla geometry - getAllMultiTileObjects checks the door")
+    print("      paths BEFORE sprite grids, so these are not our tiles.")
+    print("    GRID-POS-UNRESOLVED = sprite is not in its own grid; suspect a swapped sprite.")
     print("    not-streamed = vanilla chunk-boundary timing, not ours.")
 end
 
