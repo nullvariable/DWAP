@@ -107,9 +107,18 @@ local function describeNullSpriteObject(obj)
         container and (" HAS CONTAINER type=" .. tostring(container:getType())) or "")
 end
 
---- @param radius number optional; when the player is not in a building, or
----        when passed explicitly, scan this many tiles around the player
----        instead of the building's rooms. Defaults to the building.
+--- Walks every streamed room in the cell, across every floor, rather than a
+--- box around the player. That is not just cheaper - it is the correct scope.
+--- The vanilla loop only ever runs for a container in a room, and only ever
+--- scans that room's RoomDef RECT at the container's z, so an object outside
+--- every room rect can never trigger it and a box misses the other floors.
+---
+--- Scanning the rect rather than room:getSquares() matters too: on an L-shaped
+--- room the rect covers squares the room does not own, and vanilla reads those
+--- anyway.
+---
+--- @param radius number optional; scan a box around the player instead, across
+---        all floors. Only useful for chasing something outside a room.
 function DWAPFindNullSprites(radius)
     local player = getPlayer()
     local pSquare = player and player:getCurrentSquare()
@@ -122,36 +131,58 @@ function DWAPFindNullSprites(radius)
     -- the poisoned-room summary can name them. Parallel entries rather than a
     -- square-keyed table: streamed objects must never be used as identities.
     local squares, scope = {}, nil
-    local building = not radius and pSquare:getBuilding()
-    if building then
-        scope = "building at " .. pSquare:getX() .. "," .. pSquare:getY() .. "," .. pSquare:getZ()
-        local rooms = getCell():getRoomList()
-        for i = 1, rooms:size() do
-            local room = rooms:get(i - 1)
-            if DWAPUtils.sameBuilding(room:getBuilding(), building) then
-                local rsq = room:getSquares()
-                for s = 0, rsq:size() - 1 do
-                    squares[#squares + 1] = { sq = rsq:get(s), room = room:getName() or "?" }
+    local probed, unstreamed = 0, 0
+    if radius then
+        -- Every floor, not just the player's: this mod runs z=-5 to 3, so a
+        -- single-z box was checking one level in seventeen.
+        scope = ("%d-tile box around the player, z %d..%d"):format(radius, -10, 10)
+        local px, py = pSquare:getX(), pSquare:getY()
+        for z = -10, 10 do
+            for x = px - radius, px + radius do
+                for y = py - radius, py + radius do
+                    probed = probed + 1
+                    local sq = getSquare(x, y, z)
+                    if sq then
+                        local r = sq:getRoom()
+                        squares[#squares + 1] = {
+                            sq = sq, room = r and (r:getName() or "?") or "(outside)" }
+                    else
+                        unstreamed = unstreamed + 1
+                    end
                 end
             end
         end
     else
-        radius = radius or 15
-        scope = ("%d-tile box around the player"):format(radius)
-        local px, py, pz = pSquare:getX(), pSquare:getY(), pSquare:getZ()
-        for x = px - radius, px + radius do
-            for y = py - radius, py + radius do
-                local sq = getSquare(x, y, pz)
-                if sq then
-                    local r = sq:getRoom()
-                    squares[#squares + 1] = {
-                        sq = sq, room = r and (r:getName() or "?") or "(outside)" }
+        local rooms = getCell():getRoomList()
+        local roomCount = rooms and rooms:size() or 0
+        scope = ("%d streamed room rects in the cell (all floors)"):format(roomCount)
+        for i = 1, roomCount do
+            local room = rooms:get(i - 1)
+            local def = room and room.getRoomDef and room:getRoomDef()
+            if def then
+                local name = room:getName() or "?"
+                local z = def:getZ()
+                for x = def:getX(), def:getX() + def:getW() - 1 do
+                    for y = def:getY(), def:getY() + def:getH() - 1 do
+                        probed = probed + 1
+                        local sq = getSquare(x, y, z)
+                        if sq then
+                            squares[#squares + 1] = { sq = sq, room = name }
+                        else
+                            unstreamed = unstreamed + 1
+                        end
+                    end
                 end
             end
         end
     end
 
-    print(("=== FindNullSprites: %s | %d squares streamed ==="):format(scope, #squares))
+    -- "none found" over a mostly-unstreamed area is not a clean bill of health,
+    -- so the coverage is stated every time rather than left to be inferred
+    print(("=== FindNullSprites: %s ==="):format(scope))
+    print(("    %d squares probed, %d streamed, %d not loaded (%d%% covered)"):format(
+        probed, #squares, unstreamed,
+        probed > 0 and math.floor(#squares * 100 / probed) or 0))
     local hits, poisoned, poisonedCount = 0, {}, 0
     for i = 1, #squares do
         local sq, room = squares[i].sq, squares[i].room
@@ -174,7 +205,8 @@ function DWAPFindNullSprites(radius)
     end
 
     if hits == 0 then
-        print("  none - no room here can hit the forceForItems NPE")
+        print("  none in what was streamed - walk the area and re-run before")
+        print("  concluding it is clean, especially if coverage was low")
     else
         local names = {}
         for room in pairs(poisoned) do names[#names + 1] = room end
