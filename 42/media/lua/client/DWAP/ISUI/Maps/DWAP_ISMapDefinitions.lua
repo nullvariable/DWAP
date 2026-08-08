@@ -46,12 +46,12 @@ LootMaps.Init.DWAPStashMap6 = function(mapUI)
     mapAPI:setBoundsInSquares(6920, 5528, 7031, 5631)
 end
 
--- Rosewood Safehouse
+-- Rosewood Zippee Apts
 LootMaps.Init.DWAPStashMap7 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(8096, 11192, 8239, 11367)
+    mapAPI:setBoundsInSquares(8008, 11472, 8135, 11591)
 end
 
 -- WWestPointSafeHouse Safehouse
@@ -59,7 +59,7 @@ LootMaps.Init.DWAPStashMap8 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(10064, 6576, 10215, 6735)
+    mapAPI:setBoundsInSquares(10000, 7328, 10127, 7471)
 end
 
 -- Lowry Court Safehouse

@@ -43,28 +43,30 @@ local configs = {
         buildingY = 9562,
     },
     [6] = {
-        name = "Riverside Safehouse Map",
+        name = "Riverside Ivan Rd House Map",
         stamps = {
             {"Asterisk", nil, 6964, 5583, 0.50, 0.50, 0.0, 0.000, 0.000, 0.000},
         },
-        buildingX = 6962,
-        buildingY = 5564,
+        buildingX = 6965,
+        buildingY = 5584,
     },
     [7] = {
-        name = "Rosewood Safehouse Map",
+        name = "Rosewood Zippee Apts Map",
         stamps = {
-            {"Asterisk", nil, 8184, 11269, 0, 0, 0},
+            {"ArrowSouthEast", nil, 8067, 11554, 0.50, 0.50, 0.0, 0.129, 0.129, 0.129}
         },
-        buildingX = 8181,
-        buildingY = 11259,
+        buildingX = 8087,
+        buildingY = 11558,
     },
     [8] = {
         name = "West Point Safehouse Map",
         stamps = {
             {"Asterisk", nil, 10162, 6622, 0, 0, 0},
+            {"Asterisk", nil, 10081, 7371, 0.50, 0.50, 0.0, 0.129, 0.129, 0.129},
+            {"ArrowNorthWest", nil, 10102, 7357, 0.50, 0.50, 0.0, 0.129, 0.129, 0.129},
         },
-        buildingX = 10162,
-        buildingY = 6622,
+        buildingX = 10083,
+        buildingY = 7371,
     },
     [9] = {
         name = "Lowry Court Map",

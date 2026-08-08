@@ -274,7 +274,7 @@ local RosewoodZippee = {
         { -- E29
             note = "sidetable @ livingroom",
             coords = { x = 8093, y = 11559, z = 2 },
-            dist = {"CrateVHSTapes"},
+            dist = { "CrateVHSTapes" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
