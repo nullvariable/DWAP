@@ -9,11 +9,8 @@ tileset
     {
         xy = 0,0
         BlocksPlacement = 
-        ContainerCapacity = 100
-        CustomName = DWAP_PowerBank
         ScrapUseSkill = 
         ScrapUseTool = 
-        container = BatteryBank
     }
     // dwap_tiles_01_1
     tile
@@ -233,7 +230,7 @@ tileset
     tile
     {
         xy = 0,3
-        BlocksPlacement =
+        BlocksPlacement = 
         MaterialType = Metal
         solid =
     }

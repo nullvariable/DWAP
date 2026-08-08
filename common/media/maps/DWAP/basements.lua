@@ -640,6 +640,31 @@ else
     end
 end
 
+-- Register ONCE per world. BasementsV1.addBasementDefinitions does
+-- basementDefinitions.add(...) - an append into an ArrayList, not a keyed
+-- replace - and addSpawnLocations is the same, so loading this file twice
+-- registers every basement twice. Each duplicate then gets merged onto the
+-- metacell again, which is exactly the "duplicate RoomDef.metaID" and
+-- "roomDef missing from IsoMetaCell.RoomList" errors seen on every debug-scenario
+-- world load, and why getCell():getRoomList() ends up holding two IsoRoom
+-- objects per room - the defect that made the room picker export half a bedroom
+-- on 2026-08-08.
+--
+-- The double load is ours: DWAP_BasementLoader reloadLuaFile()s this during
+-- OnLoadMapZones because the normal load lands too late for a debug scenario to
+-- see the definitions - but the normal load still happens afterwards. A regular
+-- game only ever loads it once, which is why players never saw any of this.
+--
+-- Guarding here rather than in the loader covers both orders, and whichever load
+-- arrives first wins. The flag is a global, so it resets with the Lua state on
+-- each new world - which is the scope we want, since the Basements singleton is
+-- cleared per world too.
+if DWAP_BASEMENTS_REGISTERED then
+    print("DWAP basements.lua: already registered this world, skipping duplicate load")
+    return
+end
+DWAP_BASEMENTS_REGISTERED = true
+
 local api = Basements.getAPIv1()
 api:addAccessDefinitions('Muldraugh, KY', basement_access)
 api:addBasementDefinitions('Muldraugh, KY', basements)
