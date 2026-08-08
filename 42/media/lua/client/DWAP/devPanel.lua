@@ -231,6 +231,14 @@ function DWAPDevPanel()
             { label = "Export Rooms", fn = function() withNearest(DWAPRoomExport, "DWAPRoomExport") end },
             { label = "Clear Rooms", fn = function() DWAPRoomClear() end },
         } },
+        -- Sprites resolve on export, not on click, because clicking a door
+        -- opens it - pick, shut them, then export
+        { label = "Door Pick", fn = function() DWAPDoorPick() end,
+            state = function() return DWAP_DevToggles and DWAP_DevToggles.doorPick end },
+        { pairRow = {
+            { label = "Export Doors", fn = function() DWAPDoorExport() end },
+            { label = "Clear Doors", fn = function() DWAPDoorClear() end },
+        } },
         { label = "Barricades", fn = function() withNearest(ShowBarricades, "ShowBarricades") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.barricades end },
         -- Same one-shot, player-position shape as the plumbing scan

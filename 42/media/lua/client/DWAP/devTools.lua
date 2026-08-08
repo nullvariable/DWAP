@@ -1017,6 +1017,7 @@ function ensureDevOverlay()
         plumbingLabelsDraw()
         plumbPickDraw()
         roomPickDraw()
+        doorPickDraw()
     end
     ui:addToUIManager()
     devOverlay = ui
@@ -2341,7 +2342,13 @@ local function buildContainerLabels(config)
             -- crate, bottom on the floor
             local rise = 0
             if isUpper then
-                rise = 0.66
+                -- 0.55 rather than a rounder 0.66: raising a label by two
+                -- thirds of a level lands it near where a diagonal neighbour's
+                -- floor label already draws, so the two overlapped whenever the
+                -- tiles lined up. Dropping it clear of that keeps uppers
+                -- readably above their own tile without colliding, and stays
+                -- clear of the freezer and stack offsets below.
+                rise = 0.55
             elseif entry.slot == "freezer" then
                 rise = 0.4
             elseif entry.stack then
@@ -2362,6 +2369,15 @@ end
 
 -- Draw entry numbers pinned to their squares (same pattern the foraging
 -- icons use: isoToScreenX/Y + TextManager during UI draw)
+--
+-- Labels are pinned to a tile, so a raised one lands on a diagonal neighbour's
+-- whenever the two line up - stacks and uppers both did it. No choice of rise
+-- avoids that for every arrangement, it only changes which arrangements
+-- collide, so resolve it where it actually happens: nudge a label down until it
+-- clears everything already placed this frame. Placement tables are
+-- module-level and reused because this runs on every UI draw.
+local labelX, labelY, labelW = {}, {}, {}
+
 function containerLabelsDraw()
     if not currentContainerLabels then return end
     local player = getPlayer()
@@ -2370,12 +2386,31 @@ function containerLabelsDraw()
     local playerNum = player:getPlayerNum()
     local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
     local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    local placed = 0
     for i = 1, #currentContainerLabels do
         local l = currentContainerLabels[i]
         if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
             local drawZ = l.z + (l.rise or 0)
             local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
             local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local w = tm:MeasureStringX(UIFont.Small, l.text)
+            -- bounded: a shove can land on a third label, but give up rather
+            -- than chase it down the screen forever
+            for _ = 1, 8 do
+                local hit = false
+                for k = 1, placed do
+                    if math.abs(labelX[k] - sx) < (labelW[k] + w) * 0.5
+                        and math.abs(labelY[k] - sy) < lineH then
+                        sy = labelY[k] + lineH
+                        hit = true
+                    end
+                end
+                if not hit then break end
+            end
+            placed = placed + 1
+            labelX[placed], labelY[placed], labelW[placed] = sx, sy, w
             tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
             tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 1, 0.2, 1)
         end
@@ -3657,6 +3692,246 @@ function DWAPPlumbClear()
     plumbPickedSquares = {}
     plumbPickedKeys = {}
     DWAPUtils.dprint("Plumb pick: cleared")
+end
+
+-- Door picker. Collects squares and resolves the sprite at EXPORT time rather
+-- than on click, because clicking a door also opens it: IsoDoor swaps
+-- this.sprite between the open and closed variants and does not expose the
+-- closed one, so anything read during the click is the wrong sprite as often
+-- as not. Pick the doors, shut them again, then export.
+local doorPickedSquares = {}  -- ordered list of { key, x, y, z }
+local doorPickedKeys = {}     -- key -> true, for the toggle test
+
+local function doorPickRemove(key)
+    for i = 1, #doorPickedSquares do
+        if doorPickedSquares[i].key == key then
+            table.remove(doorPickedSquares, i)
+            break
+        end
+    end
+    doorPickedKeys[key] = nil
+end
+
+--- What a door's sprite WOULD be if shut, as a hint only - nil when it is
+--- already shut or cannot be worked out.
+---
+--- IsoDoor keeps closedSprite private, but the relationship is fixed: the open
+--- sprite sits openSpriteOffset indices above the closed one, and the offset is
+--- 2 normally, 4 for a DoubleDoor and 8 for a GarageDoor. A garage door is
+--- several tiles wide and each tile is its own sprite, but the offset applies
+--- per tile - walls_garage_01_11,12,13 open map back to _3,4,5.
+---
+--- The derived name is checked against IsoSpriteManager before being offered:
+--- if the offset was wrong for this door, the name it produces will not resolve
+--- to a real sprite, and no hint beats a misleading one.
+---
+--- Deliberately NOT substituted into the exported line. Clicking a door opens
+--- it, so an open door is often just one we picked - but some map doors are
+--- placed open by design, and there the config has to name the sprite that is
+--- actually on the square or the key will not match. Only the picker knows
+--- which case it is, so emit what is really there and offer the shut name
+--- alongside.
+--- @return string|nil
+local function shutDoorSpriteHint(door)
+    if not (door.isOpen and door:isOpen()) then return nil end
+    local name = door.getSpriteName and door:getSpriteName() or "?"
+    local sprite = door.getSprite and door:getSprite()
+    local props = sprite and sprite:getProperties()
+    local offset = 2
+    if props then
+        if props:has("GarageDoor") then
+            offset = 8
+        elseif props:has("DoubleDoor") then
+            offset = 4
+        end
+    end
+    local base, index = name:match("^(.*)_(%d+)$")
+    if not base then return nil end
+    local closed = tonumber(index) - offset
+    if closed < 0 then return nil end
+    local candidate = ("%s_%d"):format(base, closed)
+    if not getSprite(candidate) then return nil end
+    return candidate
+end
+
+local function doorOnSquare(square)
+    local objects = square:getObjects()
+    for i = 0, (objects and objects:size() or 0) - 1 do
+        local obj = objects:get(i)
+        -- garage doors are IsoDoor too, so this covers them; IsoThumpable is
+        -- the player-built//custom case and answers isDoor
+        if instanceof(obj, "IsoDoor") then return obj end
+        if instanceof(obj, "IsoThumpable") and obj.isDoor and obj:isDoor() then return obj end
+    end
+    return nil
+end
+
+local DOOR_LABEL_RISE = 0.5
+
+--- Numbered label over each picked door, same shape as the barricade overlay,
+--- with the colour carrying the thing that actually matters for keying:
+---   green  - door present and its square resolves a building
+---   amber  - door present but NO building on that square, so this entry can
+---            never reach def:setKeyId (the exterior-wall case)
+---   red    - nothing door-like there any more
+function doorPickDraw()
+    if not DWAP_DevToggles.doorPick or #doorPickedSquares == 0 then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerZ = pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #doorPickedSquares do
+        local d = doorPickedSquares[i]
+        if d.z == playerZ then
+            local square = getSquare(d.x, d.y, d.z)
+            local door = square and doorOnSquare(square)
+            local r, g, b = 1, 0.25, 0.25
+            if door then
+                if square:getBuilding() then
+                    r, g, b = 0.25, 1, 0.25
+                else
+                    r, g, b = 1, 0.75, 0.2
+                end
+            end
+            local drawZ = d.z + DOOR_LABEL_RISE
+            local sx = isoToScreenX(playerNum, d.x + 0.5, d.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, d.x + 0.5, d.y + 0.5, drawZ)
+            local text = tostring(i)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, text, r, g, b, 1)
+        end
+    end
+end
+
+--- Named function: an anonymous handler could never be removed from the event
+---
+--- Feedback goes through print, not dprint. dprint routes to log(DebugType.Lua)
+--- which lands in Zomboid/Logs rather than console.txt, so a picker whose only
+--- confirmation is a dprint looks broken even while it is collecting perfectly
+--- well - the toggle lights up and nothing else ever appears. exportHeader was
+--- moved to print for the same reason.
+function doorPickClick(tile)
+    if not DWAP_DevToggles.doorPick then return end
+    local square = tile and tile.getSquare and tile:getSquare()
+    if not square then return end
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local key = plumbPickKey(x, y, z)
+    if doorPickedKeys[key] then
+        doorPickRemove(key)
+        print(("Door pick: removed %s (%d left)"):format(key, #doorPickedSquares))
+        return
+    end
+    if not doorOnSquare(square) then
+        print(("Door pick: no door on %s"):format(key))
+        return
+    end
+    doorPickedKeys[key] = true
+    doorPickedSquares[#doorPickedSquares + 1] = { key = key, x = x, y = y, z = z }
+    print(("Door pick: added %s (%d held)"):format(key, #doorPickedSquares))
+end
+
+function DWAPDoorPick()
+    DWAP_DevToggles.doorPick = not DWAP_DevToggles.doorPick
+    if DWAP_DevToggles.doorPick then
+        Events.OnObjectLeftMouseButtonDown.Remove(doorPickClick)
+        Events.OnObjectLeftMouseButtonDown.Add(doorPickClick)
+        -- without this there is no render hook, so picks stay invisible
+        ensureDevOverlay()
+        print("Door pick: ON - left click doors to add/remove, shut them, then Export")
+        print("Left click is also attack, so expect the odd swing at air")
+    else
+        Events.OnObjectLeftMouseButtonDown.Remove(doorPickClick)
+        print(("Door pick: OFF (%d doors still held - Export or Clear)"):format(
+            #doorPickedSquares))
+    end
+end
+
+function DWAPDoorClear()
+    doorPickedSquares = {}
+    doorPickedKeys = {}
+    print("Door pick: cleared")
+end
+
+--- Paste-ready doorKeys.doors lines. Sprites are read here, not at pick time,
+--- so shut the doors first - an open one cannot report its closed sprite and
+--- is called out instead of quietly emitting a line that will not match.
+function DWAPDoorExport()
+    if #doorPickedSquares == 0 then
+        print("Door pick: nothing picked")
+        return
+    end
+    exportHeader("doorKeys.doors", (" | %d doors"):format(#doorPickedSquares))
+    local open = 0
+    local buildings, buildingOrder, orphans = {}, {}, 0
+    for i = 1, #doorPickedSquares do
+        local d = doorPickedSquares[i]
+        local square = getCell():getGridSquare(d.x, d.y, d.z)
+        local door = square and doorOnSquare(square)
+        if not door then
+            print(("            -- %s: no door there now (unstreamed or removed)"):format(d.key))
+        else
+            -- the sprite that is actually on the square, with the shut name
+            -- offered alongside when the door is open
+            local sprite = door.getSpriteName and door:getSpriteName() or "?"
+            local shut = shutDoorSpriteHint(door)
+            -- double-quoted deliberately: the balance checker strips only
+            -- double-quoted strings before splitting lines on "--", so a
+            -- literal "--" inside a single-quoted string swallows the rest of
+            -- the line and reports phantom paren drift
+            local hint = shut and ("  -- OPEN; shut sprite would be \"%s\""):format(shut) or ""
+            print(("            { sprite = \"%s\", x = %d, y = %d, z = %d, },%s"):format(
+                sprite, d.x, d.y, d.z, hint))
+            -- Each entry keys its door's BUILDING def, so a base needs one per
+            -- physical building - a basement with its own outside entrance is a
+            -- separate def and never gets keyed without a door of its own.
+            -- Tally them so a missed building is obvious from the export.
+            local square2 = door.getSquare and door:getSquare() or square
+            local building = square2 and square2:getBuilding()
+            local def = building and building.getDef and building:getDef()
+            local defId = def and def.getID and def:getID()
+            if not building then
+                -- BaseKeys only reaches def:setKeyId when square:getBuilding()
+                -- resolves; a door on an exterior wall square can miss and fall
+                -- to the branch that keys loose objects instead, so this entry
+                -- contributes nothing to the building key
+                orphans = orphans + 1
+                print("            -- ^ square resolves NO building: this door will not set a building key")
+            else
+                local bkey = defId and tostring(defId) or ("session " .. building:getID())
+                if not buildings[bkey] then
+                    buildings[bkey] = 0
+                    buildingOrder[#buildingOrder + 1] = bkey
+                end
+                buildings[bkey] = buildings[bkey] + 1
+            end
+            if shut then open = open + 1 end
+        end
+    end
+    if open > 0 then
+        print(("Door pick: %d of %d are open - keep that sprite if the map ships them open, "
+            .. "otherwise swap in the shut name on the line"):format(open, #doorPickedSquares))
+    end
+    -- distinct building defs covered, against the config's own baseBuildings
+    local parts = {}
+    for i = 1, #buildingOrder do
+        parts[#parts + 1] = ("%s x%d"):format(buildingOrder[i], buildings[buildingOrder[i]])
+    end
+    if orphans > 0 then
+        print(("Door pick: %d door(s) sit on squares with no building - those entries cannot "
+            .. "set a building key, which is what the spare doors have been compensating for"):format(orphans))
+    end
+    local index = DWAPNearestConfig(true)
+    local configs = DWAPUtils.loadConfigs()
+    local config = index and configs and configs[index]
+    local anchors = config and config.baseBuildings and #config.baseBuildings or 0
+    print(("Door pick: %d distinct building(s) keyed [%s]; config lists %d baseBuildings"):format(
+        #buildingOrder, table.concat(parts, ", "), anchors))
+    if anchors > #buildingOrder then
+        print("Door pick: fewer buildings than anchors - a building with no door of its own "
+            .. "never gets its key set (basements with an outside entrance are the usual one)")
+    end
 end
 
 -- Same line shapes FindUnconnectedPlumbing emits, so picked output can be
