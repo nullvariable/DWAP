@@ -44,6 +44,11 @@ DWAPKeysCL.updateBuildingKeyId = function(params)
                 DWAPUtils.dprint(("Building key ID already set to %d"):format(keyId))
             end
         end
+    elseif params.buildingOnly then
+        -- baseBuildings anchors come through here. They exist to reach a
+        -- building def; if this one does not resolve, keying every loose object
+        -- on the square is not what was asked for.
+        DWAPUtils.dprint(("No building at anchor %d,%d,%d"):format(coords.x, coords.y, coords.z))
     else
         local objs = square:getObjects()
         for i=0, objs:size()-1 do
@@ -146,6 +151,32 @@ Events.OnLoad.Add(function()
                             sprite = door.sprite,
                         }
                     )
+                end
+                -- Also key from the baseBuildings anchors. A door often sits on
+                -- an exterior wall square, and if that square does not resolve
+                -- a building then its entry never reaches def:setKeyId at all -
+                -- which is what the spare "insurance" doors have been working
+                -- around. Anchors are interior by construction, one per
+                -- physical building, so they reach every def including a
+                -- basement that counts as its own building because it has an
+                -- outside entrance. Additive and idempotent: doors still run,
+                -- and a def that already carries this key is left alone.
+                if config.baseBuildings then
+                    for i = 1, #config.baseBuildings do
+                        local anchor = config.baseBuildings[i]
+                        DWAPSquareLoaded:AddEvent(
+                            DWAPKeysCL.updateBuildingKeyId,
+                            anchor.x,
+                            anchor.y,
+                            anchor.z,
+                            true,
+                            {
+                                coords = {x = anchor.x, y = anchor.y, z = anchor.z},
+                                keyId = keyId,
+                                buildingOnly = true,
+                            }
+                        )
+                    end
                 end
             end
         end
