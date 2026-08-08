@@ -70,6 +70,121 @@ local function generatorTouchesChunk(x, y, range, wx, wy)
     return y + range >= minY
 end
 
+-- Find IsoObjects with no sprite, which poison base-game loot fill for the
+-- WHOLE room they sit in.
+--
+-- ItemPickerJava.rollProceduralItemInternal has a forceForItems branch that
+-- walks every square of the container's RoomDef rect and reads
+-- obj.getSprite().name with no null check (ItemPickerJava.java:789). The
+-- forceForTiles branch fourteen lines below it does check - so this is a
+-- vanilla oversight, not a rule we are breaking. One spriteless object
+-- anywhere in a room NPEs the fill of every container in that room.
+--
+-- It also repeats: the NPE unwinds out of ItemPicker.checkObject before
+-- container.setExplored(true) runs, so the container stays unexplored and is
+-- retried on every chunk load. That is a flood, not a one-off.
+--
+-- Reports the objects and, more usefully, the ROOMS they poison.
+local NULLSPRITE_PROBE_TYPES = {
+    "IsoGenerator", "IsoThumpable", "IsoDoor", "IsoWindow", "IsoLightSwitch",
+    "IsoStackedWasherDryer", "IsoCombinationWasherDryer", "IsoClothingWasher",
+    "IsoRadio", "IsoTelevision", "IsoStove", "IsoFireplace", "IsoBarricade",
+    "IsoCurtain", "IsoWindowFrame", "IsoDeadBody", "IsoWorldInventoryObject",
+}
+
+local function describeNullSpriteObject(obj)
+    local classes = {}
+    for i = 1, #NULLSPRITE_PROBE_TYPES do
+        if instanceof(obj, NULLSPRITE_PROBE_TYPES[i]) then
+            classes[#classes + 1] = NULLSPRITE_PROBE_TYPES[i]
+        end
+    end
+    local name = obj.getObjectName and obj:getObjectName()
+    local container = obj.getContainer and obj:getContainer()
+    return ("%s%s%s"):format(
+        #classes > 0 and table.concat(classes, "/") or "IsoObject",
+        (name and name ~= "" and name ~= "null") and (" name=" .. tostring(name)) or "",
+        container and (" HAS CONTAINER type=" .. tostring(container:getType())) or "")
+end
+
+--- @param radius number optional; when the player is not in a building, or
+---        when passed explicitly, scan this many tiles around the player
+---        instead of the building's rooms. Defaults to the building.
+function DWAPFindNullSprites(radius)
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then
+        print("FindNullSprites: no player square")
+        return
+    end
+
+    -- Collect the squares to scan, pairing each with the room it came from so
+    -- the poisoned-room summary can name them. Parallel entries rather than a
+    -- square-keyed table: streamed objects must never be used as identities.
+    local squares, scope = {}, nil
+    local building = not radius and pSquare:getBuilding()
+    if building then
+        scope = "building at " .. pSquare:getX() .. "," .. pSquare:getY() .. "," .. pSquare:getZ()
+        local rooms = getCell():getRoomList()
+        for i = 1, rooms:size() do
+            local room = rooms:get(i - 1)
+            if DWAPUtils.sameBuilding(room:getBuilding(), building) then
+                local rsq = room:getSquares()
+                for s = 0, rsq:size() - 1 do
+                    squares[#squares + 1] = { sq = rsq:get(s), room = room:getName() or "?" }
+                end
+            end
+        end
+    else
+        radius = radius or 15
+        scope = ("%d-tile box around the player"):format(radius)
+        local px, py, pz = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+        for x = px - radius, px + radius do
+            for y = py - radius, py + radius do
+                local sq = getSquare(x, y, pz)
+                if sq then
+                    local r = sq:getRoom()
+                    squares[#squares + 1] = {
+                        sq = sq, room = r and (r:getName() or "?") or "(outside)" }
+                end
+            end
+        end
+    end
+
+    print(("=== FindNullSprites: %s | %d squares streamed ==="):format(scope, #squares))
+    local hits, poisoned, poisonedCount = 0, {}, 0
+    for i = 1, #squares do
+        local sq, room = squares[i].sq, squares[i].room
+        local objects = sq:getObjects()
+        for j = 0, objects:size() - 1 do
+            local obj = objects:get(j)
+            -- IsoWorldInventoryObject is skipped by the vanilla scan's caller,
+            -- but the forceForItems loop above reads every object on the
+            -- square regardless, so it is still a live trigger here
+            if obj and obj:getSprite() == nil then
+                hits = hits + 1
+                print(("  %d,%d,%d  [%s]  %s"):format(
+                    sq:getX(), sq:getY(), sq:getZ(), room, describeNullSpriteObject(obj)))
+                if not poisoned[room] then
+                    poisoned[room] = true
+                    poisonedCount = poisonedCount + 1
+                end
+            end
+        end
+    end
+
+    if hits == 0 then
+        print("  none - no room here can hit the forceForItems NPE")
+    else
+        local names = {}
+        for room in pairs(poisoned) do names[#names + 1] = room end
+        table.sort(names)
+        print(("=== %d spriteless object(s) poisoning %d room(s): %s ==="):format(
+            hits, poisonedCount, table.concat(names, ", ")))
+        print("    Every container in those rooms fails base-game fill, on every chunk load.")
+    end
+end
+
 -- Simple utilities for the new fakeGenerators system
 function CreateFakeGeneratorAtPlayer(createTile)
     local pSquare = getPlayer():getCurrentSquare()

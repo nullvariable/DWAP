@@ -5,6 +5,28 @@ local RosewoodZippee = {
     baseBuildings = {
         { x = 8087, y = 11558, z = 2 }, -- apartments
     },
+    baseRooms = {
+        { x = 8086, y = 11556, z = 2 }, -- bedroom
+        { x = 8082, y = 11552, z = 2 }, -- livingroom
+        { x = 8085, y = 11552, z = 2 }, -- bathroom
+        { x = 8088, y = 11552, z = 2 }, -- closet
+        { x = 8090, y = 11552, z = 2 }, -- kitchen
+        { x = 8090, y = 11554, z = 2 }, -- livingroom
+        { x = 8084, y = 11556, z = 2 }, -- bedroom
+        { x = 8080, y = 11552, z = 2 }, -- livingroom
+        { x = 8080, y = 11552, z = 1 }, -- livingroom
+        { x = 8079, y = 11556, z = 0 }, -- livingroom
+        { x = 8073, y = 11556, z = 0 }, -- office
+        { x = 8073, y = 11552, z = 0 }, -- zippeestorage
+        { x = 8076, y = 11556, z = 0 }, -- breakroom
+        { x = 8078, y = 11552, z = 0 }, -- bathroom
+        { x = 8085, y = 11552, z = -1 }, -- hall
+        { x = 8081, y = 11552, z = -1 }, -- storage
+        { x = 8087, y = 11552, z = -1 }, -- storageunit
+        { x = 8093, y = 11552, z = -1 }, -- storageunit
+        { x = 8090, y = 11557, z = -1 }, -- storageunit
+        { x = 8084, y = 11557, z = -1 }, -- storageunit
+    },
     spawn = { x = 8087, y = 11558, z = 2 },
     generators = {
         {
