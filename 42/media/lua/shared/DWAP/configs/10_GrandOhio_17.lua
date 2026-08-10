@@ -1,10 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: 4 components at 13637-13640,1233-1235 z=-4 report "square not
---     loaded" - those chunks never stream when travelling to this base, which
---     is what a pre-move or otherwise wrong coordinate looks like
---   * systems: 8 components at 13637-13645,1247-1288 z=-4 name a sprite that
---     is not on the square, though the square itself loads - config drifted
---     from the map
 local generatorStartCoords = { x = 13636, y = 1262, z = -4, }
 local wtc = { x = generatorStartCoords.x+8, y = generatorStartCoords.y+4, z = -4, }
 local GrandOhioConfig = {

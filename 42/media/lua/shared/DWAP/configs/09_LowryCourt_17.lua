@@ -1,28 +1,20 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entries 1,2,21: square holds no container at all - coords are stale or
---     the object was removed
---   * systems: 1 component at 12982,1912 z=0 names a sprite that is not on
---     the square, though the square itself loads - config drifted from the
---     map
---   * 506 unclaimed containers against 43 entries - baseBuildings almost
---     certainly anchors the whole complex rather than our units
 local wtc = { x = 12980, y = 1920, z = 0 } -- waterTankCoords
 local pb1 = { x = 12981, y = 1922, z = -1 }
 local bunkerTopLeft = { x = 12981, y = 1907, z = -1 }
 local LowryCourt = {
-    group = "",
+    group = "Louisville",
     baseBuildings = {
         { x = 12993, y = 1914, z = 2 },  -- apartment building
         { x = 12981, y = 1907, z = -1 }, -- bunker
     },
     baseRooms = {
-        { x = 12992, y = 1912, z = 2 }, -- kitchen
-        { x = 12993, y = 1914, z = 2 }, -- livingroom
-        { x = 12992, y = 1919, z = 2 }, -- kidsbedroom
-        { x = 13000, y = 1919, z = 2 }, -- bedroom
-        { x = 12999, y = 1912, z = 2 }, -- diningroom
-        { x = 12996, y = 1912, z = 2 }, -- bathroom
-        { x = 12992, y = 1912, z = 0 }, -- storage
+        { x = 12992, y = 1912, z = 2 },  -- kitchen
+        { x = 12993, y = 1914, z = 2 },  -- livingroom
+        { x = 12992, y = 1919, z = 2 },  -- kidsbedroom
+        { x = 13000, y = 1919, z = 2 },  -- bedroom
+        { x = 12999, y = 1912, z = 2 },  -- diningroom
+        { x = 12996, y = 1912, z = 2 },  -- bathroom
+        { x = 12992, y = 1912, z = 0 },  -- storage
         { x = 12981, y = 1916, z = -1 }, -- bunker
         { x = 12981, y = 1912, z = -1 }, -- bunker
     },
@@ -62,7 +54,7 @@ local LowryCourt = {
     map = { name = "DWAPStashMap9", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 12982, y = 1912, z = 0, },
+            controls = { sprite = "dwap_tiles_01_22", x = 12982, y = 1920, z = 0, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 12984, y = 1920, z = 0, },
             fakeGenerators = {
                 -- { x = 12983, y = 1920, z = -1, createTile = true },
@@ -74,25 +66,27 @@ local LowryCourt = {
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_175",          x = pb1.x,             y = pb1.y,                       z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
+        { sprite = "industry_02_175",          x = pb1.x,             y = pb1.y,                         z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
 
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12989, y = 1923,                        z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12994, y = 1924,                        z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12998, y = 1924,                        z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 13002, y = 1924,                        z = 2, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12989, y = 1923,                          z = 2, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12994, y = 1924,                          z = 2, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12998, y = 1924,                          z = 2, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 13002, y = 1924,                          z = 2, },
 
-        { sprite = "appliances_cooking_01_16", x = 12989,             y = 1915,                        z = 2,     isFireplace = true, },
+        { sprite = "appliances_cooking_01_16", x = 12989,             y = 1915,                          z = 2,     isFireplace = true, },
     },
     loot = {
         { -- E1
-            coords = { x = 12983, y = 1919, z = 0 },
+            note = "crate @ storage",
+            coords = { x = 12984, y = 1916, z = 0 },
             dist = { "CrateLumber", "CrateSheetMetal", "ArtStorePottery", "CrateMasonry" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
         { -- E2
-            coords = { x = 12984, y = 1919, z = 0 },
+            note = "militarycrate @ storage",
+            coords = { x = 12984, y = 1917, z = 0 },
             items = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.ScrewsBox', },
@@ -100,13 +94,21 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E3 cabinet next to bunk beds (9365)
+        { -- E3
+            note = "militarycrate @ storage",
+            coords = { x = 12984, y = 1918, z = 0 },
+            dist = { "GasStoreEmergency" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = 2,
+        },
+        { -- E4 cabinet next to bunk beds (9365)
             note = "dresser @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 2, z = bunkerTopLeft.z },
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- E4 upper
+        { -- E5 upper
             sprite = 'location_trailer_02_23',
             note = "overhead @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
@@ -116,13 +118,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E5 lower (66)
+        { -- E6 lower (66)
             note = "counter @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- E6 upper
+        { -- E7 upper
             sprite = 'location_trailer_02_23',
             note = "overhead @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
@@ -132,7 +134,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E7 lower (67)
+        { -- E8 lower (67)
             sprite = 'location_trailer_02_19',
             note = "counter @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
@@ -141,7 +143,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E8 upper
+        { -- E9 upper
             sprite = 'location_trailer_02_23',
             note = "overhead @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
@@ -151,7 +153,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- E9 lower (68)
+        { -- E10 lower (68)
             sprite = 'location_trailer_02_19',
             note = "counter @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
@@ -160,7 +162,16 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- E10 metal shelves (70)
+        { -- E11
+            note = "fridge @ bunker",
+            coords = { x = 12981, y = 1913, z = -1 },
+        },
+        { -- E12
+            note = "freezer @ bunker",
+            coords = { x = 12981, y = 1913, z = -1 },
+            slot = "freezer",
+        },
+        { -- E13 metal shelves (70)
             sprite = 'location_trailer_02_23',
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
@@ -169,36 +180,37 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E11 metal shelves (71)
+        { -- E14 metal shelves (71)
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 8, z = bunkerTopLeft.z },
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- E12 next to inner door (9372)
+        { -- E15 next to inner door (9372)
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 9, z = bunkerTopLeft.z },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- E13 (73)
+        { -- E16 (73)
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 10, z = bunkerTopLeft.z },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- E14 (9374)
+        { -- E17 (9374)
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 11, z = bunkerTopLeft.z },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- E15 far end next to stairs (9375)
+        { -- E18 far end next to stairs (9375)
             note = "metal_shelves @ bunker",
             coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 12, z = bunkerTopLeft.z },
             special = "essentials",
         },
-        { -- E16 metal wall shelves
+        -- rubbish bin going south
+        { -- E19
             note = "militarycrate @ bunker",
             coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
             dist = { "CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
@@ -206,13 +218,22 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E17 metal wall shelves
+        { -- E20
+            note = "militarycrate @ bunker",
+            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
+            stack = 2,
+            dist = { "CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        { -- E21
             note = "militarycrate @ bunker",
             coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 6, z = bunkerTopLeft.z },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E18 metal wall shelves
+        { -- E22
             note = "militarycrate @ bunker",
             coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
@@ -220,9 +241,18 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
+        { -- E23
+            note = "militarycrate @ bunker",
+            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
+            stack = 2,
+            dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
 
         -- extra spawns
-        { -- E19
+        { -- E24
             note = "crate @ bunker",
             coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
             dist = { "GasStoreEmergency", "StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools", "SafehouseArmor", "SafehouseLighting" },
@@ -230,7 +260,16 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E20
+        { -- E25
+            note = "crate @ bunker",
+            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
+            stack = 2,
+            dist = { "GasStoreEmergency", "StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools", "SafehouseArmor", "SafehouseLighting" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        { -- E26
             note = "crate @ bunker",
             coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
             dist = { "SafehouseTraps", "GunStoreKnives", "CampingStoreBackpacks", "CrateLiquor", "CarSupplyTools", "GasStorageMechanics", "DrugLabOutfit" },
@@ -238,16 +277,18 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E21
-            coords = { x = 12984, y = 1920, z = 0 },
-            dist = { "GasStoreEmergency" },
+        { -- E27
+            note = "crate @ bunker",
+            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
+            stack = 2,
+            dist = { "SafehouseTraps", "GunStoreKnives", "CampingStoreBackpacks", "CrateLiquor", "CarSupplyTools", "GasStorageMechanics", "DrugLabOutfit" },
             distIncludeJunk = true,
             randUntilFull = true,
-            level = 2,
+            level = "Loot_LockersLevel",
         },
 
         -- 2nd floor
-        { -- E22
+        { -- E28
             note = "shelves @ kitchen",
             coords = { x = 12995, y = 1911, z = 2 },
             slot = "upper",
@@ -256,7 +297,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E23
+        { -- E29
             note = "counter @ kitchen",
             coords = { x = 12991, y = 1911, z = 2 },
             dist = { "GigamartTools", "JanitorTools", "WeldingWorkshopTools", },
@@ -264,16 +305,25 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E24
+        { -- E30
             note = "fridge @ kitchen",
             coords = { x = 12992, y = 1911, z = 2 },
             dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
             distIncludeJunk = true,
             randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            level = "Loot_FoodLevel",
+        },
+        { -- E31
+            note = "freezer @ kitchen",
+            coords = { x = 12992, y = 1911, z = 2 },
+            slot = "freezer",
+            dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
 
-        { -- E25
+        { -- E32
             note = "sidetable @ livingroom",
             coords = { x = 12993, y = 1922, z = 2 },
             dist = { "CrateVHSTapes" },
@@ -281,7 +331,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E26
+        { -- E33
             note = "shelves @ livingroom",
             coords = { x = 12992, y = 1916, z = 2 },
             dist = { "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
@@ -289,7 +339,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E27
+        { -- E34
             note = "sidetable @ livingroom",
             coords = { x = 12996, y = 1923, z = 2 },
             items = {
@@ -301,7 +351,7 @@ local LowryCourt = {
                 { name = 'Base.VHS_Retail', chance = 1,   count = { 30, 30 } },
             },
         },
-        { -- E28
+        { -- E35
             note = "wardrobe @ kidsbedroom",
             coords = { x = 12989, y = 1919, z = 2 },
             dist = { "CarSupplyTools", "GasStorageMechanics", },
@@ -309,7 +359,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E29
+        { -- E36
             note = "wardrobe @ kidsbedroom",
             coords = { x = 12990, y = 1919, z = 2 },
             dist = { "HuntingLockers", "RangerTools" },
@@ -317,7 +367,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- E30
+        { -- E37
             note = "sidetable @ kidsbedroom",
             coords = { x = 12989, y = 1922, z = 2 },
             dist = { "GunStoreKnives", "PawnShopKnives", "CampingStoreBackpacks" },
@@ -325,7 +375,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- E31
+        { -- E38
             note = "dresser @ kidsbedroom",
             coords = { x = 12992, y = 1923, z = 2 },
             dist = { "SafehouseArmor", "SafehouseLighting" },
@@ -333,7 +383,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E32
+        { -- E39
             note = "counter @ kitchen",
             coords = { x = 12990, y = 1911, z = 2 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
@@ -341,7 +391,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E33
+        { -- E40
             note = "counter @ kitchen",
             coords = { x = 12989, y = 1911, z = 2 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
@@ -349,13 +399,13 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E34
+        { -- E41
             note = "counter @ kitchen",
             coords = { x = 12989, y = 1912, z = 2 },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- E35
+        { -- E42
             note = "counter @ kitchen",
             coords = { x = 12989, y = 1913, z = 2 },
             dist = { "StoreKitchenBaking", },
@@ -363,7 +413,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E36
+        { -- E43
             note = "dishescabinet @ diningroom",
             coords = { x = 13002, y = 1911, z = 2 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
@@ -371,7 +421,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E37
+        { -- E44
             note = "dishescabinet @ diningroom",
             coords = { x = 13003, y = 1911, z = 2 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
@@ -379,7 +429,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E38
+        { -- E45
             note = "counter @ bathroom",
             coords = { x = 12996, y = 1913, z = 2 },
             dist = { "ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -387,19 +437,19 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E39
+        { -- E46
             note = "wardrobe @ bedroom",
             coords = { x = 13002, y = 1919, z = 2 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E40
+        { -- E47
             note = "sidetable @ bedroom",
             coords = { x = 13000, y = 1920, z = 2 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E41
+        { -- E48
             note = "sidetable @ bedroom",
             coords = { x = 13000, y = 1923, z = 2 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens" },
@@ -407,7 +457,7 @@ local LowryCourt = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E42
+        { -- E49
             note = "counter @ bathroom",
             coords = { x = 12996, y = 1912, z = 2 },
             dist = { "CrateLeather", "SewingStoreFabric", "SewingStoreTools", "BathroomCounter", },
@@ -431,7 +481,7 @@ local LowryCourt = {
         --     randUntilFull = true,
         --     level = "Loot_MediaLevel",
         -- },
-        { -- E43
+        { -- E50
             note = "wardrobe @ bedroom",
             coords = { x = 13003, y = 1919, z = 2 },
             dist = { "FirearmWeapons_Late", "SafehouseTraps", "ArmyStorageAmmunition", },
