@@ -9,6 +9,145 @@ if not getDebug() then return end
 local DWAPUtils = require("DWAPUtils")
 local Reflection = require("Starlit/utils/Reflection")
 
+-- Event registration that survives a visit to the in-game chunk debugger.
+--
+-- DebugChunkState.saveGameUI (DebugChunkState.java:472-473) snapshots the event
+-- registry and installs EMPTY containers:
+--     LuaEventManager.getEvents(this.eventList, this.eventMap);
+--     LuaEventManager.setEvents(new ArrayList<>(), new HashMap<>());
+-- With EventMap empty, the debugger's own input triggers miss in
+-- LuaEventManager.checkEvent (LuaEventManager.java:214-219), which prints
+-- `LuaEventManager: adding unknown event "OnMouseDown"` and calls AddEvent
+-- (:559-575). AddEvent builds a NEW Event and calls Event.register, whose last
+-- act is `environment.rawset(this.name, table)` (Event.java:79-84) - it
+-- OVERWRITES Events.OnMouseDown in the Lua environment with a table whose
+-- Add/Remove close over that throwaway Event. restoreGameUI
+-- (DebugChunkState.java:476-487) puts the original Event objects back into
+-- EventMap, and nothing ever puts the original table back into Lua.
+--
+-- From then on Events.OnMouseDown.Add(fn) appends to an Event that
+-- triggerEvent never reaches, because dispatch looks the name up in EventMap
+-- and gets the original. No error, no warning, permanent until the Lua state is
+-- rebuilt by a world reload. Symptom: a picker toggles ON, prints its ON line,
+-- and then clicks do nothing - not even its own "no square under the cursor"
+-- miss path.
+--
+-- The fix: capture the live table ONCE here. File scope runs during
+-- LuaManager.LoadDirBase at boot, when the entry is still the registry's own,
+-- and the restored snapshot always contains that original Event - so a
+-- boot-time reference stays correct across any number of debugger visits.
+--
+-- Only the events the debugger triggers are affected: OnMouseDown, OnMouseUp,
+-- OnMouseMove, OnObjectLeftMouseButtonDown, OnObjectLeftMouseButtonUp,
+-- OnKeyPressed, OnKeyStartPressed, OnKeyKeepPressed, OnPreUIDraw,
+-- OnPostUIDraw, OnRenderTick, OnCustomUIKey, OnCustomUIKeyReleased,
+-- RenderOpaqueObjectsInWorld. OnTick is NOT among them, which is why the room
+-- picker's highlight kept working while its clicks were dead - that asymmetry
+-- is the fingerprint. OnTick registrations here are deliberately left direct.
+--
+-- Of that set this file only ever registers OnMouseDown (the three pickers).
+local DEV_ORPHANABLE_EVENTS = { "OnMouseDown" }
+-- name -> the Events[name] table as it was at file load
+local devEventTables = {}
+-- name -> the replacement table already reported, so each orphaning prints once
+local devEventOrphan = {}
+-- name -> set of our handlers currently registered, for DWAPCheckEvents
+local devEventHandlers = {}
+-- capture order, so DWAPCheckEvents can report without a fixed list
+local devEventNames = {}
+
+--- Memoise Events[name] as it stands right now. Safe when the event does not
+--- exist: returns nil and the callers degrade to a printed complaint.
+--- @param name string
+--- @return table|nil
+local function devEventCapture(name)
+    local captured = devEventTables[name]
+    if captured then return captured end
+    local live = Events[name]
+    if type(live) ~= "table" then return nil end
+    devEventTables[name] = live
+    devEventHandlers[name] = {}
+    devEventNames[#devEventNames + 1] = name
+    return live
+end
+
+-- Capture at load, not on first use: a picker may well be toggled on for the
+-- first time only after a debugger visit, by which point Events[name] is
+-- already the orphan.
+for i = 1, #DEV_ORPHANABLE_EVENTS do
+    devEventCapture(DEV_ORPHANABLE_EVENTS[i])
+end
+
+--- The captured table, announcing each time the live entry has been swapped out
+--- from under us. One line per orphaning, not per call - a repeat debugger visit
+--- installs a different table, which is worth its own line.
+--- @param name string
+--- @return table|nil
+local function devEventTable(name)
+    local captured = devEventCapture(name)
+    if not captured then return nil end
+    if Events[name] ~= captured and devEventOrphan[name] ~= Events[name] then
+        devEventOrphan[name] = Events[name]
+        print(("DWAP: Events.%s was replaced - the in-game chunk debugger orphans the Lua entry for every event it triggers (DebugChunkState.saveGameUI). Registering through the table captured at load instead; run DWAPCheckEvents() for detail."):format(name))
+    end
+    return captured
+end
+
+--- Add a handler through the captured table. Handlers must stay named globals
+--- or locals; an inline closure can never be removed.
+--- @param name string
+--- @param fn function
+local function devEventAdd(name, fn)
+    local t = devEventTable(name)
+    if not t then
+        print(("DWAP: cannot register %s - Events.%s does not exist"):format(name, name))
+        return
+    end
+    t.Add(fn)
+    devEventHandlers[name][fn] = true
+end
+
+--- Remove a handler through the same captured table. Both halves must go
+--- through the helpers or a toggle-off removes from the wrong table and leaves
+--- the handler live.
+--- @param name string
+--- @param fn function
+local function devEventRemove(name, fn)
+    local t = devEventTable(name)
+    if not t then return end
+    t.Remove(fn)
+    devEventHandlers[name][fn] = nil
+end
+
+--- Report whether our input events still point at the registry's own Event, and
+--- how many of our handlers we hold on each. Ten-second answer to "the picker
+--- lights up but clicks do nothing".
+function DWAPCheckEvents()
+    print("DWAP event check (input events the chunk debugger can orphan):")
+    if #devEventNames == 0 then
+        print("  nothing captured - no orphanable event is registered from devTools.lua")
+        return
+    end
+    for i = 1, #devEventNames do
+        local name = devEventNames[i]
+        local captured = devEventTables[name]
+        local count = 0
+        local set = devEventHandlers[name]
+        if set then
+            for _ in pairs(set) do count = count + 1 end
+        end
+        if Events[name] == captured then
+            print(("  %s: HEALTHY - live table is the one captured at load, %d DWAP handler(s) registered")
+                :format(name, count))
+        else
+            print(("  %s: ORPHANED - Events.%s is no longer the registry's table; the in-game chunk debugger replaced it (DebugChunkState.saveGameUI empties EventMap, the debugger's own triggers make LuaEventManager.AddEvent build a new Event, and Event.register rawsets it over the Lua entry)")
+                :format(name, name))
+            print(("    Our %d handler(s) still fire: devEventAdd registered them on the table captured at load, which is the Event restoreGameUI put back. Any code calling Events.%s.Add directly is dead until a world reload rebuilds the Lua state.")
+                :format(count, name))
+        end
+    end
+end
+
 -- Live overlay state, displayed by the dev panel button labels
 DWAP_DevToggles = DWAP_DevToggles or { elec = false, plumbing = false, containers = false, where = false, barricades = false }
 
@@ -1419,23 +1558,35 @@ end
 -- pass: OnPostUIDraw never fires in 42.20 (its trigger is gated behind a
 -- main-thread check the threaded renderer fails), so overlays must live on
 -- a UI element like vanilla's debug text overlays do
+--
+-- The element is built once but re-added on every call, because the local only
+-- tracks that we made one - not that UIManager still holds it. AddUI queues into
+-- toRemove and toAdd (UIManager.java:112-117) and update() drains removes before
+-- adds (:505-516), so re-adding is idempotent and cannot duplicate. Guarding the
+-- add behind the local instead loses the overlay for the rest of the session:
+-- entering the chunk debugger between the add and the next frame's drain leaves
+-- the element out of DebugChunkState's snapshot (DebugChunkState.java:466) and
+-- restoreGameUI's UI.clear()/addAll(gameUi) (:479-480) then discards it, while
+-- the non-nil local makes every later call return early. Same silent-dead-tool
+-- shape as the orphaned event tables above.
 local devOverlay = nil
 function ensureDevOverlay()
-    if devOverlay then return devOverlay end
-    local ui = ISUIElement:new(0, 0, 1, 1)
-    ui:initialise()
-    ui.render = function()
-        whereDraw()
-        containerLabelsDraw()
-        barricadeLabelsDraw()
-        plumbingLabelsDraw()
-        plumbPickDraw()
-        roomPickDraw()
-        doorPickDraw()
+    if not devOverlay then
+        local ui = ISUIElement:new(0, 0, 1, 1)
+        ui:initialise()
+        ui.render = function()
+            whereDraw()
+            containerLabelsDraw()
+            barricadeLabelsDraw()
+            plumbingLabelsDraw()
+            plumbPickDraw()
+            roomPickDraw()
+            doorPickDraw()
+        end
+        devOverlay = ui
     end
-    ui:addToUIManager()
-    devOverlay = ui
-    return ui
+    devOverlay:addToUIManager()
+    return devOverlay
 end
 
 function DWAPWhere()
@@ -2684,16 +2835,45 @@ local function buildContainerLookup(config)
         local entry = config.loot[i]
         if entry and entry.coords then
             local x, y = entry.coords.x, entry.coords.y
-            local z = math.floor(entry.coords.z)
+            local rawZ = entry.coords.z
+            local z = math.floor(rawZ)
             local key = DWAPUtils.hashCoords(x, y, z)
             local record = lookup[key]
             if not record then
-                record = { slots = {}, hasBase = false, hasUpper = false }
+                record = { slots = {}, hasBase = false, hasUpper = false,
+                    members = {}, duplicateEntries = 0 }
                 lookup[key] = record
             end
 
+            -- The key the loot fill REGISTERS this entry under, derived by the
+            -- same rule setLootConfigValue uses (LootSpawning/Events.lua): stack
+            -- ordinal first, then legacy fractional z as upper, then the slot
+            -- name, then base. It reads the UNFLOORED z, so it has to be taken
+            -- before z is floored for the square key above.
+            --
+            -- Two entries on one square sharing a member key are a config error,
+            -- not a pair. Registration is `slot[member] = index` with no
+            -- collision check, so the second entry silently overwrites the first
+            -- and only one of the square's containers is ever filled. The
+            -- resolution below cannot see it: each entry resolves independently,
+            -- both land on the same container, and two claims against two
+            -- physical containers read as fully claimed - green on a square
+            -- where one entry is dead.
+            --
+            -- An ordinal stays a number, as it is over there: Lua keys carry
+            -- their type, so t[2] and t["2"] are already distinct buckets and
+            -- prefixing would only invent a key space registration does not use.
+            local member
+            if entry.stack then
+                member = entry.stack
+            elseif rawZ % 1 ~= 0 then
+                member = "upper"
+            else
+                member = entry.slot or "base"
+            end
+
             -- legacy +0.5 coords still mean upper
-            local isUpper = entry.slot == "upper" or entry.coords.z % 1 ~= 0
+            local isUpper = entry.slot == "upper" or rawZ % 1 ~= 0
             local value = 1
             if not entry.dist and not entry.items and not entry.special then
                 value = 0 -- nothing to spawn: an authoring error
@@ -2701,13 +2881,28 @@ local function buildContainerLookup(config)
                 value = 2
             end
 
-            record.slots[#record.slots + 1] = {
+            local slot = {
                 entry = i,
                 upper = isUpper,
                 freezer = entry.slot == "freezer",
                 stack = entry.stack,
                 value = value,
+                member = member,
             }
+            record.slots[#record.slots + 1] = slot
+            -- Keyed, so this is one pass rather than a scan over the square's
+            -- other slots. Both sides get marked: the label pass has to name the
+            -- pair, and which one survives is registration order rather than
+            -- anything the author chose. duplicateEntries counts the DEAD ones
+            -- (three entries on one member = two lost).
+            local first = record.members[member]
+            if first then
+                record.slots[first].duplicate = true
+                slot.duplicate = true
+                record.duplicateEntries = record.duplicateEntries + 1
+            else
+                record.members[member] = #record.slots
+            end
             if isUpper then
                 record.hasUpper = true
             elseif not entry.stack and entry.slot ~= "freezer" then
@@ -2726,7 +2921,7 @@ end
 -- used to paint correctly-filled squares red.
 local function checkSquareContainers(square, containerLookup)
     local status = { totalContainers = 0, foundContainers = 0, errorContainers = 0,
-        specialContainers = 0, missingContainers = 0 }
+        specialContainers = 0, missingContainers = 0, duplicateEntries = 0 }
     if not square then return status end
 
     local x, y, z = square:getX(), square:getY(), square:getZ()
@@ -2774,6 +2969,12 @@ local function checkSquareContainers(square, containerLookup)
         return status
     end
 
+    -- Precomputed in buildContainerLookup: it is pure config data, so it is
+    -- neither per-tick work nor dependent on anything being streamed. Read it
+    -- before the resolution loop so a square whose containers have not loaded
+    -- still reports the collision.
+    status.duplicateEntries = record.duplicateEntries
+
     local skippedClaims = 0
     for i = 1, #record.slots do
         local slot = record.slots[i]
@@ -2813,6 +3014,14 @@ local function checkSquareContainers(square, containerLookup)
     -- same holds for foundContainers and predates the skip list; matching would
     -- mean identity on streamed objects. It can only ever hide work, never
     -- invent it - a finished square cannot be pushed to purple this way.
+    --
+    -- duplicateEntries closes the half of that gap the config can answer on its
+    -- own (two entries registered under one member key). The half still open is
+    -- entries with DIFFERENT member keys resolving onto the same container - a
+    -- `stack = 1` entry alongside a plain base entry where list[1] is not high,
+    -- for instance, which the fill's ordinal branch wins outright. Catching that
+    -- needs resolution plus per-container identity, which is exactly what this
+    -- function avoids.
     status.totalContainers = authorable
         + (skippedClaims < skippedPhysical and skippedClaims or skippedPhysical)
 
@@ -2837,8 +3046,12 @@ function VisualizeContainersStatus(radius, containerLookup)
             if square then
                 local containerStatus = checkSquareContainers(square, containerLookup)
 
-                -- Check if we should highlight this square
-                local shouldHighlight = containerStatus.totalContainers > 0 or containerStatus.missingContainers > 0
+                -- Check if we should highlight this square. duplicateEntries is
+                -- config-only, so it stands on its own here: the collision is
+                -- real whether or not the containers have streamed.
+                local shouldHighlight = containerStatus.totalContainers > 0
+                    or containerStatus.missingContainers > 0
+                    or containerStatus.duplicateEntries > 0
 
                 if shouldHighlight then
                     -- specialContainers is tallied SEPARATELY from
@@ -2851,8 +3064,12 @@ function VisualizeContainersStatus(radius, containerLookup)
                     -- green. Blue used to sit above orange and purple, so a
                     -- square with a special plus an unclaimed container painted
                     -- blue and read as finished work.
-                    if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0 then
-                        -- Red for squares with error containers (lookup value 0) or missing containers (config but no container)
+                    if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0
+                        or containerStatus.duplicateEntries > 0 then
+                        -- Red for squares with error containers (lookup value 0),
+                        -- missing containers (config but no container), or two
+                        -- entries registered under one member key (the second
+                        -- overwrites the first, so one entry never fills)
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0, 0, 0.7)
                     elseif containerStatus.totalContainers > 0 and claimed == 0 then
                         -- Orange for squares with containers but not in config
@@ -2883,10 +3100,28 @@ end
 local currentContainerLabels = nil
 
 -- One label per loot entry: its 1-based entry number, with "^" appended for
--- upper (+0.5 z) containers so stacked pairs on one tile stay readable
-local function buildContainerLabels(config)
+-- upper (+0.5 z) containers so stacked pairs on one tile stay readable, and "!"
+-- for an entry whose registration member key collides with another entry on the
+-- same square. Reddening the tile only says something is wrong there; the marker
+-- says WHICH two entries are fighting over the one slot.
+--
+-- The collision grouping lives in buildContainerLookup so there is one copy of
+-- the member rule; pass the lookup built for the same config to get the markers.
+local function buildContainerLabels(config, lookup)
     local labels = {}
     if not config or not config.loot then return labels end
+    -- entry number -> true, flattened out of the per-square records
+    local duplicated = {}
+    if lookup then
+        for _, record in pairs(lookup) do
+            local slots = record.slots
+            for i = 1, #slots do
+                if slots[i].duplicate then
+                    duplicated[slots[i].entry] = true
+                end
+            end
+        end
+    end
     for i = 1, #config.loot do
         local entry = config.loot[i]
         if entry and entry.coords then
@@ -2916,7 +3151,8 @@ local function buildContainerLabels(config)
                 z = math.floor(z),
                 rise = rise,
                 text = tostring(i) .. (entry.stack and ("s" .. entry.stack) or "")
-                    .. (isUpper and "^" or "") .. (entry.slot == "freezer" and "f" or ""),
+                    .. (isUpper and "^" or "") .. (entry.slot == "freezer" and "f" or "")
+                    .. (duplicated[i] and "!" or ""),
             }
         end
     end
@@ -3257,11 +3493,13 @@ function ShowContainers(index)
 
         -- Build container lookup table
         currentContainerLookup = buildContainerLookup(config)
-        currentContainerLabels = buildContainerLabels(config)
+        currentContainerLabels = buildContainerLabels(config, currentContainerLookup)
         -- the lookup is keyed by square now, so count the entries inside it
         local containerCount = 0
+        local duplicateCount = 0
         for _, record in pairs(currentContainerLookup) do
             containerCount = containerCount + #record.slots
+            duplicateCount = duplicateCount + record.duplicateEntries
         end
 
         Events.OnTick.Add(containersTick)
@@ -3269,8 +3507,13 @@ function ShowContainers(index)
         ensureDevOverlay()
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
         DWAPUtils.dprint(
-        "Precedence: Red = config errors or missing containers > Orange = nothing on the tile is in the config > Purple = only some of it is > Blue = fully claimed and holds a special > Green = fully claimed")
-        DWAPUtils.dprint("Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry")
+        "Precedence: Red = config errors, missing containers, or duplicate addressing (two entries on one square resolving to the same slot - the second overwrites the first, so one never fills) > Orange = nothing on the tile is in the config > Purple = only some of it is > Blue = fully claimed and holds a special > Green = fully claimed")
+        DWAPUtils.dprint(
+        "Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry, f a freezer slot, s<n> a stack ordinal, ! every entry in a colliding group - registration order picks the survivor, so the mark says which entries are fighting, not which one loses")
+        if duplicateCount > 0 then
+            DWAPUtils.dprint(("%d entr%s lost to duplicate addressing - the ! labels are the squares to fix"):format(
+                duplicateCount, duplicateCount == 1 and "y is" or "ies are"))
+        end
     else
         Events.OnTick.Remove(containersTick)
         DWAP_DevToggles.containers = false
@@ -4393,15 +4636,15 @@ function DWAPPlumbPick()
         -- branches never toggle anything, which is what stops this recursing
         if DWAP_DevToggles.roomPick then DWAPRoomPick() end
         if DWAP_DevToggles.doorPick then DWAPDoorPick() end
-        Events.OnMouseDown.Remove(plumbPickClick)
-        Events.OnMouseDown.Add(plumbPickClick)
+        devEventRemove("OnMouseDown", plumbPickClick)
+        devEventAdd("OnMouseDown", plumbPickClick)
         Events.OnTick.Remove(plumbPickTick)
         Events.OnTick.Add(plumbPickTick)
         ensureDevOverlay()
         DWAPUtils.dprint("Plumb pick: ON - left click tiles to add/remove, then Export")
         DWAPUtils.dprint("Left click is also attack, so expect the odd swing at air")
     else
-        Events.OnMouseDown.Remove(plumbPickClick)
+        devEventRemove("OnMouseDown", plumbPickClick)
         Events.OnTick.Remove(plumbPickTick)
         DWAPUtils.dprint(("Plumb pick: OFF (%d squares still held - Export or Clear)"):format(
             #plumbPickedSquares))
@@ -4605,14 +4848,14 @@ function DWAPDoorPick()
         -- branches never toggle anything, which is what stops this recursing
         if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
         if DWAP_DevToggles.roomPick then DWAPRoomPick() end
-        Events.OnMouseDown.Remove(doorPickClick)
-        Events.OnMouseDown.Add(doorPickClick)
+        devEventRemove("OnMouseDown", doorPickClick)
+        devEventAdd("OnMouseDown", doorPickClick)
         -- without this there is no render hook, so picks stay invisible
         ensureDevOverlay()
         print("Door pick: ON - left click doors to add/remove, shut them, then Export")
         print("Left click is also attack, so expect the odd swing at air")
     else
-        Events.OnMouseDown.Remove(doorPickClick)
+        devEventRemove("OnMouseDown", doorPickClick)
         print(("Door pick: OFF (%d doors still held - Export or Clear)"):format(
             #doorPickedSquares))
     end
@@ -4818,7 +5061,11 @@ local function squareLootContainers(square, out)
             elseif list[j].isHigh and not usedUpper then
                 slot = "upper"
                 usedUpper = true
-            elseif not list[j].isHigh and ctype ~= "freezer" and not usedBase then
+            elseif not list[j].isHigh and (ctype ~= "freezer" or #list == 1) and not usedBase then
+                -- mirrors resolveLootContainer's base-branch fallback: a lone
+                -- freezer-type container satisfies a plain base entry, so the
+                -- export must claim it as base too or it re-lists a container
+                -- the config already owns via a plain entry
                 usedBase = true
             else
                 stack = j
@@ -4827,6 +5074,12 @@ local function squareLootContainers(square, out)
                 x = square:getX(), y = square:getY(), z = square:getZ(),
                 ctype = ctype, isHigh = list[j].isHigh,
                 slot = slot, stack = stack,
+                -- not emitted, read by containerClaimed: the position in object
+                -- order a `stack = n` entry would name, and whether this is the
+                -- container a plain entry resolves to. Those are the same thing
+                -- only when the first container is floor-level, so neither can
+                -- be inferred from the other.
+                index = j, isBase = not slot and not stack,
             }
         end
     end
@@ -4846,18 +5099,35 @@ end
 -- Whether a config entry already addresses this exact container, rather than
 -- just its square: a square with a claimed fridge and a free upper cabinet
 -- must still offer the cabinet.
+--
+-- An entry with no stack usually means the first container, which is what
+-- `stack = 1` names explicitly, and reading those two forms as distinct is what
+-- re-listed a container the config already owned. But they are only the same
+-- container when the first one is floor-level: resolveLootContainer's base rule
+-- skips high containers, while stack = n indexes object order raw, so on a
+-- square whose list starts with a wall cabinet a plain entry and stack = 1
+-- resolve to different things. Assuming the equivalence there would report a
+-- container claimed that nothing fills - it would vanish from the export and
+-- the gap would never get authored.
+--
+-- So match on what the pick already knows: its position in object order and
+-- whether it is the container a plain entry resolves to. An upper or freezer
+-- entry names a container by position rather than index, so it never takes part
+-- in either comparison.
 local function containerClaimed(record, c)
     if not record then return false end
     for i = 1, #record.slots do
         local s = record.slots[i]
-        if c.stack then
-            if s.stack == c.stack then return true end
-        elseif c.slot == "upper" then
+        if c.slot == "upper" then
             if s.upper then return true end
         elseif c.slot == "freezer" then
             if s.freezer then return true end
-        elseif not s.upper and not s.freezer and not s.stack then
-            return true
+        elseif not s.upper and not s.freezer then
+            if s.stack then
+                if s.stack == c.index then return true end
+            elseif c.isBase then
+                return true
+            end
         end
     end
     return false
@@ -5048,14 +5318,14 @@ function DWAPRoomPick()
         -- branches never toggle anything, which is what stops this recursing
         if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
         if DWAP_DevToggles.doorPick then DWAPDoorPick() end
-        Events.OnMouseDown.Remove(roomPickClick)
-        Events.OnMouseDown.Add(roomPickClick)
+        devEventRemove("OnMouseDown", roomPickClick)
+        devEventAdd("OnMouseDown", roomPickClick)
         Events.OnTick.Remove(roomPickTick)
         Events.OnTick.Add(roomPickTick)
         ensureDevOverlay()
         DWAPUtils.dprint("Room pick: ON - left click a tile to take/drop its whole room, or the tile alone where there is no room")
     else
-        Events.OnMouseDown.Remove(roomPickClick)
+        devEventRemove("OnMouseDown", roomPickClick)
         Events.OnTick.Remove(roomPickTick)
         DWAPUtils.dprint(("Room pick: OFF (%d picks still held)"):format(#roomPicked))
     end
