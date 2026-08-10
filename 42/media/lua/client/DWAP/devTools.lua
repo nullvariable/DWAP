@@ -27,6 +27,36 @@ local function getTableSize(tbl)
     return DWAPUtils.tableSize(tbl)
 end
 
+-- Container types no loot entry ever addresses, keyed on ItemContainer:getType().
+-- One table so the ShowContainers overlay, the room picker's export and
+-- DWAPExplainSquare cannot drift into disagreeing about what an unclaimed
+-- container is.
+--
+-- Keyed on the container TYPE, not the sprite's `container` property: IsoCompost
+-- sets "composter" on the container in its constructor
+-- (IsoCompost.java:64-65) whatever the tile def carries, and the type is what
+-- resolveLootContainer and the loot fill both read.
+--
+-- ItemContainer.isStove() (ItemContainer.java:3607-3609) is exactly
+-- stove|toaster|coffeemaker, so testing it misses woodstove and stonefurnace.
+-- The woodstove tiles are CustomName = Oven, including the craftable B42
+-- wood-fired oven (crafted_05_4..7), and woodstove appears in the unclaimed
+-- lists of our own audit reports - so this is a live gap, not a hypothetical
+-- one. isStove's own three are listed here too, so this table is the whole
+-- answer and callers do not have to test both.
+local NON_LOOT_CONTAINER_TYPES = {
+    -- trash and laundry
+    bin = true, dumpster = true, clothingdryer = true, clothingdryerbasic = true,
+    clothingrack = true, clothingwasher = true,
+    -- cooking appliances
+    stove = true, woodstove = true, stonefurnace = true, barbecue = true,
+    barbecuepropane = true, toaster = true, coffeemaker = true, microwave = true,
+    -- fireplaces
+    fireplace = true, campfire = true, brazier = true,
+    -- yard and animal fixtures
+    doghouse = true, composter = true, trough = true,
+}
+
 -- B42 chunks are 8x8 tiles
 local CHUNK_SIZE = 8
 
@@ -2702,38 +2732,49 @@ local function checkSquareContainers(square, containerLookup)
     local x, y, z = square:getX(), square:getY(), square:getZ()
     local record = containerLookup[DWAPUtils.hashCoords(x, y, z)]
 
-    -- Count what is physically here, minus the things the loot fill never
-    -- touches. Trash containers only count when the square is configured,
-    -- otherwise every bin in town lights up as unclaimed
+    -- What is physically here, split by whether a loot entry is expected to
+    -- exist for it. The bin, oven, fireplace and dog house classes are things
+    -- the fill never authors into, so counting them would light every one in
+    -- town orange as unclaimed.
+    local authorable, skippedPhysical = 0, 0
     local containers = DWAPUtils.getSquareContainers(square)
     for i = 1, #containers do
         local entry = containers[i]
-        local container = entry.container
-        local containerType = container:getType()
-        if not (containerType == "microwave" or container:isStove()) then
-            local isTrash = false
+        local skipped = NON_LOOT_CONTAINER_TYPES[entry.container:getType()] == true
+        if not skipped then
+            -- GroupName classifies the whole sprite rather than the container,
+            -- so it is a separate test from the type table
             local properties = entry.object:getProperties()
-            if properties:has("GroupName") and properties:get("GroupName") == "Garbage" then
-                isTrash = true
-            elseif properties:has("container") then
-                local trashTypes = {
-                    bin = true,
-                    dumpster = true,
-                    clothingdryer = true,
-                    clothingdryerbasic = true,
-                    clothingrack = true,
-                    clothingwasher = true,
-                }
-                isTrash = trashTypes[properties:get("container")] == true
-            end
-            if not isTrash or record then
-                status.totalContainers = status.totalContainers + 1
-            end
+            skipped = properties:has("GroupName") and properties:get("GroupName") == "Garbage"
+        end
+        if skipped then
+            skippedPhysical = skippedPhysical + 1
+        else
+            authorable = authorable + 1
         end
     end
 
-    if not record then return status end
+    -- A square is not one decision. The lookup record is keyed per SQUARE, so
+    -- letting its presence un-skip everything on the tile counts the kitchen
+    -- stove alongside the wall cabinet the entry actually addresses, and claimed
+    -- can never reach 2: permanent purple on an ordinary finished kitchen.
+    -- Excluding skipped fixtures outright is the opposite failure - a tile whose
+    -- only container is a deliberately authored woodstove counts 0, and
+    -- shouldHighlight is `totalContainers > 0 or missingContainers > 0`, so the
+    -- square leaves the overlay instead of reading as done. Such entries are
+    -- real and they fill: the loot fill refuses only microwave/isStove types,
+    -- and then only without `stove = true` (LootSpawning/Events.lua:263).
+    --
+    -- So the total is driven by what the entries RESOLVED onto, counted below:
+    -- a skipped fixture joins the total only when an entry actually landed on
+    -- one, which is also the only reading that gets a claimed woodstove sharing
+    -- a tile with a free cabinet to purple rather than to green or to nothing.
+    if not record then
+        status.totalContainers = authorable
+        return status
+    end
 
+    local skippedClaims = 0
     for i = 1, #record.slots do
         local slot = record.slots[i]
         local container = DWAPUtils.resolveLootContainer(square, {
@@ -2746,14 +2787,34 @@ local function checkSquareContainers(square, containerLookup)
         })
         if not container then
             status.missingContainers = status.missingContainers + 1
-        elseif slot.value == 0 then
-            status.errorContainers = status.errorContainers + 1
-        elseif slot.value == 2 then
-            status.specialContainers = status.specialContainers + 1
         else
-            status.foundContainers = status.foundContainers + 1
+            -- the resolver hands back the container it chose, so the entry's own
+            -- target answers this - no matching against the physical list needed
+            if NON_LOOT_CONTAINER_TYPES[container:getType()] then
+                skippedClaims = skippedClaims + 1
+            end
+            if slot.value == 0 then
+                status.errorContainers = status.errorContainers + 1
+            elseif slot.value == 2 then
+                status.specialContainers = status.specialContainers + 1
+            else
+                status.foundContainers = status.foundContainers + 1
+            end
         end
     end
+
+    -- Clamped to what is physically here: two entries can resolve onto the same
+    -- fixture, and an inflated total is a purple square with nothing to fix.
+    -- min inlined - this runs on every square in the radius, every tick.
+    --
+    -- Known gap, one-directional: claims are counted, not matched to containers,
+    -- so two duplicate entries collapsing onto one of two same-type fixtures
+    -- count as two and the square reads green with the sibling unclaimed. The
+    -- same holds for foundContainers and predates the skip list; matching would
+    -- mean identity on streamed objects. It can only ever hide work, never
+    -- invent it - a finished square cannot be pushed to purple this way.
+    status.totalContainers = authorable
+        + (skippedClaims < skippedPhysical and skippedClaims or skippedPhysical)
 
     return status
 end
@@ -2780,19 +2841,28 @@ function VisualizeContainersStatus(radius, containerLookup)
                 local shouldHighlight = containerStatus.totalContainers > 0 or containerStatus.missingContainers > 0
 
                 if shouldHighlight then
-                    -- Priority order: error containers or missing containers (red) > special (blue) > normal logic
+                    -- specialContainers is tallied SEPARATELY from
+                    -- foundContainers, so a square whose only entry is a special
+                    -- has foundContainers == 0. Every branch below asks "how much
+                    -- of this square is claimed", which is the sum of the two.
+                    local claimed = containerStatus.foundContainers + containerStatus.specialContainers
+                    -- Priority: red (broken) > orange (nothing claimed) > purple
+                    -- (partly claimed) > blue (fully claimed, holds a special) >
+                    -- green. Blue used to sit above orange and purple, so a
+                    -- square with a special plus an unclaimed container painted
+                    -- blue and read as finished work.
                     if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0 then
                         -- Red for squares with error containers (lookup value 0) or missing containers (config but no container)
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0, 0, 0.7)
+                    elseif containerStatus.totalContainers > 0 and claimed == 0 then
+                        -- Orange for squares with containers but not in config
+                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0.5, 0, 0.5)
+                    elseif claimed < containerStatus.totalContainers then
+                        -- Purple for squares with some but not all containers in config
+                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.5, 0, 0.5, 0.5)
                     elseif containerStatus.specialContainers > 0 then
                         -- Blue for squares with special containers (lookup value 2)
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.2, 0.2, 0.8, 0.5)
-                    elseif containerStatus.totalContainers > 0 and containerStatus.foundContainers == 0 then
-                        -- Orange for squares with containers but not in config
-                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0.5, 0, 0.5)
-                    elseif containerStatus.foundContainers < containerStatus.totalContainers then
-                        -- Purple for squares with some but not all containers in config
-                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.5, 0, 0.5, 0.5)
                     else
                         -- Green for squares with all containers in config
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0, 1, 0, 0.5)
@@ -3199,7 +3269,7 @@ function ShowContainers(index)
         ensureDevOverlay()
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
         DWAPUtils.dprint(
-        "Red = config errors or missing containers, Orange = containers not in config, Purple = partial config, Blue = special containers, Green = all containers in config")
+        "Precedence: Red = config errors or missing containers > Orange = nothing on the tile is in the config > Purple = only some of it is > Blue = fully claimed and holds a special > Green = fully claimed")
         DWAPUtils.dprint("Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry")
     else
         Events.OnTick.Remove(containersTick)
@@ -4704,67 +4774,71 @@ end
 -- that are not ours; picking rooms narrows the target set before any loot is
 -- authored. Rooms are identified by their RoomDef rect rather than the live
 -- IsoRoom, which churns with streaming.
-local roomPicked = {}     -- ordered: { key, name, dx, dy, dz, dw, dh }
+-- Two kinds of pick share one ordered list. kind = "room" carries the def rect
+-- (key, name, dx, dy, dz, dw, dh); kind = "tile" carries a single square
+-- (key, x, y, z) and exists because outside squares - yards, decks, sheds with
+-- no room def - hold containers worth exporting and have no room to take.
+local roomPicked = {}     -- ordered: { kind, key, ... }
 local roomPickedKeys = {} -- key -> true
 
 -- Same identity the audit's coverage pass uses, so a room picked here and a
 -- room matched by baseRooms can never disagree
 local roomKey = roomDefKey
 
--- Every container in a room, through the shared resolver so the picker counts
--- exactly what the loot fill and the audit would see. Trash and appliances the
--- fill never touches are left out, matching the audit's coverage pass.
--- Container types we never author loot into: bins and laundry appliances the
--- fill already ignores, plus composters, which read as containers but are
--- garden fixtures. They still highlight with their room in the picker - this
--- only keeps them out of the exported table.
-local ROOM_SKIP_TYPES = {
-    bin = true, dumpster = true, clothingdryer = true, clothingdryerbasic = true,
-    clothingrack = true, clothingwasher = true, composter = true,
-}
+-- Every container on one square, through the shared resolver so the picker
+-- counts exactly what the loot fill and the audit would see. Appends to `out`
+-- so a room can union its squares into one list. Types we never author loot
+-- into (NON_LOOT_CONTAINER_TYPES) are left out, matching the audit's coverage
+-- pass; they still highlight with their room or tile in the picker, this only
+-- keeps them out of the exported table.
+--
+-- Both pick kinds enumerate through here: a tile pick is one square and a room
+-- pick is many, and the slot/stack decision is per square either way, so a
+-- fridge+cabinet tile gets the same distinct addressing whichever way it was
+-- picked.
+local function squareLootContainers(square, out)
+    if not square then return out end
+    local list = DWAPUtils.getSquareContainers(square)
+    -- Two containers on one square need DIFFERENT addressing or their entries
+    -- share coords and neither resolves - that is where the 75
+    -- duplicate-coordinate failures came from. Mirror what resolveLootContainer
+    -- can actually target: the freezer compartment, the wall-mounted container,
+    -- the plain base entry for the first floor container, and stack = n (index
+    -- in object order, matching opts.stack) for anything still ambiguous.
+    local usedUpper, usedFreezer, usedBase = false, false, false
+    for j = 1, #list do
+        local ctype = list[j].container:getType()
+        if not NON_LOOT_CONTAINER_TYPES[ctype] then
+            local slot, stack = nil, nil
+            if ctype == "freezer" and #list > 1 and not usedFreezer then
+                -- a lone freezer unit satisfies a base entry, so only claim the
+                -- freezer slot when it shares the square
+                slot = "freezer"
+                usedFreezer = true
+            elseif list[j].isHigh and not usedUpper then
+                slot = "upper"
+                usedUpper = true
+            elseif not list[j].isHigh and ctype ~= "freezer" and not usedBase then
+                usedBase = true
+            else
+                stack = j
+            end
+            out[#out + 1] = {
+                x = square:getX(), y = square:getY(), z = square:getZ(),
+                ctype = ctype, isHigh = list[j].isHigh,
+                slot = slot, stack = stack,
+            }
+        end
+    end
+    return out
+end
+
 local function roomContainers(room)
     local out = {}
     local squares = room:getSquares()
     if not squares then return out end
     for i = 0, squares:size() - 1 do
-        local square = squares:get(i)
-        if square then
-            local list = DWAPUtils.getSquareContainers(square)
-            -- Two containers on one square need DIFFERENT addressing or their
-            -- entries share coords and neither resolves - that is where the 75
-            -- duplicate-coordinate failures came from. Mirror what
-            -- resolveLootContainer can actually target: the freezer
-            -- compartment, the wall-mounted container, the plain base entry
-            -- for the first floor container, and stack = n (index in object
-            -- order, matching opts.stack) for anything still ambiguous.
-            local usedUpper, usedFreezer, usedBase = false, false, false
-            for j = 1, #list do
-                local container = list[j].container
-                local ctype = container:getType()
-                local isSkipped = ROOM_SKIP_TYPES[ctype] == true
-                if not isSkipped and ctype ~= "microwave" and not container:isStove() then
-                    local slot, stack = nil, nil
-                    if ctype == "freezer" and #list > 1 and not usedFreezer then
-                        -- a lone freezer unit satisfies a base entry, so only
-                        -- claim the freezer slot when it shares the square
-                        slot = "freezer"
-                        usedFreezer = true
-                    elseif list[j].isHigh and not usedUpper then
-                        slot = "upper"
-                        usedUpper = true
-                    elseif not list[j].isHigh and ctype ~= "freezer" and not usedBase then
-                        usedBase = true
-                    else
-                        stack = j
-                    end
-                    out[#out + 1] = {
-                        x = square:getX(), y = square:getY(), z = square:getZ(),
-                        ctype = ctype, isHigh = list[j].isHigh,
-                        slot = slot, stack = stack,
-                    }
-                end
-            end
-        end
+        squareLootContainers(squares:get(i), out)
     end
     return out
 end
@@ -4789,6 +4863,24 @@ local function containerClaimed(record, c)
     return false
 end
 
+-- Key for a single-tile pick. roomDefKey is always name@x,y,z, so a form with
+-- no '@' in it cannot collide with a room key however a room is named, and the
+-- two kinds can share roomPickedKeys and its toggle test.
+local function tilePickKey(x, y, z)
+    return ("tile:%d,%d,%d"):format(x, y, z)
+end
+
+-- Drop a pick of either kind by key
+local function roomPickRemove(key)
+    for i = 1, #roomPicked do
+        if roomPicked[i].key == key then
+            table.remove(roomPicked, i)
+            break
+        end
+    end
+    roomPickedKeys[key] = nil
+end
+
 -- Named function: an anonymous handler could never be removed from the event.
 --
 -- Takes SCREEN coords, not an object: this rides OnMouseDown and resolves the
@@ -4803,14 +4895,30 @@ function roomPickClick(screenX, screenY)
     -- from open floor rather than against a wall or in a doorway. The click
     -- logs the coords and room it resolved, and picking is a toggle, so a miss
     -- is visible and undone by clicking again.
-    local square, wx, wy, z = devScreenSquare(screenX, screenY)
+    -- coords come off the square rather than the projection's wx/wy/z: both
+    -- kinds of pick are stored from the square, so the tile key and the room's
+    -- squares can never name a different tile to the one that was resolved
+    local square = devScreenSquare(screenX, screenY)
     if not square then
         DWAPUtils.dprint("Room pick: no square under the cursor")
         return
     end
     local room = square:getRoom()
     if not room then
-        DWAPUtils.dprint(("Room pick: %d,%d,%d is not in a room"):format(wx, wy, z))
+        -- Outside squares - yards, decks, sheds the mapper never gave a room
+        -- def - still hold crates and shelves worth authoring, and there is no
+        -- room to take, so take the one tile instead of refusing.
+        local tx, ty, tz = square:getX(), square:getY(), square:getZ()
+        local tkey = tilePickKey(tx, ty, tz)
+        if roomPickedKeys[tkey] then
+            roomPickRemove(tkey)
+            DWAPUtils.dprint(("Room pick: removed %s (%d left)"):format(tkey, #roomPicked))
+            return
+        end
+        roomPickedKeys[tkey] = true
+        roomPicked[#roomPicked + 1] = { kind = "tile", key = tkey, x = tx, y = ty, z = tz }
+        DWAPUtils.dprint(("Room pick: %d,%d,%d is not in a room - added as a single tile (%d containers, %d picks)"):format(
+            tx, ty, tz, #squareLootContainers(square, {}), #roomPicked))
         return
     end
     local key = roomKey(room)
@@ -4819,24 +4927,19 @@ function roomPickClick(screenX, screenY)
         return
     end
     if roomPickedKeys[key] then
-        for i = 1, #roomPicked do
-            if roomPicked[i].key == key then
-                table.remove(roomPicked, i)
-                break
-            end
-        end
-        roomPickedKeys[key] = nil
+        roomPickRemove(key)
         DWAPUtils.dprint(("Room pick: removed %s (%d left)"):format(key, #roomPicked))
         return
     end
     local def = room:getRoomDef()
     roomPickedKeys[key] = true
     roomPicked[#roomPicked + 1] = {
+        kind = "room",
         key = key, name = room:getName() or "?",
         dx = def:getX(), dy = def:getY(), dz = def:getZ(),
         dw = def:getW(), dh = def:getH(),
     }
-    DWAPUtils.dprint(("Room pick: added %s (%d containers streamed, %d rooms picked)"):format(
+    DWAPUtils.dprint(("Room pick: added %s (%d containers streamed, %d picks)"):format(
         key, #roomContainers(room), #roomPicked))
 end
 
@@ -4872,6 +4975,17 @@ function roomPickTick()
             end
         end
     end
+    -- Tiles are not in the cell's room list, so they come straight from their
+    -- stored coords rather than from pickedRoomObjects. Cyan against the room
+    -- pink: a single tile inside a picked room's footprint would otherwise be
+    -- indistinguishable from the room around it.
+    for i = 1, #roomPicked do
+        local r = roomPicked[i]
+        if r.kind == "tile" and r.z == playerZ then
+            addAreaHighlightForPlayer(playerNum, r.x, r.y, r.x + 1, r.y + 1,
+                playerZ, 0.3, 0.9, 1, 0.4)
+        end
+    end
 end
 
 function roomPickDraw()
@@ -4883,7 +4997,17 @@ function roomPickDraw()
     local tm = getTextManager()
     for i = 1, #roomPicked do
         local r = roomPicked[i]
-        if r.dz == playerZ then
+        if r.kind == "tile" then
+            if r.z == playerZ then
+                -- centre of the tile itself, matching the highlight's colour so
+                -- the label and the square it names read as one pick
+                local sx = isoToScreenX(playerNum, r.x + 0.5, r.y + 0.5, r.z)
+                local sy = isoToScreenY(playerNum, r.x + 0.5, r.y + 0.5, r.z)
+                local text = ("%d tile"):format(i)
+                tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, text, 0, 0, 0, 0.8)
+                tm:DrawStringCentre(UIFont.Small, sx, sy, text, 0.4, 0.95, 1, 1)
+            end
+        elseif r.dz == playerZ then
             -- label at the def rect's centre so it does not sit on a wall
             local cx, cy = r.dx + r.dw / 2, r.dy + r.dh / 2
             local sx = isoToScreenX(playerNum, cx, cy, r.dz)
@@ -4929,11 +5053,11 @@ function DWAPRoomPick()
         Events.OnTick.Remove(roomPickTick)
         Events.OnTick.Add(roomPickTick)
         ensureDevOverlay()
-        DWAPUtils.dprint("Room pick: ON - left click a tile to take/drop its whole room")
+        DWAPUtils.dprint("Room pick: ON - left click a tile to take/drop its whole room, or the tile alone where there is no room")
     else
         Events.OnMouseDown.Remove(roomPickClick)
         Events.OnTick.Remove(roomPickTick)
-        DWAPUtils.dprint(("Room pick: OFF (%d rooms still held)"):format(#roomPicked))
+        DWAPUtils.dprint(("Room pick: OFF (%d picks still held)"):format(#roomPicked))
     end
 end
 
@@ -4987,6 +5111,12 @@ function DWAPExplainSquare(x, y, z)
         room and (room:getName() or "?") or "NONE", tostring(key)))
     if key then
         print(("  this room picked: %s"):format(tostring(roomPickedKeys[key] and true or false)))
+    else
+        -- No room means the export can only have reached this square as a tile
+        -- pick, so that is the whole question here
+        local tkey = tilePickKey(x, y, z)
+        print(("  this tile picked: %s   key: %s"):format(
+            tostring(roomPickedKeys[tkey] and true or false), tkey))
     end
 
     -- Is the square actually in the picked room's square list? The highlight
@@ -5024,13 +5154,57 @@ function DWAPExplainSquare(x, y, z)
         end
     end
 
+    -- The export filter and the overlay's count answer different questions about
+    -- a skip-listed fixture: the export never emits an entry for one, but the
+    -- overlay counts it once an entry has resolved onto it. Resolve the nearest
+    -- config's entries up here so each container line can report both, and tally
+    -- how many landed on each skip-listed TYPE - the same test
+    -- checkSquareContainers makes on the resolver's answer.
+    --
+    -- By type, not by container: the resolver hands back a container, and
+    -- comparing that against the ones in the physical list would mean identity
+    -- on streamed objects. So on a square holding two composters with one entry
+    -- between them, this knows one is claimed but not which, and the verdict
+    -- below says so rather than marking both.
+    local claimedSkipTypes = {}
+    local index = DWAPNearestConfig(true)
+    local rec = nil
+    if index then
+        local configs = DWAPUtils.loadConfigs(true)
+        local config = configs and configs[index]
+        local lookup = config and buildContainerLookup(config)
+        rec = lookup and lookup[DWAPUtils.hashCoords(x, y, z)]
+    end
+    for i = 1, rec and #rec.slots or 0 do
+        local s = rec.slots[i]
+        local hit = DWAPUtils.resolveLootContainer(square, {
+            upper = s.upper,
+            stack = s.stack,
+            freezer = s.freezer,
+            pairPresent = s.upper and rec.hasBase or false,
+        })
+        local hitType = hit and hit:getType()
+        if hitType and NON_LOOT_CONTAINER_TYPES[hitType] then
+            claimedSkipTypes[hitType] = (claimedSkipTypes[hitType] or 0) + 1
+        end
+    end
+
     local list = DWAPUtils.getSquareContainers(square)
+    -- How many of each skip-listed type are physically here, to compare against
+    -- the claims above: fewer claims than fixtures means the overlay counts only
+    -- some of them, and the per-line verdict cannot name which
+    local skipTypeCount = {}
+    for i = 1, #list do
+        local t = list[i].container:getType()
+        if NON_LOOT_CONTAINER_TYPES[t] then
+            skipTypeCount[t] = (skipTypeCount[t] or 0) + 1
+        end
+    end
     print(("  getSquareContainers: %d"):format(#list))
     for i = 1, #list do
         local cont = list[i].container
         local ctype = cont:getType()
-        local skipped = ROOM_SKIP_TYPES[ctype] == true or ctype == "microwave"
-            or cont:isStove()
+        local skipped = NON_LOOT_CONTAINER_TYPES[ctype] == true
         -- Say WHY it reads high. "upper" is not about stacking height - it is
         -- the raised/wall-mounted slot versus the floor-level one - and a
         -- cardboardbox sitting on a counter qualifies via renderYOffset, which
@@ -5050,19 +5224,77 @@ function DWAPExplainSquare(x, y, z)
                 why = ("renderYOffset=%s (>32, drawn raised)"):format(tostring(yoff))
             end
         end
+        local verdict = "exportable, and counted by the overlay"
+        if skipped then
+            local claims = claimedSkipTypes[ctype] or 0
+            local present = skipTypeCount[ctype] or 1
+            if claims == 0 then
+                verdict = "SKIPPED by the export filter, and no entry resolves onto it, "
+                    .. "so the overlay does not count it either"
+            elseif claims >= present then
+                verdict = "SKIPPED by the export filter, but an entry resolves onto it, "
+                    .. "so the overlay counts it"
+            else
+                verdict = ("SKIPPED by the export filter; %d of the %d %s here are claimed, "
+                    .. "and this is tracked by type, so it cannot say which"):format(
+                    claims, present, ctype)
+            end
+        end
         print(("    %d. %s  isHigh=%s [%s]  %s"):format(i, ctype, tostring(list[i].isHigh), why,
-            skipped and "SKIPPED by the export filter" or "exportable"))
+            verdict))
     end
 
-    local index = DWAPNearestConfig(true)
     if index then
-        local configs = DWAPUtils.loadConfigs(true)
-        local config = configs and configs[index]
-        local lookup = config and buildContainerLookup(config)
-        local rec = lookup and lookup[DWAPUtils.hashCoords(x, y, z)]
         print(("  nearest config %02d: %s"):format(index,
             rec and "already has an entry at these coords" or "no entry at these coords"))
     end
+end
+
+-- Split one pick's containers against the config, tally them, and emit the
+-- entries. A room and a tile differ only in how they enumerate their containers
+-- and in what the note's location reads as, so everything downstream of that is
+-- one path.
+-- @return number listed, number already claimed
+local function emitPickedContainers(n, label, where, containers, lookup)
+    local free, claimed, tally = {}, 0, {}
+    for j = 1, #containers do
+        local c = containers[j]
+        local isClaimed = lookup
+            and containerClaimed(lookup[DWAPUtils.hashCoords(c.x, c.y, c.z)], c)
+        if isClaimed then claimed = claimed + 1 end
+        -- Claimed containers are normally left out, so an export can be
+        -- pasted alongside what is already there. With roomExportAll on
+        -- they are listed anyway: reworking a whole room means replacing
+        -- its entries, not filling around them. They still count as
+        -- claimed so the summary shows what is being superseded.
+        if not isClaimed or DWAP_DevToggles.roomExportAll then
+            free[#free + 1] = c
+            tally[c.ctype] = (tally[c.ctype] or 0) + 1
+        end
+    end
+    print(("  %d %s | %d containers: %d listed, %d already in config"):format(
+        n, label, #containers, #free, claimed))
+    if #free > 0 then
+        print("     " .. allLootTallyString(tally))
+        -- Emitted in the config's own shape: multiline, one field per
+        -- line, and the descriptor as a note FIELD rather than a
+        -- trailing comment - `type` was never read and the note is what
+        -- the tools can actually see at runtime. No E-marker here; paste
+        -- it in and the stamper numbers the whole table.
+        for j = 1, #free do
+            local c = free[j]
+            print("        {")
+            print(('            note = "%s @ %s",'):format(c.ctype, where))
+            print(("            coords = { x = %d, y = %d, z = %d },"):format(c.x, c.y, c.z))
+            if c.slot then
+                print(('            slot = "%s",'):format(c.slot))
+            elseif c.stack then
+                print(("            stack = %d,"):format(c.stack))
+            end
+            print("        },")
+        end
+    end
+    return #free, claimed
 end
 
 function DWAPRoomExport(index)
@@ -5079,11 +5311,11 @@ function DWAPRoomExport(index)
             return
         end
         lookup = buildContainerLookup(config)
-        exportHeader("PICKED ROOMS", (" | compared against config %02d%s"):format(
+        exportHeader("PICKED ROOMS/TILES", (" | compared against config %02d%s"):format(
             index,
             DWAP_DevToggles.roomExportAll and " | INCLUDING already-configured containers" or ""))
     else
-        exportHeader("PICKED ROOMS", " | no config compared")
+        exportHeader("PICKED ROOMS/TILES", " | no config compared")
     end
 
     -- A key can map to SEVERAL IsoRoom objects. The cell's room list holds
@@ -5104,70 +5336,52 @@ function DWAPRoomExport(index)
     end
 
     local totalFree, totalClaimed = 0, 0
+    local roomCount, tileCount = 0, 0
     for i = 1, #roomPicked do
         local r = roomPicked[i]
-        local matches = byKey[r.key]
-        if not matches then
-            print(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
+        if r.kind == "tile" then
+            tileCount = tileCount + 1
+            local square = getCell():getGridSquare(r.x, r.y, r.z)
+            if not square then
+                print(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
+            else
+                -- The note's location half is normally the room name, and this
+                -- square has no room by definition - that is what made it a tile
+                -- pick. "outside" says where it is in the same voice a room name
+                -- would, and survives being pasted into a config unedited.
+                local free, claimed = emitPickedContainers(
+                    i, r.key, "outside", squareLootContainers(square, {}), lookup)
+                totalFree = totalFree + free
+                totalClaimed = totalClaimed + claimed
+            end
         else
-            -- Union across every room object sharing this key, deduped on the
-            -- addressing a loot entry would actually use (coords plus slot or
-            -- stack) - two duplicates can list the same square.
-            local containers, seen = {}, {}
-            for m = 1, #matches do
-                local part = roomContainers(matches[m])
-                for n = 1, #part do
-                    local c = part[n]
-                    local sig = ("%d,%d,%d|%s|%s"):format(
-                        c.x, c.y, c.z, tostring(c.slot), tostring(c.stack))
-                    if not seen[sig] then
-                        seen[sig] = true
-                        containers[#containers + 1] = c
+            roomCount = roomCount + 1
+            local matches = byKey[r.key]
+            if not matches then
+                print(("  %d %s - not streamed right now, walk it to enumerate"):format(i, r.key))
+            else
+                -- Union across every room object sharing this key, deduped on the
+                -- addressing a loot entry would actually use (coords plus slot or
+                -- stack) - two duplicates can list the same square.
+                local containers, seen = {}, {}
+                for m = 1, #matches do
+                    local part = roomContainers(matches[m])
+                    for n = 1, #part do
+                        local c = part[n]
+                        local sig = ("%d,%d,%d|%s|%s"):format(
+                            c.x, c.y, c.z, tostring(c.slot), tostring(c.stack))
+                        if not seen[sig] then
+                            seen[sig] = true
+                            containers[#containers + 1] = c
+                        end
                     end
                 end
-            end
-            if #matches > 1 then
-                print(("     (%d duplicate room objects share this key - unioned)"):format(#matches))
-            end
-            local free, claimed, tally = {}, 0, {}
-            for j = 1, #containers do
-                local c = containers[j]
-                local isClaimed = lookup
-                    and containerClaimed(lookup[DWAPUtils.hashCoords(c.x, c.y, c.z)], c)
-                if isClaimed then claimed = claimed + 1 end
-                -- Claimed containers are normally left out, so an export can be
-                -- pasted alongside what is already there. With roomExportAll on
-                -- they are listed anyway: reworking a whole room means replacing
-                -- its entries, not filling around them. They still count as
-                -- claimed so the summary shows what is being superseded.
-                if not isClaimed or DWAP_DevToggles.roomExportAll then
-                    free[#free + 1] = c
-                    tally[c.ctype] = (tally[c.ctype] or 0) + 1
+                if #matches > 1 then
+                    print(("     (%d duplicate room objects share this key - unioned)"):format(#matches))
                 end
-            end
-            totalFree = totalFree + #free
-            totalClaimed = totalClaimed + claimed
-            print(("  %d %s | %d containers: %d listed, %d already in config"):format(
-                i, r.key, #containers, #free, claimed))
-            if #free > 0 then
-                print("     " .. allLootTallyString(tally))
-                -- Emitted in the config's own shape: multiline, one field per
-                -- line, and the descriptor as a note FIELD rather than a
-                -- trailing comment - `type` was never read and the note is what
-                -- the tools can actually see at runtime. No E-marker here; paste
-                -- it in and the stamper numbers the whole table.
-                for j = 1, #free do
-                    local c = free[j]
-                    print("        {")
-                    print(('            note = "%s @ %s",'):format(c.ctype, r.name))
-                    print(("            coords = { x = %d, y = %d, z = %d },"):format(c.x, c.y, c.z))
-                    if c.slot then
-                        print(('            slot = "%s",'):format(c.slot))
-                    elseif c.stack then
-                        print(("            stack = %d,"):format(c.stack))
-                    end
-                    print("        },")
-                end
+                local free, claimed = emitPickedContainers(i, r.key, r.name, containers, lookup)
+                totalFree = totalFree + free
+                totalClaimed = totalClaimed + claimed
             end
         end
     end
@@ -5175,39 +5389,66 @@ function DWAPRoomExport(index)
     -- rooms themselves rather than the def rect's centre, which can land in a
     -- wall or a courtyard on an L-shaped room. Only streamed rooms can supply
     -- one, so a room that was not walked is called out instead of skipped.
+    --
+    -- Tile picks are excluded on purpose: baseRoomKeys resolves each anchor with
+    -- square:getRoom() and takes its def key, so a tile anchor - a square with no
+    -- room, which is why it was picked as a tile - resolves to nothing and would
+    -- be reported as a broken baseRooms anchor for the life of the config.
     print("")
-    print("=== baseRooms (paste into the config next to baseBuildings) ===")
-    print("    baseRooms = {")
-    local missing = 0
-    for i = 1, #roomPicked do
-        local r = roomPicked[i]
-        local matches = byKey[r.key]
-        local anchor = nil
-        for m = 1, matches and #matches or 0 do
-            local squares = matches[m]:getSquares()
-            if squares and squares:size() > 0 then
-                anchor = squares:get(0)
-                break
+    if roomCount > 0 then
+        print("=== baseRooms (paste into the config next to baseBuildings) ===")
+        print("    baseRooms = {")
+        local missing = 0
+        for i = 1, #roomPicked do
+            local r = roomPicked[i]
+            if r.kind ~= "tile" then
+                local matches = byKey[r.key]
+                local anchor = nil
+                for m = 1, matches and #matches or 0 do
+                    local squares = matches[m]:getSquares()
+                    if squares and squares:size() > 0 then
+                        anchor = squares:get(0)
+                        break
+                    end
+                end
+                if anchor then
+                    print(("        { x = %d, y = %d, z = %d }, -- %s"):format(
+                        anchor:getX(), anchor:getY(), anchor:getZ(), r.name))
+                else
+                    missing = missing + 1
+                    print(("        -- %s: not streamed, walk it and export again"):format(r.key))
+                end
             end
         end
-        if anchor then
-            print(("        { x = %d, y = %d, z = %d }, -- %s"):format(
-                anchor:getX(), anchor:getY(), anchor:getZ(), r.name))
-        else
-            missing = missing + 1
-            print(("        -- %s: not streamed, walk it and export again"):format(r.key))
+        print("    },")
+        if missing > 0 then
+            print(("  %d room(s) had no streamed square - those lines are comments, not anchors"):format(missing))
+        end
+    else
+        print("=== baseRooms: nothing to emit, every pick was a single tile ===")
+    end
+
+    -- Tiles get their own section rather than a silent omission from the block
+    -- above: their entries were exported, and "my picks are not in the baseRooms
+    -- list" has to read as a decision rather than a loss.
+    if tileCount > 0 then
+        print("")
+        print("=== picked tiles (loot entries above; NOT baseRooms anchors) ===")
+        for i = 1, #roomPicked do
+            local r = roomPicked[i]
+            if r.kind == "tile" then
+                print(("        -- %d,%d,%d%s"):format(r.x, r.y, r.z,
+                    getCell():getGridSquare(r.x, r.y, r.z) and ""
+                        or "  NOT STREAMED - nothing was exported for this tile"))
+            end
         end
     end
-    print("    },")
-    if missing > 0 then
-        print(("  %d room(s) had no streamed square - those lines are comments, not anchors"):format(missing))
-    end
 
-    print(("=== TOTAL: %d listed, %d already in config, across %d rooms ==="):format(
-        totalFree, totalClaimed, #roomPicked))
+    print(("=== TOTAL: %d listed, %d already in config, across %d rooms and %d tiles ==="):format(
+        totalFree, totalClaimed, roomCount, tileCount))
 
     -- An export is the end of a pick session: the next one starts from a clean
-    -- slate rather than silently appending to the last dump's rooms. Only from
+    -- slate rather than silently appending to the last dump's picks. Only from
     -- here - the early returns above exported nothing and must leave the picks
     -- alone. Toggle OFF through DWAPRoomPick rather than setting the flag, so
     -- the OnMouseDown/OnTick handlers come off and the panel button un-lights.
