@@ -4062,6 +4062,78 @@ local function exportHeader(what, extra)
         extra or ""))
 end
 
+--- The square under a screen pixel, projected onto the PLAYER'S z plane.
+---
+--- screenToIsoX/Y (LuaManager.java:3532, :3540) take unscaled screen coords and
+--- apply the zoom themselves, which is the space Mouse.getXA() reports and the
+--- space OnMouseDown hands over (UIManager.java:533 sets mx, :732 passes it).
+---
+--- This is a flat projection: it answers which GROUND tile sits under the
+--- pixel, not which sprite was drawn there. Screen Y up means a smaller x + y,
+--- so clicking high on a tall sprite resolves to a square behind the one the
+--- sprite belongs to. Callers that need an object use the picker instead and
+--- keep this for miss messages and last-resort fallbacks.
+--- @return IsoGridSquare|nil square, number wx, number wy, number z
+local function devScreenSquare(screenX, screenY)
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return nil, 0, 0, 0 end
+    local z = pSquare:getZ()
+    local playerNum = player:getPlayerNum()
+    local wx = math.floor(screenToIsoX(playerNum, screenX, screenY, z))
+    local wy = math.floor(screenToIsoY(playerNum, screenX, screenY, z))
+    local cell = getCell()
+    if not cell then return nil, wx, wy, z end
+    return cell:getGridSquare(wx, wy, z), wx, wy, z
+end
+
+--- The object actually under a screen pixel - the same sprite-mask hit the
+--- game itself resolves - or nil when the cursor is over no sprite.
+---
+--- IsoObjectPicker is exposed to Lua (LuaManager.java:2186) and Instance is a
+--- public STATIC field, so the exposer copies the singleton into the class
+--- table (LuaJavaClassExposer.java:302). That is the IsoObjectPicker.Instance
+--- idiom vanilla uses in server/ISObjectClickHandler.lua:36.
+---
+--- ContextPick returns an IsoObjectPicker.ClickObject, and its tile and square
+--- are public INSTANCE fields with no getters (IsoObjectPicker.java:571-572;
+--- the only methods are set, calculateScore, getScore, contains). The exposer
+--- copies static fields only, so click.tile reads nil from Lua. The way in is
+--- the debug reflection globals getNumClassFields / getClassField /
+--- getClassFieldVal (LuaManager.java:6524, :6530, :6640): they throw unless
+--- Core.debug (validateReflectionAccess, LuaManager.java:1669) and
+--- java.lang.reflect.Field is itself only exposed under Core.debug
+--- (LuaManager.java:2662-2663). Both hold - this whole file is behind
+--- getDebug(), which is Core.debug on a client (LuaManager.java:3995). Vanilla
+--- drives the same three globals in client/DebugUIs/ObjectViewer.lua:202-206
+--- and then opens the value that comes back as a live object, which is what
+--- makes the returned IsoObject usable rather than opaque.
+---
+--- Fed the OnMouseDown coords, this recomputes exactly what UIManager sets
+--- `picked` to later in the same update (UIManager.java:644) - the fresh answer
+--- the cached one only sometimes was.
+--- @return IsoObject|nil
+local function devPickObject(screenX, screenY)
+    -- No existence guard on the reflection globals: they are registered
+    -- unconditionally and it is their runtime effect, not their presence, that
+    -- Core.debug gates. A nil check here would only hide a broken assumption.
+    local click = IsoObjectPicker.Instance:ContextPick(screenX, screenY)
+    if not click then return nil end
+    for i = 0, getNumClassFields(click) - 1 do
+        local field = getClassField(click, i)
+        -- by NAME, so field order can churn; the getName probe is vanilla's own
+        -- "is this class exposed" guard from ObjectViewer.lua:204
+        if field and field.getName and field:getName() == "tile" then
+            local obj = getClassFieldVal(click, field)
+            -- getClassFieldVal answers the STRING "<private>" when the read
+            -- fails (LuaManager.java:6647), so check for the object shape
+            if obj and obj ~= "<private>" and obj.getSquare then return obj end
+            return nil
+        end
+    end
+    return nil
+end
+
 -- Plumbing picker: click tiles to build an export by hand. The footprint scan
 -- is all-or-nothing, which is unusable in something like Rosewood where the
 -- config only wants a few rooms out of a huge building. Selection is per
@@ -4084,29 +4156,105 @@ local function plumbPickRemove(key)
     plumbPickedKeys[key] = nil
 end
 
--- Named function: an anonymous handler could never be removed from the event
-function plumbPickClick(tile)
-    if not DWAP_DevToggles.plumbPick then return end
-    local square = tile and tile.getSquare and tile:getSquare()
-    if not square then return end
-    local x, y, z = square:getX(), square:getY(), square:getZ()
-    local key = plumbPickKey(x, y, z)
-    if plumbPickedKeys[key] then
-        plumbPickRemove(key)
-        DWAPUtils.dprint(("Plumb pick: removed %s (%d left)"):format(key, #plumbPickedSquares))
-        return
-    end
-
+-- Every tank and fixture on one square, in object order
+local function plumbEntriesOn(square)
     local entries = {}
-    local objects = square:getObjects()
+    local objects = square and square:getObjects()
     if objects then
         for j = 0, objects:size() - 1 do
             local info = plumbingInfo(objects:get(j))
             if info then entries[#entries + 1] = info end
         end
     end
+    return entries
+end
+
+--- Fallback for a click the object picker could not resolve: the projected
+--- square, or the nearest square around it that carries plumbing.
+---
+--- The projection is off by a tile whenever the sprite is drawn above the tile
+--- it belongs to (a wall sink, a tank on a stand), always in the same direction
+--- - screen Y up is a smaller x + y - so the true square is one step towards
+--- the camera. The 3x3 is searched rather than that one direction because the
+--- error is half a tile per unit of sprite height and lands either side of the
+--- diagonal.
+---
+--- Ties are broken on SCREEN distance from the click to the candidate's centre
+--- raised by PLUMBING_LABEL_RISE: every candidate is raised by the same amount,
+--- so this only ranks them, but raising them all pulls the comparison up to
+--- where a fixture is actually drawn instead of where its floor is.
+---
+--- What it can get wrong: two fixtures a tile apart - a sink beside a toilet,
+--- two sinks on one wall - can hand back the neighbour rather than the one
+--- clicked. The click prints which square it took and whether it had to snap,
+--- and picking toggles, so a wrong take is one more click to undo.
+--- @return IsoGridSquare|nil square, table entries, boolean snapped
+local function plumbSnapToFixture(screenX, screenY, wx, wy, z)
+    local player = getPlayer()
+    if not player then return nil, {}, false end
+    local playerNum = player:getPlayerNum()
+    local best, bestEntries, bestDist
+    for dx = -1, 1 do
+        for dy = -1, 1 do
+            local candidate = getSquare(wx + dx, wy + dy, z)
+            local entries = candidate and plumbEntriesOn(candidate)
+            if entries and #entries > 0 then
+                local drawZ = z + PLUMBING_LABEL_RISE
+                local sx = isoToScreenX(playerNum, wx + dx + 0.5, wy + dy + 0.5, drawZ) - screenX
+                local sy = isoToScreenY(playerNum, wx + dx + 0.5, wy + dy + 0.5, drawZ) - screenY
+                local d = sx * sx + sy * sy
+                if not bestDist or d < bestDist then
+                    best, bestEntries, bestDist = candidate, entries, d
+                end
+            end
+        end
+    end
+    if not best then return nil, {}, false end
+    return best, bestEntries, not (best:getX() == wx and best:getY() == wy)
+end
+
+--- Named function: an anonymous handler could never be removed from the event.
+---
+--- Takes SCREEN coords, not an object: this rides OnMouseDown for the same
+--- reason the room picker does (see DWAPRoomPick for the mechanism), but it
+--- resolves the OBJECT under the cursor rather than projecting onto the ground
+--- plane, because a fixture is one tile and the projection is a tile out
+--- whenever the sprite is drawn above its own square.
+function plumbPickClick(screenX, screenY)
+    if not DWAP_DevToggles.plumbPick then return end
+    local entries, how
+    local picked = devPickObject(screenX, screenY)
+    local square = picked and picked.getSquare and picked:getSquare()
+    if square then
+        entries = plumbEntriesOn(square)
+        how = ""
+    else
+        -- nothing under the cursor's sprite mask, or the picker is unavailable
+        local projected, wx, wy, z = devScreenSquare(screenX, screenY)
+        local snapped
+        square, entries, snapped = plumbSnapToFixture(screenX, screenY, wx, wy, z)
+        if not square then
+            square, entries = projected, {}
+        end
+        how = snapped and " [projected, snapped from cursor tile]" or " [projected]"
+        if not square then
+            DWAPUtils.dprint(("Plumb pick: nothing under the cursor and no square at %d,%d,%d")
+                :format(wx, wy, z))
+            return
+        end
+    end
+
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local key = plumbPickKey(x, y, z)
+    if plumbPickedKeys[key] then
+        plumbPickRemove(key)
+        DWAPUtils.dprint(("Plumb pick: removed %s (%d left)%s"):format(
+            key, #plumbPickedSquares, how))
+        return
+    end
+
     if #entries == 0 then
-        DWAPUtils.dprint("Plumb pick: no tank or fixture on " .. key)
+        DWAPUtils.dprint(("Plumb pick: no tank or fixture on %s%s"):format(key, how))
         return
     end
 
@@ -4116,8 +4264,8 @@ function plumbPickClick(tile)
         x = x, y = y, z = z, key = key, entries = entries,
         where = (room and room:getName() or "outside") .. ", " .. bldTag(square:getBuilding()),
     }
-    DWAPUtils.dprint(("Plumb pick: added %s (%d fixture(s), %d picked)"):format(
-        key, #entries, #plumbPickedSquares))
+    DWAPUtils.dprint(("Plumb pick: added %s (%d fixture(s), %d picked)%s"):format(
+        key, #entries, #plumbPickedSquares, how))
 end
 
 function plumbPickTick()
@@ -4156,18 +4304,34 @@ function plumbPickDraw()
     end
 end
 
+-- OnMouseDown, not OnObjectLeftMouseButtonDown, for the reason spelled out on
+-- DWAPRoomPick: the object event only fires when UIManager's checkPicked()
+-- passes (UIManager.java:597, :832), and the `picked` it tests is a cache
+-- refreshed only on frames where no UI element consumed the mouse move
+-- (UIManager.java:643) - which the dev panel does. Clicks vanished with no log
+-- line and no error. OnMouseDown (UIManager.java:732) fires on every left press
+-- a UI element did not consume, so the panel is still safe to click on.
+--
+-- Unlike the room picker this does NOT then project onto the ground plane: it
+-- runs the object picker itself (devPickObject), because the export addresses
+-- one square per fixture and a projection is a tile out on anything drawn above
+-- its own tile. The projection is only the fallback, and says so when it fires.
 function DWAPPlumbPick()
     DWAP_DevToggles.plumbPick = not DWAP_DevToggles.plumbPick
     if DWAP_DevToggles.plumbPick then
-        Events.OnObjectLeftMouseButtonDown.Remove(plumbPickClick)
-        Events.OnObjectLeftMouseButtonDown.Add(plumbPickClick)
+        -- all three pickers claim left click, so only one may be live; the OFF
+        -- branches never toggle anything, which is what stops this recursing
+        if DWAP_DevToggles.roomPick then DWAPRoomPick() end
+        if DWAP_DevToggles.doorPick then DWAPDoorPick() end
+        Events.OnMouseDown.Remove(plumbPickClick)
+        Events.OnMouseDown.Add(plumbPickClick)
         Events.OnTick.Remove(plumbPickTick)
         Events.OnTick.Add(plumbPickTick)
         ensureDevOverlay()
         DWAPUtils.dprint("Plumb pick: ON - left click tiles to add/remove, then Export")
         DWAPUtils.dprint("Left click is also attack, so expect the odd swing at air")
     else
-        Events.OnObjectLeftMouseButtonDown.Remove(plumbPickClick)
+        Events.OnMouseDown.Remove(plumbPickClick)
         Events.OnTick.Remove(plumbPickTick)
         DWAPUtils.dprint(("Plumb pick: OFF (%d squares still held - Export or Clear)"):format(
             #plumbPickedSquares))
@@ -4291,6 +4455,28 @@ function doorPickDraw()
     end
 end
 
+--- The door under a screen pixel, through the picker's own door queries.
+---
+--- IsoObjectPicker has purpose-built door lookups that hand back an IsoObject
+--- directly instead of a ClickObject, so no reflection is needed here:
+--- PickDoor matches IsoDoor only, and its bTransparent argument is an equality
+--- test against targetAlpha < 1 (IsoObjectPicker.java:334-337, and the FBO path
+--- at FBORenderObjectPicker.java:359), so it has to be asked twice - once for
+--- solid doors, once for ones the cutaway has faded. PickThumpable covers the
+--- player-built/custom case, filtered here to the ones that answer isDoor,
+--- which is exactly the pair doorOnSquare accepts. Vanilla chains the same
+--- calls in server/ISObjectClickHandler.lua:36-46.
+--- @return IsoObject|nil
+local function devPickDoor(screenX, screenY)
+    if not IsoObjectPicker then return nil end
+    local picker = IsoObjectPicker.Instance
+    local door = picker:PickDoor(screenX, screenY, false) or picker:PickDoor(screenX, screenY, true)
+    if door then return door end
+    local thump = picker:PickThumpable(screenX, screenY)
+    if thump and thump.isDoor and thump:isDoor() then return thump end
+    return nil
+end
+
 --- Named function: an anonymous handler could never be removed from the event
 ---
 --- Feedback goes through print, not dprint. dprint routes to log(DebugType.Lua)
@@ -4298,37 +4484,65 @@ end
 --- confirmation is a dprint looks broken even while it is collecting perfectly
 --- well - the toggle lights up and nothing else ever appears. exportHeader was
 --- moved to print for the same reason.
-function doorPickClick(tile)
+---
+--- Takes SCREEN coords, not an object: this rides OnMouseDown (see DWAPDoorPick)
+--- and asks the object picker which door the cursor is over.
+function doorPickClick(screenX, screenY)
     if not DWAP_DevToggles.doorPick then return end
-    local square = tile and tile.getSquare and tile:getSquare()
-    if not square then return end
+    local how = ""
+    local door = devPickDoor(screenX, screenY)
+    local square = door and door:getSquare()
+    if not square then
+        -- Nothing door-shaped under the cursor's sprite mask. Fall back to the
+        -- ground plane, which is a tile out whenever the door sprite is clicked
+        -- above its own tile, so it only lands a pick when there happens to be
+        -- a door on the projected square too - and says which route it took.
+        local projected, wx, wy, z = devScreenSquare(screenX, screenY)
+        if not (projected and doorOnSquare(projected)) then
+            print(("Door pick: no door under the cursor (ground tile there is %d,%d,%d)")
+                :format(wx, wy, z))
+            return
+        end
+        square, how = projected, " [projected, not picked from the sprite]"
+    end
     local x, y, z = square:getX(), square:getY(), square:getZ()
     local key = plumbPickKey(x, y, z)
     if doorPickedKeys[key] then
         doorPickRemove(key)
-        print(("Door pick: removed %s (%d left)"):format(key, #doorPickedSquares))
+        print(("Door pick: removed %s (%d left)%s"):format(key, #doorPickedSquares, how))
         return
     end
     if not doorOnSquare(square) then
-        print(("Door pick: no door on %s"):format(key))
+        print(("Door pick: no door on %s%s"):format(key, how))
         return
     end
     doorPickedKeys[key] = true
     doorPickedSquares[#doorPickedSquares + 1] = { key = key, x = x, y = y, z = z }
-    print(("Door pick: added %s (%d held)"):format(key, #doorPickedSquares))
+    print(("Door pick: added %s (%d held)%s"):format(key, #doorPickedSquares, how))
 end
 
+-- OnMouseDown, not OnObjectLeftMouseButtonDown - same swallowed-click mechanism
+-- described on DWAPRoomPick: the object event needs UIManager's cached `picked`
+-- (UIManager.java:597, :832), which only refreshes on frames where no UI
+-- element consumed the mouse move (UIManager.java:643), and the dev panel is
+-- always on screen. The door itself still comes from the object picker
+-- (devPickDoor), not from a ground-plane projection, so what gets picked is the
+-- door whose sprite was clicked rather than the tile in front of it.
 function DWAPDoorPick()
     DWAP_DevToggles.doorPick = not DWAP_DevToggles.doorPick
     if DWAP_DevToggles.doorPick then
-        Events.OnObjectLeftMouseButtonDown.Remove(doorPickClick)
-        Events.OnObjectLeftMouseButtonDown.Add(doorPickClick)
+        -- all three pickers claim left click, so only one may be live; the OFF
+        -- branches never toggle anything, which is what stops this recursing
+        if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
+        if DWAP_DevToggles.roomPick then DWAPRoomPick() end
+        Events.OnMouseDown.Remove(doorPickClick)
+        Events.OnMouseDown.Add(doorPickClick)
         -- without this there is no render hook, so picks stay invisible
         ensureDevOverlay()
         print("Door pick: ON - left click doors to add/remove, shut them, then Export")
         print("Left click is also attack, so expect the odd swing at air")
     else
-        Events.OnObjectLeftMouseButtonDown.Remove(doorPickClick)
+        Events.OnMouseDown.Remove(doorPickClick)
         print(("Door pick: OFF (%d doors still held - Export or Clear)"):format(
             #doorPickedSquares))
     end
@@ -4418,6 +4632,16 @@ function DWAPDoorExport()
         print("Door pick: fewer buildings than anchors - a building with no door of its own "
             .. "never gets its key set (basements with an outside entrance are the usual one)")
     end
+
+    -- An export is the end of a pick session: the next one starts from a clean
+    -- slate rather than silently appending to the last dump's doors. Only from
+    -- here - the early return above exported nothing and must leave the picks
+    -- alone. Toggle OFF through DWAPDoorPick rather than setting the flag, so
+    -- the OnMouseDown handler comes off and the panel button un-lights.
+    DWAPDoorClear()
+    if DWAP_DevToggles.doorPick then DWAPDoorPick() end
+    print("Door pick: picks cleared and picker turned OFF - the labels are gone "
+        .. "because the session ended, not because anything failed")
 end
 
 -- Same line shapes FindUnconnectedPlumbing emits, so picked output can be
@@ -4462,6 +4686,17 @@ function DWAPPlumbExport()
         end
         print("    },")
     end
+
+    -- An export is the end of a pick session: the next one starts from a clean
+    -- slate rather than silently appending to the last dump's squares. Only
+    -- from here - the early return above exported nothing and must leave the
+    -- picks alone. Toggle OFF through DWAPPlumbPick rather than setting the
+    -- flag, so the OnMouseDown/OnTick handlers come off and the panel button
+    -- un-lights.
+    DWAPPlumbClear()
+    if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
+    print("Plumb pick: picks cleared and picker turned OFF - the highlight is gone "
+        .. "because the session ended, not because anything failed")
 end
 
 -- Room picker: click a tile to take its whole room. Buildings like Rosewood
@@ -4554,12 +4789,28 @@ local function containerClaimed(record, c)
     return false
 end
 
-function roomPickClick(tile)
+-- Named function: an anonymous handler could never be removed from the event.
+--
+-- Takes SCREEN coords, not an object: this rides OnMouseDown and resolves the
+-- square itself. See DWAPRoomPick for why it is not on the object event.
+function roomPickClick(screenX, screenY)
     if not DWAP_DevToggles.roomPick then return end
-    local square = tile and tile.getSquare and tile:getSquare()
-    local room = square and square:getRoom()
+    -- Ground projection at the player's z, the same plane roomPickTick
+    -- highlights on, so what the cursor selects and what lights up agree.
+    -- Unlike the fixture pickers this does NOT run the object picker: a room is
+    -- many tiles wide, so landing a tile off still lands in the right room.
+    -- Clicking high on a tall wall can resolve to the square behind it, so pick
+    -- from open floor rather than against a wall or in a doorway. The click
+    -- logs the coords and room it resolved, and picking is a toggle, so a miss
+    -- is visible and undone by clicking again.
+    local square, wx, wy, z = devScreenSquare(screenX, screenY)
+    if not square then
+        DWAPUtils.dprint("Room pick: no square under the cursor")
+        return
+    end
+    local room = square:getRoom()
     if not room then
-        DWAPUtils.dprint("Room pick: that tile is not in a room")
+        DWAPUtils.dprint(("Room pick: %d,%d,%d is not in a room"):format(wx, wy, z))
         return
     end
     local key = roomKey(room)
@@ -4644,19 +4895,43 @@ function roomPickDraw()
     end
 end
 
+-- OnMouseDown, not OnObjectLeftMouseButtonDown. The object event only fires
+-- when UIManager's checkPicked() passes (UIManager.java:597 and :832): it needs
+-- a cached `picked` whose tile still resolves getObjectIndex() ~= -1, i.e. is
+-- still in its square's object list (IsoObject.java:4894). That cache is
+-- whatever IsoObjectPicker.ContextPick last returned, and ContextPick returns
+-- nil whenever the cursor is not over a sprite's clicked mask
+-- (IsoObjectPicker.java:184, FBORenderObjectPicker.java:106). It is refreshed
+-- only on frames where no UI element consumed the mouse move
+-- (UIManager.java:643), and the trigger is skipped outright when a UI element
+-- consumed the click. The result is clicks that never reach the handler at all:
+-- no log line, not even the "not in a room" branch, and no error to find.
+--
+-- The picker never wanted the object, only the square under the cursor, so it
+-- resolves that itself from screen coords. OnMouseDown (UIManager.java:732)
+-- fires on any left press a UI element did not consume, so a click on the dev
+-- panel still cannot reach the picker.
+--
+-- The plumb and door pickers moved to OnMouseDown too, but they do NOT project:
+-- they select a specific fixture, and an object's own square is authoritative
+-- where a ground-plane projection is not - a door or a wall sink is drawn above
+-- the tile it belongs to, so screen coords would name the tile in front of it.
+-- Rooms are many tiles wide, which is what makes the trade acceptable here.
 function DWAPRoomPick()
     DWAP_DevToggles.roomPick = not DWAP_DevToggles.roomPick
     if DWAP_DevToggles.roomPick then
-        -- both pickers claim left click, so they cannot both be live
+        -- all three pickers claim left click, so only one may be live; the OFF
+        -- branches never toggle anything, which is what stops this recursing
         if DWAP_DevToggles.plumbPick then DWAPPlumbPick() end
-        Events.OnObjectLeftMouseButtonDown.Remove(roomPickClick)
-        Events.OnObjectLeftMouseButtonDown.Add(roomPickClick)
+        if DWAP_DevToggles.doorPick then DWAPDoorPick() end
+        Events.OnMouseDown.Remove(roomPickClick)
+        Events.OnMouseDown.Add(roomPickClick)
         Events.OnTick.Remove(roomPickTick)
         Events.OnTick.Add(roomPickTick)
         ensureDevOverlay()
         DWAPUtils.dprint("Room pick: ON - left click a tile to take/drop its whole room")
     else
-        Events.OnObjectLeftMouseButtonDown.Remove(roomPickClick)
+        Events.OnMouseDown.Remove(roomPickClick)
         Events.OnTick.Remove(roomPickTick)
         DWAPUtils.dprint(("Room pick: OFF (%d rooms still held)"):format(#roomPicked))
     end
@@ -4930,6 +5205,16 @@ function DWAPRoomExport(index)
 
     print(("=== TOTAL: %d listed, %d already in config, across %d rooms ==="):format(
         totalFree, totalClaimed, #roomPicked))
+
+    -- An export is the end of a pick session: the next one starts from a clean
+    -- slate rather than silently appending to the last dump's rooms. Only from
+    -- here - the early returns above exported nothing and must leave the picks
+    -- alone. Toggle OFF through DWAPRoomPick rather than setting the flag, so
+    -- the OnMouseDown/OnTick handlers come off and the panel button un-lights.
+    DWAPRoomClear()
+    if DWAP_DevToggles.roomPick then DWAPRoomPick() end
+    print("Room pick: picks cleared and picker turned OFF - the highlight is gone "
+        .. "because the session ended, not because anything failed")
 end
 
 local sourceConfig = 1
