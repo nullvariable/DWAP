@@ -33,7 +33,7 @@ local basements = { -- these are hard coded in the base game, but if we add thes
     dwap_29_lvillecomplex_a = { width=19, height=46, stairx=1, stairy=44, stairDir="W" },
     dwap_29_lvillecomplex_b = { width=30, height=22, stairx=28, stairy=17, stairDir="N" },
     dwap_29_lvillecomplex_c = { width=11, height=22, stairx=9, stairy=1, stairDir="N" },
-    dwap_30_brandenburg = { width=57, height=20, stairx=49, stairy=17, stairDir="N" },
+    dwap_30_irvingtonth = { width=57, height=20, stairx=49, stairy=17, stairDir="N" },
     dwap_32_quill_manor = { width=41, height=23, stairx=10, stairy=6, stairDir="N" },
     dwap_33_darkwallow = { width=9, height=23, stairx=0, stairy=14, stairDir="N" },
     dwap_34_huntingcabin = { width=9, height=17, stairx=1, stairy=15, stairDir="W" },
@@ -114,7 +114,7 @@ local basement_access = {
     ba_dwap_29_b = { width=1, height=1, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_29_c = { width=10, height=25, stairx=1, stairy=3, stairDir="N" },
     ba_dwap_29_solar = { width=2, height=3, stairx=-10, stairy=0, stairDir="N" },
-    ba_dwap_30 = { width=2, height=2, stairx=0, stairy=1, stairDir="N" },
+    ba_dwap_30 = { width=1, height=2, stairx=0, stairy=1, stairDir="N" },
     ba_dwap_30_solar = { width=3, height=15, stairx=2, stairy=14, stairDir="N" },
     ba_dwap_31_fallas_hotel = { width=16, height=12, stairx=0, stairy=0, stairDir="N" },
     ba_dwap_31 = { width=3, height=8, stairx=0, stairy=0, stairDir="N" }, -- copy of ba_dwap_jamieton_bunker_01, tweaked for fallas hotel
@@ -482,9 +482,9 @@ if doSolar then
     table.insert(fullConfig[29].locations, {x=14145-10, y=2637, z=0, stairDir="N", choices={"dummy"}, access="ba_dwap_29_solar"})
 end
 
-fullConfig[30] = { -- Brandenburg Townhome
+fullConfig[30] = { -- Irvington Townhome
     locations = {
-        {x=2608, y=14453, z=0, stairDir="N", choices={"dwap_30_brandenburg"},},
+        {x=2608, y=14453, z=0, stairDir="N", choices={"dwap_30_irvingtonth"},},
         {x=2608, y=14455, z=-1, stairDir="N", choices={"dummy"}, access="ba_dwap_30" },
     },
 }

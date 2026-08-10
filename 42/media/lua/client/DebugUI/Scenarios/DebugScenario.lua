@@ -15,7 +15,7 @@ debugScenarios = {}
 
 DebugScenarioAllMaps = false
 
-local target = 25
+local target = 32
 
 
 local DWAPUtils = require "DWAPUtils"

@@ -1,33 +1,24 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entries 1,53,54,56,57,59,60,61,63: square holds no container at all -
---     coords are stale or the object was removed
---   * entries 2,7,9: square has a container but not the one addressed - needs
---     slot = "upper" / "freezer" or stack = n
---   * entries 58,62: resolved to a container but no DWAP stamp - the freezer
---     bug is fixed, so these are the only unexplained fills left
---   * systems: 19 components at 11903-11908,6845-6865 z=0,1 name a sprite
---     that is not on the square, though the square itself loads - config
---     drifted from the map
-local wtc1 = { x = 11912, y = 6844, z = -1, }
+local wtc = { x = 11912, y = 6844, z = -1, }
 local pb1 = { x = 11907, y = 6843, z = -1 }
 local TheDrake = {
     group = "West Point",
     baseBuildings = {
         { x = 11908, y = 6853, z = 1 },  -- apartments
         { x = 11908, y = 6853, z = -1 }, -- basement
+        { x = 11905, y = 6840, z = -1 }, -- addon basement
     },
     baseRooms = {
-        { x = 11907, y = 6849, z = 1 }, -- livingroom
-        { x = 11904, y = 6849, z = 1 }, -- bathroom
-        { x = 11910, y = 6853, z = 1 }, -- bedroom
-        { x = 11911, y = 6849, z = 1 }, -- kitchen
-        { x = 11904, y = 6856, z = 1 }, -- hall
-        { x = 11906, y = 6848, z = 0 }, -- bar
-        { x = 11904, y = 6843, z = 0 }, -- restaurantkitchen
-        { x = 11904, y = 6848, z = 0 }, -- bar
-        { x = 11902, y = 6854, z = 0 }, -- janitor
-        { x = 11904, y = 6856, z = 0 }, -- bathroom
-        { x = 11904, y = 6858, z = 0 }, -- hall
+        { x = 11907, y = 6849, z = 1 },  -- livingroom
+        { x = 11904, y = 6849, z = 1 },  -- bathroom
+        { x = 11910, y = 6853, z = 1 },  -- bedroom
+        { x = 11911, y = 6849, z = 1 },  -- kitchen
+        { x = 11904, y = 6856, z = 1 },  -- hall
+        { x = 11906, y = 6848, z = 0 },  -- bar
+        { x = 11904, y = 6843, z = 0 },  -- restaurantkitchen
+        { x = 11904, y = 6848, z = 0 },  -- bar
+        { x = 11902, y = 6854, z = 0 },  -- janitor
+        { x = 11904, y = 6856, z = 0 },  -- bathroom
+        { x = 11904, y = 6858, z = 0 },  -- hall
         { x = 11905, y = 6848, z = -1 }, -- hall
         { x = 11910, y = 6858, z = -1 }, -- storage
         { x = 11907, y = 6848, z = -1 }, -- storage
@@ -48,35 +39,24 @@ local TheDrake = {
         },
     },
     waterTanks = {
-        { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType = "generator", source = { x = 11911, y = 6844, z = -1 } },
+        { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = 11911, y = 6844, z = -1 } },
     },
     waterFixtures = {
-        -- 2nd floor apts
-        { sprite = "fixtures_sinks_01_9",     x = 11908, y = 6851, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_0",  x = 11906, y = 6851, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_12",    x = 11905, y = 6851, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_25", x = 11904, y = 6851, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_11",    x = 11908, y = 6850, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_3",  x = 11906, y = 6850, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_28",    x = 11905, y = 6850, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_25", x = 11904, y = 6849, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_10",    x = 11907, y = 6865, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_2",  x = 11907, y = 6863, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_29",    x = 11907, y = 6862, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_26", x = 11906, y = 6861, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_8",     x = 11908, y = 6865, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_1",  x = 11908, y = 6863, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_13",    x = 11908, y = 6862, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_26", x = 11908, y = 6861, z = 1,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
+        -- 2nd floor apt
+        { sprite = "fixtures_bathroom_01_25", x = 11904, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- CONNECTED already | bathroom, bld 46,26#4
+        { sprite = "fixtures_sinks_01_12",    x = 11905, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
+        { sprite = "fixtures_bathroom_01_0",  x = 11906, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
+        { sprite = "fixtures_sinks_01_10",    x = 11913, y = 6850, z = 1,  sourceType = "tank", source = wtc, }, -- kitchen, bld 46,26#4
         -- 1st floor
-        { sprite = "fixtures_sinks_01_17",    x = 11903, y = 6845, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_18",    x = 11904, y = 6849, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_sinks_01_13",    x = 11904, y = 6858, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_1",  x = 11904, y = 6859, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
+        { sprite = "fixtures_sinks_01_18",    x = 11904, y = 6847, z = 0,  sourceType = "tank", source = wtc, }, -- bar, bld 46,26#4
+        { sprite = "fixtures_sinks_01_32",    x = 11902, y = 6845, z = 0,  sourceType = "tank", source = wtc, }, -- restaurantkitchen, bld 46,26#4
+        { sprite = "fixtures_sinks_01_8",     x = 11902, y = 6844, z = 0,  sourceType = "tank", source = wtc, }, -- restaurantkitchen, bld 46,26#4
+        { sprite = "fixtures_sinks_01_13",    x = 11904, y = 6856, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
+        { sprite = "fixtures_bathroom_01_1",  x = 11904, y = 6857, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
         -- basement
-        { sprite = "fixtures_sinks_01_2",     x = 11902, y = 6839, z = -1, sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "appliances_laundry_01_2", x = 11902, y = 6841, z = -1, sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        { sprite = "fixtures_bathroom_01_1",  x = 11896, y = 6841, z = -1, sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
+        { sprite = "fixtures_sinks_01_2",     x = 11902, y = 6839, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "appliances_laundry_01_2", x = 11902, y = 6841, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "fixtures_bathroom_01_1",  x = 11896, y = 6841, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
 
     },
     doorKeys = {
@@ -90,23 +70,20 @@ local TheDrake = {
     },
     map = { name = "DWAPStashMap27", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                       z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_51", x = 11914, y = 6859,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_52", x = 11914, y = 6858,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_53", x = 11914, y = 6857,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_02_4",  x = 11913, y = 6853,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_02_4",  x = 11913, y = 6852,                          z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_51", x = 11914, y = 6848,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_52", x = 11914, y = 6847,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_02_53", x = 11914, y = 6846,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_01_52", x = 11902, y = 6860,                          z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_56", x = 11902, y = 6845, z = 0, }, -- window W | restaurantkitchen, bld 46,26#4
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_57", x = 11905, y = 6843, z = 0, }, -- window N | restaurantkitchen, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6844, z = 0, }, -- window W | bar, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6845, z = 0, }, -- window W | bar, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6846, z = 0, }, -- window W | bar, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6854, z = 0, }, -- window W | bar, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6855, z = 0, }, -- window W | bar, bld 46,26#4
+        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_0",  x = 11914, y = 6856, z = 0, }, -- window W | bar, bld 46,26#4
     },
     loot = {
         -- basement
         -- shelter area
         { -- E1
-            coords = { x = 11896, y = 6843, z = -1 },
+            coords = { x = 11896, y = 6841, z = -1 },
             slot = "upper",
             dist = { "SafehouseMedical", "BathroomCounter", },
             distIncludeJunk = true,
@@ -114,7 +91,7 @@ local TheDrake = {
             level = "Loot_MedLevel",
         },
         { -- E2
-            coords = { x = 11900, y = 6841, z = -1 },
+            coords = { x = 11900, y = 6839, z = -1 },
             slot = "upper",
             dist = { "MedicalCabinet" },
             distIncludeJunk = true,
@@ -152,7 +129,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E7
-            coords = { x = 11903, y = 6841, z = -1 },
+            coords = { x = 11903, y = 6839, z = -1 },
             slot = "upper",
             dist = { "ButcherSpices", "GigamartSpices", "GroceryBagGourmet", },
             distIncludeJunk = false,
@@ -168,7 +145,7 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E9
-            coords = { x = 11904, y = 6841, z = -1 },
+            coords = { x = 11904, y = 6839, z = -1 },
             slot = "upper",
             dist = { "SafehouseFireplace", "SafehouseLighting", },
             distIncludeJunk = false,
@@ -184,18 +161,27 @@ local TheDrake = {
             level = "Loot_FoodLevel",
         },
         { -- E11
+            note = "crate @ warehouse",
+            coords = { x = 11906, y = 6839, z = -1 },
+            stack = 2,
+            dist = { "KitchenDryFood", "GigamartDryGoods", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E12
             note = "militarylocker @ warehouse",
             coords = { x = 11907, y = 6839, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E12
+        { -- E13
             note = "militarylocker @ warehouse",
             coords = { x = 11908, y = 6839, z = -1 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E13
+        { -- E14
             note = "militarycrate @ warehouse",
             coords = { x = 11909, y = 6839, z = -1 },
             dist = { "ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
@@ -203,7 +189,16 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- E14
+        { -- E15
+            note = "militarycrate @ warehouse",
+            coords = { x = 11909, y = 6839, z = -1 },
+            stack = 2,
+            dist = { "ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "DerelictHouseCrime" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E16
             note = "militarycrate @ warehouse",
             coords = { x = 11910, y = 6839, z = -1 },
             dist = { "GunStoreAmmunition", "GunStoreKnives", "GunStoreBodyArmor", "GunStoreMagsAmmo", "GunStoreGuns", },
@@ -211,7 +206,16 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- E15
+        { -- E17
+            note = "militarycrate @ warehouse",
+            coords = { x = 11910, y = 6839, z = -1 },
+            stack = 2,
+            dist = { "GunStoreAmmunition", "GunStoreKnives", "GunStoreBodyArmor", "GunStoreMagsAmmo", "GunStoreGuns", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E18
             note = "metal_shelves @ warehouse",
             coords = { x = 11911, y = 6839, z = -1 },
             dist = { "CrateFishing", "FishermanTools", "Trapper" },
@@ -219,7 +223,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- E16
+        { -- E19
             note = "metal_shelves @ warehouse",
             coords = { x = 11912, y = 6839, z = -1 },
             dist = { "GasStoreEmergency" },
@@ -227,7 +231,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E17
+        { -- E20
             note = "metal_shelves @ warehouse",
             coords = { x = 11913, y = 6839, z = -1 },
             dist = { "LoggingFactoryTools", "CrateTools", "GarageTools", "BurglarTools", "CarpenterTools", "BarnTools" },
@@ -235,7 +239,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E18
+        { -- E21
             note = "metal_shelves @ warehouse",
             coords = { x = 11914, y = 6839, z = -1 },
             dist = { "CrateBlacksmithing", "CrateCarpentry", "CrateMetalwork", "CrateMechanics", "CrateMasonry", "CrateTools" },
@@ -243,7 +247,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E19
+        { -- E22
             note = "metal_shelves @ warehouse",
             coords = { x = 11914, y = 6841, z = -1 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
@@ -251,7 +255,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E20
+        { -- E23
             note = "metal_shelves @ warehouse",
             coords = { x = 11913, y = 6841, z = -1 },
             items = {
@@ -261,13 +265,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E21
+        { -- E24
             note = "crate @ warehouse",
             coords = { x = 11912, y = 6841, z = -1 },
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
-        { -- E22
+        { -- E25
             note = "crate @ warehouse",
             coords = { x = 11911, y = 6841, z = -1 },
             dist = { "CrateBooks", "MusicStoreCDs", "CrateVHSTapes" },
@@ -275,7 +279,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E23
+        { -- E26
             note = "crate @ warehouse",
             coords = { x = 11910, y = 6841, z = -1 },
             dist = { "ArmySurplusBackpacks", "ArmySurplusOutfit", "ArmyStorageOutfit", "ArmySurplusFootwear", "ArmySurplusHeadwear", "ArmySurplusMisc" },
@@ -283,7 +287,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E24
+        { -- E27
             note = "crate @ warehouse",
             coords = { x = 11909, y = 6841, z = -1 },
             dist = { "GigamartCannedFood", "CrateCannedFood", "KitchenCannedFood" },
@@ -291,13 +295,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E25
+        { -- E28
             note = "crate @ warehouse",
             coords = { x = 11908, y = 6841, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillmags",
         },
-        { -- E26
+        { -- E29
             note = "crate @ warehouse",
             coords = { x = 11907, y = 6841, z = -1 },
             dist = { "MorgueTools", "MedicalCabinet", "ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -305,13 +309,13 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E27
+        { -- E30
             note = "locker @ warehouse",
             coords = { x = 11906, y = 6841, z = -1 },
             sandboxEnable = 'Loot_EnableMaps',
             special = "maps",
         },
-        { -- E28
+        { -- E31
             note = "clothingrack @ warehouse",
             coords = { x = 11904, y = 6841, z = -1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
@@ -319,7 +323,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E29
+        { -- E32
             note = "clothingrack @ warehouse",
             coords = { x = 11903, y = 6841, z = -1 },
             dist = { "ArmyStorageOutfit", "DrugLabOutfit", },
@@ -327,20 +331,20 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E30
+        { -- E33
             note = "shelves @ warehouse",
             coords = { x = 11900, y = 6841, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- E31
+        { -- E34
             note = "shelves @ warehouse",
             coords = { x = 11899, y = 6841, z = -1 },
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
         -- rest of basement
-        { -- E32
+        { -- E35
             note = "crate @ storage",
             coords = { x = 11907, y = 6846, z = -1 },
             dist = { "CrateLumber" },
@@ -348,7 +352,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E33
+        { -- E36
             note = "crate @ storage",
             coords = { x = 11907, y = 6847, z = -1 },
             items = {
@@ -358,7 +362,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E34
+        { -- E37
             note = "crate @ storage",
             coords = { x = 11913, y = 6857, z = -1 },
             dist = { "CrateSheetMetal" },
@@ -366,7 +370,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E35
+        { -- E38
             note = "crate @ storage",
             coords = { x = 11913, y = 6869, z = -1 },
             dist = { "CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
@@ -374,7 +378,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E36
+        { -- E39
             note = "crate @ storage",
             coords = { x = 11907, y = 6865, z = -1 },
             dist = { "CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
@@ -383,7 +387,7 @@ local TheDrake = {
             level = "Loot_BuildMatsLevel",
         },
         -- storage rooms, south to north
-        { -- E37
+        { -- E40
             note = "metal_shelves @ storageunit",
             coords = { x = 11904, y = 6858, z = -1 },
             dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
@@ -391,7 +395,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E38
+        { -- E41
             note = "locker @ storageunit",
             coords = { x = 11904, y = 6854, z = -1 },
             dist = { "SafehouseTraps", },
@@ -399,7 +403,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- E39
+        { -- E42
             note = "metal_shelves @ storageunit",
             coords = { x = 11902, y = 6854, z = -1 },
             dist = { "CrateFlour", "CrateOilVegetable" },
@@ -407,7 +411,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E40
+        { -- E43
             note = "metal_shelves @ storageunit",
             coords = { x = 11902, y = 6853, z = -1 },
             dist = { "ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
@@ -415,7 +419,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E41
+        { -- E44
             note = "toolcabinet @ storageunit",
             coords = { x = 11902, y = 6852, z = -1 },
             dist = { "StoreShelfMechanics", },
@@ -423,7 +427,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E42
+        { -- E45
             note = "cardboardbox @ storageunit",
             coords = { x = 11904, y = 6850, z = -1 },
             dist = { "CrateLeather", },
@@ -431,7 +435,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- E43
+        { -- E46
             note = "cardboardbox @ storageunit",
             coords = { x = 11902, y = 6848, z = -1 },
             dist = { "SewingStoreTools", },
@@ -439,7 +443,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- E44
+        { -- E47
             note = "cardboardbox @ storageunit",
             coords = { x = 11902, y = 6847, z = -1 },
             dist = { "LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "ArmySurplusOutfit", "CrateLinens" },
@@ -447,7 +451,16 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E45
+        { -- E48
+            note = "cardboardbox @ storageunit",
+            coords = { x = 11902, y = 6847, z = -1 },
+            stack = 2,
+            dist = { "LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "ArmySurplusOutfit", "CrateLinens" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
+        { -- E49
             note = "cardboardbox @ storageunit",
             coords = { x = 11903, y = 6847, z = -1 },
             dist = { "SewingStoreFabric" },
@@ -455,7 +468,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- E46
+        { -- E50
             note = "crate @ storageunit",
             coords = { x = 11904, y = 6846, z = -1 },
             dist = { "ArtStorePottery", },
@@ -465,7 +478,7 @@ local TheDrake = {
         },
         -- first floor
         -- bar area
-        { -- E47
+        { -- E51
             note = "fridge @ bar",
             coords = { x = 11902, y = 6853, z = 0 },
             dist = { "CrateBeer", },
@@ -473,7 +486,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E48
+        { -- E52
             note = "fridge @ bar",
             coords = { x = 11902, y = 6852, z = 0 },
             dist = { "CrateWine", },
@@ -481,7 +494,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E49
+        { -- E53
             note = "shelves @ bar",
             coords = { x = 11902, y = 6851, z = 0 },
             dist = { "StoreCounterTobacco" },
@@ -489,7 +502,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E50
+        { -- E54
             note = "shelves @ bar",
             coords = { x = 11902, y = 6850, z = 0 },
             dist = { "CrateLiquor", "LiquorStoreWhiskey" },
@@ -497,7 +510,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E51
+        { -- E55
             note = "shelves @ bar",
             coords = { x = 11902, y = 6849, z = 0 },
             dist = { "CrateLiquor", "LiquorStoreWhiskey" },
@@ -505,7 +518,7 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E52
+        { -- E56
             note = "shelves @ bar",
             coords = { x = 11902, y = 6848, z = 0 },
             dist = { "CrateLiquor", "DishCabinetVIPLounge" },
@@ -513,22 +526,22 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E53
-            coords = { x = 11904, y = 6849, z = 0 },
+        { -- E57
+            coords = { x = 11905, y = 6849, z = 0 },
             dist = { "LaundryCleaning", "JanitorCleaning" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E54
-            coords = { x = 11904, y = 6848, z = 0 },
+        { -- E58
+            coords = { x = 11905, y = 6848, z = 0 },
             dist = { "TestingLab", "TobaccoStoreAccessories", "CandyStoreSnacks" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
         -- bar kitchen
-        { -- E55
+        { -- E59
             note = "shelves @ bar",
             coords = { x = 11902, y = 6846, z = 0 },
             dist = { "BurgerKitchenFridge", "BurgerKitchenFreezer" },
@@ -536,59 +549,63 @@ local TheDrake = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E56
-            coords = { x = 11902, y = 6845, z = 0 },
+        { -- E60
+            coords = { x = 11902, y = 6843, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E57
-            coords = { x = 11904, y = 6845, z = 0 },
+        { -- E61
+            coords = { x = 11905, y = 6846, z = 0 },
             dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
-        },
-        { -- E58
-            note = "freezer @ bakerykitchen",
-            coords = { x = 11902, y = 6859, z = 0 },
-            slot = "upper",
-            dist = { "ArmyStorageMedical", "ArmyBunkerMedical" },
-            distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
         },
         -- 2nd floor apt
-        { -- E59
-            coords = { x = 11909, y = 6851, z = 1 },
+        { -- E62
+            note = "counter @ kitchen",
+            coords = { x = 11912, y = 6849, z = 1 },
             dist = { "KitchenDryFood", "GigamartDryGoods", },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E60
-            coords = { x = 11908, y = 6851, z = 1 },
+        { -- E63
+            note = "counter @ kitchen",
+            coords = { x = 11911, y = 6849, z = 1 },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- E61
-            coords = { x = 11907, y = 6851, z = 1 },
-            dist = { "BurgerKitchenFridge", "BurgerKitchenFreezer" },
+        { -- E64
+            note = "fridge @ kitchen",
+            coords = { x = 11911, y = 6852, z = 1 },
+            dist = { "BurgerKitchenFridge", },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E62
-            note = "stove @ kitchen",
-            coords = { x = 11913, y = 6851, z = 1 },
+        { -- E65
+            note = "freezer @ kitchen",
+            coords = { x = 11911, y = 6852, z = 1 },
+            slot = "freezer",
+            dist = { "BurgerKitchenFreezer" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E66
+            note = "counter @ kitchen",
+            coords = { x = 11913, y = 6849, z = 1 },
             dist = { "SafehouseArmor", "SafehouseLighting" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E63
-            coords = { x = 11905, y = 6851, z = 1 },
+        { -- E67
+            note = "medicine @ bathroom",
+            coords = { x = 11905, y = 6849, z = 1 },
             slot = "upper",
             dist = { "MedicalCabinet", "BathroomCounter", },
             distIncludeJunk = true,

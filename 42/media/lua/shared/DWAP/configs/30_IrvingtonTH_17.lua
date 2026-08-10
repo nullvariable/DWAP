@@ -43,16 +43,8 @@ local IrvingtonTH = {
     },
     map = { name = "DWAPStashMap30", },
     objectSpawns = {
-        -- { sprite = "camping_01_64", x = 2607, y = 14451, z = 0, enabled = "EnableWaterSystem", }, -- fountain
-        { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        -- { sprite = "walls_garage_01_35", x = 2608, y = 14456, z = -1, removeWall = "north" },
-        -- { sprite = "industry_trucks_01_4", x = 2608, y = 14455, z = -1, },
-        -- { sprite = "floors_exterior_street_01_16", x = 2608, y = 14455, z = -1, },
-        -- { sprite = "industry_trucks_01_6", x = 2609, y = 14455, z = -1, replaceWall = true, clearExisting = true, },
-
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 2608, y = 14456, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 2609, y = 14456, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 2608, y = 14456, z = 0, }, -- window N | livingroom, bld 10,56#16
+        { barricade = "woodhalf", enabled = "Barricade", target="walls_commercial_01_41", x = 2609, y = 14456, z = 0, }, -- window N | livingroom, bld 10,56#16
         { barricade = "metal", enabled = "Barricade", target="walls_exterior_house_01_25", x = 2611, y = 14466, z = 0, },
     },
     loot = {
@@ -154,7 +146,7 @@ local IrvingtonTH = {
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- E14 metal wall shelves
+        { -- E14
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -162,13 +154,22 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E15 metal wall shelves
+        { -- E15
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        { -- E16
             note = "militarylocker @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E16 metal wall shelves
+        { -- E17
             note = "militarylocker @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"ArmyStorageAmmunition", "GunStoreKnives", "PawnShopKnives", "Homesteading", "CrateFarming"},
@@ -176,7 +177,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E17
+        { -- E18
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -184,7 +185,16 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E18
+        { -- E19
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        { -- E20
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"ToolCabinetMechanics","CrateMechanics", "CarSupplyTools",},
@@ -192,7 +202,16 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E19
+        { -- E21
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"ToolCabinetMechanics","CrateMechanics", "CarSupplyTools",},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        { -- E22
             note = "metal_shelves @ bunker",
             coords = {x=2609,y=14448,z=-1},
             items = {
@@ -201,7 +220,7 @@ local IrvingtonTH = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E20
+        { -- E23
             note = "metal_shelves @ bunker",
             coords = {x=2610,y=14448,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},

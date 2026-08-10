@@ -246,7 +246,7 @@ local configs = {
         buildingY = 2660,
     },
     [30] = {
-        name = "Brandenburg Townhome Map",
+        name = "Irvington Townhome Map",
         stamps = {
             {"Asterisk", nil, 2609, 14458, 0, 0, 0},
         },

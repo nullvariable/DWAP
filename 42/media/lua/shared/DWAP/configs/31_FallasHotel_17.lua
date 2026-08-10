@@ -1,5 +1,5 @@
 -- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * 142 skeleton entries carry coords but no loot yet - entries 1-142
+--   * 141 skeleton entries carry coords but no loot yet - entries 1-142
 --   * systems: 2 components at 7226-7228,8201-8205 z=-1 report "square not
 --     loaded" - those chunks never stream when travelling to this base, which
 --     is what a pre-move or otherwise wrong coordinate looks like
@@ -26,11 +26,11 @@ local FallasHotel = {
         { x = 7255 + 12, y = 8250, z = -3 }, -- bunker east
     },
     baseRooms = {
-        { x = 7243, y = 8256, z = 1 }, -- motelroom
-        { x = 7243, y = 8259, z = 1 }, -- motelroom
-        { x = 7248, y = 8261, z = 1 }, -- bathroom
-        { x = 7248, y = 8259, z = 1 }, -- janitor
-        { x = 7248, y = 8259, z = 2 }, -- janitor
+        { x = 7243, y = 8256, z = 1 },  -- motelroom
+        { x = 7243, y = 8259, z = 1 },  -- motelroom
+        { x = 7248, y = 8261, z = 1 },  -- bathroom
+        { x = 7248, y = 8259, z = 1 },  -- janitor
+        { x = 7248, y = 8259, z = 2 },  -- janitor
         { x = 7248, y = 8259, z = -1 }, -- grocerystorage
         { x = 7254, y = 8256, z = -1 }, -- janitor
         { x = 7254, y = 8249, z = -1 }, -- storage
@@ -50,13 +50,41 @@ local FallasHotel = {
         { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = 7681, y = 12221, z = -1 } },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_16",   x = bunkerTopLeft.x,     y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z, sourceType = "tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_6", x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 8, z = bunkerTopLeft.z, sourceType = "tank", source = 1 },
-
-        { sprite = "fixtures_sinks_01_35",   x = 7232,                y = 8211,                z = 0,               sourceType = "tank", source = 1 },
-        { sprite = "fixtures_sinks_01_16",   x = 7233,                y = 8208,                z = 0,               sourceType = "tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_5", x = 7229,                y = 8206,                z = 0,               sourceType = "tank", source = 1 },
-        { sprite = "fixtures_sinks_01_15",   x = 7229,                y = 8204,                z = 0,               sourceType = "tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_31", x = 7254, y = 8254, z = -2, sourceType = "tank", source = wtc, }, -- laundry, bld 28,32#56
+        { sprite = "fixtures_bathroom_01_31", x = 7254, y = 8255, z = -2, sourceType = "tank", source = wtc, }, -- laundry, bld 28,32#56
+        { sprite = "fixtures_bathroom_01_6",  x = 7256, y = 8249, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#58
+        { sprite = "fixtures_sinks_01_16",    x = 7254, y = 8245, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#58
+        { sprite = "fixtures_sinks_01_16",    x = 7258, y = 8245, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#60
+        { sprite = "fixtures_bathroom_01_6",  x = 7260, y = 8249, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#60
+        { sprite = "fixtures_bathroom_01_6",  x = 7264, y = 8249, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#62
+        { sprite = "fixtures_sinks_01_16",    x = 7262, y = 8245, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#62
+        { sprite = "fixtures_sinks_01_16",    x = 7266, y = 8245, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#64
+        { sprite = "fixtures_bathroom_01_6",  x = 7268, y = 8249, z = -3, sourceType = "tank", source = wtc, }, -- bunker, bld 28,32#64
+        { sprite = "appliances_laundry_01_2", x = 7257, y = 8258, z = -1, sourceType = "tank", source = wtc, }, -- janitor, bld 28,32#2
+        { sprite = "appliances_laundry_01_2", x = 7256, y = 8258, z = -1, sourceType = "tank", source = wtc, }, -- janitor, bld 28,32#2
+        { sprite = "fixtures_sinks_01_29",    x = 7248, y = 8256, z = -1, sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#2
+        { sprite = "fixtures_bathroom_01_1",  x = 7246, y = 8256, z = -1, sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#2
+        { sprite = "fixtures_sinks_01_33",    x = 7244, y = 8256, z = -1, sourceType = "tank", source = wtc, }, -- kitchen, bld 28,32#2
+        { sprite = "fixtures_sinks_01_16",    x = 7242, y = 8259, z = -1, sourceType = "tank", source = wtc, }, -- kitchen, bld 28,32#2
+        { sprite = "fixtures_sinks_01_4",     x = 7243, y = 8258, z = 0,  sourceType = "tank", source = wtc, }, -- office, bld 28,32#36
+        { sprite = "fixtures_sinks_01_12",    x = 7246, y = 8260, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_0",  x = 7247, y = 8260, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_55", x = 7247, y = 8262, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_0",  x = 7248, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_sinks_01_2",     x = 7249, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_25", x = 7250, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_25", x = 7251, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_sinks_01_2",     x = 7252, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_0",  x = 7253, y = 8261, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_1",  x = 7254, y = 8259, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_sinks_01_1",     x = 7254, y = 8258, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_52", x = 7256, y = 8259, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_25", x = 7251, y = 8261, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_sinks_01_2",     x = 7252, y = 8261, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_0",  x = 7253, y = 8261, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_1",  x = 7254, y = 8259, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_sinks_01_1",     x = 7254, y = 8258, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
+        { sprite = "fixtures_bathroom_01_52", x = 7256, y = 8259, z = 2,  sourceType = "tank", source = wtc, }, -- bathroom, bld 28,32#36
     },
     generators = {
         {
@@ -78,16 +106,15 @@ local FallasHotel = {
     },
     map = { name = "DWAPStashMap31", },
     objectSpawns = {
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7230, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7231, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7233, y = 8199, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target = "walls_commercial_01_113",              x = 7234, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7238, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7239, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7241, y = 8199, z = 0, },
-        { barricade = "wood",     enabled = "Barricade", target = "walls_commercial_01_113",              x = 7242, y = 8199, z = 0, },
-        { barricade = "metal",    enabled = "Barricade", target = "walls_exterior_house_02_88",           x = 7244, y = 8202, z = 0, },
-        { barricade = "metal",    enabled = "Barricade", target = "location_restaurant_pileocrepe_01_48", x = 7244, y = 8203, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_53", x = 7261, y = 8256, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_52", x = 7261, y = 8257, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_51", x = 7261, y = 8258, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_53", x = 7261, y = 8260, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_52", x = 7261, y = 8261, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_51", x = 7261, y = 8262, z = 0, }, -- window W | hall, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_25", x = 7244, y = 8256, z = 0, }, -- window N | office, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 7243, y = 8258, z = 0, }, -- window W | office, bld 28,32#36
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 7243, y = 8260, z = 0, }, -- window W | bedroom, bld 28,32#36
     },
     loot = {
         { -- E1
@@ -695,7 +722,8 @@ local FallasHotel = {
         { -- E142
             note = "militarylocker @ bunker",
             coords = { x = 7268, y = 8247, z = -3 },
-        }, },
+        },
+    },
 }
 
 -- if getActivatedMods():contains("\\Ladders") then
