@@ -1,8 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entry 51: square holds no container at all - coords are stale or the
---     object was removed
---   * systems: 1 component at 1883,9977 z=0 names a sprite that is not on the
---     square, though the square itself loads - config drifted from the map
 local wtc = {x = 1907, y = 9944, z = -1} -- waterTankCoords
 local pb1 = { x = 1913, y = 9943, z = -1 }
 -- local bunkerTopLeft = {x = 1895, y = 9946, z = -2}
@@ -13,6 +8,7 @@ local EkronLakeHouse = {
         { x = 1902, y = 9951, z = 1 }, -- lake house
         { x = 1904, y = 9955, z = -1 }, -- main basement
         { x = 1908, y = 9946, z = -1 }, -- generator/bunker addon
+        { x = 1920, y = 9910, z = 0 }, -- parking shed
     },
     spawn = { x = 1902, y = 9951, z = 1 },
     waterTanks = {
@@ -166,7 +162,7 @@ local EkronLakeHouse = {
             coords = {x=bunkerTopLeft.x,y=bunkerTopLeft.y+12,z=bunkerTopLeft.z},
             special = "essentials",
         },
-        { -- E14 metal wall shelves
+        { -- E14
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
             dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -174,13 +170,29 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E15 metal wall shelves
+        { -- E15
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+5,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_MediaLevel",
+        },
+        { -- E16
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E16 metal wall shelves
+        { -- E17
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+6,z=bunkerTopLeft.z},
+            stack = 2,
+            special = "gunlocker",
+            level = "Loot_GunLevel",
+        },
+        { -- E18
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -188,9 +200,18 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
+        { -- E19
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+7,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
 
         -- extra spawns
-        { -- E17
+        { -- E20
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
             dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
@@ -198,7 +219,16 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E18
+        { -- E21
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"GasStoreEmergency","StoreCounterTobacco", "BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_ToolsLevel",
+        },
+        { -- E22
             note = "militarycrate @ bunker",
             coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
             dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
@@ -206,9 +236,18 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
+        { -- E23
+            note = "militarycrate @ bunker",
+            coords = {x=bunkerTopLeft.x+2,y=bunkerTopLeft.y+1,z=bunkerTopLeft.z},
+            stack = 2,
+            dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor", "CarSupplyTools","GasStorageMechanics","DrugLabOutfit"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_LockersLevel",
+        },
 
         -- first basement
-        { -- E19
+        { -- E24
             note = "freezer @ storage",
             coords = {x=1906,y=9957,z=-1},
             dist = {"FreezerRich", },
@@ -216,7 +255,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E20
+        { -- E25
             note = "toolcabinet @ storage",
             coords = {x=1906,y=9954,z=-1},
             dist = {"GasStoreEmergency"},
@@ -224,7 +263,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = 2,
         },
-        { -- E21
+        { -- E26
             note = "crate @ storage",
             coords = {x=1906,y=9953,z=-1},
             dist = {"WeldingWorkshopMetal"},
@@ -232,7 +271,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E22
+        { -- E27
             note = "crate @ storage",
             coords = {x=1906,y=9951,z=-1},
             dist = {"CrateLumber", "CrateSheetMetal"},
@@ -240,7 +279,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E23
+        { -- E28
             note = "metal_shelves @ storage",
             coords = {x=1902,y=9952,z=-1},
             items = {
@@ -250,7 +289,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E24
+        { -- E29
             note = "metal_shelves @ storage",
             coords = {x=1902,y=9953,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -258,7 +297,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E25
+        { -- E30
             note = "metal_shelves @ storage",
             coords = {x=1898,y=9949,z=-1},
             dist = {"CrateTVWide", "CrateVHSTapes"},
@@ -266,7 +305,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E26
+        { -- E31
             note = "locker @ storage",
             coords = {x=1897,y=9949,z=-1},
             items = {
@@ -275,7 +314,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E27
+        { -- E32
             note = "metal_shelves @ storage",
             coords = {x=1897,y=9962,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "MetalShopTools", "MetalWorkerTools" },
@@ -284,7 +323,7 @@ local EkronLakeHouse = {
             level = "Loot_ToolsLevel",
         },
         -- first floor
-        { -- E28
+        { -- E33
             note = "shelves @ livingroom",
             coords = {x=1900,y=9952,z=0},
             dist = {"MovieRentalShelves"},
@@ -292,7 +331,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E29
+        { -- E34
             note = "counter @ lobby",
             coords = {x=1902,y=9955,z=0},
             dist = {"CampingStoreTools", "ArmyHangarTools", "MetalShopTools", "MetalWorkerTools" },
@@ -300,7 +339,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E30
+        { -- E35
             note = "wardrobe @ lobby",
             coords = {x=1897,y=9959,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -308,7 +347,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E31
+        { -- E36
             note = "wardrobe @ lobby",
             coords = {x=1897,y=9958,z=0},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -316,7 +355,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E32
+        { -- E37
             note = "dresser @ lobby",
             coords = {x=1897,y=9955,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -325,7 +364,7 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         -- laundry room
-        { -- E33
+        { -- E38
             note = "metal_shelves @ laundry",
             coords = {x=1900,y=9955,z=0},
             dist = {"CrateToiletPaper"},
@@ -333,7 +372,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = 1,
         },
-        { -- E34
+        { -- E39
             note = "metal_shelves @ laundry",
             coords = {x=1900,y=9956,z=0},
             dist = {"SewingStoreFabric", "SewingStoreTools", "GymLaundry", "GymLockers"},
@@ -342,7 +381,7 @@ local EkronLakeHouse = {
             level = "Loot_TailorLevel",
         },
         -- office
-        { -- E35
+        { -- E40
             note = "desk @ office",
             coords = {x=1904,y=9958,z=0},
             items = {
@@ -353,7 +392,7 @@ local EkronLakeHouse = {
                 { name = 'Base.WristWatch_Left_ClassicMilitary', chance = 1, count = {1,1} },
             },
         },
-        { -- E36
+        { -- E41
             note = "shelves @ office",
             coords = {x=1904,y=9960,z=0},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -361,7 +400,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E37
+        { -- E42
             note = "shelves @ office",
             coords = {x=1904,y=9961,z=0},
             dist = {"BookstoreMilitaryHistory"},
@@ -369,7 +408,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E38
+        { -- E43
             note = "sidetable @ office",
             coords = {x=1904,y=9963,z=0},
             dist = {"MusicStoreCDs"},
@@ -378,7 +417,7 @@ local EkronLakeHouse = {
             level = "Loot_MediaLevel",
         },
         -- kitchen
-        { -- E39
+        { -- E44
             note = "fridge @ kitchen",
             coords = {x=1897,y=9960,z=0},
             dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
@@ -386,7 +425,16 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E40
+        { -- E45
+            note = "fridge @ kitchen",
+            coords = {x=1897,y=9960,z=0},
+            slot = "freezer",
+            dist = {"SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E46
             note = "shelves @ kitchen",
             coords = {x=1897,y=9965,z=0},
             slot = "upper",
@@ -395,7 +443,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E41
+        { -- E47
             note = "overhead @ kitchen",
             coords = {x=1897,y=9964,z=0},
             slot = "upper",
@@ -404,7 +452,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E42
+        { -- E48
             note = "counter @ kitchen",
             coords = {x=1897,y=9964,z=0},
             dist = {"CrateCannedFood", "KitchenCannedFood"},
@@ -412,7 +460,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E43
+        { -- E49
             note = "overhead @ kitchen",
             coords = {x=1897,y=9963,z=0},
             slot = "upper",
@@ -421,13 +469,13 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E44
+        { -- E50
             note = "counter @ kitchen",
             coords = {x=1897,y=9963,z=0},
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
-        { -- E45
+        { -- E51
             note = "counter @ kitchen",
             coords = {x=1898,y=9960,z=0},
             dist = {"StoreKitchenBaking",},
@@ -435,7 +483,16 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E46
+        { -- E52
+            note = "counter @ kitchen",
+            coords = {x=1898,y=9960,z=0},
+            slot = "upper",
+            dist = {"StoreKitchenBaking",},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E53
             note = "counter @ kitchen",
             coords = {x=1899,y=9960,z=0},
             dist = {"CandyStoreSnacks","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -443,8 +500,17 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
+        { -- E54
+            note = "counter @ kitchen",
+            coords = {x=1899,y=9960,z=0},
+            slot = "upper",
+            dist = {"CandyStoreSnacks","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
         -- living room
-        { -- E47
+        { -- E55
             note = "counter @ livingroom",
             coords = {x=1905,y=9949,z=0},
             dist = {"CandyStoreSnacks","StoreShelfDrinks", "FridgeSoda", "CrateSodaBottles"},
@@ -452,7 +518,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E48
+        { -- E56
             note = "counter @ livingroom",
             coords = {x=1906,y=9949,z=0},
             dist = {"ArmyStorageElectronics", "RandomFiller" },
@@ -460,7 +526,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E49
+        { -- E57
             note = "counter @ livingroom",
             coords = {x=1906,y=9950,z=0},
             dist = {"ToolFactoryHandles" },
@@ -468,7 +534,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E50
+        { -- E58
             note = "counter @ livingroom",
             coords = {x=1906,y=9951,z=0},
             dist = {"CrateRandomJunk", "RandomFiller", "ArmySurplusMisc" },
@@ -477,14 +543,15 @@ local EkronLakeHouse = {
             level = "Loot_BuildMatsLevel",
         },
         -- 2nd floor
-        { -- E51
-            coords = {x=1906,y=9953,z=1},
+        { -- E59
+            note = "shelves @ lobby",
+            coords = {x=1900,y=9953,z=1},
             dist = {"MovieRentalShelves"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E52
+        { -- E60
             note = "sidetable @ bedroom",
             coords = {x=1903,y=9963,z=1},
             dist = {"HuntingLockers", "RangerTools"},
@@ -492,7 +559,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
-        { -- E53
+        { -- E61
             note = "sidetable @ bedroom",
             coords = {x=1900,y=9963,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateLinens"},
@@ -500,19 +567,19 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E54
+        { -- E62
             note = "dishescabinet @ lobby",
             coords = {x=1902,y=9953,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E55
+        { -- E63
             note = "dishescabinet @ lobby",
             coords = {x=1903,y=9953,z=1},
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
-        { -- E56
+        { -- E64
             note = "dresser @ kidsbedroom",
             coords = {x=1902,y=9949,z=1},
             dist = {"SafehouseArmor","LaundryLoad1", "LaundryLoad2", "LaundryLoad3", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8"},
@@ -520,7 +587,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E57
+        { -- E65
             note = "dresser @ kidsbedroom",
             coords = {x=1903,y=9949,z=1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "SafehouseLighting", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy"},
@@ -528,7 +595,7 @@ local EkronLakeHouse = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E58
+        { -- E66
             note = "counter @ bathroom",
             coords = {x=1904,y=9956,z=1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical"},

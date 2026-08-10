@@ -165,11 +165,19 @@ local LowryCourt = {
         { -- E11
             note = "fridge @ bunker",
             coords = { x = 12981, y = 1913, z = -1 },
+            dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         { -- E12
             note = "freezer @ bunker",
             coords = { x = 12981, y = 1913, z = -1 },
             slot = "freezer",
+            dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
         },
         { -- E13 metal shelves (70)
             sprite = 'location_trailer_02_23',
