@@ -212,33 +212,18 @@ function DWAPDevPanel()
         -- inside, 10-tile grab outside), so no config index and no toggle
         -- state - output goes to the console as config-ready waterFixtures
         { label = "Find Unconn. Plumbing", fn = function() FindUnconnectedPlumbing() end },
-        -- Hand-picked alternative for buildings too big to scan wholesale
-        { label = "Plumb Pick", fn = function() DWAPPlumbPick() end,
-            state = function() return DWAP_DevToggles and DWAP_DevToggles.plumbPick end },
-        { pairRow = {
-            { label = "Export Picked", fn = function() DWAPPlumbExport() end },
-            { label = "Clear Picked", fn = function() DWAPPlumbClear() end },
-        } },
-        -- Room-level selection for buildings shared between businesses, where
-        -- a whole-footprint pass would grab rooms that are not ours
-        { label = "Room Pick", fn = function() DWAPRoomPick() end,
-            state = function() return DWAP_DevToggles and DWAP_DevToggles.roomPick end },
-        -- Green = the export also lists containers the config already has,
-        -- for reworking a whole room rather than filling around it
-        { label = "Incl. Configured", fn = function() DWAPRoomExportAll() end,
-            state = function() return DWAP_DevToggles and DWAP_DevToggles.roomExportAll end },
-        { pairRow = {
-            { label = "Export Rooms", fn = function() withNearest(DWAPRoomExport, "DWAPRoomExport") end },
-            { label = "Clear Rooms", fn = function() DWAPRoomClear() end },
-        } },
-        -- Sprites resolve on export, not on click, because clicking a door
-        -- opens it - pick, shut them, then export
-        { label = "Door Pick", fn = function() DWAPDoorPick() end,
-            state = function() return DWAP_DevToggles and DWAP_DevToggles.doorPick end },
-        { pairRow = {
-            { label = "Export Doors", fn = function() DWAPDoorExport() end },
-            { label = "Clear Doors", fn = function() DWAPDoorClear() end },
-        } },
+        -- Hand-picked alternative to the whole-footprint scans above and below,
+        -- and the replacement for the three pickers that used to sit here
+        -- (plumb, room, door). One queue of tile and/or room picks, one export
+        -- pass, with containers/plumbing/doors/barricades/baseRooms/Explain
+        -- chosen by checkbox on its own panel. Green while that panel is open.
+        --
+        -- devPicker.lua sorts AFTER this file, so DWAPPicker does not exist yet
+        -- at load - but fn is a closure called on click, long after every dev
+        -- file has run, which is the same call-time resolution every devTools
+        -- global on this panel relies on.
+        { label = "DWAP Picker", fn = function() DWAPPicker() end,
+            state = function() return DWAP_DevToggles and DWAP_DevToggles.picker end },
         { label = "Barricades", fn = function() withNearest(ShowBarricades, "ShowBarricades") end,
             state = function() return DWAP_DevToggles and DWAP_DevToggles.barricades end },
         -- Same one-shot, player-position shape as the plumbing scan
