@@ -1,5 +1,5 @@
 -- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * 54 skeleton entries carry coords but no loot yet - entries 72-125
+--   * 54 skeleton entries carry coords but no loot yet - entries 86-139
 --   * systems: 9 components at 6663-6676,5499-5509 z=-1,1 report "square not
 --     loaded" - those chunks never stream when travelling to this base, which
 --     is what a pre-move or otherwise wrong coordinate looks like
@@ -122,13 +122,31 @@ local RiversideMansion = {
         },
         { -- E7
             note = "militarycrate @ armysurplus",
+            coords = {x=6670,y=5529,z=-1},
+            stack = 2,
+            dist = {"HuntingLockers", "RangerTools", "CrateFishing", "FishermanTools"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FishLevel",
+        },
+        { -- E8
+            note = "militarycrate @ armysurplus",
             coords = {x=6670,y=5530,z=-1},
             dist = {"ArmyStorageElectronics", "ToolFactoryIngots" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E8
+        { -- E9
+            note = "militarycrate @ armysurplus",
+            coords = {x=6670,y=5530,z=-1},
+            stack = 2,
+            dist = {"ArmyStorageElectronics", "ToolFactoryIngots" },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E10
             note = "militarycrate @ armysurplus",
             coords = {x=6670,y=5532,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
@@ -136,7 +154,16 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E9
+        { -- E11
+            note = "militarycrate @ armysurplus",
+            coords = {x=6670,y=5532,z=-1},
+            stack = 2,
+            dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E12
             note = "militarycrate @ armysurplus",
             coords = {x=6670,y=5533,z=-1},
             dist = {"CrateSheetMetal","CrateLumber" },
@@ -144,7 +171,16 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E10
+        { -- E13
+            note = "militarycrate @ armysurplus",
+            coords = {x=6670,y=5533,z=-1},
+            stack = 2,
+            dist = {"CrateSheetMetal","CrateLumber" },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_BuildMatsLevel",
+        },
+        { -- E14
             note = "militarycrate @ armysurplus",
             coords = {x=6670,y=5534,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -152,12 +188,21 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E11
+        { -- E15
+            note = "militarycrate @ armysurplus",
+            coords = {x=6670,y=5534,z=-1},
+            stack = 2,
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        { -- E16
             note = "militarylocker @ armysurplus",
             coords = {x=6673,y=5527,z=-1},
             special = "essentials",
         },
-        { -- E12
+        { -- E17
             note = "militarylocker @ armysurplus",
             coords = {x=6673,y=5528,z=-1},
             dist = { "CarSupplyTools", "GasStorageMechanics",},
@@ -165,7 +210,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E13
+        { -- E18
             note = "militarylocker @ armysurplus",
             coords = {x=6673,y=5529,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", "CarSupplyTools", "BurglarTools", "CarpenterTools", "BarnTools", "GarageTools","GigamartTools", "JanitorTools", "LoggingFactoryTools" },
@@ -173,7 +218,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E14
+        { -- E19
             note = "militarycrate @ armysurplus",
             coords = {x=6673,y=5530,z=-1},
             dist = {"GasStoreEmergency", "StoreCounterTobacco", "CandyStoreSnacks"},
@@ -181,7 +226,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E15
+        { -- E20
             note = "militarycrate @ armysurplus",
             coords = {x=6673,y=5531,z=-1},
             items = {
@@ -190,7 +235,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E16
+        { -- E21
             note = "militarycrate @ armysurplus",
             coords = {x=6673,y=5532,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy", "RandomFiller"},
@@ -198,7 +243,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E17
+        { -- E22
             note = "militarycrate @ armysurplus",
             coords = {x=6673,y=5533,z=-1},
             items = {
@@ -207,7 +252,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E18
+        { -- E23
             note = "militarycrate @ armysurplus",
             coords = {x=6673,y=5534,z=-1},
             dist = {"ArtStorePottery",},
@@ -216,7 +261,7 @@ local RiversideMansion = {
             level = "Loot_BuildMatsLevel",
         },
         -- infirmary
-        { -- E19
+        { -- E24
             note = "medicine @ medclinic",
             coords = {x=6669,y=5516,z=-1},
             dist = {"LaboratoryLockers", },
@@ -224,7 +269,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E20
+        { -- E25
             note = "medicine @ medclinic",
             coords = {x=6669,y=5515,z=-1},
             dist = {"MorgueTools", "ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -232,7 +277,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E21
+        { -- E26
             note = "sidetable @ medclinic",
             coords = {x=6669,y=5514,z=-1},
             dist = {"MedicalClinicDrugs" },
@@ -240,7 +285,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E22
+        { -- E27
             note = "medicine @ medclinic",
             coords = {x=6669,y=5514,z=-1},
             slot = "upper",
@@ -249,7 +294,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E23
+        { -- E28
             note = "metal_shelves @ medclinic",
             coords = {x=6669,y=5512,z=-1},
             dist = {"MedicalCabinet", },
@@ -257,7 +302,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E24
+        { -- E29
             note = "metal_shelves @ medclinic",
             coords = {x=6673,y=5515,z=-1},
             dist = {"ArmyStorageMedical", "ArmyBunkerMedical" },
@@ -265,7 +310,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MedLevel",
         },
-        { -- E25
+        { -- E30
             note = "fridge @ medclinic",
             coords = {x=6673,y=5516,z=-1},
             dist = {"SafehouseMedical_Late", },
@@ -274,19 +319,19 @@ local RiversideMansion = {
             level = "Loot_MedLevel",
         },
         -- study
-        { -- E26
+        { -- E31
             note = "shelves @ security",
             coords = {x=6668,y=5516,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks1",
         },
-        { -- E27
+        { -- E32
             note = "shelves @ security",
             coords = {x=6667,y=5516,z=-1},
             sandboxEnable = 'Loot_EnableBooks',
             special = "skillbooks2",
         },
-        { -- E28
+        { -- E33
             note = "dishescabinet @ security",
             coords = {x=6668,y=5512,z=-1},
             dist = {"CrateLiquor", "LiquorStoreWhiskey"},
@@ -294,7 +339,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E29
+        { -- E34
             note = "dishescabinet @ security",
             coords = {x=6667,y=5512,z=-1},
             dist = {"CrateLiquor", "DishCabinetVIPLounge"},
@@ -302,7 +347,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E30
+        { -- E35
             note = "shelves @ security",
             coords = {x=6664,y=5513,z=-1},
             items = {
@@ -311,7 +356,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E31
+        { -- E36
             note = "shelves @ security",
             coords = {x=6664,y=5514,z=-1},
             dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
@@ -319,7 +364,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E32
+        { -- E37
             note = "shelves @ security",
             coords = {x=6664,y=5515,z=-1},
             dist = {"BookstoreBiography", "BookstoreArt", "BookstoreGeneralReference", "BookstoreChilds", "BookstoreHistory", },
@@ -328,7 +373,7 @@ local RiversideMansion = {
             level = "Loot_MediaLevel",
         },
         -- west storage
-        { -- E33
+        { -- E38
             note = "crate @ storageunit",
             coords = {x=6661,y=5521,z=-1},
             dist = {"CrateTools", "GarageTools", "BarnTools" },
@@ -336,7 +381,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E34
+        { -- E39
             note = "crate @ storageunit",
             coords = {x=6661,y=5522,z=-1},
             dist = {"BurglarTools", "CarpenterTools", "BarnTools" },
@@ -344,7 +389,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E35
+        { -- E40
             note = "locker @ storageunit",
             coords = {x=6663,y=5519,z=-1},
             dist = {"CampingStoreTools", "ArmyHangarTools", },
@@ -352,7 +397,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E36
+        { -- E41
             note = "locker @ storageunit",
             coords = {x=6660,y=5519,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -360,7 +405,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E37
+        { -- E42
             note = "crate @ storageunit",
             coords = {x=6659,y=5519,z=-1},
             dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
@@ -368,7 +413,16 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        { -- E38
+        { -- E43
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5519,z=-1},
+            stack = 2,
+            dist = {"GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FarmLevel",
+        },
+        { -- E44
             note = "crate @ storageunit",
             coords = {x=6659,y=5521,z=-1},
             dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
@@ -376,7 +430,16 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_TailorLevel",
         },
-        { -- E39
+        { -- E45
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5521,z=-1},
+            stack = 2,
+            dist = {"SewingStoreTools","SewingStoreFabric", "CrateLeather"},
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_TailorLevel",
+        },
+        { -- E46
             note = "crate @ storageunit",
             coords = {x=6659,y=5522,z=-1},
             dist = {"GigamartBreakfast","GigamartCandy","Homesteading","CrateLiquor",},
@@ -384,7 +447,25 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E40
+        { -- E47
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5522,z=-1},
+            stack = 2,
+            dist = {"GigamartBreakfast","GigamartCandy","Homesteading","CrateLiquor",},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E48
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5522,z=-1},
+            stack = 3,
+            dist = {"GigamartBreakfast","GigamartCandy","Homesteading","CrateLiquor",},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E49
             note = "crate @ storageunit",
             coords = {x=6659,y=5523,z=-1},
             dist = {"ArmyStorageAmmunition", },
@@ -392,7 +473,25 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_GunLevel",
         },
-        { -- E41
+        { -- E50
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5523,z=-1},
+            stack = 2,
+            dist = {"ArmyStorageAmmunition", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E51
+            note = "crate @ storageunit",
+            coords = {x=6659,y=5523,z=-1},
+            stack = 3,
+            dist = {"ArmyStorageAmmunition", },
+            distIncludeJunk = true,
+            randUntilFull = true,
+            level = "Loot_GunLevel",
+        },
+        { -- E52
             note = "clothingrack @ storageunit",
             coords = {x=6663,y=5520,z=-1},
             items = {
@@ -400,7 +499,7 @@ local RiversideMansion = {
                 { name = 'Base.Shoes_ArmyBootsDesert', chance = 1, count = {3,7} },
             },
         },
-        { -- E42
+        { -- E53
             note = "clothingrack @ storageunit",
             coords = {x=6663,y=5521,z=-1},
             dist = {"ArmyStorageOutfit", "DrugLabOutfit", },
@@ -408,7 +507,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E43
+        { -- E54
             note = "clothingrack @ storageunit",
             coords = {x=6663,y=5522,z=-1},
             dist = {"SafehouseArmor",},
@@ -416,7 +515,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_LockersLevel",
         },
-        { -- E44
+        { -- E55
             note = "clothingrack @ storageunit",
             coords = {x=6663,y=5523,z=-1},
             dist = {"SafehouseArmor",},
@@ -425,7 +524,7 @@ local RiversideMansion = {
             level = "Loot_LockersLevel",
         },
         -- workshop
-        { -- E45
+        { -- E56
             note = "metal_shelves @ workshop",
             coords = {x=6668,y=5523,z=-1},
             items = {
@@ -435,7 +534,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E46
+        { -- E57
             note = "metal_shelves @ workshop",
             coords = {x=6668,y=5522,z=-1},
             dist = {"ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal","ToolFactoryIngots"},
@@ -443,7 +542,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
-        { -- E47
+        { -- E58
             note = "metal_shelves @ workshop",
             coords = {x=6665,y=5519,z=-1},
             dist = { "CrateTools", },
@@ -451,7 +550,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_ToolsLevel",
         },
-        { -- E48
+        { -- E59
             note = "crate @ workshop",
             coords = {x=6668,y=5520,z=-1},
             dist = { "ToolFactoryHandles", },
@@ -460,7 +559,7 @@ local RiversideMansion = {
             level = "Loot_ToolsLevel",
         },
         -- living room
-        { -- E49
+        { -- E60
             note = "sidetable @ livingroom",
             coords = {x=6667,y=5531,z=-1},
             dist = {"CrateVHSTapes"},
@@ -468,7 +567,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_MediaLevel",
         },
-        { -- E50
+        { -- E61
             note = "shelves @ livingroom",
             coords = {x=6665,y=5524,z=-1},
             dist = {"LiquorStoreBeer","LiquorStoreBeerFancy","LiquorStoreWine"},
@@ -476,7 +575,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E51
+        { -- E62
             note = "shelves @ livingroom",
             coords = {x=6666,y=5524,z=-1},
             dist = {"CrateLiquor", "LiquorStoreBrandy"},
@@ -484,7 +583,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E52
+        { -- E63
             note = "shelves @ livingroom",
             coords = {x=6667,y=5524,z=-1},
             dist = {"CrateLiquor", "LiquorStoreMix"},
@@ -493,7 +592,7 @@ local RiversideMansion = {
             level = "Loot_FoodLevel",
         },
         -- kitchen
-        { -- E53
+        { -- E64
             note = "counter @ kitchen",
             coords = {x=6663,y=5527,z=-1},
             dist = {"TheatrePopcorn"},
@@ -501,7 +600,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E54
+        { -- E65
             note = "counter @ kitchen",
             coords = {x=6663,y=5528,z=-1},
             dist = {"TheatreSnacks"},
@@ -509,7 +608,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E55
+        { -- E66
             note = "counter @ kitchen",
             coords = {x=6663,y=5529,z=-1},
             dist = {"BarCounterMisc"},
@@ -517,7 +616,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E56
+        { -- E67
             note = "counter @ kitchen",
             coords = {x=6663,y=5530,z=-1},
             dist = {"CafeKitchenCoffee"},
@@ -525,7 +624,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E57
+        { -- E68
             note = "counter @ kitchen",
             coords = {x=6663,y=5531,z=-1},
             dist = {"BakeryKitchenFreezer"},
@@ -533,7 +632,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E58
+        { -- E69
             note = "freezer @ kitchen",
             coords = {x=6662,y=5534,z=-1},
             dist = {"SushiKitchenFreezer"},
@@ -541,7 +640,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E59
+        { -- E70
             note = "freezer @ kitchen",
             coords = {x=6661,y=5534,z=-1},
             dist = {"FreezerIceCream", },
@@ -549,31 +648,58 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E60
+        { -- E71
             note = "fridge @ kitchen",
             coords = {x=6659,y=5534,z=-1},
-            dist = {"PizzaKitchenFreezer", "PizzaKitchenFridge"},
+            dist = { "PizzaKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E61
+        { -- E72
+            note = "freezer @ kitchen",
+            coords = { x = 6659, y = 5534, z = -1 },
+            slot = "freezer",
+            dist = {"PizzaKitchenFreezer", },
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E73
             note = "fridge @ kitchen",
             coords = {x=6659,y=5533,z=-1},
-            dist = {"SpiffosKitchenFridge", "SpiffosKitchenFreezer"},
+            dist = {"SpiffosKitchenFridge", },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E62
+        { -- E74
+            note = "freezer @ kitchen",
+            coords = { x = 6659, y = 5533, z = -1 },
+            slot = "freezer",
+            dist = {"SpiffosKitchenFreezer"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E75
             note = "fridge @ kitchen",
             coords = {x=6659,y=5527,z=-1},
-            dist = {"FridgeFarmStorage", "FridgeGeneric", "SushiKitchenFridge"},
+            dist = { "FridgeGeneric", "SushiKitchenFridge"},
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E63
+        { -- E76
+            note = "freezer @ kitchen",
+            coords = { x = 6659, y = 5527, z = -1 },
+            slot = "freezer",
+            dist = { "FreezerGeneric", "SushiKitchenFreezer"},
+            distIncludeJunk = false,
+            randUntilFull = true,
+            level = "Loot_FoodLevel",
+        },
+        { -- E77
             note = "counter @ kitchen",
             coords = {x=6659,y=5532,z=-1},
             dist = {"GigamartBreakfast"},
@@ -581,7 +707,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E64
+        { -- E78
             note = "counter @ kitchen",
             coords = {x=6659,y=5532,z=-1},
             slot = "upper",
@@ -590,7 +716,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E65
+        { -- E79
             note = "counter @ kitchen",
             coords = {x=6659,y=5531,z=-1},
             dist = {"CrateSodaBottles", "CrateSodaCans"},
@@ -598,7 +724,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E66
+        { -- E80
             note = "counter @ kitchen",
             coords = {x=6659,y=5531,z=-1},
             slot = "upper",
@@ -607,7 +733,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E67
+        { -- E81
             note = "counter @ kitchen",
             coords = {x=6659,y=5530,z=-1},
             dist = {"GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood" },
@@ -615,7 +741,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E68
+        { -- E82
             note = "counter @ kitchen",
             coords = {x=6659,y=5530,z=-1},
             slot = "upper",
@@ -624,7 +750,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E69
+        { -- E83
             note = "counter @ kitchen",
             coords = {x=6659,y=5529,z=-1},
             dist = {"GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
@@ -632,7 +758,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E70
+        { -- E84
             note = "counter @ kitchen",
             coords = {x=6659,y=5529,z=-1},
             slot = "upper",
@@ -641,7 +767,7 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E71
+        { -- E85
             note = "shelves @ kitchen",
             coords = {x=6662,y=5524,z=-1},
             dist = {"KitchenBook","GigamartSpices",},
@@ -649,232 +775,233 @@ local RiversideMansion = {
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E72
+        { -- E86
             note = "desk @ kidsbedroom",
             coords = {x=6680,y=5507,z=1},
         },
-        { -- E73
+        { -- E87
             note = "dresser @ kidsbedroom",
             coords = {x=6679,y=5507,z=1},
         },
-        { -- E74
+        { -- E88
             note = "wardrobe @ kidsbedroom",
             coords = {x=6678,y=5509,z=1},
         },
-        { -- E75
+        { -- E89
             note = "wardrobe @ kidsbedroom",
             coords = {x=6678,y=5510,z=1},
         },
-        { -- E76
+        { -- E90
             note = "counter @ bathroom",
             coords = {x=6681,y=5514,z=1},
         },
-        { -- E77
+        { -- E91
             note = "shelves @ kidsbedroom",
             coords = {x=6681,y=5515,z=1},
         },
-        { -- E78
+        { -- E92
             note = "dresser @ kidsbedroom",
             coords = {x=6678,y=5518,z=1},
         },
-        { -- E79
+        { -- E93
             note = "wardrobe @ hall",
             coords = {x=6672,y=5511,z=1},
         },
-        { -- E80
+        { -- E94
             note = "wardrobe @ hall",
             coords = {x=6673,y=5511,z=1},
         },
-        { -- E81
+        { -- E95
             note = "dresser @ hall",
             coords = {x=6673,y=5517,z=1},
         },
-        { -- E82
+        { -- E96
             note = "counter @ bathroom",
             coords = {x=6669,y=5516,z=1},
         },
-        { -- E83
+        { -- E97
             note = "wardrobe @ closet",
             coords = {x=6667,y=5515,z=1},
         },
-        { -- E84
+        { -- E98
             note = "wardrobe @ closet",
             coords = {x=6667,y=5516,z=1},
         },
-        { -- E85
+        { -- E99
             note = "dresser @ bedroom",
             coords = {x=6667,y=5511,z=1},
         },
-        { -- E86
+        { -- E100
             note = "shelves @ bedroom",
             coords = {x=6670,y=5511,z=1},
         },
-        { -- E87
+        { -- E101
             note = "dresser @ bedroom",
             coords = {x=6667,y=5514,z=1},
         },
-        { -- E88
+        { -- E102
             note = "fireplace @ livingroom",
             coords = {x=6675,y=5507,z=1},
         },
-        { -- E89
+        { -- E103
             note = "sidetable @ livingroom",
             coords = {x=6677,y=5508,z=1},
         },
-        { -- E90
+        { -- E104
             note = "shelves @ livingroom",
             coords = {x=6677,y=5509,z=1},
         },
-        { -- E91
+        { -- E105
             note = "shelves @ livingroom",
             coords = {x=6677,y=5510,z=1},
         },
-        { -- E92
+        { -- E106
             note = "medicine @ bathroom",
             coords = {x=6672,y=5515,z=0},
             slot = "upper",
         },
-        { -- E93
+        { -- E107
             note = "metal_shelves @ garagestorage",
             coords = {x=6667,y=5511,z=0},
         },
-        { -- E94
+        { -- E108
             note = "barbecue @ garagestorage",
             coords = {x=6671,y=5511,z=0},
         },
-        { -- E95
+        { -- E109
             note = "counter @ garagestorage",
             coords = {x=6667,y=5512,z=0},
         },
-        { -- E96
+        { -- E110
             note = "counter @ garagestorage",
             coords = {x=6667,y=5513,z=0},
         },
-        { -- E97
+        { -- E111
             note = "locker @ garagestorage",
             coords = {x=6671,y=5514,z=0},
         },
-        { -- E98
+        { -- E112
             note = "cardboardbox @ garagestorage",
             coords = {x=6671,y=5515,z=0},
         },
-        { -- E99
+        { -- E113
             note = "metal_shelves @ garagestorage",
             coords = {x=6667,y=5516,z=0},
             slot = "upper",
         },
-        { -- E100
+        { -- E114
             note = "cardboardbox @ garagestorage",
             coords = {x=6671,y=5516,z=0},
         },
-        { -- E101
+        { -- E115
             note = "metal_shelves @ garagestorage",
             coords = {x=6667,y=5517,z=0},
             slot = "upper",
         },
-        { -- E102
+        { -- E116
             note = "cardboardbox @ garagestorage",
             coords = {x=6671,y=5517,z=0},
         },
-        { -- E103
+        { -- E117
             note = "cardboardbox @ garagestorage",
             coords = {x=6671,y=5517,z=0},
             slot = "upper",
         },
-        { -- E104
+        { -- E118
             note = "metal_shelves @ laundry",
             coords = {x=6674,y=5511,z=0},
         },
-        { -- E105
+        { -- E119
             note = "counter @ laundry",
             coords = {x=6672,y=5513,z=0},
         },
-        { -- E106
+        { -- E120
             note = "overhead @ laundry",
             coords = {x=6672,y=5513,z=0},
             slot = "upper",
         },
-        { -- E107
+        { -- E121
             note = "overhead @ laundry",
             coords = {x=6672,y=5514,z=0},
             slot = "upper",
         },
-        { -- E108
+        { -- E122
             note = "shelves @ livingroom",
             coords = {x=6672,y=5507,z=0},
         },
-        { -- E109
+        { -- E123
             note = "fireplace @ livingroom",
             coords = {x=6675,y=5507,z=0},
         },
-        { -- E110
+        { -- E124
             note = "counter @ kitchen",
             coords = {x=6681,y=5507,z=0},
         },
-        { -- E111
+        { -- E125
             note = "overhead @ kitchen",
             coords = {x=6681,y=5507,z=0},
             slot = "upper",
         },
-        { -- E112
+        { -- E126
             note = "counter @ kitchen",
             coords = {x=6681,y=5508,z=0},
         },
-        { -- E113
+        { -- E127
             note = "counter @ kitchen",
             coords = {x=6681,y=5509,z=0},
         },
-        { -- E114
+        { -- E128
             note = "fridge @ kitchen",
             coords = {x=6678,y=5507,z=0},
         },
-        { -- E115
+        { -- E129
             note = "freezer @ kitchen",
             coords = {x=6678,y=5507,z=0},
             slot = "freezer",
         },
-        { -- E116
+        { -- E130
             note = "overhead @ kitchen",
             coords = {x=6678,y=5507,z=0},
             slot = "upper",
         },
-        { -- E117
+        { -- E131
             note = "counter @ kitchen",
             coords = {x=6679,y=5507,z=0},
         },
-        { -- E118
+        { -- E132
             note = "overhead @ kitchen",
             coords = {x=6679,y=5507,z=0},
             slot = "upper",
         },
-        { -- E119
+        { -- E133
             note = "dishescabinet @ kitchen",
             coords = {x=6678,y=5513,z=0},
         },
-        { -- E120
+        { -- E134
             note = "dishescabinet @ kitchen",
             coords = {x=6678,y=5514,z=0},
         },
-        { -- E121
+        { -- E135
             note = "dresser @ hall",
             coords = {x=6677,y=5513,z=0},
         },
-        { -- E122
+        { -- E136
             note = "dresser @ office",
             coords = {x=6681,y=5515,z=0},
         },
-        { -- E123
+        { -- E137
             note = "desk @ office",
             coords = {x=6681,y=5519,z=0},
         },
-        { -- E124
+        { -- E138
             note = "dresser @ office",
             coords = {x=6678,y=5515,z=0},
         },
-        { -- E125
+        { -- E139
             note = "filingcabinet @ office",
             coords = {x=6678,y=5519,z=0},
-        },    },
+        },
+    },
 }
 
 return RiversideMansion
