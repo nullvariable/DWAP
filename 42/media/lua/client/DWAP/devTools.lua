@@ -2536,6 +2536,149 @@ end
 -- below that fill percent.
 -- checkSystems (3rd arg, off by default) adds the power/water pass: keeps the
 -- normal run light, and gives a combined fix list when you want one
+-- §7 / §3.5 dist-name validation, folded into the audit as a report-only pass.
+-- Walks every entry.dist reference across all configs, resolves each DISTINCT
+-- distribution NAME the same way loot fill does, and classifies it. Touches no
+-- config and no resolver.
+--
+-- States (exactly one per name):
+--   absent               - ProceduralDistributions.list[name] is nil. The
+--                          Distributions[1] dot-path fallback in the resolver IS
+--                          reached (its distList:find(".") test matches any name)
+--                          but yields no items for the container-style names this
+--                          repo uses, so absent = 0 survivors: the name is dead.
+--   empty-after-filtering - resolves but 0 DISTINCT survivors once the resolver's
+--                          excludeItems/convertItems/excludeStrings pass runs.
+--   thin                 - fewer than 3 DISTINCT survivors (legal, likely
+--                          unintended).
+--   ok                   - 3+ distinct survivors; not listed, only counted.
+-- Resolution mirrors fill: DWAP_LootSpawning.getItemsWithDistLists({ name },
+-- includeJunk) returns an array of { name = , weight = }; count DISTINCT .name
+-- values. includeJunk is on when ANY config entry referencing the name sets
+-- distIncludeJunk (junk is additive, so junk-on yields the most-populated pool
+-- and avoids false empty/thin verdicts).
+local DIST_STATE_ORDER = { absent = 1, ["empty-after-filtering"] = 2, thin = 3 }
+
+--- Run the dist-name validation pass and emit its report section.
+--- @param writeLine fun(line: string) sink for report lines (audit writer or standalone)
+local function validateDistNames(writeLine)
+    local configs = DWAPUtils.loadConfigs(true)
+    if not configs or #configs == 0 then
+        writeLine("=== dist name validation: no configs found ===")
+        writeLine("")
+        return
+    end
+    if not DWAP_LootSpawning or not DWAP_LootSpawning.getItemsWithDistLists then
+        writeLine("=== dist name validation: DWAP_LootSpawning.getItemsWithDistLists unavailable - skipped ===")
+        writeLine("")
+        return
+    end
+    -- Read the bare global at call time, not cached at require: this file loads
+    -- during the client bootstrap before server/ paths register, and
+    -- Items/ProceduralDistributions lives under server/. It is populated by the
+    -- time the audit or DWAPValidateDist run in-world. Mirrors vanilla
+    -- LootZed/SpawnRateChecker, which reads the global at call time.
+    if not ProceduralDistributions or not ProceduralDistributions.list then
+        writeLine("=== dist name validation: ProceduralDistributions not loaded - skipped ===")
+        writeLine("")
+        return
+    end
+
+    -- name -> { useCount = <entries referencing it>, configs = { [index] = true },
+    --           anyJunk = <any referencing entry sets distIncludeJunk> }
+    local stats = {}
+    for ci = 1, #configs do
+        local config = configs[ci]
+        if config and config.loot then
+            for li = 1, #config.loot do
+                local entry = config.loot[li]
+                if entry and entry.dist then
+                    local entryJunk = entry.distIncludeJunk and true or false
+                    -- dedupe within an entry so useCount is entries-referencing,
+                    -- not raw occurrences (a repeated name in one dist array is
+                    -- one referencing entry)
+                    local seen = {}
+                    for di = 1, #entry.dist do
+                        local name = entry.dist[di]
+                        if name and not seen[name] then
+                            seen[name] = true
+                            local s = stats[name]
+                            if not s then
+                                s = { useCount = 0, configs = {}, anyJunk = false }
+                                stats[name] = s
+                            end
+                            s.useCount = s.useCount + 1
+                            s.configs[ci] = true
+                            if entryJunk then s.anyJunk = true end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    local flagged = {}
+    local distinctCount = 0
+    local counts = { absent = 0, ["empty-after-filtering"] = 0, thin = 0, ok = 0 }
+    for name, s in pairs(stats) do
+        distinctCount = distinctCount + 1
+        local state
+        if not ProceduralDistributions.list[name] then
+            state = "absent"
+        else
+            local resolved = DWAP_LootSpawning.getItemsWithDistLists({ name }, s.anyJunk)
+            local distinct = {}
+            local survivors = 0
+            for i = 1, #resolved do
+                local it = resolved[i]
+                local n = it and it.name
+                if n and not distinct[n] then
+                    distinct[n] = true
+                    survivors = survivors + 1
+                end
+            end
+            if survivors == 0 then
+                state = "empty-after-filtering"
+            elseif survivors < 3 then
+                state = "thin"
+            else
+                state = "ok"
+            end
+        end
+        counts[state] = counts[state] + 1
+        if state ~= "ok" then
+            local idxs = {}
+            for idx in pairs(s.configs) do idxs[#idxs + 1] = idx end
+            table.sort(idxs)
+            flagged[#flagged + 1] = { name = name, state = state, useCount = s.useCount, configs = idxs }
+        end
+    end
+
+    -- state (absent, empty, thin) then use-count descending then name
+    table.sort(flagged, function(a, b)
+        local sa, sb = DIST_STATE_ORDER[a.state], DIST_STATE_ORDER[b.state]
+        if sa ~= sb then return sa < sb end
+        if a.useCount ~= b.useCount then return a.useCount > b.useCount end
+        return a.name < b.name
+    end)
+
+    writeLine("=== dist name validation (report only) ===")
+    writeLine(("  %d absent, %d empty, %d thin of %d distinct names"):format(
+        counts.absent, counts["empty-after-filtering"], counts.thin, distinctCount))
+    if #flagged == 0 then
+        writeLine("  all dist names resolve to 3+ survivors")
+    else
+        for i = 1, #flagged do
+            local f = flagged[i]
+            local idxStr = {}
+            for j = 1, #f.configs do idxStr[j] = string.format("%02d", f.configs[j]) end
+            writeLine(("  %s | %s | uses=%d | configs=%d [%s]"):format(
+                f.name, f.state, f.useCount, #f.configs, table.concat(idxStr, ",")))
+        end
+    end
+    writeLine("")
+end
+
 --- Whether an audit is currently running, for the dev panel's toggle state.
 --- allLootState is file-local, so the panel cannot read it directly.
 --- @return boolean
@@ -2600,8 +2743,42 @@ function DWAPAudit(startIndex, fillThreshold, checkSystems)
         allLootWrite("  (solar checks skipped: ISA mod inactive or EnableGenSystemSolar off)")
     end
     allLootWrite("")
+    -- §7/§3.5 dist-name validation runs up front: it needs no world streaming,
+    -- so it belongs before the first teleport while the writer is open. Skipped
+    -- on a resume so the section is not duplicated mid-report.
+    if not resuming then
+        -- pcall so a validation error still lets the audit register its OnTick
+        -- handler below rather than wedging after state is built (xpcall banned).
+        local ok, err = pcall(validateDistNames, allLootWrite)
+        if not ok then
+            DWAPUtils.dprint("validateDistNames error (audit continues): " .. tostring(err))
+        end
+    end
     DWAPUtils.dprint("Starting loot audit across " .. #configs .. " configs")
     Events.OnTick.Add(allLootTick)
+end
+
+-- Standalone dist-name validation: the same pass the audit runs up front, for
+-- quick checks without the full teleport audit. Appends its section to the
+-- shared audit report so a standalone run never clobbers a prior full audit.
+function DWAPValidateDist()
+    local writer = getFileWriter("DWAP_loot_audit.txt", true, true)
+    if not writer then
+        DWAPUtils.dprint("DWAPValidateDist: could not open report file")
+        return
+    end
+    local function writeLine(line)
+        writer:write(line .. "\r\n")
+    end
+    writeLine("--- DWAPValidateDist (standalone) ---")
+    -- pcall so an error inside the pass cannot leak the open writer (xpcall is
+    -- banned in this interpreter). Close unconditionally.
+    local ok, err = pcall(validateDistNames, writeLine)
+    writer:close()
+    if not ok then
+        DWAPUtils.dprint("DWAPValidateDist error: " .. tostring(err))
+    end
+    DWAPUtils.dprint("Dist validation report: Zomboid/Lua/DWAP_loot_audit.txt")
 end
 
 local currentContainerLookup = nil

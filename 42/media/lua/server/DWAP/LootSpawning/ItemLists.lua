@@ -756,25 +756,52 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
 
     local distLists = _distLists
 
-    local tempNoDupes = {}
+    -- Weighted builder: an array of { name = <string>, weight = <number> }.
+    -- indexByName maps a name to its slot in `items` so that repeated vanilla
+    -- names SUM their weights instead of collapsing to a single equal-weight
+    -- entry (vanilla repeats a name to make it more common; that repeat signal
+    -- plus the numeric weight are both recovered here in one pass).
     local items = {}
+    local indexByName = {}
+
+    -- Fold one name/weight pair into the builder: apply the convertItems remap
+    -- and excludeItems filtering (unchanged from before), default a missing or
+    -- non-number weight to 1, and either append a new entry or add to the
+    -- weight of an existing one.
+    local function addWeighted(name, weight)
+        if convertItems[name] then
+            name = convertItems[name]
+        end
+        if not name or type(name) ~= "string" or excludeItems[name] then
+            return
+        end
+        if type(weight) ~= "number" then
+            weight = 1
+        end
+        local existing = indexByName[name]
+        if existing then
+            items[existing].weight = items[existing].weight + weight
+        else
+            items[#items + 1] = { name = name, weight = weight }
+            indexByName[name] = #items
+        end
+    end
+
     for i = 1, #distLists do
         local distList = distLists[i]
         local distListItems
+        -- interleaved: vanilla ProceduralDistributions items are a flat
+        -- name/weight array ({ "Name", w, "Name2", w2, ... }); the
+        -- Distributions fallback below is a bare-string array with no weights.
+        local interleaved = true
         if ProceduralDistributions.list[distList] and ProceduralDistributions.list[distList].items then
-            if distIncludeJunk then
-                distListItems = ProceduralDistributions.list[distList].items
-                if ProceduralDistributions.list[distList].junk and #ProceduralDistributions.list[distList].junk > 0 then
-                    for j = 1, #ProceduralDistributions.list[distList].junk do
-                        distListItems[#distListItems+1] = ProceduralDistributions.list[distList].junk[j]
-                    end
-                end
-            else
-                distListItems = ProceduralDistributions.list[distList].items
-            end
+            -- Read the vanilla array without aliasing or mutating it; the
+            -- builder copies each pair out into its own entries.
+            distListItems = ProceduralDistributions.list[distList].items
         else
             local distTable = Distributions[1]
             distListItems = {}
+            interleaved = false
             if distList:find(".") then
                 local distListParts = splitDot(distList)
                 for j = 1, #distListParts do
@@ -793,14 +820,38 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
             end
         end
         if distListItems and #distListItems > 0 then
-            for j = 1, #distListItems do
-                local item = distListItems[j]
-                if convertItems[item] then
-                    item = convertItems[item]
+            if interleaved then
+                -- Walk name/weight pairs; a missing trailing weight defaults to
+                -- 1 inside addWeighted (weight arg is nil).
+                for j = 1, #distListItems, 2 do
+                    addWeighted(distListItems[j], distListItems[j + 1])
                 end
-                if item and type(item) == "string" and not excludeItems[item] and not tempNoDupes[item] then
-                    items[#items + 1] = item
-                    tempNoDupes[item] = true
+            else
+                -- Fallback path yields bare strings; give each weight 1.
+                for j = 1, #distListItems do
+                    addWeighted(distListItems[j], 1)
+                end
+            end
+        end
+
+        -- Fold junk into the pool when requested. Only the interleaved
+        -- ProceduralDistributions branch has a .junk (the Distributions
+        -- dot-path fallback does not). The junk ITEMS live at .junk.items --
+        -- the same interleaved name/weight array shape as the main .items --
+        -- NOT at .junk itself (a { rolls, items } hash with no integer keys).
+        -- Route each pair through addWeighted (writes only into the local
+        -- builder, never the vanilla table) at weight * 1.4: vanilla applies a
+        -- flat x1.4 to junk chances (§3.6). A missing trailing weight defaults
+        -- to 1 inside addWeighted, so multiply an explicit 1 in that case.
+        if distIncludeJunk and interleaved then
+            local junk = ProceduralDistributions.list[distList]
+                and ProceduralDistributions.list[distList].junk
+            local junkItems = junk and junk.items
+            if junkItems and #junkItems > 0 then
+                for j = 1, #junkItems, 2 do
+                    local w = junkItems[j + 1]
+                    if type(w) ~= "number" then w = 1 end
+                    addWeighted(junkItems[j], w * 1.4)
                 end
             end
         end
@@ -1046,7 +1097,14 @@ end
 function DWAP_LootSpawning.getItemsWithDistLists(distLists, distIncludeJunk)
     local items = {}
     if distLists and #distLists > 0 then
-        items = getCachedDistItemList(distLists, distIncludeJunk)
+        -- Return a SHALLOW COPY of the cached outer array: a fresh table whose
+        -- elements are the same inner { name, weight } refs. Callers nil out
+        -- OUTER slots (holes) and append entries; they never mutate the inner
+        -- tables, so the cached array stays canonical for every consumer.
+        local cached = getCachedDistItemList(distLists, distIncludeJunk)
+        for i = 1, #cached do
+            items[i] = cached[i]
+        end
     end
     return items
 end

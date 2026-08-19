@@ -257,10 +257,48 @@ local function stampFill(container, config, state)
     stamps[tostring(member)] = state or "filled"
 end
 
+-- Default weight for config.items appended into the randUntilFull weighted
+-- pool -- mid-range so configured items compete reasonably against vanilla
+-- dist weights (which run ~0.01 to 200).
+local CONFIG_ITEM_WEIGHT = 10
+
+-- Weighted draw over the LIVE (non-nil) entries of a { name, weight } array.
+-- Sums the current weights, draws a target, and walks the cumulative total to
+-- select an index. Skips nil holes left by the container/throttle nil-outs and
+-- preserves fractional vanilla weights by drawing over the float total with
+-- random:random() (Kahlua nextDouble, [0,1)). Returns nil if nothing is left.
+local function weightedPickIndex(items)
+    local total = 0
+    for i = 1, #items do
+        local entry = items[i]
+        if entry then
+            total = total + (entry.weight or 1)
+        end
+    end
+    if total <= 0 then return nil end
+    local target = random:random() * total
+    local cumulative = 0
+    for i = 1, #items do
+        local entry = items[i]
+        if entry then
+            cumulative = cumulative + (entry.weight or 1)
+            if cumulative >= target then
+                return i
+            end
+        end
+    end
+    return nil
+end
+
 local function fillContainer(container, config, index, coordsKey)
     if not container or not config then return end
     local containerType = container:getType()
     if not config.stove and (containerType == "microwave" or container:isStove()) then
+        return
+    end
+    if config.sandboxEnable ~= nil and not SandboxVars.DWAP[config.sandboxEnable] then
+        stampFill(container, config, "disabled")
+        removeLootEntry(index, coordsKey)
         return
     end
     container:emptyIt()
@@ -274,11 +312,6 @@ local function fillContainer(container, config, index, coordsKey)
         level = SandboxVars.DWAP.Loot_FoodLevel or 3
     elseif config.special == 'gunlocker' then
         level = SandboxVars.DWAP.Loot_GunLevel or 3
-    end
-    if config.sandboxEnable ~= nil and not SandboxVars.DWAP[config.sandboxEnable] then
-        stampFill(container, config, "disabled")
-        removeLootEntry(index, coordsKey)
-        return
     end
     if config.special then
         if config.special == "maps" then
@@ -347,7 +380,14 @@ local function fillContainer(container, config, index, coordsKey)
             end
         elseif config.special == "kitchentools" and level < 4 then
             local kitchenTools = DWAP_LootSpawning.getKitchenTools()
-            local kitchenToolsWithSpices =  DWAP_LootSpawning.getKitchenToolsSpices()
+            -- getKitchenToolsSpices() returns the module-local spice table BY
+            -- REFERENCE; build the merged pool in a fresh local so repeated
+            -- fills never append the ~37 tools into the canonical spice list.
+            local spices = DWAP_LootSpawning.getKitchenToolsSpices()
+            local kitchenToolsWithSpices = {}
+            for i = 1, #spices do
+                kitchenToolsWithSpices[i] = spices[i]
+            end
             for i = 1, #kitchenTools do
                 kitchenToolsWithSpices[#kitchenToolsWithSpices+1] = kitchenTools[i]
             end
@@ -395,16 +435,16 @@ local function fillContainer(container, config, index, coordsKey)
                     for j = 1, count do
                         if config.items[i].chance then
                             if config.items[i].chance == 1 or config.items[i].chance >= (random:random(1, 100) / 100) then
-                                items[#items + 1] = config.items[i].name
+                                items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
                                 addItem(container, config.items[i].name, 1)
                             end
                         else
-                            items[#items + 1] = config.items[i].name
+                            items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
                             addItem(container, config.items[i].name, 1)
                         end
                     end
                 else
-                    items[#items + 1] = config.items[i].name
+                    items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
                     addItem(container, config.items[i].name, 1)
                 end
             end
@@ -412,7 +452,7 @@ local function fillContainer(container, config, index, coordsKey)
 
         local throttledSpawnPerContainer = {}
         if not items or #items < 1 then return end
-        local item = items[random:random(1, #items)]
+        local item = items[weightedPickIndex(items) or 1]
         local hasRoom = true -- first item always has room
         local tries = 0
         while hasRoom and tries < 100 do
@@ -423,22 +463,27 @@ local function fillContainer(container, config, index, coordsKey)
                 throttledSpawnPerContainer = {}
                 -- DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
             end
-            local randindex = random:random(1, #items)
-            item = items[randindex]
+            local randindex = weightedPickIndex(items)
+            item = randindex and items[randindex]
             hasRoom = checkHasRoom(container, level)
-            if hasRoom and item then
-                addItem(container, item, 1)
-                if type(item) == "string" then
-                    local ii = instanceItem(item)
-                    if ii and ii:getCategory() == "Container" then
-                        items[randindex] = nil
-                        throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
-                        -- DWAPUtils.dprint("Added container: " .. item)
-                    elseif ii and DWAP_LootSpawning.isThrottleSpawnItem(item) then
-                        -- DWAPUtils.dprint("Throttled spawn item: " .. item)
-                        items[randindex] = nil
-                        throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
-                    end
+            if hasRoom and item and item.name then
+                addItem(container, item.name, 1)
+                local ii = instanceItem(item.name)
+                if ii and ii:getCategory() == "Container" then
+                    -- dense swap-removal: keep `items` a true sequence so #items
+                    -- stays a real length and weightedPickIndex sees the whole
+                    -- live pool (an interior nil hole can shorten # via Kahlua's
+                    -- binary-search border, dropping live entries past the hole)
+                    items[randindex] = items[#items]
+                    items[#items] = nil
+                    throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
+                    -- DWAPUtils.dprint("Added container: " .. item.name)
+                elseif ii and DWAP_LootSpawning.isThrottleSpawnItem(item.name) then
+                    -- DWAPUtils.dprint("Throttled spawn item: " .. item.name)
+                    -- dense swap-removal (see above)
+                    items[randindex] = items[#items]
+                    items[#items] = nil
+                    throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
                 end
             end
             tries = tries + 1
@@ -451,7 +496,11 @@ local function fillContainer(container, config, index, coordsKey)
             local _items = DWAP_LootSpawning.getItemsWithDistLists(dist, config.distIncludeJunk)
             if _items then
                 for i = 1, #_items do
-                    items[#items + 1] = { name = _items[i] }
+                    -- _items[i] is already a { name = , weight = } entry; reuse
+                    -- it directly. This branch dumps one of each name and only
+                    -- reads .name/.chance/.count, so the extra .weight is
+                    -- harmless.
+                    items[#items + 1] = _items[i]
                 end
             end
         end
@@ -474,6 +523,33 @@ local function fillContainer(container, config, index, coordsKey)
     removeLootEntry(index, coordsKey)
 end
 
+-- Step 6 spawn-chance experiment (proposal §5.10 option C). DEFAULT OFF.
+-- Deterministic value in [0,1) from a plain integer hash of (i, x, y, z) --
+-- NO RNG object, so the same world rolls identically across reloads and a
+-- half-looted base never reshuffles. Coords can be negative (z in basements);
+-- Kahlua's `%` is truncated division, so normalise the final result to keep
+-- value non-negative and in range.
+local function spawnChanceValue(i, x, y, z)
+    -- multiplicative mix: each term must move `value` across the whole
+    -- [0,1) range. A shallow FNV *31 polynomial left the coord terms
+    -- swamped by the modulus (value stuck in [0.519,0.526]) - proven
+    -- inert against real config coords, so dispersion was re-verified
+    -- empirically after this rewrite. All intermediates stay under 2^53
+    -- (max ~3e13 for coords up to 30000, exact as doubles) and the `%`
+    -- quotient stays under 2^31, avoiding Kahlua's int-cast overflow.
+    local h = (i * 2246822519 + x * 668265263 + y * 374761393 + z * 40503) % 2147483647
+    if h < 0 then h = h + 2147483647 end
+    return h / 2147483647
+end
+
+-- level -> KEEP probability. Each value is a tunable play-test knob.
+local function spawnChanceKeepProbability(level)
+    if level == 1 then return 1.0      -- Full: always keep
+    elseif level == 2 then return 0.8  -- keep 80%
+    elseif level == 3 then return 0.55 -- Low (the default): keep 55%
+    else return 1.0 end                -- level 4 fills nothing anyway; keep
+end
+
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
     local safehouseIndex = DWAPUtils.getPrimaryConfigIndex()
@@ -483,6 +559,7 @@ local function loadConfigs()
         local config = configs[i]
         local count = 0
         local specialCount = 0
+        local spawnChanceSkipped = 0
         if config and config.loot then
             if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex and not config.addonLootOverride) or nonPrimaryLootLevel == 4 then
                 config.loot = {}
@@ -519,21 +596,52 @@ local function loadConfigs()
                                 -- overwrite to low
                                 entry.level = 3
                             end
-                            setLootConfigValue(entry)
-                            -- try to precache the items
-                            if entry.dist then
-                                DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
+                            -- Step 6 spawn-chance experiment (default OFF). When
+                            -- enabled, deterministically de-register a fraction
+                            -- of plain declarative entries so vanilla fills those
+                            -- containers (never emptied -- emptyIt only runs in
+                            -- fillContainer, which never fires for an unregistered
+                            -- entry). Specials and pinned entries always register;
+                            -- entry.pin does not exist yet (Step 7) but is tested
+                            -- for forward compatibility.
+                            local spawnChanceSkip = false
+                            if SandboxVars.DWAP.Loot_SpawnChanceExperiment
+                                and not entry.special and not entry.pin
+                                and entry.coords then
+                                local numLevel = 3
+                                if type(entry.level) == "string" then
+                                    numLevel = SandboxVars.DWAP[entry.level] or 4
+                                elseif type(entry.level) == "number" then
+                                    numLevel = entry.level
+                                end
+                                local keepProbability = spawnChanceKeepProbability(numLevel)
+                                local value = spawnChanceValue(i, entry.coords.x, entry.coords.y, entry.coords.z)
+                                if value >= keepProbability then
+                                    spawnChanceSkip = true
+                                    spawnChanceSkipped = spawnChanceSkipped + 1
+                                    DWAPUtils.dprint("Config " .. i
+                                        .. " spawn-chance skip (level " .. numLevel
+                                        .. ", value " .. tostring(value)
+                                        .. " >= keep " .. tostring(keepProbability) .. ")")
+                                end
                             end
-                            if entry.special then
-                                specialCount = specialCount + 1
+                            if not spawnChanceSkip then
+                                setLootConfigValue(entry)
+                                -- try to precache the items
+                                if entry.dist then
+                                    DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
+                                end
+                                if entry.special then
+                                    specialCount = specialCount + 1
+                                end
+                                count = count + 1
                             end
-                            count = count + 1
                         end
                     end
                 end
             end
         end
-        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
+        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " spawn-chance skipped: " .. spawnChanceSkipped .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
 end
 
