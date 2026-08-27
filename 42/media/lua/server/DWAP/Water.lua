@@ -106,13 +106,22 @@ Events.OnInitGlobalModData.Add(function()
                     if fixture and fixture.sprite then
                         local hashed = hashCoords(fixture.x, fixture.y, fixture.z)
                         hashedObjects[hashed] = {type = "fixture", sprite = fixture.sprite, x = fixture.x, y = fixture.y, z = fixture.z}
+                        -- source is optional: a fixture with no tank is a valid
+                        -- manual-plumb target (onNewFixtureObject leaves its
+                        -- connection nil for exactly this case). Guard nil the
+                        -- way the tank loop above does - without it ONE
+                        -- sourceless fixture throws indexing fixture.source.x
+                        -- and aborts this whole OnInitGlobalModData handler
+                        -- before the MapObjects sprite handlers register below,
+                        -- so every tank AND fixture in every config stays
+                        -- unconverted (no fluid container, no UI, cannot plumb).
                         if type(fixture.source) == "number" then
                             hashedObjects[hashed].source = {
                                 x = config.waterTanks[fixture.source].x,
                                 y = config.waterTanks[fixture.source].y,
                                 z = config.waterTanks[fixture.source].z
                             }
-                        else
+                        elseif fixture.source then
                             hashedObjects[hashed].source = {
                                 x = fixture.source.x,
                                 y = fixture.source.y,
