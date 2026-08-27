@@ -1769,11 +1769,24 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     if stamps then stampState = stamps[tostring(member)] end
                 end
                 if not stampState then
+                    -- v2: every non-special container fills, so a missing stamp is
+                    -- a real not-filled failure.
                     DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
                         " - no DWAP fill stamp - FAILED")
                     table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
                         ": Not filled (no DWAP stamp)")
-                elseif stampState ~= "disabled" and fillThreshold and not entry.special then
+                elseif not entry.special and (stampState == "added" or stampState == "filled")
+                    and container:getItems():size() == 0 then
+                    -- v2: additive ("added") makes no fill-% guarantee, so it is
+                    -- exempt from the threshold below - but a container that
+                    -- stamped ("added" or "filled") yet holds ZERO items means the
+                    -- FLOOR never landed. That is a real failure regardless of the
+                    -- fill-% threshold.
+                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        " - stamped " .. tostring(stampState) .. " but empty - FAILED")
+                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        ": Empty despite stamp (floor did not land)")
+                elseif stampState ~= "disabled" and stampState ~= "added" and fillThreshold and not entry.special then
                     if fillThreshold <= 0 then
                         if container:getItems():size() == 0 then
                             DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..

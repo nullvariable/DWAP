@@ -1,8 +1,22 @@
 local DWAPUtils = require("DWAPUtils")
+local Affinity = require("DWAP/LootSpawning/Affinity")
+local TagPools = require("DWAP/LootSpawning/TagPools")
 local random = newrandom()
 
 local lootConfig = {}
 local lootByCoords = {}
+-- v2: per-base fillable-container count N (registered non-special declarative
+-- entries). S(N) scales per-container fill so base size stops driving volume.
+-- Persisted in modData alongside lootConfig/lootByCoords; loadConfigs populates
+-- it, OnSave writes it back.
+local baseContainerCount = {}
+
+-- v2 tunable knobs (loot v2 tag model + baseline scaling).
+local BASELINE = 50    -- reference fillable containers per base
+local S_MIN = 0.2      -- floor of the base-scale factor (250+-container base)
+local S_MAX = 2.0      -- cap of the base-scale factor (<=25-container base)
+local FLOOR_ITEMS = 3  -- never-empty guarantee: min items regardless of targetW
+local HARD_CAP = 100   -- absolute per-container insert ceiling (runaway guard)
 
 --- Turn a set of coords into a hash
 --- @return number
@@ -235,13 +249,13 @@ end
 
 --- @param container ItemContainer
 --- @param config table
---- @param index number
---- @param coordsKey number
+--- @param state? string "filled" | "added" | "disabled" (default "filled")
 --- Stamp the container's parent object when a loot entry is consumed so
 --- audits can verify the DWAP fill actually ran regardless of the world's
 --- base-loot setting (with loot on, "container has items" proves nothing).
 --- Keyed per vertical member so fridge/freezer and stack pairs stamp
---- independently. state: "filled" or "disabled" (sandbox option off)
+--- independently. state: "filled" (emptied then filled), "added" (additive-Low:
+--- added on top of vanilla's roll), or "disabled" (sandbox option off)
 local function stampFill(container, config, state)
     local parent = container and container:getParent()
     if not parent then return end
@@ -256,11 +270,6 @@ local function stampFill(container, config, state)
         or config.slot or "base"
     stamps[tostring(member)] = state or "filled"
 end
-
--- Default weight for config.items appended into the randUntilFull weighted
--- pool -- mid-range so configured items compete reasonably against vanilla
--- dist weights (which run ~0.01 to 200).
-local CONFIG_ITEM_WEIGHT = 10
 
 -- Weighted draw over the LIVE (non-nil) entries of a { name, weight } array.
 -- Sums the current weights, draws a target, and walks the cumulative total to
@@ -290,6 +299,84 @@ local function weightedPickIndex(items)
     return nil
 end
 
+-- Per-tier fraction of a container's max weight the DWAP fill aims to ADD
+-- (Normal/Low are additive on top of vanilla; High replaces, None spills).
+-- v2 tunable knob.
+local function tierFraction(numLevel)
+    if numLevel == 1 then return 1.00      -- High: replace, fill to full
+    elseif numLevel == 2 then return 0.50  -- Normal: +50% capacity
+    elseif numLevel == 3 then return 0.15  -- Low: +15% capacity
+    end
+    return 0                               -- None (4+): own tag adds nothing
+end
+
+--- Unify legacy and tagged entries onto one (slider, pool, items) resolution.
+--- Works on un-migrated configs (legacy level/dist) and on tag entries alike;
+--- no config is required to carry `tag`.
+--- @param config table a registered loot entry (shallow copy)
+--- @return string|nil sliderKey  Loot_<Cat>Level controlling fullness
+--- @return table|nil poolDists   ProceduralDistributions names to draw from
+--- @return table|nil itemsOverride  explicit items to place directly
+local function resolveTagFill(config)
+    if config.tag then
+        if TagPools.SLIDER[config.tag] then
+            return TagPools.SLIDER[config.tag], TagPools.POOLS[config.tag], nil
+        end
+        -- Bad tag (hand-authoring typo): warn loudly so it surfaces in the audit
+        -- / console instead of silently reading as the wrong category forever,
+        -- then fall through to legacy dist/items/level resolution.
+        DWAPUtils.dprint("WARN resolveTagFill: unknown tag '" .. tostring(config.tag)
+            .. "' at " .. tostring(config.coords and config.coords.x)
+            .. "," .. tostring(config.coords and config.coords.y)
+            .. "," .. tostring(config.coords and config.coords.z))
+    end
+    if config.dist then
+        -- Derive the category robustly (don't trust _cat: a pre-v2 save restores
+        -- entries with nil _cat). resolveCategory reads config.level string AND
+        -- config.note, and never returns nil for a non-special entry.
+        local cat = config._cat or Affinity.resolveCategory(config) or "Food"
+        local sliderKey = (type(config.level) == "string" and config.level)
+            or ("Loot_" .. cat .. "Level")
+        return sliderKey, config.dist, nil
+    elseif config.items then
+        return nil, nil, config.items
+    end
+    local cat = config._cat or Affinity.resolveCategory(config) or "Food"
+    return "Loot_" .. cat .. "Level", TagPools.POOLS["DWAP" .. cat], nil
+end
+
+--- Perishable (Freezer/Fridge) dist names may only land in a fridge or
+--- freezer container: on every other container type, strip them from the
+--- pool before drawing so replace/additive/spill can't put frozen or
+--- fridge-cold food on a bathroom counter or bookshelf. FridgeMedical is
+--- coldpacks/water, not food, so it is exempt and stays available to
+--- non-refrigerated Med containers. Never mutates poolDists (require-cached
+--- TagPools.POOLS table) - always returns either the same reference
+--- (refrigerated container, nothing to filter) or a freshly built array.
+--- Guards only the dist-POOL draws (replace/additive/spill); the explicit
+--- config.items path is author-curated and intentionally not filtered here.
+--- @param poolDists table|nil array of ProceduralDistributions names
+--- @param container ItemContainer
+--- @return table  the same pool (refrigerated) or a filtered/empty array
+local function refrigeratedGate(poolDists, container)
+    if not poolDists then return {} end
+    if container:isFreezer() or container:isFridge() then
+        return poolDists
+    end
+    local filtered = {}
+    local n = 0
+    for i = 1, #poolDists do
+        local name = poolDists[i]
+        local perishable = name ~= "FridgeMedical"
+            and (string.find(name, "Freezer", 1, true) or string.find(name, "Fridge", 1, true))
+        if not perishable then
+            n = n + 1
+            filtered[n] = name
+        end
+    end
+    return filtered
+end
+
 local function fillContainer(container, config, index, coordsKey)
     if not container or not config then return end
     local containerType = container:getType()
@@ -301,19 +388,22 @@ local function fillContainer(container, config, index, coordsKey)
         removeLootEntry(index, coordsKey)
         return
     end
-    container:emptyIt()
-    -- local level = SandboxVars.DWAP[spawnConfig.level] or 4
-    local level = 3
-    if type(config.level) == "string" then
-        level = SandboxVars.DWAP[config.level] or 4
-    elseif type(config.level) == "number" then
-        level = config.level
-    elseif config.special == 'kitchentools' then
-        level = SandboxVars.DWAP.Loot_FoodLevel or 3
-    elseif config.special == 'gunlocker' then
-        level = SandboxVars.DWAP.Loot_GunLevel or 3
-    end
+
+    -- Specials are immune to tier scaling and to v2 entirely: resolve the
+    -- effective level, emptyIt, then place the fixed loadout exactly as before.
+    -- Kept byte-identical to the step-8 special path.
     if config.special then
+        local level = 3
+        if type(config.level) == "string" then
+            level = SandboxVars.DWAP[config.level] or 4
+        elseif type(config.level) == "number" then
+            level = config.level
+        elseif config.special == 'kitchentools' then
+            level = SandboxVars.DWAP.Loot_FoodLevel or 3
+        elseif config.special == 'gunlocker' then
+            level = SandboxVars.DWAP.Loot_GunLevel or 3
+        end
+        container:emptyIt()
         if config.special == "maps" then
             local allMaps = DWAP_LootSpawning.getAllMaps()
             for i = 1, #allMaps do
@@ -423,103 +513,169 @@ local function fillContainer(container, config, index, coordsKey)
                 tries = tries + 1
             end
         end
-    elseif config.randUntilFull then
-        local items = {}
-        if config.dist then
-            items = DWAP_LootSpawning.getItemsWithDistLists(config.dist, config.distIncludeJunk)
-        end
-        if config.items then
-            for i = 1, #config.items do
-                if config.items[i].count then
-                    local count = random:random(config.items[i].count[1], config.items[i].count[2])
-                    for j = 1, count do
-                        if config.items[i].chance then
-                            if config.items[i].chance == 1 or config.items[i].chance >= (random:random(1, 100) / 100) then
-                                items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
-                                addItem(container, config.items[i].name, 1)
-                            end
-                        else
-                            items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
-                            addItem(container, config.items[i].name, 1)
-                        end
-                    end
-                else
-                    items[#items + 1] = { name = config.items[i].name, weight = CONFIG_ITEM_WEIGHT }
-                    addItem(container, config.items[i].name, 1)
-                end
-            end
-        end
+        stampFill(container, config, "filled")
+        removeLootEntry(index, coordsKey)
+        return
+    end
 
-        local throttledSpawnPerContainer = {}
-        if not items or #items < 1 then return end
-        local item = items[weightedPickIndex(items) or 1]
-        local hasRoom = true -- first item always has room
-        local tries = 0
-        while hasRoom and tries < 100 do
-            if not items or #items < 2 and throttledSpawnPerContainer and #throttledSpawnPerContainer > 0 then
-                for i = 0, #throttledSpawnPerContainer do
-                    items[#items + 1] = throttledSpawnPerContainer[i]
-                end
-                throttledSpawnPerContainer = {}
-                -- DWAPUtils.dprint("Added containers to items: " .. #alreadySpawnedContainers)
-            end
-            local randindex = weightedPickIndex(items)
-            item = randindex and items[randindex]
-            hasRoom = checkHasRoom(container, level)
-            if hasRoom and item and item.name then
-                addItem(container, item.name, 1)
-                local ii = instanceItem(item.name)
-                if ii and ii:getCategory() == "Container" then
-                    -- dense swap-removal: keep `items` a true sequence so #items
-                    -- stays a real length and weightedPickIndex sees the whole
-                    -- live pool (an interior nil hole can shorten # via Kahlua's
-                    -- binary-search border, dropping live entries past the hole)
-                    items[randindex] = items[#items]
-                    items[#items] = nil
-                    throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
-                    -- DWAPUtils.dprint("Added container: " .. item.name)
-                elseif ii and DWAP_LootSpawning.isThrottleSpawnItem(item.name) then
-                    -- DWAPUtils.dprint("Throttled spawn item: " .. item.name)
-                    -- dense swap-removal (see above)
-                    items[randindex] = items[#items]
-                    items[#items] = nil
-                    throttledSpawnPerContainer[#throttledSpawnPerContainer + 1] = item
-                end
-            end
-            tries = tries + 1
+    -- NON-special v2 fill: tag/legacy -> slider + pool, sized by the base-wide
+    -- scale factor S(N). resolveTagFill works on both migrated (tag) and legacy
+    -- (level/dist) entries, so this runs against the current un-migrated configs.
+    local sliderKey, poolDists, itemsOverride = resolveTagFill(config)
+    -- A numeric config.level still overrides the slider. sliderKey is nil only
+    -- for the items-override path, where numLevel just picks emptyIt vs additive.
+    local numLevel = (type(config.level) == "number" and config.level)
+        or (sliderKey and SandboxVars.DWAP[sliderKey])
+        or 4
+
+    -- Explicit items override: place the configured items directly (chance/count
+    -- honoured, as the old else-branch did), emptying first only at High. No pool
+    -- draw and no spill; the emptyIt rule below is the only tier gating.
+    if itemsOverride then
+        if numLevel == 1 then
+            container:emptyIt()
         end
-    else
-        -- DWAPUtils.dprint("final loot else")
-        local items = config.items or {}
-        local dist = config.dist or { "RandomFiller" }
-        if config.dist or #items < 1 then
-            local _items = DWAP_LootSpawning.getItemsWithDistLists(dist, config.distIncludeJunk)
-            if _items then
-                for i = 1, #_items do
-                    -- _items[i] is already a { name = , weight = } entry; reuse
-                    -- it directly. This branch dumps one of each name and only
-                    -- reads .name/.chance/.count, so the extra .weight is
-                    -- harmless.
-                    items[#items + 1] = _items[i]
-                end
-            end
-        end
-        if not items then return end
-        for k = 1, #items do
-            local item = items[k]
-            if item then
-                if item.chance then
-                    if item.chance == 1 or item.chance >= (random:random(1, 100) / 100) then
-                        local count = random:random(item.count[1], item.count[2])
-                        addItem(container, item.name, count)
+        for i = 1, #itemsOverride do
+            local it = itemsOverride[i]
+            if it and it.name then
+                if it.chance then
+                    if it.chance == 1 or it.chance >= (random:random(1, 100) / 100) then
+                        local count = random:random(it.count[1], it.count[2])
+                        addItem(container, it.name, count)
                     end
                 else
-                    addItem(container, item.name, 1)
+                    addItem(container, it.name, 1)
                 end
             end
+        end
+        stampFill(container, config, numLevel == 1 and "filled" or "added")
+        removeLootEntry(index, coordsKey)
+        return
+    end
+
+    -- Base-wide scale factor S(N): small bases fill fuller per container, large
+    -- bases spread thinner, both clamped. Guard N > 0 (div-by-zero / negative).
+    local N = baseContainerCount[config._base] or BASELINE
+    if N <= 0 then N = BASELINE end
+    local S = math.min(math.max(BASELINE / N, S_MIN), S_MAX)
+
+    local maxW = container:getMaxWeight()
+    local items, targetW, state
+
+    if numLevel == 1 then
+        -- High / replace: emptyIt then fill to full from the pool. S does not
+        -- apply at High. Only empty AFTER we know the pool has something to add.
+        items = DWAP_LootSpawning.getItemsWithDistLists(refrigeratedGate(poolDists, container), config.distIncludeJunk)
+        if not items or #items < 1 then
+            removeLootEntry(index, coordsKey)
+            return
+        end
+        container:emptyIt()
+        targetW = maxW
+        state = "filled"
+    elseif numLevel == 2 or numLevel == 3 then
+        -- Normal / Low: additive on top of vanilla, sized by tier * capacity * S.
+        items = DWAP_LootSpawning.getItemsWithDistLists(refrigeratedGate(poolDists, container), config.distIncludeJunk)
+        if not items or #items < 1 then
+            removeLootEntry(index, coordsKey)
+            return
+        end
+        targetW = tierFraction(numLevel) * maxW * S
+        state = "added"
+    elseif numLevel == 4 then
+        -- None -> SPILL. The own tag adds nothing, but the container must not read
+        -- empty: draw a floor from the highest-set ENABLED category's pool, chosen
+        -- by the container's furniture/room affinity.
+        local furn, room = Affinity.parseNote(config.note)
+        local CATS = Affinity.CATEGORIES
+        local pickedCat, bestAff, bestLevel
+        for c = 1, #CATS do
+            local cat = CATS[c]
+            local lvl = SandboxVars.DWAP["Loot_" .. cat .. "Level"] or 4
+            if lvl < 4 then
+                local aff = Affinity.getAffinity(furn, room, nil, cat)
+                local better
+                if not pickedCat then
+                    better = true
+                elseif aff ~= bestAff then
+                    better = aff > bestAff
+                elseif lvl ~= bestLevel then
+                    better = lvl < bestLevel  -- lower numeric slider = more loot
+                else
+                    better = false            -- CATEGORIES order breaks the tie
+                end
+                if better then
+                    pickedCat, bestAff, bestLevel = cat, aff, lvl
+                end
+            end
+        end
+        if not pickedCat then
+            -- Every category disabled: truly leave to vanilla (no stamp).
+            removeLootEntry(index, coordsKey)
+            return
+        end
+        items = DWAP_LootSpawning.getItemsWithDistLists(
+            refrigeratedGate(TagPools.POOLS["DWAP" .. pickedCat], container), config.distIncludeJunk)
+        if not items or #items < 1 then
+            removeLootEntry(index, coordsKey)
+            return
+        end
+        targetW = tierFraction(3) * maxW * S  -- spill floor tracks Low's fraction
+        state = "added"
+    else
+        -- numLevel >= 5 or no resolvable pool: leave to vanilla, no stamp/emptyIt.
+        removeLootEntry(index, coordsKey)
+        return
+    end
+
+    -- Shared fill loop (replace + additive + spill). FLOOR_ITEMS guarantees no
+    -- container reads empty even when targetW is tiny; targetW is the weight goal
+    -- for the DWAP-added amount; hasRoomFor stops physical overflow; HARD_CAP is
+    -- the runaway guard. Container/throttle items are swapped out of the live
+    -- pool (dense swap-removal, so #items stays a real length) and replenished
+    -- once the pool runs thin, matching the step-8 discipline.
+    local pl = getPlayer()
+    local startW = container:getContentsWeight()
+    local added = 0
+    local tries = 0  -- real termination bound: added never increments on a
+    -- name that fails to resolve (addItem inserts 0), so gate on tries instead.
+    local throttled = {}
+    while tries < HARD_CAP and container:hasRoomFor(pl, 1) do
+        tries = tries + 1
+        local curWeight = container:getContentsWeight()
+        -- Physical stop: never let the forced FLOOR push a small container past
+        -- capacity (additive/replace targets are already <= maxW).
+        if curWeight >= maxW then break end
+        -- Weight goal reached once the never-empty FLOOR is satisfied.
+        if added >= FLOOR_ITEMS and (curWeight - startW) >= targetW then break end
+        if #items < 2 and #throttled > 0 then
+            for i = 1, #throttled do
+                items[#items + 1] = throttled[i]
+            end
+            throttled = {}
+        end
+        local pickIdx = weightedPickIndex(items)
+        if not pickIdx then break end
+        local item = items[pickIdx]
+        if not item or not item.name then break end
+        local before = container:getItems():size()
+        addItem(container, item.name, 1)
+        -- Count ACTUAL items inserted via a size delta: addItem inserts exactly 1
+        -- for VHS/Disc/Alice regardless of the count arg.
+        added = added + (container:getItems():size() - before)
+        local ii = instanceItem(item.name)
+        if ii and ii:getCategory() == "Container" then
+            items[pickIdx] = items[#items]
+            items[#items] = nil
+            throttled[#throttled + 1] = item
+        elseif ii and DWAP_LootSpawning.isThrottleSpawnItem(item.name) then
+            items[pickIdx] = items[#items]
+            items[#items] = nil
+            throttled[#throttled + 1] = item
         end
     end
-    stampFill(container, config, "filled")
+
+    stampFill(container, config, state)
     removeLootEntry(index, coordsKey)
 end
 
@@ -560,6 +716,9 @@ local function loadConfigs()
         local count = 0
         local specialCount = 0
         local spawnChanceSkipped = 0
+        -- v2: N = registered non-special declarative entries for this base, the
+        -- fillable containers subject to tier scaling. Drives S(N) at fill time.
+        local baseCount = 0
         if config and config.loot then
             if (nonPrimaryLootLevel == 1 and i ~= safehouseIndex and not config.addonLootOverride) or nonPrimaryLootLevel == 4 then
                 config.loot = {}
@@ -589,6 +748,17 @@ local function loadConfigs()
                             -- shared config tables
                             local entry = {}
                             for k, v in pairs(lootEntry) do entry[k] = v end
+                            -- Resolve the tier category from the AUTHORED level/note
+                            -- NOW, before the default and the non-primary
+                            -- rewriteLevel below turn a string level into numeric 3
+                            -- (which would lose the authored category). resolveCategory
+                            -- only READS lootEntry (the require-cached original); the
+                            -- result is stamped on the copy. nil for specials; a
+                            -- category for pins too (harmless). _base is the schema
+                            -- key the audit reads; _cat feeds resolveTagFill for
+                            -- level-less / tagless legacy entries.
+                            entry._base = i
+                            entry._cat = Affinity.resolveCategory(lootEntry)
                             if not entry.level then
                                 entry.level = 3 -- default to low
                             end
@@ -602,8 +772,8 @@ local function loadConfigs()
                             -- containers (never emptied -- emptyIt only runs in
                             -- fillContainer, which never fires for an unregistered
                             -- entry). Specials and pinned entries always register;
-                            -- entry.pin does not exist yet (Step 7) but is tested
-                            -- for forward compatibility.
+                            -- entry.pin does not exist yet but is tested for
+                            -- forward compatibility.
                             local spawnChanceSkip = false
                             if SandboxVars.DWAP.Loot_SpawnChanceExperiment
                                 and not entry.special and not entry.pin
@@ -627,6 +797,12 @@ local function loadConfigs()
                             end
                             if not spawnChanceSkip then
                                 setLootConfigValue(entry)
+                                -- v2: count REGISTERED non-special entries as this
+                                -- base's fillable-container N. setLootConfigValue
+                                -- no-ops without coords, so gate the count on coords.
+                                if entry.coords and not entry.special then
+                                    baseCount = baseCount + 1
+                                end
                                 -- try to precache the items
                                 if entry.dist then
                                     DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
@@ -641,7 +817,8 @@ local function loadConfigs()
                 end
             end
         end
-        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " spawn-chance skipped: " .. spawnChanceSkipped .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
+        baseContainerCount[i] = baseCount
+        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " fillable N: " .. baseCount .. " spawn-chance skipped: " .. spawnChanceSkipped .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
 end
 
@@ -776,12 +953,37 @@ Events.OnPostMapLoad.Add(function()
         DWAPUtils.dprint("ModData for DWAP_Loot already initialized, loading existing loot config")
         lootConfig = modData.lootConfig
         lootByCoords = modData.lootByCoords
+        -- v2: restore the per-base fillable-container counts. Saves predating v2
+        -- have none; fall back to empty so S(N) uses BASELINE (guarded N > 0).
+        baseContainerCount = modData.baseContainerCount or {}
+        -- v2 retro-conversion (the "convert on load" pattern): loadConfigs only
+        -- runs on the FIRST-ever load, so a world created by a pre-v2 build
+        -- restores loot copies with nil _cat (and no baseContainerCount).
+        -- Backfill _cat so resolveTagFill categorizes correctly, and recompute N
+        -- per base if it is missing. One cheap pass, once per load.
+        local needCounts = modData.baseContainerCount == nil
+        local recount = {}
+        for _k, entry in pairs(lootConfig) do
+            if entry and not entry.special then
+                if not entry._cat then
+                    entry._cat = Affinity.resolveCategory(entry)
+                end
+                if needCounts and entry._base then
+                    recount[entry._base] = (recount[entry._base] or 0) + 1
+                end
+            end
+        end
+        if needCounts then
+            baseContainerCount = recount
+            modData.baseContainerCount = baseContainerCount
+        end
         Events.OnFillContainer.Add(onFillContainer)
     else
         DWAPUtils.dprint("Initializing DWAP_Loot mod data")
         loadConfigs()
         modData.lootConfig = lootConfig
         modData.lootByCoords = lootByCoords
+        modData.baseContainerCount = baseContainerCount
         modData.init = true
         Events.OnFillContainer.Add(onFillContainer)
     end
@@ -796,6 +998,7 @@ Events.OnSave.Add(function()
     if modData and modData.init then
         modData.lootConfig = lootConfig
         modData.lootByCoords = lootByCoords
+        modData.baseContainerCount = baseContainerCount
     end
 end)
 print("Events.lua loaded")
