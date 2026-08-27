@@ -12,7 +12,7 @@
 --     addresses squares that hold no container, so this is a re-pick, not a
 --     per-entry fix
 local wtc1            = { x = 8146, y = 11509, z = -2, }
-local pb1             = { x = 8145, y = 11509, z = -2, }
+local pb1             = { x = 8140, y = 11508, z = -2, }
 local SecretMausoleum = {
     group = "",
     baseBuildings = {
@@ -20,10 +20,10 @@ local SecretMausoleum = {
         { x = 8141, y = 11513, z = -1 }, -- Mausoleum
     },
     baseRooms = {
-        { x = 8148, y = 11505, z = 0 }, -- livingroom
-        { x = 8148, y = 11509, z = 0 }, -- kitchen
-        { x = 8138, y = 11505, z = 0 }, -- officechurch
-        { x = 8138, y = 11508, z = 0 }, -- bathroom
+        { x = 8148, y = 11505, z = 0 },  -- livingroom
+        { x = 8148, y = 11509, z = 0 },  -- kitchen
+        { x = 8138, y = 11505, z = 0 },  -- officechurch
+        { x = 8138, y = 11508, z = 0 },  -- bathroom
         { x = 8136, y = 11512, z = -1 }, -- hall
         { x = 8128, y = 11516, z = -2 }, -- hall
         { x = 8128, y = 11512, z = -2 }, -- bedroom
@@ -32,7 +32,8 @@ local SecretMausoleum = {
     spawn = { x = 8143, y = 11515, z = 0 },
     generators = {
         {
-            controls = { sprite = "industry_02_67", x = pb1.x - 1, y = pb1.y, z = pb1.z, },
+            controls = { sprite = "dwap_tiles_01_22", x = 8143, y = 11509, z = -2, },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 8145, y = 11509, z = -2, },
             fakeGenerators = {
                 { x = 8131, y = 11519, z = -1 },
             },
@@ -42,11 +43,12 @@ local SecretMausoleum = {
         { sprite = "dwap_tiles_01_8", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType = "generator", source = 1 },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_9",     x = 8136, y = 11510, z = 0,  sourceType = "tank", source = 1 },
-        { sprite = "fixtures_sinks_01_13",    x = 8138, y = 11513, z = 0,  sourceType = "tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_32", x = 8138, y = 11511, z = 0,  sourceType = "tank", source = 1 },
-        { sprite = "fixtures_bathroom_01_0",  x = 8139, y = 11511, z = 0,  sourceType = "tank", source = 1 },
-        { sprite = "fixtures_sinks_01_16",    x = 8137, y = 11508, z = -2, sourceType = "tank", source = 1 },
+        { sprite = "fixtures_bathroom_01_0", x = 8138, y = 11508, z = 1,  sourceType = "tank", source = wtc1, }, -- bathroom, bld 31,44#36
+        { sprite = "fixtures_sinks_01_2",    x = 8139, y = 11508, z = 1,  sourceType = "tank", source = wtc1, }, -- bathroom, bld 31,44#36
+        { sprite = "fixtures_sinks_01_4",    x = 8130, y = 11513, z = 0,  sourceType = "tank", source = wtc1, }, -- kitchen, bld 31,44#36
+        { sprite = "fixtures_bathroom_01_3", x = 8138, y = 11510, z = 0,  sourceType = "tank", source = wtc1, }, -- lobby, bld 31,44#36
+        { sprite = "fixtures_sinks_01_2",    x = 8138, y = 11508, z = 0,  sourceType = "tank", source = wtc1, }, -- bathroom, bld 31,44#36
+        { sprite = "fixtures_sinks_01_16",   x = 8137, y = 11508, z = -2, sourceType = "tank", source = 1 },
     },
     doorKeys = {
         name = "Secret Mausoleum Key",
@@ -58,58 +60,61 @@ local SecretMausoleum = {
     map = { name = "DWAPStashMap41", },
     objectSpawns = {
 
-        { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_1",    x = 8139, y = 11517, z = 0, },
-        { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_1",    x = 8143, y = 11517, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_1",    x = 8136, y = 11510, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_house_02_24", x = 8145, y = 11512, z = 0, },
-
     },
     loot = {
         -- main house
         -- kitchen
         { -- E1
-            coords = { x = 8135, y = 11513, z = 0 },
+            note = "counter @ kitchen",
+            coords = { x = 8150, y = 11511, z = 0 },
             special = "kitchentools",
             level = "Loot_FoodLevel",
         },
         { -- E2
-            coords = { x = 8135, y = 11510, z = 0 },
+            note = "counter @ kitchen",
+            coords = { x = 8149, y = 11511, z = 0 },
             dist = { "CrateFlour", "CrateOilVegetable", "CafeKitchenSupplies", "CafeKitchenTea", "CrateSodaBottles" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
         { -- E3
-            coords = { x = 8136, y = 11510, z = 0 },
+            note = "counter @ kitchen",
+            coords = { x = 8148, y = 11511, z = 0 },
             dist = { "CrateFishing", "MusicStoreCDs" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FishLevel",
         },
         { -- E4
-            coords = { x = 8137, y = 11510, z = 0 },
+            note = "counter @ kitchen",
+            coords = { x = 8148, y = 11509, z = 0 },
             dist = { "GigamartDryGoods", "CrateCannedFood", "KitchenCannedFood", "CrateLiquor", "StoreCounterTobacco" },
             distIncludeJunk = true,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
         { -- E5 fridge
-            coords = { x = 8137, y = 11511, z = 0 },
-            dist = { "FridgeFarmStorage", "FreezerIceCream" },
+            note = "fridge @ kitchen",
+            coords = { x = 8149, y = 11509, z = 0 },
+            dist = { "FridgeFarmStorage", "WesternKitchenFreezer", },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
-        { -- E6 mini fridge
-            coords = { x = 8137, y = 11512, z = 0 },
-            dist = { "FreezerIceCream", "WesternKitchenFreezer", },
+        { -- E5 fridge
+            note = "freezer @ kitchen",
+            coords = { x = 8149, y = 11509, z = 0 },
+            slot = "freezer",
+            dist = { "FridgeFarmStorage", "FreezerIceCream" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FoodLevel",
         },
         -- bathroom
         { -- E7
-            coords = { x = 8138, y = 11513, z = 0 },
+            note = "counter @ kitchen",
+            coords = { x = 8151, y = 11511, z = 0 },
             slot = "upper",
             dist = { "MedicalCabinet", "GasStoreToiletries" },
             distIncludeJunk = true,
@@ -118,20 +123,23 @@ local SecretMausoleum = {
         },
         -- living room
         { -- E8
-            coords = { x = 8140, y = 11511, z = 0 },
+            note = "shelves @ livingroom",
+            coords = { x = 8154, y = 11505, z = 0 },
             dist = { "SafehouseFireplace", "SafehouseLighting", "LivingRoomShelfClassy" },
             distIncludeJunk = false,
             randUntilFull = true,
             level = "Loot_FarmLevel",
         },
-        -- bedrooms
+        -- office
         { -- E9
-            coords = { x = 8143, y = 11514, z = 0 },
+            note = "shelves @ officechurch",
+            coords = { x = 8142, y = 11505, z = 0 },
             sandboxEnable = 'SeedLibrary',
             special = 'SeedLibrary',
         },
         { -- E10
-            coords = { x = 8144, y = 11513, z = 0 },
+            note = "dresser @ officechurch",
+            coords = { x = 8142, y = 11506, z = 0 },
             dist = { "GunStoreKnives", "ClothingStorageWinter", },
             distIncludeJunk = true,
             randUntilFull = true,
@@ -139,7 +147,8 @@ local SecretMausoleum = {
         },
         -- entrance hall
         { -- E11
-            coords = { x = 8138, y = 11510, z = 0 },
+            note = "shelves @ officechurch",
+            coords = { x = 8142, y = 11507, z = 0 },
             special = "gunlocker",
             level = "Loot_GunLevel",
         },
