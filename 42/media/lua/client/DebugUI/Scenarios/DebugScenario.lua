@@ -15,7 +15,7 @@ debugScenarios = {}
 
 DebugScenarioAllMaps = false
 
-local target = 32
+local target = 14
 
 
 local DWAPUtils = require "DWAPUtils"
@@ -50,12 +50,26 @@ debugScenarios.DebugScenarioDWAP = {
     -- startLoc = { x = 12659, y = 6402, z = 2 },
     startLoc = { x = spawns[target].x, y = spawns[target].y, z = spawns[target].z },
     setSandbox = function()
-        -- 7 = Always Tries, deliberately. Max story rate makes this world a
-        -- canary for PreventStories: 42.20 moved building stories to Java and
-        -- RBShopLooted quietly stopped honouring the stash exemption, which
-        -- showed up here as a ransacked config 37 instead of a player report
-        -- weeks later. Turning this down would hide the next such change.
-        SandboxVars.SurvivorHouseChance = 7
+        -- 1 = Never. This gates ONLY the random-story roll: RandomizedBuilding
+        -- Base.ChunkLoaded runs its forced stories (setAlwaysDo /
+        -- reallyAlwaysForce) first and unconditionally, then hits
+        -- `case 1: return;` before getRandomStory(). So the PreventStories
+        -- canary this was set to 7 for survives - RBShopLooted is
+        -- setAlwaysDo(true) (RBShopLooted.java:128) and still runs, along with
+        -- RBBar/RBOffice/RBTrashed/RBSchool and the named ones. What it drops
+        -- is the random pool, which is where RBBurnt/RBBurntFireman/
+        -- RBBurntCorpse live - none of them forced.
+        -- That is the point: a burnt building near a config grinds the audit
+        -- to a halt. BurnWalls calls the one-arg RemoveTileObject at six sites
+        -- and never checks the return, so a shipped multi-tile object that
+        -- cannot resolve its siblings is retried forever, and in -debug every
+        -- refusal costs a stack capture + File.length() + flush. That killed
+        -- the 2026-08-11 run at config 23 (Rusty Rifle): ~160 KB/s of
+        -- "Failed to find all parts of a multi-tile object!", console.txt and
+        -- the DebugLog both rotated to 100% that one line, no progress for
+        -- 6+ minutes. See docs/tis-post-1-burnwalls.md and TIS thread 97089.
+        -- Set back to 7 when deliberately testing story interactions.
+        SandboxVars.SurvivorHouseChance = 1
         -- Was HouseAlarmFrequency, which is only this option's translation
         -- key - the SandboxVars name is Alarm, so the old line set nothing
         -- and alarms ran at the default (Sometimes). 1 = Never, which is
@@ -120,19 +134,29 @@ debugScenarios.DebugScenarioDWAP = {
             WaterTankCapacity = 4000,
             Loot = 2, -- all
             -- Loot = 1, -- primary only
+            -- Loot_SpawnChanceExperiment: default-off dev tool. The step-6
+            -- generosity read (2026-08-19) closed with "empty reads as broken",
+            -- so it stays off; the fix is step 8 allocation, not skipping.
+            -- Set true + drop the levels below to 3 to re-run the read.
             Loot_EnableMaps = true,
             Loot_EnableBooks = true,
             SeedLibrary = true,
-            Loot_FoodLevel = 1,
-            Loot_MediaLevel = 1,
-            Loot_GunLevel = 1,
-            Loot_MedLevel = 1,
-            Loot_FarmLevel = 1,
-            Loot_FishLevel = 1,
-            Loot_TailorLevel = 1,
-            Loot_LockersLevel = 1,
-            Loot_ToolsLevel = 1,
-            Loot_BuildMatsLevel = 1,
+            -- Levels set to 3 (Low) to exercise the step-8 ADDITIVE-LOW path:
+            -- at tier 3 every string-level entry goes additive (skip emptyIt,
+            -- add the concentrated ~5/category floor on top of vanilla, stamp
+            -- "added"); tier 1 (Full) would route them all through the
+            -- unchanged replace path and never test allocation. Set back to 1
+            -- to test the replace/full path.
+            Loot_FoodLevel = 3,
+            Loot_MediaLevel = 3,
+            Loot_GunLevel = 3,
+            Loot_MedLevel = 3,
+            Loot_FarmLevel = 3,
+            Loot_FishLevel = 3,
+            Loot_TailorLevel = 3,
+            Loot_LockersLevel = 3,
+            Loot_ToolsLevel = 3,
+            Loot_BuildMatsLevel = 3,
         }
     end,
     onStart = function()

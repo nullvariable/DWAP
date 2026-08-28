@@ -664,11 +664,20 @@ end
 ---  * 42.20 merges window frames into the wall as an overlay, so they never
 ---    appear in getObjects(). DevShared.barricadeCandidatesOnSquare carries the
 ---    getWindowFrame/getWindow fallback that finds them.
----  * An opening belongs to its ROOMED side (isExteriorOpening guarantees
----    exactly one side is roomed). Pick a roomless tile - a yard square outside
----    a wall - and its opening is attributed to the room on the far side, which
----    is probably not picked, so nothing emits. That is counted and reported
----    rather than left as a mystery: barricade export wants room-side picks.
+---  * A ROOM entry means "this room's exterior", so its openings go through
+---    the shell rule: isExteriorOpening (exactly one side roomed), and the
+---    roomed side owns the opening and must itself be picked. An opening whose
+---    room side was never picked is counted and reported rather than left as a
+---    mystery. A TILE entry is the opposite - it names one exact square, so
+---    the user has already said which opening they mean, and the
+---    isExteriorOpening/roomed-side test is skipped entirely: interior doors
+---    and fences between two roomless squares are in scope whenever either
+---    side of the opening is a tile entry.
+---    Note this keys off the ENTRY kind, not the mode the click was made in.
+---    Room mode on a roomless square already falls back to a tile entry (see
+---    pickerClick), so clicking a yard square in Room mode gets the relaxed
+---    treatment - which is the wanted answer, since that click selected one
+---    square and nothing else could have been meant by it.
 local function barricadeSection(flat)
     local picked = {}
     for i = 1, #flat.squares do
@@ -676,8 +685,19 @@ local function barricadeSection(flat)
         picked[DevShared.coordKey(s:getX(), s:getY(), s:getZ())] = true
     end
 
+    -- From the QUEUE, not flat.entryIndex - flatten dedupes with first-entry-
+    -- wins, so a tile picked inside an already-queued room resolves to the
+    -- room's entry index and would otherwise never get the relaxation below.
+    local tilePicked = {}
+    for i = 1, #queue do
+        local e = queue[i]
+        if e.kind == "tile" then
+            tilePicked[DevShared.coordKey(e.x, e.y, e.z)] = true
+        end
+    end
+
     local unbarricaded, barricaded = {}, {}
-    local blocked, skippedInterior, skippedGarage, skippedUnpicked = 0, 0, 0, 0
+    local blocked, skippedInterior, skippedGarage, skippedUnpicked, tileRelaxed = 0, 0, 0, 0, 0
     local seen = {}
 
     -- Props.lua matches its target by sprite name against the square's object
@@ -696,23 +716,38 @@ local function barricadeSection(flat)
             skippedGarage = skippedGarage + 1
             return
         end
-        if not DevShared.isExteriorOpening(obj) then
-            skippedInterior = skippedInterior + 1
-            return
-        end
-        -- Exactly one side is roomed (isExteriorOpening guarantees it): that
-        -- side owns the opening. Testing the square the object happens to sit
-        -- on instead would drop every south/east opening, whose object lives
-        -- on the unroomed outside square
+        -- Testing the square the object happens to sit on instead of near/far
+        -- would drop every south/east opening, whose object lives on the
+        -- unroomed outside square
         local near = obj:getSquare()
         local far = obj.getOppositeSquare and obj:getOppositeSquare()
-        local inside = (near and near:getRoom()) and near or far
-        if not inside
-            or not picked[DevShared.coordKey(inside:getX(), inside:getY(), inside:getZ())] then
-            -- the neighbour scan reached an opening whose room side was never
-            -- picked; keeping it would export the neighbour's shell
-            skippedUnpicked = skippedUnpicked + 1
-            return
+        local nearKey = near and DevShared.coordKey(near:getX(), near:getY(), near:getZ())
+        local farKey = far and DevShared.coordKey(far:getX(), far:getY(), far:getZ())
+        local nearIsTilePick = nearKey and tilePicked[nearKey]
+        local farIsTilePick = farKey and tilePicked[farKey]
+        local inside
+        local relaxed = false
+        if nearIsTilePick or farIsTilePick then
+            -- A tile pick names one exact square, interior or exterior, so the
+            -- roomed-side rule below does not apply - attribute the opening to
+            -- whichever side was actually tile-picked
+            inside = nearIsTilePick and near or far
+            relaxed = true
+        else
+            if not DevShared.isExteriorOpening(obj) then
+                skippedInterior = skippedInterior + 1
+                return
+            end
+            -- Exactly one side is roomed (isExteriorOpening guarantees it):
+            -- that side owns the opening
+            inside = (near and near:getRoom()) and near or far
+            if not inside
+                or not picked[DevShared.coordKey(inside:getX(), inside:getY(), inside:getZ())] then
+                -- the neighbour scan reached an opening whose room side was
+                -- never picked; keeping it would export the neighbour's shell
+                skippedUnpicked = skippedUnpicked + 1
+                return
+            end
         end
         local insideBuilding = inside:getBuilding()
         local room = inside:getRoom()
@@ -721,6 +756,11 @@ local function barricadeSection(flat)
             blocked = blocked + 1
             return
         end
+        -- counted here rather than in the branch above, so the reported number
+        -- is what the relaxation actually put in the dump: the interior/garage
+        -- skips return, but `blocked` is checked after both branches and would
+        -- otherwise be counted twice
+        if relaxed then tileRelaxed = tileRelaxed + 1 end
         local entry = {
             sprite = sprite, x = x, y = y, z = z,
             kind = btype.kind, facing = facing, where = whereTag,
@@ -764,10 +804,15 @@ local function barricadeSection(flat)
     end
     print(("  skipped: %d interior (room both sides), %d garage (barricades do not stick), "
         .. "%d barricading not allowed"):format(skippedInterior, skippedGarage, blocked))
+    if tileRelaxed > 0 then
+        print(("  %d opening(s) included by tile pick (interior/exterior check skipped)")
+            :format(tileRelaxed))
+    end
     if skippedUnpicked > 0 then
-        print(("  skipped: %d opening(s) whose ROOM side is not picked. An opening belongs to "
-            .. "its roomed side, so picking the yard tile outside a wall attributes it to the "
-            .. "room within - pick from inside the room to export it"):format(skippedUnpicked))
+        print(("  skipped: %d opening(s) whose ROOM side is not picked. A room pick attributes "
+            .. "an opening to its roomed side, so picking the yard tile outside a wall via ROOM "
+            .. "mode attributes it to the room within - pick from inside the room, or tile-pick "
+            .. "either square directly to export interior or roomless openings"):format(skippedUnpicked))
     end
 end
 

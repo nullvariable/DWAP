@@ -32,50 +32,41 @@ loot[#loot + 1] = { -- E26
 loot[#loot + 1] = { -- E27 [20]
     note = "counter @ warehouse",
     coords = {x = 5581, y = 9376, z = -1},
-    dist = {"HuntingLockers", "RangerTools"},
     distIncludeJunk = false,
-    randUntilFull = true,
-    level = "Loot_FishLevel",
+    tag = "DWAPFish",
 }
 loot[#loot + 1] = { -- E28
     note = "counter @ warehouse",
     coords = {x = 5582, y = 9376, z = -1},
     dist = {"BurglarTools", "CarpenterTools", "BarnTools","SafehouseArmor", "SafehouseLighting"},
     distIncludeJunk = true,
-    randUntilFull = true,
-    level = "Loot_LockersLevel",
+    tag = "DWAPLockers",
 }
 loot[#loot + 1] = { -- E29
     note = "counter @ warehouse",
     coords = {x = 5583, y = 9376, z = -1},
     dist = {"CarSupplyTools", "GasStorageMechanics", "CampingLockers"},
     distIncludeJunk = true,
-    randUntilFull = true,
-    level = "Loot_GunLevel",
+    tag = "DWAPGun",
 }
 loot[#loot + 1] = { -- E30
     note = "counter @ warehouse",
     coords = {x = 5584, y = 9376, z = -1},
     dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
     distIncludeJunk = true,
-    randUntilFull = true,
-    level = "Loot_GunLevel",
+    tag = "DWAPGun",
 }
 loot[#loot + 1] = { -- E31
     note = "counter @ warehouse",
     coords = {x = 5584, y = 9375, z = -1},
-    dist = {"GasStoreEmergency","StoreCounterTobacco"},
     distIncludeJunk = true,
-    randUntilFull = true,
-    level = "Loot_ToolsLevel",
+    tag = "DWAPTools",
 }
 loot[#loot + 1] = { -- E32
     note = "counter @ warehouse",
     coords = {x = 5584, y = 9374, z = -1},
-    dist = {"CrateCannedFood", "KitchenCannedFood"},
     distIncludeJunk = false,
-    randUntilFull = true,
-    level = "Loot_FoodLevel",
+    tag = "DWAPFood",
 }
 
 local DoeValleyBunker = {

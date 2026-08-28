@@ -239,12 +239,12 @@ LootMaps.Init.DWAPStashMap30 = function(mapUI)
     mapAPI:setBoundsInSquares(2496, 14296, 2695, 14503)
 end
 
--- Prison Break
+-- Fallas Hotel
 LootMaps.Init.DWAPStashMap31 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(7064, 8144, 7447, 8463)
+    mapAPI:setBoundsInSquares(7136, 8200, 7391, 8319)
 end
 
 -- Quill Manor

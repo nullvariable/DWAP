@@ -312,15 +312,25 @@ end
 
 --- Unify legacy and tagged entries onto one (slider, pool, items) resolution.
 --- Works on un-migrated configs (legacy level/dist) and on tag entries alike;
---- no config is required to carry `tag`.
+--- no config is required to carry `tag`. Override precedence, highest first:
+--- explicit `items` (always wins, tag or no tag) > `tag` (+ optional same-entry
+--- `dist` overriding just the pool, slider still comes from the tag) > legacy
+--- `dist`/level > bare category fallback.
 --- @param config table a registered loot entry (shallow copy)
 --- @return string|nil sliderKey  Loot_<Cat>Level controlling fullness
 --- @return table|nil poolDists   ProceduralDistributions names to draw from
 --- @return table|nil itemsOverride  explicit items to place directly
 local function resolveTagFill(config)
+    if config.items then
+        return nil, nil, config.items
+    end
     if config.tag then
         if TagPools.SLIDER[config.tag] then
-            return TagPools.SLIDER[config.tag], TagPools.POOLS[config.tag], nil
+            local slider = TagPools.SLIDER[config.tag]
+            if config.dist then
+                return slider, config.dist, nil
+            end
+            return slider, TagPools.POOLS[config.tag], nil
         end
         -- Bad tag (hand-authoring typo): warn loudly so it surfaces in the audit
         -- / console instead of silently reading as the wrong category forever,
@@ -338,8 +348,6 @@ local function resolveTagFill(config)
         local sliderKey = (type(config.level) == "string" and config.level)
             or ("Loot_" .. cat .. "Level")
         return sliderKey, config.dist, nil
-    elseif config.items then
-        return nil, nil, config.items
     end
     local cat = config._cat or Affinity.resolveCategory(config) or "Food"
     return "Loot_" .. cat .. "Level", TagPools.POOLS["DWAP" .. cat], nil
@@ -375,6 +383,31 @@ local function refrigeratedGate(poolDists, container)
         end
     end
     return filtered
+end
+
+--- Draw the gated pool for an entry, guaranteeing a non-empty result when one
+--- is possible. A narrow `dist` override (or, rarely, a whole pool) can be
+--- ENTIRELY perishable — e.g. a `counter @ storage` authored with only
+--- `BakeryKitchenFreezer`. On a dry container refrigeratedGate strips every
+--- name, the draw returns nothing, and the container reads empty (no stamp),
+--- violating the no-empty-container principle. When that happens, fall back to
+--- the entry's own category pool (DWAP<Cat>), gated the same way — it always
+--- carries non-perishable members, so a dry counter still fills. Idempotent
+--- when poolDists already IS the category pool (fallback re-gates the same set).
+local function drawGatedPool(config, poolDists, container)
+    local gated = refrigeratedGate(poolDists, container)
+    if #gated >= 1 then return gated end
+    local fallback
+    if config.tag and TagPools.POOLS[config.tag] then
+        fallback = TagPools.POOLS[config.tag]
+    else
+        local cat = config._cat or Affinity.resolveCategory(config) or "Food"
+        fallback = TagPools.POOLS["DWAP" .. cat]
+    end
+    if fallback then
+        gated = refrigeratedGate(fallback, container)
+    end
+    return gated
 end
 
 local function fillContainer(container, config, index, coordsKey)
@@ -565,7 +598,7 @@ local function fillContainer(container, config, index, coordsKey)
     if numLevel == 1 then
         -- High / replace: emptyIt then fill to full from the pool. S does not
         -- apply at High. Only empty AFTER we know the pool has something to add.
-        items = DWAP_LootSpawning.getItemsWithDistLists(refrigeratedGate(poolDists, container), config.distIncludeJunk)
+        items = DWAP_LootSpawning.getItemsWithDistLists(drawGatedPool(config, poolDists, container), config.distIncludeJunk)
         if not items or #items < 1 then
             removeLootEntry(index, coordsKey)
             return
@@ -575,7 +608,7 @@ local function fillContainer(container, config, index, coordsKey)
         state = "filled"
     elseif numLevel == 2 or numLevel == 3 then
         -- Normal / Low: additive on top of vanilla, sized by tier * capacity * S.
-        items = DWAP_LootSpawning.getItemsWithDistLists(refrigeratedGate(poolDists, container), config.distIncludeJunk)
+        items = DWAP_LootSpawning.getItemsWithDistLists(drawGatedPool(config, poolDists, container), config.distIncludeJunk)
         if not items or #items < 1 then
             removeLootEntry(index, coordsKey)
             return

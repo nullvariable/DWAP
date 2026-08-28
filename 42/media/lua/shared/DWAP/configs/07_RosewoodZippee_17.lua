@@ -1,3 +1,29 @@
+-- Known audit noise (2026-08-11 audit) - not a config defect, do not "fix"
+--   The audit prints six "baseRooms <room>@x,y,z matched no room in any
+--   declared building" warnings, for the z=-1 basement rooms: hall, storage
+--   and the four storageunits. All six anchors resolve to real rooms with
+--   real defs; the warning wording overstates the problem.
+--   * The coords in the warning are the ROOM DEF rect origin, not the anchor
+--     square - roomDefKey (client/DWAP/devShared.lua) formats
+--     name@defX,defY,defZ - so they will never match the anchors below.
+--   * A genuinely bad anchor is reported separately and differently by
+--     baseRoomKeys ("square not loaded" / "square is not in a room" /
+--     "room has no def"). None of those fired.
+--   * The unclaimed sweep only walks rooms of the buildings named in
+--     baseBuildings; the basement level is a different building def from the
+--     surface apartments building our single anchor names, so those rooms are
+--     never visited, never marked hit, and get reported as unmatched.
+--   This site is a large multistory multi-business building. The baseBuildings
+--   anchor is deliberately the same square as spawn and sits inside the
+--   building; baseRooms exists to isolate the audit to the units we own.
+--   Consequence: unclaimed containers in the six basement rooms are invisible
+--   to the audit, so "unclaimed containers: 3" covers the surface rooms only.
+--   Loot fill is unaffected (it addresses explicit coords) and all 62 entries
+--   resolve, including the cardboardbox@storageunit and
+--   metal_shelves@storageunit ones.
+--   Option, not a plan: a second baseBuildings anchor on a z=-1 basement
+--   square would bring those rooms into scope - it also widens PreventStories
+--   to that building.
 local wtc = { x = 8084, y = 11550, z = -1 }
 local pb1 = { x = 8079, y = 11551, z = -1 }
 local RosewoodZippee = {
@@ -45,14 +71,12 @@ local RosewoodZippee = {
         { sprite = "fixtures_sinks_01_1",        x = 8085, y = 11552, z = 2, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_bathroom_01_1",     x = 8085, y = 11553, z = 2, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_bathroom_01_25",    x = 8087, y = 11552, z = 2, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
-        { sprite = "fixtures_bathroom_01_24",    x = 8087, y = 11553, z = 2, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         -- 2nd floor apts
         { sprite = "fixtures_sinks_01_5",        x = 8074, y = 11552, z = 1, sourceType = "tank", source = wtc, }, -- kitchen, bld 31,45#6
         { sprite = "fixtures_bathroom_01_26",    x = 8077, y = 11560, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_sinks_01_11",       x = 8078, y = 11551, z = 1, sourceType = "tank", source = wtc, }, -- kitchen, bld 31,45#6
         { sprite = "fixtures_bathroom_01_2",     x = 8078, y = 11558, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_sinks_01_29",       x = 8078, y = 11559, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
-        { sprite = "fixtures_bathroom_01_27",    x = 8078, y = 11560, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_bathroom_01_25",    x = 8087, y = 11552, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_sinks_01_4",        x = 8085, y = 11552, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
         { sprite = "fixtures_bathroom_01_1",     x = 8085, y = 11553, z = 1, sourceType = "tank", source = wtc, }, -- bathroom, bld 31,45#6
@@ -70,7 +94,7 @@ local RosewoodZippee = {
     },
     map = { name = "DWAPStashMap7", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                            z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
+        { sprite = "carpentry_02_122", x = 8084, y = 11552, z = 3, enabled = "EnableWaterSystem", delete = true, },
         { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11555,                         z = 2, }, -- window W | livingroom, bld 31,45#6
         { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11557,                         z = 2, }, -- window W | livingroom, bld 31,45#6
         { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11559,                         z = 2, }, -- window W | livingroom, bld 31,45#6
@@ -79,50 +103,38 @@ local RosewoodZippee = {
         { -- E1
             note = "dresser @ bedroom",
             coords = { x = 8089, y = 11560, z = 2 },
-            dist = { "ClothingStorageWinter", "GymLaundry" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            tag = "DWAPLockers",
         },
         { -- E2
             note = "sidetable @ bedroom",
             coords = { x = 8088, y = 11556, z = 2 },
-            dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPBooze",
         },
         { -- E3
             note = "wardrobe @ bedroom",
             coords = { x = 8086, y = 11556, z = 2 },
-            dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            tag = "DWAPLockers",
         },
         { -- E4
             note = "wardrobe @ bedroom",
             coords = { x = 8086, y = 11557, z = 2 },
-            dist = { "ArmyStorageOutfit", "DrugLabOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "CrateBootsArmy" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            tag = "DWAPLockers",
         },
         { -- E5
             note = "shelves @ bedroom",
             coords = { x = 8086, y = 11559, z = 2 },
-            dist = { "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E6
             note = "wardrobe @ bedroom",
             coords = { x = 8082, y = 11556, z = 2 },
-            dist = { "ArmyHangarOutfit", "ArmyStorageOutfit", "ArmySurplusOutfit", "LaundryLoad4", "LaundryLoad5", "LaundryLoad6", "LaundryLoad7", "LaundryLoad8" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            tag = "DWAPLockers",
         },
         { -- E7
             note = "wardrobe @ bedroom",
@@ -133,27 +145,22 @@ local RosewoodZippee = {
         { -- E8
             note = "dresser @ bedroom",
             coords = { x = 8085, y = 11558, z = 2 },
-            dist = { "ArtStorePottery", "CrateMasonry" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            tag = "DWAPBuildMats",
         },
         { -- E9
             note = "shelves @ bedroom",
             coords = { x = 8085, y = 11559, z = 2 },
             slot = "upper",
-            dist = { "CrateTailoring", "CrateFabric_Cotton", "CrateFabric_DenimBlack", "CrateLeather", "SewingStoreFabric" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_TailorLevel",
+            tag = "DWAPTailor",
         },
         { -- E10
             note = "sidetable @ bedroom",
             coords = { x = 8082, y = 11560, z = 2 },
             dist = { "LivingRoomShelfClassy" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E11
             note = "shelves @ livingroom",
@@ -187,36 +194,28 @@ local RosewoodZippee = {
         { -- E16
             note = "counter @ bathroom",
             coords = { x = 8085, y = 11552, z = 2 },
-            dist = { "BathroomCounter", "MedicalStorageDrugs" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
+            tag = "DWAPMed",
         },
         { -- E17
             note = "medicine @ bathroom",
             coords = { x = 8085, y = 11552, z = 2 },
             slot = "upper",
-            dist = { "BathroomCounter", "GasStoreToiletries" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_LockersLevel",
+            tag = "DWAPLockers",
         },
         { -- E18
             note = "cardboardbox @ closet",
             coords = { x = 8088, y = 11552, z = 2 },
-            dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
+            tag = "DWAPFarm",
         },
         { -- E19
             note = "cardboardbox @ closet",
             coords = { x = 8088, y = 11552, z = 2 },
             slot = "upper",
-            dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
+            tag = "DWAPFarm",
         },
         { -- E20
             note = "metal_shelves @ closet",
@@ -226,41 +225,33 @@ local RosewoodZippee = {
             items = {
                 { name = 'Base.Fertilizer', chance = 1, count = { 8, 10 } },
             },
-            randUntilFull = true,
             level = "Loot_FarmLevel",
         },
         { -- E21
             note = "counter @ kitchen",
             coords = { x = 8090, y = 11552, z = 2 },
-            dist = { "ButcherSpices", "GigamartSpices", "GigamartDryGoods", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E22
             note = "shelves @ kitchen",
             coords = { x = 8091, y = 11552, z = 2 },
             slot = "upper",
-            dist = { "CrateLiquor", "DishCabinetVIPLounge" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPBooze",
         },
         { -- E23
             note = "counter @ kitchen",
             coords = { x = 8091, y = 11552, z = 2 },
-            dist = { "GigamartBakingMisc", "CrateFlour", "CrateOilVegetable" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E24
             note = "counter @ kitchen",
             coords = { x = 8092, y = 11552, z = 2 },
             dist = { "KitchenDryFood", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E25
             note = "counter @ kitchen",
@@ -271,43 +262,34 @@ local RosewoodZippee = {
         { -- E26
             note = "fridge @ kitchen",
             coords = { x = 8090, y = 11553, z = 2 },
-            dist = { "BakeryKitchenFridge", "BurgerKitchenFridge", "CafeteriaKitchenFridge" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFridge",
         },
         { -- E27
             note = "freezer @ kitchen",
             coords = { x = 8090, y = 11553, z = 2 },
             slot = "freezer",
-            dist = { "SushiKitchenFreezer", "WesternKitchenFreezer", "BakeryKitchenFreezer" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFreezer",
         },
         { -- E28
             note = "sidetable @ livingroom",
             coords = { x = 8090, y = 11560, z = 2 },
-            dist = { "CrateLiquor", "DishCabinetVIPLounge", "MusicStoreCDs", "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E29
             note = "sidetable @ livingroom",
             coords = { x = 8093, y = 11559, z = 2 },
             dist = { "CrateVHSTapes" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E30
             note = "cardboardbox @ livingroom",
             coords = { x = 8080, y = 11552, z = 1 },
-            dist = { "GardenStoreTools", "Homesteading", "ToolStoreFarming", "CrateFarming" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FarmLevel",
+            tag = "DWAPFarm",
         },
         { -- E31
             note = "cardboardbox @ livingroom",
@@ -316,7 +298,6 @@ local RosewoodZippee = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = { 9, 12 } },
                 { name = 'Base.Fertilizer',    chance = 1, count = { 8, 10 } },
             },
-            randUntilFull = true,
             level = "Loot_FarmLevel",
         },
         { -- E32
@@ -326,7 +307,6 @@ local RosewoodZippee = {
                 { name = 'Base.AnimalFeedBag', chance = 1, count = { 9, 12 } },
                 { name = 'Base.Fertilizer',    chance = 1, count = { 8, 10 } },
             },
-            randUntilFull = true,
             level = "Loot_FarmLevel",
             slot = "upper",
         },
@@ -337,16 +317,13 @@ local RosewoodZippee = {
                 { name = 'Base.NailsBox', },
                 { name = 'Base.ScrewsBox', },
             },
-            randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
         { -- E34
             note = "shelves @ hall",
             coords = { x = 8078, y = 11557, z = -1 },
-            dist = { "CrateVHSTapes", "BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction", "MusicStoreCDs" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E35
             note = "smallbox @ hall",
@@ -354,17 +331,14 @@ local RosewoodZippee = {
             items = {
                 { name = 'Base.Firewood', chance = 1, count = { 10, 10 } },
             },
-            randUntilFull = true,
             level = "Loot_FarmLevel",
         },
         { -- E36
             note = "metal_shelves @ storage",
             coords = { x = 8081, y = 11552, z = -1 },
             slot = "upper",
-            dist = { "BurglarTools", "CarpenterTools", "BarnTools", "SafehouseArmor", "SafehouseLighting" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E37
             note = "smallbox @ storageunit",
@@ -375,7 +349,6 @@ local RosewoodZippee = {
                 { name = 'Base.WoodAxe', },
                 { name = 'Base.Machete', },
             },
-            randUntilFull = true,
             level = "Loot_BuildMatsLevel",
         },
         { -- E38
@@ -383,8 +356,7 @@ local RosewoodZippee = {
             coords = { x = 8089, y = 11549, z = -1 },
             dist = { "MusicStoreCDs" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E39
             note = "shelves @ storageunit",
@@ -395,10 +367,8 @@ local RosewoodZippee = {
         { -- E40
             note = "cardboardbox @ storageunit",
             coords = { x = 8092, y = 11551, z = -1 },
-            dist = { "ArmyStorageElectronics", "RandomFiller" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            tag = "DWAPBuildMats",
         },
         { -- E41
             note = "metal_shelves @ storageunit",
@@ -409,27 +379,21 @@ local RosewoodZippee = {
         { -- E42
             note = "cardboardbox @ storageunit",
             coords = { x = 8087, y = 11550, z = -1 },
-            dist = { "HuntingLockers", "RangerTools", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
+            tag = "DWAPFish",
         },
         { -- E43
             note = "cardboardbox @ storageunit",
             coords = { x = 8087, y = 11550, z = -1 },
             slot = "upper",
-            dist = { "CrateFishing", "FishermanTools" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FishLevel",
+            tag = "DWAPFish",
         },
         { -- E44
             note = "cardboardbox @ storageunit",
             coords = { x = 8087, y = 11551, z = -1 },
-            dist = { "CrateLumber", "CrateSheetMetal", "ToolFactoryBarStock", "ToolFactoryHandles", "WeldingWorkshopMetal", "ToolFactoryIngots" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            tag = "DWAPBuildMats",
         },
         { -- E45
             note = "locker @ storageunit",
@@ -440,74 +404,59 @@ local RosewoodZippee = {
         { -- E46
             note = "smallbox @ storageunit",
             coords = { x = 8093, y = 11560, z = -1 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E47
             note = "cardboardbox @ storageunit",
             coords = { x = 8090, y = 11557, z = -1 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E48
             note = "metal_shelves @ storageunit",
             coords = { x = 8086, y = 11560, z = -1 },
-            dist = { "BurglarTools", "CarpenterTools", "BarnTools", "SafehouseArmor", "SafehouseLighting" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E49
             note = "metal_shelves @ storageunit",
             coords = { x = 8087, y = 11560, z = -1 },
-            dist = { "CrateLumber", "CrateSheetMetal", "CrateMasonry", "ArtStorePottery" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            tag = "DWAPBuildMats",
         },
         { -- E50
             note = "toolcabinet @ storageunit",
             coords = { x = 8086, y = 11557, z = -1 },
-            dist = { "GasStoreEmergency", "StoreCounterTobacco" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E51
             note = "counter @ breakroom",
             coords = { x = 8076, y = 11556, z = 0 },
             dist = { "BreakRoomCounter" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E52
             note = "counter @ breakroom",
             coords = { x = 8076, y = 11557, z = 0 },
-            dist = { "GigamartDryGoods", "GigamartBreakfast" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E53
             note = "counter @ breakroom",
             coords = { x = 8076, y = 11558, z = 0 },
             dist = { "StoreKitchenCleaning" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E54
             note = "cardboardbox @ zippeestorage",
             coords = { x = 8073, y = 11552, z = 0 },
             dist = { "CrateBlacksmithing", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E55
             note = "cardboardbox @ zippeestorage",
@@ -515,65 +464,53 @@ local RosewoodZippee = {
             slot = "upper",
             dist = { "CrateCarpentry", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E56
             note = "metal_shelves @ zippeestorage",
             coords = { x = 8074, y = 11552, z = 0 },
             dist = { "CrateMechanics", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E57
             note = "metal_shelves @ zippeestorage",
             coords = { x = 8075, y = 11552, z = 0 },
             dist = { "CrateMetalwork" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_ToolsLevel",
+            tag = "DWAPTools",
         },
         { -- E58
             note = "metal_shelves @ zippeestorage",
             coords = { x = 8076, y = 11552, z = 0 },
-            dist = { "StoreKitchenButcher", "CrateFlour", "CrateOilVegetable", "StoreKitchenSauce", },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E59
             note = "metal_shelves @ zippeestorage",
             coords = { x = 8077, y = 11552, z = 0 },
-            dist = { "CrateCannedFood", "KitchenCannedFood" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPFood",
         },
         { -- E60
             note = "cardboardbox @ zippeestorage",
             coords = { x = 8073, y = 11553, z = 0 },
-            dist = { "CarvingWorkshopMaterials", "CarvingWorkshopTools" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_BuildMatsLevel",
+            tag = "DWAPBuildMats",
         },
         { -- E61
             note = "smallbox @ zippeestorage",
             coords = { x = 8077, y = 11553, z = 0 },
             dist = { "CrateLiquor" },
             distIncludeJunk = false,
-            randUntilFull = true,
-            level = "Loot_FoodLevel",
+            tag = "DWAPBooze",
         },
         { -- E62
             note = "medicine @ bathroom",
             coords = { x = 8079, y = 11552, z = 0 },
             slot = "upper",
-            dist = { "BathroomCounter", "MedicalStorageDrugs" },
             distIncludeJunk = true,
-            randUntilFull = true,
-            level = "Loot_MedLevel",
+            tag = "DWAPMed",
         },
     },
 }

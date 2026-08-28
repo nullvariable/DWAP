@@ -840,9 +840,12 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
         -- the same interleaved name/weight array shape as the main .items --
         -- NOT at .junk itself (a { rolls, items } hash with no integer keys).
         -- Route each pair through addWeighted (writes only into the local
-        -- builder, never the vanilla table) at weight * 1.4: vanilla applies a
-        -- flat x1.4 to junk chances (§3.6). A missing trailing weight defaults
-        -- to 1 inside addWeighted, so multiply an explicit 1 in that case.
+        -- builder, never the vanilla table) at weight * 0.5. Vanilla applies a
+        -- flat x1.4 junk boost (§3.6); DWAP deliberately rolls junk BELOW
+        -- vanilla to cut container clutter (0.5 ~= 1/3 of vanilla's weight --
+        -- raise toward 1.4 to restore vanilla junk density, or lower toward 0
+        -- for less). A missing trailing weight defaults to 1 inside
+        -- addWeighted, so multiply an explicit 1 in that case.
         if distIncludeJunk and interleaved then
             local junk = ProceduralDistributions.list[distList]
                 and ProceduralDistributions.list[distList].junk
@@ -851,7 +854,7 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
                 for j = 1, #junkItems, 2 do
                     local w = junkItems[j + 1]
                     if type(w) ~= "number" then w = 1 end
-                    addWeighted(junkItems[j], w * 1.4)
+                    addWeighted(junkItems[j], w * 0.5)
                 end
             end
         end
@@ -867,6 +870,28 @@ end
 --- @param item Item: The item to test
 --- @return number: 0 if not a skill book, 1 if a skill book, 2 if a skill magazine
 local function isSkillLiterature(category, name, item)
+    -- Authoritative, category-independent detection: read the item script's own
+    -- fields. A skill book declares SkillTrained (getSkillTrained ~= ""); a
+    -- recipe magazine declares LearnedRecipes (getLearnedRecipes non-empty).
+    -- Both are base script-Item accessors, so this is safe for every item from
+    -- getAllItems(). The old display-category string test ("SkillBook") let any
+    -- skill book with a different category leak, which surfaced once tag
+    -- migration broadened Media containers onto the full book-dist pool. Reading
+    -- the fields catches them regardless of category or the MAGAZINE tag.
+    local skill = item:getSkillTrained()
+    if skill and skill ~= "" then
+        return 1
+    end
+    -- Recipe magazine = teaches recipes AND is tagged a magazine. The MAGAZINE
+    -- gate is essential: seed packets (*BagSeed) also carry LearnedRecipes
+    -- ("base:carrot growing season" etc.) but are NOT magazines, and must fall
+    -- through to the seed branch in populateItems, not be stripped as skill mags.
+    local recipes = item:getLearnedRecipes()
+    if recipes and recipes:size() > 0 and item:hasTag(ItemTag.MAGAZINE) then
+        return 2
+    end
+    -- Fallback heuristic for anything the fields miss (kept from before). The
+    -- "Set" guard only applies here so a skill-book set still resolves above.
     if name:find("Set") then return 0 end
     -- 42.20 moved recipe/skill magazines from SkillBook to RecipeResource
     if (category == "SkillBook" or category == "RecipeResource") and item:hasTag(ItemTag.MAGAZINE) then

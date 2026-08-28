@@ -248,7 +248,8 @@ local configs = {
     [30] = {
         name = "Irvington Townhome Map",
         stamps = {
-            {"Asterisk", nil, 2609, 14458, 0, 0, 0},
+            {"Asterisk", nil, 2609, 14458, 0, 0, 0}
+
         },
         buildingX = 2609,
         buildingY = 14458,
@@ -256,7 +257,7 @@ local configs = {
     [31] = {
         name = "Fallas Hotel Map",
         stamps = {
-            {"Asterisk", nil, 7253, 8248, 0, 0, 0},
+            {"Asterisk", nil, 7244, 8258, 0.50, 0.50, 0.0, 0.129, 0.129, 0.129},
         },
         buildingX = 7253,
         buildingY = 8248,
