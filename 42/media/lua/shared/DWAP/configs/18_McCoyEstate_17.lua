@@ -10,7 +10,7 @@ local McCoyEstate = {
     },
     spawn = { x = 10081, y = 8259, z = 1 },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = 10116, y = 8239,  z = -1,    sourceType = "generator", source = { x = 10120, y = 8239, z = -1 } },
+        { sprite = "dwap_tiles_01_9", x = 10116, y = 8239, z = -1, sourceType = "generator", source = { x = 10120, y = 8239, z = -1 } },
     },
     waterFixtures = {
         -- fishing
@@ -56,7 +56,7 @@ local McCoyEstate = {
     map = { name = "DWAPStashMap18", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 10120, y = 8239, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10120, y = 8239, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 10118, y = 8239, z = -1, },
             fakeGenerators = {
                 { x = 10095, y = 8282, z = -1, },
@@ -67,15 +67,14 @@ local McCoyEstate = {
     },
     objectSpawns = {
         { sprite = "crafted_01_11",            x = 10094,             y = 8259,                  z = 3,     enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
-        { sprite = "industry_02_175",          x = pb1.x,             y = pb1.y,                 z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
 
-        { sprite = "constructedobjects_01_45", x = 10058,             y = 8236,                  z = 0,     clearExisting = true,              isContainer = true, },
-        { sprite = "carpentry_01_16",          x = 10095,             y = 8262,                  z = 0,     clearExisting = true,              isContainer = true, },
+        { sprite = "constructedobjects_01_45", x = 10058,             y = 8236,                  z = 0,     clearExisting = true,          isContainer = true, },
+        { sprite = "carpentry_01_16",          x = 10095,             y = 8262,                  z = 0,     clearExisting = true,          isContainer = true, },
 
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10088, y = 8254,                          z = 0, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10082, y = 8254,                          z = 0, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10081, y = 8254,                          z = 0, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_8",   x = 10101, y = 8260,                          z = 0, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10088, y = 8254,                      z = 0, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10082, y = 8254,                      z = 0, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_105", x = 10081, y = 8254,                      z = 0, },
+        { barricade = "metalbar",              enabled = "Barricade", target = "walls_logs_8",   x = 10101, y = 8260,                      z = 0, },
     },
     loot = {
         { -- E1
@@ -725,7 +724,7 @@ local McCoyEstate = {
         { -- E96
             note = "freezer @ empty",
             coords = { x = 10099, y = 8256, z = 0 },
-            dist = {"CafeteriaKitchenFreezer", },
+            dist = { "CafeteriaKitchenFreezer", },
             distIncludeJunk = false,
             tag = "DWAPFreezer",
         },
@@ -740,14 +739,14 @@ local McCoyEstate = {
         { -- E98
             note = "freezer @ empty",
             coords = { x = 10097, y = 8254, z = 0 },
-            dist = {"FreezerIceCream", },
+            dist = { "FreezerIceCream", },
             distIncludeJunk = false,
             tag = "DWAPFreezer",
         },
         { -- E99
             note = "fridge @ empty",
             coords = { x = 10094, y = 8256, z = 0 },
-            dist = {"UniversityFridge"},
+            dist = { "UniversityFridge" },
             distIncludeJunk = true,
             tag = "DWAPFridge",
         },
@@ -755,7 +754,7 @@ local McCoyEstate = {
             note = "freezer @ empty",
             coords = { x = 10094, y = 8256, z = 0 },
             slot = "freezer",
-            dist = {"BurgerKitchenFreezer", },
+            dist = { "BurgerKitchenFreezer", },
             distIncludeJunk = false,
             tag = "DWAPFreezer",
         },
@@ -763,7 +762,7 @@ local McCoyEstate = {
             note = "freezer @ empty",
             coords = { x = 10094, y = 8254, z = 0 },
             stack = 1,
-            dist = {"ButcherFreezer", },
+            dist = { "ButcherFreezer", },
             distIncludeJunk = false,
             tag = "DWAPFreezer",
         },
@@ -778,7 +777,7 @@ local McCoyEstate = {
         { -- E103
             note = "fridge @ empty",
             coords = { x = 10094, y = 8255, z = 0 },
-            dist = {"PizzaKitchenFridge"},
+            dist = { "PizzaKitchenFridge" },
             distIncludeJunk = false,
             tag = "DWAPFridge",
         },
@@ -786,7 +785,7 @@ local McCoyEstate = {
             note = "freezer @ empty",
             coords = { x = 10094, y = 8255, z = 0 },
             slot = "freezer",
-            dist = {"PizzaKitchenFreezer",},
+            dist = { "PizzaKitchenFreezer", },
             distIncludeJunk = false,
             tag = "DWAPFreezer",
         },

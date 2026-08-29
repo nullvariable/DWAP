@@ -745,6 +745,28 @@ local function splitDot(str)
     return t
 end
 
+-- Per-item weight boosts applied AFTER a pool resolves to {name, weight}.
+-- The v2 tag pools name whole vanilla ProceduralDistributions lists; the
+-- per-item weights inside those lists come from the base game and are
+-- otherwise unreachable from our configs. This is the one lever to re-rank a
+-- single item within a pool without forking the vanilla distribution.
+--
+-- Each rule is a Lua pattern matched against the (bare) item name and a
+-- multiplier applied once to the summed weight. Order matters only in that the
+-- first matching rule wins (break below). Seeded to lift canned-food "boxes"
+-- (a full case of cans), which vanilla weights ~100x below the single cans
+-- (0.02-0.1 vs 2-8); x25 lands a box near ~1.5 -- an occasional find that still
+-- stays below a single can. Patterns are unanchored at the start so a
+-- "Base."-qualified name still matches; the "_Box$" tail keeps them off the
+-- single cans.
+local WEIGHT_BOOSTS = {
+    { pattern = "Canned%w*_Box$", mult = 25 },
+    { pattern = "Tinned%w*_Box$", mult = 25 },
+    { pattern = "TunaTin_Box$", mult = 25 },
+    { pattern = "MysteryCan_Box$", mult = 25 },
+    { pattern = "Macandcheese_Box$", mult = 25 },
+}
+
 --- Get all of the items from the distribution lists, then filter them and save it to the cache variable
 --- @param distLists table[string]: The distribution list to get the items from
 --- @param distIncludeJunk boolean: Whether to include junk items in the list
@@ -856,6 +878,19 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
                     if type(w) ~= "number" then w = 1 end
                     addWeighted(junkItems[j], w * 0.5)
                 end
+            end
+        end
+    end
+
+    -- Re-rank individual items within the resolved pool. Runs once per unique
+    -- (dist set, junk) key because the result is cached below; weightedPickIndex
+    -- reads these weights directly.
+    for i = 1, #items do
+        local nm = items[i].name
+        for b = 1, #WEIGHT_BOOSTS do
+            if string.find(nm, WEIGHT_BOOSTS[b].pattern) then
+                items[i].weight = items[i].weight * WEIGHT_BOOSTS[b].mult
+                break
             end
         end
     end

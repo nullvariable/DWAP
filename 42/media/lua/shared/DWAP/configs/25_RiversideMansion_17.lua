@@ -1,12 +1,5 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: 9 components at 6663-6676,5499-5509 z=-1,1 report "square not
---     loaded" - those chunks never stream when travelling to this base, which
---     is what a pre-move or otherwise wrong coordinate looks like
---   * systems: 11 components at 6662-6680,5504-5518 z=-1,0,1 name a sprite
---     that is not on the square, though the square itself loads - config
---     drifted from the map
 local wtc = { x = 6660, y = 5516, z = -1, }
-local pb1 = { x = 6659, y = 5514, z = -1 }
+local pb1 = { x = 6659, y = 5514, z = -1, }
 local RiversideMansion = {
     group = "Riverside",
     baseBuildings = {
@@ -16,7 +9,7 @@ local RiversideMansion = {
     spawn = { x = 6680, y = 5509, z = 1 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 6663, y = 5513, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 6663, y = 5513, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 6661, y = 5513, z = -1, },
             fakeGenerators = {
                 { x = 6671, y = 5523, z = -2, },
@@ -59,12 +52,15 @@ local RiversideMansion = {
     },
     map = { name = "DWAPStashMap25", },
     objectSpawns = {
-        { barricade = "metalbar", enabled = "Barricade", target = "walls_interior_house_04_29", x = 6677, y = 5504, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_02_5",      x = 6679, y = 5504, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_house_02_24", x = 6681, y = 5508, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 6679, y = 5517, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 6677, y = 5517, z = 0, },
-        { barricade = "metal",    enabled = "Barricade", target = "walls_interior_house_04_40", x = 6669, y = 5505, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 6682, y = 5516, z = 0, },     -- window W | office, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 6682, y = 5518, z = 0, },     -- window W | office, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_25", x = 6680, y = 5520, z = 0, },     -- window N | office, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_25", x = 6679, y = 5520, z = 0, },     -- window N | office, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 6683, y = 5513, z = 0, },     -- window W | kitchen, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 6682, y = 5508, z = 0, },     -- window W | kitchen, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_24", x = 6683, y = 5511, z = 0, },     -- window W | kitchen, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_25", x = 6673, y = 5507, z = 0, },     -- window N | livingroom, bld 26,21#17
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_25", x = 6673, y = 5518, z = 0, },     -- window N | bathroom, bld 26,21#17
     },
     loot = {
 

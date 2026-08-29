@@ -27,11 +27,12 @@ local TheDrake = {
         { x = 11904, y = 6848, z = -1 }, -- storageunit
         { x = 11904, y = 6843, z = -1 }, -- storageunit
         { x = 11904, y = 6840, z = -1 }, -- warehouse
+        { x = 11905, y = 6842, z = -1 }, -- hallway
     },
     spawn = { x = 11908, y = 6853, z = 1 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 11908, y = 6844, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 11908, y = 6844, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 11910, y = 6844, z = -1, },
             fakeGenerators = {
                 { x = 11913, y = 6851, z = -1, createTile = false },
@@ -43,7 +44,7 @@ local TheDrake = {
     },
     waterFixtures = {
         -- 2nd floor apt
-        { sprite = "fixtures_bathroom_01_25", x = 11904, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- CONNECTED already | bathroom, bld 46,26#4
+        { sprite = "fixtures_bathroom_01_25", x = 11904, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
         { sprite = "fixtures_sinks_01_12",    x = 11905, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
         { sprite = "fixtures_bathroom_01_0",  x = 11906, y = 6849, z = 1,  sourceType = "tank", source = wtc, }, -- bathroom, bld 46,26#4
         { sprite = "fixtures_sinks_01_10",    x = 11913, y = 6850, z = 1,  sourceType = "tank", source = wtc, }, -- kitchen, bld 46,26#4
@@ -62,7 +63,7 @@ local TheDrake = {
     doorKeys = {
         name = "The Drake",
         doors = {
-            { sprite = "fixtures_doors_02_5",  x = 11905, y = 6841, z = -1, },
+            { sprite = "fixtures_doors_02_5",  x = 11905, y = 6842, z = -1, },
             { sprite = "fixtures_doors_02_4",  x = 11912, y = 6852, z = 0, },
             { sprite = "fixtures_doors_01_52", x = 11902, y = 6860, z = 0, },
             { sprite = "fixtures_doors_01_0",  x = 11904, y = 6854, z = 1, },

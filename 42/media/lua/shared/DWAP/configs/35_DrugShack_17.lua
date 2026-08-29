@@ -8,8 +8,8 @@ local DrugShack = {
         { x = 11582, y = 9290, z = 0 },  -- rundown house
     },
     baseRooms = {
-        { x = 11617, y = 9293, z = 0 }, -- druglab
-        { x = 11583, y = 9291, z = 0 }, -- drugshack
+        { x = 11617, y = 9293, z = 0 },  -- druglab
+        { x = 11583, y = 9291, z = 0 },  -- drugshack
         { x = 11600, y = 9289, z = -1 }, -- hallway
         { x = 11588, y = 9293, z = -1 }, -- bedroom
         { x = 11590, y = 9299, z = -1 }, -- medical
@@ -21,7 +21,7 @@ local DrugShack = {
     },
     spawn = { x = 11613, y = 9293, z = 0 },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
+        { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = wtc },
     },
     waterFixtures = {
         -- upper
@@ -55,16 +55,14 @@ local DrugShack = {
     },
     map = { name = "DWAPStashMap35", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                         z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        { barricade = "wood",         enabled = "Barricade", target = "fixtures_windows_01_48", x = 11611, y = 9294,                          z = 0, },
-        { barricade = "wood",         enabled = "Barricade", target = "fixtures_windows_01_49", x = 11611, y = 9293,                          z = 0, },
-        { barricade = "wood",         enabled = "Barricade", target = "fixtures_windows_01_50", x = 11615, y = 9296,                          z = 0, },
-        { barricade = "wood",         enabled = "Barricade", target = "fixtures_windows_01_51", x = 11616, y = 9296,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_01_57", x = 11621, y = 9296,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_01_48", x = 11624, y = 9294,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_01_49", x = 11624, y = 9293,                          z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "fixtures_windows_01_57", x = 11618, y = 9292,                          z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "fixtures_windows_01_48", x = 11611, y = 9294, z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "fixtures_windows_01_49", x = 11611, y = 9293, z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "fixtures_windows_01_50", x = 11615, y = 9296, z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "fixtures_windows_01_51", x = 11616, y = 9296, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_57", x = 11621, y = 9296, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_48", x = 11624, y = 9294, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_49", x = 11624, y = 9293, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_57", x = 11618, y = 9292, z = 0, },
     },
     loot = {
         -- lab room under trailer lab
@@ -465,6 +463,82 @@ local DrugShack = {
             coords = { x = 11596, y = 9290, z = -1 },
             distIncludeJunk = false,
             tag = "DWAPFood",
+        },
+        {
+            note = "shelves @ kitchen",
+            coords = { x = 11598, y = 9290, z = -1 },
+            distIncludeJunk = false,
+            tag = "DWAPBooze",
+        },
+        {
+            note = "shelves @ kitchen",
+            coords = { x = 11599, y = 9290, z = -1 },
+            distIncludeJunk = false,
+            tag = "DWAPBooze",
+        },
+
+        {
+            note = "counter @ druglab",
+            coords = { x = 11616, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPBuildMats",
+        },
+        {
+            note = "counter @ druglab",
+            coords = { x = 11617, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPMed",
+        },
+        {
+            note = "metal_shelves @ druglab",
+            coords = { x = 11611, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPNonFoodFiller",
+        },
+        {
+            note = "metal_shelves @ druglab",
+            coords = { x = 11612, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPBuildMats",
+        },
+        {
+            note = "overhead @ druglab",
+            coords = { x = 11613, y = 9292, z = 0 },
+            slot = "upper",
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "counter @ druglab",
+            coords = { x = 11613, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFood",
+        },
+        {
+            note = "overhead @ druglab",
+            coords = { x = 11614, y = 9292, z = 0 },
+            slot = "upper",
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "fridge @ druglab",
+            coords = { x = 11614, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFridge",
+        },
+        {
+            note = "freezer @ druglab",
+            coords = { x = 11614, y = 9292, z = 0 },
+            slot = "freezer",
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        {
+            note = "counter @ druglab",
+            coords = { x = 11615, y = 9292, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPLockers",
         },
     },
 }

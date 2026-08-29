@@ -1,29 +1,3 @@
--- Known audit noise (2026-08-11 audit) - not a config defect, do not "fix"
---   The audit prints six "baseRooms <room>@x,y,z matched no room in any
---   declared building" warnings, for the z=-1 basement rooms: hall, storage
---   and the four storageunits. All six anchors resolve to real rooms with
---   real defs; the warning wording overstates the problem.
---   * The coords in the warning are the ROOM DEF rect origin, not the anchor
---     square - roomDefKey (client/DWAP/devShared.lua) formats
---     name@defX,defY,defZ - so they will never match the anchors below.
---   * A genuinely bad anchor is reported separately and differently by
---     baseRoomKeys ("square not loaded" / "square is not in a room" /
---     "room has no def"). None of those fired.
---   * The unclaimed sweep only walks rooms of the buildings named in
---     baseBuildings; the basement level is a different building def from the
---     surface apartments building our single anchor names, so those rooms are
---     never visited, never marked hit, and get reported as unmatched.
---   This site is a large multistory multi-business building. The baseBuildings
---   anchor is deliberately the same square as spawn and sits inside the
---   building; baseRooms exists to isolate the audit to the units we own.
---   Consequence: unclaimed containers in the six basement rooms are invisible
---   to the audit, so "unclaimed containers: 3" covers the surface rooms only.
---   Loot fill is unaffected (it addresses explicit coords) and all 62 entries
---   resolve, including the cardboardbox@storageunit and
---   metal_shelves@storageunit ones.
---   Option, not a plan: a second baseBuildings anchor on a z=-1 basement
---   square would bring those rooms into scope - it also widens PreventStories
---   to that building.
 local wtc = { x = 8084, y = 11550, z = -1 }
 local pb1 = { x = 8079, y = 11551, z = -1 }
 local RosewoodZippee = {
@@ -32,20 +6,20 @@ local RosewoodZippee = {
         { x = 8087, y = 11558, z = 2 }, -- apartments
     },
     baseRooms = {
-        { x = 8086, y = 11556, z = 2 }, -- bedroom
-        { x = 8082, y = 11552, z = 2 }, -- livingroom
-        { x = 8085, y = 11552, z = 2 }, -- bathroom
-        { x = 8088, y = 11552, z = 2 }, -- closet
-        { x = 8090, y = 11552, z = 2 }, -- kitchen
-        { x = 8090, y = 11554, z = 2 }, -- livingroom
-        { x = 8084, y = 11556, z = 2 }, -- bedroom
-        { x = 8080, y = 11552, z = 2 }, -- livingroom
-        { x = 8080, y = 11552, z = 1 }, -- livingroom
-        { x = 8079, y = 11556, z = 0 }, -- livingroom
-        { x = 8073, y = 11556, z = 0 }, -- office
-        { x = 8073, y = 11552, z = 0 }, -- zippeestorage
-        { x = 8076, y = 11556, z = 0 }, -- breakroom
-        { x = 8078, y = 11552, z = 0 }, -- bathroom
+        { x = 8086, y = 11556, z = 2 },  -- bedroom
+        { x = 8082, y = 11552, z = 2 },  -- livingroom
+        { x = 8085, y = 11552, z = 2 },  -- bathroom
+        { x = 8088, y = 11552, z = 2 },  -- closet
+        { x = 8090, y = 11552, z = 2 },  -- kitchen
+        { x = 8090, y = 11554, z = 2 },  -- livingroom
+        { x = 8084, y = 11556, z = 2 },  -- bedroom
+        { x = 8080, y = 11552, z = 2 },  -- livingroom
+        { x = 8080, y = 11552, z = 1 },  -- livingroom
+        { x = 8079, y = 11556, z = 0 },  -- livingroom
+        { x = 8073, y = 11556, z = 0 },  -- office
+        { x = 8073, y = 11552, z = 0 },  -- zippeestorage
+        { x = 8076, y = 11556, z = 0 },  -- breakroom
+        { x = 8078, y = 11552, z = 0 },  -- bathroom
         { x = 8085, y = 11552, z = -1 }, -- hall
         { x = 8081, y = 11552, z = -1 }, -- storage
         { x = 8087, y = 11552, z = -1 }, -- storageunit
@@ -56,7 +30,7 @@ local RosewoodZippee = {
     spawn = { x = 8087, y = 11558, z = 2 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 8082, y = 11550, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 8082, y = 11550, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 8080, y = 11550, z = -1, },
             fakeGenerators = {
                 { x = 8082, y = 11548, z = -1, createTile = false },
@@ -94,10 +68,10 @@ local RosewoodZippee = {
     },
     map = { name = "DWAPStashMap7", },
     objectSpawns = {
-        { sprite = "carpentry_02_122", x = 8084, y = 11552, z = 3, enabled = "EnableWaterSystem", delete = true, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11555,                         z = 2, }, -- window W | livingroom, bld 31,45#6
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11557,                         z = 2, }, -- window W | livingroom, bld 31,45#6
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096,  y = 11559,                         z = 2, }, -- window W | livingroom, bld 31,45#6
+        { sprite = "carpentry_02_122", x = 8084,              y = 11552,                            z = 3,    enabled = "EnableWaterSystem", delete = true, },
+        { barricade = "woodhalf",      enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096, y = 11555,                     z = 2, },     -- window W | livingroom, bld 31,45#6
+        { barricade = "woodhalf",      enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096, y = 11557,                     z = 2, },     -- window W | livingroom, bld 31,45#6
+        { barricade = "woodhalf",      enabled = "Barricade", target = "fixtures_windows_metal_16", x = 8096, y = 11559,                     z = 2, },     -- window W | livingroom, bld 31,45#6
     },
     loot = {
         { -- E1
@@ -257,7 +231,6 @@ local RosewoodZippee = {
             note = "counter @ kitchen",
             coords = { x = 8094, y = 11552, z = 2 },
             special = "kitchentools",
-            level = "Loot_FoodLevel",
         },
         { -- E26
             note = "fridge @ kitchen",
@@ -501,7 +474,6 @@ local RosewoodZippee = {
         { -- E61
             note = "smallbox @ zippeestorage",
             coords = { x = 8077, y = 11553, z = 0 },
-            dist = { "CrateLiquor" },
             distIncludeJunk = false,
             tag = "DWAPBooze",
         },

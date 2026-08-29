@@ -45,7 +45,7 @@ local PSDelilah = {
     map = { name = "DWAPStashMap11", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 2059, y = 5690, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 2059, y = 5690, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 2061, y = 5690, z = -1, },
             fakeGenerators = {
                 { x = 2046, y = 5693, z = -1, createTile = false },
@@ -153,7 +153,7 @@ local PSDelilah = {
             distIncludeJunk = true,
             tag = "DWAPTools",
         },
-        { -- E14
+        {                            -- E14
             note = "crate @ office", -- @TODO overkill, rebalance with different loot.
             coords = { x = 2040, y = 5687, z = 2 },
             stack = 2,
@@ -199,7 +199,7 @@ local PSDelilah = {
             distIncludeJunk = true,
             tag = "DWAPGun",
         },
-        { -- E21
+        {                                           -- E21
             note = "crate @ office",
             coords = { x = 2041, y = 5687, z = 2 }, -- @TODO overkill, rebalance with different loot.
             stack = 2,

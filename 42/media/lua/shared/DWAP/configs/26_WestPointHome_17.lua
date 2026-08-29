@@ -12,7 +12,7 @@ local WestPointHome = {
     spawn = { x = 11766, y = 6667, z = 0 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 11757, y = 6664, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 11757, y = 6664, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 11755, y = 6664, z = -1, },
             fakeGenerators = {
                 { x = 11764, y = 6673, z = -1, createTile = false },
@@ -29,9 +29,9 @@ local WestPointHome = {
         { sprite = "fixtures_bathroom_01_26", x = 11768, y = 6665, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 45,26#67
         { sprite = "fixtures_sinks_01_10",    x = 11772, y = 6674, z = 0,  sourceType = "tank", source = wtc, }, -- kitchen, bld 45,26#67
         -- basement
-        { sprite = "fixtures_sinks_01_4", x = 11759, y = 6658, z = -1, sourceType="tank", source = wtc, }, -- bedroom, bld 45,26#108
-        { sprite = "fixtures_bathroom_01_31", x = 11759, y = 6657, z = -1, sourceType="tank", source = wtc, }, -- bedroom, bld 45,26#108
-        { sprite = "fixtures_bathroom_01_2", x = 11761, y = 6657, z = -1, sourceType="tank", source = wtc, }, -- bedroom, bld 45,26#108
+        { sprite = "fixtures_sinks_01_4",     x = 11759, y = 6658, z = -1, sourceType = "tank", source = wtc, }, -- bedroom, bld 45,26#108
+        { sprite = "fixtures_bathroom_01_31", x = 11759, y = 6657, z = -1, sourceType = "tank", source = wtc, }, -- bedroom, bld 45,26#108
+        { sprite = "fixtures_bathroom_01_2",  x = 11761, y = 6657, z = -1, sourceType = "tank", source = wtc, }, -- bedroom, bld 45,26#108
 
     },
     doorKeys = {

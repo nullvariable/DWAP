@@ -26,9 +26,17 @@
 ---        copied, so the caller's config table is never aliased into the
 ---        emitted loot. Keys are stable slot ids, independent of coords, so a
 ---        site whose origin differs still targets the right entry. A slot id
----        that matches no entry is ignored (only "E1".."E25" exist). Removing
----        a default field is not expressible via shallow merge; none of the
----        current sites need it.
+---        that matches no entry is ignored (only "E1".."E25" exist). To REMOVE
+---        a default field (shallow merge otherwise only adds/replaces), set that
+---        field to the sentinel string "__REMOVE__" in the override -- e.g.
+---        `{ special = "__REMOVE__", sandboxEnable = "__REMOVE__", tag = "DWAPFood" }`
+---        turns a `special` slot into a plain tag entry. `pin` is (re)decided
+---        after the merge from the FINAL entry, so an entry that loses its
+---        `special` this way is pinned like any other dist/tag entry. To OMIT a
+---        whole entry (a site whose shell square holds a different object -- e.g.
+---        a wood stove where the reference has the fridge/freezer), set the slot
+---        to the sentinel `false`: `{ E8 = false, E9 = false }`. The emitted
+---        array stays hole-free (omitted slots are skipped, not left nil).
 --- @return table a fresh array of loot entries (new tables every call)
 
 -- Each spec is one shell entry: its stable id, offset from E1, and the exact
@@ -122,35 +130,49 @@ local function copyList(t)
     return out
 end
 
+-- Override field value that deletes the default field (shallow merge otherwise
+-- cannot remove). See @param overrides above.
+local REMOVE = "__REMOVE__"
+
 return function(origin, overrides)
     local out = {}
+    local n = 0
     for i = 1, #specs do
         local spec = specs[i]
-        local entry = {}
-        for j = 1, #scalarFields do
-            local f = scalarFields[j]
-            entry[f] = spec[f]
-        end
-        entry.coords = { x = origin.x + spec.dx, y = origin.y + spec.dy, z = origin.z + spec.dz }
-        entry.dist = copyList(spec.dist)
-        -- non-special entries are pinned; specials are guaranteed by fill code.
-        -- spec.dist may now be nil after tag migration, so pin on non-special.
-        if not spec.special then
-            entry.pin = true
-        end
-
         local ov = overrides and overrides[spec.id]
-        if ov then
-            for k, v in pairs(ov) do
-                if k == "dist" or k == "items" then
-                    entry[k] = copyList(v)
-                else
-                    entry[k] = v
+        -- `<id> = false` omits the entry entirely (site square is a different
+        -- object). Any table value is a field override; nil means no override.
+        if ov ~= false then
+            local entry = {}
+            for j = 1, #scalarFields do
+                local f = scalarFields[j]
+                entry[f] = spec[f]
+            end
+            entry.coords = { x = origin.x + spec.dx, y = origin.y + spec.dy, z = origin.z + spec.dz }
+            entry.dist = copyList(spec.dist)
+
+            if ov then
+                for k, v in pairs(ov) do
+                    if v == REMOVE then
+                        entry[k] = nil
+                    elseif k == "dist" or k == "items" then
+                        entry[k] = copyList(v)
+                    else
+                        entry[k] = v
+                    end
                 end
             end
-        end
 
-        out[i] = entry
+            -- non-special entries are pinned; specials are guaranteed by fill
+            -- code. Decided from the FINAL entry so a slot whose `special` was
+            -- removed via override is pinned like any other dist/tag entry.
+            if not entry.special then
+                entry.pin = true
+            end
+
+            n = n + 1
+            out[n] = entry
+        end
     end
     return out
 end

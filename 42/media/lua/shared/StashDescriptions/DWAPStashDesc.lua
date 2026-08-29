@@ -216,10 +216,10 @@ local configs = {
     [26] = {
         name = "West Point Home Map",
         stamps = {
-            {"Asterisk", nil, 11602, 6731, 0, 0, 0},
+            {"Asterisk", nil, 11766, 6667, 0, 0, 0},
         },
-        buildingX = 11602,
-        buildingY = 6731,
+        buildingX = 11766,
+        buildingY = 6667,
     },
     [27] = {
         name = "The Drake Map",

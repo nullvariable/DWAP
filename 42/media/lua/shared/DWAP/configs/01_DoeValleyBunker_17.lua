@@ -1,14 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * solar is UNVERIFIED - every systems run so far skipped it ("ISA mod
---     inactive or EnableGenSystemSolar off"). Definitions now live in
---     configs/ISA/01_DoeValleyBunker_17.lua and only load when ISA is active;
--- solar should be fine when we get it patched, no map changes to adjust for.
---     a run with ISA loaded is still owed. Applies to all 38 solar configs
---   * the only config with an empty objectSpawns table, yet it has a surface
---     door at 5576,9375,z=0 - confirm with FindUnbarricaded() that no
---     barricades are wanted here
--- no barricades, the location is fully underground and we don't want to block the only entrance/exit
-
 --- Notes:
 --- Lives in the woods, remote with poor car access
 --- fairly small but low local zombies and plenty of room to
@@ -54,7 +43,7 @@ loot[#loot + 1] = { -- E30
     coords = {x = 5584, y = 9376, z = -1},
     dist = {"SafehouseTraps","GunStoreKnives","CampingStoreBackpacks","CrateLiquor",},
     distIncludeJunk = true,
-    tag = "DWAPGun",
+    tag = "DWAPTools",
 }
 loot[#loot + 1] = { -- E31
     note = "counter @ warehouse",

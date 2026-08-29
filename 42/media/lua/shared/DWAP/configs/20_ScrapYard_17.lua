@@ -1,9 +1,8 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: waterTank 1 at 2938,12520,2, waterTank 2 at 2937,12562,2
---     present but carrying no fluid container - the conversion started and
---     did not finish, so this one is a bug rather than bad coords
-local wtc1 = { x = 2938, y = 12520, z = 2, }
-local wtc2 = { x = 2937, y = 12562, z = 2, }
+-- local wtc1 = { x = 2938, y = 12520, z = 2, }
+-- local wtc2 = { x = 2937, y = 12562, z = 2, }
+-- previously was using spawned invisible tiles but that was breaking so added a tank and it seems to work for both houses
+local wtc1 = { x = 2944, y = 12553, z = -1, }
+local wtc2 = { x = 2944, y = 12553, z = -1, }
 local pb1 = { x = 2947, y = 12558, z = -1 }
 local ScrapYard = {
     group = "Echo Creek",                -- cluster of houses about half way between Irvington and Echo Creek
@@ -27,8 +26,8 @@ local ScrapYard = {
         },
     },
     waterTanks = {
-        { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, isProp = true, sourceType = "generator", source = { x = 2964, y = 12560, z = 0 } },
-        { sprite = "crafted_01_11", x = wtc2.x, y = wtc2.y, z = wtc2.z, isProp = true, sourceType = "generator", source = { x = 2964, y = 12560, z = 0 } },
+        { sprite = "dwap_tiles_01_9", x = wtc1.x, y = wtc1.y, z = wtc1.z, isProp = true, sourceType = "generator", source = { x = 2964, y = 12560, z = 0 } },
+        -- { sprite = "crafted_01_11", x = wtc2.x, y = wtc2.y, z = wtc2.z, isProp = true, sourceType = "generator", source = { x = 2964, y = 12560, z = 0 } },
     },
     waterFixtures = {
         -- house 1

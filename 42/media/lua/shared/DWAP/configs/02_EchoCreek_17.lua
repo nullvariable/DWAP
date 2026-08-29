@@ -1,9 +1,5 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: 1 component at 3585,10898 z=-1 names a sprite that is not on
---     the square, though the square itself loads - config drifted from the
---     map
 local wtc = {x = 3563, y = 10904, z = -1}
-local pb1 = { x = 3586, y = 10898, z = -1 }
+local pb1 = { x = 3582, y = 10897, z = -1 }
 local EchoCreek = {
     group = "Echo Creek",
     baseBuildings = {
@@ -14,7 +10,7 @@ local EchoCreek = {
     spawn = { x = 3573, y = 10896, z = 1 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = pb1.x-1, y = pb1.y, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 3586, y = 10898, z = -1 },
             fuelTank = { sprite = "dwap_tiles_01_24", x= 3584, y= 10898, z= -1, },
             fakeGenerators = {
                 { x = 3569, y = 10907, z = -1 }, -- dummy
@@ -52,18 +48,7 @@ local EchoCreek = {
     },
     map = {name = "DWAPStashMap2",},
     objectSpawns = {
-        -- { sprite = "camping_01_64", x = 3565, y = 10888, z = 0, enabled = "EnableWaterSystem", }, -- fountain
         { x = 3565, y = 10888, z = 0, disabled = "EnableWaterSystem", clearExisting = true }, -- fountain
-        { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        -- { x = 3576, y = 10902, z = -1, clearExisting = true, },
-        -- { x = 3577, y = 10902, z = -1, removeWall = "west", },
-        -- { x = 3578, y = 10902, z = -1, removeWall = "west", },
-        -- { sprite = "floors_exterior_street_01_16", x = 3577, y = 10902, z = -1, isFloor = true, },
-        -- { sprite = "location_sewer_01_1", x = 3577, y = 10902, z = -1, },
-        -- { sprite = "location_sewer_01_1", x = 3577, y = 10903, z = -1, },
-
-        -- { sprite = "carpentry_01_16", x = 3572, y = 10891, z = -1, enabled = "Loot", clearExisting = true, },
 
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3575, y = 10906, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target="walls_exterior_house_01_41", x = 3574, y = 10906, z = 0, },

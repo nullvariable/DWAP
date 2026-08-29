@@ -1,8 +1,4 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: 11 components at 1657-1665,5744-5750 z=-4,-3,-2,0,1 report
---     "square not loaded" - those chunks never stream when travelling to this
---     base, which is what a pre-move or otherwise wrong coordinate looks like
-local wtc      = { x = 6119, y = 6640, z = -1, }
+local wtc       = { x = 6119, y = 6640, z = -1, }
 local pb1       = { x = 6123, y = 6640, z = -1, }
 local WestMaple = {
     group = "Riverside",
@@ -17,7 +13,7 @@ local WestMaple = {
             controls = { sprite = "dwap_tiles_01_22", x = 6123, y = 6640, z = -1 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 6121, y = 6640, z = -1, },
             fakeGenerators = {
-                { x = 6127, y = 6635, z = -1, createTile = true },
+                { x = 6127, y = 6635, z = -1 },
             },
         },
     },
@@ -48,13 +44,12 @@ local WestMaple = {
     },
     map = { name = "DWAPStashMap40", },
     objectSpawns = {
-
         { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_1", x = 6113, y = 6641, z = 0, },
         { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_1", x = 6115, y = 6641, z = 0, },
         { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_0", x = 6124, y = 6629, z = 0, },
-        { barricade = "metal", enabled = "Barricade", target="fixtures_doors_02_5", x = 6120, y = 6628, z = 0, }, -- door N | hall, bld 23,25#4
+        { barricade = "metal",    enabled = "Barricade", target = "fixtures_doors_02_5",   x = 6120, y = 6628, z = 0, }, -- door N | hall, bld 23,25#4
         { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_1", x = 6115, y = 6628, z = 0, },
-        { barricade = "metalbar", enabled = "Barricade", target="fixtures_windows_01_0", x = 6112, y = 6632, z = 0, }, -- window W | kitchen, bld 23,25#4
+        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_0", x = 6112, y = 6632, z = 0, }, -- window W | kitchen, bld 23,25#4
 
     },
     loot = {
@@ -458,9 +453,9 @@ local WestMaple = {
     },
 }
 
-if getActivatedMods():contains("\\Ladders") then
-    table.insert(WestMaple.objectSpawns,
-        { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
-end
+-- if getActivatedMods():contains("\\Ladders") then
+--     table.insert(WestMaple.objectSpawns,
+--         { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
+-- end
 
 return WestMaple

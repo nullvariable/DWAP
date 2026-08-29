@@ -1,199 +1,25 @@
 local wtc = { x = 12718, y = 8739, z = -1 }
 local bunkerTopLeft = { x = 12716, y = 8729, z = -1 }
 local pb1 = { x = 12723, y = 8741, z = -1 }
-local HuntingCabin = {
-    group = "Muldraugh",                 -- actually deep in the woods past the abandoned settlement to the south east
-    baseBuildings = {
-        { x = 12722, y = 8749, z = 1 },  -- cabin
-        { x = 12717, y = 8738, z = -1 }, -- bunker
-    },
-    spawn = { x = 12722, y = 8749, z = 1 },
-    waterTanks = {
-        { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
-    },
-    waterFixtures = {
-        -- basement
-        { sprite = "fixtures_sinks_01_16",    x = 12716, y = 8733, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "fixtures_bathroom_01_6",  x = 12718, y = 8737, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        -- 1st floor
-        { sprite = "fixtures_sinks_01_5",     x = 12716, y = 8745, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "appliances_laundry_01_6", x = 12714, y = 8749, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "appliances_laundry_01_2", x = 12713, y = 8749, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        -- 2nd floor
-        { sprite = "fixtures_sinks_01_20",    x = 12716, y = 8751, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "fixtures_bathroom_01_55", x = 12719, y = 8751, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "fixtures_bathroom_01_2",  x = 12719, y = 8749, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-    },
-    generators = {
-        {
-            controls = { sprite = "dwap_tiles_01_22", x = 12723, y = 8739, z = -1 },
-            fuelTank = { sprite = "dwap_tiles_01_24", x = 12721, y = 8739, z = -1, },
-            fakeGenerators = {
-                { x = 12720, y = 8745, z = -1, createTile = true },
-            },
-        },
-    },
-    doorKeys = {
-        name = "Hunting Cabin Key",
-        doors = {
-            { sprite = "fixtures_doors_02_4", x = 12724, y = 8749, z = 0, },
-            { sprite = "fixtures_doors_01_4", x = 12716, y = 8744, z = 0, },
-        },
-    },
-    map = { name = "DWAPStashMap34", },
-    objectSpawns = {
-        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_32", x = 12713, y = 8750, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_32", x = 12713, y = 8751, z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12721, y = 8754, z = 0, }, -- window N | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12722, y = 8754, z = 0, }, -- window N | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12721, y = 8745, z = 0, }, -- window N | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12722, y = 8745, z = 0, }, -- window N | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12725, y = 8747, z = 0, }, -- window W | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12725, y = 8751, z = 0, }, -- window W | livingroom, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12713, y = 8746, z = 0, }, -- window W | kitchen, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12715, y = 8745, z = 0, }, -- window N | kitchen, bld 49,34#0
-        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12715, y = 8754, z = 0, }, -- window N | office, bld 49,34#0
-    },
-    loot = {
-        { -- E1 cabinet next to bunk beds (9365)
-            note = "filingcabinet @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 2, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        { -- E2 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E3 lower (66)
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
-            special = "kitchentools",
-            level = "Loot_FoodLevel",
-        },
-        { -- E4 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E5 lower (67)
-            sprite = 'location_trailer_02_19',
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPMed",
-        },
-        { -- E6 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFish",
-        },
-        { -- E7 lower (68)
-            sprite = 'location_trailer_02_19',
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            dist = { "SewingStoreTools" },
-            distIncludeJunk = true,
-            tag = "DWAPTailor",
-        },
-        { -- E8 metal shelves (70)
-            sprite = 'location_trailer_02_23',
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPFarm",
-        },
-        { -- E9 metal shelves (71)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 8, z = bunkerTopLeft.z },
-            sandboxEnable = 'SeedLibrary',
-            special = 'SeedLibrary',
-        },
-        { -- E10 next to inner door (9372)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 9, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
-        },
-        { -- E11 (73)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 10, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- E12 (9374)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 11, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- E13 far end next to stairs (9375)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 12, z = bunkerTopLeft.z },
-            special = "essentials",
-        },
-        { -- E14
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E15
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E16
-            note = "militarylocker @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 6, z = bunkerTopLeft.z },
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- E17
-            note = "militarylocker @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPFarm",
-        },
-        { -- E18
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E19
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E20
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-        { -- E21
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-        { -- E22
+local origin = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 2, z = bunkerTopLeft.z } -- bunker shell E1 (maps cabinet @ bunker, 12716,8731,-1)
+local BunkerShell = require("DWAP/configs/presets/BunkerShell_17")
+-- 1:1 bunker shell (same as config 33). Wood stove replaces the fridge/
+-- freezer, and the two island tiles at +(2,4)/+(2,5) are single lockers (a
+-- gunlocker and a militarylocker), not the crate PAIRS the reference shell
+-- has -- so their stack-2 twins are dropped and both are noted as lockers.
+local loot = BunkerShell(origin, {
+    E8  = false, -- wood stove replaces the fridge
+    E9  = false, -- wood stove replaces the freezer
+    E19 = false, -- +(2,4) is a single gunlocker, not a crate pair
+    E21 = false, -- +(2,5) is a single militarylocker, not a crate pair
+    E18 = { note = "militarylocker @ bunker" }, -- gunlocker sits in a militarylocker
+    E20 = { note = "militarylocker @ bunker" }, -- single militarylocker at +(2,5)
+})
+
+-- config 34 site-specific squares: bunker-hallway crates/shelves + the whole
+-- cabin (main floor, 2nd floor) with its firewood pile.
+local siteLoot = {
+    { -- E22
             note = "crate @ hallway",
             coords = { x = 12716, y = 8742, z = -1 },
             distIncludeJunk = false,
@@ -390,8 +216,64 @@ local HuntingCabin = {
             coords = { x = 12723, y = 8751, z = 1 },
             distIncludeJunk = true,
             tag = "DWAPTools",
+        }
+}
+for i = 1, #siteLoot do loot[#loot + 1] = siteLoot[i] end
+
+local HuntingCabin = {
+    group = "Muldraugh",                 -- actually deep in the woods past the abandoned settlement to the south east
+    baseBuildings = {
+        { x = 12722, y = 8749, z = 1 },  -- cabin
+        { x = 12717, y = 8738, z = -1 }, -- bunker
+    },
+    spawn = { x = 12722, y = 8749, z = 1 },
+    waterTanks = {
+        { sprite = "dwap_tiles_01_8", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
+    },
+    waterFixtures = {
+        -- basement
+        { sprite = "fixtures_sinks_01_16",    x = 12716, y = 8733, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "fixtures_bathroom_01_6",  x = 12718, y = 8737, z = -1, sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        -- 1st floor
+        { sprite = "fixtures_sinks_01_5",     x = 12716, y = 8745, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "appliances_laundry_01_6", x = 12714, y = 8749, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "appliances_laundry_01_2", x = 12713, y = 8749, z = 0,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        -- 2nd floor
+        { sprite = "fixtures_sinks_01_20",    x = 12716, y = 8751, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "fixtures_bathroom_01_55", x = 12719, y = 8751, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "fixtures_bathroom_01_2",  x = 12719, y = 8749, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+    },
+    generators = {
+        {
+            controls = { sprite = "dwap_tiles_01_22", x = 12723, y = 8739, z = -1 },
+            fuelTank = { sprite = "dwap_tiles_01_24", x = 12721, y = 8739, z = -1, },
+            fakeGenerators = {
+                { x = 12720, y = 8745, z = -1, createTile = true },
+            },
         },
     },
+    doorKeys = {
+        name = "Hunting Cabin Key",
+        doors = {
+            { sprite = "fixtures_doors_02_4", x = 12724, y = 8749, z = 0, },
+            { sprite = "fixtures_doors_01_4", x = 12716, y = 8744, z = 0, },
+        },
+    },
+    map = { name = "DWAPStashMap34", },
+    objectSpawns = {
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_32", x = 12713, y = 8750, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_32", x = 12713, y = 8751, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12721, y = 8754, z = 0, }, -- window N | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12722, y = 8754, z = 0, }, -- window N | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12721, y = 8745, z = 0, }, -- window N | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12722, y = 8745, z = 0, }, -- window N | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12725, y = 8747, z = 0, }, -- window W | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12725, y = 8751, z = 0, }, -- window W | livingroom, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",       x = 12713, y = 8746, z = 0, }, -- window W | kitchen, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12715, y = 8745, z = 0, }, -- window N | kitchen, bld 49,34#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_1",       x = 12715, y = 8754, z = 0, }, -- window N | office, bld 49,34#0
+    },
+    loot = loot,
 }
 
 -- if getActivatedMods():contains("\\Ladders") then

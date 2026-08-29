@@ -1,11 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entry 26: square holds no container at all - coords are stale or the
---     object was removed
---   * entries 57,59: square not found (bad z or the area never spawns)
---   * systems: generator controls declare industry_02_67 but no such object
---     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
---     configs use dwap_tiles_01_22 - the maps look to have moved on and these
---     configs did not. Confirm what is actually there before editing
 local bunkerTopLeft = { x = 12828, y = 1604, z = -1 }
 local wtc = { x = 12835, y = 1614, z = 1 }
 local pb1 = { x = 12832, y = 1610, z = 1 }
@@ -298,9 +290,7 @@ local extra = {
         { -- E67
             note = "shelves @ library",
             coords = { x = 12843, y = 1619, z = 1 },
-            dist = { "MusicStoreCDs", "LiquorStoreWhiskey" },
-            distIncludeJunk = false,
-            tag = "DWAPFood",
+            tag = "DWAPBooze",
         },
 }
 for i = 1, #extra do loot[#loot + 1] = extra[i] end

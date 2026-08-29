@@ -45,7 +45,7 @@ local ELVilleFarm = {
     map = { name = "DWAPStashMap16", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 14558, y = 3038, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 14558, y = 3038, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 14560, y = 3038, z = -1, },
             fakeGenerators = {
                 { x = 14578, y = 3037, z = -1, },
@@ -54,22 +54,6 @@ local ELVilleFarm = {
         },
     },
     objectSpawns = {
-        -- { sprite = "camping_01_16", x = 14592, y = 3045, z = 0, enabled = "EnableWaterSystem", }, -- fountain
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                                      z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        -- { sprite = "furniture_shelving_01_24", x = 14562, y = 3045, z = 0, clearExisting = false, isContainer = true, },
-        -- { sprite = "furniture_shelving_01_25", x = 14562, y = 3044, z = 0, clearExisting = false, isContainer = true, },
-        -- { sprite = "carpentry_01_16", x = 14562, y = 3043, z = 0, renderYOffset = 0, clearExisting = false, isContainer = true, },
-        -- { sprite = "carpentry_01_16", x = 14562, y = 3043, z = 0, renderYOffset = 32, clearExisting = false, isContainer = true, },
-        -- { sprite = "carpentry_01_16", x = 14562, y = 3042, z = 0, renderYOffset = 0, clearExisting = false, isContainer = true, },
-        -- { sprite = "carpentry_01_16", x = 14562, y = 3042, z = 0, renderYOffset = 32, clearExisting = false, isContainer = true, },
-        -- { x = 14563, y = 3042, z = 0, clearExisting = true, },
-
-        -- { sprite = "fixtures_doors_frames_01_9", x = 14578, y = 3036, z = 0, replaceWall = true, clearExisting = true, },
-        -- { sprite = "walls_interior_house_02_59", x = 14578, y = 3036, z = 0, },
-        -- { sprite = "walls_interior_house_02_48", x = 14578, y = 3036, z = 0, },
-        -- { sprite = "fixtures_doors_01_5", x = 14578, y = 3036, z = 0, isDoor = true, doorN = true, },
-
         { barricade = "wood",         enabled = "Barricade", target = "location_shop_bargNclothes_01_32",    x = 14564, y = 3043,                          z = 0, },
         { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_01_41",          x = 14574, y = 3046,                          z = 0, },
         { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_01_41",          x = 14576, y = 3046,                          z = 0, },
@@ -483,8 +467,14 @@ local ELVilleFarm = {
         { -- E63
             note = "shelves @ livingroom",
             coords = { x = 14573, y = 3044, z = 0 },
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
+            items = {
+                { name = 'TvWideScreen',    chance = 1,   count = { 1, 1 } },
+                { name = 'Base.Remote',     chance = 1,   count = { 1, 3 } },
+                { name = 'Base.VideoGame',  chance = 1,   count = { 3, 3 } },
+                { name = 'Base.Headphones', chance = 1,   count = { 3, 3 } },
+                { name = 'Base.CDplayer',   chance = 1,   count = { 3, 3 } },
+                { name = 'Base.Bullhorn',   chance = 0.5, count = { 1, 1 } },
+            },
         },
         { -- E64
             note = "shelves @ livingroom",
@@ -554,14 +544,8 @@ local ELVilleFarm = {
         { -- E74
             note = "counter @ bathroom",
             coords = { x = 14581, y = 3043, z = 1 },
-            items = {
-                { name = 'TvWideScreen',    chance = 1,   count = { 1, 1 } },
-                { name = 'Base.Remote',     chance = 1,   count = { 1, 3 } },
-                { name = 'Base.VideoGame',  chance = 1,   count = { 3, 3 } },
-                { name = 'Base.Headphones', chance = 1,   count = { 3, 3 } },
-                { name = 'Base.CDplayer',   chance = 1,   count = { 3, 3 } },
-                { name = 'Base.Bullhorn',   chance = 0.5, count = { 1, 1 } },
-            },
+            distIncludeJunk = false,
+            tag = "DWAPMedia",
         },
         { -- E75
             note = "metal_shelves @ closet",
@@ -675,7 +659,6 @@ local ELVilleFarm = {
             note = "metal_shelves @ garagestorage",
             coords = { x = 14573, y = 3068, z = 0 },
             slot = "upper",
-            dist = { "ToolFactoryHandles" },
             distIncludeJunk = false,
             tag = "DWAPBuildMats",
         },
@@ -699,7 +682,6 @@ local ELVilleFarm = {
         { -- E96
             note = "crate @ farmstorage",
             coords = { x = 14558, y = 3040, z = 0 },
-            dist = { "CrateLumber" },
             distIncludeJunk = true,
             tag = "DWAPBuildMats",
         },
@@ -712,7 +694,6 @@ local ELVilleFarm = {
         { -- E98
             note = "metal_shelves @ farmstorage",
             coords = { x = 14563, y = 3041, z = 0 },
-            dist = { "ArmyStorageAmmunition", },
             distIncludeJunk = true,
             tag = "DWAPGun",
         },
@@ -732,10 +713,7 @@ local ELVilleFarm = {
         { -- E101
             note = "metal_shelves @ farmstorage",
             coords = { x = 14562, y = 3044, z = 0 },
-            items = {
-                { name = 'Base.AnimalFeedBag', chance = 1, count = { 9, 12 } },
-            },
-            level = "Loot_FarmLevel",
+            tag = "DWAPFarm",
         },
         { -- E102
             note = "metal_shelves @ farmstorage",
@@ -752,10 +730,7 @@ local ELVilleFarm = {
         { -- E104
             note = "metal_shelves @ farmstorage",
             coords = { x = 14549, y = 3040, z = 0 },
-            items = {
-                { name = 'Base.Fertilizer', chance = 1, count = { 8, 10 } },
-            },
-            level = "Loot_FarmLevel",
+            tag = "DWAPFarm",
         },
     },
 }

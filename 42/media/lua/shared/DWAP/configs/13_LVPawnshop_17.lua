@@ -58,7 +58,7 @@ local LVPawnshop = {
     map = { name = "DWAPStashMap13", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 12331, y = 1326, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 12331, y = 1326, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 12329, y = 1326, z = -1, },
             fakeGenerators = {
                 { x = 12326, y = 1337, z = -1, createTile = false },
@@ -66,17 +66,16 @@ local LVPawnshop = {
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                       z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
 
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12311, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12312, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12314, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12315, y = 1337,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_01_49", x = 12318, y = 1336,                          z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12321, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12322, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12324, y = 1337,                        z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_41", x = 12325, y = 1337,                        z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12311, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12312, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12314, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12315, y = 1337, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_01_49", x = 12318, y = 1336, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12321, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12322, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12324, y = 1337, z = 0, },
+        { barricade = "metal", enabled = "Barricade", target = "walls_commercial_01_41", x = 12325, y = 1337, z = 0, },
     },
     loot = {
         -- basement
@@ -90,7 +89,6 @@ local LVPawnshop = {
         { -- E2
             note = "sidetable @ kitchen",
             coords = { x = 12328, y = 1329, z = -1 },
-            dist = { "CrateVHSTapes" },
             distIncludeJunk = false,
             tag = "DWAPMedia",
         },
@@ -105,7 +103,6 @@ local LVPawnshop = {
         { -- E4
             note = "counter @ kitchen",
             coords = { x = 12324, y = 1331, z = -1 },
-            dist = { "Homesteading", },
             distIncludeJunk = false,
             tag = "DWAPFood",
         },
@@ -119,7 +116,6 @@ local LVPawnshop = {
         { -- E6
             note = "counter @ kitchen",
             coords = { x = 12324, y = 1332, z = -1 },
-            dist = { "CrateCannedFood", },
             distIncludeJunk = false,
             tag = "DWAPFood",
         },
@@ -133,7 +129,6 @@ local LVPawnshop = {
         { -- E8
             note = "counter @ kitchen",
             coords = { x = 12324, y = 1333, z = -1 },
-            dist = { "GigamartDryGoods" },
             distIncludeJunk = false,
             tag = "DWAPFood",
         },
@@ -394,7 +389,6 @@ local LVPawnshop = {
         { -- E48
             note = "cardboardbox @ warehouse",
             coords = { x = 12319, y = 1329, z = -1 },
-            dist = { "ToolFactoryHandles" },
             distIncludeJunk = false,
             tag = "DWAPBuildMats",
         },
@@ -407,7 +401,6 @@ local LVPawnshop = {
         { -- E50
             note = "cardboardbox @ warehouse",
             coords = { x = 12319, y = 1330, z = -1 },
-            dist = { "CrateToiletPaper" },
             distIncludeJunk = false,
             tag = "DWAPTools",
         },
@@ -625,7 +618,6 @@ local LVPawnshop = {
         { -- E83
             note = "metal_shelves @ pawnshop",
             coords = { x = 12322, y = 1331, z = 0 },
-            dist = { "CrateLumber" },
             distIncludeJunk = true,
             tag = "DWAPBuildMats",
         },
@@ -644,7 +636,6 @@ local LVPawnshop = {
         { -- E86
             note = "metal_shelves @ pawnshop",
             coords = { x = 12324, y = 1330, z = 0 },
-            dist = { "ToolFactoryIngots" },
             distIncludeJunk = false,
             tag = "DWAPBuildMats",
         },

@@ -204,7 +204,7 @@ LootMaps.Init.DWAPStashMap26 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(11536, 6576, 11711, 6799)
+    mapAPI:setBoundsInSquares(11696, 6624, 11871, 6735)
 end
 
 -- The Drake
@@ -324,7 +324,7 @@ LootMaps.Init.DWAPStashMap41 = function(mapUI)
     local mapAPI = mapUI.javaObject:getAPIv1()
     MapUtils.initDirectoryMapData(mapUI, 'media/maps/Muldraugh, KY')
     MapUtils.initDefaultStyleV1(mapUI)
-    mapAPI:setBoundsInSquares(8058, 11492, 8185, 11563)
+    mapAPI:setBoundsInSquares(8072, 11464, 8295, 11615)
 end
 
 -- Louisville Townhouse

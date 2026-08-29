@@ -1,16 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entries 1,2,3,4,5,6,7,8,9,10,11: square holds no container at all -
---     coords are stale or the object was removed
---   * systems: generator controls declare industry_02_67 but no such object
---     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
---     configs use dwap_tiles_01_22 - the maps look to have moved on and these
---     configs did not. Confirm what is actually there before editing
---   * systems: 4 components at 8136-8139,11510-11513 z=0 name a sprite that
---     is not on the square, though the square itself loads - config drifted
---     from the map
---   * every loot entry fails with "no containers on square" - the whole table
---     addresses squares that hold no container, so this is a re-pick, not a
---     per-entry fix
 local wtc1            = { x = 8146, y = 11509, z = -2, }
 local pb1             = { x = 8140, y = 11508, z = -2, }
 local SecretMausoleum = {
@@ -59,7 +46,17 @@ local SecretMausoleum = {
     },
     map = { name = "DWAPStashMap41", },
     objectSpawns = {
-
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8144, y = 11505, z = 0, }, -- window N | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8146, y = 11505, z = 0, }, -- window N | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8139, y = 11505, z = 0, }, -- window N | officechurch, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_8", x = 8138, y = 11506, z = 0, }, -- window W | officechurch, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8141, y = 11505, z = 0, }, -- window N | officechurch, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_8", x = 8138, y = 11509, z = 0, }, -- window W | bathroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_8", x = 8155, y = 11506, z = 0, }, -- window W | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_8", x = 8155, y = 11508, z = 0, }, -- window W | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_8", x = 8155, y = 11510, z = 0, }, -- window W | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8149, y = 11505, z = 0, }, -- window N | livingroom, bld 31,44#36
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_9", x = 8151, y = 11505, z = 0, }, -- window N | livingroom, bld 31,44#36
     },
     loot = {
         -- main house
@@ -129,12 +126,23 @@ local SecretMausoleum = {
             distIncludeJunk = true,
             tag = "DWAPLockers",
         },
-        -- entrance hall
         { -- E11
             note = "shelves @ officechurch",
             coords = { x = 8142, y = 11507, z = 0 },
             special = "gunlocker",
             level = "Loot_GunLevel",
+        },
+        {
+            note = "filingcabinet @ officechurch",
+            coords = { x = 8138, y = 11505, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPMedia",
+        },
+        {
+            note = "desk @ officechurch",
+            coords = { x = 8139, y = 11505, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPMedia",
         },
 
         -- below crypts
@@ -270,6 +278,13 @@ local SecretMausoleum = {
             distIncludeJunk = false,
             tag = "DWAPFridge",
         },
+        {
+            note = "freezer @ kitchen",
+            coords = { x = 8137, y = 11511, z = -2 },
+            slot = "freezer",
+            distIncludeJunk = false,
+            tag = "DWAPFreezer",
+        },
         -- crates
         { -- E32
             note = "crate @ kitchen",
@@ -283,14 +298,35 @@ local SecretMausoleum = {
             distIncludeJunk = true,
             tag = "DWAPBuildMats",
         },
+        {
+            note = "crate @ kitchen",
+            coords = { x = 8145, y = 11513, z = -2 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPMedia",
+        },
+        {
+            note = "crate @ bedroom",
+            coords = { x = 8131, y = 11513, z = -2 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPBooze",
+        },
+        {
+            note = "crate @ bedroom",
+            coords = { x = 8132, y = 11513, z = -2 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
     },
 }
 
-if getActivatedMods():contains("\\Ladders") then
-    table.insert(SecretMausoleum.objectSpawns,
-        { enabled = "EnableLadders", x = 8128, y = 11514, z = 0, removeFloor = true, })
-    table.insert(SecretMausoleum.objectSpawns,
-        { enabled = "EnableLadders", x = 8128, y = 11515, z = -1, removeWall = "north", })
-end
+-- if getActivatedMods():contains("\\Ladders") then
+--     table.insert(SecretMausoleum.objectSpawns,
+--         { enabled = "EnableLadders", x = 8128, y = 11514, z = 0, removeFloor = true, })
+--     table.insert(SecretMausoleum.objectSpawns,
+--         { enabled = "EnableLadders", x = 8128, y = 11515, z = -1, removeWall = "north", })
+-- end
 
 return SecretMausoleum

@@ -310,6 +310,45 @@ local function tierFraction(numLevel)
     return 0                               -- None (4+): own tag adds nothing
 end
 
+-- Categories whose ADDITIVE fill (Normal/Low) first strips over-represented
+-- vanilla items that would otherwise leave no room for DWAP's own stock. The
+-- base game's own container distribution can cram a materials shelf full of
+-- paint -- DWAP's BuildMats pool has none -- and on Normal/Low we add on top
+-- without emptying, so hasRoomFor fails and nothing of ours lands. Purge those
+-- items first, then fill the freed weight. High already emptyIt()s, so this
+-- only matters on the additive tiers. Values are Lua patterns matched against
+-- the bare item type; "^Paint%u" catches the 15 coloured buckets (PaintBlack..)
+-- while leaving Paintbrush (lowercase b) as a legitimate tool.
+local PURGE_BEFORE_ADD = {
+    BuildMats = { "^Paint%u", "^PaintbucketEmpty$" },
+}
+
+--- Remove every item in `container` whose bare type matches one of `patterns`.
+--- Collects first, then removes, so the live list is never mutated mid-walk.
+--- @param container ItemContainer
+--- @param patterns table array of Lua patterns matched against item:getType()
+--- @return number count of items removed
+local function purgeItems(container, patterns)
+    local list = container:getItems()
+    local toRemove = {}
+    for i = 0, list:size() - 1 do
+        local it = list:get(i)
+        if it then
+            local t = it:getType()
+            for p = 1, #patterns do
+                if string.find(t, patterns[p]) then
+                    toRemove[#toRemove + 1] = it
+                    break
+                end
+            end
+        end
+    end
+    for i = 1, #toRemove do
+        container:Remove(toRemove[i])
+    end
+    return #toRemove
+end
+
 --- Unify legacy and tagged entries onto one (slider, pool, items) resolution.
 --- Works on un-migrated configs (legacy level/dist) and on tag entries alike;
 --- no config is required to carry `tag`. Override precedence, highest first:
@@ -613,6 +652,17 @@ local function fillContainer(container, config, index, coordsKey)
             removeLootEntry(index, coordsKey)
             return
         end
+        -- Surgical strip of over-represented vanilla items (e.g. a paint-crammed
+        -- materials shelf) BEFORE the additive fill, so the freed weight is
+        -- usable. Keyed to the category whose POOL we're actually drawing, taken
+        -- from the resolved sliderKey (Loot_<Cat>Level) -- NOT the note-derived
+        -- _cat: a DWAPBuildMats tag on a "crate"/"metal_shelves" note resolves
+        -- _cat to Food and would wrongly skip the purge on a real buildmats fill.
+        -- startW below is captured after this, so the additive target math sees
+        -- the post-purge contents.
+        local fillCat = sliderKey and sliderKey:match("^Loot_(.+)Level$")
+        local purge = fillCat and PURGE_BEFORE_ADD[fillCat]
+        if purge then purgeItems(container, purge) end
         targetW = tierFraction(numLevel) * maxW * S
         state = "added"
     elseif numLevel == 4 then

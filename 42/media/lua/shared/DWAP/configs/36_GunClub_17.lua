@@ -62,16 +62,16 @@ local GunClub = {
     objectSpawns = {
         -- { sprite = "crafted_01_11",   x = wtc2.x,            y = wtc2.y,                         z = wtc2.z, enabled = "EnableWaterSystem", },
 
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_113", x = 1848,   y = 14169,                         z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_commercial_01_113", x = 1849,   y = 14169,                         z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_113", x = 1852,   y = 14169,                         z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_commercial_01_113", x = 1853,   y = 14169,                         z = 0, },
-        { barricade = "wood",         enabled = "Barricade", target = "fixtures_doors_02_41",    x = 1856,   y = 14169,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_02_45",    x = 1857,   y = 14169,                         z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_113", x = 1860,   y = 14169,                         z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_commercial_01_113", x = 1861,   y = 14169,                         z = 0, },
-        { barricade = "metal",        enabled = "Barricade", target = "walls_commercial_01_113", x = 1864,   y = 14169,                         z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_commercial_01_113", x = 1865,   y = 14169,                         z = 0, },
+        { barricade = "metal",    enabled = "Barricade", target = "walls_commercial_01_113", x = 1848, y = 14169, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_113", x = 1849, y = 14169, z = 0, },
+        { barricade = "metal",    enabled = "Barricade", target = "walls_commercial_01_113", x = 1852, y = 14169, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_113", x = 1853, y = 14169, z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "fixtures_doors_02_41",    x = 1856, y = 14169, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_02_45",    x = 1857, y = 14169, z = 0, },
+        { barricade = "metal",    enabled = "Barricade", target = "walls_commercial_01_113", x = 1860, y = 14169, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_113", x = 1861, y = 14169, z = 0, },
+        { barricade = "metal",    enabled = "Barricade", target = "walls_commercial_01_113", x = 1864, y = 14169, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_113", x = 1865, y = 14169, z = 0, },
 
     },
     loot = {

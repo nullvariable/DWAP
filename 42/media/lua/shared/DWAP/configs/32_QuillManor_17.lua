@@ -1,14 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: generator controls declare industry_02_67 but no such object
---     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
---     configs use dwap_tiles_01_22 - the maps look to have moved on and these
---     configs did not. Confirm what is actually there before editing
---   * systems: 3 components at 1224-1227,7364-7381 z=0,1 name a sprite that
---     is not on the square, though the square itself loads - config drifted
---     from the map
---   * systems: waterTank 2 at 1242,7386,2 present but carrying no fluid
---     container - the conversion started and did not finish, so this one is a
---     bug rather than bad coords
 local wtcBasement = { x = 1248, y = 7366, z = -10 }
 -- local wtcMainFloor = {x = 1242, y = 7386, z = 2}
 local wtcMainFloor = { x = 1225, y = 7367, z = -1 }
@@ -43,7 +32,7 @@ local QuillManor = {
         { sprite = "fixtures_bathroom_01_0",  x = 1230, y = 7371, z = -10, sourceType = "tank", source = { x = wtcBasement.x, y = wtcBasement.y, z = wtcBasement.z } },
         -- basement - security bunkroom
         { sprite = "fixtures_sinks_01_17",    x = 1217, y = 7370, z = -10, sourceType = "tank", source = { x = wtcBasement.x, y = wtcBasement.y, z = wtcBasement.z } },
-        { sprite = "fixtures_bathroom_01_7", x = 1221, y = 7373, z = -10, sourceType="tank", source = wtcBasement, }, -- security, bld 4,28#4
+        { sprite = "fixtures_bathroom_01_7",  x = 1221, y = 7373, z = -10, sourceType = "tank", source = wtcBasement, }, -- security, bld 4,28#4
         -- main floors --
         -- bathroom behind elevator
         { sprite = "fixtures_bathroom_01_0",  x = 1226, y = 7364, z = 0,   sourceType = "tank", source = { x = wtcMainFloor.x, y = wtcMainFloor.y, z = wtcMainFloor.z } },
@@ -112,12 +101,52 @@ local QuillManor = {
         { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_54", x = 1239, y = 7399, z = 0, }, -- window N | diningroom, bld 4,28#0
         { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_02_54", x = 1230, y = 7399, z = 0, }, -- window N | diningroom, bld 4,28#0
         { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_9",  x = 1225, y = 7399, z = 0, }, -- window N | kitchen, bld 4,28#0
-        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_8",  x = 1216, y = 7396, z = 0, }, -- window W | kitchen, bld 4,28#0
-        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_8",  x = 1216, y = 7392, z = 0, }, -- window W | kitchen, bld 4,28#0
-        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_8",  x = 1216, y = 7370, z = 0, }, -- window W | library, bld 4,28#0
-        { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_8",  x = 1216, y = 7366, z = 0, }, -- window W | library, bld 4,28#0
     },
     loot = {
+        {
+            note = "counter @ kitchen",
+            coords = { x = 1216, y = 7395, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "counter @ kitchen",
+            coords = { x = 1216, y = 7394, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFish",
+        },
+        {
+            note = "counter @ kitchen",
+            coords = { x = 1216, y = 7393, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFood",
+        },
+        {
+            note = "fridge @ kitchen",
+            coords = { x = 1223, y = 7394, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFridge",
+        },
+        {
+            note = "freezer @ kitchen",
+            coords = { x = 1223, y = 7394, z = 0 },
+            slot = "freezer",
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        {
+            note = "fridge @ kitchen",
+            coords = { x = 1222, y = 7394, z = 0 },
+            distIncludeJunk = true,
+            tag = "DWAPFridge",
+        },
+        {
+            note = "freezer @ kitchen",
+            coords = { x = 1222, y = 7394, z = 0 },
+            slot = "freezer",
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
         -- only basement for now.
         -- security room
         { -- E1 desk1

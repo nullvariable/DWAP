@@ -79,7 +79,6 @@ local MuldSafeHouse = {
         { -- E3
             note = "metal_shelves @ storage",
             coords = { x = 10710, y = 9551, z = 0 },
-            dist = { "GasStoreEmergency" },
             distIncludeJunk = true,
             tag = "DWAPTools",
         },
@@ -141,12 +140,7 @@ local MuldSafeHouse = {
         { -- E12
             note = "dresser @ livingroom",
             coords = { x = 10704, y = 9549, z = 0 },
-            items = {
-                { name = 'Base.Remote',     chance = 1, count = { 1, 3 } },
-                { name = 'Base.VideoGame',  chance = 1, count = { 1, 1 } },
-                { name = 'Base.VHS_Retail', chance = 1, count = { 30, 30 } },
-            },
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E13
             note = "medicine @ bathroom",

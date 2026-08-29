@@ -36,7 +36,7 @@ local WWestPointSafeHouse = {
     map = { name = "DWAPStashMap8", },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 10087, y = 7348, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10087, y = 7348, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 10085, y = 7348, z = -1, },
             fakeGenerators = {
                 { x = 10087, y = 7366, z = -1, createTile = false },
@@ -227,7 +227,6 @@ local WWestPointSafeHouse = {
         { -- E26
             note = "freezer @ storage",
             coords = { x = 10096, y = 7350, z = -1 },
-            dist = { "FreezerRich", },
             distIncludeJunk = true,
             tag = "DWAPFreezer",
         },
@@ -240,7 +239,6 @@ local WWestPointSafeHouse = {
         { -- E28
             note = "freezer @ storage",
             coords = { x = 10094, y = 7351, z = -1 },
-            dist = { "FreezerIceCream", },
             distIncludeJunk = true,
             tag = "DWAPFreezer",
         },
@@ -336,7 +334,6 @@ local WWestPointSafeHouse = {
         { -- E43
             note = "sidetable @ livingroom",
             coords = { x = 10085, y = 7367, z = 0 },
-            dist = { "LivingRoomShelfClassy" },
             distIncludeJunk = false,
             tag = "DWAPMedia",
         },
@@ -362,7 +359,6 @@ local WWestPointSafeHouse = {
         { -- E47
             note = "fridge @ kitchen",
             coords = { x = 10078, y = 7372, z = 0 },
-            dist = { "WesternKitchenFridge" },
             distIncludeJunk = false,
             tag = "DWAPFridge",
         },
@@ -389,7 +385,6 @@ local WWestPointSafeHouse = {
         { -- E51
             note = "counter @ kitchen",
             coords = { x = 10077, y = 7374, z = 0 },
-            dist = { "KitchenCannedFood" },
             distIncludeJunk = false,
             tag = "DWAPFood",
         },

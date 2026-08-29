@@ -12,17 +12,17 @@ local ForLease = {
             controls = { sprite = "dwap_tiles_01_22", x = 12536, y = 5213, z = -1 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 12534, y = 5213, z = -1, },
             fakeGenerators = {
-                { x = 12534, y = 5220, z = -1, createTile = true },
+                { x = 12534, y = 5220, z = -1 },
             },
         },
     },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
+        { sprite = "dwap_tiles_01_9", x = wtc1.x, y = wtc1.y, z = wtc1.z, sourceType = "generator", source = wtc1 },
     },
     waterFixtures = {
         { sprite = "fixtures_bathroom_01_1",  x = 12534, y = 5217, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
         { sprite = "fixtures_sinks_01_13",    x = 12534, y = 5218, z = 0,  sourceType = "tank", source = { x = wtc1.x, y = wtc1.y, z = wtc1.z } },
-        
+
         { sprite = "fixtures_bathroom_01_30", x = 12534, y = 5219, z = -1, sourceType = "tank", source = wtc1, }, -- lobby, bld 48,20#11
         { sprite = "fixtures_sinks_01_1",     x = 12535, y = 5218, z = -1, sourceType = "tank", source = wtc1, }, -- bunker, bld 48,20#11
         { sprite = "fixtures_bathroom_01_1",  x = 12535, y = 5217, z = -1, sourceType = "tank", source = wtc1, }, -- bunker, bld 48,20#11
@@ -297,9 +297,9 @@ local ForLease = {
     },
 }
 
-if getActivatedMods():contains("\\Ladders") then
-    table.insert(ForLease.objectSpawns,
-        { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
-end
+-- if getActivatedMods():contains("\\Ladders") then
+--     table.insert(ForLease.objectSpawns,
+--         { enabled = "EnableLadders", sprite = "fencing_01_27", x = 1628, y = 5760, z = 0, removeFloor = true, clearExisting = true, })
+-- end
 
 return ForLease

@@ -354,7 +354,8 @@ local function buildContainerLookup(config)
             -- legacy +0.5 coords still mean upper
             local isUpper = entry.slot == "upper" or rawZ % 1 ~= 0
             local value = 1
-            if not entry.dist and not entry.items and not entry.special then
+            if not entry.dist and not entry.items and not entry.special
+                and not entry.tag then
                 value = 0 -- nothing to spawn: an authoring error
             elseif entry.special then
                 value = 2

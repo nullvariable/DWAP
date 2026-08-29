@@ -1,13 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * entry 64: square holds no container at all - coords are stale or the
---     object was removed
---   * systems: 11 components at 1657-1665,5744-5750 z=-4,-3,-2,0,1 report
---     "square not loaded" - those chunks never stream when travelling to this
---     base, which is what a pre-move or otherwise wrong coordinate looks like
---   * systems: generator controls declare industry_02_67 but no such object
---     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
---     configs use dwap_tiles_01_22 - the maps look to have moved on and these
---     configs did not. Confirm what is actually there before editing
 local wtc = { x = 12394, y = 3411, z = -2, }
 local pb1 = { x = 12397, y = 3415, z = -2, }
 local LeafHill = {
@@ -22,15 +12,15 @@ local LeafHill = {
             controls = { sprite = "dwap_tiles_01_22", x = 12396, y = 3415, z = -2 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 12394, y = 3415, z = -2, },
             fakeGenerators = {
-                { x = 12399, y = 3417, z = -1, createTile = true },
+                { x = 12399, y = 3417, z = -1 },
             },
         },
     },
     waterTanks = {
-        { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = { x = pb1.x - 1, y = pb1.y, z = pb1.z } },
+        { sprite = "dwap_tiles_01_9", x = wtc.x, y = wtc.y, z = wtc.z, sourceType = "generator", source = wtc },
     },
     waterFixtures = {
-        { sprite = "fixtures_sinks_01_32", x = 12395, y = 3416, z = -1, sourceType="tank", source = wtc, }, -- bar, bld 48,13#25
+        { sprite = "fixtures_sinks_01_32",    x = 12395, y = 3416, z = -1, sourceType = "tank", source = wtc, }, -- bar, bld 48,13#25
 
         { sprite = "fixtures_bathroom_01_3",  x = 12408, y = 3410, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 48,13#21
         { sprite = "fixtures_sinks_01_28",    x = 12407, y = 3410, z = 0,  sourceType = "tank", source = wtc, }, -- bathroom, bld 48,13#21
@@ -55,7 +45,6 @@ local LeafHill = {
     },
     map = { name = "DWAPStashMap39", },
     objectSpawns = {
-
         { barricade = "metalbar", enabled = "Barricade", target = "fixtures_windows_01_1", x = 12397, y = 3416, z = 0, },
         { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_0", x = 12409, y = 3413, z = 0, },
         { barricade = "metal",    enabled = "Barricade", target = "fixtures_windows_01_0", x = 12409, y = 3409, z = 0, },

@@ -9,7 +9,7 @@ local CentralLVilleMansion = {
     spawn = { x = 13441, y = 1895, z = 1 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 13459, y = 1884, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 13459, y = 1884, z = -2, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 13457, y = 1884, z = -2, },
             fakeGenerators = {
                 { x = 13439, y = 1888 + 6, z = -1, },
@@ -85,8 +85,6 @@ local CentralLVilleMansion = {
     },
     map = { name = "DWAPStashMap19", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                                      z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
         { barricade = "metalbar",     enabled = "Barricade", target = "walls_interior_house_05_10",          x = 13431, y = 1903,                          z = 0, },
         { barricade = "metalbar",     enabled = "Barricade", target = "walls_interior_house_05_10",          x = 13431, y = 1902,                          z = 0, },
         { barricade = "metalbar",     enabled = "Barricade", target = "walls_interior_house_05_10",          x = 13431, y = 1900,                          z = 0, },

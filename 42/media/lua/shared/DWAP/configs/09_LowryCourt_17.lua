@@ -1,6 +1,177 @@
 local wtc = { x = 12980, y = 1920, z = 0 } -- waterTankCoords
 local pb1 = { x = 12981, y = 1922, z = -1 }
 local bunkerTopLeft = { x = 12981, y = 1907, z = -1 }
+local origin = { x = 12981, y = 1909, z = -1 } -- bunker shell E1 (maps dresser @ bunker)
+local BunkerShell = require("DWAP/configs/presets/BunkerShell_17")
+local loot = BunkerShell(origin)
+
+-- config 09 site-specific squares: surface storage crates (E1-E3) and the
+-- upstairs apartment (E28-E50); the bunker itself now comes from the preset.
+loot[#loot + 1] = {
+    note = "crate @ storage",
+    coords = { x = 12984, y = 1916, z = 0 },
+    distIncludeJunk = true,
+    tag = "DWAPBuildMats",
+}
+loot[#loot + 1] = {
+    note = "militarycrate @ storage",
+    coords = { x = 12984, y = 1917, z = 0 },
+    items = {
+        { name = 'Base.NailsBox', },
+        { name = 'Base.ScrewsBox', },
+    },
+    level = "Loot_BuildMatsLevel",
+}
+loot[#loot + 1] = {
+    note = "militarycrate @ storage",
+    coords = { x = 12984, y = 1918, z = 0 },
+    dist = { "GasStoreEmergency" },
+    distIncludeJunk = true,
+    level = 2,
+}
+loot[#loot + 1] = {
+    note = "shelves @ kitchen",
+    coords = { x = 12995, y = 1911, z = 2 },
+    slot = "upper",
+    distIncludeJunk = true,
+    tag = "DWAPTools",
+}
+loot[#loot + 1] = {
+    note = "counter @ kitchen",
+    coords = { x = 12991, y = 1911, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPTools",
+}
+loot[#loot + 1] = {
+    note = "fridge @ kitchen",
+    coords = { x = 12992, y = 1911, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPFridge",
+}
+loot[#loot + 1] = {
+    note = "freezer @ kitchen",
+    coords = { x = 12992, y = 1911, z = 2 },
+    slot = "freezer",
+    distIncludeJunk = true,
+    tag = "DWAPFreezer",
+}
+loot[#loot + 1] = {
+    note = "sidetable @ livingroom",
+    coords = { x = 12993, y = 1922, z = 2 },
+    dist = { "CrateVHSTapes" },
+    distIncludeJunk = false,
+    tag = "DWAPMedia",
+}
+loot[#loot + 1] = {
+    note = "shelves @ livingroom",
+    coords = { x = 12992, y = 1916, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPMedia",
+}
+loot[#loot + 1] = {
+    note = "sidetable @ livingroom",
+    coords = { x = 12996, y = 1923, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPMedia",
+}
+loot[#loot + 1] = {
+    note = "wardrobe @ kidsbedroom",
+    coords = { x = 12989, y = 1919, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPTools",
+}
+loot[#loot + 1] = {
+    note = "wardrobe @ kidsbedroom",
+    coords = { x = 12990, y = 1919, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPFish",
+}
+loot[#loot + 1] = {
+    note = "sidetable @ kidsbedroom",
+    coords = { x = 12989, y = 1922, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPGun",
+}
+loot[#loot + 1] = {
+    note = "dresser @ kidsbedroom",
+    coords = { x = 12992, y = 1923, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPLockers",
+}
+loot[#loot + 1] = {
+    note = "counter @ kitchen",
+    coords = { x = 12990, y = 1911, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPFood",
+}
+loot[#loot + 1] = {
+    note = "counter @ kitchen",
+    coords = { x = 12989, y = 1911, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPFood",
+}
+loot[#loot + 1] = {
+    note = "counter @ kitchen",
+    coords = { x = 12989, y = 1912, z = 2 },
+    special = "kitchentools",
+    level = "Loot_FoodLevel",
+}
+loot[#loot + 1] = {
+    note = "counter @ kitchen",
+    coords = { x = 12989, y = 1913, z = 2 },
+    dist = { "StoreKitchenBaking", },
+    distIncludeJunk = false,
+    tag = "DWAPFood",
+}
+loot[#loot + 1] = {
+    note = "dishescabinet @ diningroom",
+    coords = { x = 13002, y = 1911, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPBooze",
+}
+loot[#loot + 1] = {
+    note = "dishescabinet @ diningroom",
+    coords = { x = 13003, y = 1911, z = 2 },
+    distIncludeJunk = false,
+    tag = "DWAPBooze",
+}
+loot[#loot + 1] = {
+    note = "counter @ bathroom",
+    coords = { x = 12996, y = 1913, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPMed",
+}
+loot[#loot + 1] = {
+    note = "wardrobe @ bedroom",
+    coords = { x = 13002, y = 1919, z = 2 },
+    special = "gunlocker",
+    level = "Loot_GunLevel",
+}
+loot[#loot + 1] = {
+    note = "sidetable @ bedroom",
+    coords = { x = 13000, y = 1920, z = 2 },
+    special = "gunlocker",
+    level = "Loot_GunLevel",
+}
+loot[#loot + 1] = {
+    note = "sidetable @ bedroom",
+    coords = { x = 13000, y = 1923, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPLockers",
+}
+loot[#loot + 1] = {
+    note = "counter @ bathroom",
+    coords = { x = 12996, y = 1912, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPTailor",
+}
+loot[#loot + 1] = {
+    note = "wardrobe @ bedroom",
+    coords = { x = 13003, y = 1919, z = 2 },
+    distIncludeJunk = true,
+    tag = "DWAPGun",
+}
+
 local LowryCourt = {
     group = "Louisville",
     baseBuildings = {
@@ -66,367 +237,14 @@ local LowryCourt = {
         },
     },
     objectSpawns = {
-        { sprite = "industry_02_175",          x = pb1.x,             y = pb1.y,                         z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_57", x = 12989, y = 1923, z = 2, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_57", x = 12990, y = 1924, z = 2, }, -- window N | outside, outside
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_57", x = 12998, y = 1924, z = 2, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_commercial_01_57", x = 13002, y = 1924, z = 2, },
 
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12989, y = 1923,                          z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12994, y = 1924,                          z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 12998, y = 1924,                          z = 2, },
-        { barricade = "metalbar",              enabled = "Barricade", target = "walls_commercial_01_57", x = 13002, y = 1924,                          z = 2, },
-
-        { sprite = "appliances_cooking_01_16", x = 12989,             y = 1915,                          z = 2,     isFireplace = true, },
+        { sprite = "appliances_cooking_01_16", x = 12989, y = 1915, z = 2, isFireplace = true, },
     },
-    loot = {
-        { -- E1
-            note = "crate @ storage",
-            coords = { x = 12984, y = 1916, z = 0 },
-            distIncludeJunk = true,
-            tag = "DWAPBuildMats",
-        },
-        { -- E2
-            note = "militarycrate @ storage",
-            coords = { x = 12984, y = 1917, z = 0 },
-            items = {
-                { name = 'Base.NailsBox', },
-                { name = 'Base.ScrewsBox', },
-            },
-            level = "Loot_BuildMatsLevel",
-        },
-        { -- E3
-            note = "militarycrate @ storage",
-            coords = { x = 12984, y = 1918, z = 0 },
-            dist = { "GasStoreEmergency" },
-            distIncludeJunk = true,
-            level = 2,
-        },
-        { -- E4 cabinet next to bunk beds (9365)
-            note = "dresser @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 2, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        { -- E5 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E6 lower (66)
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 3, z = bunkerTopLeft.z },
-            special = "kitchentools",
-            level = "Loot_FoodLevel",
-        },
-        { -- E7 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E8 lower (67)
-            sprite = 'location_trailer_02_19',
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 4, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPMed",
-        },
-        { -- E9 upper
-            sprite = 'location_trailer_02_23',
-            note = "overhead @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            slot = "upper",
-            distIncludeJunk = false,
-            tag = "DWAPFish",
-        },
-        { -- E10 lower (68)
-            sprite = 'location_trailer_02_19',
-            note = "counter @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            dist = { "SewingStoreTools" },
-            distIncludeJunk = true,
-            tag = "DWAPTailor",
-        },
-        { -- E11
-            note = "fridge @ bunker",
-            coords = { x = 12981, y = 1913, z = -1 },
-            distIncludeJunk = true,
-            tag = "DWAPFridge",
-        },
-        { -- E12
-            note = "freezer @ bunker",
-            coords = { x = 12981, y = 1913, z = -1 },
-            slot = "freezer",
-            distIncludeJunk = true,
-            tag = "DWAPFreezer",
-        },
-        { -- E13 metal shelves (70)
-            sprite = 'location_trailer_02_23',
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPFarm",
-        },
-        { -- E14 metal shelves (71)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 8, z = bunkerTopLeft.z },
-            sandboxEnable = 'SeedLibrary',
-            special = 'SeedLibrary',
-        },
-        { -- E15 next to inner door (9372)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 9, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillmags",
-        },
-        { -- E16 (73)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 10, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks2",
-        },
-        { -- E17 (9374)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 11, z = bunkerTopLeft.z },
-            sandboxEnable = 'Loot_EnableBooks',
-            special = "skillbooks1",
-        },
-        { -- E18 far end next to stairs (9375)
-            note = "metal_shelves @ bunker",
-            coords = { x = bunkerTopLeft.x, y = bunkerTopLeft.y + 12, z = bunkerTopLeft.z },
-            special = "essentials",
-        },
-        -- rubbish bin going south
-        { -- E19
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E20
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 5, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E21
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 6, z = bunkerTopLeft.z },
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- E22
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPFarm",
-        },
-        { -- E23
-            note = "militarycrate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 7, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = true,
-            tag = "DWAPFarm",
-        },
-
-        -- extra spawns
-        { -- E24
-            note = "crate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E25
-            note = "crate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E26
-            note = "crate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-        { -- E27
-            note = "crate @ bunker",
-            coords = { x = bunkerTopLeft.x + 2, y = bunkerTopLeft.y + 1, z = bunkerTopLeft.z },
-            stack = 2,
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-
-        -- 2nd floor
-        { -- E28
-            note = "shelves @ kitchen",
-            coords = { x = 12995, y = 1911, z = 2 },
-            slot = "upper",
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E29
-            note = "counter @ kitchen",
-            coords = { x = 12991, y = 1911, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E30
-            note = "fridge @ kitchen",
-            coords = { x = 12992, y = 1911, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPFridge",
-        },
-        { -- E31
-            note = "freezer @ kitchen",
-            coords = { x = 12992, y = 1911, z = 2 },
-            slot = "freezer",
-            distIncludeJunk = true,
-            tag = "DWAPFreezer",
-        },
-
-        { -- E32
-            note = "sidetable @ livingroom",
-            coords = { x = 12993, y = 1922, z = 2 },
-            dist = { "CrateVHSTapes" },
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E33
-            note = "shelves @ livingroom",
-            coords = { x = 12992, y = 1916, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPMedia",
-        },
-        { -- E34
-            note = "sidetable @ livingroom",
-            coords = { x = 12996, y = 1923, z = 2 },
-            items = {
-                { name = 'Base.Remote',     chance = 1,   count = { 1, 1 } },
-                { name = 'Base.VideoGame',  chance = 1,   count = { 1, 1 } },
-                { name = 'Base.Headphones', chance = 1,   count = { 1, 1 } },
-                { name = 'Base.CDplayer',   chance = 1,   count = { 1, 1 } },
-                { name = 'Base.Bullhorn',   chance = 0.5, count = { 1, 1 } },
-                { name = 'Base.VHS_Retail', chance = 1,   count = { 30, 30 } },
-            },
-        },
-        { -- E35
-            note = "wardrobe @ kidsbedroom",
-            coords = { x = 12989, y = 1919, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPTools",
-        },
-        { -- E36
-            note = "wardrobe @ kidsbedroom",
-            coords = { x = 12990, y = 1919, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPFish",
-        },
-        { -- E37
-            note = "sidetable @ kidsbedroom",
-            coords = { x = 12989, y = 1922, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPGun",
-        },
-        { -- E38
-            note = "dresser @ kidsbedroom",
-            coords = { x = 12992, y = 1923, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-        { -- E39
-            note = "counter @ kitchen",
-            coords = { x = 12990, y = 1911, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E40
-            note = "counter @ kitchen",
-            coords = { x = 12989, y = 1911, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E41
-            note = "counter @ kitchen",
-            coords = { x = 12989, y = 1912, z = 2 },
-            special = "kitchentools",
-            level = "Loot_FoodLevel",
-        },
-        { -- E42
-            note = "counter @ kitchen",
-            coords = { x = 12989, y = 1913, z = 2 },
-            dist = { "StoreKitchenBaking", },
-            distIncludeJunk = false,
-            tag = "DWAPFood",
-        },
-        { -- E43
-            note = "dishescabinet @ diningroom",
-            coords = { x = 13002, y = 1911, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPBooze",
-        },
-        { -- E44
-            note = "dishescabinet @ diningroom",
-            coords = { x = 13003, y = 1911, z = 2 },
-            distIncludeJunk = false,
-            tag = "DWAPBooze",
-        },
-        { -- E45
-            note = "counter @ bathroom",
-            coords = { x = 12996, y = 1913, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPMed",
-        },
-        { -- E46
-            note = "wardrobe @ bedroom",
-            coords = { x = 13002, y = 1919, z = 2 },
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- E47
-            note = "sidetable @ bedroom",
-            coords = { x = 13000, y = 1920, z = 2 },
-            special = "gunlocker",
-            level = "Loot_GunLevel",
-        },
-        { -- E48
-            note = "sidetable @ bedroom",
-            coords = { x = 13000, y = 1923, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPLockers",
-        },
-        { -- E49
-            note = "counter @ bathroom",
-            coords = { x = 12996, y = 1912, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPTailor",
-        },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10155,y=6621,z=1},
-        --     dist = {"ArmyStorageOutfit", "LockerArmyBedroom", "LockerArmyBedroomHome", "ArmySurplusOutfit", "ToolStoreOutfit"},
-        --     distIncludeJunk = true,
-        --     randUntilFull = true,
-        --     level = "Loot_LockersLevel",
-        -- },
-        -- {
-        --     type = 'container',
-        --     coords = {x=10153,y=6620,z=1},
-        --     dist = {"BookstoreBiography", "BookstoreBusiness", "BookstoreChilds", "BookstoreComputer", "BookstoreCrimeFiction"},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_MediaLevel",
-        -- },
-        { -- E50
-            note = "wardrobe @ bedroom",
-            coords = { x = 13003, y = 1919, z = 2 },
-            distIncludeJunk = true,
-            tag = "DWAPGun",
-        },
-    },
+    loot = loot,
 }
 
 if getActivatedMods():contains("\\Ladders") then

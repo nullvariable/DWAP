@@ -1,7 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * systems: 1 component at 12026,2591 z=1 names a sprite that is not on
---     the square, though the square itself loads - config drifted from the
---     map
 local wtc = { x = 12030, y = 2581, z = -1, }
 local pb1 = { x = 12029, y = 2582, z = -1  }
 local LVilleMansion = {
@@ -37,7 +33,7 @@ local LVilleMansion = {
         { sprite = "fixtures_bathroom_01_0",  x = 12027, y = 2587, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
         { sprite = "fixtures_sinks_01_12",    x = 12028, y = 2587, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
         { sprite = "fixtures_sinks_01_12",    x = 12029, y = 2587, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
-        { sprite = "fixtures_bathroom_01_52", x = 12026, y = 2591, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
+        { sprite = "fixtures_bathroom_01_26", x = 12026, y = 2591, z = 1, sourceType="tank", source = wtc, }, -- bathroom, bld 46,10#0
 
         { sprite = "fixtures_sinks_01_1",     x = 12023, y = 2596, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
         { sprite = "fixtures_sinks_01_1",     x = 12023, y = 2597, z = 1,  sourceType = "tank", source = { x = wtc.x, y = wtc.y, z = wtc.z } },
@@ -62,19 +58,6 @@ local LVilleMansion = {
     },
     map = { name = "DWAPStashMap3", },
     objectSpawns = {
-        { sprite = "industry_02_175", x = pb1.x, y = pb1.y, z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-        -- { sprite = "fixtures_doors_frames_01_1", x = 12037,             y = 2579,                            z = 0,     replaceWall = true, },
-        -- { sprite = "walls_interior_house_03_20", x = 12037,             y = 2579,                            z = 0, },
-        -- -- { sprite = "fixtures_doors_01_1", x = 12037, y = 2579, z = 0, isDoor = true, doorN = true, },
-        -- { sprite = "walls_interior_house_03_20", x = 12038,             y = 2580,                            z = 0,     clearExisting = true, },
-        -- { sprite = "fixtures_railings_01_112",   x = 12038,             y = 2581,                            z = 0,     clearExisting = true, },
-        -- { sprite = "fixtures_railings_01_115",   x = 12038,             y = 2582,                            z = 0, },
-        -- { sprite = "fixtures_doors_01_1",        x = 12038,             y = 2580,                            z = 0,     isDoor = true,        doorN = true, },
-
-        -- { sprite = "fixtures_railings_01_28",    x = 12025,             y = 2600,                            z = 0, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_28",    x = 12025,             y = 2599,                            z = 0, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_28",    x = 12025,             y = 2598,                            z = 0, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_4",     x = 12025,             y = 2598,                            z = 0, }, -- basement railing
 
         { barricade = "metalbar",                enabled = "Barricade", target = "walls_exterior_house_02_40", x = 12030, y = 2588,           z = 0, },
         { barricade = "metal",                   enabled = "Barricade", target = "walls_exterior_house_02_40", x = 12030, y = 2590,           z = 0, },
@@ -111,7 +94,6 @@ local LVilleMansion = {
             coords = { x = 12021, y = 2587, z = 0 },
             dist = { "CafeteriaSnacks" },
             distIncludeJunk = true,
-            tag = "DWAPFood",
         },
         -- living room
         { -- E4
@@ -123,15 +105,7 @@ local LVilleMansion = {
         { -- E5
             note = "sidetable @ livingroom",
             coords = { x = 12019, y = 2597, z = 0 },
-            items = {
-                { name = 'Base.Remote',     chance = 1,   count = { 1, 3 } },
-                { name = 'Base.VideoGame',  chance = 1,   count = { 3, 3 } },
-                { name = 'Base.Headphones', chance = 1,   count = { 3, 3 } },
-                { name = 'Base.CDplayer',   chance = 1,   count = { 3, 3 } },
-                { name = 'Base.Bullhorn',   chance = 0.5, count = { 1, 1 } },
-                { name = 'Base.VHS_Retail', chance = 0.5, count = { 30, 30 } },
-            },
-            level = "Loot_MediaLevel",
+            tag = "DWAPMedia",
         },
         { -- E6
             note = "counter @ laundry",
@@ -807,7 +781,6 @@ local LVilleMansion = {
         { -- E106
             note = "metal_shelves @ storageunit",
             coords = { x = 12030, y = 2589, z = -1 },
-            dist = { "CrateSheetMetal" },
             distIncludeJunk = false,
             tag = "DWAPBuildMats",
         },
@@ -820,21 +793,19 @@ local LVilleMansion = {
         { -- E108
             note = "metal_shelves @ storageunit",
             coords = { x = 12030, y = 2587, z = -1 },
-            dist = { "CrateLumber" },
             distIncludeJunk = true,
             tag = "DWAPBuildMats",
         },
-        -- {
-        --     type = 'container',
-        --     coords = {x=12030,y=2586,z=-1},
-        --     dist = {"CrateFishing", "FishermanTools"},
-        --     distIncludeJunk = false,
-        --     randUntilFull = true,
-        --     level = "Loot_FishLevel",
-        -- },
+        {
+            note = "crate @ storageunit",
+            coords = {x=12030,y=2586,z=-1},
+            distIncludeJunk = false,
+            tag = "DWAPFish",
+        },
         { -- E109
             note = "crate @ storageunit",
             coords = { x = 12030, y = 2585, z = -1 },
+            stack = 2,
             distIncludeJunk = true,
             tag = "DWAPBuildMats",
         },

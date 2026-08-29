@@ -145,27 +145,27 @@ local LVilleComplex = {
     objectSpawns = {
 
         -- southern house
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_8", x = 14139, y = 2659,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_9", x = 14140, y = 2654,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_9", x = 14143, y = 2654,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14154, y = 2661,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14154, y = 2665,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14142, y = 2668,                        z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_8",  x = 14139, y = 2659, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_9",  x = 14140, y = 2654, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_9",  x = 14143, y = 2654, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14154, y = 2661, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14154, y = 2665, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14142, y = 2668, z = 0, },
         -- eastern house
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_8", x = 14179, y = 2640,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_8", x = 14179, y = 2638,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_04_41", x = 14190, y = 2630,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14192, y = 2638,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_02_4",      x = 14192, y = 2640,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14187, y = 2642,                        z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_8",  x = 14179, y = 2640, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_8",  x = 14179, y = 2638, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_04_41", x = 14190, y = 2630, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_24", x = 14192, y = 2638, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_02_4",        x = 14192, y = 2640, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14187, y = 2642, z = 0, },
         -- northern house
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14160, y = 2607,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14158, y = 2607,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_04_72", x = 14148, y = 2599,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_04_73", x = 14151, y = 2595,                        z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_02_5",      x = 14154, y = 2595,                          z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_interior_house_03_41", x = 14159, y = 2595,                        z = 0, },
-        { barricade = "woodhalf", enabled = "Barricade", target="fixtures_windows_01_0", x = 14163, y = 2601, z = 0, }, -- window W | kitchen, bld 55,10#0
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14160, y = 2607, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_house_02_25", x = 14158, y = 2607, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_04_72", x = 14148, y = 2599, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_04_73", x = 14151, y = 2595, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_02_5",        x = 14154, y = 2595, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_interior_house_03_41", x = 14159, y = 2595, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_windows_01_0",      x = 14163, y = 2601, z = 0, }, -- window W | kitchen, bld 55,10#0
     },
     loot = {
         -- {

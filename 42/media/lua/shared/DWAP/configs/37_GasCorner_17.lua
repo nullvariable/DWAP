@@ -1,11 +1,3 @@
--- @TODO (2026-08-07 audit) unresolved - delete lines as they are fixed
---   * 2 skeleton entries carry coords but no loot yet - entries 26-27
---   * systems: generator controls declare industry_02_67 but no such object
---     is on the square. 11 configs name that sprite and ALL 11 fail, while 32
---     configs use dwap_tiles_01_22 - the maps look to have moved on and these
---     configs did not. Confirm what is actually there before editing
---   * systems: 1 component at 1659,5747 z=0 names a sprite that is not on the
---     square, though the square itself loads - config drifted from the map
 local wtc = { x = 1662, y = 5746, z = -2, }
 local pb1 = { x = 1660, y = 5747, z = -2 }
 local GasCorner = {
@@ -21,7 +13,7 @@ local GasCorner = {
             controls = { sprite = "dwap_tiles_01_22", x = 1666, y = 5746, z = -4 },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 1664, y = 5746, z = -4, },
             fakeGenerators = {
-                { x = 1659, y = 5749, z = -1, createTile = true },
+                { x = 1659, y = 5749, z = -1 },
             },
         },
     },

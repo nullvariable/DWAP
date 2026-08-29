@@ -12,7 +12,7 @@ local RustyRifle = {
     spawn = { x = 10748, y = 10543, z = 1 },
     generators = {
         {
-            controls = { sprite = "dwap_tiles_01_22", x = 10770, y = 10551, z = pb1.z },
+            controls = { sprite = "dwap_tiles_01_22", x = 10770, y = 10551, z = -1, },
             fuelTank = { sprite = "dwap_tiles_01_24", x = 10768, y = 10551, z = -1, },
             fakeGenerators = {
                 { x = 10759, y = 10549, z = -1, createTile = true },
@@ -55,35 +55,15 @@ local RustyRifle = {
     },
     map = { name = "DWAPStashMap23", },
     objectSpawns = {
-        -- { sprite = "crafted_01_11", x = wtc1.x, y = wtc1.y, z = wtc1.z, enabled = "EnableWaterSystem", }, -- invisible "tank" to simulate the well
-        -- { sprite = "camping_01_64", x = 10776, y = 10563, z = 0, enabled = "EnableWaterSystem", }, -- fountain
-        { sprite = "industry_02_175", x = pb1.x,             y = pb1.y,                                      z = pb1.z, disabled = "EnableGenSystemSolar", clearExisting = true, },
-
-        -- { sprite = "fixtures_railings_01_29", x = 10777, y = 10577, z = 0, clearExisting = true, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_29", x = 10778, y = 10577, z = 0, clearExisting = true, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_29", x = 10779, y = 10577, z = 0, clearExisting = true, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_28", x = 10780, y = 10577, z = 0, clearExisting = true, }, -- basement railing
-        -- { sprite = "fixtures_railings_01_31", x = 10780, y = 10577, z = 0, }, -- basement railing
-
-        -- -- between basements door
-        -- { sprite = "location_sewer_01_19", x = 10765, y = 10548, z = -1, replaceWall = true, },
-        -- { sprite = "fixtures_doors_01_9", x = 10765, y = 10548, z = -1, isDoor = true, doorN = true, },
-        -- { sprite = "location_sewer_01_0", x = 10766, y = 10548, z = -1, replaceWall = true, },
-
-        -- basement bookshelves
-        -- { sprite = "furniture_shelving_01_40", x = 10764, y = 10542, z = -1, isContainer = true, clearExisting = false, },
-        -- { sprite = "furniture_shelving_01_40", x = 10765, y = 10542, z = -1, isContainer = true, clearExisting = false, },
-        -- { sprite = "furniture_shelving_01_40", x = 10766, y = 10542, z = -1, isContainer = true, clearExisting = false, },
-
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10748, y = 10548,                         z = 1, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "fixtures_doors_01_5",                 x = 10748, y = 10548,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10754, y = 10548,                         z = 0, },
-        { barricade = "metalbar",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10754, y = 10548,                         z = 1, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10757, y = 10555,                         z = 0, },
-        { barricade = "wood",         enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10759, y = 10555,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "location_community_church_small_01_65", x = 10761, y = 10555,                       z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10764, y = 10555,                         z = 0, },
-        { barricade = "woodhalf",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",         x = 10766, y = 10555,                         z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10748, y = 10548, z = 1, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "fixtures_doors_01_5",                   x = 10748, y = 10548, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10754, y = 10548, z = 0, },
+        { barricade = "metalbar", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10754, y = 10548, z = 1, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10757, y = 10555, z = 0, },
+        { barricade = "wood",     enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10759, y = 10555, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "location_community_church_small_01_65", x = 10761, y = 10555, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10764, y = 10555, z = 0, },
+        { barricade = "woodhalf", enabled = "Barricade", target = "walls_exterior_wooden_01_33",           x = 10766, y = 10555, z = 0, },
     },
     loot = {
         -- owner suite
@@ -631,6 +611,150 @@ local RustyRifle = {
             coords = { x = 10763, y = 10528, z = 0 },
             distIncludeJunk = false,
             tag = "DWAPFish",
+        },
+        -- storage area, militarylockers etc
+        {
+            note = "militarycrate @ storage",
+            coords = { x = 10771, y = 10561, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "militarycrate @ storage",
+            coords = { x = 10771, y = 10561, z = -1 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "militarycrate @ storage",
+            coords = { x = 10771, y = 10562, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "militarycrate @ storage",
+            coords = { x = 10771, y = 10562, z = -1 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "militarycrate @ storage",
+            coords = { x = 10771, y = 10563, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        {
+            note = "militarylocker @ storage",
+            coords = { x = 10773, y = 10561, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPGun",
+        },
+        -- main warehouse basement room
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10777, y = 10551, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPBooze",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10777, y = 10552, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPNonFoodFiller",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10777, y = 10554, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPMedia",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10777, y = 10555, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPMed",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10777, y = 10557, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFarm",
+        },
+        {
+            note = "crate @ storage",
+            coords = { x = 10777, y = 10558, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFarm",
+        },
+        {
+            note = "crate @ storage",
+            coords = { x = 10777, y = 10558, z = -1 },
+            stack = 2,
+            distIncludeJunk = true,
+            tag = "DWAPLockers",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10775, y = 10557, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPTools",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10775, y = 10556, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPBuildMats",
+        },
+        {
+            note = "metal_shelves @ warehouse",
+            coords = { x = 10775, y = 10555, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPBuildMats",
+        },
+        {
+            note = "freezer @ warehouse",
+            coords = { x = 10773, y = 10557, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        {
+            note = "freezer @ warehouse",
+            coords = { x = 10773, y = 10556, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        {
+            note = "freezer @ warehouse",
+            coords = { x = 10773, y = 10555, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        {
+            note = "freezer @ warehouse",
+            coords = { x = 10773, y = 10554, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPFreezer",
+        },
+        -- medical room
+        {
+            note = "sidetable @ infirmary",
+            coords = { x = 10767, y = 10561, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPMed",
+        },
+        {
+            note = "medicine @ infirmary",
+            coords = { x = 10767, y = 10562, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPMed",
+        },
+        {
+            note = "medicine @ infirmary",
+            coords = { x = 10767, y = 10563, z = -1 },
+            distIncludeJunk = true,
+            tag = "DWAPLockers",
         },
     },
 }
