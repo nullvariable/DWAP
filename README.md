@@ -336,10 +336,10 @@ Custom firearms load outs for gun lockers. Attachments, clips, and ammo for:
 | Optional mods supported | * Immersive Solar Arrays |
 | ***Pros***: Nice house with 2 basements. Lots of big fences nearby. | ***Cons***: Bit far from everything, but not far from plenty of zombies. |
 
-| 41. Rosewood Parsonage | 8157, 11543 |
+| 41. Secret Mausoleum | 8143, 11515 |
 | ------------- | ---------- |
-| ![Rosewood Parsonage](readme/41_main.jpg) | ![Rosewood Parsonage](readme/41_map.png) |
-| The compact parsonage is nice enough, but the hidden room underneath the crypts is a real mystery. The construction seems recent as if someone knew something and was preparing. | ![Rosewood Parsonage](readme/41_basement.png) |
+| ![Secret Mausoleum](readme/41_main.jpg) | ![Secret Mausoleum](readme/41_map.png) |
+| The compact mausoleum grounds are nice enough, but the hidden room underneath the crypts is a real mystery. The construction seems recent as if someone knew something and was preparing. | ![Secret Mausoleum](readme/41_basement.png) |
 | Optional mods supported | * Ladders!? * Immersive Solar Arrays |
 | ***Pros***: Solid open basement area to be build out. | ***Cons***: Smack in the center of Rosewood and all the zombies there. |
 

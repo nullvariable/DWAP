@@ -103,6 +103,18 @@ local function getSpriteObject(objects, sprite)
     return nil, size
 end
 
+-- safeOnly: prop swaps must NOT force a refused removal through. These clear
+-- whole squares (everything but one sprite), and the tiles the safe path
+-- refuses are exactly the sprite-grid ones our own systems convert - water
+-- fixtures, tanks, generators. Forcing them through deleted converted fixtures
+-- on every prop spawn, so plumbing read as disconnected each time a base
+-- streamed in until the right-click fallback rebuilt it. Leaving a refused
+-- object in place is the correct outcome here; the shared helper now remembers
+-- the refusal so the retry never floods the log either.
+local function tryRemoveTileObject(square, sqObject)
+    return DWAPUtils.tryRemoveTileObject(square, sqObject, "props", true)
+end
+
 --- clear all objects from a square except for the one with the given sprite
 --- @param objects PZArrayList<IsoObject>
 --- @param square IsoGridSquare
@@ -114,9 +126,9 @@ local function clearObjectsExcluding(objects, square, sprite)
         local sqObject = objects:get(j)
         if sqObject and canDestroy(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
-            square:transmitRemoveItemFromSquare(sqObject)
-            square:RemoveTileObject(sqObject)
-            sledgeDestroy(sqObject)
+            if tryRemoveTileObject(square, sqObject) then
+                sledgeDestroy(sqObject)
+            end
         else
             DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
         end
@@ -143,9 +155,9 @@ local function clearWalls(objects, square, sprite)
         local sqObject = objects:get(j)
         if sqObject and isWall(sqObject) and sqObject:getTextureName() ~= sprite then
             DWAPUtils.dprint(("Trying to remove %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
-            square:transmitRemoveItemFromSquare(sqObject)
-            square:RemoveTileObject(sqObject)
-            sledgeDestroy(sqObject)
+            if tryRemoveTileObject(square, sqObject) then
+                sledgeDestroy(sqObject)
+            end
         else
             DWAPUtils.dprint(("Not removing %s"):format(sqObject.getSpriteName and sqObject:getSpriteName() or "nil"))
         end
@@ -228,9 +240,9 @@ function DWAP_Props.maybeSpawnObject(params)
                 local sqObject = existingObjects:get(i)
                 if sqObject and sqObject:getSpriteName() == params.sprite then
                     DWAPUtils.dprint(("DWAP_Props: Deleting object %s %s %s"):format(params.sprite, params.x, params.y))
-                    square:transmitRemoveItemFromSquare(sqObject)
-                    square:RemoveTileObject(sqObject)
-                    sledgeDestroy(sqObject)
+                    if tryRemoveTileObject(square, sqObject) then
+                        sledgeDestroy(sqObject)
+                    end
                 end
             end
             DWAPUtils.dprint(("DWAP_Props: Deleted object %s %s %s"):format(params.sprite, params.x, params.y))

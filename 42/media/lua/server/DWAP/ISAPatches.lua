@@ -219,6 +219,84 @@ local function patchUpdatePowerbanks()
     end)
 end
 
+-- dwap_tiles_01_0 no longer declares `container = BatteryBank` in
+-- dwap_tiles_01.tiles. Without ISA the powerbank is now inert scenery rather
+-- than a mystery empty box - which is what the vanilla twin industry_02_175
+-- has always been (it carries no container property at all). Attaching the
+-- container is therefore this patch's job, and it has to happen here rather
+-- than in SolarSupport: that copy runs off DWAPSquareLoaded, which has no
+-- ordering guarantee against MapObjects.OnLoadWithSprite, and every
+-- getContainer() call below assumes a container already exists.
+--
+-- Deliberately not setIsContainer(true): that method is IsoThumpable-only
+-- (IsoThumpable.java:232), and a map-loaded powerbank is a plain IsoObject, or
+-- an IsoGenerator once converted. ItemContainer is Lua-exposed (LuaManager
+-- Exposer) and IsoObject.save writes whatever containers an object holds
+-- (IsoObject.java:1454), so a container attached this way persists.
+local function ensurePowerbankContainer(isoObject)
+    local container = isoObject:getContainer()
+    if container then return container end
+    local square = isoObject:getSquare()
+    if not square then
+        DWAPUtils.dprint("DWAP_ISA: powerbank has no square, cannot attach container")
+        return nil
+    end
+    container = ItemContainer.new("BatteryBank", square, isoObject)
+    container:setCapacity(100)
+    container:setExplored(true)
+    isoObject:setContainer(container)
+    DWAPUtils.dprint("DWAP_ISA: attached BatteryBank container to powerbank")
+    return container
+end
+
+-- ISA's WorldUtil.replaceIsoObjectWithGenerator cannot be used on our tile any
+-- more: it builds the new generator's container with
+-- createContainersFromSpriteProperties(), which needs the very sprite flag we
+-- removed, and then immediately calls generator:getContainer():setExplored(true)
+-- - an NPE we cannot guard from outside. So do the conversion here, mirroring
+-- ISA's sequence but supplying our own container.
+--
+-- This also replaces the old "manual fallback" branch, which called
+-- square:AddGenerator(...). That method does not exist anywhere in 42.20, so
+-- the fallback would have errored on the first line it reached.
+local function convertToGenerator(isoObject)
+    local square = isoObject:getSquare()
+    local index = isoObject:getObjectIndex()
+    if not square or index == -1 then
+        DWAPUtils.dprint("DWAP_ISA: powerbank not on a square, cannot convert")
+        return nil
+    end
+
+    local sprite = isoObject:getSprite()
+    local fullType = "Moveables." .. isoObject:getTextureName()
+    local props = sprite and sprite:getProperties()
+    if props and props:Is("CustomItem") then
+        fullType = props:Val("CustomItem")
+    end
+
+    -- safelyRemove = false: we are replacing this object, so a safe removal
+    -- that refuses and leaves it in place would strand a duplicate. The default
+    -- overload passes true and warns per call on anything multi-square.
+    square:transmitRemoveItemFromSquare(isoObject, false)
+
+    local generator = IsoGenerator.new(square:getCell())
+    generator:setSprite(sprite)
+    generator:setSquare(square)
+    generator:getModData().generatorFullType = fullType
+    square:AddSpecialObject(generator, index)
+
+    -- before transmit, so clients receive the object with its container
+    ensurePowerbankContainer(generator)
+
+    generator:transmitCompleteItemToClients()
+    generator:setCondition(100)
+    generator:setFuel(100)
+    generator:setConnected(true)
+    generator:getCell():addToProcessIsoObjectRemove(generator)
+    triggerEvent("OnObjectAdded", generator)
+    return generator
+end
+
 -- Patch MapObjects to handle DWAP powerbank tiles
 local function patchMapObjects()
     DWAPUtils.dprint("DWAP_ISA: Patching MapObjects to handle DWAP powerbank tiles")
@@ -227,8 +305,10 @@ local function patchMapObjects()
     if isClient() then
         local function LoadDWAPPowerbank(isoObject)
             DWAPUtils.dprint("DWAP_ISA: Loading DWAP powerbank on client")
+            local container = ensurePowerbankContainer(isoObject)
+            if not container then return end
             isoObject:getCell():addToProcessIsoObjectRemove(isoObject)
-            isoObject:getContainer():setAcceptItemFunction("AcceptItemFunction.ISA_Batteries")
+            container:setAcceptItemFunction("AcceptItemFunction.ISA_Batteries")
         end
         MapObjects.OnLoadWithSprite("dwap_tiles_01_0", LoadDWAPPowerbank, 6)
     else
@@ -238,32 +318,18 @@ local function patchMapObjects()
 
             -- Check if we need to convert the object to an IsoGenerator
             if not instanceof(isoObject, "IsoGenerator") then
-                DWAPUtils.dprint("DWAP_ISA: Converting IsoThumpable to IsoGenerator for DWAP powerbank")
-
-                -- Use ISA's own replacement function if available, otherwise do it manually
-                if ISA.WorldUtil and ISA.WorldUtil.replaceIsoObjectWithGenerator then
-                    isoObject = ISA.WorldUtil.replaceIsoObjectWithGenerator(isoObject)
-                    DWAPUtils.dprint("DWAP_ISA: Used ISA WorldUtil.replaceIsoObjectWithGenerator")
-                    triggerEvent("OnFillContainer", isoObject:getSquare(), "BatteryBank", isoObject:getContainer())
-                else
-                    -- Manual conversion as fallback
-                    local textureName = isoObject:getTextureName()
-                    local square = isoObject:getSquare()
-                    -- local x, y, z = isoObject:getX(), isoObject:getY(), isoObject:getZ()
-                    -- Remove the original object
-                    square:removeIsoObject(isoObject)
-
-                    -- Create a new IsoGenerator
-                    local generator = square:AddGenerator(textureName, 0, false, 0, true, 0, nil)
-
-                    -- Use the new generator object
-                    isoObject = generator
-                    DWAPUtils.dprint("DWAP_ISA: Successfully converted to IsoGenerator manually")
-                end
+                DWAPUtils.dprint("DWAP_ISA: Converting to IsoGenerator for DWAP powerbank")
+                local generator = convertToGenerator(isoObject)
+                if not generator then return end
+                isoObject = generator
+                triggerEvent("OnFillContainer", isoObject:getSquare(), "BatteryBank", isoObject:getContainer())
             end
 
+            local container = ensurePowerbankContainer(isoObject)
+            if not container then return end
+
             ISA.PBSystem_Server:loadIsoObject(isoObject)
-            isoObject:getContainer():setAcceptItemFunction("AcceptItemFunction.ISA_Batteries")
+            container:setAcceptItemFunction("AcceptItemFunction.ISA_Batteries")
         end
         MapObjects.OnLoadWithSprite("dwap_tiles_01_0", LoadDWAPPowerbank, 6)
 
@@ -343,33 +409,22 @@ local function setupISAIntegration()
     patchPowerBankUpdateSprite()
 end
 
+-- Without ISA there is nothing to integrate, and nothing to undo either.
+--
+-- This used to swap our powerbank tile (dwap_tiles_01_0) out for the vanilla
+-- industry_02_175 on every load. That swap was not cosmetic: the two sprites
+-- are visually identical, but industry_02_175 carries no container property, so
+-- swapping was what stopped a container-less-by-design object from showing up
+-- as an unexplained empty box in a base with no solar mod installed.
+--
+-- The tile definition now handles that instead - dwap_tiles_01_0 declares no
+-- container, and ensurePowerbankContainer above attaches one only on the ISA
+-- path. So there is genuinely nothing to undo here, and no per-load object
+-- churn either. (The swap was also gated on the EnableGenSystemSolar sandbox
+-- var rather than on ISA being installed, so it never fired for a player who
+-- enabled solar without owning the mod - exactly the case it existed to cover.)
 local function noIntegration()
-    local function LoadDWAPPowerbank(isoObject)
-        -- industry_02_175
-        -- Replace the custom powerbank tile with a standard one
-        DWAPUtils.dprint("DWAP_ISA: Loading DWAP powerbank without ISA integration")
-        local x, y, z = isoObject:getX(), isoObject:getY(), isoObject:getZ()
-        local square = isoObject:getSquare()
-        if not square then
-            DWAPUtils.dprint("DWAP_ISA: LoadDWAPPowerbank no square")
-            return
-        end
-        local index = -1
-        if isoObject then
-            isoObject:getObjectIndex()
-            square:RemoveTileObject(isoObject)
-            square:transmitRemoveItemFromSquare(isoObject)
-        end
-
-        local newObject = IsoObject.getNew(square, "industry_02_175", "industry_02_175", false)
-        if newObject == nil then
-            DWAPUtils.dprint("DWAP_ISA: Failed to create new IsoObject for powerbank replacement")
-            return
-        end
-        square:transmitAddObjectToSquare(newObject, index)
-
-    end
-    MapObjects.OnLoadWithSprite("dwap_tiles_01_0", LoadDWAPPowerbank, 6)
+    DWAPUtils.dprint("DWAP_ISA: ISA inactive - leaving DWAP powerbank tiles as they are")
 end
 
 if (getActivatedMods():contains("\\ISA") and SandboxVars.DWAP.EnableGenSystemSolar) then

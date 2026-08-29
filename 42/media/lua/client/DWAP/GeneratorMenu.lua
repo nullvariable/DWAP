@@ -104,46 +104,48 @@ DWAP.worldObjectContextMenu_17 = function(_, context, worldObjects, test)
                     end
                 end
             end
-            local hose = playerInventory:getFirstTagRecurse(ItemTag.SIPHON_GAS)
-            if hose then
-                local possibleGasContainers = playerInventory:getAllEvalRecurse(predicatePetrolNotFull)
-                if possibleGasContainers:size() > 0 then
-                    ---@type ISContextMenu
-                    local subContext = ISContextMenu:getNew(context)
-                    local menuOption = context:addOption("Siphon Fuel")
-                    context:addSubMenu(menuOption, subContext)
-                    for j = 0, possibleGasContainers:size() - 1 do
-                        ---@type InventoryItem
-                        local item = possibleGasContainers:get(j)
-                        -- DWAPUtils.dprint(item:getID())
-                        subContext:addOption(("Siphon Gas into %s"):format(item:getName()), nil, function()
-                            DWAPUtils.dprint(("Siphoning gas to %s"):format(item:getName()))
-                            walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
-                            ISInventoryPaneContextMenu.equipWeapon(item, false, false, player:getPlayerNum())
-                            ISInventoryPaneContextMenu.equipWeapon(hose, true, false, player:getPlayerNum())
-                            ISTimedActionQueue.add(DWAPSiphonFuel:new(player, object, item, generator, genIndex))
-                        end)
+            if not generator.fuelTank then
+                local hose = playerInventory:getFirstTagRecurse(ItemTag.SIPHON_GAS)
+                if hose then
+                    local possibleGasContainers = playerInventory:getAllEvalRecurse(predicatePetrolNotFull)
+                    if possibleGasContainers:size() > 0 then
+                        ---@type ISContextMenu
+                        local subContext = ISContextMenu:getNew(context)
+                        local menuOption = context:addOption("Siphon Fuel")
+                        context:addSubMenu(menuOption, subContext)
+                        for j = 0, possibleGasContainers:size() - 1 do
+                            ---@type InventoryItem
+                            local item = possibleGasContainers:get(j)
+                            -- DWAPUtils.dprint(item:getID())
+                            subContext:addOption(("Siphon Gas into %s"):format(item:getName()), nil, function()
+                                DWAPUtils.dprint(("Siphoning gas to %s"):format(item:getName()))
+                                walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
+                                ISInventoryPaneContextMenu.equipWeapon(item, false, false, player:getPlayerNum())
+                                ISInventoryPaneContextMenu.equipWeapon(hose, true, false, player:getPlayerNum())
+                                ISTimedActionQueue.add(DWAPSiphonFuel:new(player, object, item, generator, genIndex))
+                            end)
+                        end
                     end
                 end
-            end
-            local gasContainers = playerInventory:getAllEvalRecurse(predicatePetrol)
-            if gasContainers and gasContainers:size() > 0 then
-                DWAPUtils.dprint("Gas containers found")
-                ---@type ISContextMenu
-                local subContext = ISContextMenu:getNew(context)
-                local menuOption = context:addOption("Fuel Generator")
-                context:addSubMenu(menuOption, subContext)
-                for j = 0, gasContainers:size() - 1 do
-                    ---@type InventoryItem
-                    local item = gasContainers:get(j)
-                    DWAPUtils.dprint(("adding item %s"):format(item:getName()))
-                    subContext:addOption(("Add From %s"):format(item:getName()), nil, function()
-                        DWAPUtils.dprint(("Emptying %s"):format(item:getName()))
-                        walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
-                        -- DWAPUtils.dprint(type(MRPAddFuel))
-                        ISTimedActionQueue.add(ISEquipWeaponAction:new(player, item, 50, true, false))
-                        ISTimedActionQueue.add(DWAPAddFuel:new(player, object, item, generator, genIndex))
-                    end)
+                local gasContainers = playerInventory:getAllEvalRecurse(predicatePetrol)
+                if gasContainers and gasContainers:size() > 0 then
+                    DWAPUtils.dprint("Gas containers found")
+                    ---@type ISContextMenu
+                    local subContext = ISContextMenu:getNew(context)
+                    local menuOption = context:addOption("Fuel Generator")
+                    context:addSubMenu(menuOption, subContext)
+                    for j = 0, gasContainers:size() - 1 do
+                        ---@type InventoryItem
+                        local item = gasContainers:get(j)
+                        DWAPUtils.dprint(("adding item %s"):format(item:getName()))
+                        subContext:addOption(("Add From %s"):format(item:getName()), nil, function()
+                            DWAPUtils.dprint(("Emptying %s"):format(item:getName()))
+                            walkToGen({ x = object:getX(), y = object:getY(), z = object:getZ() })
+                            -- DWAPUtils.dprint(type(MRPAddFuel))
+                            ISTimedActionQueue.add(ISEquipWeaponAction:new(player, item, 50, true, false))
+                            ISTimedActionQueue.add(DWAPAddFuel:new(player, object, item, generator, genIndex))
+                        end)
+                    end
                 end
             end
             return

@@ -1,3 +1,8 @@
+-- Dev tooling: inert outside debug mode so shipping this file is safe.
+-- getDebug() is the -debug launch flag - per-launch, never set for normal
+-- players, no sandbox UI exposure
+if not getDebug() then return end
+
 local DWAPUtils = require("DWAPUtils")
 local random = newrandom()
 
@@ -46,23 +51,35 @@ end
 
 local lastBuilding = nil
 DWAP_AutoLightsEnabled = false
+
+local function autoLightsTick()
+    local ply = getPlayer()
+    local square = ply and ply:getCurrentSquare()
+    if not square then return end
+    local building = square:getBuilding()
+    -- def-id comparison: streaming recreates IsoBuilding instances, so
+    -- identity would re-trigger on the same physical building
+    if building and not DWAPUtils.sameBuilding(building, lastBuilding) then
+        DWAPUtils.dprint("Building changed, starting settle-lit pass")
+        -- rooms stream in over many ticks; the settle poll keeps
+        -- flipping until the building stops growing
+        startAutoLightsAfterTeleport()
+    end
+    lastBuilding = building
+end
+
 function DoAutoLights()
-    if DWAP_AutoLightsEnabled then return end
-    DWAP_AutoLightsEnabled = true
-    Events.OnTick.Add(function()
-        local ply = getPlayer()
-        local square = ply:getCurrentSquare()
-        if not square then return end
-        local building = square:getBuilding()
-        local bn = building and building or nil
-        if bn ~= lastBuilding then
-            DWAPUtils.dprint("Building changed "..tostring(bn))
-            if building then
-                DWAPUtils.lightsOn(square)
-            end
-            lastBuilding = bn
-        end
-    end)
+    DWAP_AutoLightsEnabled = not DWAP_AutoLightsEnabled
+    if DWAP_AutoLightsEnabled then
+        -- forget the last building so turning it on while inside one
+        -- lights it immediately
+        lastBuilding = nil
+        Events.OnTick.Add(autoLightsTick)
+        DWAPUtils.dprint("AutoLights: on")
+    else
+        Events.OnTick.Remove(autoLightsTick)
+        DWAPUtils.dprint("AutoLights: off")
+    end
 end
 
 require "ISUI/ISCollapsableWindow"
@@ -516,7 +533,7 @@ function ShowChunkXYForLightSwitches()
     local rooms = getCell():getRoomList()
     for i = 0, rooms:size()-1 do
         local room = rooms:get(i)
-        if room:getBuilding() == building then
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
             local lightSwitches = room:getLightSwitches()
             for j = 0, lightSwitches:size()-1 do
                 local lightSwitch = lightSwitches:get(j)
@@ -615,7 +632,7 @@ function ListChunksForBuilding()
             local square = getSquare(x, y, playerZ)
             if square then
                 local building2 = square:getBuilding()
-                if building2 and building2 == building then
+                if building2 and DWAPUtils.sameBuilding(building2, building) then
                     squaresInBuilding[#squaresInBuilding+1] = square
                 end
             end

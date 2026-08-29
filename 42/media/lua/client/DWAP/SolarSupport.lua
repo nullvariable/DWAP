@@ -85,18 +85,23 @@ function DWAP_ISA:addModDataToSolarComponent(params)
         modData.connectDelta = 100
     elseif params.componentType == "powerbank" then
         DWAPUtils.dprint("DWAP_ISA: Adding mod data to solar powerbank at coordinates: " .. solarComponent.x .. ", " .. solarComponent.y .. ", " .. solarComponent.z)
-        if not object then
-            DWAPUtils.dprint("DWAP_ISA: Object not found for solar powerbank at coordinates: " .. solarComponent.x .. ", " .. solarComponent.y .. ", " .. solarComponent.z)
-        else
-            if not object:getContainer() then
-                DWAPUtils.dprint("DWAP_ISA: Creating container for solar powerbank at coordinates: " .. solarComponent.x .. ", " .. solarComponent.y .. ", " .. solarComponent.z)
-                local obj = ISWoodenContainer:new(solarComponent.sprite, nil)
-                -- prop = IsoThumpable.new(getCell(), square, solarComponent.sprite, false, obj)
-                buildUtil.setInfo(object, obj)
-                object:setIsContainer(true)
-                object:getContainer():setType("BatteryBank")
-                object:getContainer():setCapacity(100)
-            end
+        -- Backstop only. ISAPatches.ensurePowerbankContainer is the primary, and
+        -- it runs from MapObjects.OnLoadWithSprite; this handler runs off
+        -- DWAPSquareLoaded, so it is the later of the two but not reliably so.
+        --
+        -- The previous version of this block could never have worked: it called
+        -- object:setIsContainer(true), which exists only on IsoThumpable
+        -- (IsoThumpable.java:232), while a map-loaded powerbank is a plain
+        -- IsoObject or an IsoGenerator. It went unnoticed because the tile used
+        -- to declare its own container, so the `not getContainer()` guard was
+        -- never false. Now that the tile declares none, this path can actually
+        -- be reached.
+        if not object:getContainer() then
+            DWAPUtils.dprint("DWAP_ISA: Creating container for solar powerbank at coordinates: " .. solarComponent.x .. ", " .. solarComponent.y .. ", " .. solarComponent.z)
+            local container = ItemContainer.new("BatteryBank", square, object)
+            container:setCapacity(100)
+            container:setExplored(true)
+            object:setContainer(container)
         end
 
         -- DWAPUtils.dprint("DWAP_ISA: Adding mod data to solar powerbank at coordinates: " .. solarComponent.x .. ", " .. solarComponent.y .. ", " .. solarComponent.z)

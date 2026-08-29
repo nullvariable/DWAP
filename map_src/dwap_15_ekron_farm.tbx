@@ -22,6 +22,44 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="exterior_walls">
   <tile enum="West" tile="industry_trucks_01_048"/>
@@ -32,6 +70,44 @@
   <tile enum="NorthWindow" tile="industry_trucks_01_057"/>
   <tile enum="WestDoor" tile="industry_trucks_01_058"/>
   <tile enum="NorthDoor" tile="industry_trucks_01_059"/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="floors">
   <tile enum="Floor" tile="floors_exterior_natural_01_008"/>
@@ -76,6 +152,44 @@
   <tile enum="NorthWindow" tile=""/>
   <tile enum="WestDoor" tile=""/>
   <tile enum="NorthDoor" tile=""/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="interior_walls">
   <tile enum="West" tile="industry_01_000"/>
@@ -86,6 +200,44 @@
   <tile enum="NorthWindow" tile="industry_01_009"/>
   <tile enum="WestDoor" tile="industry_01_010"/>
   <tile enum="NorthDoor" tile="industry_01_011"/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="interior_walls">
   <tile enum="West" tile="industry_trucks_01_004"/>
@@ -96,6 +248,44 @@
   <tile enum="NorthWindow" tile="industry_trucks_01_013"/>
   <tile enum="WestDoor" tile="industry_trucks_01_014"/>
   <tile enum="NorthDoor" tile="industry_trucks_01_015"/>
+  <tile enum="WestWindow1" tile=""/>
+  <tile enum="NorthWindow1" tile=""/>
+  <tile enum="WestWindow2" tile=""/>
+  <tile enum="NorthWindow2" tile=""/>
+  <tile enum="WestWindow3" tile=""/>
+  <tile enum="NorthWindow3" tile=""/>
+  <tile enum="WestWindow4" tile=""/>
+  <tile enum="NorthWindow4" tile=""/>
+  <tile enum="WestWindow5" tile=""/>
+  <tile enum="NorthWindow5" tile=""/>
+  <tile enum="WestWindow6" tile=""/>
+  <tile enum="NorthWindow6" tile=""/>
+  <tile enum="WestWindow7" tile=""/>
+  <tile enum="NorthWindow7" tile=""/>
+  <tile enum="WestWindow8" tile=""/>
+  <tile enum="NorthWindow8" tile=""/>
+  <tile enum="WestWindow9" tile=""/>
+  <tile enum="NorthWindow9" tile=""/>
+  <tile enum="WestWindow10" tile=""/>
+  <tile enum="NorthWindow10" tile=""/>
+  <tile enum="WestWindow11" tile=""/>
+  <tile enum="NorthWindow11" tile=""/>
+  <tile enum="WestWindow12" tile=""/>
+  <tile enum="NorthWindow12" tile=""/>
+  <tile enum="WestWindow13" tile=""/>
+  <tile enum="NorthWindow13" tile=""/>
+  <tile enum="WestWindow14" tile=""/>
+  <tile enum="NorthWindow14" tile=""/>
+  <tile enum="WestWindow15" tile=""/>
+  <tile enum="NorthWindow15" tile=""/>
+  <tile enum="WestWindow16" tile=""/>
+  <tile enum="NorthWindow16" tile=""/>
+  <tile enum="WestWindow17" tile=""/>
+  <tile enum="NorthWindow17" tile=""/>
+  <tile enum="WestWindow18" tile=""/>
+  <tile enum="NorthWindow18" tile=""/>
+  <tile enum="WestWindow19" tile=""/>
+  <tile enum="NorthWindow19" tile=""/>
  </tile_entry>
  <tile_entry category="roof_caps">
   <tile enum="CapRiseE1" tile="walls_exterior_roofs_05_000"/>
@@ -130,6 +320,42 @@
   <tile enum="CapShallowRiseE2" tile="walls_exterior_roofs_05_049"/>
   <tile enum="CapShallowFallE1" tile="walls_exterior_roofs_05_053"/>
   <tile enum="CapShallowFallE2" tile="walls_exterior_roofs_05_052"/>
+  <tile enum="CapSlope30RiseE1" tile=""/>
+  <tile enum="CapSlope30RiseE2" tile=""/>
+  <tile enum="CapSlope30RiseE3" tile=""/>
+  <tile enum="CapSlope30RiseE4" tile=""/>
+  <tile enum="CapSlope30RiseE5" tile=""/>
+  <tile enum="CapSlope30RiseE6" tile=""/>
+  <tile enum="CapSlope30FallE1" tile=""/>
+  <tile enum="CapSlope30FallE2" tile=""/>
+  <tile enum="CapSlope30FallE3" tile=""/>
+  <tile enum="CapSlope30FallE4" tile=""/>
+  <tile enum="CapSlope30FallE5" tile=""/>
+  <tile enum="CapSlope30FallE6" tile=""/>
+  <tile enum="CapSlope30RiseS1" tile=""/>
+  <tile enum="CapSlope30RiseS2" tile=""/>
+  <tile enum="CapSlope30RiseS3" tile=""/>
+  <tile enum="CapSlope30RiseS4" tile=""/>
+  <tile enum="CapSlope30RiseS5" tile=""/>
+  <tile enum="CapSlope30RiseS6" tile=""/>
+  <tile enum="CapSlope30FallS1" tile=""/>
+  <tile enum="CapSlope30FallS2" tile=""/>
+  <tile enum="CapSlope30FallS3" tile=""/>
+  <tile enum="CapSlope30FallS4" tile=""/>
+  <tile enum="CapSlope30FallS5" tile=""/>
+  <tile enum="CapSlope30FallS6" tile=""/>
+  <tile enum="CapPeak30E1" tile=""/>
+  <tile enum="CapPeak30E2" tile=""/>
+  <tile enum="CapPeak30E3" tile=""/>
+  <tile enum="CapPeak30E4" tile=""/>
+  <tile enum="CapPeak30E5" tile=""/>
+  <tile enum="CapPeak30E6" tile=""/>
+  <tile enum="CapPeak30S1" tile=""/>
+  <tile enum="CapPeak30S2" tile=""/>
+  <tile enum="CapPeak30S3" tile=""/>
+  <tile enum="CapPeak30S4" tile=""/>
+  <tile enum="CapPeak30S5" tile=""/>
+  <tile enum="CapPeak30S6" tile=""/>
  </tile_entry>
  <tile_entry category="roof_slopes">
   <tile enum="SlopeS1" tile="roofs_01_000"/>
@@ -152,6 +378,48 @@
   <tile enum="ShallowSlopeN2" tile="roofs_01_085"/>
   <tile enum="ShallowSlopeS1" tile="roofs_01_087"/>
   <tile enum="ShallowSlopeS2" tile="roofs_01_086"/>
+  <tile enum="Slope30S1" tile=""/>
+  <tile enum="Slope30S2" tile=""/>
+  <tile enum="Slope30S3" tile=""/>
+  <tile enum="Slope30S4" tile=""/>
+  <tile enum="Slope30S5" tile=""/>
+  <tile enum="Slope30S6" tile=""/>
+  <tile enum="Slope30E1" tile=""/>
+  <tile enum="Slope30E2" tile=""/>
+  <tile enum="Slope30E3" tile=""/>
+  <tile enum="Slope30E4" tile=""/>
+  <tile enum="Slope30E5" tile=""/>
+  <tile enum="Slope30E6" tile=""/>
+  <tile enum="Slope30W1" tile=""/>
+  <tile enum="Slope30W2" tile=""/>
+  <tile enum="Slope30W3" tile=""/>
+  <tile enum="Slope30W4" tile=""/>
+  <tile enum="Slope30W5" tile=""/>
+  <tile enum="Slope30W6" tile=""/>
+  <tile enum="Slope30N1" tile=""/>
+  <tile enum="Slope30N2" tile=""/>
+  <tile enum="Slope30N3" tile=""/>
+  <tile enum="Slope30N4" tile=""/>
+  <tile enum="Slope30N5" tile=""/>
+  <tile enum="Slope30N6" tile=""/>
+  <tile enum="Peak30NS1" tile=""/>
+  <tile enum="Peak30NS2" tile=""/>
+  <tile enum="Peak30NS3" tile=""/>
+  <tile enum="Peak30NS4" tile=""/>
+  <tile enum="Peak30NS5" tile=""/>
+  <tile enum="Peak30NS6" tile=""/>
+  <tile enum="Peak30WE1" tile=""/>
+  <tile enum="Peak30WE2" tile=""/>
+  <tile enum="Peak30WE3" tile=""/>
+  <tile enum="Peak30WE4" tile=""/>
+  <tile enum="Peak30WE5" tile=""/>
+  <tile enum="Peak30WE6" tile=""/>
+  <tile enum="Peak30Quad1" tile=""/>
+  <tile enum="Peak30Quad2" tile=""/>
+  <tile enum="Peak30Quad3" tile=""/>
+  <tile enum="Peak30Quad4" tile=""/>
+  <tile enum="Peak30Quad5" tile=""/>
+  <tile enum="Peak30Quad6" tile=""/>
   <tile enum="Inner1" tile="roofs_01_011"/>
   <tile enum="Inner2" tile="roofs_01_012"/>
   <tile enum="Inner3" tile="roofs_01_013"/>
@@ -170,6 +438,54 @@
   <tile enum="CornerNE1" tile="roofs_01_029"/>
   <tile enum="CornerNE2" tile="roofs_01_028"/>
   <tile enum="CornerNE3" tile="roofs_01_027"/>
+  <tile enum="InnerSlope30SE1" tile=""/>
+  <tile enum="InnerSlope30SE2" tile=""/>
+  <tile enum="InnerSlope30SE3" tile=""/>
+  <tile enum="InnerSlope30SE4" tile=""/>
+  <tile enum="InnerSlope30SE5" tile=""/>
+  <tile enum="InnerSlope30SE6" tile=""/>
+  <tile enum="InnerSlope30NE1" tile=""/>
+  <tile enum="InnerSlope30NE2" tile=""/>
+  <tile enum="InnerSlope30NE3" tile=""/>
+  <tile enum="InnerSlope30NE4" tile=""/>
+  <tile enum="InnerSlope30NE5" tile=""/>
+  <tile enum="InnerSlope30NE6" tile=""/>
+  <tile enum="InnerSlope30NW1" tile=""/>
+  <tile enum="InnerSlope30NW2" tile=""/>
+  <tile enum="InnerSlope30NW3" tile=""/>
+  <tile enum="InnerSlope30NW4" tile=""/>
+  <tile enum="InnerSlope30NW5" tile=""/>
+  <tile enum="InnerSlope30NW6" tile=""/>
+  <tile enum="InnerSlope30SW1" tile=""/>
+  <tile enum="InnerSlope30SW2" tile=""/>
+  <tile enum="InnerSlope30SW3" tile=""/>
+  <tile enum="InnerSlope30SW4" tile=""/>
+  <tile enum="InnerSlope30SW5" tile=""/>
+  <tile enum="InnerSlope30SW6" tile=""/>
+  <tile enum="OuterSlope30SE1" tile=""/>
+  <tile enum="OuterSlope30SE2" tile=""/>
+  <tile enum="OuterSlope30SE3" tile=""/>
+  <tile enum="OuterSlope30SE4" tile=""/>
+  <tile enum="OuterSlope30SE5" tile=""/>
+  <tile enum="OuterSlope30SE6" tile=""/>
+  <tile enum="OuterSlope30NE1" tile=""/>
+  <tile enum="OuterSlope30NE2" tile=""/>
+  <tile enum="OuterSlope30NE3" tile=""/>
+  <tile enum="OuterSlope30NE4" tile=""/>
+  <tile enum="OuterSlope30NE5" tile=""/>
+  <tile enum="OuterSlope30NE6" tile=""/>
+  <tile enum="OuterSlope30NW1" tile=""/>
+  <tile enum="OuterSlope30NW2" tile=""/>
+  <tile enum="OuterSlope30NW3" tile=""/>
+  <tile enum="OuterSlope30NW4" tile=""/>
+  <tile enum="OuterSlope30NW5" tile=""/>
+  <tile enum="OuterSlope30NW6" tile=""/>
+  <tile enum="OuterSlope30SW1" tile=""/>
+  <tile enum="OuterSlope30SW2" tile=""/>
+  <tile enum="OuterSlope30SW3" tile=""/>
+  <tile enum="OuterSlope30SW4" tile=""/>
+  <tile enum="OuterSlope30SW5" tile=""/>
+  <tile enum="OuterSlope30SW6" tile=""/>
  </tile_entry>
  <tile_entry category="roof_tops">
   <tile enum="West1" tile="floors_exterior_street_01_014" offset="-1,-1"/>
@@ -203,7 +519,15 @@
   <tile tile="appliances_cooking_01_024"/>
   <tile tile="dwap_tiles_01_000"/>
   <tile tile="dwap_tiles_01_001"/>
+  <tile tile="dwap_tiles_01_008"/>
   <tile tile="dwap_tiles_01_009"/>
+  <tile tile="dwap_tiles_01_010"/>
+  <tile tile="dwap_tiles_01_011"/>
+  <tile tile="dwap_tiles_01_020"/>
+  <tile tile="dwap_tiles_01_021"/>
+  <tile tile="dwap_tiles_01_022"/>
+  <tile tile="dwap_tiles_01_023"/>
+  <tile tile="dwap_tiles_01_024"/>
   <tile tile="fixtures_bathroom_01_006"/>
   <tile tile="fixtures_doors_01_053"/>
   <tile tile="fixtures_doors_frames_01_005"/>
@@ -216,17 +540,10 @@
   <tile tile="furniture_tables_high_01_016"/>
   <tile tile="industry_01_012"/>
   <tile tile="industry_02_052"/>
-  <tile tile="industry_02_064"/>
-  <tile tile="industry_02_066"/>
-  <tile tile="industry_02_067"/>
-  <tile tile="industry_02_069"/>
-  <tile tile="industry_02_071"/>
   <tile tile="industry_02_072"/>
   <tile tile="industry_02_074"/>
   <tile tile="industry_02_075"/>
   <tile tile="industry_02_167"/>
-  <tile tile="industry_02_169"/>
-  <tile tile="industry_02_172"/>
   <tile tile="industry_trucks_01_004"/>
   <tile tile="industry_trucks_01_005"/>
   <tile tile="industry_trucks_01_015"/>
@@ -249,8 +566,8 @@
  <used_furniture></used_furniture>
  <room Name="warehouse" InternalName="warehouse" Color="200 200 200" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
  <room Name="hallway" InternalName="hallway" Color="128 128 128" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
- <room Name="bunker" InternalName="bunker" Color="255 0 0" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
- <room Name="bunker" InternalName="bunker" Color="0 255 0" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
+ <room Name="bunker" InternalName="security" Color="228 102 97" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
+ <room Name="bunker" InternalName="storageunit" Color="107 127 94" InteriorWall="11" InteriorWallTrim="0" Floor="6" GrimeFloor="7" GrimeWall="8" Ceiling="0"/>
  <floor>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="12" y="34" dir="W" Tile="0"/>
   <object type="wall" length="1" InteriorTile="0" ExteriorTrim="0" InteriorTrim="0" x="1" y="38" dir="W" Tile="0"/>
@@ -375,11 +692,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,8,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,
+0,16,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </tiles>
@@ -463,7 +780,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,17,17,17,17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,25,25,25,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -504,18 +821,18 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,9,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,
+0,17,0,0,0,0,0,0,0,0,0,0,17,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </tiles>
   <tiles layer="Furniture">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,44,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -538,19 +855,19 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,12,0,41,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,11,0,41,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,40,0,16,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,44,0,13,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,44,0,46,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,44,0,41,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,2,0,41,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,15,0,41,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,14,0,7,0,0,0,0,0,0,0,
-25,26,22,22,23,29,18,28,18,0,0,15,0,15,0,0,0,0,0,0,0,
-24,6,19,20,21,4,0,0,0,0,0,14,0,14,0,0,0,0,0,0,0,
-15,0,0,0,0,0,0,0,27,0,0,15,0,15,0,0,0,0,0,0,0,
-14,0,0,0,0,0,0,0,27,0,0,14,0,14,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,20,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,19,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,41,0,24,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,45,0,21,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,45,0,47,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,45,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,23,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,22,0,15,0,0,0,0,0,0,0,
+28,29,8,9,11,10,26,4,26,0,0,23,0,23,0,0,0,0,0,0,0,
+27,7,6,14,13,12,0,0,0,0,0,22,0,22,0,0,0,0,0,0,0,
+23,0,0,0,0,0,0,0,30,0,0,23,0,23,0,0,0,0,0,0,0,
+22,0,0,0,0,0,0,0,30,0,0,22,0,22,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -581,14 +898,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,3,0,42,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,3,0,43,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,43,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -627,9 +944,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -667,18 +984,18 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,35,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,38,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,37,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,36,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,35,0,0,0,37,0,0,0,0,0,0,0,0,
-0,0,0,38,39,0,0,0,0,0,0,0,36,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,36,0,0,0,38,0,0,0,0,0,0,0,0,
+0,0,0,39,40,0,0,0,0,0,0,0,37,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -690,40 +1007,40 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,34,0,0,0,0,34,0,0,0,0,34,0,0,0,0,0,0,0,0,
+0,0,35,0,0,0,0,35,0,0,0,0,35,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </tiles>
@@ -761,12 +1078,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,31,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,32,0,0,0,0,0,0,0,0,0,0,32,0,0,30,0,0,0,0,0,
+0,33,0,0,0,0,0,0,0,0,0,0,33,0,0,31,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </tiles>

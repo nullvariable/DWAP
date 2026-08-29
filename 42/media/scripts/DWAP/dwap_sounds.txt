@@ -1,0 +1,53 @@
+module Base
+{
+    /* The secret locker door tiles (dwap_tiles_01_25/27) use
+       DoorSound = LockerMetalLarge so open/close plays the same events as the
+       furniture_storage_02 locker container. Vanilla only ships the Open/Close
+       pair for that prefix; IsoDoor also plays Locked/Blocked/Unlock/Lock/Break,
+       so alias those to the MetalDoor events to avoid silent actions. */
+
+    sound LockerMetalLargeLocked
+    {
+        category = Object,
+        clip
+        {
+            event = Object/MetalDoor/IsLocked,
+        }
+    }
+
+    sound LockerMetalLargeBlocked
+    {
+        category = Object,
+        clip
+        {
+            event = Object/MetalDoor/IsBlocked,
+        }
+    }
+
+    sound LockerMetalLargeUnlock
+    {
+        category = Object,
+        clip
+        {
+            event = Object/MetalDoor/Unlock,
+        }
+    }
+
+    sound LockerMetalLargeLock
+    {
+        category = Object,
+        clip
+        {
+            event = Object/MetalDoor/Lock,
+        }
+    }
+
+    sound LockerMetalLargeBreak
+    {
+        category = Object,
+        clip
+        {
+            event = Object/MetalDoor/Break,
+        }
+    }
+}

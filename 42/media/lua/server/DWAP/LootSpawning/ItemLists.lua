@@ -745,6 +745,28 @@ local function splitDot(str)
     return t
 end
 
+-- Per-item weight boosts applied AFTER a pool resolves to {name, weight}.
+-- The v2 tag pools name whole vanilla ProceduralDistributions lists; the
+-- per-item weights inside those lists come from the base game and are
+-- otherwise unreachable from our configs. This is the one lever to re-rank a
+-- single item within a pool without forking the vanilla distribution.
+--
+-- Each rule is a Lua pattern matched against the (bare) item name and a
+-- multiplier applied once to the summed weight. Order matters only in that the
+-- first matching rule wins (break below). Seeded to lift canned-food "boxes"
+-- (a full case of cans), which vanilla weights ~100x below the single cans
+-- (0.02-0.1 vs 2-8); x25 lands a box near ~1.5 -- an occasional find that still
+-- stays below a single can. Patterns are unanchored at the start so a
+-- "Base."-qualified name still matches; the "_Box$" tail keeps them off the
+-- single cans.
+local WEIGHT_BOOSTS = {
+    { pattern = "Canned%w*_Box$", mult = 25 },
+    { pattern = "Tinned%w*_Box$", mult = 25 },
+    { pattern = "TunaTin_Box$", mult = 25 },
+    { pattern = "MysteryCan_Box$", mult = 25 },
+    { pattern = "Macandcheese_Box$", mult = 25 },
+}
+
 --- Get all of the items from the distribution lists, then filter them and save it to the cache variable
 --- @param distLists table[string]: The distribution list to get the items from
 --- @param distIncludeJunk boolean: Whether to include junk items in the list
@@ -756,25 +778,52 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
 
     local distLists = _distLists
 
-    local tempNoDupes = {}
+    -- Weighted builder: an array of { name = <string>, weight = <number> }.
+    -- indexByName maps a name to its slot in `items` so that repeated vanilla
+    -- names SUM their weights instead of collapsing to a single equal-weight
+    -- entry (vanilla repeats a name to make it more common; that repeat signal
+    -- plus the numeric weight are both recovered here in one pass).
     local items = {}
+    local indexByName = {}
+
+    -- Fold one name/weight pair into the builder: apply the convertItems remap
+    -- and excludeItems filtering (unchanged from before), default a missing or
+    -- non-number weight to 1, and either append a new entry or add to the
+    -- weight of an existing one.
+    local function addWeighted(name, weight)
+        if convertItems[name] then
+            name = convertItems[name]
+        end
+        if not name or type(name) ~= "string" or excludeItems[name] then
+            return
+        end
+        if type(weight) ~= "number" then
+            weight = 1
+        end
+        local existing = indexByName[name]
+        if existing then
+            items[existing].weight = items[existing].weight + weight
+        else
+            items[#items + 1] = { name = name, weight = weight }
+            indexByName[name] = #items
+        end
+    end
+
     for i = 1, #distLists do
         local distList = distLists[i]
         local distListItems
+        -- interleaved: vanilla ProceduralDistributions items are a flat
+        -- name/weight array ({ "Name", w, "Name2", w2, ... }); the
+        -- Distributions fallback below is a bare-string array with no weights.
+        local interleaved = true
         if ProceduralDistributions.list[distList] and ProceduralDistributions.list[distList].items then
-            if distIncludeJunk then
-                distListItems = ProceduralDistributions.list[distList].items
-                if ProceduralDistributions.list[distList].junk and #ProceduralDistributions.list[distList].junk > 0 then
-                    for j = 1, #ProceduralDistributions.list[distList].junk do
-                        distListItems[#distListItems+1] = ProceduralDistributions.list[distList].junk[j]
-                    end
-                end
-            else
-                distListItems = ProceduralDistributions.list[distList].items
-            end
+            -- Read the vanilla array without aliasing or mutating it; the
+            -- builder copies each pair out into its own entries.
+            distListItems = ProceduralDistributions.list[distList].items
         else
             local distTable = Distributions[1]
             distListItems = {}
+            interleaved = false
             if distList:find(".") then
                 local distListParts = splitDot(distList)
                 for j = 1, #distListParts do
@@ -793,15 +842,55 @@ local function getCachedDistItemList(_distLists, distIncludeJunk)
             end
         end
         if distListItems and #distListItems > 0 then
-            for j = 1, #distListItems do
-                local item = distListItems[j]
-                if convertItems[item] then
-                    item = convertItems[item]
+            if interleaved then
+                -- Walk name/weight pairs; a missing trailing weight defaults to
+                -- 1 inside addWeighted (weight arg is nil).
+                for j = 1, #distListItems, 2 do
+                    addWeighted(distListItems[j], distListItems[j + 1])
                 end
-                if item and type(item) == "string" and not excludeItems[item] and not tempNoDupes[item] then
-                    items[#items + 1] = item
-                    tempNoDupes[item] = true
+            else
+                -- Fallback path yields bare strings; give each weight 1.
+                for j = 1, #distListItems do
+                    addWeighted(distListItems[j], 1)
                 end
+            end
+        end
+
+        -- Fold junk into the pool when requested. Only the interleaved
+        -- ProceduralDistributions branch has a .junk (the Distributions
+        -- dot-path fallback does not). The junk ITEMS live at .junk.items --
+        -- the same interleaved name/weight array shape as the main .items --
+        -- NOT at .junk itself (a { rolls, items } hash with no integer keys).
+        -- Route each pair through addWeighted (writes only into the local
+        -- builder, never the vanilla table) at weight * 0.5. Vanilla applies a
+        -- flat x1.4 junk boost (§3.6); DWAP deliberately rolls junk BELOW
+        -- vanilla to cut container clutter (0.5 ~= 1/3 of vanilla's weight --
+        -- raise toward 1.4 to restore vanilla junk density, or lower toward 0
+        -- for less). A missing trailing weight defaults to 1 inside
+        -- addWeighted, so multiply an explicit 1 in that case.
+        if distIncludeJunk and interleaved then
+            local junk = ProceduralDistributions.list[distList]
+                and ProceduralDistributions.list[distList].junk
+            local junkItems = junk and junk.items
+            if junkItems and #junkItems > 0 then
+                for j = 1, #junkItems, 2 do
+                    local w = junkItems[j + 1]
+                    if type(w) ~= "number" then w = 1 end
+                    addWeighted(junkItems[j], w * 0.5)
+                end
+            end
+        end
+    end
+
+    -- Re-rank individual items within the resolved pool. Runs once per unique
+    -- (dist set, junk) key because the result is cached below; weightedPickIndex
+    -- reads these weights directly.
+    for i = 1, #items do
+        local nm = items[i].name
+        for b = 1, #WEIGHT_BOOSTS do
+            if string.find(nm, WEIGHT_BOOSTS[b].pattern) then
+                items[i].weight = items[i].weight * WEIGHT_BOOSTS[b].mult
+                break
             end
         end
     end
@@ -816,6 +905,28 @@ end
 --- @param item Item: The item to test
 --- @return number: 0 if not a skill book, 1 if a skill book, 2 if a skill magazine
 local function isSkillLiterature(category, name, item)
+    -- Authoritative, category-independent detection: read the item script's own
+    -- fields. A skill book declares SkillTrained (getSkillTrained ~= ""); a
+    -- recipe magazine declares LearnedRecipes (getLearnedRecipes non-empty).
+    -- Both are base script-Item accessors, so this is safe for every item from
+    -- getAllItems(). The old display-category string test ("SkillBook") let any
+    -- skill book with a different category leak, which surfaced once tag
+    -- migration broadened Media containers onto the full book-dist pool. Reading
+    -- the fields catches them regardless of category or the MAGAZINE tag.
+    local skill = item:getSkillTrained()
+    if skill and skill ~= "" then
+        return 1
+    end
+    -- Recipe magazine = teaches recipes AND is tagged a magazine. The MAGAZINE
+    -- gate is essential: seed packets (*BagSeed) also carry LearnedRecipes
+    -- ("base:carrot growing season" etc.) but are NOT magazines, and must fall
+    -- through to the seed branch in populateItems, not be stripped as skill mags.
+    local recipes = item:getLearnedRecipes()
+    if recipes and recipes:size() > 0 and item:hasTag(ItemTag.MAGAZINE) then
+        return 2
+    end
+    -- Fallback heuristic for anything the fields miss (kept from before). The
+    -- "Set" guard only applies here so a skill-book set still resolves above.
     if name:find("Set") then return 0 end
     -- 42.20 moved recipe/skill magazines from SkillBook to RecipeResource
     if (category == "SkillBook" or category == "RecipeResource") and item:hasTag(ItemTag.MAGAZINE) then
@@ -1046,7 +1157,14 @@ end
 function DWAP_LootSpawning.getItemsWithDistLists(distLists, distIncludeJunk)
     local items = {}
     if distLists and #distLists > 0 then
-        items = getCachedDistItemList(distLists, distIncludeJunk)
+        -- Return a SHALLOW COPY of the cached outer array: a fresh table whose
+        -- elements are the same inner { name, weight } refs. Callers nil out
+        -- OUTER slots (holes) and append entries; they never mutate the inner
+        -- tables, so the cached array stays canonical for every consumer.
+        local cached = getCachedDistItemList(distLists, distIncludeJunk)
+        for i = 1, #cached do
+            items[i] = cached[i]
+        end
     end
     return items
 end

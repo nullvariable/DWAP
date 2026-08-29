@@ -32,9 +32,40 @@ local function onLoadWithSprite(isoObject)
         DWAPUtils.dprint("DWAPWaterSystem instance not found, cannot load water object")
         return
     end
+    -- Retroactive conversion: a square first visited BEFORE its config
+    -- entry existed never fires onNew again, and loadIsoObject only
+    -- re-attaches objects that already carry water modData - without this,
+    -- fixtures added to a config mid-save stay unplumbed in that save
+    -- forever (converted objects pass isValidIsoObject and skip this)
+    if not DWAPWaterSystem.instance:isValidIsoObject(isoObject) then
+        onNewWithSprite(isoObject)
+        return
+    end
     pcall(function()
         DWAPWaterSystem.instance:loadIsoObject(isoObject)
     end)
+    -- Re-attaching is not re-connecting. IsoObject.externalWaterSource is a
+    -- runtime field with no mod data behind it, so a converted fixture comes
+    -- back from a chunk reload piped to nothing: leaving a base and walking in
+    -- again left every fixture dry (config 03 on 2026-08-07, after arriving
+    -- from config 01 where they had connected fine). ensureFixtureConnected
+    -- no-ops when the source is already live, so this is cheap on the common
+    -- path and handles the tank-not-back-yet case the same way a fresh
+    -- conversion does.
+    local hashed = hashCoords(isoObject:getX(), isoObject:getY(), isoObject:getZ())
+    local objectData = hashedObjects[hashed]
+    if not objectData then return end
+    if objectData.type == "fixture" and objectData.source then
+        local modData = isoObject:getModData()
+        DWAPWaterObject.ensureFixtureConnected(isoObject,
+            modData.connection or objectData.source, objectData,
+            DWAPWaterSystem.instance, "reconnected on chunk reload")
+    elseif objectData.type == "tank" then
+        -- the reloaded tank releases anything that parked against it; without
+        -- this a fixture that loads first waits on a tank that never announces
+        -- itself, because only onNewTankObject flushes
+        DWAPWaterObject.onLoadTankObject(isoObject, objectData, DWAPWaterSystem.instance)
+    end
 end
 
 Events.OnInitGlobalModData.Add(function()
@@ -66,18 +97,31 @@ Events.OnInitGlobalModData.Add(function()
                         tankSprites[tank.sprite] = true
                     end
                 end
+            end
+            -- fixtures register independently of tanks: a tankless config's
+            -- fixtures (and configs with tanks but no fixtures) both work
+            if config.waterFixtures then
                 for j = 1, #config.waterFixtures do
                     local fixture = config.waterFixtures[j]
                     if fixture and fixture.sprite then
                         local hashed = hashCoords(fixture.x, fixture.y, fixture.z)
                         hashedObjects[hashed] = {type = "fixture", sprite = fixture.sprite, x = fixture.x, y = fixture.y, z = fixture.z}
+                        -- source is optional: a fixture with no tank is a valid
+                        -- manual-plumb target (onNewFixtureObject leaves its
+                        -- connection nil for exactly this case). Guard nil the
+                        -- way the tank loop above does - without it ONE
+                        -- sourceless fixture throws indexing fixture.source.x
+                        -- and aborts this whole OnInitGlobalModData handler
+                        -- before the MapObjects sprite handlers register below,
+                        -- so every tank AND fixture in every config stays
+                        -- unconverted (no fluid container, no UI, cannot plumb).
                         if type(fixture.source) == "number" then
                             hashedObjects[hashed].source = {
                                 x = config.waterTanks[fixture.source].x,
                                 y = config.waterTanks[fixture.source].y,
                                 z = config.waterTanks[fixture.source].z
                             }
-                        else
+                        elseif fixture.source then
                             hashedObjects[hashed].source = {
                                 x = fixture.source.x,
                                 y = fixture.source.y,

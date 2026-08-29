@@ -9,11 +9,8 @@ tileset
     {
         xy = 0,0
         BlocksPlacement = 
-        ContainerCapacity = 100
-        CustomName = DWAP_PowerBank
         ScrapUseSkill = 
         ScrapUseTool = 
-        container = BatteryBank
     }
     // dwap_tiles_01_1
     tile
@@ -54,6 +51,38 @@ tileset
         solidfloor = 
         transparentFloor = 
     }
+    // dwap_tiles_01_4
+    tile
+    {
+        xy = 4,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_5
+    tile
+    {
+        xy = 5,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_6
+    tile
+    {
+        xy = 6,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_7
+    tile
+    {
+        xy = 7,0
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
     // dwap_tiles_01_8
     tile
     {
@@ -79,46 +108,47 @@ tileset
         ScrapUseTool = 
         solid = 
     }
+    // Secret metal-panel doors, vanilla +2 interleave (IsoDoor openSpriteOffset):
+    // 12 = W closed, 13 = N closed, 14 = W open, 15 = N open
     // dwap_tiles_01_12
     tile
     {
         xy = 4,1
         DoorSound = MetalDoor
         Facing = W
-        IsClosedState = 
+        IsClosedState =
         Material = MetalPlates
         Material2 = Door
         Material3 = Plastic
         MaterialType = Metal_Light
-        attachedW = 
-        doorW = 
+        attachedW =
+        doorW =
     }
     // dwap_tiles_01_13
     tile
     {
         xy = 5,1
         DoorSound = MetalDoor
-        Facing = W
+        Facing = N
+        IsClosedState =
         Material = MetalPlates
         Material2 = Door
         Material3 = Plastic
         MaterialType = Metal_Light
-        attachedN = 
-        doorW = 
+        attachedN =
+        doorN =
     }
     // dwap_tiles_01_14
     tile
     {
         xy = 6,1
         DoorSound = MetalDoor
-        Facing = N
-        IsClosedState = 
+        Facing = W
         Material = MetalPlates
         Material2 = Door
         Material3 = Plastic
         MaterialType = Metal_Light
-        attachedN = 
-        doorN = 
+        attachedN =
     }
     // dwap_tiles_01_15
     tile
@@ -130,7 +160,105 @@ tileset
         Material2 = Door
         Material3 = Plastic
         MaterialType = Metal_Light
-        attachedW = 
-        doorN = 
+        attachedW =
+    }
+    // dwap_tiles_01_16
+    tile
+    {
+        xy = 0,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_17
+    tile
+    {
+        xy = 1,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_18
+    tile
+    {
+        xy = 2,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_19
+    tile
+    {
+        xy = 3,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_20
+    tile
+    {
+        xy = 4,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_21
+    tile
+    {
+        xy = 5,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_22
+    tile
+    {
+        xy = 6,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_23
+    tile
+    {
+        xy = 7,2
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid = 
+    }
+    // dwap_tiles_01_24
+    tile
+    {
+        xy = 0,3
+        BlocksPlacement = 
+        MaterialType = Metal
+        solid =
+    }
+    // dwap_tiles_01_25  secret locker door, closed (art: furniture_storage_02_0)
+    // open state must be id+2 (IsoDoor.java openSpriteOffset), so 26 stays empty
+    tile
+    {
+        xy = 1,3
+        DoorSound = LockerMetalLarge
+        Facing = N
+        IsClosedState =
+        Material = MetalPlates
+        Material2 = Door
+        MaterialType = Metal_Light
+        ThumpSound = ZombieThumpMetal
+        attachedN =
+        doorN =
+    }
+    // dwap_tiles_01_27  secret locker door, open
+    tile
+    {
+        xy = 3,3
+        DoorSound = LockerMetalLarge
+        Facing = N
+        Material = MetalPlates
+        Material2 = Door
+        MaterialType = Metal_Light
+        ThumpSound = ZombieThumpMetal
+        attachedW =
     }
 }

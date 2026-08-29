@@ -1,23 +1,473 @@
+-- Dev tooling: inert outside debug mode so shipping this file is safe.
+-- getDebug() is the -debug launch flag - per-launch, never set for normal
+-- players, no sandbox UI exposure
+if not getDebug() then return end
+
 -- devTools.lua
 -- Development tools for the DWAP generator system
 
 local DWAPUtils = require("DWAPUtils")
 local Reflection = require("Starlit/utils/Reflection")
 
+local DevShared = require("DWAP/devShared")
+
+-- Everything moved to devShared.lua that still has a caller in this file.
+-- Declared here, immediately after the require and before any use: a Lua local
+-- is only visible to code that follows it, so an alias added further down would
+-- leave earlier callers reading a nil global with no load-time complaint.
+local NON_LOOT_CONTAINER_TYPES = DevShared.NON_LOOT_CONTAINER_TYPES
+local roomDefKey = DevShared.roomDefKey
+local allLootTallyString = DevShared.allLootTallyString
+local buildContainerLookup = DevShared.buildContainerLookup
+local barricadeableType = DevShared.barricadeableType
+local isGarageOpening = DevShared.isGarageOpening
+local isExteriorOpening = DevShared.isExteriorOpening
+local bldTag = DevShared.bldTag
+local plumbingInfo = DevShared.plumbingInfo
+
+-- Live overlay state, displayed by the dev panel button labels
+DWAP_DevToggles = DWAP_DevToggles or { elec = false, plumbing = false, containers = false, where = false, barricades = false }
+
+-- The power system's per-object lifecycle trace is the loudest thing in a
+-- -debug log (~2800 of 2900 DWAPPowerSystem lines last run), so it ships off
+-- and gets turned on only while working on power. Errors and state changes -
+-- generator on/off, fuel, breakdowns - are never gated and always print.
+function DWAPPowerLog()
+    DWAPUtils.verbosePower = not DWAPUtils.verbosePower
+    DWAP_DevToggles.powerLog = DWAPUtils.verbosePower
+    DWAPUtils.dprint("Power system verbose logging: " .. (DWAPUtils.verbosePower and "on" or "off"))
+end
+
 -- Helper function to get table size
 local function getTableSize(tbl)
     return DWAPUtils.tableSize(tbl)
 end
 
+-- B42 chunks are 8x8 tiles
+local CHUNK_SIZE = 8
+
 -- Helper function to get chunk center coordinates
 local function getChunkCenterXY(chunk)
     local wx = Reflection.getField(chunk, "wx")
     local wy = Reflection.getField(chunk, "wy")
-    local startX = wx * 10
-    local startY = wy * 10
-    local endX = startX + 10 - 1
-    local endY = startY + 10 - 1
-    return math.floor((startX + endX) / 2), math.floor((startY + endY) / 2)
+    local half = math.floor(CHUNK_SIZE / 2)
+    return wx * CHUNK_SIZE + half, wy * CHUNK_SIZE + half
+end
+
+-- Power reaches a Euclidean disc, see IsoGenerator.isPoweringSquare
+local function distanceSquared(x1, y1, x2, y2)
+    local dx, dy = x1 - x2, y1 - y2
+    return dx * dx + dy * dy
+end
+
+-- Only used to break ties toward the middle of the building
+local function chebyshev(x1, y1, x2, y2)
+    return math.max(math.abs(x1 - x2), math.abs(y1 - y2))
+end
+
+-- Interior generators are legal and are what this mod ships, so a square only
+-- has to be walkable and dry
+local function isValidGeneratorSquare(square)
+    if not square then return false end
+    if not square:isFree(false) then return false end
+    if square:isWaterSquare() then return false end
+    return true
+end
+
+-- Mirrors IsoGenerator.touchesChunk: does the generator's range reach the chunk
+local function generatorTouchesChunk(x, y, range, wx, wy)
+    local minX = wx * CHUNK_SIZE
+    local minY = wy * CHUNK_SIZE
+    local maxX = minX + CHUNK_SIZE - 1
+    local maxY = minY + CHUNK_SIZE - 1
+    if x - range > maxX then return false end
+    if x + range < minX then return false end
+    if y - range > maxY then return false end
+    return y + range >= minY
+end
+
+-- Find IsoObjects with no sprite, which poison base-game loot fill for the
+-- WHOLE room they sit in.
+--
+-- ItemPickerJava.rollProceduralItemInternal has a forceForItems branch that
+-- walks every square of the container's RoomDef rect and reads
+-- obj.getSprite().name with no null check (ItemPickerJava.java:789). The
+-- forceForTiles branch fourteen lines below it does check - so this is a
+-- vanilla oversight, not a rule we are breaking. One spriteless object
+-- anywhere in a room NPEs the fill of every container in that room.
+--
+-- It also repeats: the NPE unwinds out of ItemPicker.checkObject before
+-- container.setExplored(true) runs, so the container stays unexplored and is
+-- retried on every chunk load. That is a flood, not a one-off.
+--
+-- Reports the objects and, more usefully, the ROOMS they poison.
+local NULLSPRITE_PROBE_TYPES = {
+    "IsoGenerator", "IsoThumpable", "IsoDoor", "IsoWindow", "IsoLightSwitch",
+    "IsoStackedWasherDryer", "IsoCombinationWasherDryer", "IsoClothingWasher",
+    "IsoRadio", "IsoTelevision", "IsoStove", "IsoFireplace", "IsoBarricade",
+    "IsoCurtain", "IsoWindowFrame", "IsoDeadBody", "IsoWorldInventoryObject",
+}
+
+local function describeNullSpriteObject(obj)
+    local classes = {}
+    for i = 1, #NULLSPRITE_PROBE_TYPES do
+        if instanceof(obj, NULLSPRITE_PROBE_TYPES[i]) then
+            classes[#classes + 1] = NULLSPRITE_PROBE_TYPES[i]
+        end
+    end
+    local name = obj.getObjectName and obj:getObjectName()
+    local container = obj.getContainer and obj:getContainer()
+    return ("%s%s%s"):format(
+        #classes > 0 and table.concat(classes, "/") or "IsoObject",
+        (name and name ~= "" and name ~= "null") and (" name=" .. tostring(name)) or "",
+        container and (" HAS CONTAINER type=" .. tostring(container:getType())) or "")
+end
+
+--- Squares to scan, shared by the null-sprite and broken-multi-tile scanners.
+--- Returns (entries, scope, probed, unstreamed) where each entry is
+--- { sq = IsoGridSquare, room = string }.
+---
+--- Default scope is every streamed room RECT in the cell, across all floors.
+--- The rect rather than room:getSquares(): on an L-shaped room the rect covers
+--- squares the room does not own, and the vanilla code reads those anyway.
+local function collectScanSquares(radius)
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return nil end
+    local out, scope = {}, nil
+    local probed, unstreamed = 0, 0
+    if radius then
+        scope = ("%d-tile box around the player, z %d..%d"):format(radius, -10, 10)
+        local px, py = pSquare:getX(), pSquare:getY()
+        for z = -10, 10 do
+            for x = px - radius, px + radius do
+                for y = py - radius, py + radius do
+                    probed = probed + 1
+                    local sq = getSquare(x, y, z)
+                    if sq then
+                        local r = sq:getRoom()
+                        out[#out + 1] = { sq = sq, room = r and (r:getName() or "?") or "(outside)" }
+                    else
+                        unstreamed = unstreamed + 1
+                    end
+                end
+            end
+        end
+    else
+        local rooms = getCell():getRoomList()
+        local roomCount = rooms and rooms:size() or 0
+        scope = ("%d streamed room rects in the cell (all floors)"):format(roomCount)
+        for i = 1, roomCount do
+            local room = rooms:get(i - 1)
+            local def = room and room.getRoomDef and room:getRoomDef()
+            if def then
+                local name = room:getName() or "?"
+                local z = def:getZ()
+                for x = def:getX(), def:getX() + def:getW() - 1 do
+                    for y = def:getY(), def:getY() + def:getH() - 1 do
+                        probed = probed + 1
+                        local sq = getSquare(x, y, z)
+                        if sq then
+                            out[#out + 1] = { sq = sq, room = name }
+                        else
+                            unstreamed = unstreamed + 1
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return out, scope, probed, unstreamed
+end
+
+local function printScanCoverage(scope, entries, probed, unstreamed)
+    print(("=== scope: %s ==="):format(scope))
+    print(("    %d squares probed, %d streamed, %d not loaded (%d%% covered)"):format(
+        probed, #entries, unstreamed,
+        probed > 0 and math.floor(#entries * 100 / probed) or 0))
+end
+
+--- Walks every streamed room in the cell, across every floor, rather than a
+--- box around the player. That is not just cheaper - it is the correct scope.
+--- The vanilla loop only ever runs for a container in a room, and only ever
+--- scans that room's RoomDef RECT at the container's z, so an object outside
+--- every room rect can never trigger it and a box misses the other floors.
+---
+--- Scanning the rect rather than room:getSquares() matters too: on an L-shaped
+--- room the rect covers squares the room does not own, and vanilla reads those
+--- anyway.
+---
+--- @param radius number optional; scan a box around the player instead, across
+---        all floors. Only useful for chasing something outside a room.
+function DWAPFindNullSprites(radius)
+    local squares, scope, probed, unstreamed = collectScanSquares(radius)
+    if not squares then
+        print("FindNullSprites: no player square")
+        return
+    end
+
+    -- "none found" over a mostly-unstreamed area is not a clean bill of health,
+    -- so the coverage is stated every time rather than left to be inferred
+    print("=== FindNullSprites ===")
+    printScanCoverage(scope, squares, probed, unstreamed)
+    local hits, poisoned, poisonedCount = 0, {}, 0
+    for i = 1, #squares do
+        local sq, room = squares[i].sq, squares[i].room
+        local objects = sq:getObjects()
+        for j = 0, objects:size() - 1 do
+            local obj = objects:get(j)
+            -- IsoWorldInventoryObject is skipped by the vanilla scan's caller,
+            -- but the forceForItems loop above reads every object on the
+            -- square regardless, so it is still a live trigger here
+            if obj and obj:getSprite() == nil then
+                hits = hits + 1
+                print(("  %d,%d,%d  [%s]  %s"):format(
+                    sq:getX(), sq:getY(), sq:getZ(), room, describeNullSpriteObject(obj)))
+                if not poisoned[room] then
+                    poisoned[room] = true
+                    poisonedCount = poisonedCount + 1
+                end
+            end
+        end
+    end
+
+    if hits == 0 then
+        print("  none in what was streamed - walk the area and re-run before")
+        print("  concluding it is clean, especially if coverage was low")
+    else
+        local names = {}
+        for room in pairs(poisoned) do names[#names + 1] = room end
+        table.sort(names)
+        print(("=== %d spriteless object(s) poisoning %d room(s): %s ==="):format(
+            hits, poisonedCount, table.concat(names, ", ")))
+        print("    Every container in those rooms fails base-game fill, on every chunk load.")
+    end
+end
+
+-- Find objects that CLAIM to be multi-square but whose sibling parts cannot be
+-- resolved - the condition behind "Failed to find all parts of a multi-tile
+-- object!" and, more importantly, behind a silent removal failure.
+--
+-- Why this matters beyond the log noise: IsoGridSquare.BurnWalls does
+--     this.RemoveTileObject(obj);
+--     n--;
+--     continue;
+-- at four sites, decrementing its loop index on the assumption the removal
+-- happened. safelyRemoveTileObjectFromSquare returns -1 without removing
+-- anything when the sibling lookup fails, so the object survives AND the
+-- bookkeeping is wrong. That part is not debug-gated: players get it silently.
+--
+-- The verdict this tool exists to produce is WHICH failure it is:
+--   * a sibling square that is not loaded  -> vanilla chunk-boundary timing,
+--     unavoidable, and nothing to do with our content
+--   * a sibling square that IS loaded but holds no matching sprite -> the map
+--     placed part of a grid, which is a content bug we can actually fix
+--   * a grid cell with no sprite at all -> the object can NEVER resolve, on
+--     any square, because vanilla's verifyObject compares against a null
+--     sprite and always fails
+--
+-- IsoObjectUtils is not Lua-exposed, so this replicates getAllMultiTileObjects
+-- (IsoObjectUtils.java) rather than calling it. One deliberate deviation:
+-- vanilla's verifyObject compares sprites by REFERENCE; this compares by name,
+-- because identity comparison on streamed objects is not safe from Lua. Sprites
+-- are interned by name, so the two agree in practice.
+
+local function probeSpriteGrid(obj)
+    local sprite = obj:getSprite()
+    local grid = obj.getSpriteGrid and obj:getSpriteGrid()
+    local sq0 = obj:getSquare()
+    if not sprite or not grid or not sq0 then
+        return false, "NO-SPRITE-OR-GRID", "object has no sprite, grid or square"
+    end
+    local ox = grid:getSpriteGridPosX(sprite)
+    local oy = grid:getSpriteGridPosY(sprite)
+    local oz = grid:getSpriteGridPosZ(sprite)
+    -- getSpriteGridPosX/Y/Z search the grid for this exact sprite INSTANCE and
+    -- return -1 when it is not there (IsoSpriteGrid). Vanilla feeds that -1
+    -- straight into its offset arithmetic unguarded; doing the same here would
+    -- shift every probed coordinate by one and invent a confident wrong
+    -- verdict, and this tool touches far more objects than vanilla's few
+    -- removal call sites ever do.
+    if ox == -1 or oy == -1 or oz == -1 then
+        return false, "GRID-POS-UNRESOLVED",
+            ("sprite %s is not in its own grid (pos %d,%d,%d)"):format(
+                tostring(sprite.getName and sprite:getName()), ox, oy, oz)
+    end
+    local unloaded, loadedNoMatch, emptyCell = 0, 0, 0
+    -- One example per failure KIND. A single example captured at the first
+    -- miss would routinely be printed next to a different kind's label, since
+    -- the label is chosen by priority across the whole grid rather than by
+    -- scan order.
+    local missOf = {}
+    for z = 0, grid:getLevels() - 1 do
+        for x = 0, grid:getWidth() - 1 do
+            for y = 0, grid:getHeight() - 1 do
+                local tx = sq0:getX() + (x - ox)
+                local ty = sq0:getY() + (y - oy)
+                local tz = sq0:getZ() + (z - oz)
+                local sq = getSquare(tx, ty, tz)
+                local testSprite = grid:getSprite(x, y, z)
+                local found = false
+                -- A nil grid cell can never be satisfied: vanilla's
+                -- verifyObject requires getSprite() == testSprite, and no
+                -- object's sprite is ever null-equal. Counted separately
+                -- because it means the object is permanently unremovable.
+                if testSprite and sq then
+                    local want = testSprite.getName and testSprite:getName()
+                    local objs = sq:getObjects()
+                    for i = 0, objs:size() - 1 do
+                        local s = objs:get(i):getSprite()
+                        if s and want and s:getName() == want then
+                            found = true
+                            break
+                        end
+                    end
+                end
+                if not found then
+                    local kind, why
+                    if not testSprite then
+                        emptyCell = emptyCell + 1
+                        kind, why = "GRID-INCOMPLETE", "grid cell has no sprite"
+                    elseif not sq then
+                        unloaded = unloaded + 1
+                        kind, why = "not-streamed", "sibling square not loaded"
+                    else
+                        loadedNoMatch = loadedNoMatch + 1
+                        kind = "PARTIAL-PLACEMENT"
+                        why = "square loaded, sprite missing: " ..
+                            tostring(testSprite.getName and testSprite:getName())
+                    end
+                    if not missOf[kind] then
+                        missOf[kind] = ("%d,%d,%d %s"):format(tx, ty, tz, why)
+                    end
+                end
+            end
+        end
+    end
+    if emptyCell == 0 and loadedNoMatch == 0 and unloaded == 0 then return true end
+    -- Worst-first: a permanently unresolvable grid outranks a mis-placed
+    -- sibling, which outranks a merely unloaded one.
+    local kind
+    if emptyCell > 0 then
+        kind = "GRID-INCOMPLETE"
+    elseif loadedNoMatch > 0 then
+        kind = "PARTIAL-PLACEMENT"
+    else
+        kind = "not-streamed"
+    end
+    return false, kind, ("%d unloaded, %d loaded-no-match, %d empty cells | e.g. %s"):format(
+        unloaded, loadedNoMatch, emptyCell, missOf[kind])
+end
+
+--- Kinds are returned explicitly rather than parsed back out of the detail
+--- prose. Deriving them from the message text collapsed "neither half
+--- resolved" to "neither" and both "no segments resolved" and the grid's own
+--- "no sprite" case to "no", which dropped every door failure out of the
+--- vanilla-vs-our-content split this tool exists to make.
+--- @return string|nil category, boolean ok, string|nil kind, string|nil detail
+local function probeMultiTile(obj)
+    if IsoDoor and IsoDoor.getDoubleDoorIndex then
+        local dd = IsoDoor.getDoubleDoorIndex(obj)
+        if dd and dd ~= -1 then
+            local a = IsoDoor.getDoubleDoorObject(obj, dd)
+            local b = IsoDoor.getDoubleDoorObject(obj, IsoDoor.getDoubleDoorPartnerIndex(dd))
+            if a or b then return "doubledoor", true end
+            return "doubledoor", false, "DOOR-UNPAIRED", "neither half resolved"
+        end
+        local gd = IsoDoor.getGarageDoorIndex(obj)
+        if gd and gd ~= -1 then
+            -- getGarageDoorNext stops once the normalised index reaches 3, so
+            -- this cannot cycle; the cap is belt-and-braces for a malformed set
+            local n, o = 0, IsoDoor.getGarageDoorFirst(obj)
+            while o and n < 16 do
+                n = n + 1
+                o = IsoDoor.getGarageDoorNext(o)
+            end
+            if n > 0 then return "garagedoor", true end
+            return "garagedoor", false, "DOOR-UNPAIRED", "no segments resolved"
+        end
+    end
+    local sc = obj.getSpriteConfig and obj:getSpriteConfig()
+    if sc and sc.isValidMultiSquare and sc:isValidMultiSquare() then
+        -- getAllMultiSquareObjects needs a Java ArrayList out-param we cannot
+        -- build from Lua, so this path is reported, not verified
+        return "spriteconfig", true, "UNVERIFIED", "multi-square SpriteConfig - NOT probed"
+    end
+    if obj.hasSpriteGrid and obj:hasSpriteGrid() then
+        local ok, kind, detail = probeSpriteGrid(obj)
+        return "spritegrid", ok, kind, detail
+    end
+    return nil
+end
+
+--- @param radius number optional box scope; default is every room rect in cell
+function DWAPFindBrokenMultiTile(radius)
+    local squares, scope, probed, unstreamed = collectScanSquares(radius)
+    if not squares then
+        print("FindBrokenMultiTile: no player square")
+        return
+    end
+    print("=== FindBrokenMultiTile ===")
+    printScanCoverage(scope, squares, probed, unstreamed)
+
+    local multi, broken = 0, 0
+    local byKind, bySprite, examples = {}, {}, {}
+    local unprobed = 0
+    for i = 1, #squares do
+        local sq, room = squares[i].sq, squares[i].room
+        local objects = sq:getObjects()
+        for j = 0, objects:size() - 1 do
+            local obj = objects:get(j)
+            local category, ok, kind, detail = probeMultiTile(obj)
+            if category then
+                multi = multi + 1
+                if kind == "UNVERIFIED" then unprobed = unprobed + 1 end
+                if not ok then
+                    broken = broken + 1
+                    local s = obj:getSprite()
+                    local name = (s and s.getName and s:getName()) or "(no sprite)"
+                    kind = kind or category
+                    byKind[kind] = (byKind[kind] or 0) + 1
+                    bySprite[name] = (bySprite[name] or 0) + 1
+                    if #examples < 15 then
+                        examples[#examples + 1] = ("  %d,%d,%d [%s] %s | %s | %s: %s"):format(
+                            sq:getX(), sq:getY(), sq:getZ(), room, name, category,
+                            kind, detail or "?")
+                    end
+                end
+            end
+        end
+    end
+
+    -- Counts are per IsoObject, and every square of an NxM grid holds its own
+    -- IsoObject that probes the whole grid from its own position. One broken
+    -- 2x2 fixture therefore reports as up to four - say so rather than let the
+    -- number read as a structure count.
+    print(("    %d multi-square object(s) seen, %d could not resolve their parts"):format(
+        multi, broken))
+    print("    (counted per square: an NxM structure contributes up to NxM)")
+    if unprobed > 0 then
+        print(("    %d had a multi-square SpriteConfig and were NOT verified"):format(unprobed))
+    end
+    for i = 1, #examples do print(examples[i]) end
+    if broken == 0 then
+        print("    nothing broken in what was streamed")
+        return
+    end
+    local kinds = {}
+    for k, v in pairs(byKind) do kinds[#kinds + 1] = ("%s=%d"):format(k, v) end
+    table.sort(kinds)
+    print("    by failure: " .. table.concat(kinds, ", "))
+    local sprites = {}
+    for k, v in pairs(bySprite) do sprites[#sprites + 1] = ("%s=%d"):format(k, v) end
+    table.sort(sprites)
+    print("    by sprite: " .. table.concat(sprites, ", "))
+    print("    PARTIAL-PLACEMENT / GRID-INCOMPLETE = a map placed part of a grid: fixable content.")
+    print("    DOOR-UNPAIRED = a double or garage door missing its partner, almost")
+    print("      always vanilla geometry - getAllMultiTileObjects checks the door")
+    print("      paths BEFORE sprite grids, so these are not our tiles.")
+    print("    GRID-POS-UNRESOLVED = sprite is not in its own grid; suspect a swapped sprite.")
+    print("    not-streamed = vanilla chunk-boundary timing, not ours.")
 end
 
 -- Simple utilities for the new fakeGenerators system
@@ -121,8 +571,13 @@ function ListNearbyGenerators()
     end
 end
 
-function FindOptimalExteriorSquaresForBuilding()
-    local pSquare = getPlayer():getCurrentSquare()
+function FindOptimalGeneratorSquaresForBuilding()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
     local building = pSquare:getBuilding()
     if not building then
         DWAPUtils.dprint("No building found")
@@ -130,194 +585,282 @@ function FindOptimalExteriorSquaresForBuilding()
     end
 
     local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
-    local squaresInBuilding = {}
+    local range = SandboxVars.GeneratorTileRange or 20
+    local rangeSq = range * range
+    local verticalRange = SandboxVars.GeneratorVerticalPowerRange or 3
 
-    -- Find all squares in the building (expanded search area)
-    for x = playerX - 50, playerX + 50 do
-        for y = playerY - 50, playerY + 50 do
-            local square = getSquare(x, y, playerZ)
-            if square then
-                local building2 = square:getBuilding()
-                if building2 and building2 == building then
-                    squaresInBuilding[#squaresInBuilding + 1] = square
+    -- Group building squares by chunk, tracking the real tile bounds of each
+    -- chunk instead of assuming the whole chunk is occupied
+    local uniqueChunks = {}
+    local chunkBounds = {}
+    local occupiedLevels = {}
+    local squareCount = 0
+    local minX, maxX, minY, maxY
+
+    local function collectLevel(z)
+        local found = 0
+        for x = playerX - 50, playerX + 50 do
+            for y = playerY - 50, playerY + 50 do
+                local square = getSquare(x, y, z)
+                if square and DWAPUtils.sameBuilding(square:getBuilding(), building) then
+                    found = found + 1
+                    local chunk = square:getChunk()
+                    local wx = Reflection.getField(chunk, "wx")
+                    local wy = Reflection.getField(chunk, "wy")
+                    local chunkKey = wx .. "_" .. wy
+
+                    local bounds = chunkBounds[chunkKey]
+                    if not bounds then
+                        uniqueChunks[chunkKey] = { chunk = chunk, wx = wx, wy = wy }
+                        bounds = {
+                            minX = x,
+                            maxX = x,
+                            minY = y,
+                            maxY = y,
+                            minZ = z,
+                            maxZ = z,
+                            squares = 0
+                        }
+                        chunkBounds[chunkKey] = bounds
+                    end
+
+                    bounds.minX = math.min(bounds.minX, x)
+                    bounds.maxX = math.max(bounds.maxX, x)
+                    bounds.minY = math.min(bounds.minY, y)
+                    bounds.maxY = math.max(bounds.maxY, y)
+                    bounds.minZ = math.min(bounds.minZ, z)
+                    bounds.maxZ = math.max(bounds.maxZ, z)
+                    bounds.squares = bounds.squares + 1
+
+                    minX = minX and math.min(minX, x) or x
+                    maxX = maxX and math.max(maxX, x) or x
+                    minY = minY and math.min(minY, y) or y
+                    maxY = maxY and math.max(maxY, y) or y
                 end
             end
         end
-    end
-
-    DWAPUtils.dprint("SquaresInBuilding " .. #squaresInBuilding)
-
-    -- Group squares by chunk and find chunk boundaries
-    local uniqueChunks = {}
-    local chunkBounds = {}
-
-    for i = 1, #squaresInBuilding do
-        local square = squaresInBuilding[i]
-        local chunk = square:getChunk()
-        local wx = Reflection.getField(chunk, "wx")
-        local wy = Reflection.getField(chunk, "wy")
-        local chunkKey = wx .. "_" .. wy
-
-        if not uniqueChunks[chunkKey] then
-            uniqueChunks[chunkKey] = {
-                chunk = chunk,
-                wx = wx,
-                wy = wy,
-                squares = {}
-            }
-            chunkBounds[chunkKey] = {
-                minX = square:getX(),
-                maxX = square:getX(),
-                minY = square:getY(),
-                maxY = square:getY()
-            }
+        if found > 0 then
+            occupiedLevels[#occupiedLevels + 1] = z
         end
-
-        table.insert(uniqueChunks[chunkKey].squares, square)
-
-        -- Update chunk bounds for building squares
-        local bounds = chunkBounds[chunkKey]
-        bounds.minX = math.min(bounds.minX, square:getX())
-        bounds.maxX = math.max(bounds.maxX, square:getX())
-        bounds.minY = math.min(bounds.minY, square:getY())
-        bounds.maxY = math.max(bounds.maxY, square:getY())
+        squareCount = squareCount + found
+        return found
     end
 
-    DWAPUtils.dprint("UniqueChunks found: " .. getTableSize(uniqueChunks))
+    -- Basements are frequently larger than the ground footprint, so walk the
+    -- z levels out from the player until two empty levels in a row
+    local zSearch = 8
+    local minLevel, maxLevel = playerZ, playerZ
+    collectLevel(playerZ)
+    local emptyLevels = 0
+    for z = playerZ + 1, playerZ + zSearch do
+        if collectLevel(z) > 0 then
+            emptyLevels = 0
+            maxLevel = z
+        else
+            emptyLevels = emptyLevels + 1
+            if emptyLevels >= 2 then break end
+        end
+    end
+    emptyLevels = 0
+    for z = playerZ - 1, playerZ - zSearch, -1 do
+        if collectLevel(z) > 0 then
+            emptyLevels = 0
+            minLevel = z
+        else
+            emptyLevels = emptyLevels + 1
+            if emptyLevels >= 2 then break end
+        end
+    end
 
-    -- Find nearest exterior square for each chunk
-    local chunkExteriorSquares = {}
+    table.sort(occupiedLevels)
+
+    local totalChunks = getTableSize(uniqueChunks)
+    DWAPUtils.dprint(("SquaresInBuilding %d across z %d..%d"):format(squareCount, minLevel, maxLevel))
+    DWAPUtils.dprint("UniqueChunks found: " .. totalChunks)
+    if totalChunks == 0 then
+        DWAPUtils.dprint("No building squares found")
+        return
+    end
 
     for chunkKey, chunkData in pairs(uniqueChunks) do
         local bounds = chunkBounds[chunkKey]
-        local nearestExterior = nil
-        local minDistance = math.huge
+        local centerX, centerY = getChunkCenterXY(chunkData.chunk)
+        DWAPUtils.dprint(("Chunk %s center %d,%d tiles %d (x %d..%d, y %d..%d, z %d..%d)"):format(
+            chunkKey, centerX, centerY, bounds.squares,
+            bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ))
+    end
 
-        -- Search around the chunk bounds to find exterior squares
-        local searchRadius = 5
-        for x = bounds.minX - searchRadius, bounds.maxX + searchRadius do
-            for y = bounds.minY - searchRadius, bounds.maxY + searchRadius do
-                local square = getSquare(x, y, playerZ)
-                if square then
-                    local squareBuilding = square:getBuilding()
-                    -- Check if this is an exterior square (no building or different building)
-                    if not squareBuilding or squareBuilding ~= building then
-                        -- Calculate distance to chunk center
-                        local chunkCenterX, chunkCenterY = getChunkCenterXY(chunkData.chunk)
-                        local distance = math.sqrt((x - chunkCenterX) ^ 2 + (y - chunkCenterY) ^ 2)
+    -- A candidate powers a chunk only when every building tile in that chunk is
+    -- inside the generator's disc, so test the corners of the chunk's tile bounds
+    local function coversChunk(candidateX, candidateY, candidateZ, bounds)
+        if math.abs(candidateZ - bounds.minZ) > verticalRange then return false end
+        if math.abs(candidateZ - bounds.maxZ) > verticalRange then return false end
+        if distanceSquared(candidateX, candidateY, bounds.minX, bounds.minY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.minX, bounds.maxY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.maxX, bounds.minY) > rangeSq then return false end
+        if distanceSquared(candidateX, candidateY, bounds.maxX, bounds.maxY) > rangeSq then return false end
+        return true
+    end
 
-                        if distance < minDistance then
-                            minDistance = distance
-                            nearestExterior = { x = x, y = y, z = playerZ, distance = distance }
+    -- Collect every valid square within reach of the building, on each level the
+    -- building occupies, as a set cover candidate
+    DWAPUtils.dprint(("Scanning candidates on %d levels with range %d, vertical %d"):format(
+        #occupiedLevels, range, verticalRange))
+
+    local candidates = {}
+    local candidateKeys = {}
+
+    for i = 1, #occupiedLevels do
+        local z = occupiedLevels[i]
+        for x = minX - range, maxX + range do
+            for y = minY - range, maxY + range do
+                local key = x .. "_" .. y .. "_" .. z
+                if not candidates[key] then
+                    local square = getSquare(x, y, z)
+                    if isValidGeneratorSquare(square) then
+                        local coveredChunks = {}
+                        local chunkCount = 0
+                        for chunkKey, _ in pairs(uniqueChunks) do
+                            if coversChunk(x, y, z, chunkBounds[chunkKey]) then
+                                coveredChunks[chunkKey] = true
+                                chunkCount = chunkCount + 1
+                            end
+                        end
+                        -- squares that cannot power anything are not candidates
+                        if chunkCount > 0 then
+                            candidates[key] = {
+                                x = x,
+                                y = y,
+                                z = z,
+                                coveredChunks = coveredChunks,
+                                chunkCount = chunkCount
+                            }
+                            candidateKeys[#candidateKeys + 1] = key
                         end
                     end
                 end
             end
         end
-
-        if nearestExterior then
-            chunkExteriorSquares[chunkKey] = nearestExterior
-            DWAPUtils.dprint(("Chunk %s nearest exterior: %d,%d (distance: %.2f)"):format(
-                chunkKey, nearestExterior.x, nearestExterior.y, nearestExterior.distance))
-        else
-            DWAPUtils.dprint(("No exterior square found for chunk %s"):format(chunkKey))
-        end
     end
 
-    -- Now optimize to find minimal set of exterior squares that cover maximum chunks
-    local exteriorCoverage = {}
-    local coverageRadius = 25 -- Generator power range
+    table.sort(candidateKeys)
+    DWAPUtils.dprint("Candidate squares: " .. #candidateKeys)
 
-    -- For each potential exterior square, calculate which chunks it can cover
-    for chunkKey, exteriorSquare in pairs(chunkExteriorSquares) do
-        local exteriorKey = exteriorSquare.x .. "_" .. exteriorSquare.y
+    -- Select the minimal set greedily; ties go to the candidate nearest the
+    -- building center, then to the lowest key, so results are reproducible
+    local centerX = math.floor((minX + maxX) / 2)
+    local centerY = math.floor((minY + maxY) / 2)
 
-        if not exteriorCoverage[exteriorKey] then
-            exteriorCoverage[exteriorKey] = {
-                x = exteriorSquare.x,
-                y = exteriorSquare.y,
-                z = exteriorSquare.z,
-                coveredChunks = {},
-                chunkCount = 0
-            }
-        end
-
-        -- Check which chunks this exterior square can cover
-        for otherChunkKey, otherChunkData in pairs(uniqueChunks) do
-            local chunkCenterX, chunkCenterY = getChunkCenterXY(otherChunkData.chunk)
-            local distance = math.sqrt((exteriorSquare.x - chunkCenterX) ^ 2 + (exteriorSquare.y - chunkCenterY) ^ 2)
-
-            if distance <= coverageRadius then
-                if not exteriorCoverage[exteriorKey].coveredChunks[otherChunkKey] then
-                    exteriorCoverage[exteriorKey].coveredChunks[otherChunkKey] = true
-                    exteriorCoverage[exteriorKey].chunkCount = exteriorCoverage[exteriorKey].chunkCount + 1
-                end
-            end
-        end
-    end
-
-    -- Select optimal exterior squares using greedy algorithm
-    local selectedExteriors = {}
+    local selectedSquares = {}
     local coveredChunks = {}
-    local totalChunks = getTableSize(uniqueChunks)
+    local coveredCount = 0
+    local usedKeys = {}
 
-    while getTableSize(coveredChunks) < totalChunks do
-        local bestExterior = nil
-        local bestCoverage = 0
-        local bestKey = nil
+    while coveredCount < totalChunks do
+        local bestSquare, bestKey = nil, nil
+        local bestCoverage, bestDistance = 0, math.huge
 
-        -- Find exterior square that covers the most uncovered chunks
-        for exteriorKey, coverage in pairs(exteriorCoverage) do
-            local newCoverage = 0
-            for chunkKey, _ in pairs(coverage.coveredChunks) do
-                if not coveredChunks[chunkKey] then
-                    newCoverage = newCoverage + 1
+        for i = 1, #candidateKeys do
+            local key = candidateKeys[i]
+            if not usedKeys[key] then
+                local candidate = candidates[key]
+                local newCoverage = 0
+                for chunkKey, _ in pairs(candidate.coveredChunks) do
+                    if not coveredChunks[chunkKey] then
+                        newCoverage = newCoverage + 1
+                    end
                 end
-            end
 
-            if newCoverage > bestCoverage then
-                bestCoverage = newCoverage
-                bestExterior = coverage
-                bestKey = exteriorKey
+                if newCoverage > 0 then
+                    local distance = chebyshev(candidate.x, candidate.y, centerX, centerY)
+                    if newCoverage > bestCoverage or (newCoverage == bestCoverage and distance < bestDistance) then
+                        bestSquare = candidate
+                        bestKey = key
+                        bestCoverage = newCoverage
+                        bestDistance = distance
+                    end
+                end
             end
         end
 
-        if bestExterior and bestCoverage > 0 then
-            table.insert(selectedExteriors, bestExterior)
-
-            -- Mark chunks as covered
-            for chunkKey, _ in pairs(bestExterior.coveredChunks) do
-                coveredChunks[chunkKey] = true
-            end
-
-            -- Remove this exterior from consideration
-            if bestKey then
-                exteriorCoverage[bestKey] = nil
-            end
-
-            DWAPUtils.dprint(("Selected exterior %d,%d covering %d chunks"):format(
-                bestExterior.x, bestExterior.y, bestCoverage))
-        else
+        if not bestSquare then
             -- No more coverage possible, break to avoid infinite loop
             break
         end
+
+        usedKeys[bestKey] = true
+        table.insert(selectedSquares, bestSquare)
+
+        for chunkKey, _ in pairs(bestSquare.coveredChunks) do
+            if not coveredChunks[chunkKey] then
+                coveredChunks[chunkKey] = true
+                coveredCount = coveredCount + 1
+            end
+        end
+
+        DWAPUtils.dprint(("Selected square %d,%d,%d covering %d new chunks"):format(
+            bestSquare.x, bestSquare.y, bestSquare.z, bestCoverage))
     end
 
-    DWAPUtils.dprint(("Optimal solution: %d exterior squares covering %d/%d chunks"):format(
-        #selectedExteriors, getTableSize(coveredChunks), totalChunks))
+    DWAPUtils.dprint(("Optimal solution: %d generator squares covering %d/%d chunks"):format(
+        #selectedSquares, coveredCount, totalChunks))
 
-    -- Optional: Add generator positions for testing
-    for i = 1, #selectedExteriors do
-        local exterior = selectedExteriors[i]
-        local square = getSquare(exterior.x, exterior.y, exterior.z)
-        if square then
-            local chunk = square:getChunk()
-            chunk:addGeneratorPos(exterior.x, exterior.y, exterior.z)
-            DWAPUtils.dprint(("Added generator at %d,%d,%d"):format(exterior.x, exterior.y, exterior.z))
+    for chunkKey, _ in pairs(uniqueChunks) do
+        if not coveredChunks[chunkKey] then
+            DWAPUtils.dprint(("No candidate square can fully power chunk %s"):format(chunkKey))
         end
     end
 
-    return selectedExteriors
+    return selectedSquares
+end
+
+-- Drop the invisible generators into the world so a placement can be tested.
+-- haveElectricity() asks the target square's own chunk, so the position has to
+-- be registered with every chunk it touches, like IsoGenerator does
+function ApplyGeneratorPositions(positions)
+    if not positions then
+        DWAPUtils.dprint("No generator positions to apply")
+        return 0
+    end
+
+    local cell = getCell()
+    local range = SandboxVars.GeneratorTileRange or 20
+    local chunkRange = math.floor(range / CHUNK_SIZE) + 1
+    local applied = 0
+
+    for i = 1, #positions do
+        local pos = positions[i]
+        local square = getSquare(pos.x, pos.y, pos.z)
+        if square then
+            local originChunk = square:getChunk()
+            if originChunk then
+                local wx = Reflection.getField(originChunk, "wx")
+                local wy = Reflection.getField(originChunk, "wy")
+                local touched = 0
+                for dy = -chunkRange, chunkRange do
+                    for dx = -chunkRange, chunkRange do
+                        if generatorTouchesChunk(pos.x, pos.y, range, wx + dx, wy + dy) then
+                            local chunk = cell:getChunk(wx + dx, wy + dy)
+                            if chunk then
+                                chunk:addGeneratorPos(pos.x, pos.y, pos.z)
+                                touched = touched + 1
+                            end
+                        end
+                    end
+                end
+                applied = applied + 1
+                DWAPUtils.dprint(("Added generator at %d,%d,%d in %d chunks"):format(
+                    pos.x, pos.y, pos.z, touched))
+            end
+        else
+            DWAPUtils.dprint(("Square not loaded for generator at %d,%d,%d"):format(pos.x, pos.y, pos.z))
+        end
+    end
+
+    DWAPUtils.dprint("Visualization only: these positions have no IsoGenerator, so " ..
+        "checkForMissingGenerators drops them on the next chunk load")
+
+    return applied
 end
 
 -- Config migration utilities
@@ -336,27 +879,26 @@ function GenerateOptimalPositionsForBase(baseName, configFileName)
         DWAPUtils.dprint("Generator " ..
             i .. " - Controls at: " .. gen.controls.x .. "," .. gen.controls.y .. "," .. gen.controls.z)
 
-        if gen.chunks then
-            DWAPUtils.dprint("Original chunks count: " .. #gen.chunks)
-
-            -- Calculate building center from chunks
+        -- Aim the operator at the middle of what the config already powers: the
+        -- current generator positions, falling back to the control panel
+        local centerX, centerY = gen.controls.x, gen.controls.y
+        if gen.fakeGenerators and #gen.fakeGenerators > 0 then
+            DWAPUtils.dprint("Current fakeGenerators count: " .. #gen.fakeGenerators)
             local totalX, totalY = 0, 0
-            for j = 1, #gen.chunks do
-                local worldX = gen.chunks[j][1] * 10 + 5
-                local worldY = gen.chunks[j][2] * 10 + 5
-                totalX = totalX + worldX
-                totalY = totalY + worldY
+            for j = 1, #gen.fakeGenerators do
+                totalX = totalX + gen.fakeGenerators[j].x
+                totalY = totalY + gen.fakeGenerators[j].y
             end
-            local centerX = math.floor(totalX / #gen.chunks)
-            local centerY = math.floor(totalY / #gen.chunks)
-
-            DWAPUtils.dprint("Building center: " .. centerX .. "," .. centerY)
-            DWAPUtils.dprint("To get optimal positions:")
-            DWAPUtils.dprint("1. Stand inside the building near " .. centerX .. "," .. centerY .. "," .. gen.controls.z)
-            DWAPUtils.dprint("2. Run FindOptimalExteriorSquaresForBuilding()")
-            DWAPUtils.dprint("3. Copy the returned positions to the config")
-            DWAPUtils.dprint("")
+            centerX = math.floor(totalX / #gen.fakeGenerators)
+            centerY = math.floor(totalY / #gen.fakeGenerators)
         end
+
+        DWAPUtils.dprint("Building center: " .. centerX .. "," .. centerY)
+        DWAPUtils.dprint("To get optimal positions:")
+        DWAPUtils.dprint("1. Stand inside the building near " .. centerX .. "," .. centerY .. "," .. gen.controls.z)
+        DWAPUtils.dprint("2. Run FindOptimalGeneratorSquaresForBuilding()")
+        DWAPUtils.dprint("3. Copy the returned positions to the config")
+        DWAPUtils.dprint("")
     end
 
     return config
@@ -386,13 +928,16 @@ function AutoMigrateConfigAtPlayerPosition(baseName, configFileName)
     end
 
     -- Generate optimal positions
-    local optimalPositions = FindOptimalExteriorSquaresForBuilding()
+    local optimalPositions = FindOptimalGeneratorSquaresForBuilding()
     if not optimalPositions or #optimalPositions == 0 then
         DWAPUtils.dprint("No optimal positions found")
         return
     end
 
     DWAPUtils.dprint("Found " .. #optimalPositions .. " optimal positions")
+
+    -- The finder no longer places anything, so place them here for testing
+    ApplyGeneratorPositions(optimalPositions)
 
     -- Print simple fakeGenerators format
     DWAPUtils.dprint("=== FAKE GENERATORS CONFIG ===")
@@ -410,20 +955,21 @@ end
 local function testSquareForGenerator(square)
     if not square then return false end
     local x, y, z = square:getX(), square:getY(), square:getZ()
-    local interval = SandboxVars.GeneratorVerticalPowerRange or 1
-    local zMin = z - interval
-    local zMax = z + interval
+    local interval = SandboxVars.GeneratorVerticalPowerRange or 3
 
-    for i = zMin, zMax do
+    for i = z - interval, z + interval do
         local testSquare = getSquare(x, y, i)
         if testSquare then
-            local objects = square:getObjects()
+            local objects = testSquare:getObjects()
             if objects then
                 local size = objects:size() - 1
                 for j = size, 0, -1 do
                     local object = objects:get(j)
                     if instanceof(object, "IsoGenerator") or object:getSpriteName() == "dwap_tiles_01_1" then
-                        return true
+                        -- let the game decide whether that generator reaches here
+                        if IsoGenerator.isPoweringSquare(x, y, i, x, y, z) then
+                            return true
+                        end
                     end
                 end
             end
@@ -563,8 +1109,10 @@ function ShowElec(index)
         end
 
         Events.OnTick.Add(elecTick)
+        DWAP_DevToggles.elec = true
     else
         Events.OnTick.Remove(elecTick)
+        DWAP_DevToggles.elec = false
         currentGeneratorLookup = nil
         DWAPUtils.dprint("Electricity visualization disabled")
         -- Clear highlights by calling the visualization with radius 0
@@ -705,13 +1253,33 @@ function CheckTargetSquare()
     end
 end
 
--- After a teleport, lightsOn can "succeed" before the destination's rooms are
--- streamed in, flipping 0 switches. Poll until the building's rooms actually
--- have light switches in the cell's room list, then light it up.
-local autoLightsTicks = 0
+-- After a teleport (or walking into a building) the rooms stream in over
+-- many ticks. A single early lightsOn only catches whatever was loaded at
+-- that instant, so keep flipping every time the building's light-switch
+-- count grows and stop only once it has been stable for a second.
+-- Counting SWITCHES rather than rooms matters: a switch streaming into a
+-- room that was already counted forces that room's def lightsActive false
+-- in its constructor when its square has no power yet (see
+-- DWAPUtils.forceSwitchOn), which is how a room ends up switch-on but dark.
+-- The room count would not move for that, so no repair pass would run.
+-- It never stops while the toggle is on, either: a wing you first walk into
+-- an hour later streams its switches in then, and the old fixed 600-tick
+-- window had long since given up. Once a building settles the watcher drops
+-- to a slow poll instead of quitting.
+local AUTOLIGHTS_SETTLED_TICKS = 60 -- stable ticks before easing off
+local AUTOLIGHTS_IDLE_POLL = 30     -- ticks between checks after that
+-- Hard stop on re-asserts for one building. Without a timeout a watcher that
+-- keeps seeing the count move (or keeps hitting an error) re-fires forever;
+-- that is how the 2026-08-06 log flood happened. Legitimate settling takes a
+-- handful of passes, so anything past this is a fault, not streaming.
+local AUTOLIGHTS_MAX_PASSES = 25
+local autoLightsLastCount = 0
+local autoLightsStableTicks = 0
+local autoLightsIdleCountdown = 0
+local autoLightsPasses = 0
 local function autoLightsAfterTeleport()
-    autoLightsTicks = autoLightsTicks + 1
-    if autoLightsTicks > 600 then
+    -- the toggle owns the watcher's lifetime now that it has no timeout
+    if not DWAP_AutoLightsEnabled then
         Events.OnTick.Remove(autoLightsAfterTeleport)
         return
     end
@@ -719,24 +1287,165 @@ local function autoLightsAfterTeleport()
     local square = player and player:getCurrentSquare()
     if not square then return end
     local building = square:getBuilding()
-    if not building then return end
+    if not building then
+        -- stepping outside clears the tally so coming back re-asserts
+        autoLightsLastCount = 0
+        autoLightsStableTicks = 0
+        return
+    end
+    if autoLightsStableTicks >= AUTOLIGHTS_SETTLED_TICKS then
+        autoLightsIdleCountdown = autoLightsIdleCountdown - 1
+        if autoLightsIdleCountdown > 0 then return end
+        autoLightsIdleCountdown = AUTOLIGHTS_IDLE_POLL
+    end
     local rooms = getCell():getRoomList()
-    local switchRooms = 0
+    local switchCount = 0
     for i = 1, rooms:size() do
         local room = rooms:get(i - 1)
-        if room:getBuilding() == building and room:getLightSwitches():size() > 0 then
-            switchRooms = switchRooms + 1
+        if DWAPUtils.sameBuilding(room:getBuilding(), building) then
+            switchCount = switchCount + room:getLightSwitches():size()
         end
     end
-    if switchRooms == 0 then return end
-    Events.OnTick.Remove(autoLightsAfterTeleport)
-    DWAPUtils.lightsOn(square, building)
+    if switchCount == 0 then return end
+    -- any CHANGE, not just growth: unloading a wing drops the count, and the
+    -- switches rebuilt on the way back in land on the old total, which a
+    -- growth-only test would sail past - and those rebuilt switches are
+    -- exactly the ones that force their room's def dark
+    if switchCount ~= autoLightsLastCount then
+        autoLightsLastCount = switchCount
+        autoLightsStableTicks = 0
+        autoLightsPasses = autoLightsPasses + 1
+        if autoLightsPasses > AUTOLIGHTS_MAX_PASSES then
+            DWAPUtils.dprint(("AutoLights: %d re-asserts without settling, standing down for this building"):format(
+                autoLightsPasses))
+            Events.OnTick.Remove(autoLightsAfterTeleport)
+            return
+        end
+        DWAPUtils.lightsOn(square, building)
+        return
+    end
+    if autoLightsStableTicks < AUTOLIGHTS_SETTLED_TICKS then
+        autoLightsStableTicks = autoLightsStableTicks + 1
+    end
 end
 
 function startAutoLightsAfterTeleport()
-    autoLightsTicks = 0
+    autoLightsLastCount = 0
+    autoLightsStableTicks = 0
+    autoLightsIdleCountdown = 0
+    -- a new building gets a fresh pass budget; the cap is per building, not
+    -- for the lifetime of the session
+    autoLightsPasses = 0
     Events.OnTick.Remove(autoLightsAfterTeleport)
     Events.OnTick.Add(autoLightsAfterTeleport)
+end
+
+-- Where am I: sticky readout of coords, room name, and building ID pinned
+-- above the player. DWAPWhere() toggles it on/off; the text refreshes
+-- whenever you cross onto a new square
+local whereShowing = false
+local whereLastKey = nil
+local whereLines = {}
+
+-- Build the where-readout lines for a square. Shared by the person overlay
+-- and the dev panel so both always show the same data the same way
+function DWAPWhereLines(square)
+    local room = square:getRoom()
+    local building = square:getBuilding()
+    -- BuildingDef ID is the map-stable one (cellX,cellY#index packed
+    -- long); IsoBuilding:getID() is only a per-session streaming counter
+    local bldStr = "bld: none"
+    if building then
+        local def = building.getDef and building:getDef()
+        local defId = def and def.getID and def:getID()
+        if defId then
+            local hi = math.floor(defId / 4294967296)
+            local index = defId % 4294967296
+            local cellX = hi % 65536
+            local cellY = math.floor(hi / 65536)
+            bldStr = ("bld: %d,%d#%d (session %d)"):format(cellX, cellY, index, building:getID())
+        else
+            bldStr = "bld: session " .. tostring(building:getID())
+        end
+    end
+    return {
+        ("%d,%d,%d"):format(square:getX(), square:getY(), square:getZ()),
+        "room: " .. (room and room:getName() or "outside"),
+        bldStr,
+    }
+end
+
+-- File-local, registered on the line below its definition: the overlay holds a
+-- direct reference to the function, so nothing ever needs to resolve it by name.
+local function whereDraw()
+    if not whereShowing then return end
+    local player = getPlayer()
+    local square = player and player:getCurrentSquare()
+    if not square then return end
+    local key = square:getX() .. "," .. square:getY() .. "," .. square:getZ()
+    if key ~= whereLastKey then
+        whereLastKey = key
+        whereLines = DWAPWhereLines(square)
+    end
+    local playerNum = player:getPlayerNum()
+    local sx = isoToScreenX(playerNum, player:getX(), player:getY(), player:getZ())
+    local sy = isoToScreenY(playerNum, player:getX(), player:getY(), player:getZ())
+    local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    -- stack upward so the bottom line stays just above the head
+    local baseY = sy - 110 - (#whereLines - 1) * lineH
+    for i = 1, #whereLines do
+        local ly = baseY + (i - 1) * lineH
+        tm:DrawStringCentre(UIFont.Small, sx + 1, ly + 1, whereLines[i], 0, 0, 0, 0.8)
+        tm:DrawStringCentre(UIFont.Small, sx, ly, whereLines[i], 1, 1, 1, 1)
+    end
+end
+DevShared.addOverlayDraw("where", whereDraw, 10)
+
+function DWAPWhere()
+    whereShowing = not whereShowing
+    DWAP_DevToggles.where = whereShowing
+    if whereShowing then
+        whereLastKey = nil
+        ensureDevOverlay()
+        DWAPUtils.dprint("DWAPWhere: on")
+    else
+        DWAPUtils.dprint("DWAPWhere: off")
+    end
+end
+
+-- Noclip + fast-move off a staircase can wedge the player in a persistent
+-- falling state (fractional z, falling flags) that even survives saves.
+-- teleportTo doesn't clear any of it, so DWAPGoto does explicitly
+local function resetFallState(player)
+    if player.setbFalling then player:setbFalling(false) end
+    if player.setFallTime then player:setFallTime(0) end
+    if player.setLastFallSpeed then player:setLastFallSpeed(0) end
+end
+
+-- Teleporting into a not-yet-streamed area leaves the player without a
+-- square at the target z, and the fall/snap logic can dump them at ground
+-- level before the destination chunk arrives - basements lose their z.
+-- Poll until the target square exists, then re-assert the position
+local gotoTarget = nil
+local gotoTicks = 0
+local function reassertGoto()
+    gotoTicks = gotoTicks + 1
+    local player = getPlayer()
+    if not player or not gotoTarget or gotoTicks > 300 then
+        Events.OnTick.Remove(reassertGoto)
+        return
+    end
+    local t = gotoTarget
+    if getSquare(t.x, t.y, t.z) then
+        if player:getCurrentSquare() == nil or math.floor(player:getZ()) ~= t.z then
+            player:teleportTo(t.x, t.y, t.z)
+        end
+        resetFallState(player)
+        Events.OnTick.Remove(reassertGoto)
+        gotoTarget = nil
+    end
 end
 
 function DWAPGoto(index)
@@ -786,6 +1495,12 @@ function DWAPGoto(index)
         end
     end
 
+    resetFallState(player)
+    gotoTarget = { x = tonumber(x), y = tonumber(y), z = tonumber(z) }
+    gotoTicks = 0
+    Events.OnTick.Remove(reassertGoto)
+    Events.OnTick.Add(reassertGoto)
+
     local dest = tostring(index)
     if config and config.doorKeys and config.doorKeys.name then
         dest = config.doorKeys.name
@@ -795,6 +1510,38 @@ function DWAPGoto(index)
     if DWAP_AutoLightsEnabled then
         startAutoLightsAfterTeleport()
     end
+end
+
+-- Resolve a config's baseRooms anchors to the set of room keys they name.
+-- Anchors are squares, matching the baseBuildings convention: session IDs are
+-- ephemeral and def indexes churn on re-export, but a square inside the room
+-- survives both, and survives the room being renamed.
+-- Returns nil when the config declares no baseRooms, which means "no room
+-- filter" - every building in the config keeps its whole-footprint behaviour.
+local function baseRoomKeys(config, problems)
+    if not config.baseRooms or #config.baseRooms == 0 then return nil end
+    local keys, n = {}, 0
+    for i = 1, #config.baseRooms do
+        local a = config.baseRooms[i]
+        local sq = a and a.x and getSquare(a.x, a.y, math.floor(a.z or 0))
+        local room = sq and sq:getRoom()
+        local key = room and roomDefKey(room)
+        if key then
+            if not keys[key] then
+                keys[key] = true
+                n = n + 1
+            end
+        elseif problems then
+            problems[#problems + 1] = ("baseRooms anchor %d at %s,%s,%s: %s"):format(
+                i, tostring(a and a.x), tostring(a and a.y), tostring(a and a.z),
+                not sq and "square not loaded" or
+                    (not room and "square is not in a room" or "room has no def"))
+        end
+    end
+    -- Every anchor failing to resolve would silently widen the pass back to the
+    -- whole building, which is exactly the noise baseRooms exists to remove.
+    -- Report an empty set instead so the caller can say so.
+    return keys, n
 end
 
 local tlc
@@ -830,14 +1577,35 @@ function TestLootConfig(index, startFrom, retainedConfig)
     local lootEntries = config.loot
     local totalEntries = #lootEntries
 
+    -- A wiped table still runs: the baseBuildings coverage pass below is what
+    -- produces the unclaimed-container menu, and that menu is the whole point
+    -- of auditing a config you have just emptied. The entry loop simply does
+    -- nothing when there are no entries.
     if totalEntries == 0 then
-        DWAPUtils.dprint("No loot entries found in config " .. index)
-        return
+        DWAPUtils.dprint("No loot entries in config " .. index .. " - running coverage only")
     end
 
     local configName = "Config " .. index
     if config.doorKeys and config.doorKeys.name then
         configName = config.doorKeys.name
+    end
+
+    -- tile-key sets, always keyed on the integer z (slot/stack carry the
+    -- vertical): allTileKeys marks tiles with any entry (coverage check);
+    -- baseTileKeys marks tiles with a bottom entry (pairPresent for upper
+    -- resolution)
+    local allTileKeys = {}
+    local baseTileKeys = {}
+    for i = 1, totalEntries do
+        local e = lootEntries[i]
+        if e and e.coords then
+            local key = DWAPUtils.hashCoords(e.coords.x, e.coords.y, math.floor(e.coords.z))
+            allTileKeys[key] = true
+            local isUpper = e.slot == "upper" or (e.coords.z % 1) ~= 0
+            if not isUpper and not e.stack and e.slot ~= "freezer" then
+                baseTileKeys[key] = true
+            end
+        end
     end
 
     DWAPUtils.dprint("=== TESTING LOOT CONFIG: " .. configName .. " ===")
@@ -863,6 +1631,12 @@ function TestLootConfig(index, startFrom, retainedConfig)
         -- If retainedConfig is provided, use its coordsHashes
         coordsHashes = retainedConfig.coordsHashes
     end
+    local containerDetails = retainedConfig.containerDetails or {}
+    local legacyHalfZ = 0
+    -- Fill verification is stamp-based by default (works with base-game loot
+    -- on or off). fillThreshold is an optional EXTRA check for loot-off
+    -- worlds: 0 = fail empty containers, >0 = fail below that fill percent
+    local fillThreshold = retainedConfig.fillThreshold
     local lastProgressPrint = 0
     if retainedConfig.lastProgressPrint then
         -- If retainedConfig is provided, use its lastProgressPrint
@@ -887,9 +1661,15 @@ function TestLootConfig(index, startFrom, retainedConfig)
         -- Check if entry exists (not nil) and process it
         if entry and entry.coords then
             local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
+            local isUpperContainer = entry.slot == "upper" or (z % 1) ~= 0
+            if (z % 1) ~= 0 then
+                legacyHalfZ = legacyHalfZ + 1
+            end
+            local member = entry.stack or (isUpperContainer and "upper") or entry.slot or "base"
 
-            -- Check for duplicate coordinates using hash function
-            local coordsHash = DWAPUtils.hashCoords(x, y, z)
+            -- Duplicates are per tile AND vertical member: a bottom and an
+            -- upper entry sharing a tile are legitimate neighbors
+            local coordsHash = tostring(DWAPUtils.hashCoords(x, y, math.floor(z))) .. ":" .. tostring(member)
             if coordsHashes[coordsHash] then
                 DWAPUtils.dprint("Entry " ..
                     i ..
@@ -907,68 +1687,120 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     x ..
                     "," ..
                     y .. "," .. z .. ": Duplicate coordinates (first seen at entry " .. coordsHashes[coordsHash] .. ")")
-                break
+                -- keep going: the container just gets tested twice
             else
                 coordsHashes[coordsHash] = i
             end
 
-            -- Check if square exists, teleport if not
+            -- A missing square in an otherwise-loaded area means the coord
+            -- points at empty air (typo) or an unspawned basement/building -
+            -- record it and keep testing the remaining entries
             local square = getSquare(x, y, math.floor(z))
             if not square then
                 DWAPUtils.dprint("Square not found at " ..
                     x .. "," .. y .. "," .. math.floor(z) .. " - FAILED")
                 table.insert(failedContainers,
-                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Square not found")
-                break
+                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Square not found (bad z or unspawned area)")
             end
+            if square then
 
-            -- Find container at coordinates (handle upper containers with +0.5 z)
-            local container = nil
-            local isUpperContainer = (z % 1) ~= 0 -- Check if z has decimal part
-
-            local objects = square:getObjects()
-            if objects then
-                for j = 0, objects:size() - 1 do
-                    local obj = objects:get(j)
-                    if obj and obj:getContainer() then
-                        local objContainer = obj:getContainer()
-                        if isUpperContainer then
-                            -- For upper containers, check if object has "High" position or renderYOffset
-                            if objContainer:getContainerPosition() == "High" or
-                                (obj:getRenderYOffset() and obj:getRenderYOffset() > 32) then
-                                container = objContainer
-                                break
-                            end
-                        else
-                            -- For lower containers, check for normal position
-                            if objContainer:getContainerPosition() ~= "High" and
-                                (not obj:getRenderYOffset() or obj:getRenderYOffset() == 0) then
-                                container = objContainer
-                                break
-                            end
-                        end
-                    end
-                end
+            -- Resolve through the shared source of truth (same logic the
+            -- loot fill uses): stack ordinal > flagged upper > order fallbacks
+            local pairPresent = false
+            if isUpperContainer then
+                pairPresent = baseTileKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
             end
+            local container = DWAPUtils.resolveLootContainer(square, {
+                upper = isUpperContainer,
+                stack = entry.stack,
+                freezer = entry.slot == "freezer",
+                pairPresent = pairPresent,
+            })
 
             if not container then
+                -- List what IS on the square so upper/lower mismatches (High /
+                -- overhead / renderYOffset conventions) are diagnosable from
+                -- the report without revisiting in-game
+                local present = {}
+                local squareContainers = DWAPUtils.getSquareContainers(square)
+                for j = 1, #squareContainers do
+                    local sc = squareContainers[j]
+                    present[#present + 1] = tostring(sc.container:getType()) ..
+                        "(pos=" .. tostring(sc.container:getContainerPosition()) ..
+                        ",yoff=" .. tostring(sc.object:getRenderYOffset()) ..
+                        (sc.isHigh and ",HIGH" or "") .. ")"
+                end
+                local presentStr = #present > 0 and table.concat(present, " ") or "no containers on square"
                 DWAPUtils.dprint("Entry " ..
                     i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container not found - FAILED")
                 table.insert(failedContainers,
-                    "Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. ": Container not found")
+                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Container not found; square has: " .. presentStr)
                 -- break
             else
+                -- Record what the container is and where it lives, for the
+                -- balance audit (detached sheds report their own room name).
+                -- The entry's own dist/special/level rides along: pairing what
+                -- was authored with the room and container type it actually
+                -- landed in is the only place those two facts meet, and it is
+                -- what a generator needs to learn "canned food goes in a
+                -- kitchen counter, not a warehouse shelf"
+                local room = square:getRoom()
+                table.insert(containerDetails, {
+                    entry = i,
+                    x = x, y = y, z = z,
+                    containerType = container:getType(),
+                    room = room and room:getName() or "outside",
+                    dist = entry.dist,
+                    special = entry.special,
+                    level = entry.level,
+                })
+
                 -- Test if container is 80% full
                 local capacity = container:getCapacity()
                 local usedCapacity = container:getCapacityWeight()
                 local fillPercentage = capacity > 0 and (usedCapacity / capacity) * 100 or 0
 
-                if not entry.special and fillPercentage < 80 then
-                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
-                        string.format("%.1f", fillPercentage) .. "% full - FAILED")
+                -- Primary check: the DWAP fill stamp on the parent object,
+                -- valid whether base-game loot is on or off
+                local stampState = nil
+                local parentObj = container:getParent()
+                if parentObj then
+                    local stamps = parentObj:getModData().DWAPLoot
+                    if stamps then stampState = stamps[tostring(member)] end
+                end
+                if not stampState then
+                    -- v2: every non-special container fills, so a missing stamp is
+                    -- a real not-filled failure.
+                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        " - no DWAP fill stamp - FAILED")
                     table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
-                    -- break
+                        ": Not filled (no DWAP stamp)")
+                elseif not entry.special and (stampState == "added" or stampState == "filled")
+                    and container:getItems():size() == 0 then
+                    -- v2: additive ("added") makes no fill-% guarantee, so it is
+                    -- exempt from the threshold below - but a container that
+                    -- stamped ("added" or "filled") yet holds ZERO items means the
+                    -- FLOOR never landed. That is a real failure regardless of the
+                    -- fill-% threshold.
+                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        " - stamped " .. tostring(stampState) .. " but empty - FAILED")
+                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        ": Empty despite stamp (floor did not land)")
+                elseif stampState ~= "disabled" and stampState ~= "added" and fillThreshold and not entry.special then
+                    if fillThreshold <= 0 then
+                        if container:getItems():size() == 0 then
+                            DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                                " - Container empty - FAILED")
+                            table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                                ": Empty")
+                        end
+                    elseif fillPercentage < fillThreshold then
+                        DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
+                            string.format("%.1f", fillPercentage) .. "% full - FAILED")
+                        table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                            ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
+                        -- break
+                    end
                 end
 
                 -- Track distribution tags
@@ -984,6 +1816,7 @@ function TestLootConfig(index, startFrom, retainedConfig)
                     specialTags[entry.special] = (specialTags[entry.special] or 0) + 1
                 end
             end
+            end -- if square
         elseif not entry then
             DWAPUtils.dprint("Entry " .. i .. " is nil - SKIPPING")
         elseif not entry.coords then
@@ -994,6 +1827,124 @@ function TestLootConfig(index, startFrom, retainedConfig)
     end
 
     DWAPUtils.dprint("Progress: 100%")
+
+    -- baseBuildings coverage: enumerate every container in each declared
+    -- building (rooms -> squares -> containers) and record the ones no loot
+    -- entry addresses. Skips stoves/microwaves and trash-class containers,
+    -- and dedups buildings in case two anchors resolve to the same one
+    local unclaimedContainers = {}
+    local anchorProblems = {}
+    -- Optional room filter. A safehouse that occupies part of a larger
+    -- structure - an apartment in a complex, a unit in a mixed-use block -
+    -- has an anchor whose building def covers the whole thing, so the
+    -- unclaimed list fills with other people's rooms (config 07 reported
+    -- 478 unclaimed including a store, a medical suite and an office).
+    -- Declaring baseRooms narrows the pass to the rooms we actually own.
+    local roomFilter, roomFilterCount = baseRoomKeys(config, anchorProblems)
+    -- Which filter keys actually matched a room in a declared building. A key
+    -- that never matches is a room anchored outside baseBuildings, or one whose
+    -- def rect moved in a re-export - either way its containers vanish from the
+    -- unclaimed list without a word, which is the failure this whole field is
+    -- meant to avoid causing.
+    local roomFilterHit = {}
+    if roomFilter and roomFilterCount == 0 then
+        -- Not filtering at all here would quietly restore the whole-building
+        -- sweep and read as "your config is missing 500 entries"
+        anchorProblems[#anchorProblems + 1] =
+            "baseRooms declared but NO anchor resolved - unclaimed list suppressed"
+    end
+    local trashTypes = {
+        bin = true,
+        dumpster = true,
+        clothingdryer = true,
+        clothingdryerbasic = true,
+        clothingrack = true,
+        clothingwasher = true,
+    }
+    if config.baseBuildings then
+        local seenBuildings = {}
+        for b = 1, #config.baseBuildings do
+            local anchor = config.baseBuildings[b]
+            local aSq = anchor and anchor.x and getSquare(anchor.x, anchor.y, math.floor(anchor.z or 0))
+            local building = aSq and aSq:getBuilding()
+            if not building then
+                anchorProblems[#anchorProblems + 1] = ("anchor %d at %s,%s,%s: %s"):format(
+                    b, tostring(anchor and anchor.x), tostring(anchor and anchor.y),
+                    tostring(anchor and anchor.z),
+                    aSq and "no building on square" or "square not loaded")
+            else
+                local def = building.getDef and building:getDef()
+                -- Story canary: PreventStories marks our buildings explored,
+                -- which since 42.20 is the ONLY thing stopping RBShopLooted
+                -- (it drops the stash exemption the base class has). If a def
+                -- is unmarked, a story may have run here and the loot results
+                -- below are suspect - say so rather than let it read as rot
+                if def and def.isAllExplored and not def:isAllExplored() then
+                    anchorProblems[#anchorProblems + 1] = ("STORY-RISK: anchor %d at %s,%s,%s is not marked explored - a building story may have run here"):format(
+                        b, tostring(anchor.x), tostring(anchor.y), tostring(anchor.z))
+                end
+                local bldKey = def and def:getID() or building:getID()
+                if not seenBuildings[bldKey] then
+                    seenBuildings[bldKey] = true
+                    local rooms = getCell():getRoomList()
+                    for i = 1, rooms:size() do
+                        local room = rooms:get(i - 1)
+                        -- The cell's room list holds duplicate IsoRoom objects
+                        -- sharing one key, each carrying part of the squares,
+                        -- so match on the key and let every duplicate through
+                        -- rather than trying to pick one.
+                        local inScope = DWAPUtils.sameBuilding(room:getBuilding(), building)
+                        if inScope and roomFilter then
+                            local k = roomDefKey(room)
+                            inScope = k ~= nil and roomFilter[k] == true
+                            if inScope then roomFilterHit[k] = true end
+                        end
+                        if inScope then
+                            local squares = room:getSquares()
+                            for s = 0, squares:size() - 1 do
+                                local rsq = squares:get(s)
+                                local squareContainers = DWAPUtils.getSquareContainers(rsq)
+                                for c = 1, #squareContainers do
+                                    local sc = squareContainers[c]
+                                    local ctype = sc.container:getType()
+                                    local skip = ctype == "microwave" or sc.container:isStove()
+                                    if not skip then
+                                        local props = sc.object.getProperties and sc.object:getProperties()
+                                        if props then
+                                            if props:has("GroupName") and props:get("GroupName") == "Garbage" then
+                                                skip = true
+                                            elseif props:has("container") and trashTypes[props:get("container")] then
+                                                skip = true
+                                            end
+                                        end
+                                    end
+                                    if not skip then
+                                        local cx, cy, cz = rsq:getX(), rsq:getY(), rsq:getZ()
+                                        if not allTileKeys[DWAPUtils.hashCoords(cx, cy, cz)] then
+                                            unclaimedContainers[#unclaimedContainers + 1] = {
+                                                x = cx, y = cy, z = cz,
+                                                ctype = ctype,
+                                                room = room:getName() or "?",
+                                            }
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        if roomFilter then
+            for key in pairs(roomFilter) do
+                if not roomFilterHit[key] then
+                    anchorProblems[#anchorProblems + 1] = ("baseRooms %s matched no room in any declared building - anchor outside baseBuildings, or the def rect moved"):format(key)
+                end
+            end
+        end
+        DWAPUtils.dprint(("baseBuildings coverage: %d unclaimed containers, %d anchor problems"):format(
+            #unclaimedContainers, #anchorProblems))
+    end
 
     -- Print results
     if #failedContainers > 0 then
@@ -1042,126 +1993,108 @@ function TestLootConfig(index, startFrom, retainedConfig)
     end
 
     DWAPUtils.dprint("=== TEST COMPLETE ===")
+
+    return {
+        totalEntries = totalEntries,
+        failedContainers = failedContainers,
+        distTags = distTags,
+        specialTags = specialTags,
+        containerDetails = containerDetails,
+        unclaimedContainers = unclaimedContainers,
+        anchorProblems = anchorProblems,
+        roomFilterCount = roomFilterCount,
+        legacyHalfZ = legacyHalfZ,
+    }
 end
 
 tlc = TestLootConfig
 
-local currentContainerLookup = nil
-
--- Build a lookup table of container coordinates from a config
-local function buildContainerLookup(config)
-    local lookup = {}
-    if not config or not config.loot then
-        return lookup
-    end
-
-    for i = 1, #config.loot do
-        local entry = config.loot[i]
-        if entry and entry.coords then
-            local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
-            local key = DWAPUtils.hashCoords(x, y, z)
-            lookup[key] = 1
-            if not entry.dist and not entry.items and not entry.special then
-                lookup[key] = 0 -- highlight as an error since there's nothing to spawn
-            elseif entry.special then
-                lookup[key] = 2 -- special containers
+-- Systems audit: the loot pass only ever looks at containers, so a config can
+-- read PASS while its generator, tank or plumbing is broken. This walks the
+-- power and water declarations and reports only what is WRONG, so the output
+-- is a to-do list rather than an inventory. Opt-in: it costs a square lookup
+-- and an object scan per declared part.
+local function systemsObjectAt(x, y, z, sprite)
+    local square = getSquare(x, y, math.floor(z or 0))
+    if not square then return nil, "square not loaded (bad z or unstreamed)" end
+    local objects = square:getObjects()
+    if objects then
+        for i = 0, objects:size() - 1 do
+            local obj = objects:get(i)
+            if obj and (not sprite or obj:getSpriteName() == sprite) then
+                return obj, nil
             end
         end
     end
-    return lookup
+    -- ghost generators live in the special-objects list once converted
+    local specials = square:getSpecialObjects()
+    if specials then
+        for i = 0, specials:size() - 1 do
+            local obj = specials:get(i)
+            if obj and (not sprite or obj:getSpriteName() == sprite) then
+                return obj, nil
+            end
+        end
+    end
+    return nil, sprite and ("no object with sprite " .. sprite) or "no object on square"
 end
 
--- Check containers on a square and return their status
-local function checkSquareContainers(square, containerLookup)
-    if not square then
-        return { totalContainers = 0, foundContainers = 0, errorContainers = 0, specialContainers = 0, missingContainers = 0 }
+-- Solar is the ISA mod's. Without it active - or with the sandbox option off -
+-- the powerbank and panels are never spawned at all, so checking them would
+-- manufacture problems. Same condition DWAPPowerSystem uses to decide whether
+-- it can touch solar.
+local function solarSystemActive()
+    if not getActivatedMods():contains("\\ISA") then return false end
+    return SandboxVars.DWAP and SandboxVars.DWAP.EnableGenSystemSolar and true or false
+end
+
+--- @return table array of problem strings, empty when everything checks out
+function CheckConfigSystems(config)
+    local problems = {}
+    local function report(fmt, ...)
+        problems[#problems + 1] = string.format(fmt, ...)
     end
 
-    local x, y, z = square:getX(), square:getY(), square:getZ()
-    local totalContainers = 0
-    local foundContainers = 0
-    local errorContainers = 0
-    local specialContainers = 0
-    local missingContainers = 0
-
-    -- First, check if there are containers in the config for this square that are missing
-    local expectedContainers = {}
-
-    -- Check for normal container at this z level
-    local normalKey = DWAPUtils.hashCoords(x, y, z)
-    if containerLookup[normalKey] then
-        expectedContainers[normalKey] = containerLookup[normalKey]
-    end
-
-    -- Check for upper container at z + 0.5
-    local upperKey = DWAPUtils.hashCoords(x, y, z + 0.5)
-    if containerLookup[upperKey] then
-        expectedContainers[upperKey] = containerLookup[upperKey]
-    end
-
-    -- Track which expected containers we find
-    local foundExpectedContainers = {}
-
-    local objects = square:getObjects()
-    if objects then
-        for j = 0, objects:size() - 1 do
-            local obj = objects:get(j)
-            if obj and obj:getContainer() then
-                local objContainer = obj:getContainer()
-                local containerType = objContainer:getType()
-
-                -- Skip stoves and microwaves (similar to Events.lua logic)
-                if not (containerType == "microwave" or objContainer:isStove()) then
-                    -- Check if it's an upper container (similar to TestLootConfig logic)
-                    local containerZ = z
-                    if objContainer:getContainerPosition() == "High" or
-                        (obj:getRenderYOffset() and obj:getRenderYOffset() > 32) then
-                        containerZ = z + 0.5
+    -- power: control panel, fuel tank, solar powerbank/panels, ghost generators
+    if config.generators then
+        for i = 1, #config.generators do
+            local gen = config.generators[i]
+            local function checkPart(part, label, wantModData)
+                if not part or not part.x then return end
+                local obj, err = systemsObjectAt(part.x, part.y, part.z, part.sprite)
+                if not obj then
+                    report("gen %d %s at %d,%d,%d: %s", i, label, part.x, part.y, part.z or 0, err)
+                elseif wantModData then
+                    local md = obj:getModData()
+                    if not md or not md.DWAPObjectType then
+                        report("gen %d %s at %d,%d,%d: present but not converted (no DWAPObjectType)",
+                            i, label, part.x, part.y, part.z or 0)
                     end
-
-                    local key = DWAPUtils.hashCoords(x, y, containerZ)
-                    local lookupValue = containerLookup[key]
-
-                    -- Check if this is a trash container
-                    local isTrashContainer = false
-                    local properties = obj:getProperties()
-                    if properties:has("GroupName") and properties:get("GroupName") == "Garbage" then
-                        isTrashContainer = true
-                    elseif properties:has("container") then
-                        local containerName = properties:get("container")
-                        local list = {
-                            bin = true,
-                            dumpster = true,
-                            clothingdryer = true,
-                            clothingdryerbasic = true,
-                            clothingrack = true,
-                            clothingwasher = true,
-                        }
-                        isTrashContainer = list[containerName] == true
+                end
+            end
+            checkPart(gen.controls, "controls", true)
+            checkPart(gen.fuelTank, "fuelTank", true)
+            if gen.solar and solarSystemActive() then
+                checkPart(gen.solar.powerbank, "solar powerbank", false)
+                if gen.solar.panels then
+                    for p = 1, #gen.solar.panels do
+                        local panel = gen.solar.panels[p]
+                        if panel and panel.spawn ~= false then
+                            checkPart(panel, "solar panel " .. p, false)
+                        end
                     end
-
-                    -- Only count trash containers if they're in the config, count all other containers
-                    local shouldCount = not isTrashContainer or lookupValue ~= nil
-
-                    if shouldCount then
-                        totalContainers = totalContainers + 1
-
-                        if lookupValue == 0 then
-                            errorContainers = errorContainers + 1
-                        elseif lookupValue == 1 then
-                            foundContainers = foundContainers + 1
-                            foundExpectedContainers[key] = true
-                        elseif lookupValue == 2 then
-                            specialContainers = specialContainers + 1
-                            foundExpectedContainers[key] = true
-                            -- Early return for special containers - we found what we need
-                            return {
-                                totalContainers = totalContainers,
-                                foundContainers = foundContainers,
-                                errorContainers = errorContainers,
-                                specialContainers = specialContainers,
-                                missingContainers = missingContainers
-                            }
+                end
+            end
+            if gen.fakeGenerators then
+                for f = 1, #gen.fakeGenerators do
+                    local fake = gen.fakeGenerators[f]
+                    if fake and fake.x then
+                        local obj, err = systemsObjectAt(fake.x, fake.y, fake.z, nil)
+                        if not obj then
+                            report("gen %d ghost %d at %d,%d,%d: %s", i, f, fake.x, fake.y, fake.z or 0, err)
+                        elseif not instanceof(obj, "IsoGenerator") then
+                            report("gen %d ghost %d at %d,%d,%d: never converted to IsoGenerator",
+                                i, f, fake.x, fake.y, fake.z or 0)
                         end
                     end
                 end
@@ -1169,23 +2102,815 @@ local function checkSquareContainers(square, containerLookup)
         end
     end
 
-    -- Check for missing containers (in config but not found on square)
-    for expectedKey, expectedValue in pairs(expectedContainers) do
-        if not foundExpectedContainers[expectedKey] and expectedValue > 0 then
-            missingContainers = missingContainers + 1
+    -- water: tanks need a fluid container, fixtures need the objectType stamp
+    if config.waterTanks then
+        for i = 1, #config.waterTanks do
+            local tank = config.waterTanks[i]
+            if tank and tank.x then
+                local obj, err = systemsObjectAt(tank.x, tank.y, tank.z, tank.sprite)
+                if not obj then
+                    report("waterTank %d at %d,%d,%d: %s", i, tank.x, tank.y, tank.z or 0, err)
+                elseif not obj:hasFluid() then
+                    report("waterTank %d at %d,%d,%d: present but has no fluid container",
+                        i, tank.x, tank.y, tank.z or 0)
+                end
+            end
+        end
+    end
+    if config.waterFixtures then
+        for i = 1, #config.waterFixtures do
+            local fix = config.waterFixtures[i]
+            if fix and fix.x then
+                local obj, err = systemsObjectAt(fix.x, fix.y, fix.z, fix.sprite)
+                if not obj then
+                    report("waterFixture %d at %d,%d,%d: %s", i, fix.x, fix.y, fix.z or 0, err)
+                else
+                    local md = obj:getModData()
+                    if not md or not md.objectType then
+                        report("waterFixture %d at %d,%d,%d: present but not converted (no objectType)",
+                            i, fix.x, fix.y, fix.z or 0)
+                    end
+                end
+            end
+        end
+    end
+    return problems
+end
+
+-- Drive TestLootConfig across every config in one debug session: teleport to
+-- each base with DWAPGoto, wait for its loot squares to stream in (jumping to
+-- stragglers to force-load them), run the test, and write a combined report
+-- to Zomboid/Lua/DWAP_loot_audit.txt. Call DWAPAudit() to start, call it
+-- again to abort. DWAPAudit(n) starts from config n.
+local allLootState = nil
+local allLootTick
+local ALLLOOT_WAIT_TICKS = 300 -- chunk-streaming grace before jumping/giving up
+-- Squares existing does NOT mean the loot fill has run: the fill lands on
+-- later ticks, so verifying the moment chunks are in reported containers as
+-- unfilled that were about to be filled - 521 of 633 failures in the
+-- 2026-08-06 run, and config 37 flipped from 68 failures to PASS purely by
+-- being revisited. Hold after streaming until the number of stamped squares
+-- stops growing, rather than guessing a fixed delay.
+local ALLLOOT_FILL_POLL = 10    -- ticks between stamp counts
+local ALLLOOT_FILL_STABLE = 6   -- unchanged polls (~1s) before trusting the count
+local ALLLOOT_FILL_MAX = 900    -- absolute cap, for configs that never fill
+local ALLLOOT_SETTLE_TICKS = 120 -- pause between bases: back-to-back teleports can
+-- race the world streamer's vehicle chunk unload (BaseVehicle.update NPE)
+
+local function allLootTeleport(x, y, z)
+    if isClient() then
+        SendCommandToServer("/teleportto " .. x .. "," .. y .. "," .. z)
+    else
+        getPlayer():teleportTo(x, y, z)
+    end
+end
+
+local function allLootWrite(line)
+    if allLootState and allLootState.writer then
+        allLootState.writer:write(line .. "\r\n")
+    end
+end
+
+local function allLootConfigName(index, config)
+    local name = string.format("%02d", index)
+    if config and config.doorKeys and config.doorKeys.name then
+        name = name .. " " .. config.doorKeys.name
+    end
+    return name
+end
+
+local function allLootStop(summary)
+    if not allLootState then return end
+    if summary then allLootWrite(summary) end
+    if allLootState.writer then allLootState.writer:close() end
+    Events.OnTick.Remove(allLootTick)
+    -- hand auto-lights back exactly as we found it (see DWAPAudit)
+    local restore = allLootState.autoLightsWasOn
+    allLootState = nil
+    if restore and DoAutoLights and not DWAP_AutoLightsEnabled then
+        DoAutoLights()
+        DWAPUtils.dprint("Loot audit: auto-lights restored")
+    end
+    DWAPUtils.dprint("Loot audit report: Zomboid/Lua/DWAP_loot_audit.txt")
+end
+
+local function allLootFinishConfig(unloaded, badZ)
+    local st = allLootState
+    local config = st.configs[st.index]
+    local name = allLootConfigName(st.index, config)
+    local result = TestLootConfig(st.index, nil, { fillThreshold = st.fillThreshold })
+
+    allLootWrite(("=== %s: %d loot entries ==="):format(name, result and result.totalEntries or 0))
+    if unloaded > 0 then
+        allLootWrite(("  STALE?: %d squares in chunks that never streamed in - building/basement missing from this save; results below are unreliable"):format(
+            unloaded))
+    end
+    if badZ and badZ > 0 then
+        allLootWrite(("  BAD-Z: %d coords have no square at their z level (unspawned basement, moved building, or typo) - see Square-not-found lines"):format(
+            badZ))
+    end
+    if result then
+        if (result.totalEntries or 0) == 0 then
+            -- A wiped table has nothing to fail, so the PASS branch below
+            -- would call it healthy. Say what it is instead, and keep it out
+            -- of the pass tally - the unclaimed list further down is the
+            -- rebuild menu for exactly these
+            allLootWrite("  EMPTY (no loot entries - rebuild from the unclaimed list)")
+            st.skipped = st.skipped + 1
+        elseif #result.failedContainers == 0 then
+            allLootWrite("  PASS")
+            st.passed = st.passed + 1
+        else
+            allLootWrite(("  FAIL (%d):"):format(#result.failedContainers))
+            for i = 1, #result.failedContainers do
+                allLootWrite("    " .. result.failedContainers[i])
+            end
+            st.failed = st.failed + 1
+        end
+
+        if result.legacyHalfZ and result.legacyHalfZ > 0 then
+            allLootWrite(("  legacy +0.5 entries: %d (convert to slot = \"upper\")"):format(result.legacyHalfZ))
+        end
+        local special = allLootTallyString(result.specialTags)
+        if special ~= "" then allLootWrite("  special: " .. special) end
+        local dist = allLootTallyString(result.distTags)
+        if dist ~= "" then allLootWrite("  dist: " .. dist) end
+
+        -- container type per room, e.g. "filingcabinet@office=2"
+        local typeRooms = {}
+        for i = 1, #result.containerDetails do
+            local d = result.containerDetails[i]
+            local key = d.containerType .. "@" .. d.room
+            typeRooms[key] = (typeRooms[key] or 0) + 1
+        end
+        local typeRoomStr = allLootTallyString(typeRooms)
+        if typeRoomStr ~= "" then allLootWrite("  containers: " .. typeRoomStr) end
+
+        -- One line per RESOLVED entry, joining what was authored to where it
+        -- landed: "containers:" and "dist:" above are separate histograms, so
+        -- the pairing exists nowhere else. Only resolved entries appear -
+        -- an entry whose container was not found proves nothing about which
+        -- loot suits which room.
+        --
+        -- The leading E<n> and coords are what make this file usable as a data
+        -- source rather than just something to read. Because unresolved entries
+        -- are skipped, row N is NOT entry N: every failure shifts everything
+        -- after it, and a config with 86 entries can print 77 rows. Without a
+        -- key, anything mapping these rows back onto the config by position
+        -- silently mis-assigns after the first gap. Coords are the durable key
+        -- (they survive reordering); the index is the convenient one.
+        --
+        -- Format is fixed and greppable on purpose:
+        --   E<n> | <x,y,z> | <containerType>@<room> | <level|-> | <dist,dist|special:name|->
+        if #result.containerDetails > 0 then
+            allLootWrite(("  entry-map (%d of %d entries resolved):"):format(
+                #result.containerDetails, result.totalEntries or #result.containerDetails))
+            for i = 1, #result.containerDetails do
+                local d = result.containerDetails[i]
+                local tags = "-"
+                if d.special then
+                    tags = "special:" .. tostring(d.special)
+                elseif d.dist and #d.dist > 0 then
+                    tags = table.concat(d.dist, ",")
+                end
+                allLootWrite(("    E%d | %d,%d,%d | %s@%s | %s | %s"):format(
+                    d.entry, d.x, d.y, d.z,
+                    d.containerType, d.room, tostring(d.level or "-"), tags))
+            end
+        end
+
+        -- opt-in systems pass: only prints what is broken, so an empty section
+        -- means power and water are fine for this config
+        if st.checkSystems and config then
+            local sys = CheckConfigSystems(config)
+            if #sys > 0 then
+                allLootWrite(("  SYSTEMS (%d):"):format(#sys))
+                for i = 1, #sys do
+                    allLootWrite("    " .. sys[i])
+                end
+                st.systemsFlagged = (st.systemsFlagged or 0) + #sys
+            end
+        end
+
+        -- baseBuildings coverage: containers no loot entry addresses
+        if result.anchorProblems then
+            for i = 1, #result.anchorProblems do
+                allLootWrite("  BASEBUILDING: " .. result.anchorProblems[i])
+            end
+        end
+        if config and config.baseBuildings and #config.baseBuildings > 0 and result.unclaimedContainers then
+            local list = result.unclaimedContainers
+            -- Say so when the pass was narrowed: "all containers claimed" over
+            -- 6 rooms means something very different from the same line over a
+            -- whole apartment complex, and the report is read months later
+            if result.roomFilterCount and result.roomFilterCount > 0 then
+                allLootWrite(("  scope: %d baseRooms (unclaimed counts rooms we own, not the whole building)"):format(
+                    result.roomFilterCount))
+            end
+            if #list == 0 then
+                allLootWrite("  baseBuildings: all containers claimed")
+            else
+                local tally = {}
+                for i = 1, #list do
+                    local u = list[i]
+                    local key = u.ctype .. "@" .. u.room
+                    tally[key] = (tally[key] or 0) + 1
+                end
+                allLootWrite(("  unclaimed containers: %d"):format(#list))
+                allLootWrite("  unclaimed: " .. allLootTallyString(tally))
+                local cap = 250
+                for i = 1, math.min(#list, cap) do
+                    local u = list[i]
+                    allLootWrite(("    %d,%d,%d %s@%s"):format(u.x, u.y, u.z, u.ctype, u.room))
+                end
+                if #list > cap then
+                    allLootWrite(("    ...and %d more (raise the cap in allLootFinishConfig to see them)"):format(#list - cap))
+                end
+            end
+        end
+    else
+        allLootWrite("  SKIPPED (no loot data)")
+        st.skipped = st.skipped + 1
+    end
+
+    -- level keys and explicit-item entries aren't tallied by TestLootConfig
+    local levels, itemEntries, skeletons = {}, 0, {}
+    if config and config.loot then
+        for i = 1, #config.loot do
+            local e = config.loot[i]
+            if e then
+                if e.level ~= nil then
+                    local key = tostring(e.level)
+                    levels[key] = (levels[key] or 0) + 1
+                end
+                if e.items then itemEntries = itemEntries + 1 end
+                -- An entry with coords but nothing to spawn still gets stamped
+                -- "filled" by the fill (Events.lua stamps unconditionally), so
+                -- stamp verification calls it a pass. Count them separately or
+                -- a config freshly picked from rooms reads as green while every
+                -- container it names stays empty.
+                if e.coords and not e.dist and not e.items and not e.special and not e.tag then
+                    skeletons[#skeletons + 1] = i
+                end
+            end
+        end
+    end
+    local levelStr = allLootTallyString(levels)
+    if levelStr ~= "" then allLootWrite("  levels: " .. levelStr) end
+    if itemEntries > 0 then allLootWrite("  explicit-item entries: " .. itemEntries) end
+    if #skeletons > 0 then
+        allLootWrite(("  SKELETON: %d entries define no loot yet (coords only) - entries %s"):format(
+            #skeletons, table.concat(skeletons, ",")))
+        st.skeletonTotal = (st.skeletonTotal or 0) + #skeletons
+    end
+    allLootWrite("")
+
+    st.index = st.index + 1
+    st.phase = "settle"
+    st.ticksWaited = 0
+end
+
+-- Progress proxy for the fill: squares holding at least one object the fill
+-- has stamped. Cheaper than resolving every entry's container, and it only
+-- has to detect "still working" versus "done"
+local function allLootStampedSquares(config)
+    local n = 0
+    if not config or not config.loot then return n end
+    for i = 1, #config.loot do
+        local e = config.loot[i]
+        if e and e.coords then
+            local square = getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z))
+            local objects = square and square:getObjects()
+            if objects then
+                local stamped = false
+                for j = 0, objects:size() - 1 do
+                    local obj = objects:get(j)
+                    local md = obj and obj:getModData()
+                    if md and md.DWAPLoot then stamped = true end
+                end
+                if stamped then n = n + 1 end
+            end
+        end
+    end
+    return n
+end
+
+-- Hand off from streaming to the fill wait, carrying the counts the report
+-- needs so they survive the extra phase
+local function allLootBeginFillWait(st, unstreamed, badZ)
+    st.phase = "fill"
+    st.ticksWaited = 0
+    st.pendingUnstreamed = unstreamed
+    st.pendingBadZ = badZ
+    st.stampCount = -1
+    st.stampStable = 0
+end
+
+allLootTick = function()
+    local st = allLootState
+    if not st then return end
+    if st.index > #st.configs then
+        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s%s ==="):format(
+            st.passed, st.failed, st.skipped,
+            (st.skeletonTotal or 0) > 0 and (", " .. st.skeletonTotal .. " skeleton entries awaiting loot") or "",
+            st.checkSystems and (", " .. (st.systemsFlagged or 0) .. " systems problems") or ""))
+        return
+    end
+
+    local config = st.configs[st.index]
+    if st.phase == "settle" then
+        st.ticksWaited = st.ticksWaited + 1
+        if st.ticksWaited >= ALLLOOT_SETTLE_TICKS then
+            st.phase = "teleport"
+        end
+    elseif st.phase == "teleport" then
+        -- An emptied config still has a coverage pass worth running: the
+        -- unclaimed-container list is the menu you rebuild it from, and
+        -- skipping here meant a wiped table produced nothing at all
+        local hasLoot = config and config.loot and #config.loot > 0
+        local hasAnchors = config and config.baseBuildings and #config.baseBuildings > 0
+        if not config or (not hasLoot and not hasAnchors) then
+            allLootWrite("=== " .. allLootConfigName(st.index, config) .. ": no loot entries, skipped ===")
+            allLootWrite("")
+            st.skipped = st.skipped + 1
+            st.index = st.index + 1
+            return
+        end
+        DWAPUtils.dprint(("Loot audit %d/%d: %s"):format(st.index, #st.configs, allLootConfigName(st.index, config)))
+        DWAPGoto(st.index)
+        st.phase = "load"
+        st.ticksWaited = 0
+        st.jumped = {}
+    elseif st.phase == "load" then
+        st.ticksWaited = st.ticksWaited + 1
+
+        -- Sort absent squares into truly unstreamed chunks (ground square at
+        -- z=0 absent too) vs bad-z coords (chunk is in, that z just has no
+        -- square: unspawned basement, moved building, or typo). Only
+        -- unstreamed chunks are worth jumping to; bad-z gets recorded by
+        -- TestLootConfig as Square-not-found
+        local unstreamed, badZ = 0, 0
+        for i = 1, #config.loot do
+            local e = config.loot[i]
+            if e and e.coords and not getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z)) then
+                if getSquare(e.coords.x, e.coords.y, 0) then
+                    badZ = badZ + 1
+                else
+                    unstreamed = unstreamed + 1
+                end
+            end
+        end
+        -- baseBuildings anchors need their areas streamed too, so their
+        -- buildings' rooms are in the cell list for the coverage pass.
+        -- baseRooms anchors are held to the same bar: one that has not
+        -- streamed resolves to no room, which would silently drop that room
+        -- from the filter and read as "already claimed" in the report.
+        for _, anchors in ipairs({ config.baseBuildings or {}, config.baseRooms or {} }) do
+            for i = 1, #anchors do
+                local a = anchors[i]
+                if a and a.x and not getSquare(a.x, a.y, math.floor(a.z or 0)) then
+                    if getSquare(a.x, a.y, 0) then
+                        badZ = badZ + 1
+                    else
+                        unstreamed = unstreamed + 1
+                    end
+                end
+            end
+        end
+
+        if unstreamed == 0 then
+            allLootBeginFillWait(st, 0, badZ)
+        elseif st.ticksWaited >= ALLLOOT_WAIT_TICKS then
+            -- Count force-load jumps whose chunk STILL isn't in: three of
+            -- those means the area can't stream in this save - stop grinding
+            -- instead of visiting every dead coordinate
+            local failedJumps = 0
+            local jumpTo = nil
+            for i = 1, #config.loot do
+                local e = config.loot[i]
+                if e and e.coords
+                    and not getSquare(e.coords.x, e.coords.y, math.floor(e.coords.z))
+                    and not getSquare(e.coords.x, e.coords.y, 0) then
+                    local key = e.coords.x .. "," .. e.coords.y
+                    if st.jumped[key] then
+                        failedJumps = failedJumps + 1
+                    elseif not jumpTo then
+                        jumpTo = e
+                    end
+                end
+            end
+            for _, anchors in ipairs({ config.baseBuildings or {}, config.baseRooms or {} }) do
+                for i = 1, #anchors do
+                    local a = anchors[i]
+                    if a and a.x
+                        and not getSquare(a.x, a.y, math.floor(a.z or 0))
+                        and not getSquare(a.x, a.y, 0) then
+                        local key = a.x .. "," .. a.y
+                        if st.jumped[key] then
+                            failedJumps = failedJumps + 1
+                        elseif not jumpTo then
+                            jumpTo = { coords = { x = a.x, y = a.y, z = a.z or 0 } }
+                        end
+                    end
+                end
+            end
+            if failedJumps >= 3 or not jumpTo then
+                -- whatever DID stream still deserves the fill wait
+                allLootBeginFillWait(st, unstreamed, badZ)
+            else
+                st.jumped[jumpTo.coords.x .. "," .. jumpTo.coords.y] = true
+                allLootTeleport(jumpTo.coords.x, jumpTo.coords.y, math.floor(jumpTo.coords.z))
+                st.ticksWaited = 0
+            end
+        end
+    elseif st.phase == "fill" then
+        st.ticksWaited = st.ticksWaited + 1
+        if st.ticksWaited % ALLLOOT_FILL_POLL == 0 then
+            local stamped = allLootStampedSquares(config)
+            if stamped > st.stampCount then
+                st.stampCount = stamped
+                st.stampStable = 0
+            else
+                st.stampStable = st.stampStable + 1
+            end
+        end
+        if st.stampStable >= ALLLOOT_FILL_STABLE or st.ticksWaited >= ALLLOOT_FILL_MAX then
+            if st.ticksWaited >= ALLLOOT_FILL_MAX then
+                DWAPUtils.dprint("Loot audit: fill wait hit its cap, verifying anyway")
+            end
+            allLootFinishConfig(st.pendingUnstreamed or 0, st.pendingBadZ)
+        end
+    end
+end
+
+-- Verification is stamp-based by default (the fill marks parent-object
+-- modData), so audits work in normal loot-on worlds. fillThreshold is an
+-- optional extra for loot-off worlds: 0 = fail empty containers, >0 = fail
+-- below that fill percent.
+-- checkSystems (3rd arg, off by default) adds the power/water pass: keeps the
+-- normal run light, and gives a combined fix list when you want one
+-- §7 / §3.5 dist-name validation, folded into the audit as a report-only pass.
+-- Walks every entry.dist reference across all configs, resolves each DISTINCT
+-- distribution NAME the same way loot fill does, and classifies it. Touches no
+-- config and no resolver.
+--
+-- States (exactly one per name):
+--   absent               - ProceduralDistributions.list[name] is nil. The
+--                          Distributions[1] dot-path fallback in the resolver IS
+--                          reached (its distList:find(".") test matches any name)
+--                          but yields no items for the container-style names this
+--                          repo uses, so absent = 0 survivors: the name is dead.
+--   empty-after-filtering - resolves but 0 DISTINCT survivors once the resolver's
+--                          excludeItems/convertItems/excludeStrings pass runs.
+--   thin                 - fewer than 3 DISTINCT survivors (legal, likely
+--                          unintended).
+--   ok                   - 3+ distinct survivors; not listed, only counted.
+-- Resolution mirrors fill: DWAP_LootSpawning.getItemsWithDistLists({ name },
+-- includeJunk) returns an array of { name = , weight = }; count DISTINCT .name
+-- values. includeJunk is on when ANY config entry referencing the name sets
+-- distIncludeJunk (junk is additive, so junk-on yields the most-populated pool
+-- and avoids false empty/thin verdicts).
+local DIST_STATE_ORDER = { absent = 1, ["empty-after-filtering"] = 2, thin = 3 }
+
+--- Run the dist-name validation pass and emit its report section.
+--- @param writeLine fun(line: string) sink for report lines (audit writer or standalone)
+local function validateDistNames(writeLine)
+    local configs = DWAPUtils.loadConfigs(true)
+    if not configs or #configs == 0 then
+        writeLine("=== dist name validation: no configs found ===")
+        writeLine("")
+        return
+    end
+    if not DWAP_LootSpawning or not DWAP_LootSpawning.getItemsWithDistLists then
+        writeLine("=== dist name validation: DWAP_LootSpawning.getItemsWithDistLists unavailable - skipped ===")
+        writeLine("")
+        return
+    end
+    -- Read the bare global at call time, not cached at require: this file loads
+    -- during the client bootstrap before server/ paths register, and
+    -- Items/ProceduralDistributions lives under server/. It is populated by the
+    -- time the audit or DWAPValidateDist run in-world. Mirrors vanilla
+    -- LootZed/SpawnRateChecker, which reads the global at call time.
+    if not ProceduralDistributions or not ProceduralDistributions.list then
+        writeLine("=== dist name validation: ProceduralDistributions not loaded - skipped ===")
+        writeLine("")
+        return
+    end
+
+    -- name -> { useCount = <entries referencing it>, configs = { [index] = true },
+    --           anyJunk = <any referencing entry sets distIncludeJunk> }
+    local stats = {}
+    for ci = 1, #configs do
+        local config = configs[ci]
+        if config and config.loot then
+            for li = 1, #config.loot do
+                local entry = config.loot[li]
+                if entry and entry.dist then
+                    local entryJunk = entry.distIncludeJunk and true or false
+                    -- dedupe within an entry so useCount is entries-referencing,
+                    -- not raw occurrences (a repeated name in one dist array is
+                    -- one referencing entry)
+                    local seen = {}
+                    for di = 1, #entry.dist do
+                        local name = entry.dist[di]
+                        if name and not seen[name] then
+                            seen[name] = true
+                            local s = stats[name]
+                            if not s then
+                                s = { useCount = 0, configs = {}, anyJunk = false }
+                                stats[name] = s
+                            end
+                            s.useCount = s.useCount + 1
+                            s.configs[ci] = true
+                            if entryJunk then s.anyJunk = true end
+                        end
+                    end
+                end
+            end
         end
     end
 
-    return {
-        totalContainers = totalContainers,
-        foundContainers = foundContainers,
-        errorContainers = errorContainers,
-        specialContainers = specialContainers,
-        missingContainers = missingContainers
-    }
+    local flagged = {}
+    local distinctCount = 0
+    local counts = { absent = 0, ["empty-after-filtering"] = 0, thin = 0, ok = 0 }
+    for name, s in pairs(stats) do
+        distinctCount = distinctCount + 1
+        local state
+        if not ProceduralDistributions.list[name] then
+            state = "absent"
+        else
+            local resolved = DWAP_LootSpawning.getItemsWithDistLists({ name }, s.anyJunk)
+            local distinct = {}
+            local survivors = 0
+            for i = 1, #resolved do
+                local it = resolved[i]
+                local n = it and it.name
+                if n and not distinct[n] then
+                    distinct[n] = true
+                    survivors = survivors + 1
+                end
+            end
+            if survivors == 0 then
+                state = "empty-after-filtering"
+            elseif survivors < 3 then
+                state = "thin"
+            else
+                state = "ok"
+            end
+        end
+        counts[state] = counts[state] + 1
+        if state ~= "ok" then
+            local idxs = {}
+            for idx in pairs(s.configs) do idxs[#idxs + 1] = idx end
+            table.sort(idxs)
+            flagged[#flagged + 1] = { name = name, state = state, useCount = s.useCount, configs = idxs }
+        end
+    end
+
+    -- state (absent, empty, thin) then use-count descending then name
+    table.sort(flagged, function(a, b)
+        local sa, sb = DIST_STATE_ORDER[a.state], DIST_STATE_ORDER[b.state]
+        if sa ~= sb then return sa < sb end
+        if a.useCount ~= b.useCount then return a.useCount > b.useCount end
+        return a.name < b.name
+    end)
+
+    writeLine("=== dist name validation (report only) ===")
+    writeLine(("  %d absent, %d empty, %d thin of %d distinct names"):format(
+        counts.absent, counts["empty-after-filtering"], counts.thin, distinctCount))
+    if #flagged == 0 then
+        writeLine("  all dist names resolve to 3+ survivors")
+    else
+        for i = 1, #flagged do
+            local f = flagged[i]
+            local idxStr = {}
+            for j = 1, #f.configs do idxStr[j] = string.format("%02d", f.configs[j]) end
+            writeLine(("  %s | %s | uses=%d | configs=%d [%s]"):format(
+                f.name, f.state, f.useCount, #f.configs, table.concat(idxStr, ",")))
+        end
+    end
+    writeLine("")
 end
 
--- Visualize containers status around the player
+--- Whether an audit is currently running, for the dev panel's toggle state.
+--- allLootState is file-local, so the panel cannot read it directly.
+--- @return boolean
+function DWAPAuditRunning()
+    return allLootState ~= nil
+end
+
+function DWAPAudit(startIndex, fillThreshold, checkSystems)
+    if allLootState then
+        DWAPUtils.dprint("Loot audit already running - aborting it")
+        allLootStop("=== ABORTED at config " .. allLootState.index .. " ===")
+        return
+    end
+    local configs = DWAPUtils.loadConfigs(true)
+    if not configs or #configs == 0 then
+        DWAPUtils.dprint("No configs found")
+        return
+    end
+    -- resuming mid-list appends to the existing report instead of truncating it
+    local resuming = (startIndex or 1) > 1
+    -- Auto-lights is a travel convenience and actively hostile to an audit.
+    -- Its watcher runs every tick, walks the WHOLE cell room list, and
+    -- re-asserts lights on any switch-count change - and the per-building
+    -- pass budget resets on every teleport, so each config hands it a fresh
+    -- one while chunks are still streaming in. On a big base that is a full
+    -- room walk plus a switch sweep per tick, competing with the audit's own
+    -- settle loop for the same streaming window (it flooded config 04 on
+    -- 2026-08-07). The one clean 42-config run so far was a session with it
+    -- off. Own it for the duration and restore it in allLootStop.
+    -- Toggle through DoAutoLights rather than clearing the flag: the flag only
+    -- gates the settle watcher, while the building-change tick that STARTS it
+    -- lives in _test.lua and is removed by the toggle alone.
+    local autoLightsWasOn = DWAP_AutoLightsEnabled and true or false
+    if autoLightsWasOn and DoAutoLights then
+        DoAutoLights()
+        DWAPUtils.dprint("Loot audit: auto-lights suspended for the run")
+    end
+    allLootState = {
+        autoLightsWasOn = autoLightsWasOn,
+        configs = configs,
+        index = startIndex or 1,
+        phase = "teleport",
+        ticksWaited = 0,
+        jumped = {},
+        writer = getFileWriter("DWAP_loot_audit.txt", true, resuming),
+        passed = 0,
+        failed = 0,
+        skipped = 0,
+        fillThreshold = fillThreshold,
+        checkSystems = checkSystems and true or false,
+    }
+    if resuming then
+        allLootWrite("--- resumed at config " .. startIndex .. " ---")
+    else
+        allLootWrite("DWAP loot audit - " .. #configs .. " configs, verification: " ..
+            (fillThreshold and ("stamp + fill threshold " .. fillThreshold .. "%") or "stamp-based") ..
+            (checkSystems and ", systems pass ON" or ", loot only"))
+    end
+    -- state what the systems pass is NOT covering, so a quiet report is not
+    -- mistaken for solar being healthy
+    if checkSystems and not solarSystemActive() then
+        allLootWrite("  (solar checks skipped: ISA mod inactive or EnableGenSystemSolar off)")
+    end
+    allLootWrite("")
+    -- §7/§3.5 dist-name validation runs up front: it needs no world streaming,
+    -- so it belongs before the first teleport while the writer is open. Skipped
+    -- on a resume so the section is not duplicated mid-report.
+    if not resuming then
+        -- pcall so a validation error still lets the audit register its OnTick
+        -- handler below rather than wedging after state is built (xpcall banned).
+        local ok, err = pcall(validateDistNames, allLootWrite)
+        if not ok then
+            DWAPUtils.dprint("validateDistNames error (audit continues): " .. tostring(err))
+        end
+    end
+    DWAPUtils.dprint("Starting loot audit across " .. #configs .. " configs")
+    Events.OnTick.Add(allLootTick)
+end
+
+-- Standalone dist-name validation: the same pass the audit runs up front, for
+-- quick checks without the full teleport audit. Appends its section to the
+-- shared audit report so a standalone run never clobbers a prior full audit.
+function DWAPValidateDist()
+    local writer = getFileWriter("DWAP_loot_audit.txt", true, true)
+    if not writer then
+        DWAPUtils.dprint("DWAPValidateDist: could not open report file")
+        return
+    end
+    local function writeLine(line)
+        writer:write(line .. "\r\n")
+    end
+    writeLine("--- DWAPValidateDist (standalone) ---")
+    -- pcall so an error inside the pass cannot leak the open writer (xpcall is
+    -- banned in this interpreter). Close unconditionally.
+    local ok, err = pcall(validateDistNames, writeLine)
+    writer:close()
+    if not ok then
+        DWAPUtils.dprint("DWAPValidateDist error: " .. tostring(err))
+    end
+    DWAPUtils.dprint("Dist validation report: Zomboid/Lua/DWAP_loot_audit.txt")
+end
+
+local currentContainerLookup = nil
+
+-- Status of one square: what the config asks for there, and whether the
+-- shared resolver can actually find it. Resolution goes through
+-- DWAPUtils.resolveLootContainer - the same call the loot fill and the audit
+-- make - so the overlay cannot disagree with them about which container an
+-- entry owns. Reimplementing the High/overhead/ordering rules here is what
+-- used to paint correctly-filled squares red.
+local function checkSquareContainers(square, containerLookup)
+    local status = { totalContainers = 0, foundContainers = 0, errorContainers = 0,
+        specialContainers = 0, missingContainers = 0, duplicateEntries = 0 }
+    if not square then return status end
+
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local record = containerLookup[DWAPUtils.hashCoords(x, y, z)]
+
+    -- What is physically here, split by whether a loot entry is expected to
+    -- exist for it. The bin, oven, fireplace and dog house classes are things
+    -- the fill never authors into, so counting them would light every one in
+    -- town orange as unclaimed.
+    local authorable, skippedPhysical = 0, 0
+    local containers = DWAPUtils.getSquareContainers(square)
+    for i = 1, #containers do
+        local entry = containers[i]
+        local skipped = NON_LOOT_CONTAINER_TYPES[entry.container:getType()] == true
+        if not skipped then
+            -- GroupName classifies the whole sprite rather than the container,
+            -- so it is a separate test from the type table
+            local properties = entry.object:getProperties()
+            skipped = properties:has("GroupName") and properties:get("GroupName") == "Garbage"
+        end
+        if skipped then
+            skippedPhysical = skippedPhysical + 1
+        else
+            authorable = authorable + 1
+        end
+    end
+
+    -- A square is not one decision. The lookup record is keyed per SQUARE, so
+    -- letting its presence un-skip everything on the tile counts the kitchen
+    -- stove alongside the wall cabinet the entry actually addresses, and claimed
+    -- can never reach 2: permanent purple on an ordinary finished kitchen.
+    -- Excluding skipped fixtures outright is the opposite failure - a tile whose
+    -- only container is a deliberately authored woodstove counts 0, and
+    -- shouldHighlight is `totalContainers > 0 or missingContainers > 0`, so the
+    -- square leaves the overlay instead of reading as done. Such entries are
+    -- real and they fill: the loot fill refuses only microwave/isStove types,
+    -- and then only without `stove = true` (LootSpawning/Events.lua:263).
+    --
+    -- So the total is driven by what the entries RESOLVED onto, counted below:
+    -- a skipped fixture joins the total only when an entry actually landed on
+    -- one, which is also the only reading that gets a claimed woodstove sharing
+    -- a tile with a free cabinet to purple rather than to green or to nothing.
+    if not record then
+        status.totalContainers = authorable
+        return status
+    end
+
+    -- Precomputed in buildContainerLookup: it is pure config data, so it is
+    -- neither per-tick work nor dependent on anything being streamed. Read it
+    -- before the resolution loop so a square whose containers have not loaded
+    -- still reports the collision.
+    status.duplicateEntries = record.duplicateEntries
+
+    local skippedClaims = 0
+    for i = 1, #record.slots do
+        local slot = record.slots[i]
+        local container = DWAPUtils.resolveLootContainer(square, {
+            upper = slot.upper,
+            stack = slot.stack,
+            freezer = slot.freezer,
+            -- an upper entry only has to yield to a base entry when one is
+            -- actually configured on the same square
+            pairPresent = slot.upper and record.hasBase or false,
+        })
+        if not container then
+            status.missingContainers = status.missingContainers + 1
+        else
+            -- the resolver hands back the container it chose, so the entry's own
+            -- target answers this - no matching against the physical list needed
+            if NON_LOOT_CONTAINER_TYPES[container:getType()] then
+                skippedClaims = skippedClaims + 1
+            end
+            if slot.value == 0 then
+                status.errorContainers = status.errorContainers + 1
+            elseif slot.value == 2 then
+                status.specialContainers = status.specialContainers + 1
+            else
+                status.foundContainers = status.foundContainers + 1
+            end
+        end
+    end
+
+    -- Clamped to what is physically here: two entries can resolve onto the same
+    -- fixture, and an inflated total is a purple square with nothing to fix.
+    -- min inlined - this runs on every square in the radius, every tick.
+    --
+    -- Known gap, one-directional: claims are counted, not matched to containers,
+    -- so two duplicate entries collapsing onto one of two same-type fixtures
+    -- count as two and the square reads green with the sibling unclaimed. The
+    -- same holds for foundContainers and predates the skip list; matching would
+    -- mean identity on streamed objects. It can only ever hide work, never
+    -- invent it - a finished square cannot be pushed to purple this way.
+    --
+    -- duplicateEntries closes the half of that gap the config can answer on its
+    -- own (two entries registered under one member key). The half still open is
+    -- entries with DIFFERENT member keys resolving onto the same container - a
+    -- `stack = 1` entry alongside a plain base entry where list[1] is not high,
+    -- for instance, which the fill's ordinal branch wins outright. Catching that
+    -- needs resolution plus per-container identity, which is exactly what this
+    -- function avoids.
+    status.totalContainers = authorable
+        + (skippedClaims < skippedPhysical and skippedClaims or skippedPhysical)
+
+    return status
+end
+
 function VisualizeContainersStatus(radius, containerLookup)
     local pSquare = getPlayer():getCurrentSquare()
     if not pSquare then
@@ -1204,23 +2929,40 @@ function VisualizeContainersStatus(radius, containerLookup)
             if square then
                 local containerStatus = checkSquareContainers(square, containerLookup)
 
-                -- Check if we should highlight this square
-                local shouldHighlight = containerStatus.totalContainers > 0 or containerStatus.missingContainers > 0
+                -- Check if we should highlight this square. duplicateEntries is
+                -- config-only, so it stands on its own here: the collision is
+                -- real whether or not the containers have streamed.
+                local shouldHighlight = containerStatus.totalContainers > 0
+                    or containerStatus.missingContainers > 0
+                    or containerStatus.duplicateEntries > 0
 
                 if shouldHighlight then
-                    -- Priority order: error containers or missing containers (red) > special (blue) > normal logic
-                    if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0 then
-                        -- Red for squares with error containers (lookup value 0) or missing containers (config but no container)
+                    -- specialContainers is tallied SEPARATELY from
+                    -- foundContainers, so a square whose only entry is a special
+                    -- has foundContainers == 0. Every branch below asks "how much
+                    -- of this square is claimed", which is the sum of the two.
+                    local claimed = containerStatus.foundContainers + containerStatus.specialContainers
+                    -- Priority: red (broken) > orange (nothing claimed) > purple
+                    -- (partly claimed) > blue (fully claimed, holds a special) >
+                    -- green. Blue used to sit above orange and purple, so a
+                    -- square with a special plus an unclaimed container painted
+                    -- blue and read as finished work.
+                    if containerStatus.errorContainers > 0 or containerStatus.missingContainers > 0
+                        or containerStatus.duplicateEntries > 0 then
+                        -- Red for squares with error containers (lookup value 0),
+                        -- missing containers (config but no container), or two
+                        -- entries registered under one member key (the second
+                        -- overwrites the first, so one entry never fills)
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0, 0, 0.7)
+                    elseif containerStatus.totalContainers > 0 and claimed == 0 then
+                        -- Orange for squares with containers but not in config
+                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0.5, 0, 0.5)
+                    elseif claimed < containerStatus.totalContainers then
+                        -- Purple for squares with some but not all containers in config
+                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.5, 0, 0.5, 0.5)
                     elseif containerStatus.specialContainers > 0 then
                         -- Blue for squares with special containers (lookup value 2)
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.2, 0.2, 0.8, 0.5)
-                    elseif containerStatus.totalContainers > 0 and containerStatus.foundContainers == 0 then
-                        -- Orange for squares with containers but not in config
-                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 1, 0.5, 0, 0.5)
-                    elseif containerStatus.foundContainers < containerStatus.totalContainers then
-                        -- Purple for squares with some but not all containers in config
-                        addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0.5, 0, 0.5, 0.5)
                     else
                         -- Green for squares with all containers in config
                         addAreaHighlightForPlayer(playerNum, x, y, x + 1, y + 1, playerZ, 0, 1, 0, 0.5)
@@ -1235,6 +2977,326 @@ end
 function containersTick()
     if currentContainerLookup then
         VisualizeContainersStatus(30, currentContainerLookup)
+    end
+end
+
+local currentContainerLabels = nil
+
+-- One label per loot entry: its 1-based entry number, with "^" appended for
+-- upper (+0.5 z) containers so stacked pairs on one tile stay readable, and "!"
+-- for an entry whose registration member key collides with another entry on the
+-- same square. Reddening the tile only says something is wrong there; the marker
+-- says WHICH two entries are fighting over the one slot.
+--
+-- The collision grouping lives in buildContainerLookup so there is one copy of
+-- the member rule; pass the lookup built for the same config to get the markers.
+local function buildContainerLabels(config, lookup)
+    local labels = {}
+    if not config or not config.loot then return labels end
+    -- entry number -> true, flattened out of the per-square records
+    local duplicated = {}
+    if lookup then
+        for _, record in pairs(lookup) do
+            local slots = record.slots
+            for i = 1, #slots do
+                if slots[i].duplicate then
+                    duplicated[slots[i].entry] = true
+                end
+            end
+        end
+    end
+    for i = 1, #config.loot do
+        local entry = config.loot[i]
+        if entry and entry.coords then
+            local z = entry.coords.z
+            local isUpper = z % 1 ~= 0 or entry.slot == "upper"
+            -- draw-height offset in z units so co-tile labels separate at
+            -- their containers' rough heights (zoom-aware via projection):
+            -- uppers at wall-cabinet height, stacks a third of a level per
+            -- crate, bottom on the floor
+            local rise = 0
+            if isUpper then
+                -- 0.55 rather than a rounder 0.66: raising a label by two
+                -- thirds of a level lands it near where a diagonal neighbour's
+                -- floor label already draws, so the two overlapped whenever the
+                -- tiles lined up. Dropping it clear of that keeps uppers
+                -- readably above their own tile without colliding, and stays
+                -- clear of the freezer and stack offsets below.
+                rise = 0.55
+            elseif entry.slot == "freezer" then
+                rise = 0.4
+            elseif entry.stack then
+                rise = (entry.stack - 1) * 0.33
+            end
+            labels[#labels + 1] = {
+                x = entry.coords.x,
+                y = entry.coords.y,
+                z = math.floor(z),
+                rise = rise,
+                text = tostring(i) .. (entry.stack and ("s" .. entry.stack) or "")
+                    .. (isUpper and "^" or "") .. (entry.slot == "freezer" and "f" or "")
+                    .. (duplicated[i] and "!" or ""),
+            }
+        end
+    end
+    return labels
+end
+
+-- Draw entry numbers pinned to their squares (same pattern the foraging
+-- icons use: isoToScreenX/Y + TextManager during UI draw)
+--
+-- Labels are pinned to a tile, so a raised one lands on a diagonal neighbour's
+-- whenever the two line up - stacks and uppers both did it. No choice of rise
+-- avoids that for every arrangement, it only changes which arrangements
+-- collide, so resolve it where it actually happens: nudge a label down until it
+-- clears everything already placed this frame. Placement tables are
+-- module-level and reused because this runs on every UI draw.
+local labelX, labelY, labelW = {}, {}, {}
+
+local function containerLabelsDraw()
+    if not currentContainerLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    local placed = 0
+    for i = 1, #currentContainerLabels do
+        local l = currentContainerLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + (l.rise or 0)
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local w = tm:MeasureStringX(UIFont.Small, l.text)
+            -- bounded: a shove can land on a third label, but give up rather
+            -- than chase it down the screen forever
+            for _ = 1, 8 do
+                local hit = false
+                for k = 1, placed do
+                    if math.abs(labelX[k] - sx) < (labelW[k] + w) * 0.5
+                        and math.abs(labelY[k] - sy) < lineH then
+                        sy = labelY[k] + lineH
+                        hit = true
+                    end
+                end
+                if not hit then break end
+            end
+            placed = placed + 1
+            labelX[placed], labelY[placed], labelW[placed] = sx, sy, w
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 1, 0.2, 1)
+        end
+    end
+end
+DevShared.addOverlayDraw("containerLabels", containerLabelsDraw, 20)
+
+-- Barricade overlay: for each objectSpawns barricade entry, draw its entry
+-- number with the barricade type underneath, green when an IsoBarricade is
+-- actually present on the square and red when it is missing. Openings that
+-- could take a barricade but are in neither state - what FindUnbarricaded
+-- dumps - draw orange underneath, so gaps are visible without leaving the game
+local currentBarricadeLabels = nil
+local currentOpenLabels = nil
+
+local function squareHasBarricade(square)
+    if not square then return false end
+    local lists = { square:getObjects(), square:getSpecialObjects() }
+    for l = 1, 2 do
+        local objects = lists[l]
+        if objects then
+            for j = 0, objects:size() - 1 do
+                if instanceof(objects:get(j), "IsoBarricade") then return true end
+            end
+        end
+    end
+    return false
+end
+
+local function buildBarricadeLabels(config)
+    local labels = {}
+    if not config or not config.objectSpawns then return labels end
+    for i = 1, #config.objectSpawns do
+        local e = config.objectSpawns[i]
+        if e and e.barricade and e.x then
+            labels[#labels + 1] = {
+                x = e.x,
+                y = e.y,
+                z = e.z or 0,
+                num = tostring(i),
+                btype = tostring(e.barricade),
+                -- Props.lua matches its target by sprite name; keeping it
+                -- lets the open-opening scan tell a covered opening from a
+                -- second one sharing the square
+                target = e.target,
+            }
+        end
+    end
+    return labels
+end
+
+local BARRICADE_SCAN_RADIUS = 30 -- matches the label draw cutoff below
+local BARRICADE_SCAN_INTERVAL = 30 -- ticks; the scan is far too heavy per frame
+local barricadeScanCountdown = 0
+
+-- An opening the config already addresses: same square, and the same sprite
+-- when the entry names a target (so a window and a door sharing one square
+-- stay distinguishable)
+local function openingIsConfigured(x, y, z, sprite)
+    if not currentBarricadeLabels then return false end
+    for i = 1, #currentBarricadeLabels do
+        local l = currentBarricadeLabels[i]
+        if l.x == x and l.y == y and l.z == z and (not l.target or l.target == sprite) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Rebuild the list of shell openings around the player that could take a
+-- barricade and have none. Same filters FindUnbarricaded applies - exterior
+-- facing, no garage doors - so the overlay and the dump agree; anything the
+-- config already covers is left to its own red/green label
+local function rescanOpenBarricades()
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local found, seen = {}, {}
+    -- Coordinates come off the SCANNED square, not obj:getSquare(): a south or
+    -- east opening is an object on the neighbouring square and has to be
+    -- reported against the square being scanned. Read after the barricadeable
+    -- test so the two Java calls only happen for objects that matter - this
+    -- visits 61x61 squares and every object on each of them.
+    local function consider(obj, square)
+        local btype = barricadeableType(obj)
+        if not btype then return end
+        local x, y = square:getX(), square:getY()
+        local sprite = obj:getSpriteName() or ""
+        local facing = obj:getNorth() and "N" or "W"
+        local key = ("%d,%d,%s,%s"):format(x, y, sprite, facing)
+        if seen[key] then return end
+        seen[key] = true
+        if isGarageOpening(sprite) or not isExteriorOpening(obj) then return end
+        if not obj:isBarricadeAllowed() or obj:isBarricaded() then return end
+        if openingIsConfigured(x, y, playerZ, sprite) then return end
+        found[#found + 1] = {
+            x = x, y = y, z = playerZ,
+            text = btype.tag .. " " .. facing,
+        }
+    end
+    for x = playerX - BARRICADE_SCAN_RADIUS, playerX + BARRICADE_SCAN_RADIUS do
+        for y = playerY - BARRICADE_SCAN_RADIUS, playerY + BARRICADE_SCAN_RADIUS do
+            -- object list plus the getWindowFrame/getWindow fallback for
+            -- 42.20's overlay-merged frames, which never appear as their own
+            -- object; shared with FindUnbarricaded and the picker so all three
+            -- look at the same set
+            DevShared.barricadeCandidatesOnSquare(getSquare(x, y, playerZ), consider)
+        end
+    end
+    currentOpenLabels = found
+end
+
+function barricadesTick()
+    barricadeScanCountdown = barricadeScanCountdown - 1
+    if barricadeScanCountdown <= 0 then
+        barricadeScanCountdown = BARRICADE_SCAN_INTERVAL
+        rescanOpenBarricades()
+    end
+end
+
+-- A barricade belongs to the opening in the wall, not to the floor of the
+-- tile, so lift the labels half a level to sit against the window or door.
+-- Offset in z rather than screen pixels, the way the container labels do it,
+-- so it stays put as you zoom
+local BARRICADE_LABEL_RISE = 0.5
+
+local function barricadeLabelsDraw()
+    if not currentBarricadeLabels and not currentOpenLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    local lineH = tm:getFontHeight(UIFont.Small)
+    if not lineH or lineH <= 0 then lineH = 14 end
+    for i = 1, currentBarricadeLabels and #currentBarricadeLabels or 0 do
+        local l = currentBarricadeLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local seen = squareHasBarricade(getSquare(l.x, l.y, l.z))
+            local r, g, b = 1, 0.25, 0.25
+            if seen then r, g, b = 0.25, 1, 0.25 end
+            local drawZ = l.z + BARRICADE_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.num, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.num, r, g, b, 1)
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + lineH + 1, l.btype, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy + lineH, l.btype, r, g, b, 1)
+        end
+    end
+    -- Unconfigured gaps, orange to match the containers overlay's
+    -- "here but not in the config" colour. Drawn a line lower than a config
+    -- label would sit so the two never collide on a shared square
+    for i = 1, currentOpenLabels and #currentOpenLabels or 0 do
+        local l = currentOpenLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + BARRICADE_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ) + lineH * 2
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, 1, 0.55, 0.1, 1)
+        end
+    end
+end
+DevShared.addOverlayDraw("barricadeLabels", barricadeLabelsDraw, 30)
+
+local showingBarricades = false
+
+function ShowBarricades(index)
+    showingBarricades = not showingBarricades
+    DWAP_DevToggles.barricades = showingBarricades
+    if showingBarricades then
+        local configs = DWAPUtils.loadConfigs(true)
+        if not configs or #configs == 0 then
+            DWAPUtils.dprint("No configs found")
+            showingBarricades = false
+            DWAP_DevToggles.barricades = false
+            return
+        end
+        if not index or index < 1 or index > #configs then
+            DWAPUtils.dprint("Invalid index: " .. tostring(index) .. ". Must be between 1 and " .. #configs)
+            showingBarricades = false
+            DWAP_DevToggles.barricades = false
+            return
+        end
+        local config = configs[index]
+        local labels = buildBarricadeLabels(config)
+        local configName = "Config " .. index
+        if config.doorKeys and config.doorKeys.name then
+            configName = config.doorKeys.name
+        end
+        currentBarricadeLabels = labels
+        -- A config with no barricades yet is exactly when the gap markers are
+        -- worth having, so an empty list no longer refuses to turn on
+        if #labels == 0 then
+            DWAPUtils.dprint("Config " .. index .. " has no barricade objectSpawns - showing open ones only")
+        end
+        currentOpenLabels = nil
+        barricadeScanCountdown = 0
+        Events.OnTick.Remove(barricadesTick)
+        Events.OnTick.Add(barricadesTick)
+        ensureDevOverlay()
+        DWAPUtils.dprint("Barricade overlay enabled for " .. configName .. " (" .. #labels .. " barricades)")
+        DWAPUtils.dprint("Green = barricade present, Red = missing, Orange = exterior opening not in config")
+    else
+        Events.OnTick.Remove(barricadesTick)
+        currentBarricadeLabels = nil
+        currentOpenLabels = nil
+        DWAPUtils.dprint("Barricade overlay disabled")
     end
 end
 
@@ -1272,18 +3334,32 @@ function ShowContainers(index)
 
         -- Build container lookup table
         currentContainerLookup = buildContainerLookup(config)
+        currentContainerLabels = buildContainerLabels(config, currentContainerLookup)
+        -- the lookup is keyed by square now, so count the entries inside it
         local containerCount = 0
-        for _ in pairs(currentContainerLookup) do
-            containerCount = containerCount + 1
+        local duplicateCount = 0
+        for _, record in pairs(currentContainerLookup) do
+            containerCount = containerCount + #record.slots
+            duplicateCount = duplicateCount + record.duplicateEntries
         end
 
         Events.OnTick.Add(containersTick)
+        DWAP_DevToggles.containers = true
+        ensureDevOverlay()
         DWAPUtils.dprint("Container visualization enabled for " .. configName .. " (" .. containerCount .. " containers)")
         DWAPUtils.dprint(
-        "Red = config errors or missing containers, Orange = containers not in config, Purple = partial config, Blue = special containers, Green = all containers in config")
+        "Precedence: Red = config errors, missing containers, or duplicate addressing (two entries on one square resolving to the same slot - the second overwrites the first, so one never fills) > Orange = nothing on the tile is in the config > Purple = only some of it is > Blue = fully claimed and holds a special > Green = fully claimed")
+        DWAPUtils.dprint(
+        "Squares are labeled with their loot entry number; ^ marks an upper (+0.5 z) entry, f a freezer slot, s<n> a stack ordinal, ! every entry in a colliding group - registration order picks the survivor, so the mark says which entries are fighting, not which one loses")
+        if duplicateCount > 0 then
+            DWAPUtils.dprint(("%d entr%s lost to duplicate addressing - the ! labels are the squares to fix"):format(
+                duplicateCount, duplicateCount == 1 and "y is" or "ies are"))
+        end
     else
         Events.OnTick.Remove(containersTick)
+        DWAP_DevToggles.containers = false
         currentContainerLookup = nil
+        currentContainerLabels = nil
         DWAPUtils.dprint("Container visualization disabled")
     end
 end
@@ -1492,6 +3568,68 @@ local function buildPlumbingLookup(config)
     return lookup, tankLookup
 end
 
+local currentPlumbingLabels = nil
+
+-- Fixtures sit at counter/wall height rather than on the floor, same reason
+-- the barricade labels lift: offset in z so it survives zooming
+local PLUMBING_LABEL_RISE = 0.5
+
+-- One label per config entry, so a square's colour can be traced back to the
+-- line that put it there. Tanks are numbered separately with a T prefix,
+-- matching how waterTanks and waterFixtures are separate lists in the config
+local function buildPlumbingLabels(config)
+    local labels = {}
+    if not config then return labels end
+    if config.waterTanks then
+        for i = 1, #config.waterTanks do
+            local tank = config.waterTanks[i]
+            if tank and tank.x and tank.y and tank.z then
+                labels[#labels + 1] = {
+                    x = tank.x, y = tank.y, z = math.floor(tank.z),
+                    text = "T" .. i, tank = true,
+                }
+            end
+        end
+    end
+    if config.waterFixtures then
+        for i = 1, #config.waterFixtures do
+            local fixture = config.waterFixtures[i]
+            if fixture and fixture.x and fixture.y and fixture.z then
+                labels[#labels + 1] = {
+                    x = fixture.x, y = fixture.y, z = math.floor(fixture.z),
+                    text = tostring(i),
+                }
+            end
+        end
+    end
+    return labels
+end
+
+-- Same draw pattern as the container and barricade labels: isoToScreenX/Y
+-- during the UI pass, dark shadow under white-ish text
+local function plumbingLabelsDraw()
+    if not currentPlumbingLabels then return end
+    local player = getPlayer()
+    local pSquare = player and player:getCurrentSquare()
+    if not pSquare then return end
+    local playerNum = player:getPlayerNum()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    local tm = getTextManager()
+    for i = 1, #currentPlumbingLabels do
+        local l = currentPlumbingLabels[i]
+        if l.z == playerZ and math.abs(l.x - playerX) <= 30 and math.abs(l.y - playerY) <= 30 then
+            local drawZ = l.z + PLUMBING_LABEL_RISE
+            local sx = isoToScreenX(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local sy = isoToScreenY(playerNum, l.x + 0.5, l.y + 0.5, drawZ)
+            local r, g, b = 0.4, 0.85, 1
+            if l.tank then r, g, b = 0.4, 0.6, 1 end
+            tm:DrawStringCentre(UIFont.Small, sx + 1, sy + 1, l.text, 0, 0, 0, 0.8)
+            tm:DrawStringCentre(UIFont.Small, sx, sy, l.text, r, g, b, 1)
+        end
+    end
+end
+DevShared.addOverlayDraw("plumbingLabels", plumbingLabelsDraw, 40)
+
 -- Check plumbing fixtures on a square and return their status
 local function checkSquarePlumbing(square, plumbingLookup, tankLookup)
     if not square then
@@ -1681,17 +3819,40 @@ function ShowPlumbing(index)
             lookup = plumbingLookup,
             tankLookup = tankLookup
         }
+        currentPlumbingLabels = buildPlumbingLabels(config)
 
         Events.OnTick.Add(plumbingTick)
+        DWAP_DevToggles.plumbing = true
+        ensureDevOverlay()
         DWAPUtils.dprint("Plumbing visualization enabled for " ..
             configName .. " (" .. fixtureCount .. " total fixtures, " .. tankCount .. " tanks)")
         DWAPUtils.dprint(
             "Purple = industry_02_73/72, Red = not in config or <100 fluid, Blue = water tank with fluid, Green = fixture in config with >100 fluid")
     else
         Events.OnTick.Remove(plumbingTick)
+        DWAP_DevToggles.plumbing = false
         currentPlumbingLookup = nil
+        currentPlumbingLabels = nil
         DWAPUtils.dprint("Plumbing visualization disabled")
     end
+end
+
+-- Bounds for the survey tools: inside a building scan its actual footprint
+-- (def bounds) so neighbouring houses can't leak in; outside take a small
+-- grab around the player
+local function surveyBounds(building, playerX, playerY)
+    if building then
+        local def = building.getDef and building:getDef()
+        if def then
+            local minX, maxX, minY, maxY = def:getX(), def:getX2(), def:getY(), def:getY2()
+            DWAPUtils.dprint(("Scanning building footprint %d,%d - %d,%d"):format(minX, minY, maxX, maxY))
+            return minX, maxX, minY, maxY
+        end
+        DWAPUtils.dprint("No building def; falling back to 50-tile radius")
+        return playerX - 50, playerX + 50, playerY - 50, playerY + 50
+    end
+    DWAPUtils.dprint("Standing outside: scanning 10-tile radius")
+    return playerX - 10, playerX + 10, playerY - 10, playerY + 10
 end
 
 -- Find unconnected plumbing fixtures in the same building and floor as the player
@@ -1703,107 +3864,55 @@ function FindUnconnectedPlumbing()
     end
 
     local building = pSquare:getBuilding()
-    if not building then
-        DWAPUtils.dprint("Player is not inside a building")
-        return
-    end
-
     local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
     DWAPUtils.dprint("=== FINDING UNCONNECTED PLUMBING FIXTURES ===")
     DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
 
-    -- Plumbing fixture names to look for
-    local plumbingNames = {
-        ["Bath"] = true,
-        ["Shower"] = true,
-        ["Toilet"] = true,
-        ["Combo Washer Dryer"] = true,
-        ["Gallery Toilet"] = true,
-        ["Sink"] = true,
-        ["Soda Machine"] = true,
-        ["Washing Machine"] = true
-    }
+    local minX, maxX, minY, maxY = surveyBounds(building, playerX, playerY)
 
     local unconnectedFixtures = {}
     local connectedFixtures = {}
     local waterTanks = {}
-    local searchRadius = 50 -- Search in a larger area to cover the building
 
-    -- Search all squares in the radius on the same floor
-    for x = playerX - searchRadius, playerX + searchRadius do
-        for y = playerY - searchRadius, playerY + searchRadius do
+    -- Search all squares in the bounds on the same floor
+    for x = minX, maxX do
+        for y = minY, maxY do
             local square = getSquare(x, y, playerZ)
             if square then
-                -- Only check squares that are part of the same building
+                -- Inside a building only its own squares count; outside
+                -- (small radius) everything counts
                 local squareBuilding = square:getBuilding()
-                if squareBuilding == building then
+                if not building or DWAPUtils.sameBuilding(squareBuilding, building) then
+                    local room = square:getRoom()
+                    local whereTag = (room and room:getName() or "outside") .. ", " .. bldTag(squareBuilding)
                     local objects = square:getObjects()
                     if objects then
                         for j = 0, objects:size() - 1 do
-                            local obj = objects:get(j)
-                            local isPlumbingFixture = false
-                            local customNameStr = "Unknown"
-                            local spriteName = ""
-
-                            if obj then
-                                spriteName = obj:getSpriteName() or ""
-
-                                -- Check if object has fluid (tanks)
-                                if obj:hasFluid() then
-                                    local fluidContainer = obj:getFluidContainer()
-                                    if fluidContainer and fluidContainer:getCapacity() > 1000 then
-                                        -- This is likely a water tank
-                                        table.insert(waterTanks, {
-                                            sprite = spriteName,
-                                            x = x,
-                                            y = y,
-                                            z = playerZ,
-                                            capacity = fluidContainer:getCapacity(),
-                                            amount = fluidContainer:getAmount()
-                                        })
-                                    else
-                                        isPlumbingFixture = true
-                                    end
+                            local info = plumbingInfo(objects:get(j))
+                            if info and info.kind == "tank" then
+                                table.insert(waterTanks, {
+                                    sprite = info.sprite,
+                                    x = x,
+                                    y = y,
+                                    z = playerZ,
+                                    capacity = info.capacity,
+                                    amount = info.amount,
+                                    where = whereTag
+                                })
+                            elseif info then
+                                local fixtureData = {
+                                    sprite = info.sprite,
+                                    x = x,
+                                    y = y,
+                                    z = playerZ,
+                                    customName = info.customName,
+                                    isConnected = info.isConnected,
+                                    where = whereTag
+                                }
+                                if info.isConnected then
+                                    table.insert(connectedFixtures, fixtureData)
                                 else
-                                    local objectSprite = obj:getSprite()
-                                    if objectSprite then
-                                        local props = objectSprite:getProperties()
-                                        local customName = props and props:has("CustomName") and props:get("CustomName")
-                                        if customName and plumbingNames[customName] then
-                                            isPlumbingFixture = true
-                                            customNameStr = customName
-                                        end
-                                        if obj:isFloor() then
-                                            isPlumbingFixture = false
-                                        end
-                                    end
-                                end
-
-                                if isPlumbingFixture then
-                                    -- Check if the fixture is connected to water
-                                    local isConnected = false
-                                    if obj.getUsesExternalWaterSource and obj.hasExternalWaterSource then
-                                        isConnected = obj:getUsesExternalWaterSource() and obj:hasExternalWaterSource()
-                                    elseif obj:hasFluid() and obj.getFluidAmount then
-                                        -- For fluid-based fixtures, check if they have water
-                                        local fluidAmount = obj:getFluidAmount() or 0
-                                        isConnected = fluidAmount > 50 -- Consider connected if has significant water
-                                    end
-
-                                    local fixtureData = {
-                                        sprite = spriteName,
-                                        x = x,
-                                        y = y,
-                                        z = playerZ,
-                                        customName = customNameStr,
-                                        isConnected = isConnected
-                                    }
-
-                                    if isConnected then
-                                        table.insert(connectedFixtures, fixtureData)
-                                    else
-                                        table.insert(unconnectedFixtures, fixtureData)
-                                    end
+                                    table.insert(unconnectedFixtures, fixtureData)
                                 end
                             end
                         end
@@ -1824,7 +3933,7 @@ function FindUnconnectedPlumbing()
             "\", x = " ..
             tank.x ..
             ", y = " ..
-            tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount)
+            tank.y .. ", z = " .. tank.z .. " }, -- capacity: " .. tank.capacity .. ", current: " .. tank.amount .. " | " .. (tank.where or ""))
         end
         print("    },")
     else
@@ -1839,7 +3948,7 @@ function FindUnconnectedPlumbing()
             print("        { sprite = \"" ..
             fixture.sprite ..
             "\", x = " ..
-            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = #, }, ")
+            fixture.x .. ", y = " .. fixture.y .. ", z = " .. fixture.z .. ", sourceType=\"tank\", source = wtc, }, -- " .. (fixture.where or ""))
         end
         print("    },")
     else
@@ -1852,7 +3961,7 @@ function FindUnconnectedPlumbing()
             local fixture = connectedFixtures[i]
             DWAPUtils.dprint("  " ..
             fixture.sprite ..
-            " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ")")
+            " at " .. fixture.x .. "," .. fixture.y .. "," .. fixture.z .. " (" .. fixture.customName .. ") -- " .. (fixture.where or ""))
         end
     end
 
@@ -1867,6 +3976,163 @@ function FindUnconnectedPlumbing()
         unconnectedFixtures = unconnectedFixtures,
         connectedFixtures = connectedFixtures
     }
+end
+
+-- Find barricadeable openings with no barricade on them, in the same building
+-- and floor as the player. Counterpart to FindUnconnectedPlumbing: same
+-- footprint-bounded scan, same paste-ready dump - objectSpawns lines this
+-- time. Only shell openings are dumped: interior doors and garage doors are
+-- counted in the summary but never listed. Note this reads LIVE state, so
+-- barricades the mod already spawned read as done and drop out of the dump;
+-- with the Barricade sandbox option off, every opening looks like a gap.
+function FindUnbarricaded()
+    local pSquare = getPlayer():getCurrentSquare()
+    if not pSquare then
+        DWAPUtils.dprint("Player square not found")
+        return
+    end
+
+    local building = pSquare:getBuilding()
+    local playerX, playerY, playerZ = pSquare:getX(), pSquare:getY(), pSquare:getZ()
+    DWAPUtils.dprint("=== FINDING UNBARRICADED OPENINGS ===")
+    DWAPUtils.dprint("Player position: " .. playerX .. "," .. playerY .. "," .. playerZ)
+
+    local minX, maxX, minY, maxY = surveyBounds(building, playerX, playerY)
+    -- PZ only stores north and west walls, so a building's SOUTH and EAST
+    -- shell openings live on the outside square one tile past the footprint.
+    -- Widen by a tile to reach them; ownership is settled per opening below
+    if building then
+        minX, maxX, minY, maxY = minX - 1, maxX + 1, minY - 1, maxY + 1
+    end
+
+    local unbarricaded, barricaded, blocked = {}, {}, 0
+    local skippedInterior, skippedGarage = 0, 0
+    local seen = {}
+
+    -- Props.lua matches its target by sprite name against the square's object
+    -- list, so that is the name worth dumping. The coordinates are the SCANNED
+    -- square's, not obj:getSquare()'s - a south or east opening is an object on
+    -- the neighbouring square, which is why the bounds were widened above, and
+    -- it has to be dumped against the square it was found scanning.
+    local function record(obj, square)
+        local btype = barricadeableType(obj)
+        if not btype then return end
+        local x, y = square:getX(), square:getY()
+        local sprite = obj:getSpriteName() or ""
+        local facing = obj:getNorth() and "N" or "W"
+        local key = ("%d,%d,%d,%s,%s"):format(x, y, playerZ, sprite, facing)
+        if seen[key] then return end
+        seen[key] = true
+        if isGarageOpening(sprite) then
+            skippedGarage = skippedGarage + 1
+            return
+        end
+        if not isExteriorOpening(obj) then
+            skippedInterior = skippedInterior + 1
+            return
+        end
+        -- Exactly one side is roomed (isExteriorOpening guarantees it): that
+        -- side owns the opening. Testing the square the object happens to sit
+        -- on instead would drop every south/east opening, whose object lives
+        -- on the unroomed outside square
+        local near = obj:getSquare()
+        local far = obj.getOppositeSquare and obj:getOppositeSquare()
+        local inside = (near and near:getRoom()) and near or far
+        local insideBuilding = inside and inside:getBuilding()
+        if building and not DWAPUtils.sameBuilding(insideBuilding, building) then
+            return -- a neighbour's shell, pulled in by the widened bounds
+        end
+        local room = inside and inside:getRoom()
+        local whereTag = (room and room:getName() or "outside") .. ", " .. bldTag(insideBuilding)
+        if not obj:isBarricadeAllowed() then
+            blocked = blocked + 1
+            return
+        end
+        local entry = {
+            sprite = sprite, x = x, y = y, z = playerZ,
+            kind = btype.kind, facing = facing, where = whereTag,
+        }
+        if obj:isBarricaded() then
+            barricaded[#barricaded + 1] = entry
+        else
+            unbarricaded[#unbarricaded + 1] = entry
+        end
+    end
+
+    for x = minX, maxX do
+        for y = minY, maxY do
+            -- object list plus the getWindowFrame/getWindow fallback: 42.20 can
+            -- merge a window frame into the wall as an overlay, so it never
+            -- shows up in the object list as its own barricadeable object.
+            -- Shared with the overlay's rescan and the picker so all three look
+            -- at the same set
+            DevShared.barricadeCandidatesOnSquare(getSquare(x, y, playerZ), record)
+        end
+    end
+
+    DWAPUtils.dprint("=== UNBARRICADED OPENINGS FOUND (" .. #unbarricaded .. ") ===")
+    if #unbarricaded > 0 then
+        print("    objectSpawns = {")
+        for i = 1, #unbarricaded do
+            local o = unbarricaded[i]
+            print(("        { barricade = \"woodhalf\", enabled = \"Barricade\", target=\"%s\", x = %d, y = %d, z = %d, }, -- %s %s | %s")
+                :format(o.sprite, o.x, o.y, o.z, o.kind, o.facing, o.where or ""))
+        end
+        print("    },")
+        DWAPUtils.dprint("barricade = wood | woodhalf | metal | metalbar (nothing else is applied)")
+    else
+        DWAPUtils.dprint("No unbarricaded openings found!")
+    end
+
+    if #barricaded > 0 then
+        DWAPUtils.dprint("=== ALREADY BARRICADED (" .. #barricaded .. ") ===")
+        for i = 1, #barricaded do
+            local o = barricaded[i]
+            DWAPUtils.dprint(("  %s %s at %d,%d,%d (%s) -- %s"):format(
+                o.kind, o.facing, o.x, o.y, o.z, o.sprite, o.where or ""))
+        end
+    end
+
+    DWAPUtils.dprint("=== SUMMARY ===")
+    DWAPUtils.dprint("Unbarricaded: " .. #unbarricaded)
+    DWAPUtils.dprint("Already barricaded: " .. #barricaded)
+    DWAPUtils.dprint("Barricading not allowed: " .. blocked)
+    DWAPUtils.dprint("Skipped, interior (room on both sides): " .. skippedInterior)
+    DWAPUtils.dprint("Skipped, garage door (barricades do not stick): " .. skippedGarage)
+    DWAPUtils.dprint("Total openings: "
+        .. (#unbarricaded + #barricaded + blocked + skippedInterior + skippedGarage))
+
+    return {
+        unbarricaded = unbarricaded,
+        barricaded = barricaded,
+    }
+end
+
+--- Nearest config by spawn distance to the player. Shared by the dev panel
+--- and the export dumps so they cannot disagree about what "nearest" means.
+--- @param useCache boolean|nil
+--- @return number|nil index, string|nil name
+function DWAPNearestConfig(useCache)
+    local player = getPlayer()
+    if not player then return nil end
+    local px, py = player:getX(), player:getY()
+    local configs = DWAPUtils.loadConfigs(not useCache)
+    if not configs then return nil end
+    local best, bestDist
+    for i = 1, #configs do
+        local config = configs[i]
+        local spawn = config and config.spawn
+        if spawn and spawn.x then
+            local dx, dy = spawn.x - px, spawn.y - py
+            local d = dx * dx + dy * dy
+            if not bestDist or d < bestDist then
+                best, bestDist = i, d
+            end
+        end
+    end
+    if not best then return nil end
+    local config = configs[best]
+    return best, (config and config.doorKeys and config.doorKeys.name) or ("Config " .. best)
 end
 
 local sourceConfig = 1
@@ -2037,11 +4303,16 @@ function copyConfig()
         print("    loot = {")
         for i = 1, #copiedContainers do
             local container = copiedContainers[i]
-            local coordsStr = "coords = {x=" ..
-            container.coords.x .. ", y=" .. container.coords.y .. ", z=" .. container.coords.z .. "},"
+            local coordsStr = ("coords = { x = %d, y = %d, z = %d },"):format(
+                container.coords.x, container.coords.y, container.coords.z)
 
             print("        {")
-            print("            type = 'container',")
+            -- `type` was never read and is gone from the configs; the copied
+            -- entry carries the source entry's note, which is the part worth
+            -- keeping.
+            if container.note then
+                print(('            note = "%s",'):format(tostring(container.note)))
+            end
             if container.sprite then
                 print("            sprite = '" .. container.sprite .. "',")
             end

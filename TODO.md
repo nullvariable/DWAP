@@ -35,12 +35,12 @@ ekron industrial basement 575 9379
 ## 42.20 update — deferred work (audited 2026-07-30)
 
 ### Deferred modernizations (do after 42.20 compat release is verified)
-* `DWAPPowerSystem_server.lua` `getSquarePowerDrain` (~568-657): replace the hard-coded per-appliance
+* `DWAPPowerSystem_server.lua` `getSquarePowerDrain`: replace the hard-coded per-appliance
   drain table ("mirrors IsoGenerator as of 42.10") with the new 42.20 per-object API:
   `obj:couldBePoweredByGenerator()` + `obj:getGeneratorPowerConsumption()`. Tracks future vanilla
-  drain changes automatically. Keep `getPoweredItemName` for the UI list.
+  drain changes automatically. Keep `getPoweredItemName` for the UI list.✔
 * Same file, `powerScan` z-range math: use new `IsoGenerator.getMinAffectedLevel()`/`getMaxAffectedLevel()`
-  where a generator instance is in hand.
+  where a generator instance is in hand.✔
 * Optional cleanup: drop inert `entityscript=DWAP/dwap_entities` line from mod.info (module is empty);
   remove dead `[201]` sentinel entry in `StashDescriptions/DWAPStashDesc.lua`.
 * Legacy (pre-v17) save support was removed for 42.20 (42.20 map update broke old saves anyway).

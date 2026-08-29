@@ -59,8 +59,9 @@ end
 local function doPlumbing(_, player, itemToPipe)
     local playerObj = getSpecificPlayer(player)
     if not playerObj then return end
+    -- ItemTag, not a String - same B42 signature change as the menu check below
     local wrench = playerObj:getInventory():getFirstTypeEvalRecurse("PipeWrench", predicateNotBroken) or
-        playerObj:getInventory():getFirstTagEvalRecurse("PipeWrench", predicateNotBroken);
+        playerObj:getInventory():getFirstTagEvalRecurse(ItemTag.PIPE_WRENCH, predicateNotBroken);
     if not wrench then
         DWAPUtils.dprint("No wrench found")
         return
@@ -206,7 +207,12 @@ DWAP.worldObjectContextMenuWater = function(player, context, worldobjects, test)
         object);
     local playerObj = getSpecificPlayer(player)
     local playerInv = playerObj:getInventory()
-    if not playerInv:containsTypeEvalRecurse("PipeWrench", predicateNotBroken) and not playerInv:containsTagEvalRecurse("PipeWrench", predicateNotBroken) then
+    -- containsTagEvalRecurse takes an ItemTag, not a String: passing "PipeWrench"
+    -- throws "expected argument of type ItemTag, got String" and kills the whole
+    -- context menu build, so right-clicking ANY plumbable object was broken.
+    -- Vanilla passes the constant directly (see ISHutchUI's ItemTag.CLEAN_STAINS).
+    if not playerInv:containsTypeEvalRecurse("PipeWrench", predicateNotBroken)
+        and not playerInv:containsTagEvalRecurse(ItemTag.PIPE_WRENCH, predicateNotBroken) then
         option.notAvailable = true;
         local tooltip = ISWorldObjectContextMenu.addToolTip()
         tooltip:setName(getText("ContextMenu_PlumbItem", name));
