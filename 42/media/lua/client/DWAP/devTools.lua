@@ -2349,7 +2349,7 @@ local function allLootFinishConfig(unloaded, badZ)
                 -- stamp verification calls it a pass. Count them separately or
                 -- a config freshly picked from rooms reads as green while every
                 -- container it names stays empty.
-                if e.coords and not e.dist and not e.items and not e.special then
+                if e.coords and not e.dist and not e.items and not e.special and not e.tag then
                     skeletons[#skeletons + 1] = i
                 end
             end
