@@ -158,15 +158,6 @@ option DWAP.Loot_EnableMaps
 	translation = DWAP_Loot_EnableMaps,
 }
 
-option DWAP.Loot_SpawnChanceExperiment
-{
-	type = boolean,
-	default = FALSE,
-
-	page = DWAPGeneral,
-	translation = DWAP_Loot_SpawnChanceExperiment,
-}
-
 option DWAP.Loot_EnableBooks
 {
 	type = boolean,

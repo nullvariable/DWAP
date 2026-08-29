@@ -134,10 +134,6 @@ debugScenarios.DebugScenarioDWAP = {
             WaterTankCapacity = 4000,
             Loot = 2, -- all
             -- Loot = 1, -- primary only
-            -- Loot_SpawnChanceExperiment: default-off dev tool. The step-6
-            -- generosity read (2026-08-19) closed with "empty reads as broken",
-            -- so it stays off; the fix is step 8 allocation, not skipping.
-            -- Set true + drop the levels below to 3 to re-run the read.
             Loot_EnableMaps = true,
             Loot_EnableBooks = true,
             SeedLibrary = true,

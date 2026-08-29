@@ -762,33 +762,6 @@ local function fillContainer(container, config, index, coordsKey)
     removeLootEntry(index, coordsKey)
 end
 
--- Step 6 spawn-chance experiment (proposal §5.10 option C). DEFAULT OFF.
--- Deterministic value in [0,1) from a plain integer hash of (i, x, y, z) --
--- NO RNG object, so the same world rolls identically across reloads and a
--- half-looted base never reshuffles. Coords can be negative (z in basements);
--- Kahlua's `%` is truncated division, so normalise the final result to keep
--- value non-negative and in range.
-local function spawnChanceValue(i, x, y, z)
-    -- multiplicative mix: each term must move `value` across the whole
-    -- [0,1) range. A shallow FNV *31 polynomial left the coord terms
-    -- swamped by the modulus (value stuck in [0.519,0.526]) - proven
-    -- inert against real config coords, so dispersion was re-verified
-    -- empirically after this rewrite. All intermediates stay under 2^53
-    -- (max ~3e13 for coords up to 30000, exact as doubles) and the `%`
-    -- quotient stays under 2^31, avoiding Kahlua's int-cast overflow.
-    local h = (i * 2246822519 + x * 668265263 + y * 374761393 + z * 40503) % 2147483647
-    if h < 0 then h = h + 2147483647 end
-    return h / 2147483647
-end
-
--- level -> KEEP probability. Each value is a tunable play-test knob.
-local function spawnChanceKeepProbability(level)
-    if level == 1 then return 1.0      -- Full: always keep
-    elseif level == 2 then return 0.8  -- keep 80%
-    elseif level == 3 then return 0.55 -- Low (the default): keep 55%
-    else return 1.0 end                -- level 4 fills nothing anyway; keep
-end
-
 local function loadConfigs()
     local configs = DWAPUtils.loadConfigs()
     local safehouseIndex = DWAPUtils.getPrimaryConfigIndex()
@@ -798,7 +771,6 @@ local function loadConfigs()
         local config = configs[i]
         local count = 0
         local specialCount = 0
-        local spawnChanceSkipped = 0
         -- v2: N = registered non-special declarative entries for this base, the
         -- fillable containers subject to tier scaling. Drives S(N) at fill time.
         local baseCount = 0
@@ -849,59 +821,28 @@ local function loadConfigs()
                                 -- overwrite to low
                                 entry.level = 3
                             end
-                            -- Step 6 spawn-chance experiment (default OFF). When
-                            -- enabled, deterministically de-register a fraction
-                            -- of plain declarative entries so vanilla fills those
-                            -- containers (never emptied -- emptyIt only runs in
-                            -- fillContainer, which never fires for an unregistered
-                            -- entry). Specials and pinned entries always register;
-                            -- entry.pin does not exist yet but is tested for
-                            -- forward compatibility.
-                            local spawnChanceSkip = false
-                            if SandboxVars.DWAP.Loot_SpawnChanceExperiment
-                                and not entry.special and not entry.pin
-                                and entry.coords then
-                                local numLevel = 3
-                                if type(entry.level) == "string" then
-                                    numLevel = SandboxVars.DWAP[entry.level] or 4
-                                elseif type(entry.level) == "number" then
-                                    numLevel = entry.level
-                                end
-                                local keepProbability = spawnChanceKeepProbability(numLevel)
-                                local value = spawnChanceValue(i, entry.coords.x, entry.coords.y, entry.coords.z)
-                                if value >= keepProbability then
-                                    spawnChanceSkip = true
-                                    spawnChanceSkipped = spawnChanceSkipped + 1
-                                    DWAPUtils.dprint("Config " .. i
-                                        .. " spawn-chance skip (level " .. numLevel
-                                        .. ", value " .. tostring(value)
-                                        .. " >= keep " .. tostring(keepProbability) .. ")")
-                                end
+                            setLootConfigValue(entry)
+                            -- v2: count REGISTERED non-special entries as this
+                            -- base's fillable-container N. setLootConfigValue
+                            -- no-ops without coords, so gate the count on coords.
+                            if entry.coords and not entry.special then
+                                baseCount = baseCount + 1
                             end
-                            if not spawnChanceSkip then
-                                setLootConfigValue(entry)
-                                -- v2: count REGISTERED non-special entries as this
-                                -- base's fillable-container N. setLootConfigValue
-                                -- no-ops without coords, so gate the count on coords.
-                                if entry.coords and not entry.special then
-                                    baseCount = baseCount + 1
-                                end
-                                -- try to precache the items
-                                if entry.dist then
-                                    DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
-                                end
-                                if entry.special then
-                                    specialCount = specialCount + 1
-                                end
-                                count = count + 1
+                            -- try to precache the items
+                            if entry.dist then
+                                DWAP_LootSpawning.getItemsWithDistLists(entry.dist, entry.distIncludeJunk)
                             end
+                            if entry.special then
+                                specialCount = specialCount + 1
+                            end
+                            count = count + 1
                         end
                     end
                 end
             end
         end
         baseContainerCount[i] = baseCount
-        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " fillable N: " .. baseCount .. " spawn-chance skipped: " .. spawnChanceSkipped .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
+        DWAPUtils.dprint("Done. Loot config count: " .. count .. " special count: " .. specialCount .. " fillable N: " .. baseCount .. " for config: " .. tostring(config.doorKeys and config.doorKeys.name or "unknown"))
     end
 end
 

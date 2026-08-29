@@ -80,8 +80,6 @@
     "Sandbox_DWAP_Loot_value_option4": "None",
     "Sandbox_DWAP_Loot_EnableMaps": "Loot -> Maps",
     "Sandbox_DWAP_Loot_EnableMaps_tooltip": "Stash of All Maps",
-    "Sandbox_DWAP_Loot_SpawnChanceExperiment": "Loot: Spawn-Chance Experiment",
-    "Sandbox_DWAP_Loot_SpawnChanceExperiment_tooltip": "Experimental. Leaves a deterministic fraction of DWAP containers to vanilla loot instead of filling them, to evaluate emptiness. Default off.",
     "Sandbox_DWAP_Loot_EnableBooks": "Loot -> Skill Books",
     "Sandbox_DWAP_Loot_EnableBooks_tooltip": "Stash of All Skill Books",
     "Sandbox_DWAP_Loot_MediaLevel": "Loot -> Media",
