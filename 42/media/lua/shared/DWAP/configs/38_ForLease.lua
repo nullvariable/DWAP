@@ -120,7 +120,8 @@ local ForLease = {
             note = "overhead @ bunker",
             coords = { x = 12541, y = 5217, z = -1 },
             slot = "upper",
-            tag = "DWAPFood",
+            special = "kitchentools",
+            level = "Loot_FoodLevel",
         },
         { -- E15
             note = "medicine @ bunker",
@@ -147,7 +148,8 @@ local ForLease = {
         { -- E19
             note = "counter @ bunker",
             coords = { x = 12535, y = 5218, z = -1 },
-            tag = "DWAPFood",
+            sandboxEnable = "Loot_EnableMaps",
+            special = "maps"
         },
         { -- E20
             note = "medicine @ bunker",
@@ -158,13 +160,13 @@ local ForLease = {
         { -- E21
             note = "crate @ farmstorage",
             coords = { x = 12539, y = 5212, z = -1 },
-            tag = "DWAPFarm",
+            tag = "DWAPFish",
         },
         { -- E22
             note = "crate @ farmstorage",
             coords = { x = 12539, y = 5212, z = -1 },
             stack = 2,
-            tag = "DWAPFarm",
+            tag = "DWAPTailor"
         },
         { -- E23
             note = "crate @ farmstorage",
@@ -210,27 +212,31 @@ local ForLease = {
         { -- E31
             note = "metal_shelves @ farmstorage",
             coords = { x = 12539, y = 5216, z = -1 },
-            tag = "DWAPBuildMats",
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
         },
         { -- E32
             note = "metal_shelves @ farmstorage",
             coords = { x = 12540, y = 5216, z = -1 },
-            tag = "DWAPTools",
+            special = "essentials"
         },
         { -- E33
             note = "metal_shelves @ farmstorage",
             coords = { x = 12541, y = 5216, z = -1 },
-            tag = "DWAPBuildMats",
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
         },
         { -- E34
             note = "metal_shelves @ farmstorage",
             coords = { x = 12542, y = 5216, z = -1 },
-            tag = "DWAPTools",
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillbooks1",
         },
         { -- E35
             note = "metal_shelves @ farmstorage",
             coords = { x = 12543, y = 5216, z = -1 },
-            tag = "DWAPBuildMats",
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
         },
         { -- E36
             note = "crate @ farmstorage",
@@ -262,12 +268,12 @@ local ForLease = {
             note = "militarycrate @ farmstorage",
             coords = { x = 12534, y = 5218, z = -1 },
             stack = 2,
-            tag = "DWAPGun",
         },
         { -- E42
             note = "metal_shelves @ farmstorage",
             coords = { x = 12544, y = 5216, z = -1 },
-            tag = "DWAPTools",
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
         },
         { -- E43
             note = "militarycrate @ gunstore",

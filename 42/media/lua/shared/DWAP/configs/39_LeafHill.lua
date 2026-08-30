@@ -57,22 +57,32 @@ local LeafHill = {
         { -- E1
             note = "dresser @ kidsbedroom",
             coords = { x = 12394, y = 3403, z = 1 },
-            tag = "DWAPLockers",
+            special = "essentials",
         },
         { -- E2
             note = "shelves @ kidsbedroom",
             coords = { x = 12395, y = 3406, z = 1 },
-            tag = "DWAPMedia",
+            special = "gunlocker",
+            level = "Loot_GunLevel"
+        },
+        {
+            note = "metal_shelves @ closet",
+            coords = { x = 12398, y = 3406, z = 1 },
+            slot = "upper",
+            sandboxEnable = "SeedLibrary",
+            special = "SeedLibrary"
         },
         { -- E3
             note = "shelves @ hall",
             coords = { x = 12400, y = 3404, z = 1 },
+            sandboxEnable = "Loot_EnableMaps",
             special = "maps",
         },
         { -- E4
             note = "shelves @ hall",
             coords = { x = 12401, y = 3404, z = 1 },
-            tag = "DWAPMedia",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillmags"
         },
         { -- E5
             note = "wardrobe @ bedroom",
@@ -168,12 +178,14 @@ local LeafHill = {
         { -- E23
             note = "dishescabinet @ diningroom",
             coords = { x = 12394, y = 3413, z = 0 },
-            tag = "DWAPFood",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillbooks2"
         },
         { -- E24
             note = "dishescabinet @ diningroom",
             coords = { x = 12394, y = 3414, z = 0 },
-            tag = "DWAPFood",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillbooks1"
         },
         { -- E25
             note = "counter @ laundry",

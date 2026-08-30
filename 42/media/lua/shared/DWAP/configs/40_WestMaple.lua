@@ -56,12 +56,14 @@ local WestMaple = {
         { -- E1
             note = "sidetable @ bedroom",
             coords = { x = 6115, y = 6635, z = 1 },
-            tag = "DWAPMedia",
+            special = "gunlocker",
+            level = "Loot_GunLevel"
         },
         { -- E2
             note = "sidetable @ bedroom",
             coords = { x = 6115, y = 6638, z = 1 },
-            tag = "DWAPMedia",
+            special = "gunlocker",
+            level = "Loot_GunLevel"
         },
         { -- E3
             note = "shelves @ bedroom",
@@ -140,22 +142,26 @@ local WestMaple = {
         { -- E17
             note = "shelves @ kidsbedroom",
             coords = { x = 6121, y = 6634, z = 1 },
-            tag = "DWAPMedia",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillbooks1"
         },
         { -- E18
             note = "shelves @ kidsbedroom",
             coords = { x = 6122, y = 6634, z = 1 },
-            tag = "DWAPMedia",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillbooks2"
         },
         { -- E19
             note = "dresser @ kidsbedroom",
             coords = { x = 6123, y = 6634, z = 1 },
-            tag = "DWAPLockers",
+            sandboxEnable = "SeedLibrary",
+            special = "SeedLibrary"
         },
         { -- E20
             note = "sidetable @ kidsbedroom",
             coords = { x = 6121, y = 6638, z = 1 },
-            tag = "DWAPMedia",
+            sandboxEnable = "Loot_EnableBooks",
+            special = "skillmags"
         },
         { -- E21
             note = "fireplace @ livingroom",
@@ -186,7 +192,8 @@ local WestMaple = {
         { -- E26
             note = "counter @ kitchen",
             coords = { x = 6114, y = 6628, z = 0 },
-            tag = "DWAPFood",
+            special = "kitchentools",
+            level = "Loot_FoodLevel"
         },
         { -- E27
             note = "counter @ kitchen",
@@ -310,7 +317,8 @@ local WestMaple = {
             note = "militarycrate @ warehouse",
             coords = { x = 6121, y = 6646, z = -1 },
             stack = 2,
-            tag = "DWAPGun",
+            special = "gunlocker",
+            level = "Loot_GunLevel"
         },
         { -- E50
             note = "crate @ warehouse",

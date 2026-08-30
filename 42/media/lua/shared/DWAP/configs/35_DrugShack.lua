@@ -540,6 +540,18 @@ local DrugShack = {
             distIncludeJunk = true,
             tag = "DWAPLockers",
         },
+        {
+            note = "crate @ drugshack",
+            coords = { x = 11587, y = 9288, z = 0 },
+            special = "kitchentools",
+            level = "Loot_FoodLevel",
+        },
+        {
+            note = "crate @ drugshack",
+            coords = { x = 11586, y = 9292, z = 0 },
+            sandboxEnable = 'Loot_EnableMaps',
+            special = "maps",
+        },
     },
 }
 

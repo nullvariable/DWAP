@@ -13,19 +13,19 @@ local R = "__REMOVE__" -- BunkerShell field-removal sentinel (see preset docs)
 --     stack-2 twin dropped (a plain locker at +(2,3), a militarylocker at
 --     +(2,5)); the gunlocker tile is likewise a single militarylocker.
 local bunkerOverrides = {
-    E1  = { special = R, sandboxEnable = R, note = "dresser @ bunker",       tag = "DWAPFood" },
-    E3  = { special = R, level = R,         note = "counter @ bunker",       tag = "DWAPFood" },
+    E1  = { special = R, sandboxEnable = R, note = "dresser @ bunker", tag = "DWAPFood" },
+    E3  = { special = R, level = R, note = "counter @ bunker", tag = "DWAPFood" },
     E11 = { special = R, sandboxEnable = R, note = "metal_shelves @ bunker", tag = "DWAPFood" },
     E12 = { special = R, sandboxEnable = R, note = "metal_shelves @ bunker", tag = "DWAPFood" },
     E13 = { special = R, sandboxEnable = R, note = "metal_shelves @ bunker", tag = "DWAPFood" },
     E14 = { special = R, sandboxEnable = R, note = "metal_shelves @ bunker", tag = "DWAPFood" },
-    E15 = { special = R,                    note = "metal_shelves @ bunker", tag = "DWAPFood" },
-    E16 = { note = "locker @ bunker", tag = "DWAPGun", distIncludeJunk = true }, -- (2,3) is a plain locker (audit); was militarycrate (Media)
-    E17 = false,                                                -- collapsed into E16
-    E18 = { note = "militarylocker @ bunker" },                 -- single gunlocker
-    E19 = false,                                                -- collapsed into E18
+    E15 = { special = R, note = "metal_shelves @ bunker", tag = "DWAPFood" },
+    E16 = { note = "locker @ bunker", tag = "DWAPGun", distIncludeJunk = true },         -- (2,3) is a plain locker (audit); was militarycrate (Media)
+    E17 = false,                                                                         -- collapsed into E16
+    E18 = { note = "militarylocker @ bunker" },                                          -- single gunlocker
+    E19 = false,                                                                         -- collapsed into E18
     E20 = { note = "militarylocker @ bunker", tag = "DWAPGun", distIncludeJunk = true }, -- was militarycrate (Farm)
-    E21 = false,                                                -- collapsed into E20
+    E21 = false,                                                                         -- collapsed into E20
 }
 
 local bunkerOrigins = {
@@ -38,287 +38,297 @@ local bunkerOrigins = {
 -- E1-E54: the hotel + z=-2 storage above the bunkers, preserved as authored.
 local loot = {
     { -- E1
-            note = "locker @ janitor",
-            coords = { x = 7248, y = 8260, z = 2 },
-            tag = "DWAPLockers",
-        },
-        { -- E2
-            note = "locker @ janitor",
-            coords = { x = 7250, y = 8260, z = 2 },
-            tag = "DWAPLockers",
-        },
-        { -- E3
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8261, z = 2 },
-            tag = "DWAPTools",
-        },
-        { -- E4
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8262, z = 2 },
-            tag = "DWAPTools",
-        },
-        { -- E5
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8262, z = 2 },
-            slot = "upper",
-            tag = "DWAPBuildMats",
-        },
-        { -- E6
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8259, z = 1 },
-            tag = "DWAPTools",
-        },
-        { -- E7
-            note = "smallbox @ janitor",
-            coords = { x = 7250, y = 8259, z = 1 },
-            tag = "DWAPTools",
-        },
-        { -- E8
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8260, z = 1 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E9
-            note = "cardboardbox @ janitor",
-            coords = { x = 7248, y = 8260, z = 1 },
-            slot = "upper",
-            tag = "DWAPTools",
-        },
-        { -- E10
-            note = "metal_shelves @ janitor",
-            coords = { x = 7250, y = 8260, z = 1 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E11
-            note = "medicine @ bathroom",
-            coords = { x = 7249, y = 8261, z = 1 },
-            slot = "upper",
-            tag = "DWAPMed",
-        },
-        { -- E12
-            note = "counter @ bathroom",
-            coords = { x = 7249, y = 8261, z = 1 },
-            tag = "DWAPMed",
-        },
-        { -- E13
-            note = "wardrobe @ motelroom",
-            coords = { x = 7243, y = 8259, z = 1 },
-            tag = "DWAPLockers",
-        },
-        { -- E14
-            note = "wardrobe @ motelroom",
-            coords = { x = 7244, y = 8259, z = 1 },
-            tag = "DWAPLockers",
-        },
-        { -- E15
-            note = "dresser @ motelroom",
-            coords = { x = 7246, y = 8259, z = 1 },
-            special = "essentials",
-        },
-        { -- E16
-            note = "dresser @ motelroom",
-            coords = { x = 7246, y = 8256, z = 1 },
-            sandboxEnable = 'Loot_EnableMaps',
-            special = "maps",
-        },
-        { -- E17
-            note = "metal_shelves @ grocerystorage",
-            coords = { x = 7248, y = 8259, z = -1 },
-            tag = "DWAPFood",
-        },
-        { -- E18
-            note = "metal_shelves @ grocerystorage",
-            coords = { x = 7248, y = 8260, z = -1 },
-            tag = "DWAPFood",
-        },
-        { -- E19
-            note = "metal_shelves @ grocerystorage",
-            coords = { x = 7248, y = 8261, z = -1 },
-            tag = "DWAPFarm",
-        },
-        { -- E20
-            note = "cardboardbox @ grocerystorage",
-            coords = { x = 7251, y = 8261, z = -1 },
-            tag = "DWAPFood",
-        },
-        { -- E21
-            note = "metal_shelves @ grocerystorage",
-            coords = { x = 7248, y = 8262, z = -1 },
-            tag = "DWAPFood",
-        },
-        { -- E22
-            note = "smallbox @ grocerystorage",
-            coords = { x = 7250, y = 8262, z = -1 },
-            tag = "DWAPFood",
-        },
-        { -- E23
-            note = "cardboardbox @ grocerystorage",
-            coords = { x = 7251, y = 8262, z = -1 },
-            tag = "DWAPFarm",
-        },
-        { -- E24
-            note = "counter @ janitor",
-            coords = { x = 7256, y = 8256, z = -1 },
-            tag = "DWAPTools",
-        },
-        { -- E25
-            note = "metal_shelves @ janitor",
-            coords = { x = 7257, y = 8256, z = -1 },
-            tag = "DWAPTools",
-        },
-        { -- E26
-            note = "cardboardbox @ storage",
-            coords = { x = 7258, y = 8253, z = -1 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E27
-            note = "cardboardbox @ storage",
-            coords = { x = 7259, y = 8253, z = -1 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E28
-            note = "cardboardbox @ storage",
-            coords = { x = 7259, y = 8253, z = -1 },
-            slot = "upper",
-            tag = "DWAPFarm",
-        },
-        { -- E29
-            note = "locker @ laundry",
-            coords = { x = 7254, y = 8256, z = -2 },
-            tag = "DWAPLockers",
-        },
-        { -- E30
-            note = "medicine @ laundry",
-            coords = { x = 7255, y = 8253, z = -2 },
-            slot = "upper",
-            tag = "DWAPMed",
-        },
-        { -- E31
-            note = "militarylocker @ storage",
-            coords = { x = 7258, y = 8249, z = -2 },
-            tag = "DWAPGun",
-        },
-        { -- E32
-            note = "militarylocker @ storage",
-            coords = { x = 7262, y = 8249, z = -2 },
-            tag = "DWAPGun",
-        },
-        { -- E33
-            note = "woodstove @ storage",
-            coords = { x = 7256, y = 8253, z = -2 },
-            tag = "DWAPFarm",
-        },
-        { -- E34
-            note = "crate @ storage",
-            coords = { x = 7260, y = 8254, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E35
-            note = "crate @ storage",
-            coords = { x = 7261, y = 8254, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E36
-            note = "crate @ storage",
-            coords = { x = 7261, y = 8254, z = -2 },
-            stack = 2,
-            tag = "DWAPFarm",
-        },
-        { -- E37
-            note = "crate @ storage",
-            coords = { x = 7262, y = 8254, z = -2 },
-            tag = "DWAPTools",
-        },
-        { -- E38
-            note = "crate @ storage",
-            coords = { x = 7262, y = 8254, z = -2 },
-            stack = 2,
-            tag = "DWAPBuildMats",
-        },
-        { -- E39
-            note = "crate @ storage",
-            coords = { x = 7263, y = 8254, z = -2 },
-            tag = "DWAPFarm",
-        },
-        { -- E40
-            note = "crate @ storage",
-            coords = { x = 7256, y = 8255, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E41
-            note = "crate @ storage",
-            coords = { x = 7260, y = 8255, z = -2 },
-            tag = "DWAPTools",
-        },
-        { -- E42
-            note = "crate @ storage",
-            coords = { x = 7261, y = 8255, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E43
-            note = "crate @ storage",
-            coords = { x = 7261, y = 8255, z = -2 },
-            stack = 2,
-            tag = "DWAPFarm",
-        },
-        { -- E44
-            note = "crate @ storage",
-            coords = { x = 7262, y = 8255, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E45
-            note = "crate @ storage",
-            coords = { x = 7262, y = 8255, z = -2 },
-            stack = 2,
-            tag = "DWAPTools",
-        },
-        { -- E46
-            note = "crate @ storage",
-            coords = { x = 7263, y = 8255, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E47
-            note = "crate @ storage",
-            coords = { x = 7263, y = 8255, z = -2 },
-            stack = 2,
-            tag = "DWAPFarm",
-        },
-        { -- E48
-            note = "militarycrate @ storage",
-            coords = { x = 7267, y = 8256, z = -2 },
-            tag = "DWAPGun",
-        },
-        { -- E49
-            note = "militarycrate @ storage",
-            coords = { x = 7268, y = 8256, z = -2 },
-            tag = "DWAPGun",
-        },
-        { -- E50
-            note = "militarylocker @ storage",
-            coords = { x = 7266, y = 8249, z = -2 },
-            tag = "DWAPGun",
-        },
-        { -- E51
-            note = "crate @ storage",
-            coords = { x = 7264, y = 8254, z = -2 },
-            tag = "DWAPTools",
-        },
-        { -- E52
-            note = "crate @ storage",
-            coords = { x = 7264, y = 8255, z = -2 },
-            tag = "DWAPBuildMats",
-        },
-        { -- E53
-            note = "crate @ storage",
-            coords = { x = 7264, y = 8255, z = -2 },
-            stack = 2,
-            tag = "DWAPFarm",
-        },
-        { -- E54
-            note = "militarycrate @ storage",
-            coords = { x = 7268, y = 8255, z = -2 },
-            tag = "DWAPGun",
-        }
+        note = "locker @ janitor",
+        coords = { x = 7248, y = 8260, z = 2 },
+        tag = "DWAPLockers",
+    },
+    { -- E2
+        note = "locker @ janitor",
+        coords = { x = 7250, y = 8260, z = 2 },
+        tag = "DWAPLockers",
+    },
+    { -- E3
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8261, z = 2 },
+        tag = "DWAPTools",
+    },
+    { -- E4
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8262, z = 2 },
+        tag = "DWAPTools",
+    },
+    { -- E5
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8262, z = 2 },
+        slot = "upper",
+        tag = "DWAPBuildMats",
+    },
+    { -- E6
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8259, z = 1 },
+        tag = "DWAPTools",
+    },
+    { -- E7
+        note = "smallbox @ janitor",
+        coords = { x = 7250, y = 8259, z = 1 },
+        tag = "DWAPTools",
+    },
+    { -- E8
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8260, z = 1 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E9
+        note = "cardboardbox @ janitor",
+        coords = { x = 7248, y = 8260, z = 1 },
+        slot = "upper",
+        tag = "DWAPTools",
+    },
+    { -- E10
+        note = "metal_shelves @ janitor",
+        coords = { x = 7250, y = 8260, z = 1 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E11
+        note = "medicine @ bathroom",
+        coords = { x = 7249, y = 8261, z = 1 },
+        slot = "upper",
+        tag = "DWAPMed",
+    },
+    { -- E12
+        note = "counter @ bathroom",
+        coords = { x = 7249, y = 8261, z = 1 },
+        tag = "DWAPMed",
+    },
+    { -- E13
+        note = "wardrobe @ motelroom",
+        coords = { x = 7243, y = 8259, z = 1 },
+        tag = "DWAPLockers",
+    },
+    { -- E14
+        note = "wardrobe @ motelroom",
+        coords = { x = 7244, y = 8259, z = 1 },
+        tag = "DWAPLockers",
+    },
+    { -- E15
+        note = "dresser @ motelroom",
+        coords = { x = 7246, y = 8259, z = 1 },
+        special = "essentials",
+    },
+    { -- E16
+        note = "dresser @ motelroom",
+        coords = { x = 7246, y = 8256, z = 1 },
+        sandboxEnable = 'Loot_EnableMaps',
+        special = "maps",
+    },
+    { -- E17
+        note = "metal_shelves @ grocerystorage",
+        coords = { x = 7248, y = 8259, z = -1 },
+        tag = "DWAPFood",
+    },
+    { -- E18
+        note = "metal_shelves @ grocerystorage",
+        coords = { x = 7248, y = 8260, z = -1 },
+        tag = "DWAPFood",
+    },
+    { -- E19
+        note = "metal_shelves @ grocerystorage",
+        coords = { x = 7248, y = 8261, z = -1 },
+        tag = "DWAPFarm",
+    },
+    { -- E20
+        note = "cardboardbox @ grocerystorage",
+        coords = { x = 7251, y = 8261, z = -1 },
+        tag = "DWAPFood",
+    },
+    { -- E21
+        note = "metal_shelves @ grocerystorage",
+        coords = { x = 7248, y = 8262, z = -1 },
+        tag = "DWAPFood",
+    },
+    { -- E22
+        note = "smallbox @ grocerystorage",
+        coords = { x = 7250, y = 8262, z = -1 },
+        tag = "DWAPFood",
+    },
+    { -- E23
+        note = "cardboardbox @ grocerystorage",
+        coords = { x = 7251, y = 8262, z = -1 },
+        tag = "DWAPFarm",
+    },
+    { -- E24
+        note = "counter @ janitor",
+        coords = { x = 7256, y = 8256, z = -1 },
+        tag = "DWAPTools",
+    },
+    { -- E25
+        note = "metal_shelves @ janitor",
+        coords = { x = 7257, y = 8256, z = -1 },
+        tag = "DWAPTools",
+    },
+    { -- E26
+        note = "cardboardbox @ storage",
+        coords = { x = 7258, y = 8253, z = -1 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E27
+        note = "cardboardbox @ storage",
+        coords = { x = 7259, y = 8253, z = -1 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E28
+        note = "cardboardbox @ storage",
+        coords = { x = 7259, y = 8253, z = -1 },
+        slot = "upper",
+        tag = "DWAPFarm",
+    },
+    { -- E29
+        note = "locker @ laundry",
+        coords = { x = 7254, y = 8256, z = -2 },
+        tag = "DWAPLockers",
+    },
+    { -- E30
+        note = "medicine @ laundry",
+        coords = { x = 7255, y = 8253, z = -2 },
+        slot = "upper",
+        tag = "DWAPMed",
+    },
+    { -- E31
+        note = "militarylocker @ storage",
+        coords = { x = 7258, y = 8249, z = -2 },
+        tag = "DWAPGun",
+    },
+    { -- E32
+        note = "militarylocker @ storage",
+        coords = { x = 7262, y = 8249, z = -2 },
+        tag = "DWAPGun",
+    },
+    { -- E33
+        note = "woodstove @ storage",
+        coords = { x = 7256, y = 8253, z = -2 },
+        tag = "DWAPFarm",
+    },
+    { -- E34
+        note = "crate @ storage",
+        coords = { x = 7260, y = 8254, z = -2 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E35
+        note = "crate @ storage",
+        coords = { x = 7261, y = 8254, z = -2 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E36
+        note = "crate @ storage",
+        coords = { x = 7261, y = 8254, z = -2 },
+        stack = 2,
+        tag = "DWAPFarm",
+    },
+    { -- E37
+        note = "crate @ storage",
+        coords = { x = 7262, y = 8254, z = -2 },
+        tag = "DWAPTools",
+    },
+    { -- E38
+        note = "crate @ storage",
+        coords = { x = 7262, y = 8254, z = -2 },
+        stack = 2,
+        tag = "DWAPBuildMats",
+    },
+    { -- E39
+        note = "crate @ storage",
+        coords = { x = 7263, y = 8254, z = -2 },
+        tag = "DWAPFarm",
+    },
+    { -- E40
+        note = "crate @ storage",
+        coords = { x = 7256, y = 8255, z = -2 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E41
+        note = "crate @ storage",
+        coords = { x = 7260, y = 8255, z = -2 },
+        tag = "DWAPTools",
+    },
+    { -- E42
+        note = "crate @ storage",
+        coords = { x = 7261, y = 8255, z = -2 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E43
+        note = "crate @ storage",
+        coords = { x = 7261, y = 8255, z = -2 },
+        stack = 2,
+        tag = "DWAPFarm",
+    },
+    { -- E44
+        note = "crate @ storage",
+        coords = { x = 7262, y = 8255, z = -2 },
+        tag = "DWAPBuildMats",
+    },
+    { -- E45
+        note = "crate @ storage",
+        coords = { x = 7262, y = 8255, z = -2 },
+        stack = 2,
+        tag = "DWAPTools",
+    },
+    { -- E46
+        note = "crate @ storage",
+        coords = { x = 7263, y = 8255, z = -2 },
+        sandboxEnable = "SeedLibrary",
+        special = "SeedLibrary"
+    },
+    { -- E47
+        note = "crate @ storage",
+        coords = { x = 7263, y = 8255, z = -2 },
+        stack = 2,
+        sandboxEnable = "Loot_EnableBooks",
+        special = "skillmags"
+    },
+    { -- E48
+        note = "militarycrate @ storage",
+        coords = { x = 7267, y = 8256, z = -2 },
+        tag = "DWAPGun",
+    },
+    { -- E49
+        note = "militarycrate @ storage",
+        coords = { x = 7268, y = 8256, z = -2 },
+        tag = "DWAPGun",
+    },
+    { -- E50
+        note = "militarylocker @ storage",
+        coords = { x = 7266, y = 8249, z = -2 },
+        tag = "DWAPGun",
+    },
+    { -- E51
+        note = "crate @ storage",
+        coords = { x = 7264, y = 8254, z = -2 },
+        tag = "DWAPTools",
+    },
+    { -- E52
+        note = "crate @ storage",
+        coords = { x = 7264, y = 8255, z = -2 },
+        sandboxEnable = "Loot_EnableBooks",
+        special = "skillbooks2"
+    },
+    { -- E53
+        note = "crate @ storage",
+        coords = { x = 7264, y = 8255, z = -2 },
+        stack = 2,
+        sandboxEnable = "Loot_EnableBooks",
+        special = "skillbooks1"
+    },
+    { -- E54
+        note = "militarycrate @ storage",
+        coords = { x = 7268, y = 8255, z = -2 },
+        tag = "DWAPGun",
+    },
+    {
+        note = "counter @ kitchen",
+        coords = { x = 7242, y = 8256, z = -1 },
+        special = "kitchentools",
+        level = "Loot_FoodLevel"
+    },
 }
 for i = 1, #bunkerOrigins do
     local shell = BunkerShell(bunkerOrigins[i], bunkerOverrides)

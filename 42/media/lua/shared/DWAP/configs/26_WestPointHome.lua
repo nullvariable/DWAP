@@ -372,7 +372,8 @@ local WestPointHome = {
         { -- E49
             note = "counter @ kitchen",
             coords = { x = 11772, y = 6671, z = 0 },
-            tag = "DWAPFood",
+            special = "kitchentools",
+            level = "Loot_FoodLevel",
         },
         { -- E50
             note = "counter @ kitchen",

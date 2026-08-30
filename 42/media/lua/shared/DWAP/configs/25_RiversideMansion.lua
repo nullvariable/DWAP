@@ -749,7 +749,8 @@ local RiversideMansion = {
         { -- E107
             note = "metal_shelves @ garagestorage",
             coords = { x = 6667, y = 5511, z = 0 },
-            tag = "DWAPTools",
+            sandboxEnable = 'SeedLibrary',
+            special = 'SeedLibrary',
         },
         { -- E108
             note = "barbecue @ garagestorage",
@@ -769,7 +770,8 @@ local RiversideMansion = {
         { -- E111
             note = "locker @ garagestorage",
             coords = { x = 6671, y = 5514, z = 0 },
-            tag = "DWAPLockers",
+            sandboxEnable = 'Loot_EnableMaps',
+            special = "maps",
         },
         { -- E112
             note = "cardboardbox @ garagestorage",
@@ -829,7 +831,8 @@ local RiversideMansion = {
         { -- E122
             note = "shelves @ livingroom",
             coords = { x = 6672, y = 5507, z = 0 },
-            tag = "DWAPMedia",
+            sandboxEnable = 'Loot_EnableBooks',
+            special = "skillmags",
         },
         { -- E123
             note = "fireplace @ livingroom",
@@ -839,7 +842,8 @@ local RiversideMansion = {
         { -- E124
             note = "counter @ kitchen",
             coords = { x = 6681, y = 5507, z = 0 },
-            tag = "DWAPFood",
+            special = "kitchentools",
+            level = "Loot_FoodLevel",
         },
         { -- E125
             note = "overhead @ kitchen",
