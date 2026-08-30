@@ -2194,6 +2194,19 @@ local function allLootStop(summary)
     DWAPUtils.dprint("Loot audit report: Zomboid/Lua/DWAP_loot_audit.txt")
 end
 
+-- The specials a fully-stocked safehouse is expected to carry. The audit flags
+-- any a config lacks so an accidental drop is caught instead of hiding in the
+-- special: tally (config 31 lost its skill books and still read PASS,
+-- 2026-08-30). Read from config.loot, not specialTags: the tally only counts
+-- specials whose container resolved, so a special in an unstreamed square would
+-- falsely read as missing; the config declaration is the real question here.
+-- Advisory, not a FAIL - a few small safehouses (38/39/40) legitimately carry
+-- only a subset, so eyeball the list rather than auto-failing on it.
+local EXPECTED_SPECIALS = {
+    "essentials", "maps", "kitchentools", "skillmags",
+    "skillbooks1", "skillbooks2", "gunlocker", "SeedLibrary",
+}
+
 local function allLootFinishConfig(unloaded, badZ)
     local st = allLootState
     local config = st.configs[st.index]
@@ -2334,7 +2347,7 @@ local function allLootFinishConfig(unloaded, badZ)
     end
 
     -- level keys and explicit-item entries aren't tallied by TestLootConfig
-    local levels, itemEntries, skeletons = {}, 0, {}
+    local levels, itemEntries, skeletons, presentSpecials = {}, 0, {}, {}
     if config and config.loot then
         for i = 1, #config.loot do
             local e = config.loot[i]
@@ -2343,6 +2356,7 @@ local function allLootFinishConfig(unloaded, badZ)
                     local key = tostring(e.level)
                     levels[key] = (levels[key] or 0) + 1
                 end
+                if e.special then presentSpecials[e.special] = true end
                 if e.items then itemEntries = itemEntries + 1 end
                 -- An entry with coords but nothing to spawn still gets stamped
                 -- "filled" by the fill (Events.lua stamps unconditionally), so
@@ -2362,6 +2376,23 @@ local function allLootFinishConfig(unloaded, badZ)
         allLootWrite(("  SKELETON: %d entries define no loot yet (coords only) - entries %s"):format(
             #skeletons, table.concat(skeletons, ",")))
         st.skeletonTotal = (st.skeletonTotal or 0) + #skeletons
+    end
+
+    -- Missing specials: a fully-stocked safehouse carries the whole
+    -- EXPECTED_SPECIALS set; report any it lacks (see the constant). Skip empty
+    -- tables - "EMPTY (rebuild from the unclaimed list)" already covers those,
+    -- and an all-eight list there is noise.
+    if config and config.loot and result and (result.totalEntries or 0) > 0 then
+        local missing = {}
+        for i = 1, #EXPECTED_SPECIALS do
+            if not presentSpecials[EXPECTED_SPECIALS[i]] then
+                missing[#missing + 1] = EXPECTED_SPECIALS[i]
+            end
+        end
+        if #missing > 0 then
+            allLootWrite("  MISSING SPECIALS: " .. table.concat(missing, ", "))
+            st.missingSpecialsTotal = (st.missingSpecialsTotal or 0) + 1
+        end
     end
     allLootWrite("")
 
@@ -2410,9 +2441,10 @@ allLootTick = function()
     local st = allLootState
     if not st then return end
     if st.index > #st.configs then
-        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s%s ==="):format(
+        allLootStop(("=== DONE: %d passed, %d failed, %d skipped%s%s%s ==="):format(
             st.passed, st.failed, st.skipped,
             (st.skeletonTotal or 0) > 0 and (", " .. st.skeletonTotal .. " skeleton entries awaiting loot") or "",
+            (st.missingSpecialsTotal or 0) > 0 and (", " .. st.missingSpecialsTotal .. " configs missing specials") or "",
             st.checkSystems and (", " .. (st.systemsFlagged or 0) .. " systems problems") or ""))
         return
     end
