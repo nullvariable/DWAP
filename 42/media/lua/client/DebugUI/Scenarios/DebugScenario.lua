@@ -5,13 +5,20 @@ if not getDebug() then return end
 
 print("DebugScenario.lua loaded")
 
--- Drop every base-game scenario so the picker only lists ours. Mod Lua loads
--- after the vanilla DebugUIs/Scenarios files, so wiping the table is both
--- shorter and drift-proof: the old per-key blacklist nil'd file names rather
--- than the keys those files actually register (BobKates.lua registers
--- BobKateHouse, Multiplayer.lua registers MP1Scenario), so those two always
--- leaked through, and any scenario TIS adds would leak through too.
-debugScenarios = {}
+-- Drop the base-game scenario clutter so the picker only lists DWAP ones, but
+-- keep EVERY DWAP scenario - the basemod's and each addon's. A destructive
+-- `debugScenarios = {}` wipe here deletes the other DWAP mod's scenario
+-- whenever this file loads second (basemod + addons register into the same
+-- shared table), so prune by key instead: remove only keys that aren't ours
+-- (any without "DWAP"), then register ours below. This stays drift-proof - it
+-- drops BobKateHouse, MP1Scenario, and any scenario TIS adds later, without
+-- naming vanilla keys. Nil'ing the current key during a pairs() traversal is
+-- the one safe table mutation in Kahlua; we never add keys mid-loop.
+for key in pairs(debugScenarios) do
+    if type(key) == "string" and not key:find("DWAP", 1, true) then
+        debugScenarios[key] = nil
+    end
+end
 
 DebugScenarioAllMaps = false
 

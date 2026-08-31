@@ -1464,7 +1464,7 @@ function DWAPGoto(index)
         return
     end
     local spawn = config.spawn
-    if not spawn and config.doorKeys then
+    if not spawn and config.doorKeys and config.doorKeys.doors then
         for i = 1, #config.doorKeys.doors do
             local doorKey = config.doorKeys.doors[i]
             if doorKey and doorKey.x then
@@ -1473,7 +1473,7 @@ function DWAPGoto(index)
             end
         end
     end
-    if not spawn.x or not spawn.y or not spawn.z then
+    if not spawn or not spawn.x or not spawn.y or not spawn.z then
         DWAPUtils.dprint("Spawn data is incomplete for config at index " .. index)
         return
     end
@@ -4154,6 +4154,18 @@ function DWAPNearestConfig(useCache)
     for i = 1, #configs do
         local config = configs[i]
         local spawn = config and config.spawn
+        -- Fall back to the first door key when a config has no top-level
+        -- spawn (external/addon configs are authored this way); mirrors the
+        -- fallback in DWAPGoto so spawn-less bases are still selectable.
+        if not (spawn and spawn.x) and config and config.doorKeys and config.doorKeys.doors then
+            for j = 1, #config.doorKeys.doors do
+                local doorKey = config.doorKeys.doors[j]
+                if doorKey and doorKey.x then
+                    spawn = doorKey
+                    break
+                end
+            end
+        end
         if spawn and spawn.x then
             local dx, dy = spawn.x - px, spawn.y - py
             local d = dx * dx + dy * dy
