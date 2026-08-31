@@ -480,6 +480,264 @@ local gunLockersVanillaExpansion = {
     },
 }
 
+local gunLockersMarzVanillaGuns = {
+    { -- M16A3
+        "AssaultRifleA3",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "x4Scope",
+        "x8Scope",
+        "RedDot",
+        "Laser",
+        "GunLight",
+        "AmmoStraps",
+        "RecoilPad",
+        "AR_Silencer",
+        "M9_Bayonet_Attachment",
+        "556Box",
+    },
+    { -- M4 Carbine
+        "AssaultRifleM4",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "556Clip",
+        "x4Scope",
+        "RedDot",
+        "Laser",
+        "GunLight",
+        "556Muzzle",
+        "556Box",
+    },
+    { -- AK-47
+        "AssaultRifleAK47",
+        "762Clip_30",
+        "762Clip_30",
+        "762Clip_30",
+        "762Clip_30",
+        "762Clip_30",
+        "x4Scope",
+        "RedDot",
+        "AmmoStraps",
+        "RecoilPad",
+        "762Muzzle",
+        "M9_Bayonet_Attachment",
+        "762Box",
+    },
+    { -- SR25 Police Rifle
+        "SR25_Rifle",
+        "308Clip_10",
+        "308Clip_10",
+        "308Clip_10",
+        "308Clip_20",
+        "308Clip_20",
+        "x4Scope",
+        "x8Scope",
+        "RedDot",
+        "GunLight",
+        "RecoilPad",
+        "AR_Silencer",
+        "308Box",
+    },
+    { -- MP5SD
+        "MP5SD_SMG",
+        "9mmClip_25",
+        "9mmClip_25",
+        "9mmClip_25",
+        "9mmClip_25",
+        "9mmClip_25",
+        "x2Scope",
+        "RedDot",
+        "Laser",
+        "GunLight",
+        "Bullets9mmBox",
+    },
+    { -- Beretta M93R
+        "Pistolm93r",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "TritiumSights",
+        "Laser",
+        "GunLight",
+        "Pistol_Silencer",
+        "Bullets9mmBox",
+    },
+    { -- Glock
+        "PistolGlock",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "9mmClip",
+        "TritiumSights",
+        "RedDot",
+        "Laser",
+        "GunLight",
+        "Bullets9mmBox",
+    },
+}
+
+local gunLockersGunsOfMarz = {
+    { -- M4A1 (5.56)
+        "M4A1",
+        "556x45Magazine30_STANAG",
+        "556x45Magazine30_STANAG",
+        "556x45Magazine30_STANAG",
+        "556x45Magazine30_STANAG",
+        "556x45Magazine30_STANAG",
+        "Picatinny_Rail",
+        "Aimpoint_Sight",
+        "EXPS3_Sight",
+        "PX1_Laser",
+        "TL_Light",
+        "Stub_Foregrip",
+        "MKI_Suppressor",
+        "AR_Muzzle_Mount_Device",
+        "556x45_Carton",
+        "556x45_Box",
+    },
+    { -- AK47 (7.62x39)
+        "AK47",
+        "762x39Magazine30",
+        "762x39Magazine30",
+        "762x39Magazine30",
+        "762x39Magazine30",
+        "762x39Magazine30",
+        "AK_Mount",
+        "Kobra_Sight",
+        "PX1_Laser",
+        "AK_Muzzle_Mount_Device",
+        "MKC_Foregrip",
+        "762x39_Carton",
+        "762x39_Box",
+    },
+    { -- MP5 (9x19 SMG)
+        "MP5",
+        "9x19Magazine20_MP5",
+        "9x19Magazine20_MP5",
+        "9x19Magazine20_MP5",
+        "9x19Magazine20_MP5",
+        "9x19Magazine20_MP5",
+        "Picatinny_Rail",
+        "Aimpoint_Sight",
+        "TL_Light",
+        "Shh9_Suppressor",
+        "9x19_Carton",
+        "9x19_Box",
+    },
+    { -- FAL (7.62x51 battle rifle)
+        "FAL",
+        "762x51Magazine20_FAL",
+        "762x51Magazine20_FAL",
+        "762x51Magazine20_FAL",
+        "762x51Magazine20_FAL",
+        "762x51Magazine20_FAL",
+        "Picatinny_Rail",
+        "ElcanX2_Scope",
+        "LR4X_Scope",
+        "PX1_Laser",
+        "Stub_Foregrip",
+        "762x51_Carton",
+        "762x51_Box",
+    },
+    { -- SVD (7.62x54 marksman)
+        "SVD",
+        "762x54Magazine10_SVD",
+        "762x54Magazine10_SVD",
+        "762x54Magazine10_SVD",
+        "762x54Magazine10_SVD",
+        "PSO1_Scope",
+        "LR4X_Scope",
+        "TL_Light",
+        "762x54_Carton",
+        "762x54_Box",
+    },
+    { -- Desert Eagle (.50)
+        "DEAGLE",
+        "50Magazine8_DEAGLE",
+        "50Magazine8_DEAGLE",
+        "50Magazine8_DEAGLE",
+        "50Magazine8_DEAGLE",
+        "50Magazine8_DEAGLE",
+        "TL_Light",
+        "PX1_Laser",
+        "Pistol_Muzzle_Mount_Device",
+        "50_Carton",
+        "50_Box",
+    },
+    { -- M1911 (.45)
+        "M1911",
+        "45Magazine7_M1911",
+        "45Magazine7_M1911",
+        "45Magazine7_M1911",
+        "45Magazine7_M1911",
+        "45Magazine7_M1911",
+        "Colt_Mount",
+        "TL_Light",
+        "P45_Suppressor",
+        "45_Muzzle_Mount_Device",
+        "45_Carton",
+        "45_Box",
+    },
+    { -- SPAS-12 (12ga)
+        "SPAS12",
+        "Picatinny_Rail",
+        "Aimpoint_Sight",
+        "TL_Light",
+        "12Gauge_Carton_Buckshot",
+        "12Gauge_Box_Buckshot",
+    },
+    { -- Colt Python (.357)
+        "PYTHON",
+        "TL_Light",
+        "PX1_Laser",
+        "357_Carton",
+        "357_Box",
+    },
+}
+local gunLockersRadArchery = {
+    { -- Compound bow (black)
+        "CompoundBowBlack",
+        "LeatherQuiver",
+        "CarbonHuntingArrow",
+        "CarbonArrowPack",
+    },
+    { -- Compound bow (green) with crafted tipped arrows
+        "CompoundBowGreen",
+        "LeatherQuiver",
+        "TippedCarvedArrow",
+        "StoneTippedArrow",
+        "CarbonArrowPack",
+    },
+    { -- Heavy compound bow (black) jackpot
+        "CompoundBowHeavyBlack",
+        "LeatherQuiver",
+        "BoneTippedArrow",
+        "CarbonHuntingArrow",
+        "CarbonArrowCrate",
+        "CarbonArrowPack",
+    },
+    { -- Compound bow (tan)
+        "CompoundBowTan",
+        "LeatherQuiver",
+        "FineCarvedArrow",
+        "CarbonArrowPack",
+    },
+    { -- Heavy compound bow (red)
+        "CompoundBowHeavyRed",
+        "LeatherQuiver",
+        "CarbonHuntingArrow",
+        "CarbonArrowPack",
+    },
+}
+
 local gunLockersFirearmsMod = {
 }
 
@@ -1068,6 +1326,24 @@ function DWAP_LootSpawning.populateItems()
             for i = 1, #gunLockersVanillaExpansion do
                 gunLockers[#gunLockers+1] = gunLockersVanillaExpansion[i]
             end
+        end
+    end
+    if getActivatedMods():contains("MarzVanillaGuns") then
+        gunLockers = {}
+        for i = 1, #gunLockersMarzVanillaGuns do
+            gunLockers[#gunLockers+1] = gunLockersMarzVanillaGuns[i]
+        end
+    end
+    if getActivatedMods():contains("GunsOfMarz") or getActivatedMods():contains("MarzGuns") then
+        gunLockers = {}
+        for i = 1, #gunLockersGunsOfMarz do
+            gunLockers[#gunLockers+1] = gunLockersGunsOfMarz[i]
+        end
+    end
+    if getActivatedMods():contains("RadArchery") then
+        gunLockers = {}
+        for i = 1, #gunLockersRadArchery do
+            gunLockers[#gunLockers+1] = gunLockersRadArchery[i]
         end
     end
     local endTime = getTimeInMillis()

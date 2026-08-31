@@ -20,6 +20,28 @@ Uncle Dave was quite a collector and you might find a complete seed library (mod
 * There are gun locker's for some spots. Instead of using the normal random distribution, it will build from a list ensuring some standard contents and a variable amount of ammo for the specific gun.
 
 ## Supported Mods
+### Vanilla Weapons Plus - Gunworks Edition
+[Vanilla Weapons Plus - Gunworks Edition](https://steamcommunity.com/sharedfiles/filedetails/?id=3773834525)
+Custom firearms load outs for gun lockers. Attachments, clips, and ammo for:
+* M16A3
+* M4 Carbine
+* AK-47
+* SR25 Police Rifle
+* MP5SD
+* Beretta M93R
+* Glock
+### Guns of Marz
+[Guns of Marz](https://steamcommunity.com/sharedfiles/filedetails/?id=3722134990)
+Custom firearms load outs for gun lockers. Attachments, clips, and ammo for:
+* M4A1
+* AK-47
+* MP5
+* FAL
+* SVD
+* Desert Eagle
+* M1911
+* SPAS-12
+* Colt Python
 ### Immersive Solar Arrays
 Maps with basements less than 4 stories underground support starting with minimal batteries and solar panels, along with integrating to the power system.
 If the batteries have enough charge, fuel use will be reduced, or the generator will shut off entirely and the base can be power from the batteries alone. You can add additional panels and batteries as it's fully integrated and will provide power base wide.

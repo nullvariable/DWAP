@@ -249,7 +249,7 @@ local siteLoot = {
         coords = { x = 3113, y = 12055, z = 0 },
         slot = "freezer",
         distIncludeJunk = true,
-        tag = "DWAPFridge",
+        tag = "DWAPFreezer",
     },
     {     -- E59
         note = "counter @ kitchen",
