@@ -1544,6 +1544,134 @@ local function baseRoomKeys(config, problems)
     return keys, n
 end
 
+-- Full per-entry verification GIVEN a streamed square: shared-resolver
+-- container lookup + fill-stamp check + entry-map/containerDetails/tag
+-- recording, appending any failure to ctx.failedContainers. Factored out so
+-- the first verify pass (below) and the audit's re-verify phase call the SAME
+-- logic - a square re-found after a targeted teleport gets byte-identical
+-- treatment to one that streamed in on the first visit, including the
+-- fill-stamp verification the old nil-square path skipped entirely. ctx bundles
+-- the shared accumulators (failedContainers, distTags, specialTags,
+-- containerDetails), baseTileKeys, and fillThreshold.
+local function verifyResolvedEntry(square, i, entry, ctx)
+    local x, y, z = entry.coords.x, entry.coords.y, entry.coords.z
+    local isUpperContainer = entry.slot == "upper" or (z % 1) ~= 0
+    local member = entry.stack or (isUpperContainer and "upper") or entry.slot or "base"
+    local failedContainers = ctx.failedContainers
+
+    -- Resolve through the shared source of truth (same logic the
+    -- loot fill uses): stack ordinal > flagged upper > order fallbacks
+    local pairPresent = false
+    if isUpperContainer then
+        pairPresent = ctx.baseTileKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
+    end
+    local container = DWAPUtils.resolveLootContainer(square, {
+        upper = isUpperContainer,
+        stack = entry.stack,
+        freezer = entry.slot == "freezer",
+        pairPresent = pairPresent,
+    })
+
+    if not container then
+        -- List what IS on the square so upper/lower mismatches (High /
+        -- overhead / renderYOffset conventions) are diagnosable from
+        -- the report without revisiting in-game
+        local present = {}
+        local squareContainers = DWAPUtils.getSquareContainers(square)
+        for j = 1, #squareContainers do
+            local sc = squareContainers[j]
+            present[#present + 1] = tostring(sc.container:getType()) ..
+                "(pos=" .. tostring(sc.container:getContainerPosition()) ..
+                ",yoff=" .. tostring(sc.object:getRenderYOffset()) ..
+                (sc.isHigh and ",HIGH" or "") .. ")"
+        end
+        local presentStr = #present > 0 and table.concat(present, " ") or "no containers on square"
+        DWAPUtils.dprint("Entry " ..
+            i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container not found - FAILED")
+        table.insert(failedContainers,
+            "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Container not found; square has: " .. presentStr)
+    else
+        -- Record what the container is and where it lives, for the
+        -- balance audit (detached sheds report their own room name).
+        -- The entry's own dist/special/level rides along: pairing what
+        -- was authored with the room and container type it actually
+        -- landed in is the only place those two facts meet, and it is
+        -- what a generator needs to learn "canned food goes in a
+        -- kitchen counter, not a warehouse shelf"
+        local room = square:getRoom()
+        table.insert(ctx.containerDetails, {
+            entry = i,
+            x = x, y = y, z = z,
+            containerType = container:getType(),
+            room = room and room:getName() or "outside",
+            dist = entry.dist,
+            special = entry.special,
+            level = entry.level,
+        })
+
+        -- Test if container is 80% full
+        local capacity = container:getCapacity()
+        local usedCapacity = container:getCapacityWeight()
+        local fillPercentage = capacity > 0 and (usedCapacity / capacity) * 100 or 0
+
+        -- Primary check: the DWAP fill stamp on the parent object,
+        -- valid whether base-game loot is on or off
+        local stampState = nil
+        local parentObj = container:getParent()
+        if parentObj then
+            local stamps = parentObj:getModData().DWAPLoot
+            if stamps then stampState = stamps[tostring(member)] end
+        end
+        local fillThreshold = ctx.fillThreshold
+        if not stampState then
+            -- v2: every non-special container fills, so a missing stamp is
+            -- a real not-filled failure.
+            DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                " - no DWAP fill stamp - FAILED")
+            table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                ": Not filled (no DWAP stamp)")
+        elseif not entry.special and (stampState == "added" or stampState == "filled")
+            and container:getItems():size() == 0 then
+            -- v2: additive ("added") makes no fill-% guarantee, so it is
+            -- exempt from the threshold below - but a container that
+            -- stamped ("added" or "filled") yet holds ZERO items means the
+            -- FLOOR never landed. That is a real failure regardless of the
+            -- fill-% threshold.
+            DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                " - stamped " .. tostring(stampState) .. " but empty - FAILED")
+            table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                ": Empty despite stamp (floor did not land)")
+        elseif stampState ~= "disabled" and stampState ~= "added" and fillThreshold and not entry.special then
+            if fillThreshold <= 0 then
+                if container:getItems():size() == 0 then
+                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        " - Container empty - FAILED")
+                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                        ": Empty")
+                end
+            elseif fillPercentage < fillThreshold then
+                DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
+                    string.format("%.1f", fillPercentage) .. "% full - FAILED")
+                table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
+                    ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
+            end
+        end
+
+        -- Track distribution tags
+        if entry.dist then
+            for j = 1, #entry.dist do
+                local distTag = entry.dist[j]
+                ctx.distTags[distTag] = (ctx.distTags[distTag] or 0) + 1
+            end
+        end
+
+        -- Track special tags
+        if entry.special then
+            ctx.specialTags[entry.special] = (ctx.specialTags[entry.special] or 0) + 1
+        end
+    end
+end
+
 local tlc
 function TestLootConfig(index, startFrom, retainedConfig)
     if not retainedConfig then
@@ -1642,6 +1770,20 @@ function TestLootConfig(index, startFrom, retainedConfig)
         -- If retainedConfig is provided, use its lastProgressPrint
         lastProgressPrint = retainedConfig.lastProgressPrint
     end
+    -- Shared accumulators bundled so verifyResolvedEntry is identical whether
+    -- called here or from the audit's re-verify phase. deferred collects
+    -- nil-square entries for that re-verify; it is only populated when the
+    -- caller sets deferReverify (the audit driver), so a standalone
+    -- TestLootConfig call keeps its original one-shot Square-not-found record.
+    local ctx = {
+        failedContainers = failedContainers,
+        distTags = distTags,
+        specialTags = specialTags,
+        containerDetails = containerDetails,
+        baseTileKeys = baseTileKeys,
+        fillThreshold = fillThreshold,
+    }
+    local deferred = {}
     if startFrom and startFrom > 0 and startFrom <= totalEntries then
         DWAPUtils.dprint("Starting from entry: " .. startFrom)
     else
@@ -1692,131 +1834,34 @@ function TestLootConfig(index, startFrom, retainedConfig)
                 coordsHashes[coordsHash] = i
             end
 
-            -- A missing square in an otherwise-loaded area means the coord
-            -- points at empty air (typo) or an unspawned basement/building -
-            -- record it and keep testing the remaining entries
+            -- A missing square here does NOT prove the coord is bad: a
+            -- detached, far-flung building (a gatehouse ~240 tiles off) is
+            -- beyond the streaming radius the main base holds, so its chunk -
+            -- force-loaded earlier in the load phase - has streamed back out by
+            -- the time verification runs from one final position. Defer the
+            -- nil-square entries so the audit driver can teleport back to each
+            -- and re-check; only a square STILL nil after that is a real
+            -- Square-not-found. Resolved squares are verified in full here.
             local square = getSquare(x, y, math.floor(z))
-            if not square then
+            if square then
+                verifyResolvedEntry(square, i, entry, ctx)
+            elseif retainedConfig.deferReverify and not getSquare(x, y, 0) then
+                -- Only defer when the CHUNK is genuinely unstreamed (even the
+                -- z=0 ground square is absent) - a detached far building past
+                -- the streaming radius. A present z=0 means the chunk is loaded
+                -- and this z simply has no square (unspawned basement, moved
+                -- building, or typo): teleporting back can't conjure it, so it
+                -- falls through to the immediate record below, matching the
+                -- load phase's own unstreamed/bad-z split.
+                deferred[#deferred + 1] = { i = i, x = x, y = y, z = z, entry = entry }
+            else
+                -- Standalone TestLootConfig (no reverify driver), or an
+                -- audit-mode bad-z entry: record immediately as before.
                 DWAPUtils.dprint("Square not found at " ..
                     x .. "," .. y .. "," .. math.floor(z) .. " - FAILED")
                 table.insert(failedContainers,
                     "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Square not found (bad z or unspawned area)")
             end
-            if square then
-
-            -- Resolve through the shared source of truth (same logic the
-            -- loot fill uses): stack ordinal > flagged upper > order fallbacks
-            local pairPresent = false
-            if isUpperContainer then
-                pairPresent = baseTileKeys[DWAPUtils.hashCoords(x, y, math.floor(z))] == true
-            end
-            local container = DWAPUtils.resolveLootContainer(square, {
-                upper = isUpperContainer,
-                stack = entry.stack,
-                freezer = entry.slot == "freezer",
-                pairPresent = pairPresent,
-            })
-
-            if not container then
-                -- List what IS on the square so upper/lower mismatches (High /
-                -- overhead / renderYOffset conventions) are diagnosable from
-                -- the report without revisiting in-game
-                local present = {}
-                local squareContainers = DWAPUtils.getSquareContainers(square)
-                for j = 1, #squareContainers do
-                    local sc = squareContainers[j]
-                    present[#present + 1] = tostring(sc.container:getType()) ..
-                        "(pos=" .. tostring(sc.container:getContainerPosition()) ..
-                        ",yoff=" .. tostring(sc.object:getRenderYOffset()) ..
-                        (sc.isHigh and ",HIGH" or "") .. ")"
-                end
-                local presentStr = #present > 0 and table.concat(present, " ") or "no containers on square"
-                DWAPUtils.dprint("Entry " ..
-                    i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container not found - FAILED")
-                table.insert(failedContainers,
-                    "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z .. ": Container not found; square has: " .. presentStr)
-                -- break
-            else
-                -- Record what the container is and where it lives, for the
-                -- balance audit (detached sheds report their own room name).
-                -- The entry's own dist/special/level rides along: pairing what
-                -- was authored with the room and container type it actually
-                -- landed in is the only place those two facts meet, and it is
-                -- what a generator needs to learn "canned food goes in a
-                -- kitchen counter, not a warehouse shelf"
-                local room = square:getRoom()
-                table.insert(containerDetails, {
-                    entry = i,
-                    x = x, y = y, z = z,
-                    containerType = container:getType(),
-                    room = room and room:getName() or "outside",
-                    dist = entry.dist,
-                    special = entry.special,
-                    level = entry.level,
-                })
-
-                -- Test if container is 80% full
-                local capacity = container:getCapacity()
-                local usedCapacity = container:getCapacityWeight()
-                local fillPercentage = capacity > 0 and (usedCapacity / capacity) * 100 or 0
-
-                -- Primary check: the DWAP fill stamp on the parent object,
-                -- valid whether base-game loot is on or off
-                local stampState = nil
-                local parentObj = container:getParent()
-                if parentObj then
-                    local stamps = parentObj:getModData().DWAPLoot
-                    if stamps then stampState = stamps[tostring(member)] end
-                end
-                if not stampState then
-                    -- v2: every non-special container fills, so a missing stamp is
-                    -- a real not-filled failure.
-                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        " - no DWAP fill stamp - FAILED")
-                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        ": Not filled (no DWAP stamp)")
-                elseif not entry.special and (stampState == "added" or stampState == "filled")
-                    and container:getItems():size() == 0 then
-                    -- v2: additive ("added") makes no fill-% guarantee, so it is
-                    -- exempt from the threshold below - but a container that
-                    -- stamped ("added" or "filled") yet holds ZERO items means the
-                    -- FLOOR never landed. That is a real failure regardless of the
-                    -- fill-% threshold.
-                    DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        " - stamped " .. tostring(stampState) .. " but empty - FAILED")
-                    table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                        ": Empty despite stamp (floor did not land)")
-                elseif stampState ~= "disabled" and stampState ~= "added" and fillThreshold and not entry.special then
-                    if fillThreshold <= 0 then
-                        if container:getItems():size() == 0 then
-                            DWAPUtils.dprint("Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                                " - Container empty - FAILED")
-                            table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                                ": Empty")
-                        end
-                    elseif fillPercentage < fillThreshold then
-                        DWAPUtils.dprint("Entry " .. i .. " at " .. x .. ".*" .. y .. ".*" .. z .. " - Container only " ..
-                            string.format("%.1f", fillPercentage) .. "% full - FAILED")
-                        table.insert(failedContainers, "Entry " .. i .. " at " .. x .. "," .. y .. "," .. z ..
-                            ": Only " .. string.format("%.1f", fillPercentage) .. "% full")
-                        -- break
-                    end
-                end
-
-                -- Track distribution tags
-                if entry.dist then
-                    for j = 1, #entry.dist do
-                        local distTag = entry.dist[j]
-                        distTags[distTag] = (distTags[distTag] or 0) + 1
-                    end
-                end
-
-                -- Track special tags
-                if entry.special then
-                    specialTags[entry.special] = (specialTags[entry.special] or 0) + 1
-                end
-            end
-            end -- if square
         elseif not entry then
             DWAPUtils.dprint("Entry " .. i .. " is nil - SKIPPING")
         elseif not entry.coords then
@@ -1946,16 +1991,22 @@ function TestLootConfig(index, startFrom, retainedConfig)
             #unclaimedContainers, #anchorProblems))
     end
 
-    -- Print results
-    if #failedContainers > 0 then
-        DWAPUtils.dprint("=== TEST FAILED ===")
-        DWAPUtils.dprint("Failed containers:")
-        for i = 1, #failedContainers do
-            DWAPUtils.dprint("  " .. failedContainers[i])
+    -- Print results. Suppressed on the audit path (deferReverify): this fires
+    -- at the end of the FIRST pass, before the re-verify phase appends its
+    -- results, so it would print PASSED for a config that later fails a
+    -- deferred entry. allLootWriteReport is the authoritative summary there.
+    -- The standalone console TestLootConfig keeps the live PASSED/FAILED line.
+    if not retainedConfig.deferReverify then
+        if #failedContainers > 0 then
+            DWAPUtils.dprint("=== TEST FAILED ===")
+            DWAPUtils.dprint("Failed containers:")
+            for i = 1, #failedContainers do
+                DWAPUtils.dprint("  " .. failedContainers[i])
+            end
+        else
+            DWAPUtils.dprint("=== TEST PASSED ===")
+            DWAPUtils.dprint("All " .. totalEntries .. " containers found and properly filled!")
         end
-    else
-        DWAPUtils.dprint("=== TEST PASSED ===")
-        DWAPUtils.dprint("All " .. totalEntries .. " containers found and properly filled!")
     end
 
     -- Print distribution tags summary
@@ -2004,6 +2055,12 @@ function TestLootConfig(index, startFrom, retainedConfig)
         anchorProblems = anchorProblems,
         roomFilterCount = roomFilterCount,
         legacyHalfZ = legacyHalfZ,
+        -- Nil-square entries the audit driver must teleport back to and
+        -- re-verify, plus the accumulator bundle re-verify appends into (the
+        -- same table refs already returned above, so appends land in the
+        -- report). Empty/nil for a standalone (non-deferring) call.
+        deferred = deferred,
+        ctx = ctx,
     }
 end
 
@@ -2156,6 +2213,14 @@ local ALLLOOT_FILL_STABLE = 6   -- unchanged polls (~1s) before trusting the cou
 local ALLLOOT_FILL_MAX = 900    -- absolute cap, for configs that never fill
 local ALLLOOT_SETTLE_TICKS = 120 -- pause between bases: back-to-back teleports can
 -- race the world streamer's vehicle chunk unload (BaseVehicle.update NPE)
+local ALLLOOT_REVERIFY_GRACE = 30 -- ticks to hold after a deferred re-verify
+-- square streams back in before resolving it. The fill already RAN during the
+-- load-phase force-load, so its stamped parent-object modData only has to
+-- deserialize onto the reloaded square, not recompute - hence far shorter than
+-- the fill-stable wait. The per-square streaming cap reuses ALLLOOT_WAIT_TICKS:
+-- a direct teleport onto the square makes its chunk the top streaming priority,
+-- so it resolves well inside that grace and the cap only ever fires on a
+-- genuinely unreachable coord (real bad-z / typo).
 
 local function allLootTeleport(x, y, z)
     if isClient() then
@@ -2207,16 +2272,31 @@ local EXPECTED_SPECIALS = {
     "skillbooks1", "skillbooks2", "gunlocker", "SeedLibrary",
 }
 
-local function allLootFinishConfig(unloaded, badZ)
+-- Write one config's full report section from an already-verified result and
+-- advance to the next config. Split from the verify call (allLootBeginReport)
+-- so the re-verify phase can run in between without the report ever seeing a
+-- half-checked result.
+local function allLootWriteReport(result, unloaded, badZ)
     local st = allLootState
     local config = st.configs[st.index]
     local name = allLootConfigName(st.index, config)
-    local result = TestLootConfig(st.index, nil, { fillThreshold = st.fillThreshold })
 
     allLootWrite(("=== %s: %d loot entries ==="):format(name, result and result.totalEntries or 0))
-    if unloaded > 0 then
+    -- Reconcile the load-phase STALE count with what re-verify has since
+    -- reached: entries recovered by a teleport-back are no longer unstreamed,
+    -- so the header must not label them "unreliable" over now-verified PASS/FAIL
+    -- lines. recovered <= the loot-entry portion of unloaded, so the difference
+    -- stays non-negative (any residual is genuinely-unreachable squares/anchors).
+    local recovered = st.reverifyRecovered or 0
+    local shownUnloaded = unloaded - recovered
+    if shownUnloaded < 0 then shownUnloaded = 0 end
+    if shownUnloaded > 0 then
         allLootWrite(("  STALE?: %d squares in chunks that never streamed in - building/basement missing from this save; results below are unreliable"):format(
-            unloaded))
+            shownUnloaded))
+    end
+    if recovered > 0 then
+        allLootWrite(("  RE-VERIFIED: %d far-building squares reached by teleport-back and fully checked in the lines below"):format(
+            recovered))
     end
     if badZ and badZ > 0 then
         allLootWrite(("  BAD-Z: %d coords have no square at their z level (unspawned basement, moved building, or typo) - see Square-not-found lines"):format(
@@ -2293,10 +2373,13 @@ local function allLootFinishConfig(unloaded, badZ)
         end
 
         -- opt-in systems pass: only prints what is broken, so an empty section
-        -- means power and water are fine for this config
+        -- means power and water are fine for this config. The scan itself ran
+        -- earlier (see the sysreturn phase) from the primary anchor with the
+        -- main base streamed - NOT from here, where a re-verify teleport may
+        -- have left the player 240 tiles away and every fixture reads unloaded.
         if st.checkSystems and config then
-            local sys = CheckConfigSystems(config)
-            if #sys > 0 then
+            local sys = st.systemsResult
+            if sys and #sys > 0 then
                 allLootWrite(("  SYSTEMS (%d):"):format(#sys))
                 for i = 1, #sys do
                     allLootWrite("    " .. sys[i])
@@ -2337,7 +2420,7 @@ local function allLootFinishConfig(unloaded, badZ)
                     allLootWrite(("    %d,%d,%d %s@%s"):format(u.x, u.y, u.z, u.ctype, u.room))
                 end
                 if #list > cap then
-                    allLootWrite(("    ...and %d more (raise the cap in allLootFinishConfig to see them)"):format(#list - cap))
+                    allLootWrite(("    ...and %d more (raise the cap in allLootWriteReport to see them)"):format(#list - cap))
                 end
             end
         end
@@ -2435,6 +2518,49 @@ local function allLootBeginFillWait(st, unstreamed, badZ)
     st.pendingBadZ = badZ
     st.stampCount = -1
     st.stampStable = 0
+end
+
+-- Verify is done (first pass, and any re-verify). Before writing the report,
+-- run the opt-in systems pass IF requested - but the power/water fixtures live
+-- at the MAIN base, and re-verify (or the load-phase straggler jumps) may have
+-- left the player at a far building, so route through the sysreturn phase which
+-- returns to the primary anchor and settles first. With systems off, write the
+-- report straight away (no extra teleport - the common single-building path).
+local function allLootFinishVerify()
+    local st = allLootState
+    if st.checkSystems then
+        st.phase = "sysreturn"
+        st.ticksWaited = 0
+        st.sysReturned = false
+    else
+        allLootWriteReport(st.result, st.pendingUnstreamed or 0, st.pendingBadZ)
+    end
+end
+
+-- Run the first verify pass for the current config, then branch: if it deferred
+-- any nil-square entries (detached far buildings past the streaming radius),
+-- enter the re-verify phase to teleport back to each; otherwise finish up.
+-- The common single-building case defers nothing and takes the same path (and,
+-- with systems off, the same timing) as before.
+local function allLootBeginReport(unloaded, badZ)
+    local st = allLootState
+    st.pendingUnstreamed = unloaded
+    st.pendingBadZ = badZ
+    st.reverifyRecovered = 0
+    st.systemsResult = nil
+    st.result = TestLootConfig(st.index, nil, {
+        fillThreshold = st.fillThreshold,
+        deferReverify = true,
+    })
+    local deferred = st.result and st.result.deferred
+    if deferred and #deferred > 0 then
+        DWAPUtils.dprint(("Loot audit: re-verifying %d far/unstreamed entries"):format(#deferred))
+        st.phase = "reverify"
+        st.reverifyIndex = 1
+        st.ticksWaited = 0
+    else
+        allLootFinishVerify()
+    end
 end
 
 allLootTick = function()
@@ -2570,7 +2696,81 @@ allLootTick = function()
             if st.ticksWaited >= ALLLOOT_FILL_MAX then
                 DWAPUtils.dprint("Loot audit: fill wait hit its cap, verifying anyway")
             end
-            allLootFinishConfig(st.pendingUnstreamed or 0, st.pendingBadZ)
+            allLootBeginReport(st.pendingUnstreamed or 0, st.pendingBadZ)
+        end
+    elseif st.phase == "reverify" then
+        -- Re-verify deferred nil-square entries one at a time: teleport onto the
+        -- square, let its chunk (and the fill stamp that persisted from the
+        -- load-phase force-load) stream back, then run the SAME full per-entry
+        -- verification via verifyResolvedEntry. Squares already streamed by a
+        -- prior deferred teleport (co-located in the same far chunk) skip the
+        -- teleport. Only a square still nil after a direct teleport plus the
+        -- settle grace is a genuine Square-not-found.
+        local deferred = st.result.deferred
+        local d = deferred[st.reverifyIndex]
+        if not d then
+            allLootFinishVerify()
+        else
+            local zc = math.floor(d.z)
+            local square = getSquare(d.x, d.y, zc)
+            if square and (not d.teleported or st.ticksWaited >= ALLLOOT_REVERIFY_GRACE) then
+                verifyResolvedEntry(square, d.i, d.entry, st.result.ctx)
+                -- recovered: no longer an unstreamed square, so the report
+                -- header must discount it from the STALE count (FINDING 2)
+                st.reverifyRecovered = (st.reverifyRecovered or 0) + 1
+                st.reverifyIndex = st.reverifyIndex + 1
+                st.ticksWaited = 0
+            elseif not d.teleported then
+                allLootTeleport(d.x, d.y, zc)
+                d.teleported = true
+                st.ticksWaited = 0
+            else
+                st.ticksWaited = st.ticksWaited + 1
+                if st.ticksWaited >= ALLLOOT_WAIT_TICKS then
+                    -- Direct teleport + full grace and still no square: now it
+                    -- genuinely is unreachable (bad z / typo / never-spawned).
+                    -- Same failure string the one-shot path used to emit.
+                    DWAPUtils.dprint(("Square not found at %d,%d,%d after re-verify - FAILED"):format(
+                        d.x, d.y, zc))
+                    table.insert(st.result.ctx.failedContainers,
+                        "Entry " .. d.i .. " at " .. d.x .. "," .. d.y .. "," .. d.z ..
+                        ": Square not found (bad z or unspawned area)")
+                    st.reverifyIndex = st.reverifyIndex + 1
+                    st.ticksWaited = 0
+                end
+            end
+        end
+    elseif st.phase == "sysreturn" then
+        -- Systems (power/water) fixtures live at the MAIN base. Re-verify (or a
+        -- load-phase straggler jump) can leave the player at a far building, so
+        -- return to the primary anchor and settle before scanning, or every
+        -- fixture reads unloaded and false-fails (FINDING 1). Stash the result
+        -- for allLootWriteReport. If the anchor is already streamed (the common
+        -- single-building case) this scans on the spot with no teleport.
+        local anchor = config and config.baseBuildings and config.baseBuildings[1]
+        if not (anchor and anchor.x) then
+            -- nothing to return to; scan from here as a best effort
+            st.systemsResult = CheckConfigSystems(config)
+            allLootWriteReport(st.result, st.pendingUnstreamed or 0, st.pendingBadZ)
+        else
+            local az = math.floor(anchor.z or 0)
+            local asq = getSquare(anchor.x, anchor.y, az)
+            if asq and (not st.sysReturned or st.ticksWaited >= ALLLOOT_REVERIFY_GRACE) then
+                st.systemsResult = CheckConfigSystems(config)
+                allLootWriteReport(st.result, st.pendingUnstreamed or 0, st.pendingBadZ)
+            elseif not st.sysReturned then
+                allLootTeleport(anchor.x, anchor.y, az)
+                st.sysReturned = true
+                st.ticksWaited = 0
+            else
+                st.ticksWaited = st.ticksWaited + 1
+                if st.ticksWaited >= ALLLOOT_WAIT_TICKS then
+                    -- anchor never streamed back; scan anyway - it will report
+                    -- its own fixtures as unloaded, which is the truth here
+                    st.systemsResult = CheckConfigSystems(config)
+                    allLootWriteReport(st.result, st.pendingUnstreamed or 0, st.pendingBadZ)
+                end
+            end
         end
     end
 end
